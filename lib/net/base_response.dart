@@ -9,10 +9,9 @@ class BaseResponse<T> {
 
   BaseResponse.success(this.data, this.code);
 
-  ///业务代码异常处理
+
   BaseResponse.error(this.code, this.errorMessage);
 
-  ///受限于国际化，需要项目中统一处理异常
   BaseResponse.errorDio(this.errorDio);
 
   bool isSuccess() => code == NetConstants.codeSuccess;

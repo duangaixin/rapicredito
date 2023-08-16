@@ -58,7 +58,6 @@ class WebViewPageState extends State<WebViewPage> {
       onWillPop: () async {
         final bool canGoBack = await _controller.canGoBack();
         if (canGoBack) {
-          // 网页可以返回时，优先返回上一页
           await _controller.goBack();
           return Future.value(false);
         }

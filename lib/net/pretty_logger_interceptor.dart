@@ -1,11 +1,6 @@
 import 'dart:math' as math;
 import 'package:dio/dio.dart';
 
-/// @author 段改新
-/// @ClassName:PrettyDioLogger
-/// @date: 2023/3/13
-/// @Description:内置网络日志
-
 class PrettyDioLogger extends Interceptor {
   /// Print request [Options]
   final bool request;
@@ -285,7 +280,6 @@ class PrettyDioLogger extends Interceptor {
 }
 
 class LogFilter {
-  /// [response]是否可以打印，防止日志过长造成app卡顿崩溃
   static bool canLog(Response response) {
     return response.requestOptions.responseType != ResponseType.bytes;
   }

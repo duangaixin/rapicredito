@@ -9,8 +9,6 @@ import 'package:rapicredito/style/index.dart';
 import 'package:get/get.dart';
 
 
-
-
 void main() async {
   await AppGlobalConfig.init();
   runApp(const MyApp());

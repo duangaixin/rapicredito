@@ -1,10 +1,7 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 
-/// @author 段改新
-/// @ClassName:NetException
-/// @date: 2023/3/13
-/// @Description:异常处理
+
 class NetException {
   // static void toastException(dynamic error) async {
   //   var s = handleException(error) ?? '默认值';

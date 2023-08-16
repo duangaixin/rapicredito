@@ -5,22 +5,21 @@ import 'package:bot_toast/bot_toast.dart';
 const Color _bgColor = Color(0xff171717);
 const double _radius = 10.0;
 const int _closeTime = 5000;
-// 表示是否该分组内是否在同一时间里只存在一个Toast,区分是哪一个组是按照[groupKey]来区分的,默认false
+
 const bool _onlyOne = true;
-// 是否在点击屏幕触发事件时自动关闭该Toast,默认false
+
 const bool _clickClose = false;
-// 是否跨页面显示,如果为true,则该Toast会跨越多个Route显示,如果为false则在当前Route发生变化时,会自动关闭该Toast,默认true
-// 注意，设置为false时，如果需要在全屏弹框回调中展示toast，可以添加100延时
+
 const bool _crossPage = false;
-// 点击穿透toast显示区域,为true可以穿透,默认false
+
 const bool _ignoreContentClick = false;
-// 是否在该Loading Toast显示时,能否正常点击触发事件,默认false
+
 const bool _allowClickLoading = false;
-// 是否允许该Loading跨页面显示,如果为true,则该Toast会跨越多个Route显示,如果为false则在当前Route发生变化时,会自动关闭该Toast,默认false
+
 const bool _crossPageLoading = false;
-// 点击物理返回键的行为(在android上等同于物理的返回键)
+
 const BackButtonBehavior _backButtonBehavior = BackButtonBehavior.close;
-// Toast显示位置,中间往上一点
+
 const Alignment _alignment = Alignment(0.0, -0.2);
 
 enum _ToastType {

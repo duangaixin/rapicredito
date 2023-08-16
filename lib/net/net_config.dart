@@ -4,16 +4,12 @@ import 'package:rapicredito/net/base_response.dart';
 
 
 abstract class INetConfig {
-  ///默认header
   Future<Map<String, dynamic>> getDefHeader();
 
-  ///默认传参
   Future<Map<String, dynamic>> getDefParam();
 
-  ///默认拦截器
   Interceptors? getDefInterceptors();
 
-  ///检测token
   void check401Error(BaseResponse error);
 }
 
@@ -23,11 +19,10 @@ typedef OnGetIsLoggable = bool Function();
 typedef OnTransform<T> = T Function(dynamic json);
 typedef OnCheck401Error = void Function(BaseResponse error);
 
-///请求配置类
+
 class NetConfig implements INetConfig {
   String baseUrl;
 
-  ///是否开启日志及代理
   OnGetIsLoggable isLoggable;
   OnGetDefHeader defHeader;
   OnGetDefParam defParam;

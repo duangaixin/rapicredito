@@ -8,11 +8,6 @@ import 'package:rapicredito/net/pretty_logger_interceptor.dart';
 import 'package:http_proxy/http_proxy.dart';
 
 
-/// @author 段改新
-/// @ClassName:NetRequest
-/// @date: 2023/3/13
-/// @Description:发起网络请求
-
 class NetRequest {
   NetRequest._internal();
 
@@ -58,7 +53,6 @@ class NetRequest {
     return dio;
   }
 
-  ///设置自动代理
   void _setCharlesProxy(Dio dio) async {
     if(!isLoggable)return;
     HttpProxy httpProxy = await HttpProxy.createHttpProxy();

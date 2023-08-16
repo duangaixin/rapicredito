@@ -31,7 +31,7 @@ class LoggingInterceptor extends Interceptor {
 
     Log.d('ResponseCode: ${response.statusCode}');
     debugPrint(response.toString());
-    Log.d('----------End: $duration 毫秒----------');
+    Log.d('----------End: $duration ----------');
     super.onResponse(response, handler);
   }
 
