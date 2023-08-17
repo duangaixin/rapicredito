@@ -3,7 +3,6 @@ import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:get/get.dart';
 
-
 class RouteAuthMiddleware extends GetMiddleware {
   RouteAuthMiddleware();
 
@@ -13,6 +12,19 @@ class RouteAuthMiddleware extends GetMiddleware {
       return null;
     } else {
       return const RouteSettings(name: PageRouterName.loginPage);
+    }
+  }
+}
+
+class RouteSplashMiddleware extends GetMiddleware {
+  RouteSplashMiddleware();
+
+  @override
+  RouteSettings? redirect(String? route) {
+    if (UserStore.to.isFirstStart == false) {
+      return null;
+    } else {
+      return const RouteSettings(name: PageRouterName.mainPage);
     }
   }
 }

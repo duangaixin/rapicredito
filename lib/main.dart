@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.light,
       navigatorKey: Get.key,
       title: 'rapicredito',
-      initialRoute: PageRouterName.homePage,
+      initialRoute: PageRouterName.initial,
       getPages: PageRouterManage.routes,
       builder: (context, child) {
         child = MediaQuery(
