@@ -39,6 +39,7 @@ class AppMainCtr extends BaseGetCtr{
         ),
         label: '首页',
       ),
+
       BottomNavigationBarItem(
         icon: Image.asset('', width: 25.0),
         activeIcon: Image.asset(
@@ -46,25 +47,7 @@ class AppMainCtr extends BaseGetCtr{
           color: Colour.themeColor,
           width: 25.0,
         ),
-        label: '',
-      ),
-      BottomNavigationBarItem(
-        icon: Image.asset('', width: 25.0),
-        activeIcon: Image.asset(
-          '',
-          color: Colour.themeColor,
-          width: 25.0,
-        ),
-        label: '',
-      ),
-      BottomNavigationBarItem(
-        icon: Image.asset('', width: 25.0),
-        activeIcon: Image.asset(
-          '',
-          color: Colour.themeColor,
-          width: 25.0,
-        ),
-        label: '',
+        label: '账单',
       ),
       BottomNavigationBarItem(
         icon: Image.asset('', width: 25.0),
@@ -81,6 +64,7 @@ class AppMainCtr extends BaseGetCtr{
   @override
   void onReady() {
     super.onReady();
+
     var isFirstEnter = StorageService.to.getBool(AppConstants.isFirstStartKey);
     if (!isFirstEnter) {
       Future.delayed(const Duration(milliseconds: 300), () {

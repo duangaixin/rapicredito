@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.light,
       navigatorKey: Get.key,
       title: '巴基斯坦',
-      initialRoute: PageRouterName.initial,
+      initialRoute: PageRouterName.homePage,
       getPages: PageRouterManage.routes,
       builder: (context, child) {
         child = MediaQuery(

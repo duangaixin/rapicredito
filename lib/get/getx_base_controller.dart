@@ -1,13 +1,13 @@
 
-import 'package:rapicredito/net/net_request.dart';
+import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:get/get.dart';
 
 class BaseGetCtr extends GetxController {
-  late NetRequest netRequest;
+  late HttpRequestManage requestManage;
 
   @override
   void onInit() {
     super.onInit();
-    netRequest = Get.find<NetRequest>();
+    requestManage = Get.find<HttpRequestManage>();
   }
 }
