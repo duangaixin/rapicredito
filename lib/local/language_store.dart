@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rapicredito/get/getx_storage_service.dart';
-import 'package:rapicredito/lang/en_us.dart';
-import 'package:rapicredito/lang/zh_hans.dart';
+import 'package:rapicredito/lang/es_co.dart';
+import 'package:rapicredito/lang/zh_cn.dart';
 import 'package:rapicredito/local/app_constants.dart';
 import 'package:get/get.dart';
 
@@ -15,20 +15,20 @@ class LanguageStore extends GetxController {
   Locale? get locale {
     switch (languageType) {
       case 0:
-        return const Locale('zh', 'Hans');
+        return const Locale('es', 'CO');
       case 1:
-        return const Locale('en', 'US');
+        return const Locale('zh', 'CN');
     }
-    return const Locale('en', 'US');
+    return const Locale('es', 'CO');
   }
 
   void setLocal(Locale locale) {
-    if (locale == const Locale('zh', 'Hans')) {
+    if (locale == const Locale('es', 'CO')) {
       StorageService.to.setInt(AppConstants.appLanguageKey, 0);
-    } else if (locale == const Locale('en', 'US')) {
+    } else if (locale == const Locale('zh', 'CN')) {
       StorageService.to.setInt(AppConstants.appLanguageKey, 1);
     } else {
-      StorageService.to.setInt(AppConstants.appLanguageKey, 1);
+      StorageService.to.setInt(AppConstants.appLanguageKey, 0);
     }
     updateLocal();
   }
@@ -47,11 +47,11 @@ class LanguageStore extends GetxController {
 
 class Message extends Translations {
   static Locale? get locale => LanguageStore.to.locale;
-  static const fallbackLocale = Locale('en', 'US');
+  static const fallbackLocale = Locale('es', 'CO');
 
   @override
   Map<String, Map<String, String>> get keys => {
-        'en_US': enUS,
-        'zh_Hans': zhHans,
+        'es_CO': esCO,
+        'zh_CN': zhCN,
       };
 }

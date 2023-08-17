@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/page/main/index.dart';
 import 'package:get/get.dart';
-
+import 'package:rapicredito/page/main/mine/index.dart';
+import 'package:rapicredito/page/main/order/index.dart';
 
 class AppMainPage extends StatefulWidget {
   const AppMainPage({
@@ -18,14 +20,9 @@ class AppMainPageState extends State<AppMainPage> {
   Widget _buildPageView() {
     return PageView(
       physics: const NeverScrollableScrollPhysics(),
-      children: <Widget>[
-        Container(),
-        Container(),
-        Container(),
-        Container(),
-      ],
       controller: controller.pageController,
       onPageChanged: controller.dealPageChanged,
+      children: const <Widget>[MainHomePage(), MainOrderPage(), MainMinePage()],
     );
   }
 

@@ -37,12 +37,27 @@ bool is401Error(BaseResponse<dynamic> error) {
 
 Future<Map<String, dynamic>> _getDefHeader() async {
   var map = <String, dynamic>{};
-
+  map['client-id']='';
+  map['token']='';
+  map['userId']='';
+  map['currentUserId']='';
+  map['channel']='';
+  map['versionName']='';
+  map['versionCode']='';
+  map['device-id']='';
+  map['imei']='';
+  map['mulFlag']='';
+  map['v-flag']='';
   return map;
 }
 
 Future<Map<String, dynamic>> _getDefParam() async {
+
   var map = <String, dynamic>{};
+  map['appssid']='';
+  map['userId']='';
+  map['lbs']='';
+  map['language']='es';
   return map;
 }
 

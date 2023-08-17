@@ -8,7 +8,6 @@ import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:get/get.dart';
 
-
 void main() async {
   await AppGlobalConfig.init();
   runApp(const MyApp());
@@ -22,11 +21,11 @@ class MyApp extends StatelessWidget {
     final botToastBuilder = BotToastInit();
 
     return GetMaterialApp(
-      showPerformanceOverlay: true,
-      debugShowCheckedModeBanner: true,
+      showPerformanceOverlay: false,
+      debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       navigatorKey: Get.key,
-      title: '巴基斯坦',
+      title: 'rapicredito',
       initialRoute: PageRouterName.homePage,
       getPages: PageRouterManage.routes,
       builder: (context, child) {
