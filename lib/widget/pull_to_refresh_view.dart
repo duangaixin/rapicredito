@@ -86,6 +86,7 @@ class PullToRefreshView extends StatelessWidget {
   }
 
   Widget getCustomHeader() {
+  return MaterialClassicHeader();
     return CustomHeader(
       builder: (BuildContext context, RefreshStatus? mode) {
         Widget header;

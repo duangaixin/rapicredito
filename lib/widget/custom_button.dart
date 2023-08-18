@@ -36,7 +36,6 @@ class CustomButton extends StatelessWidget {
     return TextButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        // 文字颜色
         foregroundColor: MaterialStateProperty.resolveWith((states) {
             if (states.contains(MaterialState.disabled)) {
               return disabledTextColor ;
@@ -44,17 +43,14 @@ class CustomButton extends StatelessWidget {
             return textColor;
           },
         ),
-        // 背景颜色
         backgroundColor: MaterialStateProperty.resolveWith((states) {
           if (states.contains(MaterialState.disabled)) {
             return disabledBackgroundColor ;
           }
           return backgroundColor;
         }),
-        // 水波纹
         overlayColor: MaterialStateProperty.resolveWith((states) {
-          return textColor; }),
-        // 按钮最小大小
+          return backgroundColor; }),
         minimumSize: (minWidth == null || minHeight == null) ? null : MaterialStateProperty.all<Size>(Size(minWidth!, minHeight!)),
         padding: MaterialStateProperty.all<EdgeInsetsGeometry>(padding),
         shape: MaterialStateProperty.all<OutlinedBorder>(

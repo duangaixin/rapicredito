@@ -12,14 +12,22 @@ Future<void> initSystemConfig() async {
 
 Future<void> setSystemUi() async {
   if (GetPlatform.isAndroid) {
-    SystemUiOverlayStyle systemUiOverlayStyle = const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarBrightness: Brightness.light,
-      statusBarIconBrightness: Brightness.dark,
-      systemNavigationBarDividerColor: Colors.transparent,
-      systemNavigationBarColor: Colors.white,
-      systemNavigationBarIconBrightness: Brightness.dark,
-    );
+    // SystemUiOverlayStyle systemUiOverlayStyle = const SystemUiOverlayStyle(
+    //   statusBarColor: Colors.transparent,
+    //   statusBarBrightness: Brightness.light,
+    //   statusBarIconBrightness: Brightness.dark,
+    //   systemNavigationBarDividerColor: Colors.transparent,
+    //   systemNavigationBarColor: Colors.white,
+    //   systemNavigationBarIconBrightness: Brightness.dark,
+    // );
+
+    SystemUiOverlayStyle systemUiOverlayStyle = const   SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarBrightness: Brightness.dark,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarDividerColor: Colors.transparent,
+        systemNavigationBarColor: Colors.white,
+        systemNavigationBarIconBrightness: Brightness.dark);
     SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
   }
   await SystemChrome.setPreferredOrientations(

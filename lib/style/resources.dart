@@ -11,4 +11,6 @@ class Resource {
       'assets/image/main/home_tab_auction.png';
   static const String assetsImagesMainThree =
       'assets/image/main/home_tab_my.png';
+  static const String assetsImagesHomeDefault=
+      'assets/image/main/home_default.png';
 }

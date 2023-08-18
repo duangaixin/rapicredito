@@ -32,8 +32,8 @@ class AppMainPageState extends State<AppMainPage> {
           currentIndex: controller.state.pageIndex,
           type: BottomNavigationBarType.fixed,
           onTap: controller.dealNavBarTap,
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
         ));
   }
 

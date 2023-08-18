@@ -37,7 +37,7 @@ class AppMainCtr extends BaseGetCtr{
           color: Colour.themeColor,
           width: 25.0,
         ),
-        label: '',
+          label: ''
       ),
       BottomNavigationBarItem(
         icon: Image.asset(Resource.assetsImagesMainTwo, width: 25.0),
@@ -46,7 +46,7 @@ class AppMainCtr extends BaseGetCtr{
           color: Colour.themeColor,
           width: 25.0,
         ),
-        label: '',
+          label: ''
       ),
       BottomNavigationBarItem(
         icon: Image.asset( Resource.assetsImagesMainThree, width: 25.0),
@@ -55,7 +55,7 @@ class AppMainCtr extends BaseGetCtr{
           color: Colour.themeColor,
           width: 25.0,
         ),
-        label: '',
+        label: ''
       ),
     ];
   }
