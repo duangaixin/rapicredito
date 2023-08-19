@@ -16,4 +16,6 @@ class Resource {
 
   static const String assetsImageAuthTitleBg=
       'assets/image/auth/auth_title_bg.png';
+  static const String assetsImageLoginClear=
+      'assets/image/login/login_clear.png';
 }

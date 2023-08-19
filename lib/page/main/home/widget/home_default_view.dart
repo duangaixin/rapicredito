@@ -27,6 +27,7 @@ class HomeDefaultView extends GetView<MainHomeCtr> {
               style: TextStyle(fontSize: 15.0, color: Color(0xff333333)),
             ),
             GestureDetector(
+              behavior: HitTestBehavior.opaque,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
                 child: Text(

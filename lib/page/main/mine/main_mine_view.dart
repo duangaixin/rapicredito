@@ -41,7 +41,12 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
                         text: '个人信息',
                         onPressed: (){
                        Get.toNamed(PageRouterName.authPersonPage);
-                        })
+                        }),
+                    CustomButton(
+                        text: '注册',
+                        onPressed: (){
+                          Get.toNamed(PageRouterName.registerPage);
+                        }),
                   ],
                 ),
               ),

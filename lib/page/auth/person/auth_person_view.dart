@@ -17,6 +17,7 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
   @override
   Widget build(BuildContext context) {
     return CustomPageBgView(
+      titleSpace: 14.0,
       resizeToAvoidBottomInset: false,
       title: 'Información básica',
       content: Container(
