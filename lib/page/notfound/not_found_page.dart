@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rapicredito/widget/base_appbar.dart';
+import 'package:rapicredito/widget/custom_appbar.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
 
 
@@ -9,7 +9,7 @@ class NotFoundPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BaseAppBar(
+      appBar: CustomAppBar(
         title: 'notFound',
         leftAction: () {
           Navigator.pop(context);

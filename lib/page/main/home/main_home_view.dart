@@ -22,15 +22,9 @@ class MainHomePage extends GetKeepStateView<MainHomeCtr> {
               onRefresh: ctr.refreshInfo,
               enablePullUp: false,
               child: Container(
-                padding: const EdgeInsets.only(left: 14.0,right: 16.0),
+                padding: const EdgeInsets.only(left: 14.0, right: 16.0),
                 child: const SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
-                  child: Column(
-                    children: [
-                      HomeDefaultView()
-                    ],
-                  ),
-                ),
+                    physics: BouncingScrollPhysics(), child: HomeDefaultView()),
               ),
             ),
             loadState: ctr.state.loadState);

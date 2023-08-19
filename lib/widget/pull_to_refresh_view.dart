@@ -26,6 +26,7 @@ class PullToRefreshView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SmartRefresher(
+      physics: BouncingScrollPhysics(),
       controller: _refreshController,
       enablePullDown: enablePullDown ?? true,
       enablePullUp: enablePullUp ?? true,
@@ -33,6 +34,7 @@ class PullToRefreshView extends StatelessWidget {
       onLoading: onLoadMore,
       header: header ?? getCustomHeader(),
       footer: footer ?? getCustomFooter(),
+
       child: child,
     );
   }
@@ -86,6 +88,7 @@ class PullToRefreshView extends StatelessWidget {
   }
 
   Widget getCustomHeader() {
+
   return MaterialClassicHeader();
     return CustomHeader(
       builder: (BuildContext context, RefreshStatus? mode) {

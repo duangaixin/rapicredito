@@ -34,7 +34,7 @@ class AppMainCtr extends BaseGetCtr{
         icon: Image.asset( Resource.assetsImagesMainOne, width: 25.0),
         activeIcon: Image.asset(
           Resource.assetsImagesMainOne,
-          color: Colour.themeColor,
+          color: Color(0xff666666),
           width: 25.0,
         ),
           label: ''
@@ -43,7 +43,7 @@ class AppMainCtr extends BaseGetCtr{
         icon: Image.asset(Resource.assetsImagesMainTwo, width: 25.0),
         activeIcon: Image.asset(
           Resource.assetsImagesMainTwo,
-          color: Colour.themeColor,
+          color: Color(0xff666666),
           width: 25.0,
         ),
           label: ''
@@ -52,7 +52,7 @@ class AppMainCtr extends BaseGetCtr{
         icon: Image.asset( Resource.assetsImagesMainThree, width: 25.0),
         activeIcon: Image.asset(
           Resource.assetsImagesMainThree,
-          color: Colour.themeColor,
+          color: Color(0xff666666),
           width: 25.0,
         ),
         label: ''

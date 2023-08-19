@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class BaseAppBar extends StatefulWidget implements PreferredSizeWidget {
+class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
   final String? title;
   final Widget? titleView;
@@ -16,7 +16,7 @@ class BaseAppBar extends StatefulWidget implements PreferredSizeWidget {
   final bool isShowBottomLine;
   final double? titleSpacing;
 
-  const BaseAppBar(
+  const CustomAppBar(
       {Key? key,
       this.isCenterTitle = true,
       this.isBack = true,
@@ -35,14 +35,14 @@ class BaseAppBar extends StatefulWidget implements PreferredSizeWidget {
       : super(key: key);
 
   @override
-  BaseAppBarState createState() => BaseAppBarState();
+  CustomAppBarState createState() => CustomAppBarState();
 
   @override
   Size get preferredSize => Size.fromHeight(
       bottom == null ? kToolbarHeight : kToolbarHeight + bottomHeight);
 }
 
-class BaseAppBarState extends State<BaseAppBar> {
+class CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
     return Stack(

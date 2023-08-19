@@ -22,5 +22,8 @@ class MainHomeCtr extends BaseGetCtr {
 
   void refreshInfo() {
     state.isRefresh = true;
+    Future.delayed(Duration(milliseconds: 2000),(){
+    refreshController.refreshCompleted();
+    });
   }
 }

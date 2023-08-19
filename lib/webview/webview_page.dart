@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/utils/object_util.dart';
-import 'package:rapicredito/widget/base_appbar.dart';
 import 'package:get/get.dart';
+import 'package:rapicredito/widget/custom_appbar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 
@@ -64,7 +64,7 @@ class WebViewPageState extends State<WebViewPage> {
         return Future.value(true);
       },
       child: Scaffold(
-        appBar:BaseAppBar(
+        appBar:CustomAppBar(
           title: title,
         ),
         body: Stack(
