@@ -13,6 +13,7 @@ class MainHomeCtr extends BaseGetCtr {
   @override
   void onInit() {
     super.onInit();
+
   }
 
   @override

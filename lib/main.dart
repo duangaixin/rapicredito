@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       showPerformanceOverlay: false,
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.light,
+      theme: AppTheme.dark,
       navigatorKey: Get.key,
       title: 'rapicredito',
       initialRoute: PageRouterName.initial,

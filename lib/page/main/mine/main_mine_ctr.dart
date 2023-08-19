@@ -20,6 +20,6 @@ class MainMineCtr extends BaseGetCtr {
   }
 
   void refreshInfo() {
-    state.isRefresh = true;
+
   }
 }

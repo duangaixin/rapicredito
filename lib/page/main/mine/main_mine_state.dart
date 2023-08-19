@@ -8,7 +8,6 @@ class MainMineState {
 
   set loadState(value) => _loadState.value = value;
 
-  bool isRefresh = false;
 
 
 }

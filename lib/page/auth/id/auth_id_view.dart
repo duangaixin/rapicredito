@@ -8,8 +8,8 @@ import 'package:rapicredito/widget/custom_edit_view.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
 import 'package:rapicredito/widget/custom_select_view.dart';
 
-class AuthPersonPage extends GetView<AuthPersonCtr> {
-  const AuthPersonPage({Key? key}) : super(key: key);
+class AuthIdPage extends GetView<AuthPersonCtr> {
+  const AuthIdPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

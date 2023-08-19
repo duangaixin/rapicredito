@@ -17,7 +17,7 @@ class CustomPageBgView extends StatefulWidget {
     this.leftAction,
     this.isShowBackBtn = true,
     this.resizeToAvoidBottomInset = true,
-    this.titleSpace=15.0,
+    this.titleSpace=16.0,
     this.actions,
   }) : super(key: key);
 

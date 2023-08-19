@@ -6,4 +6,6 @@ class PageRouterName {
   static const String registerPage = '/registerPage';
   static const String mainPage = '/mainPage';
   static const String authPersonPage = '/authPersonPage';
+  static const String authContactPage = '/authContactPage';
+  static const String authIdPage = '/authIdPage';
 }

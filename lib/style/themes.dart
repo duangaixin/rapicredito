@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rapicredito/style/index.dart';
 
-
 class AppTheme {
   AppTheme._();
 
-  static ThemeData light = ThemeData(
+  static ThemeData dark = ThemeData(
     brightness: Brightness.light,
     scaffoldBackgroundColor: Colour.scaffoldBackground,
     splashColor: Colors.transparent,
@@ -29,13 +28,13 @@ class AppTheme {
         fontSize: 20,
         fontWeight: FontWeight.w500,
       ),
-        systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: Colors.transparent,
-            statusBarBrightness: Brightness.dark,
-            statusBarIconBrightness: Brightness.dark,
-            systemNavigationBarDividerColor: Colors.transparent,
-            systemNavigationBarColor: Colors.white,
-            systemNavigationBarIconBrightness: Brightness.dark),
+      systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarBrightness: Brightness.dark,
+          statusBarIconBrightness: Brightness.dark,
+          systemNavigationBarDividerColor: Colors.transparent,
+          systemNavigationBarColor: Colors.white,
+          systemNavigationBarIconBrightness: Brightness.dark),
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: Colors.white,

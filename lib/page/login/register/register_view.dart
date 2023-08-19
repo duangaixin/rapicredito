@@ -16,7 +16,7 @@ class RegisterPage extends GetView<RegisterCtr> {
   @override
   Widget build(BuildContext context) {
     return CustomPageBgView(
-      titleSpace: 16.0,
+      titleSpace: 14.0,
       resizeToAvoidBottomInset: false,
       title: 'Regresar',
       content: Container(
@@ -95,7 +95,10 @@ class RegisterPage extends GetView<RegisterCtr> {
                           )
                         ],
                       ))),
-              const CommonAgreeView()
+              Padding(
+                padding: EdgeInsets.only(bottom: 25.0),
+                child: const CommonAgreeView(),
+              )
             ],
           )),
     );

@@ -39,7 +39,9 @@ class HomeDefaultView extends GetView<MainHomeCtr> {
                     borderRadius: BorderRadius.all(Radius.circular(4.0)),
                     border: Border.all(color: Color(0xff333333), width: 1.0)),
               ),
-              onTap: () {},
+              onTap: () {
+
+              },
             )
           ],
         ),
@@ -130,7 +132,11 @@ class HomeDefaultView extends GetView<MainHomeCtr> {
           child: _buildBottomItemView(
               'Bajo', 'cargo por servicio', '10', Color(0xff1E1E1E)),
         ),
-        CommonAgreeView()
+        Padding(
+          padding: EdgeInsets.only(bottom: 30.0),
+          child: CommonAgreeView(),
+        ),
+
       ],
     );
   }

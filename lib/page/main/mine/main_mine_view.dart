@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:rapicredito/get/getx_keep_state_view.dart';
 import 'package:rapicredito/page/main/mine/index.dart';
 import 'package:rapicredito/page/main/mine/widget/input_dialog.dart';
@@ -15,7 +14,7 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: Obx(() {
+      body: Obx(() {
         return LoadContainerView(
             contentView: PullToRefreshView(
               ctr.refreshController,
@@ -43,6 +42,11 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
                        Get.toNamed(PageRouterName.authPersonPage);
                         }),
                     CustomButton(
+                        text: '联系人信息',
+                        onPressed: (){
+                          Get.toNamed(PageRouterName.authContactPage);
+                        }),
+                    CustomButton(
                         text: '注册',
                         onPressed: (){
                           Get.toNamed(PageRouterName.registerPage);
@@ -52,7 +56,7 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
               ),
             ),
             loadState: ctr.state.loadState);
-      })),
+      })
     );
   }
 }

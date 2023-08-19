@@ -11,7 +11,7 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: Obx(() {
+      body:  Obx(() {
         return LoadContainerView(
             contentView: PullToRefreshView(
               ctr.refreshController,
@@ -25,7 +25,7 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
               ),
             ),
             loadState: ctr.state.loadState);
-      })),
+      })
     );
   }
 }
