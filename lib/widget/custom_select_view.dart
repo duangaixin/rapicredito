@@ -40,18 +40,18 @@ class CustomSelectViewState extends State<CustomSelectView> {
     Widget titleView = ObjectUtil.isEmptyString(widget.editTitle)
         ? const SizedBox.shrink()
         : Padding(
-            padding: const EdgeInsets.only(top: 23.67),
+            padding: const EdgeInsets.only(top: 16.0),
             child: Text(
               widget.editTitle,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
               style: widget.titleStyle ??
-                  const TextStyle(fontSize: 14.0, color: Color(0xff505470)),
+                  const TextStyle(fontSize: 16.0, color: Color(0xff333333)),
             ),
           );
 
     Widget contentView = Padding(
-      padding: const EdgeInsets.only(top: 12.0, bottom: 10.0),
+      padding: const EdgeInsets.only(top: 7.0, bottom: 8.0),
       child: Text(
         overflow: TextOverflow.ellipsis,
         maxLines: 1,
@@ -60,9 +60,9 @@ class CustomSelectViewState extends State<CustomSelectView> {
             : widget.editContent,
         style: ObjectUtil.isEmptyString(widget.editContent)
             ? widget.hintStyle ??
-                const TextStyle(fontSize: 14.0, color: Color(0xff9395A8))
+                const TextStyle(fontSize: 15.0, color: Color(0xff999999))
             : widget.editContentStyle ??
-                const TextStyle(fontSize: 14.0, color: Color(0xff222222)),
+                const TextStyle(fontSize: 15.0, color: Color(0xff333333)),
       ),
     );
 
@@ -71,15 +71,15 @@ class CustomSelectViewState extends State<CustomSelectView> {
           margin: const EdgeInsets.only(top: 12.0, bottom: 10.0),
           alignment: Alignment.center,
           child: Icon(
-            Icons.arrow_forward_ios,
-            color: Colors.grey[600],
-            size: 12.0,
+            Icons.keyboard_arrow_down,
+            color: Color(0xff6a6a6a),
+            size: 17,
           ),
         );
     Widget line = Container(
       height: 0.5,
       color: ObjectUtil.isEmptyString(widget.errorText)
-          ? const Color(0xffE2E2E2)
+          ? const Color(0xffEBEBEB)
           : const Color(0xffFF5544),
     );
     Widget errorText = ObjectUtil.isEmptyString(widget.errorText)

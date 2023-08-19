@@ -2,8 +2,8 @@
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:flutter/material.dart';
 
-class GradientButton extends StatelessWidget {
-  const GradientButton({
+class CustomColorButton extends StatelessWidget {
+  const CustomColorButton({
     Key? key,
     this.colors,
     this.disableColors,

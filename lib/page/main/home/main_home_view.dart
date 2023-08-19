@@ -12,19 +12,18 @@ class MainHomePage extends GetKeepStateView<MainHomeCtr> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomPageBgView(
-      title: 'RapiCredito',
-      isShowBackBtn: false,
-      content: Obx(() {
+    return Scaffold(
+      body: Obx(() {
         return LoadContainerView(
             contentView: PullToRefreshView(
               ctr.refreshController,
               onRefresh: ctr.refreshInfo,
               enablePullUp: false,
-              child: Container(
-                padding: const EdgeInsets.only(left: 14.0, right: 16.0),
-                child: const SingleChildScrollView(
-                    physics: BouncingScrollPhysics(), child: HomeDefaultView()),
+              child: SingleChildScrollView(
+                physics: NeverScrollableScrollPhysics(),
+                child: Container(
+                    padding: const EdgeInsets.only(left: 14.0, right: 16.0),
+                    child: HomeDefaultView()),
               ),
             ),
             loadState: ctr.state.loadState);

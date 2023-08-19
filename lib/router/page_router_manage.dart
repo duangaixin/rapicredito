@@ -1,4 +1,5 @@
 import 'package:rapicredito/get/getx_router_auth.dart';
+import 'package:rapicredito/page/auth/person/index.dart';
 import 'package:rapicredito/page/main/app_main_bindings.dart';
 import 'package:rapicredito/page/main/app_main_view.dart';
 import 'package:rapicredito/page/notfound/not_found_page.dart';
@@ -19,6 +20,10 @@ class PageRouterManage {
         name: PageRouterName.mainPage,
         page: () => const AppMainPage(),
         binding: AppMainBinding()),
+    GetPage(
+        name: PageRouterName.authPersonPage,
+        page: () => const AuthPersonPage(),
+        binding: AuthPersonBinding()),
     GetPage(
         name: PageRouterName.notFoundPage, page: () => const NotFoundPage()),
   ];

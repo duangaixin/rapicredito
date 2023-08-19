@@ -72,13 +72,13 @@ class CustomEditViewState extends State<CustomEditView> {
     Widget titleView = ObjectUtil.isEmptyString(widget.editTitle)
         ? const SizedBox.shrink()
         : Padding(
-            padding: const EdgeInsets.only(top: 23.67),
+            padding: const EdgeInsets.only(top: 16.0),
             child: Text(
               widget.editTitle,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
               style: widget.titleStyle ??
-                  const TextStyle(fontSize: 14.0, color: Color(0xff505470)),
+                  const TextStyle(fontSize: 16.0, color: Color(0xff333333)),
             ),
           );
     Widget textFiled = TextField(
@@ -98,14 +98,14 @@ class CustomEditViewState extends State<CustomEditView> {
       textInputAction: TextInputAction.done,
       cursorColor: const Color(0xff2E82FF),
       style: widget.editStyle ??
-          const TextStyle(fontSize: 14.0, color: Color(0xff222222)),
+          const TextStyle(fontSize: 15.0, color: Color(0xff222222)),
       decoration: InputDecoration(
         isCollapsed: true,
         contentPadding: const EdgeInsets.only(top: 12.0, bottom: 10.0),
         hintText: widget.hintText,
         hintMaxLines: 1,
         hintStyle: widget.hintStyle ??
-            const TextStyle(fontSize: 14.0, color: Color(0xff9395A8)),
+            const TextStyle(fontSize: 15.0, color: Color(0xff9395A8)),
         counterText: '',
         border: const OutlineInputBorder(
           borderSide: BorderSide.none,

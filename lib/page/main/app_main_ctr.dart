@@ -31,27 +31,27 @@ class AppMainCtr extends BaseGetCtr{
     pageController = PageController(initialPage: state.pageIndex);
     bottomTabList = <BottomNavigationBarItem>[
       BottomNavigationBarItem(
-        icon: Image.asset( Resource.assetsImagesMainOne, width: 25.0),
+        icon: Image.asset( Resource.assetsImageMainOne, width: 25.0),
         activeIcon: Image.asset(
-          Resource.assetsImagesMainOne,
+          Resource.assetsImageMainOne,
           color: Color(0xff666666),
           width: 25.0,
         ),
           label: ''
       ),
       BottomNavigationBarItem(
-        icon: Image.asset(Resource.assetsImagesMainTwo, width: 25.0),
+        icon: Image.asset(Resource.assetsImageMainTwo, width: 25.0),
         activeIcon: Image.asset(
-          Resource.assetsImagesMainTwo,
+          Resource.assetsImageMainTwo,
           color: Color(0xff666666),
           width: 25.0,
         ),
           label: ''
       ),
       BottomNavigationBarItem(
-        icon: Image.asset( Resource.assetsImagesMainThree, width: 25.0),
+        icon: Image.asset( Resource.assetsImageMainThree, width: 25.0),
         activeIcon: Image.asset(
-          Resource.assetsImagesMainThree,
+          Resource.assetsImageMainThree,
           color: Color(0xff666666),
           width: 25.0,
         ),

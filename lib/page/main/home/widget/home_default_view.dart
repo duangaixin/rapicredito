@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/main/home/index.dart';
@@ -15,6 +14,10 @@ class HomeDefaultView extends GetView<MainHomeCtr> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        AppBar(
+          titleSpacing: 0,
+          title: leftView,
+        ),
         Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -25,8 +28,7 @@ class HomeDefaultView extends GetView<MainHomeCtr> {
             ),
             GestureDetector(
               child: Container(
-                padding:
-                    EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
+                padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 5.0),
                 child: Text(
                   '91 Días',
                   style: TextStyle(fontSize: 15.0, color: Color(0xff333333)),
@@ -51,7 +53,7 @@ class HomeDefaultView extends GetView<MainHomeCtr> {
                   alignment: Alignment.center,
                   children: [
                     CustomImageView(
-                      Resource.assetsImagesHomeDefault,
+                      Resource.assetsImageHomeDefault,
                       imageType: ImageType.assets,
                       width: 267.0,
                       height: 142.0,
@@ -115,21 +117,25 @@ class HomeDefaultView extends GetView<MainHomeCtr> {
             ],
           ),
         ),
-        _buildBottomItemView('Bajo', 'cargo por servicio', '10', Color(0xffB8EF17)),
+        _buildBottomItemView(
+            'Bajo', 'cargo por servicio', '10', Color(0xffB8EF17)),
         Padding(
           padding: EdgeInsets.only(top: 20.0),
-          child: _buildBottomItemView('APP', 'Descargas de la', '10', Color(0xff044952)),
+          child: _buildBottomItemView(
+              'APP', 'Descargas de la', '10', Color(0xff044952)),
         ),
         Padding(
           padding: EdgeInsets.only(top: 20.0),
-          child: _buildBottomItemView('Bajo', 'cargo por servicio', '10', Color(0xff1E1E1E)),
+          child: _buildBottomItemView(
+              'Bajo', 'cargo por servicio', '10', Color(0xff1E1E1E)),
         ),
-
-      HomeAgreeView()
+        HomeAgreeView()
       ],
     );
   }
- Widget _buildBottomItemView(String title,String subTitle,String number,Color color){
+
+  Widget _buildBottomItemView(
+      String title, String subTitle, String number, Color color) {
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -142,8 +148,7 @@ class HomeDefaultView extends GetView<MainHomeCtr> {
               height: 8.0,
               width: 8.0,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4.0),
-                  color: color),
+                  borderRadius: BorderRadius.circular(4.0), color: color),
             ),
             Padding(
               padding: EdgeInsets.only(left: 16.0),
@@ -153,15 +158,14 @@ class HomeDefaultView extends GetView<MainHomeCtr> {
                 children: [
                   Text(
                     title,
-                    style:
-                    TextStyle(fontSize: 18.0, color: Color(0xff333333)),
+                    style: TextStyle(fontSize: 18.0, color: Color(0xff333333)),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 2.0),
                     child: Text(
                       subTitle,
                       style:
-                      TextStyle(fontSize: 18.0, color: Color(0xff999999)),
+                          TextStyle(fontSize: 18.0, color: Color(0xff999999)),
                     ),
                   ),
                 ],
@@ -175,7 +179,19 @@ class HomeDefaultView extends GetView<MainHomeCtr> {
         )
       ],
     );
- }
+  }
 
-
+  Widget get leftView => Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text('RapiCredito',
+              textAlign: TextAlign.left,
+              style: const TextStyle(
+                color: Colour.text33,
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              )),
+        ],
+      );
 }

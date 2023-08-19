@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/utils/navigator_util.dart';
 
@@ -38,7 +39,7 @@ class CustomPageBgViewState extends State<CustomPageBgView> {
                     if (widget.leftAction != null) {
                       widget.leftAction?.call();
                     } else {
-                      NavigatorUtil.pop(context);
+                      Get.back;
                     }
                   },
                 )
@@ -65,7 +66,10 @@ class CustomPageBgViewState extends State<CustomPageBgView> {
           child: Column(
             children: [
               AppBar(
+                  leading: const SizedBox.shrink(),
+                  leadingWidth: 0,
                   titleSpacing: 14.0,
+                  centerTitle: false,
                   title: leftView,
                   actions: widget.actions),
               Expanded(child: widget.content)

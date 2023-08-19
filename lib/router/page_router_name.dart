@@ -4,4 +4,5 @@ class PageRouterName {
   static const String notFoundPage = '/notFoundPage';
   static const String loginPage = '/loginPage';
   static const String mainPage = '/mainPage';
+  static const String authPersonPage = '/authPersonPage';
 }
