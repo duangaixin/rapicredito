@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/style/index.dart';
-import 'package:rapicredito/utils/navigator_util.dart';
 
 class CustomPageBgView extends StatefulWidget {
   final Widget content;
@@ -39,7 +38,7 @@ class CustomPageBgViewState extends State<CustomPageBgView> {
                     if (widget.leftAction != null) {
                       widget.leftAction?.call();
                     } else {
-                      Get.back;
+                      Get.back();
                     }
                   },
                 )

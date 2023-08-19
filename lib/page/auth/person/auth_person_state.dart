@@ -24,7 +24,7 @@ class AuthPersonState {
 
   set educationalLevel(value) => _educationalLevel.value = value;
 
-  final RxBool _btnCanClick= false.obs;
+  final RxBool _btnCanClick= true.obs;
 
   bool get btnCanClick=> _btnCanClick.value;
 

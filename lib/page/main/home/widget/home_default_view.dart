@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/main/home/index.dart';
-import 'package:rapicredito/page/main/home/widget/home_agreement_view.dart';
+import 'package:rapicredito/page/main/home/widget/common_agreement_view.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
@@ -129,7 +129,7 @@ class HomeDefaultView extends GetView<MainHomeCtr> {
           child: _buildBottomItemView(
               'Bajo', 'cargo por servicio', '10', Color(0xff1E1E1E)),
         ),
-        HomeAgreeView()
+        CommonAgreeView()
       ],
     );
   }

@@ -5,31 +5,31 @@ import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 
 
-class HomeAgreeView extends GetView<MainHomeCtr> {
-  const HomeAgreeView({Key? key}) : super(key: key);
+class CommonAgreeView extends GetView<MainHomeCtr> {
+  const CommonAgreeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 25.0, bottom: 30.0),
+      margin: const EdgeInsets.only(top: 25.0, bottom: 30.0),
       child: RichText(
           text: TextSpan(
               text: Strings.autoLineString('Lea atentamente todas las '),
-              style: TextStyle(fontSize: 15.0, color: Color(0xff666666)),
+              style: const TextStyle(fontSize: 15.0, color: Color(0xff666666)),
               children: <TextSpan>[
             TextSpan(
                 text: Strings.autoLineString('Aviso de Privacidad.'),
-                style: TextStyle(
+                style: const TextStyle(
                     decoration: TextDecoration.underline,
                     fontSize: 15.0,
                     color: Color(0xff6B8817)),
                 recognizer: TapGestureRecognizer()..onTap = () {}),
             TextSpan(
                 text: Strings.autoLineString('y'),
-                style: TextStyle(fontSize: 15.0, color: Color(0xff666666))),
+                style: const TextStyle(fontSize: 15.0, color: Color(0xff666666))),
             TextSpan(
                 text: Strings.autoLineString('Terminos y Condiciones'),
-                style: TextStyle(
+                style: const TextStyle(
                     decoration: TextDecoration.underline,
                     fontSize: 15.0,
                     color: Color(0xff6B8817)),
