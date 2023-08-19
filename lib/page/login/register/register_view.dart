@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/login/register/index.dart';
@@ -8,6 +7,7 @@ import 'package:rapicredito/page/login/widget/phone_text_field.dart';
 import 'package:rapicredito/page/main/home/widget/common_agreement_view.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_button.dart';
+import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
 
 class RegisterPage extends GetView<RegisterCtr> {
@@ -27,11 +27,11 @@ class RegisterPage extends GetView<RegisterCtr> {
             children: [
               Expanded(
                   child: SingleChildScrollView(
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Padding(
+                          const Padding(
                             padding: EdgeInsets.only(top: 59.0, bottom: 80.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
@@ -85,30 +85,30 @@ class RegisterPage extends GetView<RegisterCtr> {
                               onPressed: () {},
                               minHeight: 46.0,
                               minWidth: 265.0,
-                              backgroundColor: Color(0xffB8EF17),
-                              disabledBackgroundColor: Color(0xffB8EF17),
+                              backgroundColor: const Color(0xffB8EF17),
+                              disabledBackgroundColor: const Color(0xffB8EF17),
                               fontSize: 15.0,
                               radius: 8.0,
                               text: 'Continúa',
-                              textColor: Color(0xff333333),
+                              textColor: const Color(0xff333333),
                             ),
                           )
                         ],
                       ))),
-              CommonAgreeView()
+              const CommonAgreeView()
             ],
           )),
     );
   }
 
-  Widget get  optView => Obx(() {
+  Widget get optView => Obx(() {
         var initClick = controller.state.isInitClick;
         var timeEnd = controller.state.timeEnd;
         var str = initClick
             ? 'Obtener el OTP'
             : (timeEnd <= 0
                 ? 'Volver a enviar código'
-                : 'Código de reserva en $timeEnd');
+                : 'Código de reserva en ');
         var style = initClick
             ? const TextStyle(color: Color(0xff044952), fontSize: 14.0)
             : (timeEnd <= 0
@@ -125,13 +125,26 @@ class RegisterPage extends GetView<RegisterCtr> {
 
         var func = initClick || timeEnd <= 0
             ? () {
-                Future.delayed(const Duration(milliseconds: 2000), () {
+                Future.delayed(const Duration(milliseconds: 1000), () {
                   controller.state.isInitClick = false;
                   controller.startTimer();
                 });
               }
             : null;
-        return GestureDetector(
+        var textWidget = initClick || timeEnd <= 0
+            ? Text(
+                str,
+                style: style,
+              )
+            : RichText(
+                text: TextSpan(text: str, style: style, children: <TextSpan>[
+                TextSpan(
+                    text: timeEnd.toString(),
+                    style: const TextStyle(
+                        fontSize: 14.0, color: Color(0xff044952))),
+              ]));
+
+        return CustomClickView(
           onTap: func,
           child: Container(
             padding:
@@ -140,10 +153,7 @@ class RegisterPage extends GetView<RegisterCtr> {
                 color: Colors.white,
                 borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                 border: Border.all(color: borderColor, width: 1.0)),
-            child: Text(
-              str,
-              style: style,
-            ),
+            child: textWidget,
           ),
         );
       });
