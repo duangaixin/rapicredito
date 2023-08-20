@@ -4,8 +4,6 @@ import 'package:rapicredito/page/bank/widget/wallet_view.dart';
 import 'package:rapicredito/widget/comon_section_title_view.dart';
 import 'package:rapicredito/page/bank/index.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
-import 'package:rapicredito/widget/custom_color_button.dart';
-import 'package:rapicredito/widget/custom_edit_view.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
 
 class SelectBankPage extends GetView<SelectBankCtr> {
