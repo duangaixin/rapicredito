@@ -15,6 +15,7 @@ class CommonAgreeViewState extends State<CommonAgreeView> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       margin: const EdgeInsets.only(top: 25.0),
       child: RichText(
           text: TextSpan(

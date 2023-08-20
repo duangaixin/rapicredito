@@ -2,6 +2,7 @@ import 'package:rapicredito/get/getx_router_auth.dart';
 import 'package:rapicredito/page/auth/contact/index.dart';
 import 'package:rapicredito/page/auth/id/index.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
+import 'package:rapicredito/page/bank/index.dart';
 import 'package:rapicredito/page/login/register/index.dart';
 import 'package:rapicredito/page/main/app_main_bindings.dart';
 import 'package:rapicredito/page/main/app_main_view.dart';
@@ -39,6 +40,10 @@ class PageRouterManage {
         name: PageRouterName.authIdPage,
         page: () => const AuthIdPage(),
         binding: AuthIdBinding()),
+    GetPage(
+        name: PageRouterName.selectBankPage,
+        page: () => const SelectBankPage(),
+        binding: SelectBankBinding()),
     GetPage(
         name: PageRouterName.notFoundPage, page: () => const NotFoundPage()),
   ];

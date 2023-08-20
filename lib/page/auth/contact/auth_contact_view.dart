@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/auth/contact/auth_contact_ctr.dart';
 import 'package:rapicredito/page/auth/widget/common_auth_agreement_view.dart';
-import 'package:rapicredito/page/auth/widget/comon_auth_title_view.dart';
+import 'package:rapicredito/widget/comon_section_title_view.dart';
 import 'package:rapicredito/widget/custom_color_button.dart';
 import 'package:rapicredito/widget/custom_edit_view.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
@@ -15,26 +15,38 @@ class AuthContactPage extends GetView<AuthContactCtr> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          const CommonAuthTitleView(
-            title: 'Primera referencia personal',
+          const Padding(
+            padding: EdgeInsets.only(top: 19.0, left: 14.0),
+            child: CommonSectionTitleView(
+              title: 'Primera referencia personal',
+            ),
           ),
-          Obx(() {
-            return CustomSelectView(
-              editTitle: 'Relación',
-              hintText: 'Por favor elige',
-              editContent: controller.state.relationshipOne,
-              action: () {},
-            );
-          }),
-          CustomEditView(
-            controller: TextEditingController(),
-            editTitle: 'Número de celular',
-            hintText: 'Introducir texto',
-          ),
-          CustomEditView(
-            controller: TextEditingController(),
-            editTitle: 'Nombre',
-            hintText: 'Introducir texto',
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0, left: 16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Obx(() {
+                  return CustomSelectView(
+                    editTitle: 'Relación',
+                    hintText: 'Por favor elige',
+                    editContent: controller.state.relationshipOne,
+                    action: () {},
+                  );
+                }),
+                CustomEditView(
+                  controller: TextEditingController(),
+                  editTitle: 'Número de celular',
+                  hintText: 'Introducir texto',
+                ),
+                CustomEditView(
+                  controller: TextEditingController(),
+                  editTitle: 'Nombre',
+                  hintText: 'Introducir texto',
+                ),
+              ],
+            ),
           ),
         ],
       );
@@ -44,29 +56,38 @@ class AuthContactPage extends GetView<AuthContactCtr> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            padding: const EdgeInsets.only(top: 33.0, bottom: 8.0),
-            child: const CommonAuthTitleView(
+            padding: const EdgeInsets.only(top: 33.0, bottom: 8.0, left: 14.0),
+            child: const CommonSectionTitleView(
               title: 'Segunda referencia personal',
             ),
           ),
-          Obx(() {
-            return CustomSelectView(
-              editTitle: 'Relación',
-              hintText: 'Por favor elige',
-              editContent: controller.state.relationshipTwo,
-              action: () {},
-            );
-          }),
-          CustomEditView(
-            controller: TextEditingController(),
-            editTitle: 'Número de celular',
-            hintText: 'Introducir texto',
-          ),
-          CustomEditView(
-            controller: TextEditingController(),
-            editTitle: 'Nombre',
-            hintText: 'Introducir texto',
-          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0, left: 16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Obx(() {
+                  return CustomSelectView(
+                    editTitle: 'Relación',
+                    hintText: 'Por favor elige',
+                    editContent: controller.state.relationshipTwo,
+                    action: () {},
+                  );
+                }),
+                CustomEditView(
+                  controller: TextEditingController(),
+                  editTitle: 'Número de celular',
+                  hintText: 'Introducir texto',
+                ),
+                CustomEditView(
+                  controller: TextEditingController(),
+                  editTitle: 'Nombre',
+                  hintText: 'Introducir texto',
+                ),
+              ],
+            ),
+          )
         ],
       );
 
@@ -75,7 +96,7 @@ class AuthContactPage extends GetView<AuthContactCtr> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 39.0, right: 39.0, top: 26.0),
+            padding: const EdgeInsets.only(left: 55.0, right: 55.0, top: 26.0),
             child: CustomColorButton(
               disableColors: const [
                 Color(0xffF5F6F4),
@@ -106,16 +127,14 @@ class AuthContactPage extends GetView<AuthContactCtr> {
     //  double bottom = MediaQuery.of(context).viewInsets.bottom;
     return CustomPageBgView(
         title: 'Contacto de emergencia',
-        content: Container(
-            padding: const EdgeInsets.only(left: 14.0, right: 16.0, top: 18.0),
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children: [oneContactView, twoContactView, bottomView],
-              ),
-            )));
+        content: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: [oneContactView, twoContactView, bottomView],
+          ),
+        ));
 
     // return CustomPageBgView(
     //     title: 'Contacto de emergencia',

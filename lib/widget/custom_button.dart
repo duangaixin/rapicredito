@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rapicredito/widget/custom_click_view.dart';
 
 class CustomButton extends StatelessWidget {
 
@@ -34,7 +35,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: onPressed,
+      onPressed: onPressed?.throttleWithTimeout(),
       style: ButtonStyle(
         foregroundColor: MaterialStateProperty.resolveWith((states) {
             if (states.contains(MaterialState.disabled)) {

@@ -15,28 +15,31 @@ class CommonAuthAgreeView extends GetView<MainHomeCtr> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CustomImageView(
-              Resource.assetsImageMainOne,
-              imageType: ImageType.assets,
-              width: 18.0,
-              height: 15.0,
-            ),
-            Expanded(
-                child: Padding(
-              padding: EdgeInsets.only(left: 10.0),
-              child: Text(
-                Strings.autoLineString(
-                    'Todos los datos que rellene serán tratados correctamente y nunca revelarán su información personal.'),
-                style: TextStyle(fontSize: 13.0, color: Color(0xff666666)),
+        Padding(
+          padding: EdgeInsets.only(left: 12.0, right: 16.0),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const CustomImageView(
+                Resource.assetsImageMainOne,
+                imageType: ImageType.assets,
+                width: 18.0,
+                height: 15.0,
               ),
-            ))
-          ],
+              Expanded(
+                  child: Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: Text(
+                  Strings.autoLineString(
+                      'Todos los datos que rellene serán tratados correctamente y nunca revelarán su información personal.'),
+                  style: const TextStyle(fontSize: 13.0, color: Color(0xff666666)),
+                ),
+              ))
+            ],
+          ),
         ),
-        CommonAgreeView()
+        const CommonAgreeView()
       ],
     );
   }

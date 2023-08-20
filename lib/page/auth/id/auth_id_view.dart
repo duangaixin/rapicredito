@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
 import 'package:rapicredito/page/auth/widget/common_auth_agreement_view.dart';
-import 'package:rapicredito/page/auth/widget/comon_auth_title_view.dart';
+import 'package:rapicredito/widget/comon_section_title_view.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_color_button.dart';
@@ -39,11 +39,14 @@ class AuthIdPage extends GetView<AuthPersonCtr> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          const CommonAuthTitleView(
-            title: 'ID CARD',
+          const Padding(
+            padding: EdgeInsets.only(left: 14.0, top: 19.0),
+            child: CommonSectionTitleView(
+              title: 'ID CARD',
+            ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 28.0),
+            padding: const EdgeInsets.only(top: 28.0, left: 16.0, right: 16.0),
             child: Row(mainAxisSize: MainAxisSize.max, children: [
               Expanded(child: idCameraView('Frente', () {})),
               const SizedBox(
@@ -105,8 +108,8 @@ class AuthIdPage extends GetView<AuthPersonCtr> {
         mainAxisSize: MainAxisSize.min,
         children: [
           const Padding(
-            padding: EdgeInsets.only(top: 28.0),
-            child: CommonAuthTitleView(
+            padding: EdgeInsets.only(top: 28.0, left: 14.0),
+            child: CommonSectionTitleView(
               title: 'Reconocimiento facial',
             ),
           ),
@@ -118,93 +121,97 @@ class AuthIdPage extends GetView<AuthPersonCtr> {
         ],
       );
 
-
   Widget get bottomView => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    mainAxisSize: MainAxisSize.min,
-    children: [
-      Padding(
-        padding: const EdgeInsets.only(left: 39.0, right: 39.0, top: 26.0),
-        child: CustomColorButton(
-          disableColors: const [
-            Color(0xffF5F6F4),
-            Color(0xffF5F6F4),
-          ],
-          disable: false,
-          colors: const [Color(0xffB8EF17), Color(0xffB8EF17)],
-          height: 46.0,
-          borderRadius: BorderRadius.circular(8.0),
-          btnContent: const Text(
-            'Registrarse',
-            style: TextStyle(
-                fontSize: 15.0,
-                color: Color(0xff333333),
-                fontWeight: FontWeight.bold),
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 55.0, right: 55.0, top: 26.0),
+            child: CustomColorButton(
+              disableColors: const [
+                Color(0xffF5F6F4),
+                Color(0xffF5F6F4),
+              ],
+              disable: false,
+              colors: const [Color(0xffB8EF17), Color(0xffB8EF17)],
+              height: 46.0,
+              borderRadius: BorderRadius.circular(8.0),
+              btnContent: const Text(
+                'Registrarse',
+                style: TextStyle(
+                    fontSize: 15.0,
+                    color: Color(0xff333333),
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
-        ),
-      ),
-      const Padding(
-        padding: EdgeInsets.only(top: 30.0, bottom: 20.0),
-        child: CommonAuthAgreeView(),
-      )
-    ],
-  );
-Widget get infoView=>Column(
-  crossAxisAlignment: CrossAxisAlignment.start,
-  mainAxisSize: MainAxisSize.min,
-  children: [
+          const Padding(
+            padding: EdgeInsets.only(top: 30.0, bottom: 20.0),
+            child: CommonAuthAgreeView(),
+          )
+        ],
+      );
 
-    const Padding(
-      padding: EdgeInsets.only(top: 33.0,bottom: 12.0),
-      child: CommonAuthTitleView(
-        title: 'Tarjeta de identificación',
-      ),
-    ),
-
-    CustomEditView(
-      controller: TextEditingController(),
-      editTitle: 'Número de documento',
-      hintText: 'Introducir texto',
-    ),
-    CustomEditView(
-      controller: TextEditingController(),
-      editTitle: 'Nombres',
-      hintText: 'Introducir texto',
-    ),
-    CustomEditView(
-      controller: TextEditingController(),
-      editTitle: 'Apellidos',
-      hintText: 'Introducir texto',
-    ),
-    CustomSelectView(
-        editTitle: 'Género',
-        hintText: 'Por favor elige',
-        editContent: '',
-        action: () {},
-      ),
-    CustomSelectView(
-      editTitle: 'Fecha de nacimiento',
-      hintText: 'Por favor elige',
-      editContent: '',
-      action: () {},
-    )
-  ],
-
-);
+  Widget get infoView => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(top: 33.0, bottom: 12.0, left: 14.0),
+            child: CommonSectionTitleView(
+              title: 'Tarjeta de identificación',
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CustomEditView(
+                  controller: TextEditingController(),
+                  editTitle: 'Número de documento',
+                  hintText: 'Introducir texto',
+                ),
+                CustomEditView(
+                  controller: TextEditingController(),
+                  editTitle: 'Nombres',
+                  hintText: 'Introducir texto',
+                ),
+                CustomEditView(
+                  controller: TextEditingController(),
+                  editTitle: 'Apellidos',
+                  hintText: 'Introducir texto',
+                ),
+                CustomSelectView(
+                  editTitle: 'Género',
+                  hintText: 'Por favor elige',
+                  editContent: '',
+                  action: () {},
+                ),
+                CustomSelectView(
+                  editTitle: 'Fecha de nacimiento',
+                  hintText: 'Por favor elige',
+                  editContent: '',
+                  action: () {},
+                )
+              ],
+            ),
+          )
+        ],
+      );
 
   @override
   Widget build(BuildContext context) {
     return CustomPageBgView(
         title: 'Información básica',
-        content: Container(
-            padding: const EdgeInsets.only(left: 14.0, right: 16.0, top: 18.0),
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children: [idCardView, faceView,infoView,bottomView],
-              ),
-            )));
+        content: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: [idCardView, faceView, infoView, bottomView],
+          ),
+        ));
   }
 }

@@ -13,55 +13,60 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body:  Obx(() {
-        return LoadContainerView(
-            contentView: PullToRefreshView(
-              ctr.refreshController,
-              onRefresh: ctr.refreshInfo,
-              enablePullUp: false,
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  children:  [
-                    CustomButton(
-                        text: '输入弹窗',
-                        onPressed: (){
-                          showDialog(context: context,
-                              barrierDismissible: false,
-                              builder: (_){
-
-                                return Dialog(child: InputDialog(clickConfirm: (String s) {
-
-                                },),);
-                              });
-                        }),
-                    CustomButton(
-                        text: '个人信息',
-                        onPressed: (){
-                          Get.toNamed(PageRouterName.authPersonPage);
-                        }),
-                    CustomButton(
-                        text: '联系人信息',
-                        onPressed: (){
-                          Get.toNamed(PageRouterName.authContactPage);
-                        }),
-                    CustomButton(
-                        text: '身份认证信息',
-                        onPressed: (){
-                          Get.toNamed(PageRouterName.authIdPage);
-                        }),
-                    CustomButton(
-                        text: '注册',
-                        onPressed: (){
-                          Get.toNamed(PageRouterName.registerPage);
-                        }),
-                  ],
-                ),
+    return Scaffold(body: Obx(() {
+      return LoadContainerView(
+          contentView: PullToRefreshView(
+            ctr.refreshController,
+            onRefresh: ctr.refreshInfo,
+            enablePullUp: false,
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  CustomButton(
+                      text: '输入弹窗',
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (_) {
+                              return Dialog(
+                                child: InputDialog(
+                                  clickConfirm: (String s) {},
+                                ),
+                              );
+                            });
+                      }),
+                  CustomButton(
+                      text: '个人信息',
+                      onPressed: () {
+                        Get.toNamed(PageRouterName.authPersonPage);
+                      }),
+                  CustomButton(
+                      text: '联系人信息',
+                      onPressed: () {
+                        Get.toNamed(PageRouterName.authContactPage);
+                      }),
+                  CustomButton(
+                      text: '身份认证信息',
+                      onPressed: () {
+                        Get.toNamed(PageRouterName.authIdPage);
+                      }),
+                  CustomButton(
+                      text: '注册',
+                      onPressed: () {
+                        Get.toNamed(PageRouterName.registerPage);
+                      }),
+                  CustomButton(
+                      text: '更换银行卡',
+                      onPressed: () {
+                        Get.toNamed(PageRouterName.selectBankPage);
+                      }),
+                ],
               ),
             ),
-            loadState: ctr.state.loadState);
-      })
-    );
+          ),
+          loadState: ctr.state.loadState);
+    }));
   }
 }

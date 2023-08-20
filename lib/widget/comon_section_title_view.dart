@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
-class CommonAuthTitleView extends StatefulWidget {
-  const CommonAuthTitleView({Key? key, this.title = ''}) : super(key: key);
+class CommonSectionTitleView extends StatefulWidget {
+  const CommonSectionTitleView({Key? key, this.title = ''}) : super(key: key);
   final String title;
 
   @override
-  CommonAuthTitleViewState createState() => CommonAuthTitleViewState();
+  CommonSectionTitleViewState createState() => CommonSectionTitleViewState();
 }
 
-class CommonAuthTitleViewState extends State<CommonAuthTitleView> {
+class CommonSectionTitleViewState extends State<CommonSectionTitleView> {
   @override
   Widget build(BuildContext context) {
     return Row(

@@ -70,14 +70,14 @@ class CustomSelectViewState extends State<CustomSelectView> {
         Container(
           margin: const EdgeInsets.only(top: 12.0, bottom: 10.0),
           alignment: Alignment.center,
-          child: Icon(
+          child: const Icon(
             Icons.keyboard_arrow_down,
             color: Color(0xff6a6a6a),
             size: 17,
           ),
         );
     Widget line = Container(
-      height: 0.5,
+      height: 1.0,
       color: ObjectUtil.isEmptyString(widget.errorText)
           ? const Color(0xffEBEBEB)
           : const Color(0xffFF5544),
