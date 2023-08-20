@@ -59,7 +59,7 @@ class CustomAppBarState extends State<CustomAppBar> {
               Text(
                 widget.title ?? '',
                 style: widget.titleStyle ??
-                    const TextStyle(color: Color(0xFF505470), fontSize: 17.0),
+                    const TextStyle(color: Color(0xFF333333), fontSize: 15.0),
               ),
           leading: widget.isBack
               ? IconButton(

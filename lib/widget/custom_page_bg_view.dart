@@ -48,8 +48,7 @@ class CustomPageBgViewState extends State<CustomPageBgView> {
               textAlign: TextAlign.left,
               style: const TextStyle(
                 color: Colour.text33,
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
+                fontSize: 15,
               )),
         ],
       );

@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 
 class AuthPersonState {
 
+  double imageWidth=167.0;
+
+
   ///收入
   final RxString _income = ''.obs;
 

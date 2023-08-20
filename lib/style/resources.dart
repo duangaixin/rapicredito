@@ -18,4 +18,11 @@ class Resource {
       'assets/image/auth/auth_title_bg.png';
   static const String assetsImageLoginClear=
       'assets/image/login/login_clear.png';
+
+  static const String assetsImageAuthCameraBg=
+      'assets/image/auth/auth_camera_bg.png';
+  static const String assetsImageAuthFace=
+      'assets/image/auth/auth_face.png';
+  static const String assetsImageAuthTakeCamera=
+      'assets/image/auth/auth_take_camera.png';
 }

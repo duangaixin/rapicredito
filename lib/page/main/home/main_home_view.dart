@@ -18,11 +18,9 @@ class MainHomePage extends GetKeepStateView<MainHomeCtr> {
               ctr.refreshController,
               onRefresh: ctr.refreshInfo,
               enablePullUp: false,
-              child: SingleChildScrollView(
-                physics: const NeverScrollableScrollPhysics(),
-                child: Container(
-                    padding: const EdgeInsets.only(left: 14.0, right: 16.0),
-                    child: const HomeDefaultView()),
+              child: const SingleChildScrollView(
+                physics: NeverScrollableScrollPhysics(),
+                child: HomeDefaultView(),
               ),
             ),
             loadState: ctr.state.loadState);

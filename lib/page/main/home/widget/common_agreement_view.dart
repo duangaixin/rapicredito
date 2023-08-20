@@ -1,13 +1,17 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 
+class CommonAgreeView extends StatefulWidget {
+  const CommonAgreeView({
+    Key? key,
+  }) : super(key: key);
 
-class CommonAgreeView extends GetView<MainHomeCtr> {
-  const CommonAgreeView({Key? key}) : super(key: key);
+  @override
+  CommonAgreeViewState createState() => CommonAgreeViewState();
+}
 
+class CommonAgreeViewState extends State<CommonAgreeView> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,7 +30,8 @@ class CommonAgreeView extends GetView<MainHomeCtr> {
                 recognizer: TapGestureRecognizer()..onTap = () {}),
             TextSpan(
                 text: Strings.autoLineString('y'),
-                style: const TextStyle(fontSize: 15.0, color: Color(0xff666666))),
+                style:
+                    const TextStyle(fontSize: 15.0, color: Color(0xff666666))),
             TextSpan(
                 text: Strings.autoLineString('Terminos y Condiciones'),
                 style: const TextStyle(
