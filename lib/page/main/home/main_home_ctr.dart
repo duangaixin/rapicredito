@@ -2,8 +2,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/page/main/home/index.dart';
 
-
-
 class MainHomeCtr extends BaseGetCtr {
   MainHomeCtr();
 
@@ -13,7 +11,6 @@ class MainHomeCtr extends BaseGetCtr {
   @override
   void onInit() {
     super.onInit();
-
   }
 
   @override
@@ -23,8 +20,8 @@ class MainHomeCtr extends BaseGetCtr {
 
   void refreshInfo() {
     state.isRefresh = true;
-    Future.delayed(Duration(milliseconds: 2000),(){
-    refreshController.refreshCompleted();
+    Future.delayed(Duration(milliseconds: 2000), () {
+      refreshController.refreshCompleted();
     });
   }
 }

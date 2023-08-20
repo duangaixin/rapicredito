@@ -195,7 +195,6 @@ Widget get infoView=>Column(
   @override
   Widget build(BuildContext context) {
     return CustomPageBgView(
-        resizeToAvoidBottomInset: false,
         title: 'Información básica',
         content: Container(
             padding: const EdgeInsets.only(left: 14.0, right: 16.0, top: 18.0),
