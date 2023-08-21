@@ -9,4 +9,5 @@ class PageRouterName {
   static const String authContactPage = '/authContactPage';
   static const String authIdPage = '/authIdPage';
   static const String selectBankPage = '/selectBankPage';
+  static const String customCameraPage = '/customCameraPage';
 }

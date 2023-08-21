@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:rapicredito/page/auth/person/index.dart';
+import 'package:rapicredito/page/auth/id/index.dart';
 
 class AuthIdBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<AuthPersonCtr>(() => AuthPersonCtr());
+    Get.lazyPut<AuthIdCtr>(() => AuthIdCtr());
   }
 }

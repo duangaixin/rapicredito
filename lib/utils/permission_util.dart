@@ -22,10 +22,10 @@ class PermissionUtil {
 
       switch (permissionStatus) {
         case PermissionStatus.denied:
-          onFailed != null ? onFailed() : defaultCall("权限申请失败");
+          onFailed != null ? onFailed() : defaultCall('');
           break;
         case PermissionStatus.granted:
-          onSuccess != null ? onSuccess() : defaultCall("权限申请成功");
+          onSuccess != null ? onSuccess() : defaultCall('');
           break;
         case PermissionStatus.restricted:
         case PermissionStatus.limited:

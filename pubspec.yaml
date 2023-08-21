@@ -32,6 +32,7 @@ dependencies:
   dio: ^5.0.2
   http_proxy: ^1.2.1
   flutter_image_compress: ^2.0.4
+  camera: ^0.10.5+3
 
 dev_dependencies:
   flutter_test:

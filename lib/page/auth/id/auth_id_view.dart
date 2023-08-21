@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rapicredito/page/auth/person/index.dart';
+import 'package:rapicredito/page/auth/id/index.dart';
 import 'package:rapicredito/page/auth/widget/common_auth_agreement_view.dart';
 import 'package:rapicredito/widget/comon_section_title_view.dart';
 import 'package:rapicredito/style/index.dart';
@@ -11,7 +11,7 @@ import 'package:rapicredito/widget/custom_image_view.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
 import 'package:rapicredito/widget/custom_select_view.dart';
 
-class AuthIdPage extends GetView<AuthPersonCtr> {
+class AuthIdPage extends GetView<AuthIdCtr> {
   const AuthIdPage({Key? key}) : super(key: key);
 
   Widget idCameraView(String title, VoidCallback func) => CustomClickView(
@@ -48,11 +48,11 @@ class AuthIdPage extends GetView<AuthPersonCtr> {
           Padding(
             padding: const EdgeInsets.only(top: 28.0, left: 16.0, right: 16.0),
             child: Row(mainAxisSize: MainAxisSize.max, children: [
-              Expanded(child: idCameraView('Frente', () {})),
+              Expanded(child: idCameraView('Frente', controller.tackCamera)),
               const SizedBox(
                 width: 10.0,
               ),
-              Expanded(child: idCameraView('Atrás', () {})),
+              Expanded(child: idCameraView('Atrás', controller.tackCamera)),
             ]),
           )
         ],
@@ -61,7 +61,6 @@ class AuthIdPage extends GetView<AuthPersonCtr> {
   Widget faceCameraView(VoidCallback func) => CustomClickView(
       onTap: func,
       child: SizedBox(
-        width: controller.state.imageWidth,
         height: 108,
         child: Stack(
           alignment: Alignment.topCenter,
@@ -71,6 +70,7 @@ class AuthIdPage extends GetView<AuthPersonCtr> {
               imageType: ImageType.assets,
               width: controller.state.imageWidth,
               height: 91.0,
+              fit: BoxFit.contain,
             ),
             const Positioned(
               top: 25.0,
@@ -81,12 +81,11 @@ class AuthIdPage extends GetView<AuthPersonCtr> {
                 imageType: ImageType.assets,
                 width: 41.0,
                 height: 41.0,
+                fit: BoxFit.contain,
               ),
             ),
             Positioned(
                 top: 81.0,
-                left: 26.0,
-                right: 26.0,
                 child: Container(
                   alignment: Alignment.center,
                   height: 26.0,
@@ -108,15 +107,13 @@ class AuthIdPage extends GetView<AuthPersonCtr> {
         mainAxisSize: MainAxisSize.min,
         children: [
           const Padding(
-            padding: EdgeInsets.only(top: 28.0, left: 14.0),
+            padding: EdgeInsets.only(top: 28.0, left: 14.0, bottom: 13.0),
             child: CommonSectionTitleView(
               title: 'Reconocimiento facial',
             ),
           ),
-          Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.only(top: 13.0),
-            child: faceCameraView(() {}),
+          Center(
+            child: faceCameraView(controller.goToCustomCamera),
           )
         ],
       );
