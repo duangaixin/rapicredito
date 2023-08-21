@@ -103,7 +103,7 @@ class _PermissionDialogState extends State<PermissionDialog> {
 
   Widget _buildBottomView() {
     return Container(
-      margin: const EdgeInsets.only(top: 18.0, left: 6.0, right: 6.0),
+      margin: const EdgeInsets.only(top: 10.0, left: 6.0, right: 6.0),
       decoration: BoxDecoration(
           color: const Color(0xffF1F1F1),
           borderRadius: BorderRadius.circular(10.0)),
