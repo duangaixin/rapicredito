@@ -1,7 +1,6 @@
 import 'package:rapicredito/widget/custom_loading_dialog.dart';
 import 'package:get/get.dart';
 
-
 extension GetExtension on GetInterface {
   dismiss() {
     if (Get.isDialogOpen != null && Get.isDialogOpen!) {

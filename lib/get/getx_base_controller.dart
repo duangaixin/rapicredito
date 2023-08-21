@@ -1,4 +1,3 @@
-
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:get/get.dart';
 

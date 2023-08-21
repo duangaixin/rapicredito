@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 
 class CustomButton extends StatelessWidget {
-
   const CustomButton({
     super.key,
     this.text = '',
@@ -35,33 +34,39 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: onPressed?.throttleWithTimeout(),
-      style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.resolveWith((states) {
-            if (states.contains(MaterialState.disabled)) {
-              return disabledTextColor ;
-            }
-            return textColor;
-          },
-        ),
-        backgroundColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.disabled)) {
-            return disabledBackgroundColor ;
-          }
-          return backgroundColor;
-        }),
-        overlayColor: MaterialStateProperty.resolveWith((states) {
-          return backgroundColor; }),
-        minimumSize: (minWidth == null || minHeight == null) ? null : MaterialStateProperty.all<Size>(Size(minWidth!, minHeight!)),
-        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(padding),
-        shape: MaterialStateProperty.all<OutlinedBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(radius),
+        onPressed: onPressed?.throttleWithTimeout(),
+        style: ButtonStyle(
+          foregroundColor: MaterialStateProperty.resolveWith(
+            (states) {
+              if (states.contains(MaterialState.disabled)) {
+                return disabledTextColor;
+              }
+              return textColor;
+            },
           ),
+          backgroundColor: MaterialStateProperty.resolveWith((states) {
+            if (states.contains(MaterialState.disabled)) {
+              return disabledBackgroundColor;
+            }
+            return backgroundColor;
+          }),
+          overlayColor: MaterialStateProperty.resolveWith((states) {
+            return backgroundColor;
+          }),
+          minimumSize: (minWidth == null || minHeight == null)
+              ? null
+              : MaterialStateProperty.all<Size>(Size(minWidth!, minHeight!)),
+          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(padding),
+          shape: MaterialStateProperty.all<OutlinedBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(radius),
+            ),
+          ),
+          side: MaterialStateProperty.all<BorderSide>(side),
         ),
-        side: MaterialStateProperty.all<BorderSide>(side),
-      ),
-      child: Text(text, style: TextStyle(fontSize: fontSize),)
-    );
+        child: Text(
+          text,
+          style: TextStyle(fontSize: fontSize),
+        ));
   }
 }

@@ -6,10 +6,8 @@ import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/page/main/index.dart';
 import 'package:rapicredito/style/index.dart';
 
-
-class AppMainCtr extends BaseGetCtr{
+class AppMainCtr extends BaseGetCtr {
   AppMainCtr();
-
 
   late final PageController pageController;
 
@@ -31,32 +29,29 @@ class AppMainCtr extends BaseGetCtr{
     pageController = PageController(initialPage: state.pageIndex);
     bottomTabList = <BottomNavigationBarItem>[
       BottomNavigationBarItem(
-        icon: Image.asset( Resource.assetsImageMainOne, width: 25.0),
-        activeIcon: Image.asset(
-          Resource.assetsImageMainOne,
-          color: Color(0xff666666),
-          width: 25.0,
-        ),
-          label: ''
-      ),
+          icon: Image.asset(Resource.assetsImageMainOne, width: 25.0),
+          activeIcon: Image.asset(
+            Resource.assetsImageMainOne,
+            color: Color(0xff666666),
+            width: 25.0,
+          ),
+          label: ''),
       BottomNavigationBarItem(
-        icon: Image.asset(Resource.assetsImageMainTwo, width: 25.0),
-        activeIcon: Image.asset(
-          Resource.assetsImageMainTwo,
-          color: Color(0xff666666),
-          width: 25.0,
-        ),
-          label: ''
-      ),
+          icon: Image.asset(Resource.assetsImageMainTwo, width: 25.0),
+          activeIcon: Image.asset(
+            Resource.assetsImageMainTwo,
+            color: Color(0xff666666),
+            width: 25.0,
+          ),
+          label: ''),
       BottomNavigationBarItem(
-        icon: Image.asset( Resource.assetsImageMainThree, width: 25.0),
-        activeIcon: Image.asset(
-          Resource.assetsImageMainThree,
-          color: Color(0xff666666),
-          width: 25.0,
-        ),
-        label: ''
-      ),
+          icon: Image.asset(Resource.assetsImageMainThree, width: 25.0),
+          activeIcon: Image.asset(
+            Resource.assetsImageMainThree,
+            color: Color(0xff666666),
+            width: 25.0,
+          ),
+          label: ''),
     ];
   }
 
@@ -74,17 +69,13 @@ class AppMainCtr extends BaseGetCtr{
     }
   }
 
-
   void _checkUpdate() {
     var isLogin = UserStore.to.isLogin;
     if (!isLogin) return;
     var param = <String, dynamic>{};
-
   }
 
-  void _showPrivacyDialog() {
-
-  }
+  void _showPrivacyDialog() {}
 
   @override
   void dispose() {

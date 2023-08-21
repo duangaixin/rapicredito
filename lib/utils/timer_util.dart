@@ -6,19 +6,15 @@ class TimerUtil {
   TimerUtil(
       {this.mInterval = Duration.millisecondsPerSecond, this.mTotalTime = 0});
 
-
   Timer? _mTimer;
-
 
   bool _isActive = false;
 
   int mInterval;
 
-
   int mTotalTime;
 
   OnTimerTickCallback? _onTimerTickCallback;
-
 
   void setInterval(int interval) {
     if (interval <= 0) interval = Duration.millisecondsPerSecond;
@@ -30,7 +26,6 @@ class TimerUtil {
     mTotalTime = totalTime;
   }
 
-
   void startTimer() {
     if (_isActive || mInterval <= 0) return;
     _isActive = true;
@@ -40,7 +35,6 @@ class TimerUtil {
       _doCallback(timer.tick);
     });
   }
-
 
   void startCountDown() {
     if (_isActive || mInterval <= 0 || mTotalTime <= 0) return;
@@ -71,7 +65,6 @@ class TimerUtil {
       _onTimerTickCallback!(time);
     }
   }
-
 
   void updateTotalTime(int totalTime) {
     cancel();

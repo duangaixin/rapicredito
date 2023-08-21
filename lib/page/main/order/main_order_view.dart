@@ -5,6 +5,7 @@ import 'package:rapicredito/page/main/mine/widget/input_dialog.dart';
 import 'package:rapicredito/page/main/order/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/widget/custom_button.dart';
+import 'package:rapicredito/widget/custom_picker.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
 import 'package:rapicredito/widget/pull_to_refresh_view.dart';
 
@@ -37,6 +38,13 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
                               );
                             });
                       }),
+                  CustomButton(
+                      text: '底部弹窗',
+                      onPressed: () {
+                        CustomPicker.showSinglePicker(context, data: ['1','2','3','4']);
+                      }),
+
+
                   CustomButton(
                       text: '个人信息',
                       onPressed: () {

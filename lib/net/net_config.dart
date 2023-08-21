@@ -1,7 +1,5 @@
-
 import 'package:dio/dio.dart';
 import 'package:rapicredito/net/base_response.dart';
-
 
 abstract class INetConfig {
   Future<Map<String, dynamic>> getDefHeader();
@@ -18,7 +16,6 @@ typedef OnGetDefParam = Future<Map<String, dynamic>> Function();
 typedef OnGetIsLoggable = bool Function();
 typedef OnTransform<T> = T Function(dynamic json);
 typedef OnCheck401Error = void Function(BaseResponse error);
-
 
 class NetConfig implements INetConfig {
   String baseUrl;

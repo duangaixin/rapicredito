@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rapicredito/utils/object_util.dart';
 
-
 class CustomEditView extends StatefulWidget {
   const CustomEditView({
     Key? key,

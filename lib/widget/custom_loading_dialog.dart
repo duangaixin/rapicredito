@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:rapicredito/style/index.dart';
 
 class CustomLoadingDialog extends StatelessWidget {
-
   const CustomLoadingDialog({
     Key? key,
     this.hintText = '加载中...',

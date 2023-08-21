@@ -9,6 +9,4 @@ class MainOrderState {
   set loadState(value) => _loadState.value = value;
 
   bool isRefresh = false;
-
-
 }

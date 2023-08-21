@@ -10,6 +10,7 @@ class CustomPageBgView extends StatefulWidget {
   final bool resizeToAvoidBottomInset;
   final List<Widget>? actions;
   final double titleSpace;
+
   const CustomPageBgView({
     Key? key,
     required this.content,
@@ -17,7 +18,7 @@ class CustomPageBgView extends StatefulWidget {
     this.leftAction,
     this.isShowBackBtn = true,
     this.resizeToAvoidBottomInset = true,
-    this.titleSpace=16.0,
+    this.titleSpace = 16.0,
     this.actions,
   }) : super(key: key);
 

@@ -25,7 +25,10 @@ class SplashPage extends GetView<SplashCtr> {
         return SizedBox(
           width: double.infinity,
           height: double.infinity,
-          child: Image.asset(controller.state.guideList[index],fit: BoxFit.cover,),
+          child: Image.asset(
+            controller.state.guideList[index],
+            fit: BoxFit.cover,
+          ),
         );
       },
       onTap: (index) {

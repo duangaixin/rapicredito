@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:rapicredito/style/index.dart';
 
-
 class TextStyles {
   TextStyles._();
 

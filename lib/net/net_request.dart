@@ -7,7 +7,6 @@ import 'package:rapicredito/net/net_constants.dart';
 import 'package:rapicredito/net/pretty_logger_interceptor.dart';
 import 'package:http_proxy/http_proxy.dart';
 
-
 class NetRequest {
   NetRequest._internal();
 
@@ -54,7 +53,7 @@ class NetRequest {
   }
 
   void _setCharlesProxy(Dio dio) async {
-    if(!isLoggable)return;
+    if (!isLoggable) return;
     HttpProxy httpProxy = await HttpProxy.createHttpProxy();
     var proxyHost = httpProxy.host;
     var proxyPort = httpProxy.port;
@@ -130,7 +129,7 @@ class NetRequest {
           cancelToken: cancelToken,
           onReceiveProgress: onReceiveProgress);
       return _wrapperData<T>(result, onTransform);
-    }  catch (e) {
+    } catch (e) {
       return _wrapperError<T>(e);
     }
   }
@@ -154,7 +153,7 @@ class NetRequest {
           onSendProgress: onSendProgress,
           onReceiveProgress: onReceiveProgress);
       return _wrapperData<T>(result, onTransform);
-    }  catch (e) {
+    } catch (e) {
       return _wrapperError<T>(e);
     }
   }
@@ -174,7 +173,7 @@ class NetRequest {
           options: options,
           cancelToken: cancelToken);
       return _wrapperData<T>(result, onTransform);
-    }  catch (e) {
+    } catch (e) {
       return _wrapperError<T>(e);
     }
   }
@@ -198,7 +197,7 @@ class NetRequest {
           onSendProgress: onSendProgress,
           onReceiveProgress: onReceiveProgress);
       return _wrapperData<T>(result, onTransform);
-    }  catch (e) {
+    } catch (e) {
       return _wrapperError<T>(e);
     }
   }
@@ -222,7 +221,7 @@ class NetRequest {
           onSendProgress: onSendProgress,
           onReceiveProgress: onReceiveProgress);
       return _wrapperData<T>(result, onTransform);
-    }  catch (e) {
+    } catch (e) {
       return _wrapperError<T>(e);
     }
   }
@@ -242,7 +241,7 @@ class NetRequest {
           options: options,
           cancelToken: cancelToken);
       return _wrapperData<T>(result, onTransform);
-    }  catch (e) {
+    } catch (e) {
       return _wrapperError<T>(e);
     }
   }

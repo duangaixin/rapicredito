@@ -7,7 +7,4 @@ class MainMineState {
   LoadState get loadState => _loadState.value;
 
   set loadState(value) => _loadState.value = value;
-
-
-
 }

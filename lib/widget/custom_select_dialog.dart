@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rapicredito/style/index.dart';
 
-
 class CustomSelectDialog extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _CustomSelectDialogState();
@@ -102,7 +101,7 @@ class _CustomSelectDialogState extends State<CustomSelectDialog> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
         height: 44.0,
-        child:Text(
+        child: Text(
           name,
           style: TextStyles.textNormal16,
         ),

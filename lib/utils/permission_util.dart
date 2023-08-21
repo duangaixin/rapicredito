@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-
 class PermissionUtil {
   static Function(String) defaultCall = (s) {};
 

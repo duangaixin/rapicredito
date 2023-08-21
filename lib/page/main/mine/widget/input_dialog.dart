@@ -46,7 +46,6 @@ class _InputDialogState extends State<InputDialog> {
     );
   }
 
-
   Widget _buildTextFieldView() {
     return Container(
       margin: const EdgeInsets.only(top: 10.0),
@@ -58,7 +57,7 @@ class _InputDialogState extends State<InputDialog> {
         child: TextField(
             controller: ctr,
             maxLength: 200,
-            style: const TextStyle(fontSize: 13.0,color: Colors.black87),
+            style: const TextStyle(fontSize: 13.0, color: Colors.black87),
             maxLines: null,
             decoration: const InputDecoration(
                 contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -76,13 +75,12 @@ class _InputDialogState extends State<InputDialog> {
   Widget _buildBottomButtonView(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(top: 20.0),
-      child:  CustomButton(
+      child: CustomButton(
         text: 'OK',
         padding: const EdgeInsets.symmetric(horizontal: 50.0),
         onPressed: () {
           Navigator.pop(context);
         },
-
       ),
     );
   }

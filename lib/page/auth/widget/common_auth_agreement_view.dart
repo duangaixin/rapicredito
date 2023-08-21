@@ -16,7 +16,7 @@ class CommonAuthAgreeView extends GetView<MainHomeCtr> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 12.0, right: 16.0),
+          padding: const EdgeInsets.only(left: 12.0, right: 16.0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -33,7 +33,8 @@ class CommonAuthAgreeView extends GetView<MainHomeCtr> {
                 child: Text(
                   Strings.autoLineString(
                       'Todos los datos que rellene serán tratados correctamente y nunca revelarán su información personal.'),
-                  style: const TextStyle(fontSize: 13.0, color: Color(0xff666666)),
+                  style:
+                      const TextStyle(fontSize: 13.0, color: Color(0xff666666)),
                 ),
               ))
             ],

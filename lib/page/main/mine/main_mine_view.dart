@@ -80,7 +80,7 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              margin: const EdgeInsets.only( bottom: 18.0),
+              margin: const EdgeInsets.only(bottom: 18.0),
               height: 1.0,
               width: double.infinity,
               color: const Color(0xffE9E9E9),

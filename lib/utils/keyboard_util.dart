@@ -7,6 +7,7 @@ class KeyboardUtils {
       FocusManager.instance.primaryFocus?.unfocus();
     }
   }
+
   static void unFocus() {
     FocusManager.instance.primaryFocus?.unfocus();
   }

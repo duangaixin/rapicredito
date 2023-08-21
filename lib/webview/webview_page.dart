@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:rapicredito/widget/custom_appbar.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-
 class WebViewPage extends StatefulWidget {
   const WebViewPage({
     Key? key,
@@ -64,7 +63,7 @@ class WebViewPageState extends State<WebViewPage> {
         return Future.value(true);
       },
       child: Scaffold(
-        appBar:CustomAppBar(
+        appBar: CustomAppBar(
           title: title,
         ),
         body: Stack(
@@ -72,15 +71,17 @@ class WebViewPageState extends State<WebViewPage> {
             WebViewWidget(
               controller: _controller,
             ),
-            if (_progressValue != 100) LinearProgressIndicator(
-              value: _progressValue / 100,
-              backgroundColor: Colors.transparent,
-              minHeight: 2,
-            ) else const SizedBox.shrink(),
+            if (_progressValue != 100)
+              LinearProgressIndicator(
+                value: _progressValue / 100,
+                backgroundColor: Colors.transparent,
+                minHeight: 2,
+              )
+            else
+              const SizedBox.shrink(),
           ],
         ),
       ),
     );
   }
 }
-

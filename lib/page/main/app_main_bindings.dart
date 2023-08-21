@@ -11,6 +11,5 @@ class AppMainBinding implements Bindings {
     Get.lazyPut<MainHomeCtr>(() => MainHomeCtr());
     Get.lazyPut<MainOrderCtr>(() => MainOrderCtr());
     Get.lazyPut<MainMineCtr>(() => MainMineCtr());
-
   }
 }

@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:rapicredito/utils/log_utils.dart';
 
-
 class LoggingInterceptor extends Interceptor {
   late DateTime _startTime;
   late DateTime _endTime;

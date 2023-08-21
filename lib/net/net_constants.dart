@@ -1,4 +1,3 @@
-
 class NetConstants {
   static const String data = 'data';
   static const String message = 'msg';

@@ -72,7 +72,7 @@ class PhoneTextFieldState extends State<PhoneTextField> {
       decoration: InputDecoration(
         contentPadding: const EdgeInsets.symmetric(vertical: 12.0),
         hintText: widget.hintText,
-        hintMaxLines: _isHideDelete?2:1,
+        hintMaxLines: _isHideDelete ? 2 : 1,
         hintStyle: const TextStyle(color: Color(0xFFCBCBCB), fontSize: 14.0),
         counterText: '',
         focusedBorder: _getBorder(),
@@ -118,7 +118,7 @@ class PhoneTextFieldState extends State<PhoneTextField> {
                   height: 23,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(right: 28.0,left: 3.0),
+                  padding: EdgeInsets.only(right: 28.0, left: 3.0),
                   child: Text(
                     '+57',
                     style: TextStyle(fontSize: 16.0, color: Color(0xff333333)),

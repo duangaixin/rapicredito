@@ -9,7 +9,6 @@ class BaseResponse<T> {
 
   BaseResponse.success(this.data, this.code);
 
-
   BaseResponse.error(this.code, this.errorMessage);
 
   BaseResponse.errorDio(this.errorDio);

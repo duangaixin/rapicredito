@@ -1,4 +1,3 @@
-
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +8,7 @@ class CustomColorButton extends StatelessWidget {
     this.disableColors,
     this.width,
     this.height,
-    this.borderRadius=BorderRadius.zero,
+    this.borderRadius = BorderRadius.zero,
     this.tapCallback,
     this.btnTxt,
     this.btnContent,
@@ -39,7 +38,7 @@ class CustomColorButton extends StatelessWidget {
     } else {
       colorList = colors ?? [theme.primaryColor, theme.primaryColorDark];
     }
-   if(colorList.length<2)return const SizedBox.shrink();
+    if (colorList.length < 2) return const SizedBox.shrink();
     return DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: borderRadius,
@@ -60,7 +59,7 @@ class CustomColorButton extends StatelessWidget {
                 child: btnContent ??
                     Padding(
                       padding: const EdgeInsetsDirectional.all(13.0),
-                      child: Text(btnTxt??'',
+                      child: Text(btnTxt ?? '',
                           style: const TextStyle(
                               fontSize: 17, color: Colors.white)),
                     ),

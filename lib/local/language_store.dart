@@ -6,7 +6,6 @@ import 'package:rapicredito/lang/zh_cn.dart';
 import 'package:rapicredito/local/app_constants.dart';
 import 'package:get/get.dart';
 
-
 class LanguageStore extends GetxController {
   static LanguageStore get to => Get.find();
 

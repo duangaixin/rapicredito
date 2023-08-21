@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:rapicredito/local/app_constants.dart';
 
-
 class Log {
   static const String tag = 'HC-LOG';
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 
-
 class CustomSelectView extends StatefulWidget {
   const CustomSelectView(
       {Key? key,

@@ -44,20 +44,15 @@ class ScreenUtil {
   /// 屏幕 宽
   double get screenWidth => _screenWidth;
 
-
   double get screenHeight => _screenHeight;
-
 
   double get appBarHeight => _appBarHeight;
 
   double get screenDensity => _screenDensity;
 
-
   double get statusBarHeight => _statusBarHeight;
 
-
   double get bottomBarHeight => _bottomBarHeight;
-
 
   MediaQueryData? get mediaQueryData => _mediaQueryData;
 
@@ -66,18 +61,15 @@ class ScreenUtil {
     return mediaQuery.size.width;
   }
 
-
   static double getScreenH(BuildContext context) {
     MediaQueryData mediaQuery = MediaQuery.of(context);
     return mediaQuery.size.height;
   }
 
-
   static double getScreenDensity(BuildContext context) {
     MediaQueryData mediaQuery = MediaQuery.of(context);
     return mediaQuery.devicePixelRatio;
   }
-
 
   static double getStatusBarH(BuildContext context) {
     MediaQueryData mediaQuery = MediaQuery.of(context);
@@ -94,7 +86,6 @@ class ScreenUtil {
     return mediaQuery;
   }
 
-
   static double getScaleW(BuildContext context, double size) {
     if (getScreenW(context) == 0.0) return size;
     return size * getScreenW(context) / _designW;
@@ -105,28 +96,23 @@ class ScreenUtil {
     return size * getScreenH(context) / _designH;
   }
 
-
   static double getScaleSp(BuildContext context, double fontSize) {
     if (getScreenW(context) == 0.0) return fontSize;
     return fontSize * getScreenW(context) / _designW;
   }
-
 
   static Orientation getOrientation(BuildContext context) {
     MediaQueryData mediaQuery = MediaQuery.of(context);
     return mediaQuery.orientation;
   }
 
-
   double getWidth(double size) {
     return _screenWidth == 0.0 ? size : (size * _screenWidth / _designW);
   }
 
-
   double getHeight(double size) {
     return _screenHeight == 0.0 ? size : (size * _screenHeight / _designH);
   }
-
 
   double getWidthPx(double sizePx) {
     return _screenWidth == 0.0
@@ -150,19 +136,16 @@ class ScreenUtil {
     return getRatio() * dp;
   }
 
-
   double getRatio() {
     return (_screenWidth > _screenHeight ? _screenHeight : _screenWidth) /
         _designW;
   }
-
 
   static double getAdapterSizeCtx(BuildContext context, double dp) {
     Size size = MediaQuery.of(context).size;
     if (size == Size.zero) return dp;
     return getRatioCtx(context) * dp;
   }
-
 
   static double getRatioCtx(BuildContext context) {
     Size size = MediaQuery.of(context).size;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rapicredito/page/bank/widget/bank_view.dart';
 import 'package:rapicredito/page/bank/widget/wallet_view.dart';
 import 'package:rapicredito/widget/comon_section_title_view.dart';
 import 'package:rapicredito/page/bank/index.dart';
@@ -18,7 +19,12 @@ class SelectBankPage extends GetView<SelectBankCtr> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
-            children: [tipView, selectView, const WalletView()],
+            children: [
+              tipView, selectView,
+
+              //const    BankView(),
+              const WalletView()
+            ],
           ),
         ));
   }

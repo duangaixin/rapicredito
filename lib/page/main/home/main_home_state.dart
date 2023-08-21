@@ -9,6 +9,4 @@ class MainHomeState {
   set loadState(value) => _loadState.value = value;
 
   bool isRefresh = false;
-
-
 }

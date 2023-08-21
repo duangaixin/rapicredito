@@ -30,7 +30,6 @@ enum _ToastType {
   loading,
 }
 
-
 class ProgressHUD {
   static showText(String loadingText,
       {Alignment alignment = Alignment.center}) {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class SelectAndShowTextView extends StatelessWidget {
   const SelectAndShowTextView(
       {Key? key,
@@ -34,8 +33,9 @@ class SelectAndShowTextView extends StatelessWidget {
             style: TextStyle(color: Colors.red, fontSize: 16.0),
           ),
         ),
-        Text(title, ),
-
+        Text(
+          title,
+        ),
         Expanded(
           child: Text(content,
               maxLines: maxLine,
@@ -43,10 +43,10 @@ class SelectAndShowTextView extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: content.contains('请选择')
                   ? const TextStyle(
-                      fontSize:16.0, )
+                      fontSize: 16.0,
+                    )
                   : textShowStyle),
         ),
-
         Offstage(
             offstage: onTap == null,
             child:

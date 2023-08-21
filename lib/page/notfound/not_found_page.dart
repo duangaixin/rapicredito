@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rapicredito/widget/custom_appbar.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
 
-
 class NotFoundPage extends StatelessWidget {
   const NotFoundPage({Key? key}) : super(key: key);
 
