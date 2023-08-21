@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:rapicredito/get/getx_keep_state_view.dart';
 import 'package:rapicredito/page/main/mine/widget/input_dialog.dart';
 import 'package:rapicredito/page/main/order/index.dart';
+import 'package:rapicredito/page/splash/widget/permission_dialog.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_picker.dart';
@@ -39,12 +40,31 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
                             });
                       }),
                   CustomButton(
+                      text: '权限弹窗',
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (_) {
+                              return Dialog(
+                                insetPadding: const EdgeInsets.only(
+                                    top: 79.0,
+                                    bottom: 70.0,
+                                    left: 10.0,
+                                    right: 10.0),
+                                child: PermissionDialog(
+                                  leftClickConfirm: () {},
+                                  rightClickConfirm: () {},
+                                ),
+                              );
+                            });
+                      }),
+                  CustomButton(
                       text: '底部弹窗',
                       onPressed: () {
-                        CustomPicker.showSinglePicker(context, data: ['1','2','3','4']);
+                        CustomPicker.showSinglePicker(context,
+                            data: ['1', '2', '3', '4']);
                       }),
-
-
                   CustomButton(
                       text: '个人信息',
                       onPressed: () {

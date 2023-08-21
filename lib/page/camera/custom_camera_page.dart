@@ -34,8 +34,7 @@ class CustomCameraPageState extends State<CustomCameraPage> {
   void initCameraCtr() {
     if (cameraList.isEmpty) return;
     controller = CameraController(
-      cameraList[0],
-     // cameraList[cameraList.length > 1 ? 1 : 0],
+      cameraList[cameraList.length > 1 ? 1 : 0],
       ResolutionPreset.max,
     );
     try {
@@ -43,6 +42,11 @@ class CustomCameraPageState extends State<CustomCameraPage> {
         if (mounted) {
           setState(() {});
         }
+        controller?.addListener(() {
+          if (mounted) {
+            setState(() {});
+          }
+        });
       });
     } on CameraException catch (e) {
       var permissionError = e.code.contains('Permission');
@@ -72,7 +76,8 @@ class CustomCameraPageState extends State<CustomCameraPage> {
       future: _initializeControllerFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return SizedBox(
+          return Container(
+            color: Colors.red,
             width: double.infinity,
             height: double.infinity,
             child: Stack(
