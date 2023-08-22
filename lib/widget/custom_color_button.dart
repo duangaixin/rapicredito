@@ -39,33 +39,38 @@ class CustomColorButton extends StatelessWidget {
       colorList = colors ?? [theme.primaryColor, theme.primaryColorDark];
     }
     if (colorList.length < 2) return const SizedBox.shrink();
-    return DecoratedBox(
-        decoration: BoxDecoration(
-          borderRadius: borderRadius,
-          gradient: LinearGradient(colors: colorList),
-        ),
-        child: Material(
-          type: MaterialType.transparency,
-          child: InkWell(
-            onTap: disable ? null : tapCallback?.throttleWithTimeout(),
-            splashColor: colorList.last,
+    return ClipRRect(
+      borderRadius: borderRadius,
+      child:       DecoratedBox(
+          decoration: BoxDecoration(
             borderRadius: borderRadius,
-            enableFeedback: !disable,
-            highlightColor: Colors.transparent,
-            child: ConstrainedBox(
-              constraints:
-                  BoxConstraints.tightFor(width: width, height: height),
-              child: Center(
-                child: btnContent ??
-                    Padding(
-                      padding: const EdgeInsetsDirectional.all(13.0),
-                      child: Text(btnTxt ?? '',
-                          style: const TextStyle(
-                              fontSize: 17, color: Colors.white)),
-                    ),
+            gradient: LinearGradient(colors: colorList),
+          ),
+          child: Material(
+            type: MaterialType.transparency,
+            child: InkWell(
+              onTap: disable ? null : tapCallback?.throttleWithTimeout(),
+              splashColor: colorList.last,
+              borderRadius: borderRadius,
+              enableFeedback: !disable,
+              highlightColor: Colors.transparent,
+              child: ConstrainedBox(
+                constraints:
+                BoxConstraints.tightFor(width: width, height: height),
+                child: Center(
+                  child: btnContent ??
+                      Padding(
+                        padding: const EdgeInsetsDirectional.all(13.0),
+                        child: Text(btnTxt ?? '',
+                            style: const TextStyle(
+                                fontSize: 17, color: Colors.white)),
+                      ),
+                ),
               ),
             ),
-          ),
-        ));
+          )),
+    )
+
+;
   }
 }

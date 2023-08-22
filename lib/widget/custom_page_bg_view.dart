@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/style/index.dart';
+import 'package:rapicredito/widget/custom_click_view.dart';
 
 class CustomPageBgView extends StatefulWidget {
   final Widget content;
@@ -27,23 +28,21 @@ class CustomPageBgView extends StatefulWidget {
 }
 
 class CustomPageBgViewState extends State<CustomPageBgView> {
-  Widget get leftView => Row(
+  Widget get leftView => CustomClickView(
+      onTap: () {
+        if (widget.leftAction != null) {
+          widget.leftAction?.call();
+        } else {
+          Get.back();
+        }
+      },
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           widget.isShowBackBtn
-              ? GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  child: const Icon(Icons.arrow_back_ios,
-                      color: Colors.black, size: 16.0),
-                  onTap: () {
-                    if (widget.leftAction != null) {
-                      widget.leftAction?.call();
-                    } else {
-                      Get.back();
-                    }
-                  },
-                )
+              ? const Icon(Icons.arrow_back_ios,
+                  color: Colors.black, size: 16.0)
               : const SizedBox.shrink(),
           Text(widget.title,
               textAlign: TextAlign.left,
@@ -52,7 +51,7 @@ class CustomPageBgViewState extends State<CustomPageBgView> {
                 fontSize: 15,
               )),
         ],
-      );
+      ));
 
   @override
   Widget build(BuildContext context) {

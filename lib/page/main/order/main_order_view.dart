@@ -22,7 +22,7 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
             onRefresh: ctr.refreshInfo,
             enablePullUp: false,
             child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
+              physics: NeverScrollableScrollPhysics(),
               child: Column(
                 children: [
                   const SizedBox(height: 100.0,),

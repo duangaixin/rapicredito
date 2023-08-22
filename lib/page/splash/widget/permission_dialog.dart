@@ -24,10 +24,6 @@ class _PermissionDialogState extends State<PermissionDialog> {
       height: double.infinity,
       padding: const EdgeInsets.only(top: 23.0, bottom: 7.0),
       alignment: Alignment.center,
-      // decoration: BoxDecoration(
-      //   color: Colors.white,
-      //   borderRadius: BorderRadius.circular(16.0),
-      // ),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
