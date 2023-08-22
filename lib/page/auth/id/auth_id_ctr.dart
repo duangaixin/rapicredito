@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:camera/camera.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -35,12 +34,8 @@ class AuthIdCtr extends BaseGetCtr {
   }
 
   void goToCustomCamera() async {
-    List<CameraDescription> cameraList = await availableCameras();
+   List<CameraDescription> cameraList = await availableCameras();
     var result = await Get.toNamed(PageRouterName.customCameraPage,
         arguments: {'cameraList': cameraList});
-    if (result != null && result is XFile) {
-      var file = File(result.path);
-      var compressFile = await CompressUtil.compressImage(file, 1048576);
-    }
   }
 }
