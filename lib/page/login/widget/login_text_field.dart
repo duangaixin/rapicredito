@@ -87,21 +87,15 @@ class LoginTextFieldState extends State<LoginTextField> {
         width: 14.0,
         margin: const EdgeInsetsDirectional.only(start: 12.0),
         decoration: BoxDecoration(
-          color: const Color(0xff3D3D3D),
+          color: const Color(0xffDEDEDE),
           borderRadius: BorderRadiusDirectional.circular(8.0),
         ),
-
-        child: CustomImageView(
+        child: const CustomImageView(
           Resource.assetsImageLoginClear,
           imageType: ImageType.assets,
           width: 19.0,
           height: 20.0,
         ),
-        // child: const Icon(
-        //   Icons.clear,
-        //   size: 8.0,
-        //   color: Color(0xFFffffff),
-        // ),
       ),
       onTap: () => widget.controller.clear(),
     );

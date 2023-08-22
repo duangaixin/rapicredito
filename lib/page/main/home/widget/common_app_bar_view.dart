@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:rapicredito/style/index.dart';
 
 class MainAppBarView extends StatefulWidget {
+  final String? title;
   const MainAppBarView({
     Key? key,
+    this.title
   }) : super(key: key);
 
   @override
@@ -11,13 +13,13 @@ class MainAppBarView extends StatefulWidget {
 }
 
 class MainAppBarViewState extends State<MainAppBarView> {
-  Widget get leftView => const Row(
+  Widget get leftView =>  Row(
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('RapiCredito',
+          Text(widget.title??'',
               textAlign: TextAlign.left,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colour.text33,
                 fontSize: 15,
               )),

@@ -25,6 +25,7 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
               physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
+                  const SizedBox(height: 100.0,),
                   CustomButton(
                       text: '输入弹窗',
                       onPressed: () {
@@ -47,6 +48,11 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
                             barrierDismissible: false,
                             builder: (_) {
                               return Dialog(
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(16.0),
+                                  ),
+                                ),
                                 insetPadding: const EdgeInsets.only(
                                     top: 79.0,
                                     bottom: 70.0,

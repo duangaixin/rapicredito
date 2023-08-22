@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:rapicredito/utils/string_ext.dart';
+import 'package:rapicredito/widget/custom_button.dart';
 
 class PermissionDialog extends StatefulWidget {
   @override
@@ -23,10 +24,10 @@ class _PermissionDialogState extends State<PermissionDialog> {
       height: double.infinity,
       padding: const EdgeInsets.only(top: 23.0, bottom: 7.0),
       alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16.0),
-      ),
+      // decoration: BoxDecoration(
+      //   color: Colors.white,
+      //   borderRadius: BorderRadius.circular(16.0),
+      // ),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,8 +41,10 @@ class _PermissionDialogState extends State<PermissionDialog> {
   }
 
   Widget _buildTitleView() {
-    return const Center(
-      child: Text(
+    return Container(
+      alignment: Alignment.center,
+      padding: const EdgeInsets.only(bottom: 10.0),
+      child: const Text(
         'Permiso',
         style: TextStyle(
             fontSize: 18.0,
@@ -59,7 +62,7 @@ class _PermissionDialogState extends State<PermissionDialog> {
         mainAxisSize: MainAxisSize.max,
         children: [
           const Padding(
-            padding: EdgeInsets.only(top: 10.0, left: 16.0, right: 16.0),
+            padding: EdgeInsets.only( left: 16.0, right: 16.0),
             child: Text(
               'Hi.there To access your eligibility and facilitate faster disbursal of your loan, we need these permissions',
               style: TextStyle(fontSize: 15.0, color: Color(0xff666666)),
@@ -147,18 +150,34 @@ class _PermissionDialogState extends State<PermissionDialog> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
-                  child: Container(
-                    color: Colors.black,
-                    height: 46.0,
+                  child: CustomButton(
+                    onPressed: () {},
+                    minHeight: 46.0,
+                    backgroundColor: Colors.transparent,
+                    disabledBackgroundColor: Colors.transparent,
+                    fontSize: 15.0,
+                    radius: 8.0,
+                    text: 'SALTAR',
+                    textColor: const Color(0xff333333),
+                    fontWeight: FontWeight.bold,
+                    side: const BorderSide(color: Color(0xff333333),width: 1.0),
                   ),
                 ),
                 const SizedBox(
                   width: 20.0,
                 ),
                 Expanded(
-                  child: Container(
-                    color: Colors.red,
-                    height: 46.0,
+                  child: CustomButton(
+                    onPressed: () {},
+                    minHeight: 46.0,
+                    backgroundColor: const Color(0xffB8EF17),
+                    disabledBackgroundColor: const Color(0xffB8EF17),
+                    fontSize: 15.0,
+                    radius: 8.0,
+                    text: 'ACEPTOY\nCONTINUAR',
+                    textColor: const Color(0xff333333),
+                    textAlign: TextAlign.center,
+                    fontWeight: FontWeight.bold
                   ),
                 ),
               ],

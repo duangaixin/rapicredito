@@ -7,8 +7,8 @@ import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
-class HomeDefaultView extends GetView<MainHomeCtr> {
-  const HomeDefaultView({Key? key}) : super(key: key);
+class HomeFailedView extends GetView<MainHomeCtr> {
+  const HomeFailedView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class HomeDefaultView extends GetView<MainHomeCtr> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.max,
       children: [
-        const MainAppBarView(title: 'RapiCrédito',),
+        const MainAppBarView(),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
