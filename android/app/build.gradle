@@ -37,9 +37,9 @@ android {
         targetSdkVersion rootProject.ext.android["targetSdk"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
-//        ndk {
-//            abiFilters 'armeabi-v7a', 'arm64-v8a'
-//        }
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
         multiDexEnabled true
     }
 

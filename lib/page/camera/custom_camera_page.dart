@@ -34,7 +34,8 @@ class CustomCameraPageState extends State<CustomCameraPage> {
   void initCameraCtr() {
     if (cameraList.isEmpty) return;
     controller = CameraController(
-      cameraList[cameraList.length > 1 ? 1 : 0],
+      cameraList[ 0],
+      //cameraList[cameraList.length > 1 ? 1 : 0],
       ResolutionPreset.max,
     );
     try {

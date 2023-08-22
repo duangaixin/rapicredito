@@ -140,11 +140,10 @@ packages:
   camera:
     dependency: "direct main"
     description:
-      name: camera
-      sha256: b4cede7c66f44fa476272d21bfe143d5f32e75de1ea56f737e3eaf982da23bab
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.10.5+3"
+      path: "camera-0.10.5+2"
+      relative: true
+    source: path
+    version: "0.10.5+2"
   camera_android:
     dependency: transitive
     description:
