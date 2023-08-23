@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/loan/first/index.dart';
+import 'package:rapicredito/page/loan/first/widget/first_loan_select_view.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
@@ -28,7 +29,9 @@ class FirstLoanPage extends GetView<FirstLoanCtr> {
               padding:
                   const EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
+                  FirstLoanTopView(),
                   centerView,
                   bottomView,
                 ],
@@ -40,7 +43,7 @@ class FirstLoanPage extends GetView<FirstLoanCtr> {
       );
 
   Widget get centerView => Container(
-        margin: const EdgeInsets.symmetric(vertical: 20.0),
+        margin: const EdgeInsets.only(bottom: 20.0,top: 12.0),
         padding: const EdgeInsets.only(
             left: 10.0, top: 20.0, right: 10.0, bottom: 20.0),
         decoration: BoxDecoration(

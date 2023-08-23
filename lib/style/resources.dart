@@ -22,7 +22,8 @@ class Resource {
       'assets/image/auth/auth_title_bg.png';
   static const String assetsImageLoginClear =
       'assets/image/login/login_clear.png';
-
+  static const String assetsImageLoanLock =
+      'assets/image/main/loan_lock.png';
   static const String assetsImageAuthCameraBg =
       'assets/image/auth/auth_camera_bg.png';
   static const String assetsImageAuthFace = 'assets/image/auth/auth_face.png';
