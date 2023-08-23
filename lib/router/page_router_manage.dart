@@ -7,6 +7,7 @@ import 'package:rapicredito/page/camera/custom_camera_page.dart';
 import 'package:rapicredito/page/login/register/index.dart';
 import 'package:rapicredito/page/main/app_main_bindings.dart';
 import 'package:rapicredito/page/main/app_main_view.dart';
+import 'package:rapicredito/page/main/mine/client/index.dart';
 import 'package:rapicredito/page/notfound/not_found_page.dart';
 import 'package:rapicredito/page/splash/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
@@ -46,8 +47,12 @@ class PageRouterManage {
         page: () => const SelectBankPage(),
         binding: SelectBankBinding()),
     GetPage(
-        name: PageRouterName.customCameraPage,
-        page: () => const CustomCameraPage(),
+        name: PageRouterName.clientPage,
+        page: () => const ClientPage(),
+        binding: ClientBinding()),
+    GetPage(
+      name: PageRouterName.customCameraPage,
+      page: () => const CustomCameraPage(),
     ),
     GetPage(
         name: PageRouterName.notFoundPage, page: () => const NotFoundPage()),

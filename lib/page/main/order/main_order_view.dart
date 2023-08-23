@@ -25,7 +25,9 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
               physics: NeverScrollableScrollPhysics(),
               child: Column(
                 children: [
-                  const SizedBox(height: 100.0,),
+                  const SizedBox(
+                    height: 100.0,
+                  ),
                   CustomButton(
                       text: '输入弹窗',
                       onPressed: () {
@@ -95,6 +97,11 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
                       text: '更换银行卡',
                       onPressed: () {
                         Get.toNamed(PageRouterName.selectBankPage);
+                      }),
+                  CustomButton(
+                      text: '客服',
+                      onPressed: () {
+                        Get.toNamed(PageRouterName.clientPage);
                       }),
                 ],
               ),

@@ -23,6 +23,7 @@ class SelectBankCtr extends BaseGetCtr {
 
   void showSelectBankDialog() {
     CustomPicker.showSinglePicker(Get.context!, data: state.bankList,
+        selectData: state.bankList[state.bankSelectIndex],
         onConfirm: (data, position) {
       state.bankSelectIndex = position;
     });
