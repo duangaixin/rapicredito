@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:rapicredito/get/getx_keep_state_view.dart';
 import 'package:rapicredito/page/main/home/index.dart';
+import 'package:rapicredito/page/main/home/widget/home_loan_audit_view.dart';
 import 'package:rapicredito/page/main/home/widget/home_loan_deal_view.dart';
 import 'package:rapicredito/page/main/home/widget/home_loan_default_view.dart';
 import 'package:rapicredito/page/main/home/widget/home_loan_failure_view.dart';
@@ -24,7 +25,8 @@ class MainHomePage extends GetKeepStateView<MainHomeCtr> {
             //  child: HomeLoanDefaultView(),
               //    child: HomeLoanFailureView(),
               //  child: HomeLoanDealView(),
-                 child: HomeRefusalToLendView()
+                child:HomeLoanAuditView()
+               //  child: HomeRefusalToLendView()
             ),
             loadState: ctr.state.loadState);
       }),
