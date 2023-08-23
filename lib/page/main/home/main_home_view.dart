@@ -18,16 +18,15 @@ class MainHomePage extends GetKeepStateView<MainHomeCtr> {
     return Scaffold(
       body: Obx(() {
         return LoadContainerView(
-            contentView: PullToRefreshView(
-              ctr.refreshController,
-              onRefresh: ctr.refreshInfo,
-              enablePullUp: false,
-            //  child: HomeLoanDefaultView(),
-              //    child: HomeLoanFailureView(),
-              //  child: HomeLoanDealView(),
-                child:HomeLoanAuditView()
-               //  child: HomeRefusalToLendView()
-            ),
+            contentView: PullToRefreshView(ctr.refreshController,
+                onRefresh: ctr.refreshInfo,
+                enablePullUp: false,
+                //  child: HomeLoanDefaultView(),
+                //    child: HomeLoanFailureView(),
+                //  child: HomeLoanDealView(),
+                child: HomeLoanAuditView()
+                //  child: HomeRefusalToLendView()
+                ),
             loadState: ctr.state.loadState);
       }),
     );

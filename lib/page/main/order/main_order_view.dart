@@ -22,7 +22,6 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
             onRefresh: ctr.refreshInfo,
             enablePullUp: false,
             child: SingleChildScrollView(
-              physics: NeverScrollableScrollPhysics(),
               child: Column(
                 children: [
                   const SizedBox(
@@ -102,6 +101,11 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
                       text: '客服',
                       onPressed: () {
                         Get.toNamed(PageRouterName.clientPage);
+                      }),
+                  CustomButton(
+                      text: '首贷单金额单期限',
+                      onPressed: () {
+                        Get.toNamed(PageRouterName.firstLoanPage);
                       }),
                 ],
               ),

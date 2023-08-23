@@ -8,6 +8,7 @@ import 'package:rapicredito/page/main/home/widget/common_agreement_view.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
+import 'package:rapicredito/widget/custom_color_button.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
 
 class RegisterPage extends GetView<RegisterCtr> {
@@ -80,16 +81,23 @@ class RegisterPage extends GetView<RegisterCtr> {
                         Padding(
                           padding: const EdgeInsets.only(
                               left: 39.0, right: 39.0, top: 33.0),
-                          child: CustomButton(
-                            onPressed: () {},
-                            minHeight: 46.0,
-                            minWidth: 265.0,
-                            backgroundColor: const Color(0xffB8EF17),
-                            disabledBackgroundColor: const Color(0xffB8EF17),
-                            fontSize: 15.0,
-                            radius: 8.0,
-                            text: 'Continúa',
-                            textColor: const Color(0xff333333),
+                          child:CustomColorButton(
+                            disableColors: const [
+                              Color(0xffF5F6F4),
+                              Color(0xffF5F6F4)
+                            ],
+                            disable: false,
+                            colors: const [Color(0xffB8EF17), Color(0xffB8EF17)],
+                            height: 46.0,
+                            borderRadius: BorderRadius.circular(8.0),
+                            btnContent: const Text(
+                              'Continúa',
+                              style: TextStyle(
+                                  fontSize: 15.0,
+                                  color: Color(0xff333333),
+                                 // color:Color(0xffC4BFBF),
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ),
                         )
                       ],

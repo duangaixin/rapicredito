@@ -4,6 +4,7 @@ import 'package:rapicredito/page/auth/id/index.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
 import 'package:rapicredito/page/bank/index.dart';
 import 'package:rapicredito/page/camera/custom_camera_page.dart';
+import 'package:rapicredito/page/loan/first/index.dart';
 import 'package:rapicredito/page/login/register/index.dart';
 import 'package:rapicredito/page/main/app_main_bindings.dart';
 import 'package:rapicredito/page/main/app_main_view.dart';
@@ -50,6 +51,10 @@ class PageRouterManage {
         name: PageRouterName.clientPage,
         page: () => const ClientPage(),
         binding: ClientBinding()),
+    GetPage(
+        name: PageRouterName.firstLoanPage,
+        page: () => const FirstLoanPage(),
+        binding: FirstLoanBinding()),
     GetPage(
       name: PageRouterName.customCameraPage,
       page: () => const CustomCameraPage(),
