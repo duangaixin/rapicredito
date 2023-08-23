@@ -16,7 +16,9 @@ class HomeLoanAuditView extends GetView<MainHomeCtr> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.max,
       children: [
-        const MainAppBarView(title: 'Bajo Revisión',),
+        const MainAppBarView(
+          title: 'Bajo Revisión',
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(

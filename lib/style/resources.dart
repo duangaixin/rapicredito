@@ -16,7 +16,8 @@ class Resource {
       'assets/image/main/home_error_tip.png';
   static const String assetsImageHomeDefault =
       'assets/image/main/home_default.png';
-
+  static const String assetsImageHomeInfoBg =
+      'assets/image/main/home_info_bg.png';
   static const String assetsImageAuthTitleBg =
       'assets/image/auth/auth_title_bg.png';
   static const String assetsImageLoginClear =

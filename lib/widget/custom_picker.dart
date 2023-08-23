@@ -50,17 +50,18 @@ PickerStyle customizeStyle() {
   );
 
   Decoration headDecoration = const BoxDecoration(
-    color: Colors.white,
+      color: Colors.white,
       borderRadius: BorderRadius.only(
           topLeft: Radius.circular(30.0), topRight: Radius.circular(30.0)));
 
   return PickerStyle(
-    pickerHeight: 159,
-    pickerTitleHeight: 48,
-    pickerItemHeight: 50,
-    cancelButton: cancelButton,
-    commitButton: commitButton,
-    headDecoration: headDecoration,
-    backgroundColor: Colors.white,
-  );
+      pickerHeight: 159,
+      pickerTitleHeight: 48,
+      pickerItemHeight: 50,
+      cancelButton: cancelButton,
+      commitButton: commitButton,
+      headDecoration: headDecoration,
+      backgroundColor: Colors.white,
+      textColor: const Color(0xff666666),
+      textSize: 13.0);
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/style/resources.dart';
 
-
 class CommonLoanMoneyView extends StatefulWidget {
   const CommonLoanMoneyView({
     Key? key,
@@ -17,12 +16,14 @@ class CommonLoanMoneyViewState extends State<CommonLoanMoneyView> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
+      width: double.infinity,
+      height: 190.0,
       decoration: const BoxDecoration(
           color: Colors.white,
           image: DecorationImage(
-              image: AssetImage(Resource.assetsImageAuthCameraBg),
+              image: AssetImage(Resource.assetsImageHomeInfoBg),
               fit: BoxFit.cover)),
-      margin: const EdgeInsets.only(top: 20.0, left: 40.0, right: 40.0),
+      margin: const EdgeInsets.only(top: 20.0, left: 47.0, right: 47.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
@@ -33,18 +34,16 @@ class CommonLoanMoneyViewState extends State<CommonLoanMoneyView> {
                 'Monto del préstamo',
                 style: TextStyle(fontSize: 15.0, color: Color(0xff333333)),
               )),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 42.0),
-            child: Text(
-              '300,702GTQ',
-              style: TextStyle(
-                  fontSize: 30.0,
-                  color: Color(0xff333333),
-                  fontWeight: FontWeight.bold),
-            ),
+          Text(
+            '300,702GTQ',
+            style: TextStyle(
+                fontSize: 30.0,
+                color: Color(0xff333333),
+                fontWeight: FontWeight.bold),
           ),
           Container(
-            padding: const EdgeInsets.only(top: 10.0, bottom: 12.0,left: 30.0,right: 30),
+            padding: const EdgeInsets.only(
+                top: 5.0, bottom: 12.0, left: 30.0, right: 30),
             child: const HomeDashLine(
               color: Color(0xffE2E5DA),
             ),
@@ -79,7 +78,7 @@ class HomeDashLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final boxWidth = Get.size.width-84-60;
+    final boxWidth = Get.size.width - 84 - 60;
     final dashHeight = height;
     final dashCount = (boxWidth / (2 * dashWidth)).floor();
 

@@ -20,10 +20,18 @@ class SelectBankPage extends GetView<SelectBankCtr> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             children: [
-              tipView, selectView,
-
-              //const    BankView(),
-              const WalletView()
+              tipView,
+              selectView,
+              Obx(() {
+                return Visibility(
+                    visible: controller.state.bankSelectIndex == 0,
+                    child: const WalletView());
+              }),
+              Obx(() {
+                return Visibility(
+                    visible: controller.state.bankSelectIndex == 1,
+                    child: const BankView());
+              })
             ],
           ),
         ));
@@ -66,20 +74,22 @@ class SelectBankPage extends GetView<SelectBankCtr> {
               'Método de pago',
               style: TextStyle(fontSize: 16.0, color: Color(0xff333333)),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 8.0, bottom: 7.0),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0, bottom: 7.0),
               child: CustomClickView(
-                  onTap: null,
+                  onTap: controller.showSelectBankDialog,
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Expanded(
-                          child: Text(
-                        'Billetera Móvil',
-                        style:
-                            TextStyle(fontSize: 15.0, color: Color(0xff333333)),
-                      )),
-                      Icon(
+                      Expanded(child: Obx(() {
+                        return Text(
+                          controller
+                              .state.bankList[controller.state.bankSelectIndex],
+                          style: const TextStyle(
+                              fontSize: 15.0, color: Color(0xff333333)),
+                        );
+                      })),
+                      const Icon(
                         Icons.keyboard_arrow_down,
                         color: Color(0xff6a6a6a),
                         size: 17,

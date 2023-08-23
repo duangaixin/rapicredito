@@ -13,7 +13,7 @@ class HomeLoanFailureView extends GetView<MainHomeCtr> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
         const MainAppBarView(
@@ -25,6 +25,7 @@ class HomeLoanFailureView extends GetView<MainHomeCtr> {
               top: 25.0, left: 55.0, right: 55.0, bottom: 46.0),
           child: CustomButton(
             onPressed: () {},
+            minWidth: 265.0,
             minHeight: 46.0,
             backgroundColor: const Color(0xffB8EF17),
             disabledBackgroundColor: const Color(0xffB8EF17),

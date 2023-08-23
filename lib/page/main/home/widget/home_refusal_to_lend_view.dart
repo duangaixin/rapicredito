@@ -22,10 +22,11 @@ class HomeRefusalToLendView extends GetView<MainHomeCtr> {
           decoration: const BoxDecoration(
               color: Colors.white,
               image: DecorationImage(
-                  image: AssetImage(Resource.assetsImageAuthCameraBg),
+                  image: AssetImage(Resource.assetsImageHomeInfoBg),
                   fit: BoxFit.cover)),
-          margin: const EdgeInsets.only(top: 20.0, left: 54.0, right: 54.0),
-          padding: const EdgeInsets.only(left: 50.0,right: 50.0,top: 49.0,bottom: 49.0),
+          margin: const EdgeInsets.only(top: 20.0, left: 47.0, right: 47.0),
+          padding: const EdgeInsets.only(
+              left: 50.0, right: 50.0, top: 49.0, bottom: 49.0),
           child: const Text(
             'Solicitud\nrechazado',
             textAlign: TextAlign.center,

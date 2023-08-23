@@ -27,7 +27,7 @@ class HomeLoanDealView extends GetView<MainHomeCtr> {
                   const MainAppBarView(
                     title: 'Préstamo fallido',
                   ),
-                const CommonLoanMoneyView(),
+                  const CommonLoanMoneyView(),
                   dealTipView,
                   const Spacer(),
                   const Padding(
