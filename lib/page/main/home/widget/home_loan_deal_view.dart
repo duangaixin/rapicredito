@@ -7,8 +7,8 @@ import 'package:rapicredito/page/main/home/widget/common_loan_money_view.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
-class HomeDealView extends GetView<MainHomeCtr> {
-  const HomeDealView({Key? key}) : super(key: key);
+class HomeLoanDealView extends GetView<MainHomeCtr> {
+  const HomeLoanDealView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +21,13 @@ class HomeDealView extends GetView<MainHomeCtr> {
             ),
             child: IntrinsicHeight(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   const MainAppBarView(
                     title: 'Préstamo fallido',
                   ),
-                  const CommonLoanMoneyView(),
+                const CommonLoanMoneyView(),
                   dealTipView,
                   const Spacer(),
                   const Padding(

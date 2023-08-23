@@ -87,12 +87,12 @@ class PhoneTextFieldState extends State<PhoneTextField> {
       child: Container(
         height: 14.0,
         width: 14.0,
-        margin: const EdgeInsetsDirectional.only(start: 12.0),
+        margin: const EdgeInsets.only(left: 12.0),
         decoration: BoxDecoration(
           color: const Color(0xffDEDEDE),
-          borderRadius: BorderRadiusDirectional.circular(8.0),
+          borderRadius: BorderRadius.circular(8.0),
         ),
-        child: CustomImageView(
+        child: const CustomImageView(
           Resource.assetsImageLoginClear,
           imageType: ImageType.assets,
           width: 19.0,

@@ -7,8 +7,8 @@ import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
-class HomeDefaultView extends GetView<MainHomeCtr> {
-  const HomeDefaultView({Key? key}) : super(key: key);
+class HomeLoanDefaultView extends GetView<MainHomeCtr> {
+  const HomeLoanDefaultView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

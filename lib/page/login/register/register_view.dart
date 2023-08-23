@@ -17,7 +17,6 @@ class RegisterPage extends GetView<RegisterCtr> {
   Widget build(BuildContext context) {
     return CustomPageBgView(
       titleSpace: 14.0,
-      resizeToAvoidBottomInset: false,
       title: 'Regresar',
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
