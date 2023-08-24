@@ -12,5 +12,7 @@ class PageRouterName {
   static const String updateBankPage = '/updateBankPage';
   static const String clientPage = '/clientPage';
   static const String loanDatePage = '/loanDatePage';
+  static const String rolloverPaymentResultPage = '/rolloverPaymentResultPage';
+
   static const String customCameraPage = '/customCameraPage';
 }

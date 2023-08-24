@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/get/getx_keep_state_view.dart';
-import 'package:rapicredito/page/main/mine/widget/input_dialog.dart';
+import 'package:rapicredito/page/dialog/message_input_dialog.dart';
 import 'package:rapicredito/page/main/order/index.dart';
 import 'package:rapicredito/page/splash/widget/permission_dialog.dart';
 import 'package:rapicredito/router/page_router_name.dart';
@@ -34,10 +34,8 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
                             context: context,
                             barrierDismissible: false,
                             builder: (_) {
-                              return Dialog(
-                                child: InputDialog(
-                                  clickConfirm: (String s) {},
-                                ),
+                              return MessageInputDialog(
+                                clickConfirm: (String s) {},
                               );
                             });
                       }),

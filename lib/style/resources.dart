@@ -29,4 +29,6 @@ class Resource {
   static const String assetsImageAuthFace = 'assets/image/auth/auth_face.png';
   static const String assetsImageAuthTakeCamera =
       'assets/image/auth/auth_take_camera.png';
+  static const String assetsImageMessageDialog =
+      'assets/image/other/message_top_dialog.png';
 }

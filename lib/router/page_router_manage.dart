@@ -11,6 +11,7 @@ import 'package:rapicredito/page/main/app_main_bindings.dart';
 import 'package:rapicredito/page/main/app_main_view.dart';
 import 'package:rapicredito/page/main/mine/client/index.dart';
 import 'package:rapicredito/page/notfound/not_found_page.dart';
+import 'package:rapicredito/page/result/rollover/index.dart';
 import 'package:rapicredito/page/splash/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:get/route_manager.dart';
@@ -60,6 +61,11 @@ class PageRouterManage {
         name: PageRouterName.loanDatePage,
         page: () => const LoanDatePage(),
         binding: LoanDateBinding()),
+    GetPage(
+        name: PageRouterName.rolloverPaymentResultPage,
+        page: () => const RolloverPaymentResultPage(),
+        binding: RolloverPaymentResultBinding()),
+
     GetPage(
       name: PageRouterName.customCameraPage,
       page: () => const CustomCameraPage(),
