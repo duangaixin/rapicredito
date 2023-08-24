@@ -25,13 +25,13 @@ class RegisterPage extends GetView<RegisterCtr> {
         children: [
           Expanded(
               child: SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.only(top: 59.0, bottom: 80.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,

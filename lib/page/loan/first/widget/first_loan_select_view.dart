@@ -88,7 +88,7 @@ class FirstLoanTopViewState extends State<FirstLoanTopView> {
           borderRadius: BorderRadius.circular(8.0),
         ),
         alignment: Alignment.center,
-        child: const Stack(
+        child: Stack(
           alignment: Alignment.center,
           children: [
             Text('300,000',
@@ -114,7 +114,7 @@ class FirstLoanTopViewState extends State<FirstLoanTopView> {
           borderRadius: BorderRadius.circular(8.0),
         ),
         alignment: Alignment.center,
-        child: const Stack(
+        child:  Stack(
           alignment: Alignment.center,
           children: [
             Text('300,000',

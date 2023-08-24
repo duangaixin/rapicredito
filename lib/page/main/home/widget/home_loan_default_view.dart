@@ -60,7 +60,7 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Stack(
+                       Stack(
                         alignment: Alignment.center,
                         children: [
                           CustomImageView(
@@ -114,7 +114,7 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
                       ),
                     ],
                   )),
-              const Padding(
+             Padding(
                 padding: EdgeInsets.only(top: 26.0, bottom: 30.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

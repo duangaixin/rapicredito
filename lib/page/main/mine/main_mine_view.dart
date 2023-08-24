@@ -46,7 +46,7 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
                   borderRadius: BorderRadius.circular(37.5),
                   color: const Color(0xffB6EF13)),
             ),
-            const Expanded(
+             Expanded(
                 child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,

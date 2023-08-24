@@ -133,7 +133,7 @@ class FirstLoanPage extends GetView<FirstLoanCtr> {
         decoration: BoxDecoration(
             color: const Color(0xffF9F9F9),
             borderRadius: BorderRadius.circular(8.0)),
-        child: const Column(
+        child:  Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
