@@ -8,8 +8,9 @@ class PageRouterName {
   static const String authPersonPage = '/authPersonPage';
   static const String authContactPage = '/authContactPage';
   static const String authIdPage = '/authIdPage';
-  static const String selectBankPage = '/selectBankPage';
+  static const String addBankPage = '/selectBankPage';
+  static const String updateBankPage = '/updateBankPage';
   static const String clientPage = '/clientPage';
-  static const String firstLoanPage = '/firstLoanPage';
+  static const String loanDatePage = '/loanDatePage';
   static const String customCameraPage = '/customCameraPage';
 }

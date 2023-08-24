@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
-class FirstLoanTopView extends StatefulWidget {
-  const FirstLoanTopView({
+class LoanDateTopView extends StatefulWidget {
+  const LoanDateTopView({
     Key? key,
   }) : super(key: key);
 
   @override
-  FirstLoanTopViewState createState() => FirstLoanTopViewState();
+  LoanDateTopViewState createState() => LoanDateTopViewState();
 }
 
-class FirstLoanTopViewState extends State<FirstLoanTopView> {
+class LoanDateTopViewState extends State<LoanDateTopView> {
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rapicredito/page/bank/widget/bank_view.dart';
-import 'package:rapicredito/page/bank/widget/wallet_view.dart';
+import 'package:rapicredito/page/auth/widget/common_auth_agreement_view.dart';
+import 'package:rapicredito/page/bank/add/index.dart';
+import 'package:rapicredito/page/bank/add/widget/add_bank_view.dart';
+import 'package:rapicredito/page/bank/add/widget/add_wallet_view.dart';
 import 'package:rapicredito/widget/comon_section_title_view.dart';
-import 'package:rapicredito/page/bank/index.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
 
-class SelectBankPage extends GetView<SelectBankCtr> {
-  const SelectBankPage({Key? key}) : super(key: key);
+class AddBankPage extends GetView<AddBankCtr> {
+  const AddBankPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +21,23 @@ class SelectBankPage extends GetView<SelectBankCtr> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             children: [
-              tipView,
               selectView,
+
               Obx(() {
                 return Visibility(
                     visible: controller.state.bankSelectIndex == 0,
-                    child: const WalletView());
+                    child: const AddWalletView());
               }),
               Obx(() {
                 return Visibility(
                     visible: controller.state.bankSelectIndex == 1,
-                    child: const BankView());
-              })
+                    child: const AddBankView());
+              }),
+
+              const Padding(
+                padding: EdgeInsets.only(bottom: 30.0,top: 30.0),
+                child: CommonAuthAgreeView(),
+              )
             ],
           ),
         ));

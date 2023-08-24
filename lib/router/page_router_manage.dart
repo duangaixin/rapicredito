@@ -2,9 +2,10 @@ import 'package:rapicredito/get/getx_router_auth.dart';
 import 'package:rapicredito/page/auth/contact/index.dart';
 import 'package:rapicredito/page/auth/id/index.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
-import 'package:rapicredito/page/bank/index.dart';
+import 'package:rapicredito/page/bank/add/index.dart';
+import 'package:rapicredito/page/bank/change/index.dart';
 import 'package:rapicredito/page/camera/custom_camera_page.dart';
-import 'package:rapicredito/page/loan/first/index.dart';
+import 'package:rapicredito/page/loan/index.dart';
 import 'package:rapicredito/page/login/register/index.dart';
 import 'package:rapicredito/page/main/app_main_bindings.dart';
 import 'package:rapicredito/page/main/app_main_view.dart';
@@ -44,17 +45,21 @@ class PageRouterManage {
         page: () => const AuthIdPage(),
         binding: AuthIdBinding()),
     GetPage(
-        name: PageRouterName.selectBankPage,
-        page: () => const SelectBankPage(),
-        binding: SelectBankBinding()),
+        name: PageRouterName.addBankPage,
+        page: () => const AddBankPage(),
+        binding:AddBankBinding()),
+    GetPage(
+        name: PageRouterName.updateBankPage,
+        page: () => const UpdateBankPage(),
+        binding:UpdateBankBinding()),
     GetPage(
         name: PageRouterName.clientPage,
         page: () => const ClientPage(),
         binding: ClientBinding()),
     GetPage(
-        name: PageRouterName.firstLoanPage,
-        page: () => const FirstLoanPage(),
-        binding: FirstLoanBinding()),
+        name: PageRouterName.loanDatePage,
+        page: () => const LoanDatePage(),
+        binding: LoanDateBinding()),
     GetPage(
       name: PageRouterName.customCameraPage,
       page: () => const CustomCameraPage(),

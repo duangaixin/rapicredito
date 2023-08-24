@@ -93,9 +93,14 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
                         Get.toNamed(PageRouterName.registerPage);
                       }),
                   CustomButton(
-                      text: '更换银行卡',
+                      text: '添加银行卡',
                       onPressed: () {
-                        Get.toNamed(PageRouterName.selectBankPage);
+                        Get.toNamed(PageRouterName.addBankPage);
+                      }),
+                  CustomButton(
+                      text: '更新银行卡',
+                      onPressed: () {
+                        Get.toNamed(PageRouterName.updateBankPage);
                       }),
                   CustomButton(
                       text: '客服',
@@ -105,7 +110,7 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
                   CustomButton(
                       text: '首贷单金额单期限',
                       onPressed: () {
-                        Get.toNamed(PageRouterName.firstLoanPage);
+                        Get.toNamed(PageRouterName.loanDatePage);
                       }),
                 ],
               ),

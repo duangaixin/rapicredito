@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rapicredito/page/bank/index.dart';
+import 'package:rapicredito/page/bank/change/index.dart';
 import 'package:rapicredito/widget/custom_color_button.dart';
 import 'package:rapicredito/widget/custom_edit_view.dart';
 import 'package:rapicredito/widget/custom_select_view.dart';
 
-class BankView extends GetView<SelectBankCtr> {
-  const BankView({Key? key}) : super(key: key);
+class UpdateBankView extends GetView<UpdateBankCtr> {
+  const UpdateBankView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +46,7 @@ class BankView extends GetView<SelectBankCtr> {
           Padding(
             padding: const EdgeInsets.only(left: 16.0, right: 16.0),
             child: CustomEditView(
+              key: GlobalKey(),
               controller: TextEditingController(),
               editTitle: 'Numero de cuenta',
               hintText: 'Introducir texto',

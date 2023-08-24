@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rapicredito/page/loan/first/index.dart';
-import 'package:rapicredito/page/loan/first/widget/first_loan_select_view.dart';
+import 'package:rapicredito/page/loan/index.dart';
+import 'package:rapicredito/page/loan/widget/loan_date_select_view.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
 
-class FirstLoanPage extends GetView<FirstLoanCtr> {
-  const FirstLoanPage({Key? key}) : super(key: key);
+class LoanDatePage extends GetView<LoanDateCtr> {
+  const LoanDatePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class FirstLoanPage extends GetView<FirstLoanCtr> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  FirstLoanTopView(),
+                  LoanDateTopView(),
                   centerView,
                   bottomView,
                 ],
@@ -43,7 +43,7 @@ class FirstLoanPage extends GetView<FirstLoanCtr> {
       );
 
   Widget get centerView => Container(
-        margin: const EdgeInsets.only(bottom: 20.0,top: 12.0),
+        margin: const EdgeInsets.only(bottom: 20.0, top: 12.0),
         padding: const EdgeInsets.only(
             left: 10.0, top: 20.0, right: 10.0, bottom: 20.0),
         decoration: BoxDecoration(
@@ -81,7 +81,7 @@ class FirstLoanPage extends GetView<FirstLoanCtr> {
               content: '876.00',
             ),
             Padding(
-                padding: const EdgeInsets.only(top: 8.0, bottom:11.0),
+                padding: const EdgeInsets.only(top: 8.0, bottom: 11.0),
                 child: _buildKeyValueView(
                   title:
                       'Cargo por servicios de transferencia\n(Cobrado por el Banco)',
@@ -133,7 +133,7 @@ class FirstLoanPage extends GetView<FirstLoanCtr> {
         decoration: BoxDecoration(
             color: const Color(0xffF9F9F9),
             borderRadius: BorderRadius.circular(8.0)),
-        child:  Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -180,7 +180,8 @@ class FirstLoanPage extends GetView<FirstLoanCtr> {
       );
 
   Widget get submitBtn => Padding(
-        padding: const EdgeInsets.only(bottom: 23.0, left: 55.0, right: 55.0),
+        padding: const EdgeInsets.only(
+            bottom: 23.0, left: 55.0, right: 55.0, top: 26.0),
         child: CustomButton(
           onPressed: () {},
           minWidth: 265.0,
