@@ -2,11 +2,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
-import 'package:rapicredito/page/login/register/register_state.dart';
+import 'package:rapicredito/page/login/index.dart';
 import 'package:rapicredito/widget/progress_hud_view.dart';
 
-class RegisterCtr extends BaseGetCtr {
-  final state = RegisterState();
+class LoginCtr extends BaseGetCtr {
+  final state = LoginState();
   TextEditingController phoneCtr = TextEditingController();
   TextEditingController codeCtr = TextEditingController();
   StreamSubscription? _subscription;
@@ -29,7 +29,7 @@ class RegisterCtr extends BaseGetCtr {
   void postSendCodeRequest() async {
     _startTimer();
     var param = <String, String>{};
-    param[''] = '';
+    param['swiftMeansEitherPine'] = phoneCtr.text;
     var response = await HttpRequestManage.instance.postSendCodeRequest(param);
 
     if (response.isSuccess()) {

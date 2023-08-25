@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rapicredito/page/login/register/index.dart';
+import 'package:rapicredito/page/login/login_ctr.dart';
 import 'package:rapicredito/page/login/widget/login_text_field.dart';
 import 'package:rapicredito/page/login/widget/phone_text_field.dart';
 import 'package:rapicredito/page/main/home/widget/common_agreement_view.dart';
@@ -10,8 +10,8 @@ import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_color_button.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
 
-class RegisterPage extends GetView<RegisterCtr> {
-  const RegisterPage({Key? key}) : super(key: key);
+class LoginPage extends GetView<LoginCtr> {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

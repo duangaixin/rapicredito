@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:rapicredito/get/getx_keep_state_view.dart';
 import 'package:rapicredito/page/dialog/message_input_dialog.dart';
 import 'package:rapicredito/page/main/order/index.dart';
-import 'package:rapicredito/page/splash/widget/permission_dialog.dart';
+import 'package:rapicredito/page/permission/permission_dialog.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_picker.dart';
@@ -65,6 +65,11 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
                             });
                       }),
                   CustomButton(
+                      text: '权限页面',
+                      onPressed: () {
+                        Get.toNamed(PageRouterName.permissionPage);
+                      }),
+                  CustomButton(
                       text: '底部弹窗',
                       onPressed: () {
                         CustomPicker.showSinglePicker(context,
@@ -86,9 +91,9 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
                         Get.toNamed(PageRouterName.authIdPage);
                       }),
                   CustomButton(
-                      text: '注册',
+                      text: '登录',
                       onPressed: () {
-                        Get.toNamed(PageRouterName.registerPage);
+                        Get.toNamed(PageRouterName.loginPage);
                       }),
                   CustomButton(
                       text: '添加银行卡',

@@ -35,7 +35,7 @@ class PermissionUtil {
           break;
       }
     } else {
-      onSuccess != null ? onSuccess() : defaultCall("权限申请成功");
+      onSuccess != null ? onSuccess() : defaultCall('');
     }
   }
 

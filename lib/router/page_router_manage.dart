@@ -6,22 +6,27 @@ import 'package:rapicredito/page/bank/add/index.dart';
 import 'package:rapicredito/page/bank/change/index.dart';
 import 'package:rapicredito/page/camera/custom_camera_page.dart';
 import 'package:rapicredito/page/loan/index.dart';
-import 'package:rapicredito/page/login/register/index.dart';
+import 'package:rapicredito/page/login/index.dart';
 import 'package:rapicredito/page/main/app_main_bindings.dart';
 import 'package:rapicredito/page/main/app_main_view.dart';
 import 'package:rapicredito/page/main/mine/client/index.dart';
 import 'package:rapicredito/page/notfound/not_found_page.dart';
+import 'package:rapicredito/page/permission/index.dart';
 import 'package:rapicredito/page/result/rollover/index.dart';
 import 'package:rapicredito/page/splash/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:get/route_manager.dart';
 
 class PageRouterManage {
-  static const initial = PageRouterName.splashPage;
+  static const initial = PageRouterName.permissionPage;
 
   static final List<GetPage> routes = [
     GetPage(
         name: PageRouterName.initial,
+        page: () => const PermissionPage(),
+        binding: PermissionBinding()),
+    GetPage(
+        name: PageRouterName.splashPage,
         page: () => const SplashPage(),
         binding: SplashBinding(),
         middlewares: [RouteSplashMiddleware()]),
@@ -34,9 +39,9 @@ class PageRouterManage {
         page: () => const AuthPersonPage(),
         binding: AuthPersonBinding()),
     GetPage(
-        name: PageRouterName.registerPage,
-        page: () => const RegisterPage(),
-        binding: RegisterBinding()),
+        name: PageRouterName.loginPage,
+        page: () => const LoginPage(),
+        binding: LoginBinding()),
     GetPage(
         name: PageRouterName.authContactPage,
         page: () => const AuthContactPage(),
@@ -48,11 +53,11 @@ class PageRouterManage {
     GetPage(
         name: PageRouterName.addBankPage,
         page: () => const AddBankPage(),
-        binding:AddBankBinding()),
+        binding: AddBankBinding()),
     GetPage(
         name: PageRouterName.updateBankPage,
         page: () => const UpdateBankPage(),
-        binding:UpdateBankBinding()),
+        binding: UpdateBankBinding()),
     GetPage(
         name: PageRouterName.clientPage,
         page: () => const ClientPage(),
@@ -65,7 +70,6 @@ class PageRouterManage {
         name: PageRouterName.rolloverPaymentResultPage,
         page: () => const RolloverPaymentResultPage(),
         binding: RolloverPaymentResultBinding()),
-
     GetPage(
       name: PageRouterName.customCameraPage,
       page: () => const CustomCameraPage(),

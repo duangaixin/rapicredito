@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class RegisterState {
+class LoginState {
   int totalSecond = 60;
   final RxInt _timeEnd = 60.obs;
 
