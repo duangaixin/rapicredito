@@ -13,7 +13,6 @@ import 'package:rapicredito/net/net_config.dart';
 import 'package:rapicredito/net/net_request.dart';
 import 'package:rapicredito/utils/object_util.dart';
 
-
 late NetRequest httpRequest;
 
 Future<void> initHttp() async {
@@ -36,9 +35,9 @@ void _check401Error(BaseResponse<dynamic> error) async {
 }
 
 bool is401Error(BaseResponse<dynamic> error) {
-  if (error.code != null) {
-    return true;
-  }
+  // if (error.code != null) {
+  //   return true;
+  // }
   return error.errorDio is DioException &&
       error.errorDio.response?.statusCode == 401;
 }
@@ -48,37 +47,40 @@ Future<Map<String, dynamic>> _getDefHeader() async {
   var userId = StorageService.to.getString(AppConstants.userIdKey);
   var token = StorageService.to.getString(AppConstants.userTokenKey);
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
-  var version = packageInfo.version;
+  var versionName = packageInfo.version;
   var buildNumber = packageInfo.buildNumber;
-  var deviceId = await PlatformDeviceId.getDeviceId;
+  var deviceId = await PlatformDeviceId.getDeviceId ?? '';
   var imei = await DeviceIdentity.imei;
+  if (ObjectUtil.isEmptyString(imei)) {
+    imei = deviceId;
+  }
   if (ObjectUtil.isEmptyString(imei)) {
     final deviceInfoPlugin = DeviceInfoPlugin();
     AndroidDeviceInfo androidInfo = await deviceInfoPlugin.androidInfo;
     var serialNumber = androidInfo.serialNumber;
     imei = serialNumber;
   }
-
-  map['client-id'] = '';
-  map['token'] = token;
-  map['userId'] = userId;
-  map['currentUserId'] = userId;
-  map['channel'] = '';
-  map['versionName'] = version;
-  map['versionCode'] = buildNumber;
-  map['device-id'] = deviceId;
-  map['imei'] = imei;
-  map['mulFlag'] = '';
-  map['v-flag'] = '';
+  map['delightedHospitalGoldenMuttonManyTaxi'] = '204';
+  map['darkPlentyNervousHandbag'] = token;
+  map['terminalDifferentActionFatFountain'] = userId;
+  map['taxFebruary'] = 'googleplay';
+  map['extraordinaryIndependentCollegeDeal'] = versionName;
+  map['literaryMineralFatHillSwiftRobot'] = buildNumber;
+  map['italianArm'] = imei;
+  map['emptyChainFamousJewel'] = imei;
+  map['electronicRiceEarth'] = imei;
+  map['perfectAche'] = true;
   return map;
 }
 
 Future<Map<String, dynamic>> _getDefParam() async {
   var map = <String, dynamic>{};
-  map['appssid'] = '';
-  map['userId'] = '';
-  map['lbs'] = '';
-  map['language'] = 'es';
+  var userId = StorageService.to.getString(AppConstants.userIdKey);
+  map['madUnableBackacheCanal'] = '204';
+  map['terminalDifferentActionFatFountain'] = userId;
+  map['dailyFortuneQuantity'] = '0.0,0.0';
+  map['contraryScientificRightNone'] = 'es';
+
   return map;
 }
 

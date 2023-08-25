@@ -15,7 +15,7 @@ class PhoneTextField extends StatefulWidget {
   const PhoneTextField(
       {Key? key,
       required this.controller,
-      this.maxLength = 16,
+      this.maxLength = 20,
       this.keyboardType = TextInputType.text,
       this.hintText = '',
       this.isInputPwd = false,

@@ -1,6 +1,8 @@
 class HttpApi {
   ///正式
-  static const String apiBaseUrl = 'http://hk.hekaiauction.com:85/';
+  static const String apiBaseUrl = 'http://rapicredito://believeaggression/';
 
-  static const String apiSendCode = '';
+  static const String apiSendCode = 'italy/pushHarmfulConstruction';
+
+  static const String apiLogin = 'italy/inventBetterMoon';
 }

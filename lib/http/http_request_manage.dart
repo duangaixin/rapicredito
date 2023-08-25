@@ -19,6 +19,10 @@ extension RequestBussiness on HttpRequestManage {
     return await httpRequest.post(HttpApi.apiSendCode,
         data: param, onTransform: (json) => null);
   }
-
+  Future<BaseResponse> postLoginRequest(
+      Map<String, dynamic> param) async {
+    return await httpRequest.post(HttpApi.apiLogin,
+        data: param, onTransform: (json) => null);
+  }
 
 }
