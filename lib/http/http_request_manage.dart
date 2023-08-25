@@ -1,3 +1,7 @@
+import 'package:rapicredito/config/app_http_init.dart';
+import 'package:rapicredito/http/http_api.dart';
+import 'package:rapicredito/net/base_response.dart';
+
 class HttpRequestManage {
   HttpRequestManage._privateConstructor();
 
@@ -9,4 +13,12 @@ class HttpRequestManage {
   }
 }
 
-extension RequestBussiness on HttpRequestManage {}
+extension RequestBussiness on HttpRequestManage {
+  Future<BaseResponse> postSendCodeRequest(
+      Map<String, dynamic> param) async {
+    return await httpRequest.post(HttpApi.apiSendCode,
+        data: param, onTransform: (json) => null);
+  }
+
+
+}

@@ -13,6 +13,9 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   device_info_plus: ^9.0.2
+  package_info_plus: ^4.1.0
+  device_identity: ^1.0.0
+  platform_device_id: ^1.0.1
   flutter_pickers: ^2.1.8
   permission_handler: ^10.3.0
   connectivity_plus: ^4.0.1
