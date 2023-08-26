@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rapicredito/page/bank/change/index.dart';
-import 'package:rapicredito/page/bank/change/widget/update_bank_view.dart';
-import 'package:rapicredito/page/bank/change/widget/update_wallet_view.dart';
+import 'package:rapicredito/page/account/change/index.dart';
+import 'package:rapicredito/page/account/change/widget/update_bank_view.dart';
+import 'package:rapicredito/page/account/change/widget/update_wallet_view.dart';
 import 'package:rapicredito/widget/comon_section_title_view.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
 
-class UpdateBankPage extends GetView<UpdateBankCtr> {
-  const UpdateBankPage({Key? key}) : super(key: key);
+class UpdateAccountPage extends GetView<UpdateAccountCtr> {
+  const UpdateAccountPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

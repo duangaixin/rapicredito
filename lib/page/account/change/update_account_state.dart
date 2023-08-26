@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:rapicredito/model/key_value_bean.dart';
 
-class AddBankState {
+class UpdateAccountState {
   List<String> bankList = ['Billetera Móvil', 'Cuenta Bancaria'];
 
   final _bankSelectIndex = 0.obs;

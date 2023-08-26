@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rapicredito/page/account/add/widget/add_bank_view.dart';
+import 'package:rapicredito/page/account/add/widget/add_wallet_view.dart';
 import 'package:rapicredito/page/auth/widget/common_auth_agreement_view.dart';
-import 'package:rapicredito/page/bank/add/index.dart';
-import 'package:rapicredito/page/bank/add/widget/add_bank_view.dart';
-import 'package:rapicredito/page/bank/add/widget/add_wallet_view.dart';
+import 'package:rapicredito/page/account/add/index.dart';
 import 'package:rapicredito/widget/comon_section_title_view.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
 
-class AddBankPage extends GetView<AddBankCtr> {
-  const AddBankPage({Key? key}) : super(key: key);
+class AddAccountPage extends GetView<AddAccountCtr> {
+  const AddAccountPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +25,12 @@ class AddBankPage extends GetView<AddBankCtr> {
 
               Obx(() {
                 return Visibility(
-                    visible: controller.state.bankSelectIndex == 0,
+                    visible: controller.state.accountTypeSelectIndex == 0,
                     child: const AddWalletView());
               }),
               Obx(() {
                 return Visibility(
-                    visible: controller.state.bankSelectIndex == 1,
+                    visible: controller.state.accountTypeSelectIndex == 1,
                     child: const AddBankView());
               }),
 
@@ -90,7 +90,7 @@ class AddBankPage extends GetView<AddBankCtr> {
                       Expanded(child: Obx(() {
                         return Text(
                           controller
-                              .state.bankList[controller.state.bankSelectIndex],
+                              .state.accountTypeList[controller.state.accountTypeSelectIndex],
                           style: const TextStyle(
                               fontSize: 15.0, color: Color(0xff333333)),
                         );

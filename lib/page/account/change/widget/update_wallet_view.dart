@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rapicredito/page/bank/change/index.dart';
+import 'package:rapicredito/page/account/change/index.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_color_button.dart';
 import 'package:rapicredito/widget/custom_edit_view.dart';
 
-class UpdateWalletView extends GetView<UpdateBankCtr> {
+class UpdateWalletView extends GetView<UpdateAccountCtr> {
   const UpdateWalletView({Key? key}) : super(key: key);
 
   @override

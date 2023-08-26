@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rapicredito/page/bank/add/index.dart';
+import 'package:rapicredito/page/account/add/index.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_color_button.dart';
 import 'package:rapicredito/widget/custom_edit_view.dart';
 
-class AddWalletView extends GetView<AddBankCtr> {
+class AddWalletView extends GetView<AddAccountCtr> {
   const AddWalletView({Key? key}) : super(key: key);
 
   @override
@@ -23,7 +23,7 @@ class AddWalletView extends GetView<AddBankCtr> {
             padding: const EdgeInsets.only(left: 16.0, right: 16.0),
             child: CustomEditView(
               key: GlobalKey(),
-              controller: TextEditingController(),
+              controller: controller.walletAccountCtr,
               editTitle: 'Cuenta de billetera móvil',
               hintText: 'Introducir texto',
             ),
@@ -31,7 +31,7 @@ class AddWalletView extends GetView<AddBankCtr> {
           Padding(
             padding: const EdgeInsets.only(left: 16.0, right: 16.0),
             child: CustomEditView(
-              controller: TextEditingController(),
+              controller: controller.walletAccountConfirmCtr,
               editTitle: 'Confirmar Cuenta de  billetera móvil',
               hintText: 'Introducir texto',
             ),

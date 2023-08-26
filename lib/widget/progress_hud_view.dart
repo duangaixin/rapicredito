@@ -4,7 +4,7 @@ import 'package:bot_toast/bot_toast.dart';
 
 const Color _bgColor = Color(0xff171717);
 const double _radius = 10.0;
-const int _closeTime = 5000;
+const int _closeTime = 2000;
 
 const bool _onlyOne = true;
 

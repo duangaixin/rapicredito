@@ -1,9 +1,9 @@
 import 'package:rapicredito/get/getx_router_auth.dart';
+import 'package:rapicredito/page/account/add/index.dart';
+import 'package:rapicredito/page/account/change/index.dart';
 import 'package:rapicredito/page/auth/contact/index.dart';
 import 'package:rapicredito/page/auth/id/index.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
-import 'package:rapicredito/page/bank/add/index.dart';
-import 'package:rapicredito/page/bank/change/index.dart';
 import 'package:rapicredito/page/camera/custom_camera_page.dart';
 import 'package:rapicredito/page/loan/index.dart';
 import 'package:rapicredito/page/login/index.dart';
@@ -46,24 +46,26 @@ class PageRouterManage {
       // middlewares: [RouteAuthMiddleware()]
     ),
     GetPage(
-        name: PageRouterName.authContactPage,
-        page: () => const AuthContactPage(),
-        binding: AuthContactBinding(),
-        middlewares: [RouteAuthMiddleware()]),
-    GetPage(
-        name: PageRouterName.authIdPage,
-        page: () => const AuthIdPage(),
-        binding: AuthIdBinding(),
-        middlewares: [RouteAuthMiddleware()]),
-    GetPage(
-      name: PageRouterName.addBankPage,
-      page: () => const AddBankPage(),
-      binding: AddBankBinding(),
+      name: PageRouterName.authContactPage,
+      page: () => const AuthContactPage(),
+      binding: AuthContactBinding(),
+      //middlewares: [RouteAuthMiddleware()]
     ),
     GetPage(
-        name: PageRouterName.updateBankPage,
-        page: () => const UpdateBankPage(),
-        binding: UpdateBankBinding()),
+      name: PageRouterName.authIdPage,
+      page: () => const AuthIdPage(),
+      binding: AuthIdBinding(),
+      //   middlewares: [RouteAuthMiddleware()]
+    ),
+    GetPage(
+      name: PageRouterName.addAccountPage,
+      page: () => const AddAccountPage(),
+      binding: AddAccountBinding(),
+    ),
+    GetPage(
+        name: PageRouterName.updateAccountPage,
+        page: () => const UpdateAccountPage(),
+        binding: UpdateAccountBinding()),
     GetPage(
         name: PageRouterName.clientPage,
         page: () => const ClientPage(),

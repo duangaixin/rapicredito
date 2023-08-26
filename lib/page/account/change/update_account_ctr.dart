@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
-import 'package:rapicredito/page/bank/change/index.dart';
+import 'package:rapicredito/page/account/change/index.dart';
+
 import 'package:rapicredito/widget/custom_picker.dart';
 
-class UpdateBankCtr extends BaseGetCtr {
-  final state = UpdateBankState();
+class UpdateAccountCtr extends BaseGetCtr {
+  final state = UpdateAccountState();
 
   @override
   void onInit() {

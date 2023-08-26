@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rapicredito/page/bank/change/index.dart';
+import 'package:rapicredito/page/account/add/index.dart';
+
 import 'package:rapicredito/widget/custom_color_button.dart';
 import 'package:rapicredito/widget/custom_edit_view.dart';
 import 'package:rapicredito/widget/custom_select_view.dart';
+import 'package:rapicredito/widget/progress_hud_view.dart';
 
-class UpdateBankView extends GetView<UpdateBankCtr> {
-  const UpdateBankView({Key? key}) : super(key: key);
+class AddBankView extends GetView<AddAccountCtr> {
+  const AddBankView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,27 +29,38 @@ class UpdateBankView extends GetView<UpdateBankCtr> {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-            child: CustomSelectView(
-              editTitle: 'Nombre del banco',
-              hintText: 'Por favor elige',
-              editContent: '',
-              action: () {},
-            ),
+            child: Obx(() {
+              return CustomSelectView(
+                editTitle: 'Nombre del banco',
+                hintText: 'Por favor elige',
+                editContent: controller.state.bankName,
+                enableEdit: controller.state.bankNameEnable,
+                action: () {
+                  ProgressHUD.showSuccess('hha');
+                  // controller.state.bankNameEnable=false;
+                },
+              );
+            }),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-            child: CustomSelectView(
-              editTitle: 'Tipo de cuenta bancaria',
-              hintText: 'Por favor elige',
-              editContent: '',
-              action: () {},
-            ),
+            child: Obx(() {
+              return CustomSelectView(
+                editTitle: 'Tipo de cuenta bancaria',
+                hintText: 'Por favor elige',
+                editContent: controller.state.bankType,
+                enableEdit: controller.state.bankTypeEnable,
+                action: () {
+                  ProgressHUD.showSuccess('啊啊啊');
+                },
+              );
+            }),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 16.0, right: 16.0),
             child: CustomEditView(
               key: GlobalKey(),
-              controller: TextEditingController(),
+              controller: controller.bankAccountCtr,
               editTitle: 'Numero de cuenta',
               hintText: 'Introducir texto',
             ),
@@ -55,7 +68,8 @@ class UpdateBankView extends GetView<UpdateBankCtr> {
           Padding(
             padding: const EdgeInsets.only(left: 16.0, right: 16.0),
             child: CustomEditView(
-              controller: TextEditingController(),
+              key: GlobalKey(),
+              controller: controller.bankAccountConfirmCtr,
               editTitle: 'Confirmar Numero de cuenta',
               hintText: 'Introducir texto',
             ),

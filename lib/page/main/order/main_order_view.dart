@@ -98,12 +98,12 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
                   CustomButton(
                       text: '添加银行卡',
                       onPressed: () {
-                        Get.toNamed(PageRouterName.addBankPage);
+                        Get.toNamed(PageRouterName.addAccountPage);
                       }),
                   CustomButton(
                       text: '更新银行卡',
                       onPressed: () {
-                        Get.toNamed(PageRouterName.updateBankPage);
+                        Get.toNamed(PageRouterName.updateAccountPage);
                       }),
                   CustomButton(
                       text: '客服',
