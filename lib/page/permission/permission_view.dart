@@ -126,7 +126,11 @@ class PermissionPage extends GetView<PermissionCtr> {
                           decoration: TextDecoration.underline,
                           fontSize: 15.0,
                           color: Color(0xff6B8817)),
-                      recognizer: TapGestureRecognizer()..onTap = () {}),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          controller.goToWebViewPage(
+                              '百度', 'https://www.baidu.com/');
+                        }),
                   TextSpan(
                       text: Strings.autoLineString('y'),
                       style: const TextStyle(
@@ -137,7 +141,11 @@ class PermissionPage extends GetView<PermissionCtr> {
                           decoration: TextDecoration.underline,
                           fontSize: 15.0,
                           color: Color(0xff6B8817)),
-                      recognizer: TapGestureRecognizer()..onTap = () {}),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          controller.goToWebViewPage(
+                              '百度', 'https://www.baidu.com/');
+                        }),
                 ])),
           ),
           Padding(

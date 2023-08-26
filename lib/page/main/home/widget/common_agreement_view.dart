@@ -1,5 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:rapicredito/local/app_constants.dart';
+import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 
 class CommonAgreeView extends StatefulWidget {
@@ -28,7 +31,10 @@ class CommonAgreeViewState extends State<CommonAgreeView> {
                     decoration: TextDecoration.underline,
                     fontSize: 15.0,
                     color: Color(0xff6B8817)),
-                recognizer: TapGestureRecognizer()..onTap = () {}),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    _goToWebViewPage('百度', 'https://www.baidu.com/');
+                  }),
             TextSpan(
                 text: Strings.autoLineString('y'),
                 style:
@@ -39,8 +45,18 @@ class CommonAgreeViewState extends State<CommonAgreeView> {
                     decoration: TextDecoration.underline,
                     fontSize: 15.0,
                     color: Color(0xff6B8817)),
-                recognizer: TapGestureRecognizer()..onTap = () {}),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    _goToWebViewPage('百度', 'https://www.baidu.com/');
+                  }),
           ])),
     );
+  }
+
+  void _goToWebViewPage(String title, String webViewUrl) {
+    Get.toNamed(PageRouterName.webViewPage, arguments: {
+      AppConstants.webViewTitleKey: title,
+      AppConstants.webViewUrlKey: webViewUrl
+    });
   }
 }

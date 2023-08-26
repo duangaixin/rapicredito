@@ -16,6 +16,7 @@ import 'package:rapicredito/page/result/rollover/index.dart';
 import 'package:rapicredito/page/splash/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:get/route_manager.dart';
+import 'package:rapicredito/webview/webview_page.dart';
 
 class PageRouterManage {
   static const initial = PageRouterName.permissionPage;
@@ -61,7 +62,9 @@ class PageRouterManage {
     GetPage(
         name: PageRouterName.clientPage,
         page: () => const ClientPage(),
-        binding: ClientBinding()),
+        binding: ClientBinding(),
+        middlewares: [RouteAuthMiddleware()]
+    ),
     GetPage(
         name: PageRouterName.loanDatePage,
         page: () => const LoanDatePage(),
@@ -70,6 +73,10 @@ class PageRouterManage {
         name: PageRouterName.rolloverPaymentResultPage,
         page: () => const RolloverPaymentResultPage(),
         binding: RolloverPaymentResultBinding()),
+    GetPage(
+      name: PageRouterName.webViewPage,
+      page: () => const WebViewPage(),
+    ),
     GetPage(
       name: PageRouterName.customCameraPage,
       page: () => const CustomCameraPage(),

@@ -53,7 +53,7 @@ class NetRequest {
   }
 
   void _setCharlesProxy(Dio dio) async {
-    if (!isLoggable) return;
+    //if (!isLoggable) return;
     HttpProxy httpProxy = await HttpProxy.createHttpProxy();
     var proxyHost = httpProxy.host;
     var proxyPort = httpProxy.port;

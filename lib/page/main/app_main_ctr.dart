@@ -58,24 +58,11 @@ class AppMainCtr extends BaseGetCtr {
   @override
   void onReady() {
     super.onReady();
-
     var isFirstEnter = StorageService.to.getBool(AppConstants.isFirstStartKey);
-    if (!isFirstEnter) {
-      Future.delayed(const Duration(milliseconds: 300), () {
-        _showPrivacyDialog();
-      });
-    } else {
-      _checkUpdate();
-    }
+
   }
 
-  void _checkUpdate() {
-    var isLogin = UserStore.to.isLogin;
-    if (!isLogin) return;
-    var param = <String, dynamic>{};
-  }
 
-  void _showPrivacyDialog() {}
 
   @override
   void dispose() {

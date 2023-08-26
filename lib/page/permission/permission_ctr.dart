@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
+import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/page/permission/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
-
 
 class PermissionCtr extends BaseGetCtr {
   final state = PermissionState();
@@ -22,5 +22,12 @@ class PermissionCtr extends BaseGetCtr {
     await Permission.contacts.request();
     await Permission.camera.request();
     goToMainPage();
+  }
+
+  void goToWebViewPage(String title, String webViewUrl) {
+    Get.toNamed(PageRouterName.webViewPage, arguments: {
+      AppConstants.webViewTitleKey: title,
+      AppConstants.webViewUrlKey: webViewUrl
+    });
   }
 }

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/page/main/home/widget/common_agreement_view.dart';
 import 'package:rapicredito/page/main/home/widget/common_app_bar_view.dart';
+import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
@@ -33,24 +34,20 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
                     'Cantidad máxima',
                     style: TextStyle(fontSize: 15.0, color: Color(0xff333333)),
                   ),
-                  GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15.0, vertical: 5.0),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                          border:
-                              Border.all(color: Color(0xff333333), width: 1.0)),
-                      child: const Text(
-                        '91 Días',
-                        style:
-                            TextStyle(fontSize: 15.0, color: Color(0xff333333)),
-                      ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15.0, vertical: 5.0),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                        border:
+                            Border.all(color: Color(0xff333333), width: 1.0)),
+                    child: const Text(
+                      '91 Días',
+                      style:
+                          TextStyle(fontSize: 15.0, color: Color(0xff333333)),
                     ),
-                    onTap: () {},
-                  )
+                  ),
                 ],
               ),
               Container(
@@ -60,7 +57,7 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                       Stack(
+                      Stack(
                         alignment: Alignment.center,
                         children: [
                           CustomImageView(
@@ -114,7 +111,7 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
                       ),
                     ],
                   )),
-             Padding(
+              Padding(
                 padding: EdgeInsets.only(top: 26.0, bottom: 30.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,16 +128,16 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
                 ),
               ),
               _buildBottomItemView(
-                  'Bajo', 'cargo por servicio', '10', Color(0xffB8EF17)),
+                  'Bajo', 'cargo por servicio', '-10%', Color(0xffB8EF17)),
               Padding(
                 padding: const EdgeInsets.only(top: 20.0),
                 child: _buildBottomItemView(
-                    'APP', 'Descargas de la', '10', Color(0xff044952)),
+                    'APP', 'Descargas de la', '100M+', Color(0xff044952)),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20.0),
                 child: _buildBottomItemView(
-                    'Bajo', 'cargo por servicio', '10', Color(0xff1E1E1E)),
+                    'Bajo', 'cargo por servicio', '-10%', Color(0xff1E1E1E)),
               ),
               const Padding(
                 padding: EdgeInsets.only(bottom: 30.0),
@@ -170,7 +167,7 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
                   borderRadius: BorderRadius.circular(4.0), color: color),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 16.0),
+              padding: const EdgeInsets.only(left: 16.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,

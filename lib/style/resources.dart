@@ -20,6 +20,10 @@ class Resource {
       'assets/image/main/home_info_bg.png';
   static const String assetsImageAuthTitleBg =
       'assets/image/auth/auth_title_bg.png';
+  static const String assetsImageHomeTitleAction=
+      'assets/image/main/home_title_action.png';
+
+
   static const String assetsImageLoginClear =
       'assets/image/login/login_clear.png';
   static const String assetsImageLoanLock =

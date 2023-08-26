@@ -75,11 +75,11 @@ Future<Map<String, dynamic>> _getDefHeader() async {
 
 Future<Map<String, dynamic>> _getDefParam() async {
   var map = <String, dynamic>{};
-  var userId = StorageService.to.getString(AppConstants.userIdKey);
-  map['madUnableBackacheCanal'] = '204';
-  map['terminalDifferentActionFatFountain'] = userId;
-  map['dailyFortuneQuantity'] = '0.0,0.0';
-  map['contraryScientificRightNone'] = 'es';
+  // var userId = StorageService.to.getString(AppConstants.userIdKey);
+  // map['madUnableBackacheCanal'] = '204';
+  // map['terminalDifferentActionFatFountain'] = userId;
+  // map['dailyFortuneQuantity'] = '0.0,0.0';
+  // map['contraryScientificRightNone'] = 'es';
 
   return map;
 }

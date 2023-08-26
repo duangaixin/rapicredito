@@ -13,6 +13,6 @@ class PageRouterName {
   static const String clientPage = '/clientPage';
   static const String loanDatePage = '/loanDatePage';
   static const String rolloverPaymentResultPage = '/rolloverPaymentResultPage';
-
+  static const String webViewPage = '/webViewPage';
   static const String customCameraPage = '/customCameraPage';
 }

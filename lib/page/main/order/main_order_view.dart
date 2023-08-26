@@ -39,31 +39,31 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
                               );
                             });
                       }),
-                  CustomButton(
-                      text: '权限弹窗',
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            barrierDismissible: false,
-                            builder: (_) {
-                              return Dialog(
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(16.0),
-                                  ),
-                                ),
-                                insetPadding: const EdgeInsets.only(
-                                    top: 79.0,
-                                    bottom: 70.0,
-                                    left: 10.0,
-                                    right: 10.0),
-                                child: PermissionDialog(
-                                  leftClickConfirm: () {},
-                                  rightClickConfirm: () {},
-                                ),
-                              );
-                            });
-                      }),
+                  // CustomButton(
+                  //     text: '权限弹窗',
+                  //     onPressed: () {
+                  //       showDialog(
+                  //           context: context,
+                  //           barrierDismissible: false,
+                  //           builder: (_) {
+                  //             return Dialog(
+                  //               shape: const RoundedRectangleBorder(
+                  //                 borderRadius: BorderRadius.all(
+                  //                   Radius.circular(16.0),
+                  //                 ),
+                  //               ),
+                  //               insetPadding: const EdgeInsets.only(
+                  //                   top: 79.0,
+                  //                   bottom: 70.0,
+                  //                   left: 10.0,
+                  //                   right: 10.0),
+                  //               child: PermissionDialog(
+                  //                 leftClickConfirm: () {},
+                  //                 rightClickConfirm: () {},
+                  //               ),
+                  //             );
+                  //           });
+                  //     }),
                   CustomButton(
                       text: '权限页面',
                       onPressed: () {

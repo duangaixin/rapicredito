@@ -21,10 +21,10 @@ class MainHomePage extends GetKeepStateView<MainHomeCtr> {
             contentView: PullToRefreshView(ctr.refreshController,
                 onRefresh: ctr.refreshInfo,
                 enablePullUp: false,
-                //  child: HomeLoanDefaultView(),
+               child: HomeLoanDefaultView(),
                 //    child: HomeLoanFailureView(),
                 //  child: HomeLoanDealView(),
-                child: HomeLoanAuditView()
+              //   child: HomeLoanAuditView()
                 //  child: HomeRefusalToLendView()
                 ),
             loadState: ctr.state.loadState);

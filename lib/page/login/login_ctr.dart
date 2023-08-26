@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
+import 'package:rapicredito/get/getx_storage_service.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
+import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/page/login/index.dart';
 import 'package:rapicredito/widget/progress_hud_view.dart';
 
@@ -29,6 +31,11 @@ class LoginCtr extends BaseGetCtr {
   void postSendCodeRequest() async {
     _startTimer();
     var param = <String, String>{};
+    var userId = StorageService.to.getString(AppConstants.userIdKey);
+    param['madUnableBackacheCanal'] = '204';
+    param['terminalDifferentActionFatFountain'] = userId;
+    param['dailyFortuneQuantity'] = '0.0,0.0';
+    param['contraryScientificRightNone'] = 'es';
     param['swiftMeansEitherPine'] = phoneCtr.text;
     var response = await HttpRequestManage.instance.postSendCodeRequest(param);
 
