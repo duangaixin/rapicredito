@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/page/main/home/widget/common_agreement_view.dart';
 import 'package:rapicredito/page/main/home/widget/common_app_bar_view.dart';
-import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
@@ -39,9 +38,9 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
                         horizontal: 15.0, vertical: 5.0),
                     decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                        borderRadius: const BorderRadius.all(Radius.circular(4.0)),
                         border:
-                            Border.all(color: Color(0xff333333), width: 1.0)),
+                            Border.all(color: const Color(0xff333333), width: 1.0)),
                     child: const Text(
                       '91 Días',
                       style:
@@ -60,7 +59,7 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
                       Stack(
                         alignment: Alignment.center,
                         children: [
-                          CustomImageView(
+                          const CustomImageView(
                             Resource.assetsImageHomeDefault,
                             imageType: ImageType.assets,
                             width: 267.0,
@@ -70,7 +69,7 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
                               bottom: 16.0,
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
-                                children: [
+                                children: const [
                                   Text(
                                     'Cantidad máxima',
                                     style: TextStyle(
@@ -93,7 +92,7 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
                       Padding(
                         padding: const EdgeInsets.only(top: 27.0, bottom: 24.0),
                         child: CustomButton(
-                          onPressed: () {},
+                          onPressed: controller.goToAuthPage,
                           minHeight: 46.0,
                           minWidth: 265.0,
                           backgroundColor: const Color(0xffB8EF17),
@@ -111,12 +110,12 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
                       ),
                     ],
                   )),
-              Padding(
-                padding: EdgeInsets.only(top: 26.0, bottom: 30.0),
+               Padding(
+                padding: const EdgeInsets.only(top: 26.0, bottom: 30.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
-                  children: [
+                  children: const [
                     Text(
                       '¿Por qué elegir este producto?',
                       style: TextStyle(
@@ -132,12 +131,12 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
               Padding(
                 padding: const EdgeInsets.only(top: 20.0),
                 child: _buildBottomItemView(
-                    'APP', 'Descargas de la', '100M+', Color(0xff044952)),
+                    'APP', 'Descargas de la', '100M+', const Color(0xff044952)),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20.0),
                 child: _buildBottomItemView(
-                    'Bajo', 'cargo por servicio', '-10%', Color(0xff1E1E1E)),
+                    'Bajo', 'cargo por servicio', '-10%', const Color(0xff1E1E1E)),
               ),
               const Padding(
                 padding: EdgeInsets.only(bottom: 30.0),

@@ -7,11 +7,17 @@ class Resource {
       'assets/image/splash/splash_three.png';
 
   static const String assetsImageMainOne =
-      'assets/image/main/home_tab_home.png';
+      'assets/image/main/main_tab_home_unselect.png';
+  static const String assetsImageMainOneSelected =
+      'assets/image/main/main_tab_home_selected.png';
   static const String assetsImageMainTwo =
-      'assets/image/main/home_tab_auction.png';
+      'assets/image/main/main_tab_order_unselect.png';
+  static const String assetsImageMainTwoSelected =
+      'assets/image/main/main_tab_order_selected.png';
   static const String assetsImageMainThree =
-      'assets/image/main/home_tab_my.png';
+      'assets/image/main/main_tab_my_unselect.png';
+  static const String assetsImageMainThreeSelected =
+      'assets/image/main/main_tab_my_selected.png';
   static const String assetsImageHomeErrorTip =
       'assets/image/main/home_error_tip.png';
   static const String assetsImageHomeDefault =

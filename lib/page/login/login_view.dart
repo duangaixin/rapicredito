@@ -81,27 +81,30 @@ class LoginPage extends GetView<LoginCtr> {
                         Padding(
                           padding: const EdgeInsets.only(
                               left: 39.0, right: 39.0, top: 33.0),
-                          child: CustomColorButton(
-                            disableColors: const [
-                              Color(0xffF5F6F4),
-                              Color(0xffF5F6F4)
-                            ],
-                            disable: false,
-                            colors: const [
-                              Color(0xffB8EF17),
-                              Color(0xffB8EF17)
-                            ],
-                            height: 46.0,
-                            borderRadius: BorderRadius.circular(8.0),
-                            btnContent: const Text(
-                              'Continúa',
-                              style: TextStyle(
-                                  fontSize: 15.0,
-                                  color: Color(0xff333333),
-                                  // color:Color(0xffC4BFBF),
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
+                          child: Obx(() {
+                            return CustomColorButton(
+                              disableColors: const [
+                                Color(0xffF5F6F4),
+                                Color(0xffF5F6F4)
+                              ],
+                              disable: controller.state.btnDisableClick,
+                              colors: const [
+                                Color(0xffB8EF17),
+                                Color(0xffB8EF17)
+                              ],
+                              height: 46.0,
+                              borderRadius: BorderRadius.circular(8.0),
+                              btnContent: Text(
+                                'Continúa',
+                                style: TextStyle(
+                                    fontSize: 15.0,
+                                    color: controller.state.btnDisableClick
+                                        ? const Color(0xffC4BFBF)
+                                        : const Color(0xff333333),
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            );
+                          }),
                         )
                       ],
                     ),

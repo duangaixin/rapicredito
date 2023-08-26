@@ -36,25 +36,30 @@ class PageRouterManage {
         page: () => const AppMainPage(),
         binding: AppMainBinding()),
     GetPage(
-        name: PageRouterName.authPersonPage,
-        page: () => const AuthPersonPage(),
-        binding: AuthPersonBinding()),
-    GetPage(
         name: PageRouterName.loginPage,
         page: () => const LoginPage(),
         binding: LoginBinding()),
     GetPage(
+      name: PageRouterName.authPersonPage,
+      page: () => const AuthPersonPage(),
+      binding: AuthPersonBinding(),
+      // middlewares: [RouteAuthMiddleware()]
+    ),
+    GetPage(
         name: PageRouterName.authContactPage,
         page: () => const AuthContactPage(),
-        binding: AuthContactBinding()),
+        binding: AuthContactBinding(),
+        middlewares: [RouteAuthMiddleware()]),
     GetPage(
         name: PageRouterName.authIdPage,
         page: () => const AuthIdPage(),
-        binding: AuthIdBinding()),
+        binding: AuthIdBinding(),
+        middlewares: [RouteAuthMiddleware()]),
     GetPage(
-        name: PageRouterName.addBankPage,
-        page: () => const AddBankPage(),
-        binding: AddBankBinding()),
+      name: PageRouterName.addBankPage,
+      page: () => const AddBankPage(),
+      binding: AddBankBinding(),
+    ),
     GetPage(
         name: PageRouterName.updateBankPage,
         page: () => const UpdateBankPage(),
@@ -63,8 +68,7 @@ class PageRouterManage {
         name: PageRouterName.clientPage,
         page: () => const ClientPage(),
         binding: ClientBinding(),
-        middlewares: [RouteAuthMiddleware()]
-    ),
+        middlewares: [RouteAuthMiddleware()]),
     GetPage(
         name: PageRouterName.loanDatePage,
         page: () => const LoanDatePage(),

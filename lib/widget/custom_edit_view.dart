@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/utils/object_util.dart';
+import 'package:rapicredito/widget/custom_image_view.dart';
 
 class CustomEditView extends StatefulWidget {
   const CustomEditView({
@@ -92,7 +94,7 @@ class CustomEditViewState extends State<CustomEditView> {
       onChanged: (s) {
         widget.textChangeAction?.call(s);
       },
-      maxLines: 1,
+      maxLines: null,
       minLines: 1,
       textInputAction: TextInputAction.done,
       cursorColor: const Color(0xff2E82FF),
@@ -118,26 +120,25 @@ class CustomEditViewState extends State<CustomEditView> {
     Widget rightView = _isHideDelete || !widget.enableEdit
         ? const SizedBox.shrink()
         : widget.rightWidget ??
-            GestureDetector(
-              child: Container(
-                width: 16.0,
-                height: 16.0,
-                margin: const EdgeInsets.only(top: 12.0, bottom: 10.0),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                child: Icon(
-                  Icons.clear,
-                  color: Colors.grey[500],
-                  size: 10.0,
-                ),
-              ),
-              onTap: () {
-                widget.controller.text = '';
-              },
-            );
+        GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          child: Container(
+            height: 14.0,
+            width: 14.0,
+            margin: const EdgeInsets.only(left: 12.0),
+            decoration: BoxDecoration(
+              color: const Color(0xffDEDEDE),
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: const CustomImageView(
+              Resource.assetsImageLoginClear,
+              imageType: ImageType.assets,
+              width: 19.0,
+              height: 20.0,
+            ),
+          ),
+          onTap: () => widget.controller.clear(),
+        );
     Widget line = Container(
       height: 0.5,
       color: ObjectUtil.isEmptyString(widget.errorText)

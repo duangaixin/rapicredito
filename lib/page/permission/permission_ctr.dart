@@ -4,6 +4,7 @@ import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/page/permission/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
+import 'package:rapicredito/utils/keyboard_util.dart';
 
 class PermissionCtr extends BaseGetCtr {
   final state = PermissionState();
@@ -14,6 +15,7 @@ class PermissionCtr extends BaseGetCtr {
   }
 
   void goToMainPage() {
+    KeyboardUtils.unFocus();
     Get.offAndToNamed(PageRouterName.mainPage);
   }
 
@@ -25,6 +27,7 @@ class PermissionCtr extends BaseGetCtr {
   }
 
   void goToWebViewPage(String title, String webViewUrl) {
+    KeyboardUtils.unFocus();
     Get.toNamed(PageRouterName.webViewPage, arguments: {
       AppConstants.webViewTitleKey: title,
       AppConstants.webViewUrlKey: webViewUrl

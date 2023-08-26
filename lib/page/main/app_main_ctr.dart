@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/get/getx_storage_service.dart';
 import 'package:rapicredito/local/app_constants.dart';
-import 'package:rapicredito/local/user_store.dart';
+import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/page/main/index.dart';
+import 'package:rapicredito/page/main/mine/index.dart';
+import 'package:rapicredito/page/main/order/index.dart';
 import 'package:rapicredito/style/index.dart';
 
 class AppMainCtr extends BaseGetCtr {
@@ -21,6 +24,14 @@ class AppMainCtr extends BaseGetCtr {
 
   void dealPageChanged(int index) {
     state.pageIndex = index;
+    if (state.pageIndex == 0) {
+      var homeCtr = Get.find<MainHomeCtr>();
+      homeCtr.refreshInfo();
+    } else if (state.pageIndex == 1) {
+      var orderCtr = Get.find<MainOrderCtr>();
+    } else if (state.pageIndex == 2) {
+      var mineCtr = Get.find<MainMineCtr>();
+    }
   }
 
   @override
@@ -31,24 +42,21 @@ class AppMainCtr extends BaseGetCtr {
       BottomNavigationBarItem(
           icon: Image.asset(Resource.assetsImageMainOne, width: 25.0),
           activeIcon: Image.asset(
-            Resource.assetsImageMainOne,
-            color: Color(0xff666666),
+            Resource.assetsImageMainOneSelected,
             width: 25.0,
           ),
           label: ''),
       BottomNavigationBarItem(
           icon: Image.asset(Resource.assetsImageMainTwo, width: 25.0),
           activeIcon: Image.asset(
-            Resource.assetsImageMainTwo,
-            color: Color(0xff666666),
+            Resource.assetsImageMainTwoSelected,
             width: 25.0,
           ),
           label: ''),
       BottomNavigationBarItem(
           icon: Image.asset(Resource.assetsImageMainThree, width: 25.0),
           activeIcon: Image.asset(
-            Resource.assetsImageMainThree,
-            color: Color(0xff666666),
+            Resource.assetsImageMainThreeSelected,
             width: 25.0,
           ),
           label: ''),
@@ -59,10 +67,7 @@ class AppMainCtr extends BaseGetCtr {
   void onReady() {
     super.onReady();
     var isFirstEnter = StorageService.to.getBool(AppConstants.isFirstStartKey);
-
   }
-
-
 
   @override
   void dispose() {

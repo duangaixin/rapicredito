@@ -43,20 +43,29 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
                                 editTitle: 'Ingresos',
                                 hintText: 'Por favor elige',
                                 editContent: controller.state.income,
-                                action: () {},
+                                action: () {
+                                  controller.showSelectDialog(
+                                      PersonClickType.incomeType);
+                                },
                               );
                             }),
                             CustomEditView(
-                              controller: TextEditingController(),
+                              controller: controller.emailCtr,
                               editTitle: 'Dirección de correo electrónico',
-                              hintText: '',
+                              hintText: 'Por ejemplo:12345678@gmail.com',
+                              keyboardType: TextInputType.emailAddress,
+                              hintStyle: const TextStyle(
+                                  color: Color(0xffD53535), fontSize: 15.0),
                             ),
                             Obx(() {
                               return CustomSelectView(
                                 editTitle: 'Tamaño de la familia',
                                 hintText: 'Por favor elige',
                                 editContent: controller.state.familyCount,
-                                action: () {},
+                                action: () {
+                                  controller.showSelectDialog(
+                                      PersonClickType.familyCount);
+                                },
                               );
                             }),
                             Obx(() {
@@ -64,7 +73,10 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
                                 editTitle: 'Nivel de educación',
                                 hintText: 'Por favor elige',
                                 editContent: controller.state.educationalLevel,
-                                action: () {},
+                                action: () {
+                                  controller.showSelectDialog(
+                                      PersonClickType.educationalLevel);
+                                },
                               );
                             }),
                             Container(
@@ -76,18 +88,21 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
                                     Color(0xffF5F6F4),
                                     Color(0xffF5F6F4),
                                   ],
-                                  disable: controller.state.btnCanClick,
+                                  disable: controller.state.btnDisableClick,
                                   colors: const [
                                     Color(0xffB8EF17),
                                     Color(0xffB8EF17)
                                   ],
                                   height: 46.0,
                                   borderRadius: BorderRadius.circular(8.0),
-                                  btnContent: const Text(
+                                  btnContent: Text(
                                     'Siguiente',
                                     style: TextStyle(
-                                        fontSize: 15.0,
-                                        color: Color(0xffC4BFBF)),
+                                      fontSize: 15.0,
+                                      color: controller.state.btnDisableClick
+                                          ? const Color(0xffC4BFBF)
+                                          : const Color(0xff333333),
+                                    ),
                                   ),
                                 );
                               }),

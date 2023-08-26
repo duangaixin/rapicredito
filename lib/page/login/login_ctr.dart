@@ -5,6 +5,7 @@ import 'package:rapicredito/get/getx_storage_service.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/page/login/index.dart';
+import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/widget/progress_hud_view.dart';
 
 class LoginCtr extends BaseGetCtr {
@@ -17,7 +18,12 @@ class LoginCtr extends BaseGetCtr {
   void onInit() {
     super.onInit();
     state.isInitClick = true;
+    codeCtr.addListener(_btnCanClick);
   }
+
+   void _btnCanClick(){
+     state.btnDisableClick=ObjectUtil.isEmptyString(codeCtr.text);
+   }
 
   void _startTimer() {
     state.timeEnd = 60;
@@ -48,6 +54,8 @@ class LoginCtr extends BaseGetCtr {
   @override
   void onClose() {
     _subscription?.cancel();
+    phoneCtr.dispose();
+    codeCtr.dispose();
     super.onClose();
   }
 }
