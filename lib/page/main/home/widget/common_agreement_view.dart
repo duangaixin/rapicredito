@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/router/page_router_name.dart';
+import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 
 class CommonAgreeView extends StatefulWidget {
@@ -54,6 +55,7 @@ class CommonAgreeViewState extends State<CommonAgreeView> {
   }
 
   void _goToWebViewPage(String title, String webViewUrl) {
+    KeyboardUtils.unFocus();
     Get.toNamed(PageRouterName.webViewPage, arguments: {
       AppConstants.webViewTitleKey: title,
       AppConstants.webViewUrlKey: webViewUrl
