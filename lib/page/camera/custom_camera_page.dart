@@ -14,9 +14,7 @@ class CustomCameraPage extends StatefulWidget {
 }
 
 class CustomCameraPageState extends State<CustomCameraPage> {
-  CameraController? controller;
-  late Future<void> _initializeControllerFuture;
-
+  late CameraController controller;
   late List<CameraDescription> cameraList;
 
   @override
@@ -38,7 +36,10 @@ class CustomCameraPageState extends State<CustomCameraPage> {
       ResolutionPreset.max,
     );
     try {
-      _initializeControllerFuture = controller!.initialize().then((value) {
+      controller.initialize().then((value) {
+        if (mounted) {
+          setState(() {});
+        }
       });
     } on CameraException catch (e) {
       var permissionError = e.code.contains('Permission');
@@ -63,56 +64,47 @@ class CustomCameraPageState extends State<CustomCameraPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: FutureBuilder<void>(
-      future: _initializeControllerFuture,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return Container(
-            color: Colors.red,
-            width: double.infinity,
-            height: double.infinity,
-            child: Stack(
-              children: [
-                Positioned(
-                    left: 0,
-                    right: 0,
-                    top: 0,
-                    bottom: 0,
-                    child: AspectRatio(
-                      aspectRatio: 16 / 9,
-                      child: CameraPreview(controller!),
-                    )),
-                Positioned(
-                    top: 40.0,
-                    left: 20.0,
-                    child: GestureDetector(
-                      behavior: HitTestBehavior.opaque,
-                      onTap: Get.back,
-                      child: const Icon(Icons.arrow_back_ios,
-                          color: Colors.black, size: 16.0),
-                    )),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: captureBtn,
-                )
-              ],
-            ),
-          );
-        } else {
-          return const Center(child: CircularProgressIndicator());
-        }
-      },
-    ));
+    if (!controller.value.isInitialized) {
+      return const Center(child: CircularProgressIndicator());
+    } else {
+      return SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: Stack(
+          children: [
+            Positioned(
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
+                child: AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: CameraPreview(controller!),
+                )),
+            Positioned(
+                top: 40.0,
+                left: 20.0,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: Get.back,
+                  child: const Icon(Icons.arrow_back_ios,
+                      color: Colors.black, size: 16.0),
+                )),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: captureBtn,
+            )
+          ],
+        ),
+      );
+    }
   }
 
   void takeCamera() {
-    if (controller == null ||
-        !controller!.value.isInitialized ||
-        controller!.value.isTakingPicture) {
+    if (!controller.value.isInitialized || controller.value.isTakingPicture) {
       return;
     }
-    controller?.takePicture().then((XFile? file) async {
+    controller.takePicture().then((XFile? file) async {
       if (mounted) {
         if (file != null) {
           Get.back(result: file);
@@ -123,7 +115,7 @@ class CustomCameraPageState extends State<CustomCameraPage> {
 
   @override
   void dispose() {
-    controller?.dispose();
+    controller.dispose();
     super.dispose();
   }
 }

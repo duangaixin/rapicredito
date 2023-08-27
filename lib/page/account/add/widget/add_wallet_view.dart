@@ -123,10 +123,10 @@ class AddWalletView extends GetView<AddAccountCtr> {
                                     style: const TextStyle(
                                         fontSize: 15.0,
                                         color: Color(0xff333333)),
-                                    children: <TextSpan>[
+                                    children: const <TextSpan>[
                                   TextSpan(
                                     text: 'Solicita un enlace',
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                         decoration: TextDecoration.underline,
                                         fontSize: 15.0,
                                         color: Color(0xff333333)),

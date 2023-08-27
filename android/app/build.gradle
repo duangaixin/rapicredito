@@ -30,9 +30,10 @@ static def getTime() {
 }
 
 android {
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion rootProject.ext.android["compileSdk"]
     defaultConfig {
-        applicationId rootProject.ext.android["applicationId"]
+        //applicationId rootProject.ext.android["applicationId"]
+        applicationId "com.duanxin.test"
         minSdkVersion rootProject.ext.android["minSdk"]
         targetSdkVersion rootProject.ext.android["targetSdk"]
         versionCode rootProject.ext.android["versionCode"]
@@ -40,7 +41,7 @@ android {
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a'
         }
-        multiDexEnabled true
+       multiDexEnabled true
     }
 
     compileOptions {

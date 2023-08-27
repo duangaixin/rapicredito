@@ -34,7 +34,7 @@ class AuthIdCtr extends BaseGetCtr {
   }
 
   void goToCustomCamera() async {
-   List<CameraDescription> cameraList = await availableCameras();
+    List<CameraDescription> cameraList = await availableCameras();
     var result = await Get.toNamed(PageRouterName.customCameraPage,
         arguments: {'cameraList': cameraList});
   }

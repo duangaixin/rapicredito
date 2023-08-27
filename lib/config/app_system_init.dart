@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:rapicredito/utils/log_utils.dart';
 import 'package:get/get_utils/get_utils.dart';
 
-
 Future<void> initSystemConfig() async {
   WidgetsFlutterBinding.ensureInitialized();
   Log.init();
@@ -12,16 +11,7 @@ Future<void> initSystemConfig() async {
 
 Future<void> setSystemUi() async {
   if (GetPlatform.isAndroid) {
-    // SystemUiOverlayStyle systemUiOverlayStyle = const SystemUiOverlayStyle(
-    //   statusBarColor: Colors.transparent,
-    //   statusBarBrightness: Brightness.light,
-    //   statusBarIconBrightness: Brightness.dark,
-    //   systemNavigationBarDividerColor: Colors.transparent,
-    //   systemNavigationBarColor: Colors.white,
-    //   systemNavigationBarIconBrightness: Brightness.dark,
-    // );
-
-    SystemUiOverlayStyle systemUiOverlayStyle = const   SystemUiOverlayStyle(
+    SystemUiOverlayStyle systemUiOverlayStyle = const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         statusBarBrightness: Brightness.dark,
         statusBarIconBrightness: Brightness.dark,

@@ -19,7 +19,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final botToastBuilder = BotToastInit();
-
     return GetMaterialApp(
       showPerformanceOverlay: false,
       debugShowCheckedModeBanner: false,
