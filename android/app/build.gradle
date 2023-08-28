@@ -33,7 +33,6 @@ android {
     compileSdkVersion rootProject.ext.android["compileSdk"]
     defaultConfig {
         applicationId rootProject.ext.android["applicationId"]
-        applicationId "com.duanxin.test"
         minSdkVersion rootProject.ext.android["minSdk"]
         targetSdkVersion rootProject.ext.android["targetSdk"]
         versionCode rootProject.ext.android["versionCode"]

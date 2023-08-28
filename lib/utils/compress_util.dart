@@ -3,7 +3,7 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:path_provider/path_provider.dart';
 
 class CompressUtil {
-  static Future<File> compressImage(File file, int maxSize) async {
+  static Future<File> compressImage(File file) async {
     if (file.lengthSync() < 1024 * 1024) {
       return file;
     }
@@ -12,8 +12,9 @@ class CompressUtil {
         '${'${dir.path}/'}${DateTime.now().millisecondsSinceEpoch}.jpeg';
     final result = await FlutterImageCompress.compressAndGetFile(
         file.path, targetPath,
-        quality: 80);
+        quality: 60);
     File compressedFile = File(result!.path);
+    print(compressedFile.path+'-----duanxin');
     return compressedFile;
   }
 }

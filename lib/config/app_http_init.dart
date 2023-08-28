@@ -3,7 +3,6 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:platform_device_id/platform_device_id.dart';
 import 'package:rapicredito/get/getx_storage_service.dart';
@@ -37,7 +36,7 @@ bool isReleaseBuild() => !kProfileMode && kReleaseMode;
 void _check401Error(BaseResponse<dynamic> error) async {
   if (is401Error(error)) {
     UserStore.to.loginOut();
-    Get.offAllNamed(PageRouterName.mainPage);
+    Get.offAllNamed(PageRouterName.loginPage,arguments: {AppConstants.isRootPage:true});
   }
 }
 

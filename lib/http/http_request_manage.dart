@@ -20,7 +20,9 @@ extension RequestBussiness on HttpRequestManage {
   Future<BaseResponse<String>> postSendCodeRequest(
       Map<String, dynamic> param) async {
     return await httpRequest.post<String>(HttpApi.apiSendCode,
-        options: Options(headers: {'perfectAche': true}),
+        options: Options(headers: {
+          'perfectAche': true,
+        }, contentType: Headers.formUrlEncodedContentType),
         data: param,
         onTransform: (json) => json['littlePenfriendCompressedFlightManager']);
   }
@@ -28,20 +30,26 @@ extension RequestBussiness on HttpRequestManage {
   Future<BaseResponse<LoginInfoBean>> postLoginRequest(
       Map<String, dynamic> param) async {
     return await httpRequest.post<LoginInfoBean>(HttpApi.apiLogin,
-        data: param, onTransform: (json) => LoginInfoBean.fromJson(json));
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        data: param,
+        onTransform: (json) => LoginInfoBean.fromJson(json));
   }
 
   Future<BaseResponse<List<ConfigInfoBean>>> postAppConfigInfo(
       Map<String, dynamic> param) async {
     return await httpRequest.post<List<ConfigInfoBean>>(HttpApi.apiConfigInfo,
         data: param,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
         onTransform: (json) => json
             .map<ConfigInfoBean>((e) => ConfigInfoBean.fromJson(e))
             .toList());
   }
 
-
-
-
-
+  Future<BaseResponse<String>> postUploadIdCard( param) async {
+    return await httpRequest.post<String>(HttpApi.apiUploadIdPhoto,
+        //  options: Options(contentType: Headers.formUrlEncodedContentType),
+       options: Options(contentType: Headers.multipartFormDataContentType),
+        data: param,
+        onTransform: (json) => json['northernMarriageCommunism']);
+  }
 }

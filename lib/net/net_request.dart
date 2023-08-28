@@ -27,7 +27,6 @@ class NetRequest {
       onRequest: (options, handler) async {
         var defHeader = await _netConfig.getDefHeader();
         var defParam = await _netConfig.getDefParam();
-        options.contentType= Headers.formUrlEncodedContentType;
         options.headers.addAll(defHeader);
         options.queryParameters.addAll(defParam);
         handler.next(options);
