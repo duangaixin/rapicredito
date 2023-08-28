@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/get/getx_keep_state_view.dart';
+import 'package:rapicredito/page/dialog/date_select_dialog.dart';
 import 'package:rapicredito/page/dialog/message_input_dialog.dart';
 import 'package:rapicredito/page/loan/widget/loan_confirm_money_dialog.dart';
 import 'package:rapicredito/page/main/order/index.dart';
@@ -27,6 +28,25 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
                   const SizedBox(
                     height: 100.0,
                   ),
+
+                  CustomButton(
+                      text: '展期还款成功',
+                      onPressed: () {
+                        Get.toNamed(PageRouterName.rolloverPaymentResultPage);
+                      }),
+
+                  CustomButton(
+                      text: '日期选择弹窗',
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (_) {
+                              return DateSelectDialog(
+                                clickConfirm: () {},
+                              );
+                            });
+                      }),
                   CustomButton(
                       text: '金额确认弹窗',
                       onPressed: () {

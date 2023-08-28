@@ -41,4 +41,9 @@ class Resource {
       'assets/image/auth/auth_take_camera.png';
   static const String assetsImageMessageDialog =
       'assets/image/other/message_top_dialog.png';
+  static const String assetsImageDateSelectDialog =
+      'assets/image/other/date_select_dialog.png';
+  static const String assetsImageResultTip =
+      'assets/image/other/result_tip.png';
+
 }

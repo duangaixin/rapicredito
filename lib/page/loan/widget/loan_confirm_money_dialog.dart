@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
@@ -104,7 +103,7 @@ class _LoanConfirmMoneyDialogState extends State<LoanConfirmMoneyDialog> {
           margin: const EdgeInsets.only(top: 15.0, right: 5.0, bottom: 19.0),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4.0),
-              border: Border.all(color: Color(0xff666666), width: 1.0)),
+              border: Border.all(color: const Color(0xff666666), width: 1.0)),
         ),
         Expanded(
             child: RichText(
@@ -151,7 +150,7 @@ class _LoanConfirmMoneyDialogState extends State<LoanConfirmMoneyDialog> {
         Expanded(
             child: CustomButton(
           onPressed: widget.clickConfirm(''),
-              minWidth: 152.0,
+          minWidth: 152.0,
           minHeight: 46.0,
           backgroundColor: const Color(0xffB8EF17),
           disabledBackgroundColor: const Color(0xffB8EF17),
