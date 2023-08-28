@@ -9,4 +9,5 @@ class HttpApi {
   static const String apiConfigInfo = 'facialHis/studyCompressedNortheast';
 
   static const String apiUploadIdPhoto = 'curtain/defeatUntrueToday';
+  static const String apiQueryPhoto = 'curtain/completeProbableFortnight';
 }

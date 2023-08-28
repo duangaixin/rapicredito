@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/auth/id/index.dart';
 import 'package:rapicredito/page/auth/widget/common_auth_agreement_view.dart';
+import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/widget/comon_section_title_view.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
@@ -14,26 +15,35 @@ import 'package:rapicredito/widget/custom_select_view.dart';
 class AuthIdPage extends GetView<AuthIdCtr> {
   const AuthIdPage({Key? key}) : super(key: key);
 
-  Widget idCameraView(String title, VoidCallback func) => CustomClickView(
-      onTap: func,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          CustomImageView(
-            Resource.assetsImageAuthTakeCamera,
-            imageType: ImageType.assets,
-            width: controller.state.imageWidth,
-            height: 91.0,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 7.0),
-            child: Text(
-              title,
-              style: const TextStyle(fontSize: 15.0, color: Color(0xff333333)),
-            ),
-          )
-        ],
-      ));
+  Widget idCameraView(String title, String imageUrl, VoidCallback func) =>
+      CustomClickView(
+          onTap: func,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CustomImageView(
+                key: GlobalKey(),
+                ObjectUtil.isEmptyString(imageUrl)
+                    ? Resource.assetsImageAuthTakeCamera
+                    : imageUrl,
+                imageType: ObjectUtil.isEmptyString(imageUrl)
+                    ? ImageType.assets
+                    : ImageType.network,
+                //width: controller.state.imageWidth,
+                placeholder: Resource.assetsImageAuthTakeCamera,
+                height: 91.0,
+                radius: 8.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 7.0),
+                child: Text(
+                  title,
+                  style:
+                      const TextStyle(fontSize: 15.0, color: Color(0xff333333)),
+                ),
+              )
+            ],
+          ));
 
   Widget get idCardView => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,11 +58,19 @@ class AuthIdPage extends GetView<AuthIdCtr> {
           Padding(
             padding: const EdgeInsets.only(top: 28.0, left: 16.0, right: 16.0),
             child: Row(mainAxisSize: MainAxisSize.max, children: [
-              Expanded(child: idCameraView('Frente', controller.tackCamera)),
+              Expanded(child: Obx(() {
+                return idCameraView('Frente', controller.state.idFrontUrl, () {
+                  controller.tackCamera(isFront: true);
+                });
+              })),
               const SizedBox(
                 width: 10.0,
               ),
-              Expanded(child: idCameraView('Atrás', controller.tackCamera)),
+              Expanded(child: Obx(() {
+                return idCameraView('Atrás', controller.state.idBackUrl, () {
+                  controller.tackCamera(isFront: false);
+                });
+              })),
             ]),
           )
         ],
@@ -113,11 +131,10 @@ class AuthIdPage extends GetView<AuthIdCtr> {
             ),
           ),
           Center(
-            child: faceCameraView(
-              controller.goToCustomCamera
-               // controller.tackCamera
+            child: faceCameraView(controller.goToCustomCamera
+                // controller.tackCamera
 
-            ),
+                ),
           )
         ],
       );
