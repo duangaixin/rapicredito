@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/get/getx_keep_state_view.dart';
 import 'package:rapicredito/page/dialog/message_input_dialog.dart';
+import 'package:rapicredito/page/loan/widget/loan_confirm_money_dialog.dart';
 import 'package:rapicredito/page/main/order/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/widget/custom_button.dart';
@@ -26,6 +27,18 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
                   const SizedBox(
                     height: 100.0,
                   ),
+                  CustomButton(
+                      text: '金额确认弹窗',
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (_) {
+                              return LoanConfirmMoneyDialog(
+                                clickConfirm: (String s) {},
+                              );
+                            });
+                      }),
                   CustomButton(
                       text: '输入弹窗',
                       onPressed: () {
