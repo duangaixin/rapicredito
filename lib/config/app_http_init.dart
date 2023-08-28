@@ -51,7 +51,7 @@ bool is401Error(BaseResponse<dynamic> error) {
 
 Future<Map<String, dynamic>> _getDefHeader() async {
   var map = <String, dynamic>{};
-  var userId = StorageService.to.getString(AppConstants.userIdKey);
+  var userId = StorageService.to.getInt(AppConstants.userIdKey);
   var token = StorageService.to.getString(AppConstants.userTokenKey);
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
   var versionName = packageInfo.version;
@@ -97,7 +97,7 @@ Interceptors? getNetInterceptors() {
 
 Map<String, dynamic> getCommonParam() {
   var commonParam = <String, dynamic>{};
-  var userId = StorageService.to.getString(AppConstants.userIdKey);
+  var userId = StorageService.to.getInt(AppConstants.userIdKey);
   commonParam['madUnableBackacheCanal'] = '204';
   commonParam['terminalDifferentActionFatFountain'] = userId;
   commonParam['dailyFortuneQuantity'] = '0.0,0.0';

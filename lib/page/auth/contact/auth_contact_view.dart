@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/auth/contact/auth_contact_ctr.dart';
+import 'package:rapicredito/page/auth/person/auth_person_ctr.dart';
 import 'package:rapicredito/page/auth/widget/common_auth_agreement_view.dart';
 import 'package:rapicredito/widget/comon_section_title_view.dart';
 import 'package:rapicredito/widget/custom_color_button.dart';
@@ -32,18 +34,27 @@ class AuthContactPage extends GetView<AuthContactCtr> {
                     editTitle: 'Relación',
                     hintText: 'Por favor elige',
                     editContent: controller.state.relationshipOne,
-                    action: () {},
+                    action: () {
+                      controller.postAppConfigInfoRequest(
+                          PersonClickType.relationOne);
+                    },
                   );
                 }),
                 CustomEditView(
-                  controller: TextEditingController(),
+                  controller: controller.phoneOneCtr,
                   editTitle: 'Número de celular',
                   hintText: 'Introducir texto',
+                  keyboardType: TextInputType.number,
+                  inputFormatter: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(20),
+                  ],
                 ),
                 CustomEditView(
-                  controller: TextEditingController(),
+                  controller: controller.nameOneCtr,
                   editTitle: 'Nombre',
                   hintText: 'Introducir texto',
+                  keyboardType: TextInputType.text,
                 ),
               ],
             ),
@@ -72,18 +83,27 @@ class AuthContactPage extends GetView<AuthContactCtr> {
                     editTitle: 'Relación',
                     hintText: 'Por favor elige',
                     editContent: controller.state.relationshipTwo,
-                    action: () {},
+                    action: () {
+                      controller.postAppConfigInfoRequest(
+                          PersonClickType.relationTwo);
+                    },
                   );
                 }),
                 CustomEditView(
-                  controller: TextEditingController(),
+                  controller: controller.phoneTwoCtr,
                   editTitle: 'Número de celular',
                   hintText: 'Introducir texto',
+                  keyboardType: TextInputType.number,
+                  inputFormatter: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    LengthLimitingTextInputFormatter(20),
+                  ],
                 ),
                 CustomEditView(
-                  controller: TextEditingController(),
+                  controller: controller.nameTwoCtr,
                   editTitle: 'Nombre',
                   hintText: 'Introducir texto',
+                  keyboardType: TextInputType.text,
                 ),
               ],
             ),
@@ -97,23 +117,29 @@ class AuthContactPage extends GetView<AuthContactCtr> {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 55.0, right: 55.0, top: 26.0),
-            child: CustomColorButton(
-              disableColors: const [
-                Color(0xffF5F6F4),
-                Color(0xffF5F6F4),
-              ],
-              disable: false,
-              colors: const [Color(0xffB8EF17), Color(0xffB8EF17)],
-              height: 46.0,
-              borderRadius: BorderRadius.circular(8.0),
-              btnContent: const Text(
-                'Registrarse',
-                style: TextStyle(
-                    fontSize: 15.0,
-                    color: Color(0xff333333),
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
+            child: Obx(() {
+              return CustomColorButton(
+                disableColors: const [
+                  Color(0xffF5F6F4),
+                  Color(0xffF5F6F4),
+                ],
+                disable: controller.state.btnDisableClick,
+                realClick: controller.goToNextPage,
+                disableClick: controller.disableClickToast,
+                colors: const [Color(0xffB8EF17), Color(0xffB8EF17)],
+                height: 46.0,
+                borderRadius: BorderRadius.circular(8.0),
+                btnContent:  Text(
+                  'Registrarse',
+                  style: TextStyle(
+                      fontSize: 15.0,
+                      color: controller.state.btnDisableClick
+                          ? const Color(0xffC4BFBF)
+                          : const Color(0xff333333),
+                      fontWeight: FontWeight.bold),
+                ),
+              );
+            }),
           ),
           const Padding(
             padding: EdgeInsets.only(top: 30.0, bottom: 20.0),
@@ -124,7 +150,6 @@ class AuthContactPage extends GetView<AuthContactCtr> {
 
   @override
   Widget build(BuildContext context) {
-    //  double bottom = MediaQuery.of(context).viewInsets.bottom;
     return CustomPageBgView(
         title: 'Contacto de emergencia',
         content: SingleChildScrollView(
@@ -135,7 +160,7 @@ class AuthContactPage extends GetView<AuthContactCtr> {
             children: [oneContactView, twoContactView, bottomView],
           ),
         ));
-
+//  double bottom = MediaQuery.of(context).viewInsets.bottom;
     // return CustomPageBgView(
     //     title: 'Contacto de emergencia',
     //     content: Container(

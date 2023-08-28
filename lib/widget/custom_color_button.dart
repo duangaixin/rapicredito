@@ -9,10 +9,10 @@ class CustomColorButton extends StatelessWidget {
     this.width,
     this.height,
     this.borderRadius = BorderRadius.zero,
-    this.tapCallback,
+    this.realClick,
     this.btnTxt,
     this.btnContent,
-    this.disable = false,
+    this.disable = false, this.disableClick,
   }) : super(key: key);
   final Widget? btnContent;
   final List<Color>? colors;
@@ -21,7 +21,8 @@ class CustomColorButton extends StatelessWidget {
   final double? height;
   final BorderRadius borderRadius;
 
-  final GestureTapCallback? tapCallback;
+  final GestureTapCallback? realClick;
+  final GestureTapCallback? disableClick;
   final bool disable;
   final String? btnTxt;
 
@@ -41,7 +42,7 @@ class CustomColorButton extends StatelessWidget {
     if (colorList.length < 2) return const SizedBox.shrink();
     return ClipRRect(
       borderRadius: borderRadius,
-      child:       DecoratedBox(
+      child: DecoratedBox(
           decoration: BoxDecoration(
             borderRadius: borderRadius,
             gradient: LinearGradient(colors: colorList),
@@ -49,14 +50,16 @@ class CustomColorButton extends StatelessWidget {
           child: Material(
             type: MaterialType.transparency,
             child: InkWell(
-              onTap: disable ? null : tapCallback?.throttleWithTimeout(),
+              onTap: disable
+                  ? disableClick?.throttleWithTimeout()
+                  : realClick?.throttleWithTimeout(),
               splashColor: colorList.last,
               borderRadius: borderRadius,
               enableFeedback: !disable,
               highlightColor: Colors.transparent,
               child: ConstrainedBox(
                 constraints:
-                BoxConstraints.tightFor(width: width, height: height),
+                    BoxConstraints.tightFor(width: width, height: height),
                 child: Center(
                   child: btnContent ??
                       Padding(
@@ -69,8 +72,6 @@ class CustomColorButton extends StatelessWidget {
               ),
             ),
           )),
-    )
-
-;
+    );
   }
 }

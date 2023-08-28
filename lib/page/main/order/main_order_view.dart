@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:rapicredito/get/getx_keep_state_view.dart';
 import 'package:rapicredito/page/dialog/message_input_dialog.dart';
 import 'package:rapicredito/page/main/order/index.dart';
-import 'package:rapicredito/page/permission/permission_dialog.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_picker.dart';

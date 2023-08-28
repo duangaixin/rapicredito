@@ -5,4 +5,7 @@ class HttpApi {
   static const String apiSendCode = 'italy/pushHarmfulConstruction';
 
   static const String apiLogin = 'italy/inventBetterMoon';
+
+
+  static const String apiConfigInfo = 'facialHis/studyCompressedNortheast';
 }

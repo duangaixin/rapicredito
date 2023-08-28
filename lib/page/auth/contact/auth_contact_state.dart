@@ -14,4 +14,11 @@ class AuthContactState {
   String get relationshipTwo => _relationshipTwo.value;
 
   set relationshipTwo(value) => _relationshipTwo.value = value;
+
+
+  final RxBool _btnDisableClick = true.obs;
+
+  bool get btnDisableClick => _btnDisableClick.value;
+
+  set btnDisableClick(value) => _btnDisableClick.value = value;
 }

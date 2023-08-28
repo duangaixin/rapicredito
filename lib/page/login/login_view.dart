@@ -83,7 +83,7 @@ class LoginPage extends GetView<LoginCtr> {
                               left: 39.0, right: 39.0, top: 33.0),
                           child: Obx(() {
                             return CustomColorButton(
-                              tapCallback: controller.postLoginRequest,
+                              realClick: controller.postLoginRequest,
                               disableColors: const [
                                 Color(0xffF5F6F4),
                                 Color(0xffF5F6F4)

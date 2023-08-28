@@ -44,7 +44,7 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
                                 hintText: 'Por favor elige',
                                 editContent: controller.state.income,
                                 action: () {
-                                  controller.showSelectDialog(
+                                  controller.postAppConfigInfoRequest(
                                       PersonClickType.incomeType);
                                 },
                               );
@@ -63,7 +63,7 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
                                 hintText: 'Por favor elige',
                                 editContent: controller.state.familyCount,
                                 action: () {
-                                  controller.showSelectDialog(
+                                  controller.postAppConfigInfoRequest(
                                       PersonClickType.familyCount);
                                 },
                               );
@@ -74,7 +74,7 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
                                 hintText: 'Por favor elige',
                                 editContent: controller.state.educationalLevel,
                                 action: () {
-                                  controller.showSelectDialog(
+                                  controller.postAppConfigInfoRequest(
                                       PersonClickType.educationalLevel);
                                 },
                               );
@@ -84,6 +84,8 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
                                   left: 39.0, right: 39.0, top: 26.0),
                               child: Obx(() {
                                 return CustomColorButton(
+                                  disableClick: controller.disableClickToast,
+                                  realClick: controller.goToNextPage,
                                   disableColors: const [
                                     Color(0xffF5F6F4),
                                     Color(0xffF5F6F4),

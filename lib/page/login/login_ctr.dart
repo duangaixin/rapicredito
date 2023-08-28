@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
-import 'package:rapicredito/get/getx_storage_service.dart';
+import 'package:rapicredito/get/getx_extension.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
-import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/page/login/index.dart';
 import 'package:rapicredito/page/main/home/index.dart';
@@ -44,12 +43,15 @@ class LoginCtr extends BaseGetCtr {
     var param = <String, dynamic>{};
     param['swiftMeansEitherPine'] = phoneCtr.text.strRvSpace();
     param.addAll(getCommonParam());
+    Get.showLoading();
     var response = await HttpRequestManage.instance.postSendCodeRequest(param);
+    Get.showLoading();
     if (response.isSuccess()) {
       var codeStr = response.data ?? '';
       ProgressHUD.showSuccess(codeStr);
     } else {
-      ProgressHUD.showError('');
+      var errorMsg = response.message ?? 'error';
+      ProgressHUD.showError(errorMsg);
     }
   }
 
@@ -70,7 +72,9 @@ class LoginCtr extends BaseGetCtr {
     ///appInstanceId
     param['aliveCanteenSteadyPioneer'] = '00000000000000000000000000000000';
     param.addAll(getCommonParam());
+    Get.showLoading();
     var response = await HttpRequestManage.instance.postLoginRequest(param);
+    Get.dismiss();
     if (response.isSuccess()) {
       var loginInfoBean = response.data;
       var token = loginInfoBean?.darkPlentyNervousHandbag ?? '';
@@ -84,7 +88,8 @@ class LoginCtr extends BaseGetCtr {
       mainHomeCtr.refreshInfo();
       Get.back();
     } else {
-      ProgressHUD.showError('');
+      var errorMsg = response.message ?? 'error';
+      ProgressHUD.showError(errorMsg);
     }
   }
 

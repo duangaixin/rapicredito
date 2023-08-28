@@ -5,7 +5,7 @@ import 'package:rapicredito/style/index.dart';
 class CustomLoadingDialog extends StatelessWidget {
   const CustomLoadingDialog({
     Key? key,
-    this.hintText = '加载中...',
+    this.hintText = 'loading...',
   }) : super(key: key);
 
   final String hintText;
