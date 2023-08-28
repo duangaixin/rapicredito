@@ -27,6 +27,7 @@ class NetRequest {
       onRequest: (options, handler) async {
         var defHeader = await _netConfig.getDefHeader();
         var defParam = await _netConfig.getDefParam();
+        options.contentType= Headers.formUrlEncodedContentType;
         options.headers.addAll(defHeader);
         options.queryParameters.addAll(defParam);
         handler.next(options);
@@ -102,7 +103,7 @@ class NetRequest {
       }
       return BaseResponse<T>.success(t, response.code);
     } else {
-      var error = BaseResponse<T>.error(response.code, response.errorMessage);
+      var error = BaseResponse<T>.error(response.code, response.message);
       _netConfig.check401Error(error);
       return error;
     }

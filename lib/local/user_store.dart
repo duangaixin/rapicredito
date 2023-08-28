@@ -4,32 +4,31 @@ import 'package:get/get.dart';
 
 class UserStore extends GetxController {
   static UserStore get to => Get.find();
-  bool isLogin = false;
-  bool isFirstStart = false;
-  String token = '';
-
-  bool get hasToken => token.isNotEmpty;
+  String mToken = '';
+ int mUserId=-1;
+  bool get hasToken => mToken.isNotEmpty;
 
   @override
   void onInit() {
     super.onInit();
-    isFirstStart = StorageService.to.getBool(AppConstants.isFirstStartKey);
-    token = StorageService.to.getString(AppConstants.userTokenKey);
-    isLogin = StorageService.to.getBool(AppConstants.useLoginKey);
+    mToken = StorageService.to.getString(AppConstants.userTokenKey);
+    mUserId= StorageService.to.getInt(AppConstants.userIdKey);
   }
 
-  void setToken(String value) async {
-    await StorageService.to.setString(AppConstants.userTokenKey, value);
-    await StorageService.to.setBool(AppConstants.useLoginKey, true);
-    token = value;
-    isLogin = true;
+  Future<void> setLoginInfo(String token,int userId) async {
+    await StorageService.to.setString(AppConstants.userTokenKey, token);
+    await StorageService.to.setInt(AppConstants.userIdKey, userId);
+
+    mToken = token;
+    mUserId=userId;
   }
 
   Future<void> loginOut() async {
-    if (isLogin) {
+    if (hasToken) {
+      mUserId=-1;
+      mToken = '';
       await StorageService.to.clear();
-      isLogin = false;
-      token = '';
+
     }
   }
 

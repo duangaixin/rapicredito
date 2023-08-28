@@ -13,7 +13,7 @@ class RouteAuthMiddleware extends GetMiddleware {
   }
   @override
   RouteSettings? redirect(String? route) {
-    if (UserStore.to.isLogin || route == PageRouterName.loginPage) {
+    if (UserStore.to.hasToken || route == PageRouterName.loginPage) {
       return null;
     } else {
       return const RouteSettings(name: PageRouterName.loginPage);
@@ -21,15 +21,3 @@ class RouteAuthMiddleware extends GetMiddleware {
   }
 }
 
-class RouteSplashMiddleware extends GetMiddleware {
-  RouteSplashMiddleware();
-
-  @override
-  RouteSettings? redirect(String? route) {
-    if (UserStore.to.isFirstStart == false) {
-      return null;
-    } else {
-      return const RouteSettings(name: PageRouterName.mainPage);
-    }
-  }
-}

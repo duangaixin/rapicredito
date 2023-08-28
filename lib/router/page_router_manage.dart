@@ -30,7 +30,7 @@ class PageRouterManage {
         name: PageRouterName.splashPage,
         page: () => const SplashPage(),
         binding: SplashBinding(),
-        middlewares: [RouteSplashMiddleware()]),
+    ),
     GetPage(
         name: PageRouterName.mainPage,
         page: () => const AppMainPage(),

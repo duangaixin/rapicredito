@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/http/http_api.dart';
+import 'package:rapicredito/model/login_info_bean.dart';
 import 'package:rapicredito/net/base_response.dart';
 
 class HttpRequestManage {
@@ -15,17 +16,17 @@ class HttpRequestManage {
 }
 
 extension RequestBussiness on HttpRequestManage {
-  Future<BaseResponse> postSendCodeRequest(
+  Future<BaseResponse<String>> postSendCodeRequest(
       Map<String, dynamic> param) async {
-    return await httpRequest.post(HttpApi.apiSendCode,
-       options:Options(contentType:Headers.jsonContentType)  ,
-       // options: Options(contentType:Headers.formUrlEncodedContentType),
-        data: param, onTransform: (json) => null);
-  }
-  Future<BaseResponse> postLoginRequest(
-      Map<String, dynamic> param) async {
-    return await httpRequest.post(HttpApi.apiLogin,
-        data: param, onTransform: (json) => null);
+    return await httpRequest.post<String>(HttpApi.apiSendCode,
+        options: Options(headers: {'perfectAche': true}),
+        data: param,
+        onTransform: (json) => json['littlePenfriendCompressedFlightManager']);
   }
 
+  Future<BaseResponse<LoginInfoBean>> postLoginRequest(
+      Map<String, dynamic> param) async {
+    return await httpRequest.post<LoginInfoBean>(HttpApi.apiLogin,
+        data: param, onTransform: (json) => LoginInfoBean.fromJson(json));
+  }
 }
