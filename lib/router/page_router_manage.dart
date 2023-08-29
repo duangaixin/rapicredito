@@ -10,6 +10,7 @@ import 'package:rapicredito/page/login/index.dart';
 import 'package:rapicredito/page/main/app_main_bindings.dart';
 import 'package:rapicredito/page/main/app_main_view.dart';
 import 'package:rapicredito/page/main/mine/client/index.dart';
+import 'package:rapicredito/page/main/mine/setting/index.dart';
 import 'package:rapicredito/page/notfound/not_found_page.dart';
 import 'package:rapicredito/page/permission/index.dart';
 import 'package:rapicredito/page/result/rollover/index.dart';
@@ -17,6 +18,7 @@ import 'package:rapicredito/page/splash/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:get/route_manager.dart';
 import 'package:rapicredito/webview/webview_page.dart';
+
 
 class PageRouterManage {
   static const initial = PageRouterName.permissionPage;
@@ -27,9 +29,9 @@ class PageRouterManage {
         page: () => const PermissionPage(),
         binding: PermissionBinding()),
     GetPage(
-        name: PageRouterName.splashPage,
-        page: () => const SplashPage(),
-        binding: SplashBinding(),
+      name: PageRouterName.splashPage,
+      page: () => const SplashPage(),
+      binding: SplashBinding(),
     ),
     GetPage(
         name: PageRouterName.mainPage,
@@ -79,6 +81,10 @@ class PageRouterManage {
         name: PageRouterName.rolloverPaymentResultPage,
         page: () => const RolloverPaymentResultPage(),
         binding: RolloverPaymentResultBinding()),
+    GetPage(
+        name: PageRouterName.settingPage,
+        page: () => const SettingPage(),
+        binding: SettingBinding()),
     GetPage(
       name: PageRouterName.webViewPage,
       page: () => const WebViewPage(),

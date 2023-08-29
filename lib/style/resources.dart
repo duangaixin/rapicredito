@@ -45,5 +45,9 @@ class Resource {
       'assets/image/other/date_select_dialog.png';
   static const String assetsImageResultTip =
       'assets/image/other/result_tip.png';
+  static const String assetsImagePayTipDialog =
+      'assets/image/other/pay_tip_dialog.png';
+  static const String assetsImageCommitSuccessDialog =
+      'assets/image/other/commit_success_dialog.png';
 
 }

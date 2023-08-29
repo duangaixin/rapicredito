@@ -15,4 +15,5 @@ class PageRouterName {
   static const String rolloverPaymentResultPage = '/rolloverPaymentResultPage';
   static const String webViewPage = '/webViewPage';
   static const String customCameraPage = '/customCameraPage';
+  static const String settingPage = '/settingPage';
 }

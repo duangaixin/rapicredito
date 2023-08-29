@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:rapicredito/get/getx_keep_state_view.dart';
 import 'package:rapicredito/page/main/home/widget/common_app_bar_view.dart';
 import 'package:rapicredito/page/main/mine/index.dart';
 import 'package:rapicredito/page/main/mine/widget/common_setting_click_view.dart';
 import 'package:rapicredito/style/index.dart';
-import 'package:rapicredito/widget/load_container_view.dart';
 import 'package:rapicredito/widget/pull_to_refresh_view.dart';
 
 class MainMinePage extends GetKeepStateView<MainMineCtr> {
@@ -13,22 +11,22 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Obx(() {
-      return LoadContainerView(
-          contentView: PullToRefreshView(
-            ctr.refreshController,
-            onRefresh: ctr.refreshInfo,
-            enablePullUp: false,
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [const MainAppBarView(), headerView, contentView],
-              ),
-            ),
+    return Scaffold(
+      body: PullToRefreshView(
+        ctr.refreshController,
+        onRefresh: ctr.refreshInfo,
+        enablePullUp: false,
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [const MainAppBarView(
+              title: 'RapiCrédito',
+            ), headerView, contentView],
           ),
-          loadState: ctr.state.loadState);
-    }));
+        ),
+      ),
+    );
   }
 
   Widget get headerView => Padding(
@@ -46,7 +44,7 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
                   borderRadius: BorderRadius.circular(37.5),
                   color: const Color(0xffB6EF13)),
             ),
-             Expanded(
+            Expanded(
                 child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -89,14 +87,14 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
               iconHeight: 22.0,
               iconWith: 23.49,
               iconPath: Resource.assetsImageAuthFace,
-              onTap: () {},
+              onTap: ctr.goToSettingPage,
               content: 'Ajuste',
             ),
             CommonSettingClickView(
               iconHeight: 25.0,
               iconWith: 25.0,
               iconPath: Resource.assetsImageAuthFace,
-              onTap: () {},
+              onTap: ctr.goToClientPage,
               content: 'Servicio al Cliente',
             ),
             CommonSettingClickView(

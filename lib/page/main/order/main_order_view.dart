@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/get/getx_keep_state_view.dart';
+import 'package:rapicredito/page/dialog/commit_success_dialog.dart';
 import 'package:rapicredito/page/dialog/date_select_dialog.dart';
 import 'package:rapicredito/page/dialog/message_input_dialog.dart';
+import 'package:rapicredito/page/dialog/pay_dialog.dart';
 import 'package:rapicredito/page/loan/widget/loan_confirm_money_dialog.dart';
 import 'package:rapicredito/page/main/order/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
@@ -28,13 +30,46 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
                   const SizedBox(
                     height: 100.0,
                   ),
-
+                  CustomButton(
+                      text: '设置页面',
+                      onPressed: () {
+                        Get.toNamed(PageRouterName.settingPage);
+                      }),
+                  CustomButton(
+                      text: '客服',
+                      onPressed: () {
+                        Get.toNamed(PageRouterName.clientPage);
+                      }),
                   CustomButton(
                       text: '展期还款成功',
                       onPressed: () {
                         Get.toNamed(PageRouterName.rolloverPaymentResultPage);
                       }),
 
+                  CustomButton(
+                      text: '提交成功弹窗',
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (_) {
+                              return CommitSuccessDialog(
+                                clickConfirm: () {},
+                              );
+                            });
+                      }),
+                  CustomButton(
+                      text: '支付弹窗',
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (_) {
+                              return PayDialog(
+                                clickConfirm: () {},
+                              );
+                            });
+                      }),
                   CustomButton(
                       text: '日期选择弹窗',
                       onPressed: () {
@@ -137,11 +172,7 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
                       onPressed: () {
                         Get.toNamed(PageRouterName.updateAccountPage);
                       }),
-                  CustomButton(
-                      text: '客服',
-                      onPressed: () {
-                        Get.toNamed(PageRouterName.clientPage);
-                      }),
+
                   CustomButton(
                       text: '首贷单金额单期限',
                       onPressed: () {
