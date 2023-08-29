@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/http/http_api.dart';
+import 'package:rapicredito/model/auth_info_bean.dart';
 import 'package:rapicredito/model/config_info_bean.dart';
 import 'package:rapicredito/model/login_info_bean.dart';
 import 'package:rapicredito/model/query_photo_info_bean.dart';
@@ -46,9 +47,9 @@ extension RequestBussiness on HttpRequestManage {
             .toList());
   }
 
-  Future<BaseResponse<String>> postUploadIdCard( param) async {
+  Future<BaseResponse<String>> postUploadIdCard(param) async {
     return await httpRequest.post<String>(HttpApi.apiUploadIdPhoto,
-       options: Options(contentType: Headers.multipartFormDataContentType),
+        options: Options(contentType: Headers.multipartFormDataContentType),
         data: param,
         onTransform: (json) => json['northernMarriageCommunism']);
   }
@@ -58,8 +59,21 @@ extension RequestBussiness on HttpRequestManage {
     return await httpRequest.post<QueryPhotoInfoBean>(HttpApi.apiQueryPhoto,
         options: Options(contentType: Headers.formUrlEncodedContentType),
         data: param,
-        onTransform: (json) =>QueryPhotoInfoBean.fromJson(json));
+        onTransform: (json) => QueryPhotoInfoBean.fromJson(json));
   }
 
+  Future<BaseResponse> postSaveAuthInfoRequest(
+      Map<String, dynamic> param) async {
+    return await httpRequest.post(HttpApi.apiSaveAuthInfo,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        data: param);
+  }
 
+  Future<BaseResponse<AuthInfoBean>> postQueryAuthInfoRequest(
+      Map<String, dynamic> param) async {
+    return await httpRequest.post<AuthInfoBean>(HttpApi.apiQueryAuthInfo,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        data: param,
+        onTransform: (json) => AuthInfoBean.fromJson(json));
+  }
 }

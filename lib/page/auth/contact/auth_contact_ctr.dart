@@ -30,6 +30,12 @@ class AuthContactCtr extends BaseGetCtr {
   }
 
   @override
+  void onReady() {
+    _postQueryAuthPersonRequest();
+    super.onReady();
+  }
+
+  @override
   void onClose() {
     super.onClose();
     phoneOneCtr.dispose();
@@ -102,16 +108,46 @@ class AuthContactCtr extends BaseGetCtr {
 
   Map<String, dynamic> collectContactParam() {
     Map<String, dynamic> param = {};
-    if (_validate()) {
-      param['rainyMonthDiscount'] = state.relationshipOne;
-      param['pureDollFailure'] = phoneOneCtr.text.strRvSpace();
-      param['communistBuddhistZooExtraCellar'] = nameOneCtr.text.trim();
-      param['instantMerchantMidday'] = state.relationshipOne;
-      param['theoreticalAppleFlatLateFriendship'] =
-          phoneTwoCtr.text.strRvSpace();
-      param['quickNonDetermination'] = nameTwoCtr.text.trim();
-    }
+    param['rainyMonthDiscount'] = state.relationshipOne;
+    param['pureDollFailure'] = phoneOneCtr.text.strRvSpace();
+    param['communistBuddhistZooExtraCellar'] = nameOneCtr.text.trim();
+    param['instantMerchantMidday'] = state.relationshipOne;
+    param['theoreticalAppleFlatLateFriendship'] = phoneTwoCtr.text.strRvSpace();
+    param['quickNonDetermination'] = nameTwoCtr.text.trim();
+    param.addAll(getCommonParam());
     return param;
+  }
+
+  void _postQueryAuthPersonRequest() async {
+    Map<String, dynamic> param = getCommonParam();
+    Get.showLoading();
+    var response =
+        await HttpRequestManage.instance.postQueryAuthInfoRequest(param);
+    Get.dismiss();
+    if (response.isSuccess()) {
+      var authInfoBean = response.data;
+
+      ProgressHUD.showText('成功了');
+    } else {
+      var errorMsg = response.message ?? 'error';
+      ProgressHUD.showError(errorMsg);
+    }
+  }
+
+  void postSaveAuthContactRequest() async {
+    KeyboardUtils.unFocus();
+    if (!_validate()) return;
+    Map<String, dynamic> param = collectContactParam();
+    Get.showLoading();
+    var response =
+        await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
+    Get.dismiss();
+    if (response.isSuccess()) {
+      Get.toNamed(PageRouterName.authIdPage);
+    } else {
+      var errorMsg = response.message ?? 'error';
+      ProgressHUD.showError(errorMsg);
+    }
   }
 
   bool _validate() {
@@ -134,11 +170,5 @@ class AuthContactCtr extends BaseGetCtr {
       return false;
     }
     return true;
-  }
-
-  void goToNextPage() async {
-    if (_validate()) {
-      Get.toNamed(PageRouterName.authIdPage);
-    }
   }
 }

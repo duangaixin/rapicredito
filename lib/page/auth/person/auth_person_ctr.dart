@@ -22,6 +22,13 @@ class AuthPersonCtr extends BaseGetCtr {
     emailCtr.addListener(_btnCanClick);
   }
 
+  @override
+  void onReady() {
+    super.onReady();
+    _postQueryAuthPersonRequest();
+  }
+
+
   void _btnCanClick() {
     if (ObjectUtil.isEmptyString(state.income) ||
         ObjectUtil.isEmptyString(state.familyCount) ||
@@ -100,7 +107,40 @@ class AuthPersonCtr extends BaseGetCtr {
     param['sadBirdHopelessHobby'] = emailCtr.text.strRvSpace();
     param['necessarySeasonTechnicalHers'] = state.familyCount;
     param['thesePopCrossCountryside'] = state.educationalLevel;
+    param.addAll(getCommonParam());
     return param;
+  }
+
+  void postSaveAuthPersonRequest() async {
+    KeyboardUtils.unFocus();
+    if (!_validate()) return;
+    Map<String, dynamic> param = collectPersonParam();
+    Get.showLoading();
+    var response =
+        await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
+    Get.dismiss();
+    if (response.isSuccess()) {
+      Get.toNamed(PageRouterName.authContactPage);
+    } else {
+      var errorMsg = response.message ?? 'error';
+      ProgressHUD.showError(errorMsg);
+    }
+  }
+
+  void _postQueryAuthPersonRequest() async {
+    Map<String, dynamic> param = getCommonParam();
+    Get.showLoading();
+    var response =
+        await HttpRequestManage.instance.postQueryAuthInfoRequest(param);
+    Get.dismiss();
+    if (response.isSuccess()) {
+      var authInfoBean=response.data;
+
+      ProgressHUD.showText('成功了');
+    } else {
+      var errorMsg = response.message ?? 'error';
+      ProgressHUD.showError(errorMsg);
+    }
   }
 
   bool _validate() {
@@ -118,12 +158,6 @@ class AuthPersonCtr extends BaseGetCtr {
     }
     return true;
   }
-
-  void goToNextPage() async {
-    if (_validate()) {
-      Get.toNamed(PageRouterName.authContactPage);
-    }
-  }
 }
 
 enum PersonClickType {
@@ -131,5 +165,6 @@ enum PersonClickType {
   familyCount,
   educationalLevel,
   relationOne,
-  relationTwo
+  relationTwo,
+  gender
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/auth/id/index.dart';
+import 'package:rapicredito/page/auth/person/auth_person_ctr.dart';
 import 'package:rapicredito/page/auth/widget/common_auth_agreement_view.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/widget/comon_section_title_view.dart';
@@ -133,7 +134,6 @@ class AuthIdPage extends GetView<AuthIdCtr> {
           Center(
             child: faceCameraView(controller.goToCustomCamera
                 // controller.tackCamera
-
                 ),
           )
         ],
@@ -145,23 +145,29 @@ class AuthIdPage extends GetView<AuthIdCtr> {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 55.0, right: 55.0, top: 26.0),
-            child: CustomColorButton(
-              disableColors: const [
-                Color(0xffF5F6F4),
-                Color(0xffF5F6F4),
-              ],
-              disable: false,
-              colors: const [Color(0xffB8EF17), Color(0xffB8EF17)],
-              height: 46.0,
-              borderRadius: BorderRadius.circular(8.0),
-              btnContent: const Text(
-                'Registrarse',
-                style: TextStyle(
+            child: Obx(() {
+              return CustomColorButton(
+                disableClick: controller.disableClickToast,
+                realClick: controller.postSaveAuthIdRequest,
+                disableColors: const [
+                  Color(0xffF5F6F4),
+                  Color(0xffF5F6F4),
+                ],
+                disable: controller.state.btnDisableClick,
+                colors: const [Color(0xffB8EF17), Color(0xffB8EF17)],
+                height: 46.0,
+                borderRadius: BorderRadius.circular(8.0),
+                btnContent: Text(
+                  'Registrarse',
+                  style: TextStyle(
                     fontSize: 15.0,
-                    color: Color(0xff333333),
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
+                    color: controller.state.btnDisableClick
+                        ? const Color(0xffC4BFBF)
+                        : const Color(0xff333333),
+                  ),
+                ),
+              );
+            }),
           ),
           const Padding(
             padding: EdgeInsets.only(top: 30.0, bottom: 20.0),
@@ -187,32 +193,39 @@ class AuthIdPage extends GetView<AuthIdCtr> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 CustomEditView(
-                  controller: TextEditingController(),
+                  controller: controller.idNumCtr,
                   editTitle: 'Número de documento',
                   hintText: 'Introducir texto',
                 ),
                 CustomEditView(
-                  controller: TextEditingController(),
+                  controller: controller.firstNameCtr,
                   editTitle: 'Nombres',
                   hintText: 'Introducir texto',
                 ),
                 CustomEditView(
-                  controller: TextEditingController(),
+                  controller: controller.secondNameCtr,
                   editTitle: 'Apellidos',
                   hintText: 'Introducir texto',
                 ),
-                CustomSelectView(
-                  editTitle: 'Género',
-                  hintText: 'Por favor elige',
-                  editContent: '',
-                  action: () {},
-                ),
-                CustomSelectView(
-                  editTitle: 'Fecha de nacimiento',
-                  hintText: 'Por favor elige',
-                  editContent: '',
-                  action: () {},
-                )
+                Obx(() {
+                  return CustomSelectView(
+                    editTitle: 'Género',
+                    hintText: 'Por favor elige',
+                    editContent: controller.state.gender,
+                    action: () {
+                      controller
+                          .postAppConfigInfoRequest(PersonClickType.gender);
+                    },
+                  );
+                }),
+                Obx(() {
+                  return CustomSelectView(
+                    editTitle: 'Fecha de nacimiento',
+                    hintText: 'Por favor elige',
+                    editContent: controller.state.birth,
+                    action: controller.showDateDialog,
+                  );
+                }),
               ],
             ),
           )

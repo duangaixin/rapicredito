@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pickers/more_pickers/init_data.dart';
 import 'package:flutter_pickers/more_pickers/route/single_picker_route.dart';
 import 'package:flutter_pickers/style/picker_style.dart';
+import 'package:flutter_pickers/time_picker/model/date_item_model.dart';
+import 'package:flutter_pickers/time_picker/model/date_mode.dart';
+import 'package:flutter_pickers/time_picker/model/pduration.dart';
+import 'package:flutter_pickers/time_picker/model/suffix.dart';
+import 'package:flutter_pickers/time_picker/route/date_picker_route.dart';
 
 class CustomPicker {
   static void showSinglePicker(BuildContext context,
@@ -30,6 +35,55 @@ class CustomPicker {
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
     ));
   }
+
+
+  static void showDatePicker(BuildContext context,
+      {DateMode mode = DateMode.YMD,
+        PDuration? selectDate,
+        PDuration? maxDate,
+        PDuration? minDate,
+        Suffix? suffix,
+        PickerStyle? pickerStyle,
+        DateCallback? onChanged,
+        DateCallback? onConfirm,
+        Function(bool isCancel)? onCancel,
+        bool overlapTabBar = false}) {
+    pickerStyle ??= customizeStyle();
+    pickerStyle.context ??= context;
+    selectDate ??= PDuration.now();
+    suffix ??= Suffix(years: ' year ',month: ' month ',days: ' day ');
+    DateItemModel dateItemModel = DateItemModel.parse(mode);
+    maxDate ??= PDuration(year: 2100);
+    minDate ??= PDuration(year: 1900);
+
+    if ((dateItemModel.day || dateItemModel.year)) {
+      if (intEmpty(selectDate.year)) {
+        selectDate.year = DateTime.now().year;
+      }
+
+      if (intEmpty(maxDate.year)) maxDate.year = 2100;
+      if (intEmpty(minDate.year)) minDate.year = 1900;
+
+      if (dateItemModel.month || dateItemModel.day) {
+        assert(minDate.year! > 1582, 'min Date Year must > 1582');
+      }
+    }
+
+    Navigator.of(context, rootNavigator: overlapTabBar).push(DatePickerRoute(
+      mode: mode,
+      initDate: selectDate,
+      maxDate: maxDate,
+      minDate: minDate,
+      suffix: suffix,
+      pickerStyle: pickerStyle,
+      onChanged: onChanged,
+      onConfirm: onConfirm,
+      onCancel: onCancel,
+      theme: Theme.of(context),
+      barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+    ));
+  }
+
 }
 
 PickerStyle customizeStyle() {

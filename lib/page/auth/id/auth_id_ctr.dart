@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_pickers/time_picker/model/pduration.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,20 +14,41 @@ import 'package:rapicredito/get/getx_storage_service.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/page/auth/id/index.dart';
+import 'package:rapicredito/page/auth/person/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/compress_util.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
+import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/utils/permission_util.dart';
 import 'package:rapicredito/utils/screen_util.dart';
+import 'package:rapicredito/utils/string_ext.dart';
+import 'package:rapicredito/widget/custom_picker.dart';
 import 'package:rapicredito/widget/progress_hud_view.dart';
 
 class AuthIdCtr extends BaseGetCtr {
   final state = AuthIdState();
+  TextEditingController idNumCtr = TextEditingController();
+
+  //姓
+  TextEditingController firstNameCtr = TextEditingController();
+
+  //名
+  TextEditingController secondNameCtr = TextEditingController();
 
   @override
   void onInit() {
     super.onInit();
     state.imageWidth = ScreenUtil.getScreenH(Get.context!) - 32 - 10 - 1;
+    idNumCtr.addListener(_btnCanClick);
+    firstNameCtr.addListener(_btnCanClick);
+    secondNameCtr.addListener(_btnCanClick);
+  }
+
+  @override
+  void onReady() {
+   _postQueryAuthPersonRequest();
+   _postQueryPhotoInfo();
+    super.onReady();
   }
 
   void tackCamera({bool isFront = true}) {
@@ -80,8 +103,8 @@ class AuthIdCtr extends BaseGetCtr {
     if (response.isSuccess()) {
       var photoBean = response.data;
       var frontUrl = photoBean?.tastelessAmericanPlateCattle ?? '';
-      if (state.idBackUrl != frontUrl) {
-        state.idBackUrl = frontUrl;
+      if (state.idFrontUrl != frontUrl) {
+        state.idFrontUrl = frontUrl;
       }
       var backUrl = photoBean?.hugeNeed ?? '';
       if (state.idBackUrl != backUrl) {
@@ -97,5 +120,136 @@ class AuthIdCtr extends BaseGetCtr {
     List<CameraDescription> cameraList = await availableCameras();
     var result = await Get.toNamed(PageRouterName.customCameraPage,
         arguments: {'cameraList': cameraList});
+  }
+
+  void showDateDialog() {
+    KeyboardUtils.unFocus();
+    dynamic selectData;
+    if (!ObjectUtil.isEmptyString(state.birth)) {
+      selectData = PDuration(
+          year: state.birthYear, month: state.birthMonth, day: state.birthDay);
+    }
+
+    CustomPicker.showDatePicker(Get.context!, onConfirm: (PDuration res) {
+      state.birthDay = res.day;
+      state.birthMonth = res.month;
+      state.birthYear = res.year;
+      state.birth = '${res.year}-${res.month}-${res.day}';
+      _btnCanClick();
+    }, selectDate: selectData);
+  }
+
+  void _showSelectDialog(List netList, PersonClickType clickType) {
+    dynamic selectData;
+    if (clickType == PersonClickType.gender) {
+      selectData = state.gender;
+    }
+    CustomPicker.showSinglePicker(Get.context!, data: netList,
+        onConfirm: (data, p) {
+      selectData = data;
+      if (clickType == PersonClickType.gender) {
+        state.gender = data;
+      }
+      _btnCanClick();
+    }, selectData: selectData);
+  }
+
+  void postAppConfigInfoRequest(PersonClickType clickType) async {
+    KeyboardUtils.unFocus();
+    var param = <String, dynamic>{};
+    var typeStr = '';
+    if (clickType == PersonClickType.gender) {
+      typeStr = 'sex';
+    }
+    param['everydayMapleChallengingAirline'] = typeStr;
+    param.addAll(getCommonParam());
+    Get.showLoading();
+    var response = await HttpRequestManage.instance.postAppConfigInfo(param);
+    Get.dismiss();
+    if (response.isSuccess()) {
+      var netList = response.data ?? [];
+      if (!ObjectUtil.isEmptyList(netList)) {
+        var showList = netList.map((e) => e.latestCandle).toList();
+        if (!ObjectUtil.isEmptyList(showList)) {
+          _showSelectDialog(showList, clickType);
+        }
+      }
+    } else {
+      var errorMsg = response.message ?? 'error';
+      ProgressHUD.showError(errorMsg);
+    }
+  }
+
+  void disableClickToast() {
+    if (state.btnDisableClick) {
+      ProgressHUD.showInfo(
+          'Please fill in all information completely——Por favor complete toda la información completamente');
+    }
+  }
+
+  void _btnCanClick() {
+    if (ObjectUtil.isEmptyString(idNumCtr.text.strRvSpace()) ||
+        ObjectUtil.isEmptyString(firstNameCtr.text.trim()) ||
+        ObjectUtil.isEmptyString(secondNameCtr.text.trim()) ||
+        ObjectUtil.isEmptyString(state.gender) ||
+        ObjectUtil.isEmptyString(state.birth)) {
+      state.btnDisableClick = true;
+    } else {
+      state.btnDisableClick = false;
+    }
+  }
+
+  Map<String, dynamic> collectIdParam() {
+    Map<String, dynamic> param = {};
+    //身份证号 undividedMay
+    param['straightLoadSweetMemberRudeFlu'] = idNumCtr.text.strRvSpace();
+    //姓
+    param['puzzledConditionFamiliarUnion'] = firstNameCtr.text.trim();
+    //名
+    param['pacificCheapMineralCrazyLamb'] = secondNameCtr.text.trim();
+    //性别
+    param['fairJarExitPair'] = state.gender;
+    //生日
+    param['juicyGayPresentation'] = state.birth;
+    param.addAll(getCommonParam());
+    return param;
+  }
+
+  void _postQueryAuthPersonRequest() async {
+    Map<String, dynamic> param = getCommonParam();
+    Get.showLoading();
+    var response =
+        await HttpRequestManage.instance.postQueryAuthInfoRequest(param);
+    Get.dismiss();
+    if (response.isSuccess()) {
+      var authInfoBean = response.data;
+
+      ProgressHUD.showText('成功了');
+    } else {
+      var errorMsg = response.message ?? 'error';
+      ProgressHUD.showError(errorMsg);
+    }
+  }
+
+  void postSaveAuthIdRequest() async {
+    KeyboardUtils.unFocus();
+    Map<String, dynamic> param = collectIdParam();
+    Get.showLoading();
+    var response =
+        await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
+    Get.dismiss();
+    if (response.isSuccess()) {
+    } else {
+      var errorMsg = response.message ?? 'error';
+      ProgressHUD.showError(errorMsg);
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    idNumCtr.dispose();
+    firstNameCtr.dispose();
+    secondNameCtr.dispose();
   }
 }

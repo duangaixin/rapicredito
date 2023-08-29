@@ -124,7 +124,7 @@ class AuthContactPage extends GetView<AuthContactCtr> {
                   Color(0xffF5F6F4),
                 ],
                 disable: controller.state.btnDisableClick,
-                realClick: controller.goToNextPage,
+                realClick: controller.postSaveAuthContactRequest,
                 disableClick: controller.disableClickToast,
                 colors: const [Color(0xffB8EF17), Color(0xffB8EF17)],
                 height: 46.0,
