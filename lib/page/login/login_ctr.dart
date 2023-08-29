@@ -5,6 +5,7 @@ import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/get/getx_extension.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
+import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/page/login/index.dart';
@@ -19,21 +20,21 @@ class LoginCtr extends BaseGetCtr {
   TextEditingController phoneCtr = TextEditingController();
   TextEditingController codeCtr = TextEditingController();
   StreamSubscription? _subscription;
-  bool isRootPage=false;
+  bool isRootPage = false;
+
   @override
   void onInit() {
     super.onInit();
-   var param= Get.arguments;
-   if(param!=null&&param is Map){
-      if(!ObjectUtil.isEmptyMap(param)){
-        if(param.containsKey(AppConstants.isRootPage)){
-          isRootPage=param[AppConstants.isRootPage];
+    var param = Get.arguments;
+    if (param != null && param is Map) {
+      if (!ObjectUtil.isEmptyMap(param)) {
+        if (param.containsKey(AppConstants.isRootPage)) {
+          isRootPage = param[AppConstants.isRootPage];
         }
       }
-   }
+    }
     state.isInitClick = true;
     codeCtr.addListener(_btnCanClick);
-
   }
 
   void _btnCanClick() {
@@ -56,13 +57,11 @@ class LoginCtr extends BaseGetCtr {
     param.addAll(getCommonParam());
     Get.showLoading();
     var response = await HttpRequestManage.instance.postSendCodeRequest(param);
-    Get.showLoading();
+    Get.dismiss();
     if (response.isSuccess()) {
       var codeStr = response.data ?? '';
-      ProgressHUD.showSuccess(codeStr);
     } else {
-      var errorMsg = response.message ?? 'error';
-      ProgressHUD.showError(errorMsg);
+      NetException.toastException(response);
     }
   }
 
@@ -94,15 +93,13 @@ class LoginCtr extends BaseGetCtr {
       var testFirstRegister =
           loginInfoBean?.delightedGooseFacialUnmarriedHamburger ?? 0;
       await UserStore.to.setLoginInfo(token, userId);
-
       var mainHomeCtr = Get.find<MainHomeCtr>();
       mainHomeCtr.refreshInfo();
-      if(isRootPage){
-       Get.toNamed(PageRouterName.mainPage);
-      }else{
+      if (isRootPage) {
+        Get.toNamed(PageRouterName.mainPage);
+      } else {
         Get.back();
       }
-
     } else {
       var errorMsg = response.message ?? 'error';
       ProgressHUD.showError(errorMsg);

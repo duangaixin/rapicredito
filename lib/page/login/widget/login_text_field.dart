@@ -26,7 +26,7 @@ class LoginTextField extends StatefulWidget {
 }
 
 class LoginTextFieldState extends State<LoginTextField> {
-  bool _isShowPwd = false;
+  final bool _isShowPwd = false;
   bool _isHideDelete = false;
 
   @override
@@ -82,20 +82,12 @@ class LoginTextFieldState extends State<LoginTextField> {
 
     Widget clear = GestureDetector(
       behavior: HitTestBehavior.opaque,
-      child: Container(
-        height: 14.0,
-        width: 14.0,
-        margin: const EdgeInsetsDirectional.only(start: 12.0),
-        decoration: BoxDecoration(
-          color: const Color(0xffDEDEDE),
-          borderRadius: BorderRadiusDirectional.circular(8.0),
-        ),
-        child: const CustomImageView(
-          Resource.assetsImageLoginClear,
-          imageType: ImageType.assets,
-          width: 19.0,
-          height: 20.0,
-        ),
+      child: const CustomImageView(
+        Resource.assetsImageLoginClear,
+        imageType: ImageType.assets,
+        margin: EdgeInsetsDirectional.only(start: 12.0),
+        width: 19.0,
+        height: 20.0,
       ),
       onTap: () => widget.controller.clear(),
     );

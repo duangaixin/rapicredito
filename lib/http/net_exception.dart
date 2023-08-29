@@ -1,42 +1,47 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:rapicredito/net/base_response.dart';
+import 'package:rapicredito/widget/progress_hud_view.dart';
 
 class NetException {
   static void toastException(dynamic error) async {
-    var errorMsg = handleException(error) ?? '默认值';
+    var errorMsg = handleException(error) ?? 'Galat tak diketahui';
+    ProgressHUD.showError(errorMsg);
   }
 
   static String? handleException(dynamic response) {
-    if (response.code != null) {
-      return response.errorMessage;
-    } else {
-      var error = response.errorDio;
-      if (error is DioException) {
-        var e = error.error;
-        if (e is SocketException) {
-          return '网络异常';
-        }
-        if (e is HttpException) {
-          return '网络异常';
-        } else if (e is FormatException) {
-          return '数据格式错误';
-        }
-        switch (error.type) {
-          case DioExceptionType.sendTimeout:
-          case DioExceptionType.receiveTimeout:
-          case DioExceptionType.connectionTimeout:
-            return '连接服务器超时';
-          case DioExceptionType.cancel:
-            return '连接取消';
-          case DioExceptionType.badResponse:
-            return '无效请求';
-          case DioExceptionType.unknown:
-            return '未知错误';
-          default:
-            return '未知错误';
+    if (response is BaseResponse) {
+      if (response.code != null) {
+        return response.message;
+      } else {
+        var error = response.errorDio;
+        if (error is DioException) {
+          var e = error.error;
+          if (e is SocketException) {
+            return 'Kelainan jaringan';
+          }
+          if (e is HttpException) {
+            return 'Kelainan jaringan';
+          } else if (e is FormatException) {
+            return 'Pengecualian dalam format data';
+          }
+          switch (error.type) {
+            case DioExceptionType.sendTimeout:
+            case DioExceptionType.receiveTimeout:
+            case DioExceptionType.connectionTimeout:
+              return 'Waktu koneksi habis';
+            case DioExceptionType.cancel:
+              return 'Koneksi dibatalkan';
+            case DioExceptionType.badResponse:
+              return 'Permintaan tidak valid';
+            case DioExceptionType.unknown:
+              return 'Galat tak diketahui';
+            default:
+              return 'Galat tak diketahui';
+          }
         }
       }
     }
-    return '未知错误默认值';
+    return 'Galat tak diketahui';
   }
 }

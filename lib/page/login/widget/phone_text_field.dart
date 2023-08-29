@@ -84,20 +84,12 @@ class PhoneTextFieldState extends State<PhoneTextField> {
 
     Widget clear = GestureDetector(
       behavior: HitTestBehavior.opaque,
-      child: Container(
-        height: 14.0,
-        width: 14.0,
-        margin: const EdgeInsets.only(left: 12.0),
-        decoration: BoxDecoration(
-          color: const Color(0xffDEDEDE),
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        child: const CustomImageView(
-          Resource.assetsImageLoginClear,
-          imageType: ImageType.assets,
-          width: 19.0,
-          height: 20.0,
-        ),
+      child: const CustomImageView(
+        Resource.assetsImageLoginClear,
+        imageType: ImageType.assets,
+        margin: EdgeInsets.only(left: 12.0),
+        width: 19.0,
+        height: 20.0,
       ),
       onTap: () => widget.controller.clear(),
     );
@@ -108,9 +100,9 @@ class PhoneTextFieldState extends State<PhoneTextField> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-             Row(
+            Row(
               mainAxisSize: MainAxisSize.min,
-              children: [
+              children: const [
                 CustomImageView(
                   Resource.assetsImageMainOne,
                   imageType: ImageType.assets,

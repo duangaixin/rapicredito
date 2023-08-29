@@ -4,6 +4,7 @@ import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/get/getx_extension.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
+import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/page/auth/contact/auth_contact_state.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
@@ -76,10 +77,32 @@ class AuthContactCtr extends BaseGetCtr {
     }, selectData: selectData);
   }
 
+  void disableClickToast() {
+    if (state.btnDisableClick) {
+      ProgressHUD.showInfo(
+          'Please fill in all information completely——Por favor complete toda la información completamente');
+    }
+  }
+
+  Map<String, dynamic> collectContactParam() {
+    Map<String, dynamic> param = {};
+    param['rainyMonthDiscount'] = state.relationshipOne;
+    param['pureDollFailure'] = phoneOneCtr.text.strRvSpace();
+    param['communistBuddhistZooExtraCellar'] = nameOneCtr.text.trim();
+    param['instantMerchantMidday'] = state.relationshipTwo;
+    param['theoreticalAppleFlatLateFriendship'] = phoneTwoCtr.text.strRvSpace();
+    param['quickNonDetermination'] = nameTwoCtr.text.trim();
+    param.addAll(getCommonParam());
+    return param;
+  }
+
   void postAppConfigInfoRequest(PersonClickType clickType) async {
     KeyboardUtils.unFocus();
     var param = <String, dynamic>{};
-    var typeStr = 'relationship';
+    var typeStr = '';
+    if (clickType == PersonClickType.relationTwo||clickType==PersonClickType.relationOne) {
+      typeStr = 'relationship';
+    }
     param['everydayMapleChallengingAirline'] = typeStr;
     param.addAll(getCommonParam());
     Get.showLoading();
@@ -94,28 +117,8 @@ class AuthContactCtr extends BaseGetCtr {
         }
       }
     } else {
-      var errorMsg = response.message ?? 'error';
-      ProgressHUD.showError(errorMsg);
+      NetException.toastException(response);
     }
-  }
-
-  void disableClickToast() {
-    if (state.btnDisableClick) {
-      ProgressHUD.showInfo(
-          'Please fill in all information completely——Por favor complete toda la información completamente');
-    }
-  }
-
-  Map<String, dynamic> collectContactParam() {
-    Map<String, dynamic> param = {};
-    param['rainyMonthDiscount'] = state.relationshipOne;
-    param['pureDollFailure'] = phoneOneCtr.text.strRvSpace();
-    param['communistBuddhistZooExtraCellar'] = nameOneCtr.text.trim();
-    param['instantMerchantMidday'] = state.relationshipOne;
-    param['theoreticalAppleFlatLateFriendship'] = phoneTwoCtr.text.strRvSpace();
-    param['quickNonDetermination'] = nameTwoCtr.text.trim();
-    param.addAll(getCommonParam());
-    return param;
   }
 
   void _postQueryAuthPersonRequest() async {
@@ -126,11 +129,15 @@ class AuthContactCtr extends BaseGetCtr {
     Get.dismiss();
     if (response.isSuccess()) {
       var authInfoBean = response.data;
-
-      ProgressHUD.showText('成功了');
+      state.relationshipOne=authInfoBean?.rainyMonthDiscount??'';
+      phoneOneCtr.text=authInfoBean?.pureDollFailure??'';
+      nameOneCtr.text=authInfoBean?.communistBuddhistZooExtraCellar??'';
+      state.relationshipOne=authInfoBean?.instantMerchantMidday??'';
+      phoneTwoCtr.text=authInfoBean?.theoreticalAppleFlatLateFriendship??'';
+      nameTwoCtr.text=authInfoBean?.quickNonDetermination??'';
+      _btnCanClick();
     } else {
-      var errorMsg = response.message ?? 'error';
-      ProgressHUD.showError(errorMsg);
+      NetException.toastException(response);
     }
   }
 
@@ -145,8 +152,7 @@ class AuthContactCtr extends BaseGetCtr {
     if (response.isSuccess()) {
       Get.toNamed(PageRouterName.authIdPage);
     } else {
-      var errorMsg = response.message ?? 'error';
-      ProgressHUD.showError(errorMsg);
+      NetException.toastException(response);
     }
   }
 

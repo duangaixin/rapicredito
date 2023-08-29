@@ -120,25 +120,17 @@ class CustomEditViewState extends State<CustomEditView> {
     Widget rightView = _isHideDelete || !widget.enableEdit
         ? const SizedBox.shrink()
         : widget.rightWidget ??
-        GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          child: Container(
-            height: 14.0,
-            width: 14.0,
-            margin: const EdgeInsets.only(left: 12.0),
-            decoration: BoxDecoration(
-              color: const Color(0xffDEDEDE),
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            child: const CustomImageView(
-              Resource.assetsImageLoginClear,
-              imageType: ImageType.assets,
-              width: 19.0,
-              height: 20.0,
-            ),
-          ),
-          onTap: () => widget.controller.clear(),
-        );
+            GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              child: const CustomImageView(
+                Resource.assetsImageLoginClear,
+                imageType: ImageType.assets,
+                margin: EdgeInsets.only(left: 12.0),
+                width: 19.0,
+                height: 20.0,
+              ),
+              onTap: () => widget.controller.clear(),
+            );
     Widget line = Container(
       height: 0.5,
       color: ObjectUtil.isEmptyString(widget.errorText)

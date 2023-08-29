@@ -12,6 +12,7 @@ import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/get/getx_extension.dart';
 import 'package:rapicredito/get/getx_storage_service.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
+import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/page/auth/id/index.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
@@ -46,8 +47,8 @@ class AuthIdCtr extends BaseGetCtr {
 
   @override
   void onReady() {
-   _postQueryAuthPersonRequest();
-   _postQueryPhotoInfo();
+    _postQueryAuthPersonRequest();
+    _postQueryPhotoInfo();
     super.onReady();
   }
 
@@ -154,32 +155,6 @@ class AuthIdCtr extends BaseGetCtr {
     }, selectData: selectData);
   }
 
-  void postAppConfigInfoRequest(PersonClickType clickType) async {
-    KeyboardUtils.unFocus();
-    var param = <String, dynamic>{};
-    var typeStr = '';
-    if (clickType == PersonClickType.gender) {
-      typeStr = 'sex';
-    }
-    param['everydayMapleChallengingAirline'] = typeStr;
-    param.addAll(getCommonParam());
-    Get.showLoading();
-    var response = await HttpRequestManage.instance.postAppConfigInfo(param);
-    Get.dismiss();
-    if (response.isSuccess()) {
-      var netList = response.data ?? [];
-      if (!ObjectUtil.isEmptyList(netList)) {
-        var showList = netList.map((e) => e.latestCandle).toList();
-        if (!ObjectUtil.isEmptyList(showList)) {
-          _showSelectDialog(showList, clickType);
-        }
-      }
-    } else {
-      var errorMsg = response.message ?? 'error';
-      ProgressHUD.showError(errorMsg);
-    }
-  }
-
   void disableClickToast() {
     if (state.btnDisableClick) {
       ProgressHUD.showInfo(
@@ -215,6 +190,31 @@ class AuthIdCtr extends BaseGetCtr {
     return param;
   }
 
+  void postAppConfigInfoRequest(PersonClickType clickType) async {
+    KeyboardUtils.unFocus();
+    var param = <String, dynamic>{};
+    var typeStr = '';
+    if (clickType == PersonClickType.gender) {
+      typeStr = 'sex';
+    }
+    param['everydayMapleChallengingAirline'] = typeStr;
+    param.addAll(getCommonParam());
+    Get.showLoading();
+    var response = await HttpRequestManage.instance.postAppConfigInfo(param);
+    Get.dismiss();
+    if (response.isSuccess()) {
+      var netList = response.data ?? [];
+      if (!ObjectUtil.isEmptyList(netList)) {
+        var showList = netList.map((e) => e.latestCandle).toList();
+        if (!ObjectUtil.isEmptyList(showList)) {
+          _showSelectDialog(showList, clickType);
+        }
+      }
+    } else {
+      NetException.toastException(response);
+    }
+  }
+
   void _postQueryAuthPersonRequest() async {
     Map<String, dynamic> param = getCommonParam();
     Get.showLoading();
@@ -226,8 +226,7 @@ class AuthIdCtr extends BaseGetCtr {
 
       ProgressHUD.showText('成功了');
     } else {
-      var errorMsg = response.message ?? 'error';
-      ProgressHUD.showError(errorMsg);
+      NetException.toastException(response);
     }
   }
 
@@ -240,8 +239,7 @@ class AuthIdCtr extends BaseGetCtr {
     Get.dismiss();
     if (response.isSuccess()) {
     } else {
-      var errorMsg = response.message ?? 'error';
-      ProgressHUD.showError(errorMsg);
+      NetException.toastException(response);
     }
   }
 
