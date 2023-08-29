@@ -73,7 +73,7 @@ class ClassicalErrorView extends StatelessWidget {
                   size: 70, color: Color(0xFFB8C0D4)),
               Padding(
                   padding: const EdgeInsets.only(top: 10),
-                  child: Text(errorTip ?? '亲的网络有点问题~',
+                  child: Text(errorTip ?? 'error',
                       style: const TextStyle(
                           fontSize: 12.0, color: Color(0xFFB8C0D4)))),
               const Padding(padding: EdgeInsets.only(bottom: 10)),
@@ -99,7 +99,7 @@ class ClassicalEmptyView extends StatelessWidget {
                   size: 70, color: Colors.grey[300]),
               Padding(
                   padding: const EdgeInsets.only(top: 10),
-                  child: Text(emptyTip ?? '暂无数据',
+                  child: Text(emptyTip ?? 'empty data',
                       style: const TextStyle(
                           fontSize: 12.0, color: Color(0xFFB8C0D4))))
             ]),
@@ -115,7 +115,7 @@ class ClassicalLoadingView extends StatelessWidget {
           CupertinoActivityIndicator(radius: 17.0),
           Padding(
               padding: EdgeInsets.only(top: 15),
-              child: Text('加载中', style: TextStyle(fontSize: 14)))
+              child: Text('loading...', style: TextStyle(fontSize: 14)))
         ]),
       );
 }
