@@ -37,7 +37,7 @@ class AuthInfoBean extends Object {
   String? similarExperimentSpecialArtist;
 
   @JsonKey(name: 'theoreticalAppleFlatLateFriendship')
-  String theoreticalAppleFlatLateFriendship;
+  String? theoreticalAppleFlatLateFriendship;
 
   @JsonKey(name: 'exactGlassReservation')
   String? exactGlassReservation;

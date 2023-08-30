@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rapicredito/page/account/add/widget/add_bank_view.dart';
-import 'package:rapicredito/page/account/add/widget/add_wallet_view.dart';
+import 'package:rapicredito/page/account/widget/bank_view.dart';
+import 'package:rapicredito/page/account/widget/wallet_view.dart';
 import 'package:rapicredito/page/auth/widget/common_auth_agreement_view.dart';
-import 'package:rapicredito/page/account/add/index.dart';
+import 'package:rapicredito/page/account/index.dart';
 import 'package:rapicredito/widget/comon_section_title_view.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
 
-class AddAccountPage extends GetView<AddAccountCtr> {
-  const AddAccountPage({Key? key}) : super(key: key);
+class AccountPage extends GetView<AccountCtr> {
+  const AccountPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,29 +21,32 @@ class AddAccountPage extends GetView<AddAccountCtr> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             children: [
+              tipView,
               selectView,
               Obx(() {
                 return Visibility(
                     visible: controller.state.accountTypeSelectIndex == 0,
-                    child: const AddWalletView());
+                    child: const WalletView());
               }),
               Obx(() {
                 return Visibility(
                     visible: controller.state.accountTypeSelectIndex == 1,
-                    child: const AddBankView());
+                    child: const BankView());
               }),
-              const Padding(
-                padding: EdgeInsets.only(bottom: 30.0, top: 30.0),
-                child: CommonAuthAgreeView(),
-              )
+              Visibility(
+                  visible: !controller.state.isFromChange,
+                  child: const Padding(
+                    padding: EdgeInsets.only(bottom: 30.0, top: 30.0),
+                    child: CommonAuthAgreeView(),
+                  ))
             ],
           ),
         ));
   }
 
-  Widget get tipView => const Visibility(
-      visible: true,
-      child: Padding(
+  Widget get tipView => Visibility(
+      visible: controller.state.isFromChange,
+      child: const Padding(
         padding: EdgeInsets.only(top: 20.0, left: 16.0, right: 16.0),
         child: Text(
           'Por favor, rellene la información correcta de cobro para asegurarse de que el préstamo se puede conceder sin problemas a su cuenta.',

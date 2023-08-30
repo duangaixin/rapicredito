@@ -5,16 +5,19 @@ import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/get/getx_extension.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
+import 'package:rapicredito/model/config_info_bean.dart';
 import 'package:rapicredito/model/key_value_bean.dart';
-import 'package:rapicredito/page/account/add/index.dart';
-import 'package:rapicredito/page/account/change/index.dart';
+import 'package:rapicredito/page/account/index.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/object_util.dart';
+import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_picker.dart';
+import 'package:rapicredito/widget/progress_hud_view.dart';
 
-class AddAccountCtr extends BaseGetCtr {
-  final state = AddAccountState();
+
+class AccountCtr extends BaseGetCtr {
+  final state = AccountState();
   TextEditingController walletAccountCtr = TextEditingController();
   TextEditingController walletAccountConfirmCtr = TextEditingController();
 
@@ -24,6 +27,13 @@ class AddAccountCtr extends BaseGetCtr {
   @override
   void onInit() {
     super.onInit();
+    if (state.walletSelectIndex == 0) {
+      walletAccountCtr.addListener(_walletBtnCanClick);
+      walletAccountConfirmCtr.addListener(_walletBtnCanClick);
+    } else {
+      bankAccountCtr.addListener(_walletBtnCanClick);
+      bankAccountConfirmCtr.addListener(_walletBtnCanClick);
+    }
   }
 
   @override
@@ -32,13 +42,21 @@ class AddAccountCtr extends BaseGetCtr {
     super.onReady();
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
   void clickWalletItemView(int index) {
     state.walletSelectIndex = index;
+  }
+  void disableWalletClickToast() {
+    if (state.walletBtnDisableClick) {
+      ProgressHUD.showInfo(
+          'Please fill in all information completely——Por favor complete toda la información completamente');
+    }
+  }
+
+  void disableBankClickToast() {
+    if (state.bankBtnDisableClick) {
+      ProgressHUD.showInfo(
+          'Please fill in all information completely——Por favor complete toda la información completamente');
+    }
   }
 
   void showSelectBankDialog() {
@@ -53,6 +71,10 @@ class AddAccountCtr extends BaseGetCtr {
           state.bankType = '';
           bankAccountCtr.text = '';
           bankAccountConfirmCtr.text = '';
+        }else if(position==1){
+           state.walletSelectIndex=0;
+           walletAccountCtr.text='';
+           walletAccountConfirmCtr.text='';
         }
       }
     });
@@ -69,7 +91,6 @@ class AddAccountCtr extends BaseGetCtr {
     } else if (clickType == AppConfigClickType.collectionType) {
       typeStr = 'collectionType';
     }
-
     param['everydayMapleChallengingAirline'] = typeStr;
     param.addAll(getCommonParam());
     Get.showLoading();
@@ -79,11 +100,13 @@ class AddAccountCtr extends BaseGetCtr {
       var netList = response.data ?? [];
       if (!ObjectUtil.isEmptyList(netList)) {
         if (clickType == AppConfigClickType.collectionType) {
-          state.originWalletList.addAll(netList);
-          for (int i = 0; i < state.originWalletList.length; i++) {
-            var bean = state.originWalletList[i];
+          state.originAccountList
+            ..clear()
+            ..addAll(netList);
+          state.walletList.clear();
+          for (int i = 0; i < state.originAccountList.length; i++) {
+            var bean = state.originAccountList[i];
             var type = bean.humanExpensiveBraveryHarmfulPhoto ?? '';
-
             if (type != '1') {
               var key = bean.latestCandle ?? '';
               var value = bean.northernMarriageCommunism ?? '';
@@ -91,13 +114,24 @@ class AddAccountCtr extends BaseGetCtr {
               state.walletList.add(keyValueBean);
             }
           }
-        }else{
+        } else if (clickType == AppConfigClickType.bankNameList) {
+          state.originBankNameList
+            ..clear()
+            ..addAll(netList);
+
+          var showList = netList.map((e) => e.latestCandle).toList();
+          if (!ObjectUtil.isEmptyList(showList)) {
+            _showSelectDialog(showList, clickType);
+          }
+        } else if (clickType == AppConfigClickType.bankAccountType) {
+          state.originBankTypeList
+            ..clear()
+            ..addAll(netList);
           var showList = netList.map((e) => e.latestCandle).toList();
           if (!ObjectUtil.isEmptyList(showList)) {
             _showSelectDialog(showList, clickType);
           }
         }
-
       }
     } else {
       NetException.toastException(response);
@@ -110,6 +144,20 @@ class AddAccountCtr extends BaseGetCtr {
     var bankName = '';
     var bankAccountNumber = '';
     var collectionType = '';
+
+    ///钱包
+    if (state.accountTypeSelectIndex == 0) {
+      var walletName = state.walletList[state.walletSelectIndex].key ?? '';
+
+      collectionType = _getWalletCollectionType(walletName);
+      bankAccountNumber = walletAccountConfirmCtr.text.strRvSpace();
+    } else if (state.accountTypeSelectIndex == 1) {
+      ///银行卡
+      collectionType = _getBankCollectionType();
+      bankName = _getCode(state.originBankNameList, state.bankName);
+      bankAccountType = _getCode(state.originBankTypeList, state.bankType);
+      bankAccountNumber = bankAccountConfirmCtr.text.strRvSpace();
+    }
 
     ///1 2 collectionType
     param['swissEnoughSaying'] = collectionType;
@@ -157,19 +205,73 @@ class AddAccountCtr extends BaseGetCtr {
       if (clickType == AppConfigClickType.bankAccountType) {
         state.bankType = data;
       }
-
-      // else if (clickType == AppConfigClickType.collectionType) {
-      //   state.collectionTypeValue = data;
-      //   if (!ObjectUtil.isEmptyList(state.originWalletList)) {
-      //     for (int i = 0; i < state.originWalletList.length; i++) {
-      //       var bean = state.originWalletList[i];
-      //       if (bean.latestCandle == state.collectionTypeValue) {
-      //         state.collectionTypeCode = bean.humanExpensiveBraveryHarmfulPhoto ?? '';
-      //         return;
-      //       }
-      //     }
-      //   }
-      // }
+      _bankBtnCanClick();
     }, selectData: selectData);
+  }
+
+  String _getWalletCollectionType(String key) {
+    if (!ObjectUtil.isEmptyList(state.originAccountList)) {
+      for (int i = 0; i < state.originAccountList.length; i++) {
+        var bean = state.originAccountList[i];
+        if (bean.latestCandle == key) {
+          return bean.humanExpensiveBraveryHarmfulPhoto ?? '';
+        }
+      }
+    }
+    return '';
+  }
+
+  String _getBankCollectionType() {
+    if (!ObjectUtil.isEmptyList(state.originAccountList)) {
+      for (int i = 0; i < state.originAccountList.length; i++) {
+        var bean = state.originAccountList[i];
+        var type = bean.humanExpensiveBraveryHarmfulPhoto ?? '';
+        if (type == '1') {
+          return bean.humanExpensiveBraveryHarmfulPhoto ?? '';
+        }
+      }
+    }
+    return '';
+  }
+
+  String _getCode(List<ConfigInfoBean> dataSource, String value) {
+    if (!ObjectUtil.isEmptyList(dataSource)) {
+      for (int i = 0; i < dataSource.length; i++) {
+        var bean = dataSource[i];
+        if (bean.latestCandle == value) {
+          return bean.humanExpensiveBraveryHarmfulPhoto ?? '';
+        }
+      }
+    }
+    return '';
+  }
+
+  void _walletBtnCanClick() {
+    if (ObjectUtil.isEmptyString(walletAccountCtr.text.strRvSpace()) ||
+        ObjectUtil.isEmptyString(walletAccountConfirmCtr.text.strRvSpace())) {
+      state.walletBtnDisableClick = true;
+    } else {
+      state.walletBtnDisableClick = false;
+    }
+  }
+
+  void _bankBtnCanClick() {
+    if (ObjectUtil.isEmptyString(bankAccountCtr.text.strRvSpace()) ||
+        ObjectUtil.isEmptyString(bankAccountConfirmCtr.text.strRvSpace()) ||
+        ObjectUtil.isEmptyString(state.bankType) ||
+        ObjectUtil.isEmptyString(state.bankName)) {
+      state.bankBtnDisableClick = true;
+    } else {
+      state.bankBtnDisableClick = false;
+    }
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    walletAccountCtr.dispose();
+    walletAccountConfirmCtr.dispose();
+    bankAccountConfirmCtr.dispose();
+    bankAccountCtr.dispose();
   }
 }

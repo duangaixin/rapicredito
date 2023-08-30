@@ -129,7 +129,7 @@ class AuthIdCtr extends BaseGetCtr {
     }
   }
 
-  Map<String, dynamic> collectIdParam() {
+  Map<String, dynamic> _collectIdParam() {
     Map<String, dynamic> param = {};
     //身份证号 undividedMay
     param['undividedMay'] = idNumCtr.text.strRvSpace();
@@ -199,7 +199,7 @@ class AuthIdCtr extends BaseGetCtr {
 
   void postSaveAuthIdRequest() async {
     KeyboardUtils.unFocus();
-    Map<String, dynamic> param = collectIdParam();
+    Map<String, dynamic> param = _collectIdParam();
     Get.showLoading();
     var response =
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);

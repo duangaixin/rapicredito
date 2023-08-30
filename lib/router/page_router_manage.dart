@@ -1,6 +1,5 @@
 import 'package:rapicredito/get/getx_router_auth.dart';
-import 'package:rapicredito/page/account/add/index.dart';
-import 'package:rapicredito/page/account/change/index.dart';
+import 'package:rapicredito/page/account/index.dart';
 import 'package:rapicredito/page/auth/contact/index.dart';
 import 'package:rapicredito/page/auth/id/index.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
@@ -18,7 +17,6 @@ import 'package:rapicredito/page/splash/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:get/route_manager.dart';
 import 'package:rapicredito/webview/webview_page.dart';
-
 
 class PageRouterManage {
   static const initial = PageRouterName.permissionPage;
@@ -42,32 +40,25 @@ class PageRouterManage {
         page: () => const LoginPage(),
         binding: LoginBinding()),
     GetPage(
-      name: PageRouterName.authPersonPage,
-      page: () => const AuthPersonPage(),
-      binding: AuthPersonBinding(),
-      // middlewares: [RouteAuthMiddleware()]
-    ),
+        name: PageRouterName.authPersonPage,
+        page: () => const AuthPersonPage(),
+        binding: AuthPersonBinding(),
+        middlewares: [RouteAuthMiddleware()]),
     GetPage(
-      name: PageRouterName.authContactPage,
-      page: () => const AuthContactPage(),
-      binding: AuthContactBinding(),
-      //middlewares: [RouteAuthMiddleware()]
-    ),
+        name: PageRouterName.authContactPage,
+        page: () => const AuthContactPage(),
+        binding: AuthContactBinding(),
+        middlewares: [RouteAuthMiddleware()]),
     GetPage(
-      name: PageRouterName.authIdPage,
-      page: () => const AuthIdPage(),
-      binding: AuthIdBinding(),
-      //   middlewares: [RouteAuthMiddleware()]
-    ),
+        name: PageRouterName.authIdPage,
+        page: () => const AuthIdPage(),
+        binding: AuthIdBinding(),
+        middlewares: [RouteAuthMiddleware()]),
     GetPage(
       name: PageRouterName.addAccountPage,
-      page: () => const AddAccountPage(),
-      binding: AddAccountBinding(),
+      page: () => const AccountPage(),
+      binding: AccountBinding(),
     ),
-    GetPage(
-        name: PageRouterName.updateAccountPage,
-        page: () => const UpdateAccountPage(),
-        binding: UpdateAccountBinding()),
     GetPage(
         name: PageRouterName.clientPage,
         page: () => const ClientPage(),

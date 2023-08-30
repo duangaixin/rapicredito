@@ -17,7 +17,7 @@ AuthInfoBean _$AuthInfoBeanFromJson(Map<String, dynamic> json) => AuthInfoBean(
       json['dampKingChannel'] as String?,
       json['publicTeenagerConceitedChampion'] as String?,
       json['similarExperimentSpecialArtist'] as String?,
-      json['theoreticalAppleFlatLateFriendship'] as String,
+      json['theoreticalAppleFlatLateFriendship'] as String?,
       json['exactGlassReservation'] as String?,
       json['thesePopCrossCountryside'] as String?,
       json['quickNonDetermination'] as String?,

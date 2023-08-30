@@ -22,6 +22,7 @@ class CustomEditView extends StatefulWidget {
     this.hintText = '',
     this.errorText = '',
     this.editTitle = '',
+    this.maxLength,
   }) : super(key: key);
   final TextEditingController controller;
   final String hintText;
@@ -35,6 +36,7 @@ class CustomEditView extends StatefulWidget {
   final TextStyle? hintStyle;
   final TextStyle? editStyle;
   final Widget? rightWidget;
+  final int?maxLength;
   final FocusNode? focusNode;
   final Function(String s)? submitAction;
   final Function(String s)? textChangeAction;
@@ -83,6 +85,7 @@ class CustomEditViewState extends State<CustomEditView> {
             ),
           );
     Widget textFiled = TextField(
+      maxLength: widget.maxLength,
       controller: widget.controller,
       keyboardType: widget.keyboardType,
       inputFormatters: widget.inputFormatter,

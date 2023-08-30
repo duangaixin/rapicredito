@@ -76,7 +76,7 @@ class AuthContactCtr extends BaseGetCtr {
     }
   }
 
-  Map<String, dynamic> collectContactParam() {
+  Map<String, dynamic> _collectContactParam() {
     Map<String, dynamic> param = {};
     param['rainyMonthDiscount'] = state.relationshipOne;
     param['pureDollFailure'] = phoneOneCtr.text.strRvSpace();
@@ -136,7 +136,7 @@ class AuthContactCtr extends BaseGetCtr {
   void postSaveAuthContactRequest() async {
     KeyboardUtils.unFocus();
     if (!_validate()) return;
-    Map<String, dynamic> param = collectContactParam();
+    Map<String, dynamic> param = _collectContactParam();
     Get.showLoading();
     var response =
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);

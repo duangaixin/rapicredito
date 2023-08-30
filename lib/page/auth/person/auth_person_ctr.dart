@@ -71,7 +71,7 @@ class AuthPersonCtr extends BaseGetCtr {
     }
   }
 
-  Map<String, dynamic> collectPersonParam() {
+  Map<String, dynamic> _collectPersonParam() {
     Map<String, dynamic> param = {};
     param['mistakenBriefInvitation'] = state.income;
     param['sadBirdHopelessHobby'] = emailCtr.text.strRvSpace();
@@ -84,7 +84,7 @@ class AuthPersonCtr extends BaseGetCtr {
   void postSaveAuthPersonRequest() async {
     KeyboardUtils.unFocus();
     if (!_validate()) return;
-    Map<String, dynamic> param = collectPersonParam();
+    Map<String, dynamic> param = _collectPersonParam();
     Get.showLoading();
     var response =
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);

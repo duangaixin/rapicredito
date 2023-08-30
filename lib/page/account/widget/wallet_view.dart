@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rapicredito/page/account/change/index.dart';
+import 'package:rapicredito/page/account/index.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_color_button.dart';
 import 'package:rapicredito/widget/custom_edit_view.dart';
 
-class UpdateWalletView extends GetView<UpdateAccountCtr> {
-  const UpdateWalletView({Key? key}) : super(key: key);
+class WalletView extends GetView<AccountCtr> {
+  const WalletView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,9 @@ class UpdateWalletView extends GetView<UpdateAccountCtr> {
             padding: const EdgeInsets.only(left: 16.0, right: 16.0),
             child: CustomEditView(
               key: GlobalKey(),
-              controller: TextEditingController(),
+              controller: controller.walletAccountCtr,
+              maxLength: 10,
+              keyboardType: TextInputType.number,
               editTitle: 'Cuenta de billetera móvil',
               hintText: 'Introducir texto',
             ),
@@ -31,28 +33,33 @@ class UpdateWalletView extends GetView<UpdateAccountCtr> {
           Padding(
             padding: const EdgeInsets.only(left: 16.0, right: 16.0),
             child: CustomEditView(
-              key: GlobalKey(),
-              controller: TextEditingController(),
+              controller: controller.walletAccountConfirmCtr,
               editTitle: 'Confirmar Cuenta de  billetera móvil',
+              maxLength: 10,
+              keyboardType: TextInputType.number,
               hintText: 'Introducir texto',
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 55.0, right: 55.0, top: 26.0),
             child: CustomColorButton(
+              realClick: controller.postSaveAccountRequest,
+              disableClick: controller.disableWalletClickToast,
               disableColors: const [
                 Color(0xffF5F6F4),
                 Color(0xffF5F6F4),
               ],
-              disable: false,
+              disable:  controller.state.walletBtnDisableClick,
               colors: const [Color(0xffB8EF17), Color(0xffB8EF17)],
               height: 46.0,
               borderRadius: BorderRadius.circular(8.0),
-              btnContent: const Text(
+              btnContent:  Text(
                 'Confirmar',
                 style: TextStyle(
                     fontSize: 15.0,
-                    color: Color(0xff333333),
+                    color: controller.state.walletBtnDisableClick
+                        ? const Color(0xffC4BFBF)
+                        : const Color(0xff333333),
                     fontWeight: FontWeight.bold),
               ),
             ),
@@ -75,6 +82,7 @@ class UpdateWalletView extends GetView<UpdateAccountCtr> {
   Widget _buildWalletItemView(int index) {
     var bean = controller.state.walletList[index];
     var title = bean.key ?? '';
+    var value = bean.value ?? '';
     return CustomClickView(
         onTap: () {
           controller.clickWalletItemView(index);
@@ -126,7 +134,7 @@ class UpdateWalletView extends GetView<UpdateAccountCtr> {
                                         color: Color(0xff333333)),
                                     children: <TextSpan>[
                                   TextSpan(
-                                    text: 'Solicita un enlace',
+                                    text: value,
                                     style: const TextStyle(
                                         decoration: TextDecoration.underline,
                                         fontSize: 15.0,
