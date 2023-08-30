@@ -37,7 +37,7 @@ class AuthInfoBean extends Object {
   String? similarExperimentSpecialArtist;
 
   @JsonKey(name: 'theoreticalAppleFlatLateFriendship')
-  String? theoreticalAppleFlatLateFriendship;
+  String theoreticalAppleFlatLateFriendship;
 
   @JsonKey(name: 'exactGlassReservation')
   String? exactGlassReservation;
@@ -72,6 +72,9 @@ class AuthInfoBean extends Object {
   @JsonKey(name: 'eastDifferentMorning')
   String? eastDifferentMorning;
 
+  @JsonKey(name: 'undividedMay')
+  String? undividedMay;
+
   @JsonKey(name: 'rectangleThirstyHarbourFox')
   String? rectangleThirstyHarbourFox;
 
@@ -105,7 +108,7 @@ class AuthInfoBean extends Object {
   @JsonKey(name: 'singlePastGrassNovelist')
   String? singlePastGrassNovelist;
 
-  AuthInfoBean(this.necessarySeasonTechnicalHers,this.luckyDescription,this.fairJarExitPair,this.lowBeeMainDusk,this.normalTankerPianist,this.juicyGayPresentation,this.newSureComedy,this.dampKingChannel,this.publicTeenagerConceitedChampion,this.similarExperimentSpecialArtist,this.theoreticalAppleFlatLateFriendship,this.exactGlassReservation,this.thesePopCrossCountryside,this.quickNonDetermination,this.pureDollFailure,this.rainyMonthDiscount,this.mistakenBriefInvitation,this.pacificCheapMineralCrazyLamb,this.communistBuddhistZooExtraCellar,this.rightSmokePalace,this.greedyCoralNarrowTastelessJustice,this.eastDifferentMorning,this.rectangleThirstyHarbourFox,this.sadBirdHopelessHobby,this.thoseSkillJarTheory,this.similarStomachacheFavouriteComedyInstantDrawing,this.betterCrossingFight,this.instantMerchantMidday,this.northernManThoseAnimalCubicPollution,this.horribleProudFondBranch,this.everyRest,this.puzzledConditionFamiliarUnion,this.singlePastGrassNovelist,);
+  AuthInfoBean(this.necessarySeasonTechnicalHers,this.luckyDescription,this.fairJarExitPair,this.lowBeeMainDusk,this.normalTankerPianist,this.juicyGayPresentation,this.newSureComedy,this.dampKingChannel,this.publicTeenagerConceitedChampion,this.similarExperimentSpecialArtist,this.theoreticalAppleFlatLateFriendship,this.exactGlassReservation,this.thesePopCrossCountryside,this.quickNonDetermination,this.pureDollFailure,this.rainyMonthDiscount,this.mistakenBriefInvitation,this.pacificCheapMineralCrazyLamb,this.communistBuddhistZooExtraCellar,this.rightSmokePalace,this.greedyCoralNarrowTastelessJustice,this.eastDifferentMorning,this.undividedMay,this.rectangleThirstyHarbourFox,this.sadBirdHopelessHobby,this.thoseSkillJarTheory,this.similarStomachacheFavouriteComedyInstantDrawing,this.betterCrossingFight,this.instantMerchantMidday,this.northernManThoseAnimalCubicPollution,this.horribleProudFondBranch,this.everyRest,this.puzzledConditionFamiliarUnion,this.singlePastGrassNovelist,);
 
   factory AuthInfoBean.fromJson(Map<String, dynamic> srcJson) => _$AuthInfoBeanFromJson(srcJson);
 

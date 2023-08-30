@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/result/rollover/index.dart';
@@ -50,16 +49,16 @@ class RolloverPaymentResultPage extends GetView<RolloverPaymentResultCtr> {
               ),
               Container(
                 margin: const EdgeInsets.only(top: 44.0, bottom: 4.0),
-                child: const CustomButton(
-                  onPressed: null,
+                child:  CustomButton(
+                  onPressed: Get.back,
                   minWidth: 265.0,
                   minHeight: 46.0,
-                  backgroundColor: Color(0xffB8EF17),
-                  disabledBackgroundColor: Color(0xffB8EF17),
+                  backgroundColor: const Color(0xffB8EF17),
+                  disabledBackgroundColor: const Color(0xffB8EF17),
                   fontSize: 15.0,
                   radius: 8.0,
                   text: 'OK',
-                  textColor: Color(0xff333333),
+                  textColor: const Color(0xff333333),
                   fontWeight: FontWeight.bold,
                 ),
               ),

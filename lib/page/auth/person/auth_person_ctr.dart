@@ -158,6 +158,12 @@ class AuthPersonCtr extends BaseGetCtr {
     }
     return true;
   }
+
+  @override
+  void onClose() {
+    emailCtr.dispose();
+    super.onClose();
+  }
 }
 
 enum PersonClickType {

@@ -36,14 +36,6 @@ class AuthContactCtr extends BaseGetCtr {
     super.onReady();
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-    phoneOneCtr.dispose();
-    nameOneCtr.dispose();
-    phoneTwoCtr.dispose();
-    nameTwoCtr.dispose();
-  }
 
   void _btnCanClick() {
     if (ObjectUtil.isEmptyString(state.relationshipOne) ||
@@ -132,7 +124,7 @@ class AuthContactCtr extends BaseGetCtr {
       state.relationshipOne=authInfoBean?.rainyMonthDiscount??'';
       phoneOneCtr.text=authInfoBean?.pureDollFailure??'';
       nameOneCtr.text=authInfoBean?.communistBuddhistZooExtraCellar??'';
-      state.relationshipOne=authInfoBean?.instantMerchantMidday??'';
+      state.relationshipTwo=authInfoBean?.instantMerchantMidday??'';
       phoneTwoCtr.text=authInfoBean?.theoreticalAppleFlatLateFriendship??'';
       nameTwoCtr.text=authInfoBean?.quickNonDetermination??'';
       _btnCanClick();
@@ -176,5 +168,15 @@ class AuthContactCtr extends BaseGetCtr {
       return false;
     }
     return true;
+  }
+
+
+  @override
+  void onClose() {
+    super.onClose();
+    phoneOneCtr.dispose();
+    nameOneCtr.dispose();
+    phoneTwoCtr.dispose();
+    nameTwoCtr.dispose();
   }
 }

@@ -48,12 +48,15 @@ extension RequestBussiness on HttpRequestManage {
             .toList());
   }
 
-  Future<BaseResponse<String>> postUploadIdCard(param) async {
+  Future<BaseResponse<String>> postUploadPhotoRequest(param) async {
     return await httpRequest.post<String>(HttpApi.apiUploadIdPhoto,
         options: Options(contentType: Headers.multipartFormDataContentType),
         data: param,
         onTransform: (json) => json['northernMarriageCommunism']);
   }
+
+
+
 
   Future<BaseResponse<QueryPhotoInfoBean>> postQueryPhotoInfo(
       Map<String, dynamic> param) async {

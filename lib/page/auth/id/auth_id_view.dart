@@ -30,7 +30,7 @@ class AuthIdPage extends GetView<AuthIdCtr> {
                 imageType: ObjectUtil.isEmptyString(imageUrl)
                     ? ImageType.assets
                     : ImageType.network,
-                //width: controller.state.imageWidth,
+                width: controller.state.imageWidth,
                 placeholder: Resource.assetsImageAuthTakeCamera,
                 height: 91.0,
                 radius: 8.0,
@@ -84,24 +84,35 @@ class AuthIdPage extends GetView<AuthIdCtr> {
         child: Stack(
           alignment: Alignment.topCenter,
           children: [
-            CustomImageView(
-              Resource.assetsImageAuthCameraBg,
-              imageType: ImageType.assets,
-              width: controller.state.imageWidth,
-              height: 91.0,
-              fit: BoxFit.contain,
-            ),
-            const Positioned(
+            Obx(() {
+              return CustomImageView(
+                ObjectUtil.isEmptyString(controller.state.faceUrl)
+                    ? Resource.assetsImageAuthCameraBg
+                    : controller.state.faceUrl,
+                imageType: ObjectUtil.isEmptyString(controller.state.faceUrl)
+                    ? ImageType.assets
+                    : ImageType.network,
+                placeholder: Resource.assetsImageAuthCameraBg,
+                width: 167.0,
+                height: 91.0,
+                radius: 8.0,
+              );
+            }),
+            Positioned(
               top: 25.0,
               left: 63.0,
               right: 63.0,
-              child: CustomImageView(
-                Resource.assetsImageAuthFace,
-                imageType: ImageType.assets,
-                width: 41.0,
-                height: 41.0,
-                fit: BoxFit.contain,
-              ),
+              child: Obx(() {
+                return Visibility(
+                    visible: ObjectUtil.isEmptyString(controller.state.faceUrl),
+                    child: const CustomImageView(
+                      Resource.assetsImageAuthFace,
+                      imageType: ImageType.assets,
+                      width: 41.0,
+                      height: 41.0,
+                      fit: BoxFit.contain,
+                    ));
+              }),
             ),
             Positioned(
                 top: 81.0,
@@ -132,9 +143,10 @@ class AuthIdPage extends GetView<AuthIdCtr> {
             ),
           ),
           Center(
-            child: faceCameraView(controller.goToCustomCamera
-                // controller.tackCamera
-                ),
+            child: faceCameraView(() {
+              //         controller.goToCustomCamera();
+              controller.tackCamera(isUploadFace: true);
+            }),
           )
         ],
       );

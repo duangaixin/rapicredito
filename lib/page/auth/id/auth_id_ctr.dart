@@ -52,7 +52,7 @@ class AuthIdCtr extends BaseGetCtr {
     super.onReady();
   }
 
-  void tackCamera({bool isFront = true}) {
+  void tackCamera({bool isFront = true, bool isUploadFace = false}) {
     KeyboardUtils.unFocus();
     PermissionUtil.checkPermission(
         permissionList: [Permission.camera],
@@ -62,59 +62,10 @@ class AuthIdCtr extends BaseGetCtr {
           print(result?.path ?? '' + '-----duanxin===path');
           if (result != null) {
             var file = File(result.path);
-            _uploadIdPhoto(file, isFront);
+            _uploadPhotoData(file, isFront, isUploadFace: isUploadFace);
           }
         },
         onFailed: () {});
-  }
-
-  void _uploadIdPhoto(File file, bool isFront) async {
-    var compressFile = await CompressUtil.compressImage(file);
-    final String path = compressFile.path;
-    print('$path-----duanxin===compressFilePath');
-    final String name = path.substring(path.lastIndexOf('/') + 1);
-    MultipartFile multipartFile =
-        await MultipartFile.fromFile(path, filename: name);
-    var userId = StorageService.to.getInt(AppConstants.userIdKey);
-    final FormData formData = FormData.fromMap({
-      'medicalPrisonStationEnoughNobody': isFront ? multipartFile : '',
-      'lovelyFrontBurialBiscuit': isFront ? '' : multipartFile,
-      'madUnableBackacheCanal': '204',
-      'terminalDifferentActionFatFountain': userId,
-      'dailyFortuneQuantity': '0.0,0.0',
-      'contraryScientificRightNone': 'es',
-      'everydayMapleChallengingAirline': '00'
-    });
-    Get.showLoading();
-    var response = await HttpRequestManage.instance.postUploadIdCard(formData);
-    if (response.isSuccess()) {
-      _postQueryPhotoInfo();
-    } else {
-      Get.dismiss();
-      var errorMsg = response.message ?? 'error';
-      ProgressHUD.showError(errorMsg);
-    }
-  }
-
-  Future<void> _postQueryPhotoInfo() async {
-    var param = <String, dynamic>{};
-    param.addAll(getCommonParam());
-    var response = await HttpRequestManage.instance.postQueryPhotoInfo(param);
-    Get.dismiss();
-    if (response.isSuccess()) {
-      var photoBean = response.data;
-      var frontUrl = photoBean?.tastelessAmericanPlateCattle ?? '';
-      if (state.idFrontUrl != frontUrl) {
-        state.idFrontUrl = frontUrl;
-      }
-      var backUrl = photoBean?.hugeNeed ?? '';
-      if (state.idBackUrl != backUrl) {
-        state.idBackUrl = backUrl;
-      }
-    } else {
-      var errorMsg = response.message ?? 'error';
-      ProgressHUD.showError(errorMsg);
-    }
   }
 
   void goToCustomCamera() async {
@@ -129,13 +80,14 @@ class AuthIdCtr extends BaseGetCtr {
     if (!ObjectUtil.isEmptyString(state.birth)) {
       selectData = PDuration(
           year: state.birthYear, month: state.birthMonth, day: state.birthDay);
+    } else {
+      selectData = PDuration(year: 2000, month: 1, day: 1);
     }
-
     CustomPicker.showDatePicker(Get.context!, onConfirm: (PDuration res) {
       state.birthDay = res.day;
       state.birthMonth = res.month;
       state.birthYear = res.year;
-      state.birth = '${res.year}-${res.month}-${res.day}';
+      state.birth = '${res.day}-${res.month}-${res.year}';
       _btnCanClick();
     }, selectDate: selectData);
   }
@@ -163,7 +115,10 @@ class AuthIdCtr extends BaseGetCtr {
   }
 
   void _btnCanClick() {
-    if (ObjectUtil.isEmptyString(idNumCtr.text.strRvSpace()) ||
+    if (ObjectUtil.isEmptyString(state.idFrontUrl) ||
+        ObjectUtil.isEmptyString(state.idBackUrl) ||
+        ObjectUtil.isEmptyString(state.faceUrl) ||
+        ObjectUtil.isEmptyString(idNumCtr.text.strRvSpace()) ||
         ObjectUtil.isEmptyString(firstNameCtr.text.trim()) ||
         ObjectUtil.isEmptyString(secondNameCtr.text.trim()) ||
         ObjectUtil.isEmptyString(state.gender) ||
@@ -177,7 +132,7 @@ class AuthIdCtr extends BaseGetCtr {
   Map<String, dynamic> collectIdParam() {
     Map<String, dynamic> param = {};
     //身份证号 undividedMay
-    param['straightLoadSweetMemberRudeFlu'] = idNumCtr.text.strRvSpace();
+    param['undividedMay'] = idNumCtr.text.strRvSpace();
     //姓
     param['puzzledConditionFamiliarUnion'] = firstNameCtr.text.trim();
     //名
@@ -223,8 +178,20 @@ class AuthIdCtr extends BaseGetCtr {
     Get.dismiss();
     if (response.isSuccess()) {
       var authInfoBean = response.data;
-
-      ProgressHUD.showText('成功了');
+      idNumCtr.text = authInfoBean?.undividedMay ?? '';
+      firstNameCtr.text = authInfoBean?.puzzledConditionFamiliarUnion ?? '';
+      secondNameCtr.text = authInfoBean?.pacificCheapMineralCrazyLamb ?? '';
+      state.gender = authInfoBean?.fairJarExitPair ?? '';
+      state.birth = authInfoBean?.juicyGayPresentation ?? '';
+      if (!ObjectUtil.isEmptyString(state.birth)) {
+        List<String> birthList = state.birth.split('-');
+        if (!ObjectUtil.isEmptyList(birthList) && birthList.length == 3) {
+          state.birthYear = int.tryParse(birthList[2]);
+          state.birthMonth = int.tryParse(birthList[1]);
+          state.birthDay = int.tryParse(birthList[0]);
+        }
+      }
+      _btnCanClick();
     } else {
       NetException.toastException(response);
     }
@@ -240,6 +207,62 @@ class AuthIdCtr extends BaseGetCtr {
     if (response.isSuccess()) {
     } else {
       NetException.toastException(response);
+    }
+  }
+
+  void _uploadPhotoData(File file, bool isFront,
+      {bool isUploadFace = false}) async {
+    var compressFile = await CompressUtil.compressImage(file);
+    final String path = compressFile.path;
+    print('$path-----duanxin===compressFilePath');
+    final String name = path.substring(path.lastIndexOf('/') + 1);
+    MultipartFile multipartFile =
+        await MultipartFile.fromFile(path, filename: name);
+    var userId = StorageService.to.getInt(AppConstants.userIdKey);
+    final FormData formData = FormData.fromMap({
+      'medicalPrisonStationEnoughNobody': isFront ? multipartFile : '',
+      'lovelyFrontBurialBiscuit': isFront ? '' : multipartFile,
+      'madUnableBackacheCanal': '204',
+      'terminalDifferentActionFatFountain': userId,
+      'dailyFortuneQuantity': '0.0,0.0',
+      'contraryScientificRightNone': 'es',
+      'everydayMapleChallengingAirline': isUploadFace ? '00' : '01'
+    });
+    Get.showLoading();
+    var response =
+        await HttpRequestManage.instance.postUploadPhotoRequest(formData);
+    if (response.isSuccess()) {
+      _postQueryPhotoInfo();
+    } else {
+      Get.dismiss();
+      var errorMsg = response.message ?? 'error';
+      ProgressHUD.showError(errorMsg);
+    }
+  }
+
+  Future<void> _postQueryPhotoInfo() async {
+    var param = <String, dynamic>{};
+    param.addAll(getCommonParam());
+    var response = await HttpRequestManage.instance.postQueryPhotoInfo(param);
+    Get.dismiss();
+    if (response.isSuccess()) {
+      var photoBean = response.data;
+      var frontUrl = photoBean?.tastelessAmericanPlateCattle ?? '';
+      if (state.idFrontUrl != frontUrl) {
+        state.idFrontUrl = frontUrl;
+      }
+      var backUrl = photoBean?.hugeNeed ?? '';
+      if (state.idBackUrl != backUrl) {
+        state.idBackUrl = backUrl;
+      }
+      var faceUrl = photoBean?.dueReligionFoggyCustom ?? '';
+      if (state.faceUrl != faceUrl) {
+        state.faceUrl = faceUrl;
+      }
+      _btnCanClick();
+    } else {
+      var errorMsg = response.message ?? 'error';
+      ProgressHUD.showError(errorMsg);
     }
   }
 

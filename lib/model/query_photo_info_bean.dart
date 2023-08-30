@@ -12,6 +12,9 @@ class QueryPhotoInfoBean extends Object {
   @JsonKey(name: 'hugeNeed')
   String? hugeNeed;
 
+  @JsonKey(name: 'dueReligionFoggyCustom')
+  String? dueReligionFoggyCustom;
+
   @JsonKey(name: 'strictKettleDowntownCheque')
   String? strictKettleDowntownCheque;
 
@@ -24,11 +27,17 @@ class QueryPhotoInfoBean extends Object {
   @JsonKey(name: 'followingPastBoatingApology')
   String? followingPastBoatingApology;
 
+  @JsonKey(name: 'names')
+  String? names;
+
   @JsonKey(name: 'terminalFrontierArcticHomeland')
   String? terminalFrontierArcticHomeland;
 
   @JsonKey(name: 'ripeCloseToughMonument')
   String? ripeCloseToughMonument;
+
+  @JsonKey(name: 'deepJuicyStomach')
+  String? deepJuicyStomach;
 
   @JsonKey(name: 'digestGrandSemicircle')
   String? digestGrandSemicircle;
@@ -42,10 +51,13 @@ class QueryPhotoInfoBean extends Object {
   @JsonKey(name: 'hungryDoorHer')
   String? hungryDoorHer;
 
+  @JsonKey(name: 'surnames')
+  String? surnames;
+
   @JsonKey(name: 'excellentSummerDisabledCamp')
   String? excellentSummerDisabledCamp;
 
-  QueryPhotoInfoBean(this.leadingUnfitHotel,this.hugeNeed,this.strictKettleDowntownCheque,this.attractiveKeeperExtraYou,this.proudCartoonAtlanticFuelSteepCustoms,this.followingPastBoatingApology,this.terminalFrontierArcticHomeland,this.ripeCloseToughMonument,this.digestGrandSemicircle,this.tastelessAmericanPlateCattle,this.asleepNuclearRiddleBritishSubtraction,this.hungryDoorHer,this.excellentSummerDisabledCamp,);
+  QueryPhotoInfoBean(this.leadingUnfitHotel,this.hugeNeed,this.dueReligionFoggyCustom,this.strictKettleDowntownCheque,this.attractiveKeeperExtraYou,this.proudCartoonAtlanticFuelSteepCustoms,this.followingPastBoatingApology,this.names,this.terminalFrontierArcticHomeland,this.ripeCloseToughMonument,this.deepJuicyStomach,this.digestGrandSemicircle,this.tastelessAmericanPlateCattle,this.asleepNuclearRiddleBritishSubtraction,this.hungryDoorHer,this.surnames,this.excellentSummerDisabledCamp,);
 
   factory QueryPhotoInfoBean.fromJson(Map<String, dynamic> srcJson) => _$QueryPhotoInfoBeanFromJson(srcJson);
 

@@ -53,8 +53,10 @@ class CustomPicker {
     selectDate ??= PDuration.now();
     suffix ??= Suffix(years: ' year ',month: ' month ',days: ' day ');
     DateItemModel dateItemModel = DateItemModel.parse(mode);
-    maxDate ??= PDuration(year: 2100);
-    minDate ??= PDuration(year: 1900);
+     DateTime dateTime=DateTime.now();
+        var maxYear= dateTime.year-10;
+    maxDate ??= PDuration(year: maxYear);
+    minDate ??= PDuration(year: 1950,month: 1,day: 1);
 
     if ((dateItemModel.day || dateItemModel.year)) {
       if (intEmpty(selectDate.year)) {
