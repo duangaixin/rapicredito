@@ -226,7 +226,7 @@ class AuthIdPage extends GetView<AuthIdCtr> {
                     editContent: controller.state.gender,
                     action: () {
                       controller
-                          .postAppConfigInfoRequest(PersonClickType.gender);
+                          .postAppConfigInfoRequest(AppConfigClickType.gender);
                     },
                   );
                 }),

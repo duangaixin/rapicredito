@@ -41,23 +41,23 @@ class AuthPersonCtr extends BaseGetCtr {
     }
   }
 
-  void _showSelectDialog(List netList, PersonClickType clickType) {
+  void _showSelectDialog(List netList, AppConfigClickType clickType) {
     dynamic selectData;
-    if (clickType == PersonClickType.incomeType) {
+    if (clickType == AppConfigClickType.incomeType) {
       selectData = state.income;
-    } else if (clickType == PersonClickType.familyCount) {
+    } else if (clickType == AppConfigClickType.familyCount) {
       selectData = state.familyCount;
-    } else if (clickType == PersonClickType.educationalLevel) {
+    } else if (clickType == AppConfigClickType.educationalLevel) {
       selectData = state.educationalLevel;
     }
     CustomPicker.showSinglePicker(Get.context!, data: netList,
         onConfirm: (data, p) {
       selectData = data;
-      if (clickType == PersonClickType.incomeType) {
+      if (clickType == AppConfigClickType.incomeType) {
         state.income = data;
-      } else if (clickType == PersonClickType.familyCount) {
+      } else if (clickType == AppConfigClickType.familyCount) {
         state.familyCount = data;
-      } else if (clickType == PersonClickType.educationalLevel) {
+      } else if (clickType == AppConfigClickType.educationalLevel) {
         state.educationalLevel = data;
       }
       _btnCanClick();
@@ -114,15 +114,15 @@ class AuthPersonCtr extends BaseGetCtr {
     }
   }
 
-  void postAppConfigInfoRequest(PersonClickType clickType) async {
+  void postAppConfigInfoRequest(AppConfigClickType clickType) async {
     KeyboardUtils.unFocus();
     var param = <String, dynamic>{};
     var typeStr = '';
-    if (clickType == PersonClickType.incomeType) {
+    if (clickType == AppConfigClickType.incomeType) {
       typeStr = 'incomeLevel';
-    } else if (clickType == PersonClickType.familyCount) {
+    } else if (clickType == AppConfigClickType.familyCount) {
       typeStr = 'familySize';
-    } else if (clickType == PersonClickType.educationalLevel) {
+    } else if (clickType == AppConfigClickType.educationalLevel) {
       typeStr = 'educational';
     }
     param['everydayMapleChallengingAirline'] = typeStr;
@@ -166,11 +166,14 @@ class AuthPersonCtr extends BaseGetCtr {
   }
 }
 
-enum PersonClickType {
+enum AppConfigClickType {
   incomeType,
   familyCount,
   educationalLevel,
   relationOne,
   relationTwo,
-  gender
+  gender,
+  bankNameList,
+  bankAccountType,
+  collectionType
 }

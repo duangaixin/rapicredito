@@ -9,5 +9,6 @@ class HttpApi {
   static const String apiSaveAuthInfo = 'curtain/digitalSmallLung';
   static const String apiQueryAuthInfo = 'curtain/pleaseUnimportantBank';
   static const String apiQueryClientInfo = 'facialHis/paySnowyTax';
-
+  static const String apiQueryAccountInfo = 'curtain/realisePoisonousDesk';
+  static const String apiSaveAccountInfo = 'curtain/landAttractivePath';
 }

@@ -22,7 +22,6 @@ class AddAccountPage extends GetView<AddAccountCtr> {
             mainAxisSize: MainAxisSize.max,
             children: [
               selectView,
-
               Obx(() {
                 return Visibility(
                     visible: controller.state.accountTypeSelectIndex == 0,
@@ -33,9 +32,8 @@ class AddAccountPage extends GetView<AddAccountCtr> {
                     visible: controller.state.accountTypeSelectIndex == 1,
                     child: const AddBankView());
               }),
-
               const Padding(
-                padding: EdgeInsets.only(bottom: 30.0,top: 30.0),
+                padding: EdgeInsets.only(bottom: 30.0, top: 30.0),
                 child: CommonAuthAgreeView(),
               )
             ],
@@ -89,8 +87,8 @@ class AddAccountPage extends GetView<AddAccountCtr> {
                     children: [
                       Expanded(child: Obx(() {
                         return Text(
-                          controller
-                              .state.accountTypeList[controller.state.accountTypeSelectIndex],
+                          controller.state.accountTypeList[
+                              controller.state.accountTypeSelectIndex],
                           style: const TextStyle(
                               fontSize: 15.0, color: Color(0xff333333)),
                         );

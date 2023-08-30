@@ -45,7 +45,7 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
                                 editContent: controller.state.income,
                                 action: () {
                                   controller.postAppConfigInfoRequest(
-                                      PersonClickType.incomeType);
+                                      AppConfigClickType.incomeType);
                                 },
                               );
                             }),
@@ -64,7 +64,7 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
                                 editContent: controller.state.familyCount,
                                 action: () {
                                   controller.postAppConfigInfoRequest(
-                                      PersonClickType.familyCount);
+                                      AppConfigClickType.familyCount);
                                 },
                               );
                             }),
@@ -75,7 +75,7 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
                                 editContent: controller.state.educationalLevel,
                                 action: () {
                                   controller.postAppConfigInfoRequest(
-                                      PersonClickType.educationalLevel);
+                                      AppConfigClickType.educationalLevel);
                                 },
                               );
                             }),

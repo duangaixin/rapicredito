@@ -10,6 +10,7 @@ ConfigInfoBean _$ConfigInfoBeanFromJson(Map<String, dynamic> json) =>
     ConfigInfoBean(
       json['humanExpensiveBraveryHarmfulPhoto'] as String?,
       json['latestCandle'] as String?,
+      json['northernMarriageCommunism'] as String?,
     );
 
 Map<String, dynamic> _$ConfigInfoBeanToJson(ConfigInfoBean instance) =>
@@ -17,4 +18,5 @@ Map<String, dynamic> _$ConfigInfoBeanToJson(ConfigInfoBean instance) =>
       'humanExpensiveBraveryHarmfulPhoto':
           instance.humanExpensiveBraveryHarmfulPhoto,
       'latestCandle': instance.latestCandle,
+      'northernMarriageCommunism': instance.northernMarriageCommunism,
     };

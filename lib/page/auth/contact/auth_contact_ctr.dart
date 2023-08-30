@@ -50,19 +50,19 @@ class AuthContactCtr extends BaseGetCtr {
     }
   }
 
-  void _showSelectDialog(List netList, PersonClickType clickType) {
+  void _showSelectDialog(List netList, AppConfigClickType clickType) {
     dynamic selectData;
-    if (clickType == PersonClickType.relationOne) {
+    if (clickType == AppConfigClickType.relationOne) {
       selectData = state.relationshipOne;
-    } else if (clickType == PersonClickType.relationTwo) {
+    } else if (clickType == AppConfigClickType.relationTwo) {
       selectData = state.relationshipTwo;
     }
     CustomPicker.showSinglePicker(Get.context!, data: netList,
         onConfirm: (data, p) {
       selectData = data;
-      if (clickType == PersonClickType.relationOne) {
+      if (clickType == AppConfigClickType.relationOne) {
         state.relationshipOne = data;
-      } else if (clickType == PersonClickType.relationTwo) {
+      } else if (clickType == AppConfigClickType.relationTwo) {
         state.relationshipTwo = data;
       }
       _btnCanClick();
@@ -88,11 +88,11 @@ class AuthContactCtr extends BaseGetCtr {
     return param;
   }
 
-  void postAppConfigInfoRequest(PersonClickType clickType) async {
+  void postAppConfigInfoRequest(AppConfigClickType clickType) async {
     KeyboardUtils.unFocus();
     var param = <String, dynamic>{};
     var typeStr = '';
-    if (clickType == PersonClickType.relationTwo||clickType==PersonClickType.relationOne) {
+    if (clickType == AppConfigClickType.relationTwo||clickType==AppConfigClickType.relationOne) {
       typeStr = 'relationship';
     }
     param['everydayMapleChallengingAirline'] = typeStr;

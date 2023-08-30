@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/account/add/index.dart';
-
+import 'package:rapicredito/page/auth/person/auth_person_ctr.dart';
 import 'package:rapicredito/widget/custom_color_button.dart';
 import 'package:rapicredito/widget/custom_edit_view.dart';
 import 'package:rapicredito/widget/custom_select_view.dart';
-import 'package:rapicredito/widget/progress_hud_view.dart';
 
 class AddBankView extends GetView<AddAccountCtr> {
   const AddBankView({Key? key}) : super(key: key);
@@ -34,10 +33,9 @@ class AddBankView extends GetView<AddAccountCtr> {
                 editTitle: 'Nombre del banco',
                 hintText: 'Por favor elige',
                 editContent: controller.state.bankName,
-                enableEdit: controller.state.bankNameEnable,
                 action: () {
-                  ProgressHUD.showSuccess('hha');
-                  // controller.state.bankNameEnable=false;
+                  controller.postAppConfigInfoRequest(
+                      AppConfigClickType.bankNameList);
                 },
               );
             }),
@@ -49,9 +47,9 @@ class AddBankView extends GetView<AddAccountCtr> {
                 editTitle: 'Tipo de cuenta bancaria',
                 hintText: 'Por favor elige',
                 editContent: controller.state.bankType,
-                enableEdit: controller.state.bankTypeEnable,
                 action: () {
-                  ProgressHUD.showSuccess('啊啊啊');
+                  controller.postAppConfigInfoRequest(
+                      AppConfigClickType.bankAccountType);
                 },
               );
             }),

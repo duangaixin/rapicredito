@@ -11,8 +11,9 @@ class ConfigInfoBean extends Object {
 
   @JsonKey(name: 'latestCandle')
   String? latestCandle;
-
-  ConfigInfoBean(this.humanExpensiveBraveryHarmfulPhoto,this.latestCandle,);
+  @JsonKey(name: 'northernMarriageCommunism')
+  String? northernMarriageCommunism;
+  ConfigInfoBean(this.humanExpensiveBraveryHarmfulPhoto,this.latestCandle,this.northernMarriageCommunism);
 
   factory ConfigInfoBean.fromJson(Map<String, dynamic> srcJson) => _$ConfigInfoBeanFromJson(srcJson);
 

@@ -11,6 +11,7 @@ import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/page/login/index.dart';
 import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
+import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/progress_hud_view.dart';
@@ -51,6 +52,7 @@ class LoginCtr extends BaseGetCtr {
   }
 
   void postSendCodeRequest() async {
+    KeyboardUtils.unFocus();
     _startTimer();
     var param = <String, dynamic>{};
     param['swiftMeansEitherPine'] = phoneCtr.text.strRvSpace();
@@ -66,6 +68,7 @@ class LoginCtr extends BaseGetCtr {
   }
 
   void postLoginRequest() async {
+    KeyboardUtils.unFocus();
     _startTimer();
     var param = <String, dynamic>{};
 

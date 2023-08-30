@@ -36,7 +36,7 @@ class AuthContactPage extends GetView<AuthContactCtr> {
                     editContent: controller.state.relationshipOne,
                     action: () {
                       controller.postAppConfigInfoRequest(
-                          PersonClickType.relationOne);
+                          AppConfigClickType.relationOne);
                     },
                   );
                 }),
@@ -85,7 +85,7 @@ class AuthContactPage extends GetView<AuthContactCtr> {
                     editContent: controller.state.relationshipTwo,
                     action: () {
                       controller.postAppConfigInfoRequest(
-                          PersonClickType.relationTwo);
+                          AppConfigClickType.relationTwo);
                     },
                   );
                 }),

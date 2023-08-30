@@ -22,7 +22,4 @@ class UpdateAccountState {
   set walletSelectIndex(value) => _walletSelectIndex.value = value;
 }
 
-class KeyValue {
-  var title = '';
-  var value = '';
-}
+

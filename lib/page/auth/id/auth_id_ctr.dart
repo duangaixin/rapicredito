@@ -92,15 +92,15 @@ class AuthIdCtr extends BaseGetCtr {
     }, selectDate: selectData);
   }
 
-  void _showSelectDialog(List netList, PersonClickType clickType) {
+  void _showSelectDialog(List netList, AppConfigClickType clickType) {
     dynamic selectData;
-    if (clickType == PersonClickType.gender) {
+    if (clickType == AppConfigClickType.gender) {
       selectData = state.gender;
     }
     CustomPicker.showSinglePicker(Get.context!, data: netList,
         onConfirm: (data, p) {
       selectData = data;
-      if (clickType == PersonClickType.gender) {
+      if (clickType == AppConfigClickType.gender) {
         state.gender = data;
       }
       _btnCanClick();
@@ -145,11 +145,11 @@ class AuthIdCtr extends BaseGetCtr {
     return param;
   }
 
-  void postAppConfigInfoRequest(PersonClickType clickType) async {
+  void postAppConfigInfoRequest(AppConfigClickType clickType) async {
     KeyboardUtils.unFocus();
     var param = <String, dynamic>{};
     var typeStr = '';
-    if (clickType == PersonClickType.gender) {
+    if (clickType == AppConfigClickType.gender) {
       typeStr = 'sex';
     }
     param['everydayMapleChallengingAirline'] = typeStr;

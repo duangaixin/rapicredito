@@ -74,6 +74,7 @@ class AddWalletView extends GetView<AddAccountCtr> {
   Widget _buildWalletItemView(int index) {
     var bean = controller.state.walletList[index];
     var title = bean.key ?? '';
+    var value=bean.value??'';
     return CustomClickView(
         onTap: () {
           controller.clickWalletItemView(index);
@@ -123,10 +124,10 @@ class AddWalletView extends GetView<AddAccountCtr> {
                                     style: const TextStyle(
                                         fontSize: 15.0,
                                         color: Color(0xff333333)),
-                                    children: const <TextSpan>[
+                                    children:  <TextSpan>[
                                   TextSpan(
-                                    text: 'Solicita un enlace',
-                                    style: TextStyle(
+                                    text: value,
+                                    style: const TextStyle(
                                         decoration: TextDecoration.underline,
                                         fontSize: 15.0,
                                         color: Color(0xff333333)),
