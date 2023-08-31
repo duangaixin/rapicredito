@@ -6,9 +6,12 @@ part 'bank_info_bean.g.dart';
 @JsonSerializable()
 class BankInfoBean extends Object {
 
-  ///bankAccountType
   @JsonKey(name: 'broadSpiritualKilometre')
   String? broadSpiritualKilometre;
+
+  ///bankAccountType
+  @JsonKey(name: 'dampThatTentBlankTrunk')
+  String? dampThatTentBlankTrunk;
 
   ///collectionTypeDesc
   @JsonKey(name: 'blankKeyRegulation')
@@ -30,7 +33,7 @@ class BankInfoBean extends Object {
   @JsonKey(name: 'swissEnoughSaying')
   String? swissEnoughSaying;
 
-  BankInfoBean(this.broadSpiritualKilometre,this.blankKeyRegulation,this.localImpossibleEffortSmoothNetwork,this.firstNurse,this.saltyComfortablePlatformKingdom,this.swissEnoughSaying,);
+  BankInfoBean(this.broadSpiritualKilometre,this.dampThatTentBlankTrunk,this.blankKeyRegulation,this.localImpossibleEffortSmoothNetwork,this.firstNurse,this.saltyComfortablePlatformKingdom,this.swissEnoughSaying,);
 
   factory BankInfoBean.fromJson(Map<String, dynamic> srcJson) => _$BankInfoBeanFromJson(srcJson);
 

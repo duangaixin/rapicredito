@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
@@ -47,11 +48,20 @@ class AuthIdCtr extends BaseGetCtr {
 
   @override
   void onReady() {
-    _postQueryAuthPersonRequest();
-    _postQueryPhotoInfo();
+    // _postQueryAuthPersonRequest();
+    // _postQueryPhotoInfo();
+    _postInitRequest();
     super.onReady();
   }
-
+  void _postInitRequest() {
+    Get.showLoading();
+    Future.wait([
+      _postQueryAuthPersonRequest(),
+      _postQueryPhotoInfo(),
+    ]).whenComplete(() {
+        Get.dismiss();
+    });
+  }
   void tackCamera({bool isFront = true, bool isUploadFace = false}) {
     KeyboardUtils.unFocus();
     PermissionUtil.checkPermission(
@@ -170,12 +180,10 @@ class AuthIdCtr extends BaseGetCtr {
     }
   }
 
-  void _postQueryAuthPersonRequest() async {
+  Future<void> _postQueryAuthPersonRequest() async {
     Map<String, dynamic> param = getCommonParam();
-    Get.showLoading();
     var response =
         await HttpRequestManage.instance.postQueryAuthInfoRequest(param);
-    Get.dismiss();
     if (response.isSuccess()) {
       var authInfoBean = response.data;
       idNumCtr.text = authInfoBean?.undividedMay ?? '';
@@ -231,8 +239,12 @@ class AuthIdCtr extends BaseGetCtr {
     Get.showLoading();
     var response =
         await HttpRequestManage.instance.postUploadPhotoRequest(formData);
+    Get.dismiss();
     if (response.isSuccess()) {
-      _postQueryPhotoInfo();
+      Future.delayed(const Duration(milliseconds: 50),(){
+        _postQueryPhotoInfo(isShowDialog: true) ;
+      });
+
     } else {
       Get.dismiss();
       var errorMsg = response.message ?? 'error';
@@ -240,11 +252,16 @@ class AuthIdCtr extends BaseGetCtr {
     }
   }
 
-  Future<void> _postQueryPhotoInfo() async {
+  Future<void> _postQueryPhotoInfo({bool isShowDialog=false}) async {
     var param = <String, dynamic>{};
     param.addAll(getCommonParam());
+    if(isShowDialog){
+      Get.showLoading();
+    }
     var response = await HttpRequestManage.instance.postQueryPhotoInfo(param);
-    Get.dismiss();
+    if(isShowDialog){
+      Get.dismiss();
+    }
     if (response.isSuccess()) {
       var photoBean = response.data;
       var frontUrl = photoBean?.tastelessAmericanPlateCattle ?? '';

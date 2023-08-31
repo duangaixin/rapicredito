@@ -2,18 +2,18 @@ import 'package:get/get.dart';
 import 'package:rapicredito/model/config_info_bean.dart';
 import 'package:rapicredito/model/key_value_bean.dart';
 
-class AccountState {
+
+class AddAccountState {
   List<String> accountTypeList = ['Billetera Móvil', 'Cuenta Bancaria'];
 
   String collectionTypeCode = '';
-  bool isFromChange = false;
+
 
   List<ConfigInfoBean> originAccountList = [];
   List<ConfigInfoBean> originBankNameList = [];
   List<ConfigInfoBean> originBankTypeList = [];
 
   RxList<KeyValueBean> walletList = <KeyValueBean>[].obs;
-
   final RxInt _walletSelectIndex = 0.obs;
 
   int get walletSelectIndex => _walletSelectIndex.value;

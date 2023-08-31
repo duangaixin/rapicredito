@@ -1,47 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rapicredito/page/account/widget/bank_view.dart';
-import 'package:rapicredito/page/account/widget/wallet_view.dart';
+import 'package:rapicredito/page/account/change/index.dart';
+import 'package:rapicredito/page/account/change/widget/change_bank_view.dart';
+import 'package:rapicredito/page/account/change/widget/change_wallet_view.dart';
 import 'package:rapicredito/page/auth/widget/common_auth_agreement_view.dart';
-import 'package:rapicredito/page/account/index.dart';
 import 'package:rapicredito/widget/comon_section_title_view.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
+import 'package:rapicredito/widget/load_container_view.dart';
 
-class AccountPage extends GetView<AccountCtr> {
-  const AccountPage({Key? key}) : super(key: key);
+class ChangeAccountPage extends GetView<ChangeAccountCtr> {
+  const ChangeAccountPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomPageBgView(
         title: 'Método de pago',
-        content: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              tipView,
-              selectView,
-              Obx(() {
-                return Visibility(
-                    visible: controller.state.accountTypeSelectIndex == 0,
-                    child: const WalletView());
-              }),
-              Obx(() {
-                return Visibility(
-                    visible: controller.state.accountTypeSelectIndex == 1,
-                    child: const BankView());
-              }),
-              Visibility(
-                  visible: !controller.state.isFromChange,
-                  child: const Padding(
-                    padding: EdgeInsets.only(bottom: 30.0, top: 30.0),
-                    child: CommonAuthAgreeView(),
-                  ))
-            ],
-          ),
-        ));
+        content: Obx(() {
+          return LoadContainerView(
+              contentView: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    tipView,
+                    selectView,
+                    Obx(() {
+                      return Visibility(
+                          visible: controller.state.accountTypeSelectIndex == 0,
+                          child: const ChangeWalletView());
+                    }),
+                    Obx(() {
+                      return Visibility(
+                          visible: controller.state.accountTypeSelectIndex == 1,
+                          child: const ChangeBankView());
+                    }),
+                    Visibility(
+                        visible: !controller.state.isFromChange,
+                        child: const Padding(
+                          padding: EdgeInsets.only(bottom: 30.0, top: 30.0),
+                          child: CommonAuthAgreeView(),
+                        ))
+                  ],
+                ),
+              ),
+              loadState: controller.state.loadState);
+        }));
   }
 
   Widget get tipView => Visibility(

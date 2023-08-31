@@ -1,5 +1,6 @@
 import 'package:rapicredito/get/getx_router_auth.dart';
-import 'package:rapicredito/page/account/index.dart';
+import 'package:rapicredito/page/account/add/index.dart';
+import 'package:rapicredito/page/account/change/index.dart';
 import 'package:rapicredito/page/auth/contact/index.dart';
 import 'package:rapicredito/page/auth/id/index.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
@@ -56,8 +57,13 @@ class PageRouterManage {
         middlewares: [RouteAuthMiddleware()]),
     GetPage(
       name: PageRouterName.addAccountPage,
-      page: () => const AccountPage(),
-      binding: AccountBinding(),
+      page: () => const AddAccountPage(),
+      binding: AddAccountBinding(),
+    ),
+    GetPage(
+      name: PageRouterName.changeAccountPage,
+      page: () => const ChangeAccountPage(),
+      binding: ChangeAccountBinding(),
     ),
     GetPage(
         name: PageRouterName.clientPage,

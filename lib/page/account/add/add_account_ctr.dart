@@ -5,19 +5,20 @@ import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/get/getx_extension.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
+import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/model/config_info_bean.dart';
 import 'package:rapicredito/model/key_value_bean.dart';
-import 'package:rapicredito/page/account/index.dart';
+import 'package:rapicredito/page/account/add/index.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
+import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_picker.dart';
 import 'package:rapicredito/widget/progress_hud_view.dart';
 
-
-class AccountCtr extends BaseGetCtr {
-  final state = AccountState();
+class AddAccountCtr extends BaseGetCtr {
+  final state = AddAccountState();
   TextEditingController walletAccountCtr = TextEditingController();
   TextEditingController walletAccountConfirmCtr = TextEditingController();
 
@@ -27,24 +28,22 @@ class AccountCtr extends BaseGetCtr {
   @override
   void onInit() {
     super.onInit();
-    if (state.walletSelectIndex == 0) {
-      walletAccountCtr.addListener(_walletBtnCanClick);
-      walletAccountConfirmCtr.addListener(_walletBtnCanClick);
-    } else {
-      bankAccountCtr.addListener(_walletBtnCanClick);
-      bankAccountConfirmCtr.addListener(_walletBtnCanClick);
-    }
+    walletAccountCtr.addListener(_walletBtnCanClick);
+    walletAccountConfirmCtr.addListener(_walletBtnCanClick);
+    bankAccountCtr.addListener(_bankBtnCanClick);
+    bankAccountConfirmCtr.addListener(_bankBtnCanClick);
   }
 
   @override
-  void onReady() {
-    postAppConfigInfoRequest(AppConfigClickType.collectionType);
+  void onReady() async {
+    await postAppConfigInfoRequest(AppConfigClickType.collectionType);
     super.onReady();
   }
 
   void clickWalletItemView(int index) {
     state.walletSelectIndex = index;
   }
+
   void disableWalletClickToast() {
     if (state.walletBtnDisableClick) {
       ProgressHUD.showInfo(
@@ -71,16 +70,16 @@ class AccountCtr extends BaseGetCtr {
           state.bankType = '';
           bankAccountCtr.text = '';
           bankAccountConfirmCtr.text = '';
-        }else if(position==1){
-           state.walletSelectIndex=0;
-           walletAccountCtr.text='';
-           walletAccountConfirmCtr.text='';
+        } else if (position == 1) {
+          state.walletSelectIndex = 0;
+          walletAccountCtr.text = '';
+          walletAccountConfirmCtr.text = '';
         }
       }
     });
   }
 
-  void postAppConfigInfoRequest(AppConfigClickType clickType) async {
+  Future<void> postAppConfigInfoRequest(AppConfigClickType clickType) async {
     KeyboardUtils.unFocus();
     var param = <String, dynamic>{};
     var typeStr = '';
@@ -174,6 +173,47 @@ class AccountCtr extends BaseGetCtr {
     return param;
   }
 
+  Future<void> _postQueryAccountRequest() async {
+    KeyboardUtils.unFocus();
+    Map<String, dynamic> param = getCommonParam();
+    Get.showLoading();
+    var response =
+        await HttpRequestManage.instance.postQueryAccountRequest(param);
+    Get.dismiss();
+    if (response.isSuccess()) {
+      var netList = response.data ?? [];
+      if (!ObjectUtil.isEmptyList(netList)) {
+        var accountBean = netList[0];
+        var collectionType = accountBean.swissEnoughSaying ?? '';
+        var accountNumber = accountBean.dampThatTentBlankTrunk ?? '';
+        var walletName = accountBean.blankKeyRegulation ?? '';
+        var bankNameCode = accountBean.firstNurse ?? '';
+        var bankTypeCode = accountBean.broadSpiritualKilometre ?? '';
+        if (collectionType == '1') {
+          state.accountTypeSelectIndex = 1;
+          state.bankName = _getName(state.originBankNameList, bankNameCode);
+          state.bankType = _getName(state.originBankTypeList, bankTypeCode) ;
+          bankAccountCtr.text = accountNumber;
+          bankAccountConfirmCtr.text = accountNumber;
+        } else {
+          state.accountTypeSelectIndex = 0;
+          walletAccountCtr.text = accountNumber;
+          walletAccountConfirmCtr.text = accountNumber;
+          if (!ObjectUtil.isEmptyList(state.walletList)) {
+            for (int i = 0; i < state.walletList.length; i++) {
+              var bean = state.walletList[i];
+              if (bean.key == walletName) {
+                state.walletSelectIndex = i;
+              }
+            }
+          }
+        }
+      }
+    } else {
+      NetException.toastException(response);
+    }
+  }
+
   void postSaveAccountRequest() async {
     KeyboardUtils.unFocus();
     Map<String, dynamic> param = collectAccountParam();
@@ -246,9 +286,32 @@ class AccountCtr extends BaseGetCtr {
     return '';
   }
 
+  String _getName(List<ConfigInfoBean> dataSource, String value) {
+    if (!ObjectUtil.isEmptyList(dataSource)) {
+      for (int i = 0; i < dataSource.length; i++) {
+        var bean = dataSource[i];
+        if (bean.humanExpensiveBraveryHarmfulPhoto == value) {
+          return bean.latestCandle ?? '';
+        }
+      }
+    }
+    return '';
+  }
+
+
+  void goToWebViewPage(String title, String webViewUrl) {
+    KeyboardUtils.unFocus();
+    Get.toNamed(PageRouterName.webViewPage, arguments: {
+      AppConstants.webViewTitleKey: title,
+      AppConstants.webViewUrlKey: webViewUrl
+    });
+  }
+
   void _walletBtnCanClick() {
     if (ObjectUtil.isEmptyString(walletAccountCtr.text.strRvSpace()) ||
-        ObjectUtil.isEmptyString(walletAccountConfirmCtr.text.strRvSpace())) {
+        ObjectUtil.isEmptyString(walletAccountConfirmCtr.text.strRvSpace()) ||
+        walletAccountConfirmCtr.text.strRvSpace() !=
+            walletAccountCtr.text.strRvSpace()) {
       state.walletBtnDisableClick = true;
     } else {
       state.walletBtnDisableClick = false;
@@ -258,6 +321,8 @@ class AccountCtr extends BaseGetCtr {
   void _bankBtnCanClick() {
     if (ObjectUtil.isEmptyString(bankAccountCtr.text.strRvSpace()) ||
         ObjectUtil.isEmptyString(bankAccountConfirmCtr.text.strRvSpace()) ||
+        bankAccountConfirmCtr.text.strRvSpace() !=
+            bankAccountCtr.text.strRvSpace() ||
         ObjectUtil.isEmptyString(state.bankType) ||
         ObjectUtil.isEmptyString(state.bankName)) {
       state.bankBtnDisableClick = true;

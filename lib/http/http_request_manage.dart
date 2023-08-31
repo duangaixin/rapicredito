@@ -87,7 +87,7 @@ extension RequestBussiness on HttpRequestManage {
         onTransform: (json) => ClientInfoBean.fromJson(json));
   }
 
-  Future<BaseResponse<List<BankInfoBean>>> postQueryBankRequest(
+  Future<BaseResponse<List<BankInfoBean>>> postQueryAccountRequest(
       Map<String, dynamic> param) async {
     return await httpRequest.post<List<BankInfoBean>>(HttpApi.apiQueryAccountInfo,
         options: Options(contentType: Headers.formUrlEncodedContentType),

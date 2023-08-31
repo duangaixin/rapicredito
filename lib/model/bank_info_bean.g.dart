@@ -8,6 +8,7 @@ part of 'bank_info_bean.dart';
 
 BankInfoBean _$BankInfoBeanFromJson(Map<String, dynamic> json) => BankInfoBean(
       json['broadSpiritualKilometre'] as String?,
+      json['dampThatTentBlankTrunk'] as String?,
       json['blankKeyRegulation'] as String?,
       json['localImpossibleEffortSmoothNetwork'] as String?,
       json['firstNurse'] as String?,
@@ -18,6 +19,7 @@ BankInfoBean _$BankInfoBeanFromJson(Map<String, dynamic> json) => BankInfoBean(
 Map<String, dynamic> _$BankInfoBeanToJson(BankInfoBean instance) =>
     <String, dynamic>{
       'broadSpiritualKilometre': instance.broadSpiritualKilometre,
+      'dampThatTentBlankTrunk': instance.dampThatTentBlankTrunk,
       'blankKeyRegulation': instance.blankKeyRegulation,
       'localImpossibleEffortSmoothNetwork':
           instance.localImpossibleEffortSmoothNetwork,

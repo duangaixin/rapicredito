@@ -1,13 +1,14 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rapicredito/page/account/index.dart';
+import 'package:rapicredito/page/account/change/change_account_ctr.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_color_button.dart';
 import 'package:rapicredito/widget/custom_edit_view.dart';
 
-class WalletView extends GetView<AccountCtr> {
-  const WalletView({Key? key}) : super(key: key);
+class ChangeWalletView extends GetView<ChangeAccountCtr> {
+  const ChangeWalletView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,27 +43,32 @@ class WalletView extends GetView<AccountCtr> {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 55.0, right: 55.0, top: 26.0),
-            child: CustomColorButton(
-              realClick: controller.postSaveAccountRequest,
-              disableClick: controller.disableWalletClickToast,
-              disableColors: const [
-                Color(0xffF5F6F4),
-                Color(0xffF5F6F4),
-              ],
-              disable:  controller.state.walletBtnDisableClick,
-              colors: const [Color(0xffB8EF17), Color(0xffB8EF17)],
-              height: 46.0,
-              borderRadius: BorderRadius.circular(8.0),
-              btnContent:  Text(
-                'Confirmar',
-                style: TextStyle(
-                    fontSize: 15.0,
-                    color: controller.state.walletBtnDisableClick
-                        ? const Color(0xffC4BFBF)
-                        : const Color(0xff333333),
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
+            child: Obx((){
+              return  CustomColorButton(
+                realClick: controller.postSaveAccountRequest,
+                disableClick: controller.disableWalletClickToast,
+                disableColors: const [
+                  Color(0xffF5F6F4),
+                  Color(0xffF5F6F4),
+                ],
+                disable:  controller.state.walletBtnDisableClick,
+                colors: const [Color(0xffB8EF17), Color(0xffB8EF17)],
+                height: 46.0,
+                borderRadius: BorderRadius.circular(8.0),
+                btnContent:  Text(
+                  'Confirmar',
+                  style: TextStyle(
+                      fontSize: 15.0,
+                      color: controller.state.walletBtnDisableClick
+                          ? const Color(0xffC4BFBF)
+                          : const Color(0xff333333),
+                      fontWeight: FontWeight.bold),
+                ),
+              );
+            })
+
+
+           ,
           ),
         ],
       );
@@ -138,8 +144,13 @@ class WalletView extends GetView<AccountCtr> {
                                     style: const TextStyle(
                                         decoration: TextDecoration.underline,
                                         fontSize: 15.0,
-                                        color: Color(0xff333333)),
-                                  ),
+                                        color: Color(0xff333333)
+
+                                    ),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        controller.goToWebViewPage('百度', value);
+                                      }),
                                 ])));
                       }))
                 ],

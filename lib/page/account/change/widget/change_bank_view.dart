@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rapicredito/page/account/index.dart';
+import 'package:rapicredito/page/account/change/index.dart';
 import 'package:rapicredito/page/auth/person/auth_person_ctr.dart';
 import 'package:rapicredito/widget/custom_color_button.dart';
 import 'package:rapicredito/widget/custom_edit_view.dart';
 import 'package:rapicredito/widget/custom_select_view.dart';
 
-class BankView extends GetView<AccountCtr> {
-  const BankView({Key? key}) : super(key: key);
+class ChangeBankView extends GetView<ChangeAccountCtr> {
+  const ChangeBankView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -78,27 +78,29 @@ class BankView extends GetView<AccountCtr> {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 55.0, right: 55.0, top: 26.0),
-            child: CustomColorButton(
-              realClick: controller.postSaveAccountRequest,
-              disableClick: controller.disableBankClickToast,
-              disableColors: const [
-                Color(0xffF5F6F4),
-                Color(0xffF5F6F4),
-              ],
-              disable: controller.state.bankBtnDisableClick,
-              colors: const [Color(0xffB8EF17), Color(0xffB8EF17)],
-              height: 46.0,
-              borderRadius: BorderRadius.circular(8.0),
-              btnContent: Text(
-                'Registrarse',
-                style: TextStyle(
-                    fontSize: 15.0,
-                    color: controller.state.bankBtnDisableClick
-                        ? const Color(0xffC4BFBF)
-                        : const Color(0xff333333),
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
+            child: Obx(() {
+              return CustomColorButton(
+                realClick: controller.postSaveAccountRequest,
+                disableClick: controller.disableBankClickToast,
+                disableColors: const [
+                  Color(0xffF5F6F4),
+                  Color(0xffF5F6F4),
+                ],
+                disable: controller.state.bankBtnDisableClick,
+                colors: const [Color(0xffB8EF17), Color(0xffB8EF17)],
+                height: 46.0,
+                borderRadius: BorderRadius.circular(8.0),
+                btnContent: Text(
+                  'Registrarse',
+                  style: TextStyle(
+                      fontSize: 15.0,
+                      color: controller.state.bankBtnDisableClick
+                          ? const Color(0xffC4BFBF)
+                          : const Color(0xff333333),
+                      fontWeight: FontWeight.bold),
+                ),
+              );
+            }),
           ),
         ],
       );

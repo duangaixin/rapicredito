@@ -163,9 +163,14 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
                         Get.toNamed(PageRouterName.loginPage);
                       }),
                   CustomButton(
-                      text: '钱包或银行',
+                      text: '添加账户',
                       onPressed: () {
                         Get.toNamed(PageRouterName.addAccountPage);
+                      }),
+                  CustomButton(
+                      text: '修改账户',
+                      onPressed: () {
+                        Get.toNamed(PageRouterName.changeAccountPage);
                       }),
                   CustomButton(
                       text: '首贷单金额单期限',
