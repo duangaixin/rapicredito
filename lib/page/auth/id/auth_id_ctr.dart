@@ -48,8 +48,6 @@ class AuthIdCtr extends BaseGetCtr {
 
   @override
   void onReady() {
-    // _postQueryAuthPersonRequest();
-    // _postQueryPhotoInfo();
     _postInitRequest();
     super.onReady();
   }
@@ -143,7 +141,7 @@ class AuthIdCtr extends BaseGetCtr {
 
   Map<String, dynamic> _collectIdParam() {
     Map<String, dynamic> param = {};
-    //身份证号 undividedMay
+    //身份证号
     param['undividedMay'] = idNumCtr.text.strRvSpace();
     //姓
     param['puzzledConditionFamiliarUnion'] = firstNameCtr.text.trim();
@@ -215,6 +213,7 @@ class AuthIdCtr extends BaseGetCtr {
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
     Get.dismiss();
     if (response.isSuccess()) {
+      Get.offNamedUntil(PageRouterName.mainPage, (route) => false);
     } else {
       NetException.toastException(response);
     }

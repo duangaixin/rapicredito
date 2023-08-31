@@ -1,8 +1,7 @@
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_button.dart';
-import 'package:rapicredito/widget/custom_image_view.dart';
+
 
 class DateSelectDialog extends StatefulWidget {
   @override
