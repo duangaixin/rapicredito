@@ -49,5 +49,16 @@ class Resource {
       'assets/image/other/pay_tip_dialog.png';
   static const String assetsImageCommitSuccessDialog =
       'assets/image/other/commit_success_dialog.png';
+  static const String assetsImageMineClient =
+      'assets/image/main/mine_client.png';
+  static const String assetsImageMinePhone =
+      'assets/image/main/mine_phone.png';
+  static const String assetsImageMineSetting =
+      'assets/image/main/mine_setting.png';
+  static const String assetsImageMineSignAgreement =
+      'assets/image/main/mine_sign_agreement.png';
+  static const String assetsImageMineSupplyAgreement =
+      'assets/image/main/mine_supply_agreement.png';
+
 
 }
