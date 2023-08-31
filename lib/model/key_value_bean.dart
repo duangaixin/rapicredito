@@ -1,18 +1,23 @@
-class KeyValueBean {
+import 'package:json_annotation/json_annotation.dart';
+
+part 'key_value_bean.g.dart';
+
+
+@JsonSerializable()
+class KeyValueBean extends Object {
+
+  @JsonKey(name: 'key')
   String? key;
+
+  @JsonKey(name: 'value')
   String? value;
 
-  KeyValueBean({this.key, this.value});
+  KeyValueBean(this.key,this.value,);
 
-  KeyValueBean.fromJson(Map<String, dynamic> json) {
-    key = json['key'];
-    value = json['value'];
-  }
+  factory KeyValueBean.fromJson(Map<String, dynamic> srcJson) => _$KeyValueBeanFromJson(srcJson);
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['key'] = key;
-    data['value'] = value;
-    return data;
-  }
+  Map<String, dynamic> toJson() => _$KeyValueBeanToJson(this);
+
 }
+
+  

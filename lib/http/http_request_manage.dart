@@ -103,4 +103,31 @@ extension RequestBussiness on HttpRequestManage {
         data: param);
   }
 
+
+
+
+
+
+
+
+  Future<BaseResponse> postUploadBigJson(
+      Map<String, dynamic> param) async {
+    return await httpRequest.post(HttpApi.apiUploadBigJson,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        data: param,
+        onTransform: (json) => null
+    );
+  }
+
+
+  Future<BaseResponse> postQueryUserInfoRequest(
+      Map<String, dynamic> param) async {
+    return await httpRequest.post(HttpApi.apiQueryUserInfo,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        data: param,
+        onTransform: (json) => null
+    );
+  }
+
+
 }

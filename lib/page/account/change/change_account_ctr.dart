@@ -121,7 +121,7 @@ class ChangeAccountCtr extends BaseGetCtr {
             if (type != '1') {
               var key = bean.latestCandle ?? '';
               var value = bean.northernMarriageCommunism ?? '';
-              var keyValueBean = KeyValueBean(key: key, value: value);
+              var keyValueBean = KeyValueBean(key,value);
               state.walletList.add(keyValueBean);
             }
           }
