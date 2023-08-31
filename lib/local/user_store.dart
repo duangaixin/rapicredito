@@ -6,7 +6,7 @@ class UserStore extends GetxController {
   static UserStore get to => Get.find();
   String mToken = '';
   int mUserId = -1;
-
+  String mUserPhone='';
   bool get hasToken => mToken.isNotEmpty;
 
   @override
@@ -14,20 +14,25 @@ class UserStore extends GetxController {
     super.onInit();
     mToken = StorageService.to.getString(AppConstants.userTokenKey);
     mUserId = StorageService.to.getInt(AppConstants.userIdKey);
+    mUserPhone = StorageService.to.getString(AppConstants.userPhoneKey);
   }
 
-  Future<void> setLoginInfo(String token, int userId) async {
+  Future<void> setLoginInfo(String token, int userId,String userPhone) async {
     await StorageService.to.setString(AppConstants.userTokenKey, token);
     await StorageService.to.setInt(AppConstants.userIdKey, userId);
+    await StorageService.to.setInt(AppConstants.userPhoneKey, userId);
 
     mToken = token;
     mUserId = userId;
+    mUserPhone=userPhone;
+
   }
 
   Future<void> loginOut() async {
     if (hasToken) {
       mUserId = -1;
       mToken = '';
+      mUserPhone='';
       await StorageService.to.clear();
     }
   }

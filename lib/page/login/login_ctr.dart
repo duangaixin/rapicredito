@@ -71,9 +71,10 @@ class LoginCtr extends BaseGetCtr {
     KeyboardUtils.unFocus();
     _startTimer();
     var param = <String, dynamic>{};
+    var phoneNum = phoneCtr.text.strRvSpace();
 
     ///phoneNo
-    param['swiftMeansEitherPine'] = phoneCtr.text.strRvSpace();
+    param['swiftMeansEitherPine'] = phoneNum;
 
     ///smsCode
     param['littlePenfriendCompressedFlightManager'] = codeCtr.text.strRvSpace();
@@ -95,7 +96,7 @@ class LoginCtr extends BaseGetCtr {
       var firstRegister = loginInfoBean?.cheapFenceScholarEverydayClinic ?? '0';
       var testFirstRegister =
           loginInfoBean?.delightedGooseFacialUnmarriedHamburger ?? 0;
-      await UserStore.to.setLoginInfo(token, userId);
+      await UserStore.to.setLoginInfo(token, userId, phoneNum);
       var mainHomeCtr = Get.find<MainHomeCtr>();
       mainHomeCtr.refreshInfo();
       if (isRootPage) {
