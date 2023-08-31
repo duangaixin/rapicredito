@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:rapicredito/get/getx_keep_state_view.dart';
 import 'package:rapicredito/page/main/home/widget/common_app_bar_view.dart';
 import 'package:rapicredito/page/main/mine/index.dart';
@@ -95,7 +96,7 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
               iconWith: 25.0,
               iconPath: Resource.assetsImageAuthFace,
               onTap: ctr.goToClientPage,
-              content: 'Servicio al Cliente',
+              content: 'client'.tr,
             ),
             CommonSettingClickView(
               iconHeight: 21.25,

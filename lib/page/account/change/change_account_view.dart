@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:rapicredito/page/account/change/index.dart';
 import 'package:rapicredito/page/account/change/widget/change_bank_view.dart';
 import 'package:rapicredito/page/account/change/widget/change_wallet_view.dart';
-import 'package:rapicredito/page/auth/widget/common_auth_agreement_view.dart';
 import 'package:rapicredito/widget/comon_section_title_view.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';

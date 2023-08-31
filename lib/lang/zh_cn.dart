@@ -1,4 +1,5 @@
 const Map<String, String> zhCN = {
-  'title': '这是标题',
-  'login': '登录用户 @name，邮箱账号 @email',
+  'en': '英语',
+  'es': '西班牙语',
+  'client': '客服'
 };

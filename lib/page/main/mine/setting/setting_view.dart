@@ -42,14 +42,14 @@ class SettingPage extends GetView<SettingCtr> {
                     children: [
                       Expanded(
                           child: CustomButton(
-                        onPressed: () {},
+                        onPressed: controller.changeChinese,
                         minWidth: 111.0,
                         minHeight: 46.0,
                         backgroundColor: const Color(0xffB8EF17),
                         disabledBackgroundColor: const Color(0xffB8EF17),
                         fontSize: 15.0,
                         radius: 8.0,
-                        text: 'English',
+                        text: 'en'.tr,
                         textColor: const Color(0xff333333),
                         fontWeight: FontWeight.bold,
                       )),
@@ -58,14 +58,14 @@ class SettingPage extends GetView<SettingCtr> {
                       ),
                       Expanded(
                           child: CustomButton(
-                        onPressed: () {},
+                        onPressed:controller.changeEs,
                         minWidth: 111.0,
                         minHeight: 46.0,
                         backgroundColor: Colors.white,
                         disabledBackgroundColor: Colors.white,
                         fontSize: 15.0,
                         radius: 8.0,
-                        text: 'Español',
+                        text: 'es'.tr,
                         textColor: const Color(0xff333333),
                         fontWeight: FontWeight.bold,
                         side: const BorderSide(

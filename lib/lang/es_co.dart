@@ -1,4 +1,6 @@
 const Map<String, String> esCO = {
-  'title': 'This is Title!',
-  'login': 'logged in as @name with email @email',
+  'en': 'English',
+  'es': 'Español',
+  'client': 'Servicio al Cliente'
+
 };
