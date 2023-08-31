@@ -36,12 +36,6 @@ class ChangeAccountPage extends GetView<ChangeAccountCtr> {
                           visible: controller.state.accountTypeSelectIndex == 1,
                           child: const ChangeBankView());
                     }),
-                    Visibility(
-                        visible: !controller.state.isFromChange,
-                        child: const Padding(
-                          padding: EdgeInsets.only(bottom: 30.0, top: 30.0),
-                          child: CommonAuthAgreeView(),
-                        ))
                   ],
                 ),
               ),
@@ -49,15 +43,11 @@ class ChangeAccountPage extends GetView<ChangeAccountCtr> {
         }));
   }
 
-  Widget get tipView => Visibility(
-      visible: controller.state.isFromChange,
-      child: const Padding(
-        padding: EdgeInsets.only(top: 20.0, left: 16.0, right: 16.0),
-        child: Text(
+  Widget get tipView => const Padding(
+      padding: EdgeInsets.only(top: 20.0, left: 16.0, right: 16.0),
+      child: Text(
           'Por favor, rellene la información correcta de cobro para asegurarse de que el préstamo se puede conceder sin problemas a su cuenta.',
-          style: TextStyle(fontSize: 15.0, color: Color(0xffD53535)),
-        ),
-      ));
+          style: TextStyle(fontSize: 15.0, color: Color(0xffD53535))));
 
   Widget get selectView => Column(
         mainAxisSize: MainAxisSize.min,

@@ -8,7 +8,6 @@ class AddAccountState {
 
   String collectionTypeCode = '';
 
-
   List<ConfigInfoBean> originAccountList = [];
   List<ConfigInfoBean> originBankNameList = [];
   List<ConfigInfoBean> originBankTypeList = [];

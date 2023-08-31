@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:rapicredito/page/account/add/widget/add_bank_view.dart';
 import 'package:rapicredito/page/account/add/widget/add_wallet_view.dart';
 import 'package:rapicredito/page/account/add/index.dart';
+import 'package:rapicredito/page/auth/widget/common_auth_agreement_view.dart';
 import 'package:rapicredito/widget/comon_section_title_view.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
@@ -31,6 +32,10 @@ class AddAccountPage extends GetView<AddAccountCtr> {
                     visible: controller.state.accountTypeSelectIndex == 1,
                     child: const AddBankView());
               }),
+              const Padding(
+                padding: EdgeInsets.only(bottom: 30.0, top: 30.0),
+                child: CommonAuthAgreeView(),
+              )
             ],
           ),
         ));

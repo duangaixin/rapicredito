@@ -35,7 +35,7 @@ class ChangeBankView extends GetView<ChangeAccountCtr> {
                 editContent: controller.state.bankName,
                 action: () {
                   controller.postAppConfigInfoRequest(
-                      AppConfigClickType.bankNameList);
+                      AppConfigClickType.bankNameList,isShowDialog: true);
                 },
               );
             }),
@@ -49,7 +49,7 @@ class ChangeBankView extends GetView<ChangeAccountCtr> {
                 editContent: controller.state.bankType,
                 action: () {
                   controller.postAppConfigInfoRequest(
-                      AppConfigClickType.bankAccountType);
+                      AppConfigClickType.bankAccountType,isShowDialog: true);
                 },
               );
             }),

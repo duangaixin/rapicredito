@@ -15,6 +15,7 @@ import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_picker.dart';
+import 'package:rapicredito/widget/load_container_view.dart';
 import 'package:rapicredito/widget/progress_hud_view.dart';
 
 class ChangeAccountCtr extends BaseGetCtr {
@@ -28,13 +29,6 @@ class ChangeAccountCtr extends BaseGetCtr {
   @override
   void onInit() {
     super.onInit();
-    var param = Get.arguments;
-    if (param is Map && !ObjectUtil.isEmptyMap(param)) {
-      if (param.containsKey('isFromChange')) {
-        state.isFromChange = param['isFromChange'] ?? true;
-      }
-    }
-
     walletAccountCtr.addListener(_walletBtnCanClick);
     walletAccountConfirmCtr.addListener(_walletBtnCanClick);
     bankAccountCtr.addListener(_bankBtnCanClick);
@@ -43,19 +37,13 @@ class ChangeAccountCtr extends BaseGetCtr {
 
   @override
   void onReady() async {
-    await postAppConfigInfoRequest(AppConfigClickType.collectionType);
-
-
-
-    await postAppConfigInfoRequest(AppConfigClickType.bankNameList );
-    await postAppConfigInfoRequest(AppConfigClickType.bankAccountType);
+    await postAppConfigInfoRequest(AppConfigClickType.collectionType,
+        isInitRequest: true);
+    await postAppConfigInfoRequest(AppConfigClickType.bankNameList,
+        isInitRequest: true);
+    await postAppConfigInfoRequest(AppConfigClickType.bankAccountType,
+        isInitRequest: true);
     await _postQueryAccountRequest();
-    if (state.isFromChange) {
-
-      await postAppConfigInfoRequest(AppConfigClickType.bankNameList );
-      await postAppConfigInfoRequest(AppConfigClickType.bankAccountType);
-      await _postQueryAccountRequest();
-    }
     super.onReady();
   }
 
@@ -98,7 +86,8 @@ class ChangeAccountCtr extends BaseGetCtr {
     });
   }
 
-  Future<void> postAppConfigInfoRequest(AppConfigClickType clickType) async {
+  Future<void> postAppConfigInfoRequest(AppConfigClickType clickType,
+      {bool isShowDialog = false, bool isInitRequest = false}) async {
     KeyboardUtils.unFocus();
     var param = <String, dynamic>{};
     var typeStr = '';
@@ -111,9 +100,13 @@ class ChangeAccountCtr extends BaseGetCtr {
     }
     param['everydayMapleChallengingAirline'] = typeStr;
     param.addAll(getCommonParam());
-    Get.showLoading();
+    if (isShowDialog) {
+      Get.showLoading();
+    }
     var response = await HttpRequestManage.instance.postAppConfigInfo(param);
-    Get.dismiss();
+    if (isShowDialog) {
+      Get.dismiss();
+    }
     if (response.isSuccess()) {
       var netList = response.data ?? [];
       if (!ObjectUtil.isEmptyList(netList)) {
@@ -139,7 +132,9 @@ class ChangeAccountCtr extends BaseGetCtr {
 
           var showList = netList.map((e) => e.latestCandle).toList();
           if (!ObjectUtil.isEmptyList(showList)) {
-            _showSelectDialog(showList, clickType);
+            if (!isInitRequest) {
+              _showSelectDialog(showList, clickType);
+            }
           }
         } else if (clickType == AppConfigClickType.bankAccountType) {
           state.originBankTypeList
@@ -147,7 +142,9 @@ class ChangeAccountCtr extends BaseGetCtr {
             ..addAll(netList);
           var showList = netList.map((e) => e.latestCandle).toList();
           if (!ObjectUtil.isEmptyList(showList)) {
-            _showSelectDialog(showList, clickType);
+            if (!isInitRequest) {
+              _showSelectDialog(showList, clickType);
+            }
           }
         }
       }
@@ -192,13 +189,17 @@ class ChangeAccountCtr extends BaseGetCtr {
     return param;
   }
 
-  Future<void> _postQueryAccountRequest() async {
+  Future<void> _postQueryAccountRequest({bool isShowDialog = false}) async {
     KeyboardUtils.unFocus();
     Map<String, dynamic> param = getCommonParam();
-    Get.showLoading();
+    if (isShowDialog) {
+      Get.showLoading();
+    }
     var response =
         await HttpRequestManage.instance.postQueryAccountRequest(param);
-    Get.dismiss();
+    if (isShowDialog) {
+      Get.dismiss();
+    }
     if (response.isSuccess()) {
       var netList = response.data ?? [];
       if (!ObjectUtil.isEmptyList(netList)) {
@@ -211,7 +212,7 @@ class ChangeAccountCtr extends BaseGetCtr {
         if (collectionType == '1') {
           state.accountTypeSelectIndex = 1;
           state.bankName = _getName(state.originBankNameList, bankNameCode);
-          state.bankType = _getName(state.originBankTypeList, bankTypeCode) ;
+          state.bankType = _getName(state.originBankTypeList, bankTypeCode);
           bankAccountCtr.text = accountNumber;
           bankAccountConfirmCtr.text = accountNumber;
         } else {
@@ -228,7 +229,9 @@ class ChangeAccountCtr extends BaseGetCtr {
           }
         }
       }
+      state.loadState = LoadState.succeed;
     } else {
+      state.loadState = LoadState.failed;
       NetException.toastException(response);
     }
   }
@@ -251,8 +254,6 @@ class ChangeAccountCtr extends BaseGetCtr {
     if (clickType == AppConfigClickType.bankNameList) {
       selectData = state.bankName;
     } else if (clickType == AppConfigClickType.bankAccountType) {
-      selectData = state.bankType;
-    } else if (clickType == AppConfigClickType.collectionType) {
       selectData = state.bankType;
     }
     CustomPicker.showSinglePicker(Get.context!, data: netList,
@@ -316,7 +317,6 @@ class ChangeAccountCtr extends BaseGetCtr {
     }
     return '';
   }
-
 
   void goToWebViewPage(String title, String webViewUrl) {
     KeyboardUtils.unFocus();

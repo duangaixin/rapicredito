@@ -7,7 +7,6 @@ class ChangeAccountState {
   List<String> accountTypeList = ['Billetera Móvil', 'Cuenta Bancaria'];
 
   String collectionTypeCode = '';
-  bool isFromChange = false;
 
   List<ConfigInfoBean> originAccountList = [];
   List<ConfigInfoBean> originBankNameList = [];

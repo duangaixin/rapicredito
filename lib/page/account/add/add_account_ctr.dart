@@ -173,47 +173,6 @@ class AddAccountCtr extends BaseGetCtr {
     return param;
   }
 
-  Future<void> _postQueryAccountRequest() async {
-    KeyboardUtils.unFocus();
-    Map<String, dynamic> param = getCommonParam();
-    Get.showLoading();
-    var response =
-        await HttpRequestManage.instance.postQueryAccountRequest(param);
-    Get.dismiss();
-    if (response.isSuccess()) {
-      var netList = response.data ?? [];
-      if (!ObjectUtil.isEmptyList(netList)) {
-        var accountBean = netList[0];
-        var collectionType = accountBean.swissEnoughSaying ?? '';
-        var accountNumber = accountBean.dampThatTentBlankTrunk ?? '';
-        var walletName = accountBean.blankKeyRegulation ?? '';
-        var bankNameCode = accountBean.firstNurse ?? '';
-        var bankTypeCode = accountBean.broadSpiritualKilometre ?? '';
-        if (collectionType == '1') {
-          state.accountTypeSelectIndex = 1;
-          state.bankName = _getName(state.originBankNameList, bankNameCode);
-          state.bankType = _getName(state.originBankTypeList, bankTypeCode) ;
-          bankAccountCtr.text = accountNumber;
-          bankAccountConfirmCtr.text = accountNumber;
-        } else {
-          state.accountTypeSelectIndex = 0;
-          walletAccountCtr.text = accountNumber;
-          walletAccountConfirmCtr.text = accountNumber;
-          if (!ObjectUtil.isEmptyList(state.walletList)) {
-            for (int i = 0; i < state.walletList.length; i++) {
-              var bean = state.walletList[i];
-              if (bean.key == walletName) {
-                state.walletSelectIndex = i;
-              }
-            }
-          }
-        }
-      }
-    } else {
-      NetException.toastException(response);
-    }
-  }
-
   void postSaveAccountRequest() async {
     KeyboardUtils.unFocus();
     Map<String, dynamic> param = collectAccountParam();
@@ -232,8 +191,6 @@ class AddAccountCtr extends BaseGetCtr {
     if (clickType == AppConfigClickType.bankNameList) {
       selectData = state.bankName;
     } else if (clickType == AppConfigClickType.bankAccountType) {
-      selectData = state.bankType;
-    } else if (clickType == AppConfigClickType.collectionType) {
       selectData = state.bankType;
     }
     CustomPicker.showSinglePicker(Get.context!, data: netList,

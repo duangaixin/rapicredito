@@ -53,15 +53,17 @@ class AuthIdCtr extends BaseGetCtr {
     _postInitRequest();
     super.onReady();
   }
+
   void _postInitRequest() {
     Get.showLoading();
     Future.wait([
       _postQueryAuthPersonRequest(),
       _postQueryPhotoInfo(),
     ]).whenComplete(() {
-        Get.dismiss();
+      Get.dismiss();
     });
   }
+
   void tackCamera({bool isFront = true, bool isUploadFace = false}) {
     KeyboardUtils.unFocus();
     PermissionUtil.checkPermission(
@@ -234,17 +236,16 @@ class AuthIdCtr extends BaseGetCtr {
       'terminalDifferentActionFatFountain': userId,
       'dailyFortuneQuantity': '0.0,0.0',
       'contraryScientificRightNone': 'es',
-      'everydayMapleChallengingAirline': isUploadFace ? '00' : '01'
+      'everydayMapleChallengingAirline': isUploadFace ? '01' : '00'
     });
     Get.showLoading();
     var response =
         await HttpRequestManage.instance.postUploadPhotoRequest(formData);
     Get.dismiss();
     if (response.isSuccess()) {
-      Future.delayed(const Duration(milliseconds: 50),(){
-        _postQueryPhotoInfo(isShowDialog: true) ;
+      Future.delayed(const Duration(milliseconds: 50), () {
+        _postQueryPhotoInfo(isShowDialog: true);
       });
-
     } else {
       Get.dismiss();
       var errorMsg = response.message ?? 'error';
@@ -252,14 +253,14 @@ class AuthIdCtr extends BaseGetCtr {
     }
   }
 
-  Future<void> _postQueryPhotoInfo({bool isShowDialog=false}) async {
+  Future<void> _postQueryPhotoInfo({bool isShowDialog = false}) async {
     var param = <String, dynamic>{};
     param.addAll(getCommonParam());
-    if(isShowDialog){
+    if (isShowDialog) {
       Get.showLoading();
     }
     var response = await HttpRequestManage.instance.postQueryPhotoInfo(param);
-    if(isShowDialog){
+    if (isShowDialog) {
       Get.dismiss();
     }
     if (response.isSuccess()) {

@@ -145,7 +145,7 @@ class AuthIdPage extends GetView<AuthIdCtr> {
           Center(
             child: faceCameraView(() {
               //         controller.goToCustomCamera();
-              controller.tackCamera(isUploadFace: true);
+              controller.tackCamera(isFront:true,isUploadFace: true);
             }),
           )
         ],
@@ -208,6 +208,8 @@ class AuthIdPage extends GetView<AuthIdCtr> {
                   controller: controller.idNumCtr,
                   editTitle: 'Número de documento',
                   hintText: 'Introducir texto',
+                  maxLength: 10,
+                  keyboardType: TextInputType.number,
                 ),
                 CustomEditView(
                   controller: controller.firstNameCtr,
