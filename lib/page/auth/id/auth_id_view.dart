@@ -143,10 +143,7 @@ class AuthIdPage extends GetView<AuthIdCtr> {
             ),
           ),
           Center(
-            child: faceCameraView(() {
-              //         controller.goToCustomCamera();
-              controller.tackCamera(isFront:true,isUploadFace: true);
-            }),
+            child: faceCameraView(controller.goToCustomCamera),
           )
         ],
       );

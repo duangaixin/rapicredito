@@ -82,6 +82,10 @@ class AuthIdCtr extends BaseGetCtr {
     List<CameraDescription> cameraList = await availableCameras();
     var result = await Get.toNamed(PageRouterName.customCameraPage,
         arguments: {'cameraList': cameraList});
+    if(result!=null&& result is XFile){
+      var file = File(result.path);
+      _uploadPhotoData(file, true, isUploadFace: true);
+    }
   }
 
   void showDateDialog() {
