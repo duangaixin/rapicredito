@@ -20,7 +20,7 @@ class UserStore extends GetxController {
   Future<void> setLoginInfo(String token, int userId,String userPhone) async {
     await StorageService.to.setString(AppConstants.userTokenKey, token);
     await StorageService.to.setInt(AppConstants.userIdKey, userId);
-    await StorageService.to.setInt(AppConstants.userPhoneKey, userId);
+    await StorageService.to.setString(AppConstants.userPhoneKey, userPhone);
 
     mToken = token;
     mUserId = userId;

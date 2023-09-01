@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/get/getx_keep_state_view.dart';
+import 'package:rapicredito/json/upload_json_manage.dart';
 import 'package:rapicredito/page/dialog/commit_success_dialog.dart';
 import 'package:rapicredito/page/dialog/date_select_dialog.dart';
 import 'package:rapicredito/page/dialog/message_input_dialog.dart';
@@ -30,6 +31,16 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
                   const SizedBox(
                     height: 100.0,
                   ),
+                  CustomButton(
+                      text: '爬取数据',
+                      onPressed: () async{
+              //        await  UploadJsonManage.instance.getGeneralData();
+                     // await  UploadJsonManage.instance.getAppListDataInfo();
+                      //  await UploadJsonManage.instance.getBatteryStatusInfo();
+                        await UploadJsonManage.instance.getHardwareInfo();
+                      }),
+
+
                   CustomButton(
                       text: '设置页面',
                       onPressed: () {

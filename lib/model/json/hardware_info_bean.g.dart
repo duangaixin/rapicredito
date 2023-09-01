@@ -1,0 +1,83 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'hardware_info_bean.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+HardwareInfoBean _$HardwareInfoBeanFromJson(Map<String, dynamic> json) =>
+    HardwareInfoBean(
+      json['abis'] as String?,
+      json['base_os'] as String?,
+      json['baseband_ver'] as String?,
+      json['board'] as String?,
+      json['bootloader'] as String?,
+      json['brand'] as String?,
+      json['cpu_abi'] as String?,
+      json['cpu_abi2'] as String?,
+      json['cpu_cur'] as String?,
+      json['cpu_max'] as String?,
+      json['cpu_min'] as String?,
+      json['cpu_type'] as String?,
+      json['device'] as String?,
+      json['display'] as String?,
+      json['finger_print'] as String?,
+      json['hardware'] as String?,
+      json['host'] as String?,
+      json['id'] as String?,
+      json['is_tablet'] as int?,
+      json['manufacturer_name'] as String?,
+      json['model'] as String?,
+      json['physical_size'] as String?,
+      json['product'] as String?,
+      json['radio_version'] as String?,
+      json['release'] as String?,
+      json['resolution'] as String?,
+      json['screen_density'] as String?,
+      json['screen_density_dpi'] as String?,
+      json['sdk_version_code'] as String?,
+      json['serial_number'] as String?,
+      json['tags'] as String?,
+      json['time'] as String?,
+      json['type'] as String?,
+      json['user'] as String?,
+    );
+
+Map<String, dynamic> _$HardwareInfoBeanToJson(HardwareInfoBean instance) =>
+    <String, dynamic>{
+      'abis': instance.abis,
+      'base_os': instance.baseOs,
+      'baseband_ver': instance.basebandVer,
+      'board': instance.board,
+      'bootloader': instance.bootloader,
+      'brand': instance.brand,
+      'cpu_abi': instance.cpuAbi,
+      'cpu_abi2': instance.cpuAbi2,
+      'cpu_cur': instance.cpuCur,
+      'cpu_max': instance.cpuMax,
+      'cpu_min': instance.cpuMin,
+      'cpu_type': instance.cpuType,
+      'device': instance.device,
+      'display': instance.display,
+      'finger_print': instance.fingerPrint,
+      'hardware': instance.hardware,
+      'host': instance.host,
+      'id': instance.id,
+      'is_tablet': instance.isTablet,
+      'manufacturer_name': instance.manufacturerName,
+      'model': instance.model,
+      'physical_size': instance.physicalSize,
+      'product': instance.product,
+      'radio_version': instance.radioVersion,
+      'release': instance.release,
+      'resolution': instance.resolution,
+      'screen_density': instance.screenDensity,
+      'screen_density_dpi': instance.screenDensityDpi,
+      'sdk_version_code': instance.sdkVersionCode,
+      'serial_number': instance.serialNumber,
+      'tags': instance.tags,
+      'time': instance.time,
+      'type': instance.type,
+      'user': instance.user,
+    };

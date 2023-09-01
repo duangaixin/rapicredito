@@ -27,10 +27,10 @@ dependencies:
   pull_to_refresh: ^2.0.0
   cached_network_image: ^3.2.3
   timelines: ^0.1.0
-  image_picker: ^0.8.9
+  image_picker: ^1.0.4
   url_launcher: ^6.1.11
-  json_serializable: ^6.2.0
-  build_runner: ^2.1.0
+  json_serializable: ^6.7.1
+  build_runner: ^ 2.4.6
   bot_toast: ^4.0.4
   dio: ^5.0.2
   http_proxy: ^1.2.1
@@ -39,7 +39,7 @@ dependencies:
   camera: ^0.10.5+3
   firebase_core: 2.6.1
   firebase_crashlytics: 3.0.14
-
+  devicesinfo: 0.0.2
 
 dev_dependencies:
   flutter_test:
