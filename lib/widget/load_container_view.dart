@@ -112,7 +112,7 @@ class ClassicalLoadingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Center(
         child: Column(mainAxisSize: MainAxisSize.min, children: const <Widget>[
-          CupertinoActivityIndicator(radius: 10.0),
+          CupertinoActivityIndicator(radius: 12.0),
           Padding(
               padding: EdgeInsets.only(top: 10),
               child: Text('', style: TextStyle(fontSize: 13)))
