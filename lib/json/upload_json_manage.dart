@@ -5,6 +5,8 @@ import 'package:rapicredito/model/json/app_list_info_bean.dart';
 import 'package:rapicredito/model/json/battery_info_bean.dart';
 import 'package:rapicredito/model/json/general_info_bean.dart';
 import 'package:rapicredito/model/json/hardware_info_bean.dart';
+import 'package:rapicredito/model/json/location_info_bean.dart';
+import 'package:rapicredito/model/json/media_count_info_bean.dart';
 import 'package:rapicredito/utils/object_util.dart';
 
 class UploadJsonManage {
@@ -60,6 +62,37 @@ class UploadJsonManage {
       print(bean);
     }
   }
+
+  ///定位信息
+  Future<void> getLocationInfo() async {
+    var locationInfo = await MethodChannelDevicesinfo.getLocationAddressData();
+    if (!ObjectUtil.isEmptyString(locationInfo)) {
+      var map = json.decode(locationInfo!);
+      var bean = LocationInfoBean.fromJson(map);
+      print(bean);
+    }
+  }
+
+
+  ///获取手机文件个数
+  Future<void> getMediaFileCountInfo() async {
+    var mediaCountInfo = await MethodChannelDevicesinfo.getMediaFilesData();
+    if (!ObjectUtil.isEmptyString(mediaCountInfo)) {
+      var map = json.decode(mediaCountInfo!);
+      var bean = MediaCountInfoBean.fromJson(map);
+      print(bean);
+    }
+  }
+  ///网络信息
+  Future<void> getNetInfo() async {
+    var netInfo = await MethodChannelDevicesinfo.getNetWorkData();
+    if (!ObjectUtil.isEmptyString(netInfo)) {
+      var map = json.decode(netInfo!);
+      // var bean = MediaCountInfoBean.fromJson(map);
+      print(map);
+    }
+  }
+
 
 
 }

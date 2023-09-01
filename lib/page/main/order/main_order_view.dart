@@ -37,7 +37,13 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
               //        await  UploadJsonManage.instance.getGeneralData();
                      // await  UploadJsonManage.instance.getAppListDataInfo();
                       //  await UploadJsonManage.instance.getBatteryStatusInfo();
-                        await UploadJsonManage.instance.getHardwareInfo();
+                       // await UploadJsonManage.instance.getHardwareInfo();
+
+                       // await UploadJsonManage.instance.getLocationInfo();
+
+                       // await UploadJsonManage.instance.getMediaFileCountInfo();
+
+                        await UploadJsonManage.instance.getNetInfo();
                       }),
 
 
