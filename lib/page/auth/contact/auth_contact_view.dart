@@ -34,10 +34,7 @@ class AuthContactPage extends GetView<AuthContactCtr> {
                     editTitle: 'Relación',
                     hintText: 'Por favor elige',
                     editContent: controller.state.relationshipOne,
-                    action: () {
-                      controller.postAppConfigInfoRequest(
-                          AppConfigClickType.relationOne);
-                    },
+                    action:controller.clickRelationOne,
                   );
                 }),
                 CustomEditView(
@@ -83,10 +80,7 @@ class AuthContactPage extends GetView<AuthContactCtr> {
                     editTitle: 'Relación',
                     hintText: 'Por favor elige',
                     editContent: controller.state.relationshipTwo,
-                    action: () {
-                      controller.postAppConfigInfoRequest(
-                          AppConfigClickType.relationTwo);
-                    },
+                    action:controller.clickRelationTwo,
                   );
                 }),
                 CustomEditView(

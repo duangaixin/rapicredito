@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 
 class AuthContactState {
+  List<String?> relationshipOneList = [];
+  List<String?> relationshipTwoList = [];
   ///关系1
   final RxString _relationshipOne = ''.obs;
 

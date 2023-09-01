@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 
 class AuthIdState {
+  List<String?> genderList=[];
+
   double imageWidth = 167.0;
 
   final RxString _idFrontUrl = ''.obs;

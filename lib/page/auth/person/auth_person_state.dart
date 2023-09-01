@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
 
 class AuthPersonState {
-
+  List<String?> incomeList = [];
+  List<String?> familyList = [];
+  List<String?> educationalList = [];
 
   ///收入
   final RxString _income = ''.obs;

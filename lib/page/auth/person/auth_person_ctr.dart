@@ -42,6 +42,7 @@ class AuthPersonCtr extends BaseGetCtr {
   }
 
   void _showSelectDialog(List netList, AppConfigClickType clickType) {
+    KeyboardUtils.unFocus();
     dynamic selectData;
     if (clickType == AppConfigClickType.incomeType) {
       selectData = state.income;
@@ -114,7 +115,31 @@ class AuthPersonCtr extends BaseGetCtr {
     }
   }
 
-  void postAppConfigInfoRequest(AppConfigClickType clickType) async {
+  void clickIncome(){
+    if(ObjectUtil.isEmptyList(state.incomeList)){
+      _postAppConfigInfoRequest(AppConfigClickType.incomeType);
+    }else{
+        _showSelectDialog(state.incomeList, AppConfigClickType.incomeType);
+    }
+  }
+
+  void clickFamily(){
+    if(ObjectUtil.isEmptyList(state.familyList)){
+      _postAppConfigInfoRequest(AppConfigClickType.familyCount);
+    }else{
+      _showSelectDialog(state.familyList, AppConfigClickType.familyCount);
+    }
+  }
+
+
+  void clickEducational(){
+    if(ObjectUtil.isEmptyList(state.educationalList)){
+      _postAppConfigInfoRequest(AppConfigClickType.educationalLevel);
+    }else{
+      _showSelectDialog(state.educationalList, AppConfigClickType.educationalLevel);
+    }
+  }
+  void _postAppConfigInfoRequest(AppConfigClickType clickType) async {
     KeyboardUtils.unFocus();
     var param = <String, dynamic>{};
     var typeStr = '';
@@ -134,6 +159,13 @@ class AuthPersonCtr extends BaseGetCtr {
       var netList = response.data ?? [];
       if (!ObjectUtil.isEmptyList(netList)) {
         var showList = netList.map((e) => e.latestCandle).toList();
+        if (clickType == AppConfigClickType.incomeType) {
+         state.incomeList..clear()..addAll(showList);
+        } else if (clickType == AppConfigClickType.familyCount) {
+          state.familyList..clear()..addAll(showList);
+        } else if (clickType == AppConfigClickType.educationalLevel) {
+          state.educationalList..clear()..addAll(showList);
+        }
         if (!ObjectUtil.isEmptyList(showList)) {
           _showSelectDialog(showList, clickType);
         }
@@ -142,6 +174,9 @@ class AuthPersonCtr extends BaseGetCtr {
       NetException.toastException(response);
     }
   }
+
+
+
 
   bool _validate() {
     if (ObjectUtil.isEmptyString(state.income)) {

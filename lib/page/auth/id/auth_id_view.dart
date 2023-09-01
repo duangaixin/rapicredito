@@ -220,14 +220,10 @@ class AuthIdPage extends GetView<AuthIdCtr> {
                 ),
                 Obx(() {
                   return CustomSelectView(
-                    editTitle: 'Género',
-                    hintText: 'Por favor elige',
-                    editContent: controller.state.gender,
-                    action: () {
-                      controller
-                          .postAppConfigInfoRequest(AppConfigClickType.gender);
-                    },
-                  );
+                      editTitle: 'Género',
+                      hintText: 'Por favor elige',
+                      editContent: controller.state.gender,
+                      action: controller.clickGender);
                 }),
                 Obx(() {
                   return CustomSelectView(

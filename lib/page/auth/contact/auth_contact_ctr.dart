@@ -36,7 +36,6 @@ class AuthContactCtr extends BaseGetCtr {
     super.onReady();
   }
 
-
   void _btnCanClick() {
     if (ObjectUtil.isEmptyString(state.relationshipOne) ||
         ObjectUtil.isEmptyString(phoneOneCtr.text.strRvSpace()) ||
@@ -88,11 +87,30 @@ class AuthContactCtr extends BaseGetCtr {
     return param;
   }
 
-  void postAppConfigInfoRequest(AppConfigClickType clickType) async {
+  void clickRelationOne() {
+    if (ObjectUtil.isEmptyList(state.relationshipOneList)) {
+      _postAppConfigInfoRequest(AppConfigClickType.relationOne);
+    } else {
+      _showSelectDialog(
+          state.relationshipOneList, AppConfigClickType.relationOne);
+    }
+  }
+
+  void clickRelationTwo() {
+    if (ObjectUtil.isEmptyList(state.relationshipTwoList)) {
+      _postAppConfigInfoRequest(AppConfigClickType.relationTwo);
+    } else {
+      _showSelectDialog(
+          state.relationshipTwoList, AppConfigClickType.relationTwo);
+    }
+  }
+
+  void _postAppConfigInfoRequest(AppConfigClickType clickType) async {
     KeyboardUtils.unFocus();
     var param = <String, dynamic>{};
     var typeStr = '';
-    if (clickType == AppConfigClickType.relationTwo||clickType==AppConfigClickType.relationOne) {
+    if (clickType == AppConfigClickType.relationTwo ||
+        clickType == AppConfigClickType.relationOne) {
       typeStr = 'relationship';
     }
     param['everydayMapleChallengingAirline'] = typeStr;
@@ -104,6 +122,16 @@ class AuthContactCtr extends BaseGetCtr {
       var netList = response.data ?? [];
       if (!ObjectUtil.isEmptyList(netList)) {
         var showList = netList.map((e) => e.latestCandle).toList();
+        if (clickType == AppConfigClickType.relationOne) {
+          state.relationshipOneList
+            ..clear()
+            ..addAll(showList);
+        }
+        if (clickType == AppConfigClickType.relationTwo) {
+          state.relationshipTwoList
+            ..clear()
+            ..addAll(showList);
+        }
         if (!ObjectUtil.isEmptyList(showList)) {
           _showSelectDialog(showList, clickType);
         }
@@ -121,12 +149,12 @@ class AuthContactCtr extends BaseGetCtr {
     Get.dismiss();
     if (response.isSuccess()) {
       var authInfoBean = response.data;
-      state.relationshipOne=authInfoBean?.rainyMonthDiscount??'';
-      phoneOneCtr.text=authInfoBean?.pureDollFailure??'';
-      nameOneCtr.text=authInfoBean?.communistBuddhistZooExtraCellar??'';
-      state.relationshipTwo=authInfoBean?.instantMerchantMidday??'';
-      phoneTwoCtr.text=authInfoBean?.theoreticalAppleFlatLateFriendship??'';
-      nameTwoCtr.text=authInfoBean?.quickNonDetermination??'';
+      state.relationshipOne = authInfoBean?.rainyMonthDiscount ?? '';
+      phoneOneCtr.text = authInfoBean?.pureDollFailure ?? '';
+      nameOneCtr.text = authInfoBean?.communistBuddhistZooExtraCellar ?? '';
+      state.relationshipTwo = authInfoBean?.instantMerchantMidday ?? '';
+      phoneTwoCtr.text = authInfoBean?.theoreticalAppleFlatLateFriendship ?? '';
+      nameTwoCtr.text = authInfoBean?.quickNonDetermination ?? '';
       _btnCanClick();
     } else {
       NetException.toastException(response);
@@ -169,7 +197,6 @@ class AuthContactCtr extends BaseGetCtr {
     }
     return true;
   }
-
 
   @override
   void onClose() {

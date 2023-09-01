@@ -159,7 +159,16 @@ class AuthIdCtr extends BaseGetCtr {
     return param;
   }
 
-  void postAppConfigInfoRequest(AppConfigClickType clickType) async {
+  void clickGender(){
+    if (ObjectUtil.isEmptyList(state.genderList)) {
+      _postAppConfigInfoRequest(AppConfigClickType.gender);
+    } else {
+      _showSelectDialog(
+          state.genderList, AppConfigClickType.gender);
+    }
+  }
+
+  void _postAppConfigInfoRequest(AppConfigClickType clickType) async {
     KeyboardUtils.unFocus();
     var param = <String, dynamic>{};
     var typeStr = '';
@@ -175,6 +184,9 @@ class AuthIdCtr extends BaseGetCtr {
       var netList = response.data ?? [];
       if (!ObjectUtil.isEmptyList(netList)) {
         var showList = netList.map((e) => e.latestCandle).toList();
+        if (clickType == AppConfigClickType.gender) {
+         state.genderList..clear()..addAll(showList);
+        }
         if (!ObjectUtil.isEmptyList(showList)) {
           _showSelectDialog(showList, clickType);
         }

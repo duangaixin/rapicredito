@@ -43,10 +43,7 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
                                 editTitle: 'Ingresos',
                                 hintText: 'Por favor elige',
                                 editContent: controller.state.income,
-                                action: () {
-                                  controller.postAppConfigInfoRequest(
-                                      AppConfigClickType.incomeType);
-                                },
+                                action: controller.clickIncome,
                               );
                             }),
                             CustomEditView(
@@ -59,25 +56,18 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
                             ),
                             Obx(() {
                               return CustomSelectView(
-                                editTitle: 'Tamaño de la familia',
-                                hintText: 'Por favor elige',
-                                editContent: controller.state.familyCount,
-                                action: () {
-                                  controller.postAppConfigInfoRequest(
-                                      AppConfigClickType.familyCount);
-                                },
-                              );
+                                  editTitle: 'Tamaño de la familia',
+                                  hintText: 'Por favor elige',
+                                  editContent: controller.state.familyCount,
+                                  action: controller.clickFamily);
                             }),
                             Obx(() {
                               return CustomSelectView(
-                                editTitle: 'Nivel de educación',
-                                hintText: 'Por favor elige',
-                                editContent: controller.state.educationalLevel,
-                                action: () {
-                                  controller.postAppConfigInfoRequest(
-                                      AppConfigClickType.educationalLevel);
-                                },
-                              );
+                                  editTitle: 'Nivel de educación',
+                                  hintText: 'Por favor elige',
+                                  editContent:
+                                      controller.state.educationalLevel,
+                                  action: controller.clickEducational);
                             }),
                             Container(
                               padding: const EdgeInsets.only(
