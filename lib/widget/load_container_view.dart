@@ -115,7 +115,7 @@ class ClassicalLoadingView extends StatelessWidget {
           CupertinoActivityIndicator(radius: 10.0),
           Padding(
               padding: EdgeInsets.only(top: 10),
-              child: Text('loading...', style: TextStyle(fontSize: 13)))
+              child: Text('', style: TextStyle(fontSize: 13)))
         ]),
       );
 }

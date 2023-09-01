@@ -27,11 +27,12 @@ class AppMainCtr extends BaseGetCtr {
     if (state.pageIndex == 0) {
       var homeCtr = Get.find<MainHomeCtr>();
       homeCtr.refreshInfo();
-    } else if (state.pageIndex == 1) {
-      var orderCtr = Get.find<MainOrderCtr>();
-    } else if (state.pageIndex == 2) {
-      var mineCtr = Get.find<MainMineCtr>();
     }
+    // else if (state.pageIndex == 1) {
+    //   var orderCtr = Get.find<MainOrderCtr>();
+    // } else if (state.pageIndex == 2) {
+    //   var mineCtr = Get.find<MainMineCtr>();
+    // }
   }
 
   @override

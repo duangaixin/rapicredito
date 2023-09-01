@@ -5,6 +5,7 @@ import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/get/getx_extension.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
+import 'package:rapicredito/model/config_info_bean.dart';
 import 'package:rapicredito/page/auth/contact/auth_contact_state.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
@@ -12,6 +13,7 @@ import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_picker.dart';
+import 'package:rapicredito/widget/load_container_view.dart';
 import 'package:rapicredito/widget/progress_hud_view.dart';
 
 class AuthContactCtr extends BaseGetCtr {
@@ -32,8 +34,13 @@ class AuthContactCtr extends BaseGetCtr {
 
   @override
   void onReady() {
-    _postQueryAuthPersonRequest();
     super.onReady();
+    _requestInitData();
+  }
+
+  void _requestInitData()async{
+    await _postAppConfigInfoRequest(AppConfigClickType.relationOne);
+    await _postQueryAuthPersonRequest();
   }
 
   void _btnCanClick() {
@@ -77,10 +84,10 @@ class AuthContactCtr extends BaseGetCtr {
 
   Map<String, dynamic> _collectContactParam() {
     Map<String, dynamic> param = {};
-    param['rainyMonthDiscount'] = state.relationshipOne;
+    param['rainyMonthDiscount'] = _getCode(state.relationshipOriginList, state.relationshipOne);
     param['pureDollFailure'] = phoneOneCtr.text.strRvSpace();
     param['communistBuddhistZooExtraCellar'] = nameOneCtr.text.trim();
-    param['instantMerchantMidday'] = state.relationshipTwo;
+    param['instantMerchantMidday'] =_getCode(state.relationshipOriginList, state.relationshipTwo);
     param['theoreticalAppleFlatLateFriendship'] = phoneTwoCtr.text.strRvSpace();
     param['quickNonDetermination'] = nameTwoCtr.text.trim();
     param.addAll(getCommonParam());
@@ -88,24 +95,24 @@ class AuthContactCtr extends BaseGetCtr {
   }
 
   void clickRelationOne() {
-    if (ObjectUtil.isEmptyList(state.relationshipOneList)) {
+    if (ObjectUtil.isEmptyList(state.relationshipShowList)) {
       _postAppConfigInfoRequest(AppConfigClickType.relationOne);
     } else {
       _showSelectDialog(
-          state.relationshipOneList, AppConfigClickType.relationOne);
+          state.relationshipShowList, AppConfigClickType.relationOne);
     }
   }
 
   void clickRelationTwo() {
-    if (ObjectUtil.isEmptyList(state.relationshipTwoList)) {
+    if (ObjectUtil.isEmptyList(state.relationshipShowList)) {
       _postAppConfigInfoRequest(AppConfigClickType.relationTwo);
     } else {
       _showSelectDialog(
-          state.relationshipTwoList, AppConfigClickType.relationTwo);
+          state.relationshipShowList, AppConfigClickType.relationTwo);
     }
   }
 
-  void _postAppConfigInfoRequest(AppConfigClickType clickType) async {
+  Future<void> _postAppConfigInfoRequest(AppConfigClickType clickType) async {
     KeyboardUtils.unFocus();
     var param = <String, dynamic>{};
     var typeStr = '';
@@ -115,48 +122,37 @@ class AuthContactCtr extends BaseGetCtr {
     }
     param['everydayMapleChallengingAirline'] = typeStr;
     param.addAll(getCommonParam());
-    Get.showLoading();
     var response = await HttpRequestManage.instance.postAppConfigInfo(param);
-    Get.dismiss();
     if (response.isSuccess()) {
       var netList = response.data ?? [];
       if (!ObjectUtil.isEmptyList(netList)) {
+        state.relationshipOriginList..clear()..addAll(netList);
         var showList = netList.map((e) => e.latestCandle).toList();
-        if (clickType == AppConfigClickType.relationOne) {
-          state.relationshipOneList
-            ..clear()
-            ..addAll(showList);
-        }
-        if (clickType == AppConfigClickType.relationTwo) {
-          state.relationshipTwoList
-            ..clear()
-            ..addAll(showList);
-        }
-        if (!ObjectUtil.isEmptyList(showList)) {
-          _showSelectDialog(showList, clickType);
-        }
+        state.relationshipShowList
+          ..clear()
+          ..addAll(showList);
       }
     } else {
       NetException.toastException(response);
     }
   }
 
-  void _postQueryAuthPersonRequest() async {
+  Future<void> _postQueryAuthPersonRequest() async {
     Map<String, dynamic> param = getCommonParam();
-    Get.showLoading();
     var response =
         await HttpRequestManage.instance.postQueryAuthInfoRequest(param);
-    Get.dismiss();
     if (response.isSuccess()) {
       var authInfoBean = response.data;
-      state.relationshipOne = authInfoBean?.rainyMonthDiscount ?? '';
+      state.relationshipOne = _getName(state.relationshipOriginList, authInfoBean?.rainyMonthDiscount ?? '') ;
       phoneOneCtr.text = authInfoBean?.pureDollFailure ?? '';
       nameOneCtr.text = authInfoBean?.communistBuddhistZooExtraCellar ?? '';
-      state.relationshipTwo = authInfoBean?.instantMerchantMidday ?? '';
+      state.relationshipTwo =_getName(state.relationshipOriginList, authInfoBean?.instantMerchantMidday ?? '') ;
       phoneTwoCtr.text = authInfoBean?.theoreticalAppleFlatLateFriendship ?? '';
       nameTwoCtr.text = authInfoBean?.quickNonDetermination ?? '';
       _btnCanClick();
+      state.loadState=LoadState.succeed;
     } else {
+      state.loadState=LoadState.failed;
       NetException.toastException(response);
     }
   }
@@ -197,7 +193,29 @@ class AuthContactCtr extends BaseGetCtr {
     }
     return true;
   }
+  String _getCode(List<ConfigInfoBean> dataSource, String value) {
+    if (!ObjectUtil.isEmptyList(dataSource)) {
+      for (int i = 0; i < dataSource.length; i++) {
+        var bean = dataSource[i];
+        if (bean.latestCandle == value) {
+          return bean.humanExpensiveBraveryHarmfulPhoto ?? '';
+        }
+      }
+    }
+    return '';
+  }
 
+  String _getName(List<ConfigInfoBean> dataSource, String value) {
+    if (!ObjectUtil.isEmptyList(dataSource)) {
+      for (int i = 0; i < dataSource.length; i++) {
+        var bean = dataSource[i];
+        if (bean.humanExpensiveBraveryHarmfulPhoto == value) {
+          return bean.latestCandle ?? '';
+        }
+      }
+    }
+    return '';
+  }
   @override
   void onClose() {
     super.onClose();

@@ -48,11 +48,11 @@ class AuthIdCtr extends BaseGetCtr {
 
   @override
   void onReady() {
-    _postInitRequest();
+    _requestInitData();
     super.onReady();
   }
 
-  void _postInitRequest() {
+  void _requestInitData() {
     Get.showLoading();
     Future.wait([
       _postQueryAuthPersonRequest(),
@@ -229,7 +229,7 @@ class AuthIdCtr extends BaseGetCtr {
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
     Get.dismiss();
     if (response.isSuccess()) {
-      Get.offNamedUntil(PageRouterName.mainPage, (route) => false);
+      Get.until((route) =>route.settings.name==PageRouterName.mainPage);
     } else {
       NetException.toastException(response);
     }

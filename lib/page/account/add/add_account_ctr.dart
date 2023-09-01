@@ -109,7 +109,7 @@ class AddAccountCtr extends BaseGetCtr {
             if (type != '1') {
               var key = bean.latestCandle ?? '';
               var value = bean.northernMarriageCommunism ?? '';
-              var keyValueBean = KeyValueBean(key,  value);
+              var keyValueBean = KeyValueBean(key, value);
               state.walletList.add(keyValueBean);
             }
           }
@@ -242,19 +242,6 @@ class AddAccountCtr extends BaseGetCtr {
     }
     return '';
   }
-
-  String _getName(List<ConfigInfoBean> dataSource, String value) {
-    if (!ObjectUtil.isEmptyList(dataSource)) {
-      for (int i = 0; i < dataSource.length; i++) {
-        var bean = dataSource[i];
-        if (bean.humanExpensiveBraveryHarmfulPhoto == value) {
-          return bean.latestCandle ?? '';
-        }
-      }
-    }
-    return '';
-  }
-
 
   void goToWebViewPage(String title, String webViewUrl) {
     KeyboardUtils.unFocus();

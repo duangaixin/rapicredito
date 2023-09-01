@@ -1,8 +1,15 @@
 import 'package:get/get.dart';
+import 'package:rapicredito/model/config_info_bean.dart';
+import 'package:rapicredito/widget/load_container_view.dart';
 
 class AuthContactState {
-  List<String?> relationshipOneList = [];
-  List<String?> relationshipTwoList = [];
+  final _loadState = LoadState.loading.obs;
+
+  LoadState get loadState => _loadState.value;
+
+  set loadState(value) => _loadState.value = value;
+  List<String?> relationshipShowList = [];
+  List<ConfigInfoBean> relationshipOriginList = [];
   ///关系1
   final RxString _relationshipOne = ''.obs;
 

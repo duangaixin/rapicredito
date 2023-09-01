@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/auth/contact/auth_contact_ctr.dart';
-import 'package:rapicredito/page/auth/person/auth_person_ctr.dart';
 import 'package:rapicredito/page/auth/widget/common_auth_agreement_view.dart';
 import 'package:rapicredito/widget/comon_section_title_view.dart';
 import 'package:rapicredito/widget/custom_color_button.dart';
 import 'package:rapicredito/widget/custom_edit_view.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
 import 'package:rapicredito/widget/custom_select_view.dart';
+import 'package:rapicredito/widget/load_container_view.dart';
 
 class AuthContactPage extends GetView<AuthContactCtr> {
   const AuthContactPage({Key? key}) : super(key: key);
@@ -146,14 +146,19 @@ class AuthContactPage extends GetView<AuthContactCtr> {
   Widget build(BuildContext context) {
     return CustomPageBgView(
         title: 'Contacto de emergencia',
-        content: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            children: [oneContactView, twoContactView, bottomView],
-          ),
-        ));
+        content:  Obx(() {
+          return LoadContainerView(
+              contentView:  SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [oneContactView, twoContactView, bottomView],
+                ),
+              ), loadState: controller.state.loadState);
+        })
+
+       );
 //  double bottom = MediaQuery.of(context).viewInsets.bottom;
     // return CustomPageBgView(
     //     title: 'Contacto de emergencia',
