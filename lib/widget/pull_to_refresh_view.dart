@@ -26,6 +26,7 @@ class PullToRefreshView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SmartRefresher(
+      physics: BouncingScrollPhysics(),
       controller: _refreshController,
       enablePullDown: enablePullDown ?? true,
       enablePullUp: enablePullUp ?? true,
@@ -40,25 +41,25 @@ class PullToRefreshView extends StatelessWidget {
   Widget getClassicHeader() {
     return const ClassicHeader(
       refreshStyle: RefreshStyle.Follow,
-      releaseText: '释放刷新',
+      releaseText: 'loading...',
       releaseIcon: CupertinoActivityIndicator(radius: 10.0),
-      completeText: '刷新完成',
+      completeText: 'complete',
       completeIcon: Icon(
         Icons.done,
         color: Colors.grey,
       ),
-      failedText: '刷新失败',
+      failedText: 'failed',
       failedIcon: Icon(
         Icons.error,
         color: Colors.grey,
       ),
-      refreshingText: '正在刷新',
+      refreshingText: 'loading',
       refreshingIcon: SizedBox(
         width: 25.0,
         height: 25.0,
         child: CupertinoActivityIndicator(),
       ),
-      idleText: '下拉刷新',
+      idleText: 'pull',
       idleIcon: Icon(
         Icons.arrow_downward,
         color: Colors.grey,
@@ -68,19 +69,19 @@ class PullToRefreshView extends StatelessWidget {
 
   Widget getClassicFooter() {
     return ClassicFooter(
-      loadingText: '正在加载',
+      loadingText: 'loading...',
       loadingIcon: const SizedBox(
         width: 25.0,
         height: 25.0,
         child: CupertinoActivityIndicator(),
       ),
-      noDataText: '没有更多',
+      noDataText: 'no more',
       noMoreIcon: Container(),
-      idleText: '上拉加载更多',
+      idleText: 'push',
       idleIcon: const Icon(Icons.arrow_upward, color: Colors.grey),
-      failedText: '加载失败，上拉试试',
+      failedText: 'failed ',
       failedIcon: const Icon(Icons.error, color: Colors.grey),
-      canLoadingText: '释放加载更多',
+      canLoadingText: 'load more',
       canLoadingIcon: const Icon(Icons.autorenew, color: Colors.grey),
     );
   }

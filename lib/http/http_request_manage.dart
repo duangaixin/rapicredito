@@ -120,14 +120,5 @@ extension RequestBussiness on HttpRequestManage {
   }
 
 
-  Future<BaseResponse> postQueryUserInfoRequest(
-      Map<String, dynamic> param) async {
-    return await httpRequest.post(HttpApi.apiQueryUserInfo,
-        options: Options(contentType: Headers.formUrlEncodedContentType),
-        data: param,
-        onTransform: (json) => null
-    );
-  }
-
 
 }

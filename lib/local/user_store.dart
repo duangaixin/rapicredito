@@ -1,6 +1,7 @@
 import 'package:rapicredito/get/getx_storage_service.dart';
 import 'package:rapicredito/local/app_constants.dart';
 import 'package:get/get.dart';
+import 'package:rapicredito/page/main/mine/index.dart';
 
 class UserStore extends GetxController {
   static UserStore get to => Get.find();
@@ -25,7 +26,8 @@ class UserStore extends GetxController {
     mToken = token;
     mUserId = userId;
     mUserPhone=userPhone;
-
+    var mineCtr=  Get.find<MainMineCtr>();
+    mineCtr.refreshInfo();
   }
 
   Future<void> loginOut() async {
@@ -33,6 +35,9 @@ class UserStore extends GetxController {
       mUserId = -1;
       mToken = '';
       mUserPhone='';
+    var mineCtr=  Get.find<MainMineCtr>();
+    mineCtr.state.userName='Ronald Lamb';
+    mineCtr.state.phoneNum='+57 954-566670';
       await StorageService.to.clear();
     }
   }

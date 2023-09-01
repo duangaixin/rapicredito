@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/get/getx_storage_service.dart';
 import 'package:rapicredito/local/app_constants.dart';
+import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/page/main/index.dart';
 import 'package:rapicredito/page/main/mine/index.dart';
@@ -28,11 +29,14 @@ class AppMainCtr extends BaseGetCtr {
       var homeCtr = Get.find<MainHomeCtr>();
       homeCtr.refreshInfo();
     }
-    // else if (state.pageIndex == 1) {
-    //   var orderCtr = Get.find<MainOrderCtr>();
-    // } else if (state.pageIndex == 2) {
-    //   var mineCtr = Get.find<MainMineCtr>();
-    // }
+    else if (state.pageIndex == 1) {
+      var orderCtr = Get.find<MainOrderCtr>();
+    } else if (state.pageIndex == 2) {
+      var mineCtr = Get.find<MainMineCtr>();
+      if(UserStore.to.hasToken){
+        mineCtr.refreshInfo();
+      }
+    }
   }
 
   @override

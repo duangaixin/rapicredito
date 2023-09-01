@@ -18,12 +18,16 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
         onRefresh: ctr.refreshInfo,
         enablePullUp: false,
         child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
+
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [const MainAppBarView(
-              title: 'RapiCrédito',
-            ), headerView, contentView],
+            children: [
+              const MainAppBarView(
+                title: 'RapiCrédito',
+              ),
+              headerView,
+              contentView
+            ],
           ),
         ),
       ),
@@ -50,22 +54,26 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  'Ronald Lamb',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18.0,
-                      color: Color(0xff333333)),
-                ),
-                Padding(
-                    padding: EdgeInsets.only(top: 16.0),
-                    child: Text(
-                      '+57 954-566670',
-                      style: TextStyle(
+                Obx(() {
+                  return Text(
+                    ctr.state.userName,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
                         fontSize: 18.0,
-                        color: Color(0xff333333),
-                      ),
-                    ))
+                        color: Color(0xff333333)),
+                  );
+                }),
+                Padding(
+                    padding: const EdgeInsets.only(top: 16.0),
+                    child: Obx(() {
+                      return Text(
+                        ctr.state.phoneNum,
+                        style: const TextStyle(
+                          fontSize: 18.0,
+                          color: Color(0xff333333),
+                        ),
+                      );
+                    }))
               ],
             ))
           ],
