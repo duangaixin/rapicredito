@@ -10,7 +10,6 @@ import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/page/login/index.dart';
 import 'package:rapicredito/page/main/home/index.dart';
-import 'package:rapicredito/page/main/order/main_order_ctr.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/object_util.dart';
@@ -22,7 +21,7 @@ class LoginCtr extends BaseGetCtr {
   TextEditingController phoneCtr = TextEditingController();
   TextEditingController codeCtr = TextEditingController();
   StreamSubscription? _subscription;
-  bool isRootPage = false;
+  bool isTokenExpired = false;
 
   @override
   void onInit() {
@@ -30,8 +29,8 @@ class LoginCtr extends BaseGetCtr {
     var param = Get.arguments;
     if (param != null && param is Map) {
       if (!ObjectUtil.isEmptyMap(param)) {
-        if (param.containsKey(AppConstants.isRootPage)) {
-          isRootPage = param[AppConstants.isRootPage];
+        if (param.containsKey(AppConstants.isTokenExpired)) {
+          isTokenExpired = param[AppConstants.isTokenExpired];
         }
       }
     }
@@ -98,7 +97,7 @@ class LoginCtr extends BaseGetCtr {
       var testFirstRegister =
           loginInfoBean?.delightedGooseFacialUnmarriedHamburger ?? 0;
       await UserStore.to.setLoginInfo(token, userId, phoneNum);
-      if (isRootPage) {
+      if (isTokenExpired) {
         Get.toNamed(PageRouterName.mainPage);
         var mainHomeCtr = Get.find<MainHomeCtr>();
         mainHomeCtr.refreshInfo();

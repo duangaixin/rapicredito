@@ -28,6 +28,9 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
             child: contentView,
           ),
           emptyView: const OrderEmptyView(),
+          onReload: () {
+            ctr.refreshInfo(isShowDialog: true);
+          },
           loadState: ctr.state.loadState);
     }));
   }

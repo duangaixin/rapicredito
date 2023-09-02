@@ -10,6 +10,6 @@ class AppConstants {
   static const String useLoginKey = 'user_login';
   static const String webViewTitleKey = 'webView_title';
   static const String webViewUrlKey = 'webView_url';
-  static const String isRootPage = 'isRootPage';
+  static const String isTokenExpired = 'isTokenExpired';
   static const String fromPageNameKey = 'fromPageNameKey';
 }

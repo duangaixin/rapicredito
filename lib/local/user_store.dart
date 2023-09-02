@@ -7,7 +7,8 @@ class UserStore extends GetxController {
   static UserStore get to => Get.find();
   String mToken = '';
   int mUserId = -1;
-  String mUserPhone='';
+  String mUserPhone = '';
+
   bool get hasToken => mToken.isNotEmpty;
 
   @override
@@ -18,15 +19,15 @@ class UserStore extends GetxController {
     mUserPhone = StorageService.to.getString(AppConstants.userPhoneKey);
   }
 
-  Future<void> setLoginInfo(String token, int userId,String userPhone) async {
+  Future<void> setLoginInfo(String token, int userId, String userPhone) async {
     await StorageService.to.setString(AppConstants.userTokenKey, token);
     await StorageService.to.setInt(AppConstants.userIdKey, userId);
     await StorageService.to.setString(AppConstants.userPhoneKey, userPhone);
 
     mToken = token;
     mUserId = userId;
-    mUserPhone=userPhone;
-    var mineCtr=  Get.find<MainMineCtr>();
+    mUserPhone = userPhone;
+    var mineCtr = Get.find<MainMineCtr>();
     mineCtr.refreshInfo();
   }
 
@@ -34,10 +35,7 @@ class UserStore extends GetxController {
     if (hasToken) {
       mUserId = -1;
       mToken = '';
-      mUserPhone='';
-    var mineCtr=  Get.find<MainMineCtr>();
-    mineCtr.state.userName='Ronald Lamb';
-    mineCtr.state.phoneNum='+57 954-566670';
+      mUserPhone = '';
       await StorageService.to.clear();
     }
   }

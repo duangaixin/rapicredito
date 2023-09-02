@@ -36,7 +36,7 @@ bool isReleaseBuild() => !kProfileMode && kReleaseMode;
 void _check401Error(BaseResponse<dynamic> error) async {
   if (is401Error(error)) {
     UserStore.to.loginOut();
-    Get.offAllNamed(PageRouterName.loginPage,arguments: {AppConstants.isRootPage:true});
+    Get.offAllNamed(PageRouterName.loginPage,arguments: {AppConstants.isTokenExpired:true});
   }
 }
 

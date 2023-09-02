@@ -21,10 +21,12 @@ class AppMainCtr extends BaseGetCtr {
   final state = AppMainState();
 
   void dealNavBarTap(int index) {
-    if (UserStore.to.hasToken) {
+    if (UserStore.to.hasToken || index == 0) {
       pageController.jumpToPage(index);
     } else {
-      Get.toNamed(PageRouterName.loginPage);
+      if (index != 0) {
+        Get.toNamed(PageRouterName.loginPage);
+      }
     }
   }
 
@@ -34,11 +36,13 @@ class AppMainCtr extends BaseGetCtr {
       var homeCtr = Get.find<MainHomeCtr>();
       homeCtr.refreshInfo();
     } else if (state.pageIndex == 1) {
-      var orderCtr = Get.find<MainOrderCtr>();
-      orderCtr.refreshInfo();
-    } else if (state.pageIndex == 2) {
-      var mineCtr = Get.find<MainMineCtr>();
       if (UserStore.to.hasToken) {
+        var orderCtr = Get.find<MainOrderCtr>();
+        orderCtr.refreshInfo();
+      }
+    } else if (state.pageIndex == 2) {
+      if (UserStore.to.hasToken) {
+        var mineCtr = Get.find<MainMineCtr>();
         mineCtr.refreshInfo();
       }
     }

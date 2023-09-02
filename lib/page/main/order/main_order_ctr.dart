@@ -16,15 +16,14 @@ class MainOrderCtr extends BaseGetCtr {
   final state = MainOrderState();
   var refreshController = RefreshController();
 
-
   @override
   void onReady() {
     super.onReady();
   }
 
-  Future<void> refreshInfo() async {
+  Future<void> refreshInfo({bool isShowDialog = false}) async {
     if (UserStore.to.hasToken) {
-      await _postQueryOrderListRequest(isShowDialog: false);
+      await _postQueryOrderListRequest(isShowDialog: isShowDialog);
     }
     refreshController.refreshCompleted();
   }

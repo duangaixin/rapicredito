@@ -58,7 +58,7 @@ class SettingPage extends GetView<SettingCtr> {
                       ),
                       Expanded(
                           child: CustomButton(
-                        onPressed:controller.changeEs,
+                        onPressed: controller.changeEs,
                         minWidth: 111.0,
                         minHeight: 46.0,
                         backgroundColor: Colors.white,
@@ -81,7 +81,9 @@ class SettingPage extends GetView<SettingCtr> {
           Container(
             margin: const EdgeInsets.only(bottom: 132.0),
             child: CustomButton(
-              onPressed: controller.logout,
+              onPressed: () async {
+                controller.logout();
+              },
               minWidth: 111.0,
               minHeight: 46.0,
               backgroundColor: Colors.white,

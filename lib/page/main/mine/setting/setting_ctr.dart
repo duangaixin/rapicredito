@@ -29,8 +29,8 @@ class SettingCtr extends BaseGetCtr {
 
   void logout() {
     UserStore.to.loginOut();
+    Get.back();
     var mainCtr = Get.find<AppMainCtr>();
     mainCtr.dealNavBarTap(0);
-    Get.back();
   }
 }
