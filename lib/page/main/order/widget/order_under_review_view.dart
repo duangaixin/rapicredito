@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rapicredito/model/order_info_bean.dart';
 import 'package:rapicredito/page/main/order/index.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
 ///审核中1
 class OrderUnderReviewView extends GetView<MainOrderCtr> {
-  const OrderUnderReviewView({Key? key}) : super(key: key);
+  final OrderInfoBean bean;
+
+  const OrderUnderReviewView({
+    Key? key,
+    required this.bean,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +27,8 @@ class OrderUnderReviewView extends GetView<MainOrderCtr> {
   }
 
   Widget _buildShowInfoView() {
+   var applyAmount=  bean.funnyAustraliaTeamTale??'';
+   var submitTime=bean.luckyExperience??'';
     return Container(
       margin: const EdgeInsets.only(top: 13.0, bottom: 14.0),
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
@@ -30,10 +38,10 @@ class OrderUnderReviewView extends GetView<MainOrderCtr> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildKeyValueView('Monto del préstamo', '\$121211'),
+          _buildKeyValueView('Monto del préstamo', applyAmount),
           Padding(
-            padding: EdgeInsets.only(top: 8.0),
-            child: _buildKeyValueView('Fecha de aplicación', '\$98776'),
+            padding: const EdgeInsets.only(top: 8.0),
+            child: _buildKeyValueView('Fecha de aplicación', submitTime),
           )
         ],
       ),
@@ -41,34 +49,37 @@ class OrderUnderReviewView extends GetView<MainOrderCtr> {
   }
 
   Widget _buildAppInfoView() {
+    var logoUrl = bean.bornDoubleShallowAcheActiveSparrow ?? '';
+    var appName = bean.unfitImpressionSingleHandSuchElectricity ?? '';
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         CustomImageView(
-          '',
+          logoUrl,
           placeholder: Resource.assetsImageAuthCameraBg,
           width: 44.0,
           height: 44.0,
           radius: 8.0,
-          margin: EdgeInsets.only(right: 10.0),
+          margin: const EdgeInsets.only(right: 10.0),
           fit: BoxFit.cover,
         ),
         Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              '1111',
+            const Text(
+              'APPName',
               style: TextStyle(
                   fontSize: 15.0,
                   color: Color(0xff333333),
                   fontWeight: FontWeight.bold),
             ),
             Padding(
-                padding: EdgeInsets.only(top: 6.0),
+                padding: const EdgeInsets.only(top: 6.0),
                 child: Text(
-                  '2322323',
-                  style: TextStyle(fontSize: 14.0, color: Color(0xff333333)),
+                  appName,
+                  style:
+                      const TextStyle(fontSize: 14.0, color: Color(0xff333333)),
                 ))
           ],
         )

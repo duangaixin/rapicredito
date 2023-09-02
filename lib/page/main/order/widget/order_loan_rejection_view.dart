@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rapicredito/model/order_info_bean.dart';
 import 'package:rapicredito/page/main/order/index.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_button.dart';
@@ -7,7 +8,8 @@ import 'package:rapicredito/widget/custom_image_view.dart';
 
 ///拒绝放款4
 class OrderLoanRejectionView extends GetView<MainOrderCtr> {
-  const OrderLoanRejectionView({Key? key}) : super(key: key);
+  final OrderInfoBean bean;
+  const OrderLoanRejectionView({Key? key,required this.bean}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +20,6 @@ class OrderLoanRejectionView extends GetView<MainOrderCtr> {
         mainAxisSize: MainAxisSize.min,
         children: [
           _buildAppInfoView(),
-          SizedBox(
-            height: 19.0,
-          ),
           _buildErrorInfoView(),
           _buildBottomView(),
           _buildLineView()
@@ -30,34 +29,36 @@ class OrderLoanRejectionView extends GetView<MainOrderCtr> {
   }
 
   Widget _buildAppInfoView() {
+    var logoUrl = bean.bornDoubleShallowAcheActiveSparrow ?? '';
+    var appName = bean.unfitImpressionSingleHandSuchElectricity ?? '';
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         CustomImageView(
-          '',
+          logoUrl,
           placeholder: Resource.assetsImageAuthCameraBg,
           width: 44.0,
           height: 44.0,
           radius: 8.0,
-          margin: EdgeInsets.only(right: 10.0),
+          margin: const EdgeInsets.only(right: 10.0),
           fit: BoxFit.cover,
         ),
         Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              '1111',
+            const Text(
+              'APPName',
               style: TextStyle(
                   fontSize: 15.0,
                   color: Color(0xff333333),
                   fontWeight: FontWeight.bold),
             ),
             Padding(
-                padding: EdgeInsets.only(top: 6.0),
+                padding: const EdgeInsets.only(top: 6.0),
                 child: Text(
-                  '2322323',
-                  style: TextStyle(fontSize: 14.0, color: Color(0xff333333)),
+                  appName,
+                  style: const TextStyle(fontSize: 14.0, color: Color(0xff333333)),
                 ))
           ],
         )
@@ -73,29 +74,28 @@ class OrderLoanRejectionView extends GetView<MainOrderCtr> {
     );
   }
 
-
-
-
   Widget _buildErrorInfoView() {
-    return const Row(
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        CustomImageView(
-          Resource.assetsImageOrderErrorInfo,
-          imageType: ImageType.assets,
-          width: 32.0,
-          height: 32.0,
-          margin: EdgeInsets.only(right: 7.0),
-        ),
-        Expanded(child: Text(
-          'Si hay una situación de vencimiento maliciosa, ¡presentaremos una demanda en su contra a través de los canales legales!',
-          style: TextStyle(fontSize: 14.0, color: Color(0xffD53535)),
-        ))
-
-      ],
-    );
+    return Container(
+        margin: const EdgeInsets.only(top: 20.0),
+        child: const Row(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            CustomImageView(
+              Resource.assetsImageOrderErrorInfo,
+              imageType: ImageType.assets,
+              width: 32.0,
+              height: 32.0,
+              margin: EdgeInsets.only(right: 7.0),
+            ),
+            Expanded(
+                child: Text(
+              'Si hay una situación de vencimiento maliciosa, ¡presentaremos una demanda en su contra a través de los canales legales!',
+              style: TextStyle(fontSize: 14.0, color: Color(0xffD53535)),
+            ))
+          ],
+        ));
   }
 
   Widget _buildBottomView() {

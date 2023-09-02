@@ -1,64 +1,72 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rapicredito/model/order_info_bean.dart';
+import 'package:rapicredito/page/main/home/widget/common_app_bar_view.dart';
 import 'package:rapicredito/page/main/order/index.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
-///再借一笔6
-class OrderLoanAgainView extends GetView<MainOrderCtr> {
-  final OrderInfoBean bean;
-  const OrderLoanAgainView({Key? key,required this.bean}) : super(key: key);
+class OrderEmptyView extends GetView<MainOrderCtr> {
+  const OrderEmptyView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(top: 17.0),
+    return SizedBox(
+      width: double.infinity,
+      height: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.max,
         children: [
-          _buildAppInfoView(),
-          _buildErrorInfoView(),
-          _buildBottomView(),
-          _buildLineView()
+          MainAppBarView(
+            title: 'RapiCrédito',
+          ),
+          CustomImageView(
+            Resource.assetsImageOrderEmpty,
+            imageType: ImageType.assets,
+            width: 96.0,
+            height: 94.0,
+            margin: EdgeInsets.only(top: 65.0, bottom: 37.0),
+            fit: BoxFit.cover,
+          ),
+          Text(
+            'No se concentric orden relacionado',
+            style: TextStyle(fontSize: 14.0, color: Color(0xff333333)),
+          )
         ],
       ),
     );
   }
 
   Widget _buildAppInfoView() {
-    var logoUrl = bean.bornDoubleShallowAcheActiveSparrow ?? '';
-    var appName = bean.unfitImpressionSingleHandSuchElectricity ?? '';
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         CustomImageView(
-          logoUrl,
+          '',
           placeholder: Resource.assetsImageAuthCameraBg,
           width: 44.0,
           height: 44.0,
           radius: 8.0,
-          margin: const EdgeInsets.only(right: 10.0),
+          margin: EdgeInsets.only(right: 10.0),
           fit: BoxFit.cover,
         ),
         Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'APPName',
+            Text(
+              '1111',
               style: TextStyle(
                   fontSize: 15.0,
                   color: Color(0xff333333),
                   fontWeight: FontWeight.bold),
             ),
             Padding(
-                padding: const EdgeInsets.only(top: 6.0),
+                padding: EdgeInsets.only(top: 6.0),
                 child: Text(
-                  appName,
-                  style: const TextStyle(fontSize: 14.0, color: Color(0xff333333)),
+                  '2322323',
+                  style: TextStyle(fontSize: 14.0, color: Color(0xff333333)),
                 ))
           ],
         )

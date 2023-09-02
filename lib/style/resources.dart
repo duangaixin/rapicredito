@@ -63,4 +63,7 @@ class Resource {
       'assets/image/main/order_warn_info.png';
   static const String assetsImageOrderErrorInfo =
       'assets/image/main/order_error_info.png';
+  static const String assetsImageOrderEmpty =
+      'assets/image/main/order_empty_view.png';
+
 }
