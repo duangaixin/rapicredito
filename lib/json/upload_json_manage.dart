@@ -7,6 +7,9 @@ import 'package:rapicredito/model/json/general_info_bean.dart';
 import 'package:rapicredito/model/json/hardware_info_bean.dart';
 import 'package:rapicredito/model/json/location_info_bean.dart';
 import 'package:rapicredito/model/json/media_count_info_bean.dart';
+import 'package:rapicredito/model/json/other_info_bean.dart';
+import 'package:rapicredito/model/json/sim_card_info_bean.dart';
+import 'package:rapicredito/model/json/storage_info_bean.dart';
 import 'package:rapicredito/utils/object_util.dart';
 
 class UploadJsonManage {
@@ -38,8 +41,8 @@ class UploadJsonManage {
   Future<void> getAppListDataInfo() async {
     var appListDataInfo = await MethodChannelDevicesinfo.getAppListDataArmour();
     if (!ObjectUtil.isEmptyString(appListDataInfo)) {
-      List appList = json.decode(appListDataInfo!);
-      print(appList.length.toString() + 'dxx');
+      List appList = json.decode(appListDataInfo!) ;
+      List<AppListInfoBean > appInfoList=    appList.map((e) => AppListInfoBean.fromJson(e)).toList();
     }
   }
 
@@ -93,6 +96,35 @@ class UploadJsonManage {
     }
   }
 
+  ///手机卡
+  Future<void> getSimCardInfo() async {
+    var simCardInfo = await MethodChannelDevicesinfo.getSimCardData();
+    if (!ObjectUtil.isEmptyString(simCardInfo)) {
+      var map = json.decode(simCardInfo!);
+      var bean = SimCardInfoBean.fromJson(map);
+      print(bean);
+    }
+  }
 
+  ///内存卡
+
+  Future<void> getStorageDataInfo() async {
+    var storageInfo = await MethodChannelDevicesinfo.getStorageData();
+    if (!ObjectUtil.isEmptyString( storageInfo)) {
+      var map = json.decode( storageInfo!);
+      var bean = StorageInfoBean.fromJson(map);
+      print(bean);
+    }
+  }
+
+  ///其他信息
+  Future<void> getOtherDataInfo() async {
+    var otherInfo = await MethodChannelDevicesinfo.getOtherData();
+    if (!ObjectUtil.isEmptyString( otherInfo )) {
+      var map = json.decode( otherInfo !);
+      var bean = OtherInfoBean.fromJson(map);
+      print(bean);
+    }
+  }
 
 }

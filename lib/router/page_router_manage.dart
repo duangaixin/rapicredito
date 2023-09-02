@@ -15,6 +15,7 @@ import 'package:rapicredito/page/notfound/not_found_page.dart';
 import 'package:rapicredito/page/permission/index.dart';
 import 'package:rapicredito/page/result/rollover/index.dart';
 import 'package:rapicredito/page/splash/index.dart';
+import 'package:rapicredito/page/test/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:get/route_manager.dart';
 import 'package:rapicredito/webview/webview_page.dart';
@@ -90,6 +91,10 @@ class PageRouterManage {
       name: PageRouterName.customCameraPage,
       page: () => const CustomCameraPage(),
     ),
+    GetPage(
+        name: PageRouterName.testPage,
+        page: () => const TestPage(),
+        binding: TestBinding()),
     GetPage(
         name: PageRouterName.notFoundPage, page: () => const NotFoundPage()),
   ];

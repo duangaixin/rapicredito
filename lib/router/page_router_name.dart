@@ -1,5 +1,6 @@
 class PageRouterName {
   static const initial = '/';
+  static const String testPage = '/testPage';
   static const String permissionPage = '/permissionPage';
   static const String splashPage = '/splashPage';
   static const String notFoundPage = '/notFoundPage';

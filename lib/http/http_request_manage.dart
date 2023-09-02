@@ -119,6 +119,12 @@ extension RequestBussiness on HttpRequestManage {
     );
   }
 
-
+  Future<BaseResponse> postQueryOrderListRequest(
+      Map<String, dynamic> param) async {
+    return await httpRequest.post(HttpApi.apiQueryOrderListInfo,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        data: param,
+        onTransform: (json) =>null);
+  }
 
 }

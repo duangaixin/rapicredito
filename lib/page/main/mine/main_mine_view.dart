@@ -18,7 +18,6 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
         onRefresh: ctr.refreshInfo,
         enablePullUp: false,
         child: SingleChildScrollView(
-
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -124,7 +123,7 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
               iconHeight: 24.0,
               iconWith: 25.0,
               iconPath: Resource.assetsImageMineSupplyAgreement,
-              onTap: () {},
+              onTap: ctr.goToTestPage,
               content: 'Atención al cliente',
             ),
           ],

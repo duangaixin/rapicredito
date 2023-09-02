@@ -69,4 +69,8 @@ class MainMineCtr extends BaseGetCtr {
       AppConstants.webViewUrlKey: webViewUrl
     });
   }
+
+  void goToTestPage() {
+    Get.toNamed(PageRouterName.testPage);
+  }
 }
