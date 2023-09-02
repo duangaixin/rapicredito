@@ -59,6 +59,8 @@ class Resource {
       'assets/image/main/mine_sign_agreement.png';
   static const String assetsImageMineSupplyAgreement =
       'assets/image/main/mine_supply_agreement.png';
-
-
+  static const String assetsImageOrderWarnInfo =
+      'assets/image/main/order_warn_info.png';
+  static const String assetsImageOrderErrorInfo =
+      'assets/image/main/order_error_info.png';
 }

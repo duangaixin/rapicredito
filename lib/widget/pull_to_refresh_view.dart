@@ -26,7 +26,7 @@ class PullToRefreshView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SmartRefresher(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       controller: _refreshController,
       enablePullDown: enablePullDown ?? true,
       enablePullUp: enablePullUp ?? true,
@@ -87,7 +87,7 @@ class PullToRefreshView extends StatelessWidget {
   }
 
   Widget getCustomHeader() {
-    return MaterialClassicHeader();
+    return const MaterialClassicHeader(color: Color(0xffB8EF17));
     return CustomHeader(
       builder: (BuildContext context, RefreshStatus? mode) {
         Widget header;
