@@ -75,7 +75,7 @@ class LoanMoneyDatePage extends GetView<LoanMoneyDateCtr> {
             Padding(
                 padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                 child: _buildKeyValueView(
-                    title: 'Cargo por servicios', content: '')),
+                    title: 'Cargo por servicios', content: controller.state.serviceCharge)),
             _buildKeyValueView(
               title: 'IVA',
               content: controller.state.iva,
@@ -124,13 +124,11 @@ class LoanMoneyDatePage extends GetView<LoanMoneyDateCtr> {
                     'Program de reembolso',
                     style: TextStyle(fontSize: 14.0, color: Color(0xff666666)),
                   ),
-                  Obx(() {
-                    return Text(
-                      controller.state.repaymentDate,
-                      style: const TextStyle(
-                          fontSize: 14.0, color: Color(0xff666666)),
-                    );
-                  }),
+                  Text(
+                    controller.state.repaymentAmount,
+                    style: const TextStyle(
+                        fontSize: 14.0, color: Color(0xff666666)),
+                  ),
                 ],
               ),
             ),
@@ -142,11 +140,13 @@ class LoanMoneyDatePage extends GetView<LoanMoneyDateCtr> {
                   'Fecha de pago de tu crédito',
                   style: TextStyle(fontSize: 14.0, color: Color(0xff666666)),
                 ),
-                Text(
-                  controller.state.repaymentAmount,
-                  style:
-                      const TextStyle(fontSize: 14.0, color: Color(0xff666666)),
-                ),
+                Obx(() {
+                  return Text(
+                    controller.state.repaymentDate,
+                    style: const TextStyle(
+                        fontSize: 14.0, color: Color(0xff666666)),
+                  );
+                }),
               ],
             ),
           ],

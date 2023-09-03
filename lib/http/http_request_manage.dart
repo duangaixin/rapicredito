@@ -7,6 +7,7 @@ import 'package:rapicredito/model/client_info_bean.dart';
 import 'package:rapicredito/model/config_info_bean.dart';
 import 'package:rapicredito/model/login_info_bean.dart';
 import 'package:rapicredito/model/order_info_bean.dart';
+import 'package:rapicredito/model/pre_submit_order_bean.dart';
 import 'package:rapicredito/model/product_info_bean.dart';
 import 'package:rapicredito/model/query_photo_info_bean.dart';
 import 'package:rapicredito/model/test_calculate_info_bean.dart';
@@ -140,11 +141,11 @@ extension RequestBussiness on HttpRequestManage {
         onTransform: (json) => TestCalculateInfoBean.fromJson(json));
   }
 
-  Future<BaseResponse> postPreSubmitOrderRequest(Map<String, dynamic> param) async {
-    return await httpRequest.post(HttpApi.apiPreSubmitOrder,
+  Future<BaseResponse<PreSubmitOrderBean>> postPreSubmitOrderRequest(Map<String, dynamic> param) async {
+    return await httpRequest.post<PreSubmitOrderBean>(HttpApi.apiPreSubmitOrder,
         options: Options(contentType: Headers.formUrlEncodedContentType),
         data: param,
-        onTransform: (json) => null);
+        onTransform: (json) =>PreSubmitOrderBean.fromJson(json));
   }
   Future<BaseResponse> postSubmitOrderRequest(Map<String, dynamic> param) async {
     return await httpRequest.post(HttpApi.apiSubmitOrder,

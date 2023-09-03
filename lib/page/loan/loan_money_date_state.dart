@@ -12,7 +12,7 @@ class LoanMoneyDateState {
   int productId = -1;
   int detailId = -1;
   double applyAmount = -1;
-  String orderId='';
+  int orderId = -1;
 
   ///到手金额
   String amountInHand = '';
@@ -27,10 +27,13 @@ class LoanMoneyDateState {
   String iva = '';
 
   ///银行收取服务费
-  String bankServiceCharge='';
+  String bankServiceCharge = '';
 
   ///借款金额
   String loanAmount = '';
+
+  ///还款金额
+  String repaymentAmount = '';
 
   ///还款日期
   final RxString _repaymentDate = ''.obs;
@@ -38,7 +41,4 @@ class LoanMoneyDateState {
   String get repaymentDate => _repaymentDate.value;
 
   set repaymentDate(value) => _repaymentDate.value = value;
-
-  ///还款金额
-  String repaymentAmount = '';
 }

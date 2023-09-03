@@ -122,8 +122,8 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     var response =
         await HttpRequestManage.instance.postPreSubmitOrderRequest(param);
     if (response.isSuccess()) {
-      //todo 解析
-      state.orderId = '';
+      var bean = response.data;
+      state.orderId = bean?.disabledLondonPrivatePoolAmericanInstrument ?? -1;
       showConfirmMoneyDialog();
     } else {
       NetException.toastException(response);
@@ -143,7 +143,6 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     var response =
         await HttpRequestManage.instance.postSubmitOrderRequest(param);
     if (response.isSuccess()) {
-
     } else {
       NetException.toastException(response);
     }
@@ -153,7 +152,12 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     showDialog(
         context: Get.context!,
         builder: (_) {
-          return LoanConfirmMoneyDialog(clickConfirm: postSubmitOrderRequest);
+          return LoanConfirmMoneyDialog(
+            clickConfirm: postSubmitOrderRequest,
+            amountInHand: state.amountInHand,
+            loanAmount: state.loanAmount,
+            repaymentDate: state.repaymentDate,
+          );
         });
   }
 }

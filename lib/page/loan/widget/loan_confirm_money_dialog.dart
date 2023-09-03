@@ -9,10 +9,15 @@ class LoanConfirmMoneyDialog extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _LoanConfirmMoneyDialogState();
   final Function clickConfirm;
-
+  final String? amountInHand;
+  final String? loanAmount;
+  final String? repaymentDate;
   const LoanConfirmMoneyDialog({
     Key? key,
     required this.clickConfirm,
+    this.amountInHand,
+    this.loanAmount,
+    this.repaymentDate
   }) : super(key: key);
 }
 
@@ -56,15 +61,15 @@ class _LoanConfirmMoneyDialogState extends State<LoanConfirmMoneyDialog> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 20.0),
-            child: _buildItemView('Cantidad a recibir', '300,702.00 \$'),
+            child: _buildItemView('Cantidad a recibir', '${widget.amountInHand}\$'),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
-            child: _buildItemView('Monto de devolución', '300,702.00\$'),
+            child: _buildItemView('Monto de devolución', '${widget.loanAmount}\$'),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
-            child: _buildItemView('Fecha de pago de tu crédito', '30–11-2020'),
+            child: _buildItemView('Fecha de pago de tu crédito','${widget.repaymentDate}' ),
           ),
           _buildSelectView(),
           _buildBottomButtonView(),
@@ -132,7 +137,9 @@ class _LoanConfirmMoneyDialogState extends State<LoanConfirmMoneyDialog> {
       children: [
         Expanded(
             child: CustomButton(
-          onPressed: widget.clickConfirm(''),
+          onPressed:(){
+            widget.clickConfirm();
+          } ,
           minWidth: 152.0,
           minHeight: 46.0,
           backgroundColor: Colors.white,
@@ -149,7 +156,9 @@ class _LoanConfirmMoneyDialogState extends State<LoanConfirmMoneyDialog> {
         ),
         Expanded(
             child: CustomButton(
-          onPressed: widget.clickConfirm(''),
+              onPressed:(){
+                widget.clickConfirm();
+              } ,
           minWidth: 152.0,
           minHeight: 46.0,
           backgroundColor: const Color(0xffB8EF17),
