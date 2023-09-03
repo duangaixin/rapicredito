@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
@@ -27,13 +29,16 @@ class TestPage extends GetView<TestCtr> {
               CustomButton(
                   text: '爬取数据',
                   onPressed: () async {
-                    await UploadJsonManage.instance.getGeneralData();
+                    var bean=await UploadJsonManage.instance.collectAllData();
+                var jsonStr=    json.encode(bean);
+                print(jsonStr);
+                   // await UploadJsonManage.instance.getGeneralData();
                     //    await UploadJsonManage.instance.getAppListDataInfo();
                     //  await UploadJsonManage.instance.getBatteryStatusInfo();
                     // await UploadJsonManage.instance.getHardwareInfo();
                     // await UploadJsonManage.instance.getLocationInfo();
                     // await UploadJsonManage.instance.getMediaFileCountInfo();
-                    //   await UploadJsonManage.instance.getNetInfo();
+                    // await UploadJsonManage.instance.getNetInfo();
                     //  await UploadJsonManage.instance.getSimCardInfo();
                     //    await UploadJsonManage.instance.getStorageDataInfo();
                     //      await UploadJsonManage.instance.getOtherDataInfo();

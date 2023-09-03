@@ -9,7 +9,7 @@ part of 'battery_info_bean.dart';
 BatteryInfoBean _$BatteryInfoBeanFromJson(Map<String, dynamic> json) =>
     BatteryInfoBean(
       json['battery_health'] as int?,
-      (json['battery_pct'] as num).toDouble(),
+      (json['battery_pct'] as num?)?.toDouble(),
       json['battery_temperature'] as int?,
       json['charge_type'] as int?,
       json['is_charging'] as int?,

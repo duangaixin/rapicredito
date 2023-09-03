@@ -10,7 +10,7 @@ class BatteryInfoBean extends Object {
   int? batteryHealth;
 
   @JsonKey(name: 'battery_pct')
-  double batteryPct;
+  double? batteryPct;
 
   @JsonKey(name: 'battery_temperature')
   int? batteryTemperature;
