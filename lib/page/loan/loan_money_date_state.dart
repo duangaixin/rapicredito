@@ -12,6 +12,7 @@ class LoanMoneyDateState {
   int productId = -1;
   int detailId = -1;
   double applyAmount = -1;
+  String orderId='';
 
   ///到手金额
   String amountInHand = '';

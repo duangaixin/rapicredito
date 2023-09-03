@@ -139,4 +139,17 @@ extension RequestBussiness on HttpRequestManage {
         data: param,
         onTransform: (json) => TestCalculateInfoBean.fromJson(json));
   }
+
+  Future<BaseResponse> postPreSubmitOrderRequest(Map<String, dynamic> param) async {
+    return await httpRequest.post(HttpApi.apiPreSubmitOrder,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        data: param,
+        onTransform: (json) => null);
+  }
+  Future<BaseResponse> postSubmitOrderRequest(Map<String, dynamic> param) async {
+    return await httpRequest.post(HttpApi.apiSubmitOrder,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        data: param,
+        onTransform: (json) => null);
+  }
 }

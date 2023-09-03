@@ -157,7 +157,7 @@ class LoanMoneyDatePage extends GetView<LoanMoneyDateCtr> {
         padding: const EdgeInsets.only(
             bottom: 23.0, left: 55.0, right: 55.0, top: 26.0),
         child: CustomButton(
-          onPressed: () {},
+          onPressed: controller.postPreSubmitOrderRequest,
           minWidth: 265.0,
           minHeight: 46.0,
           backgroundColor: const Color(0xffB8EF17),

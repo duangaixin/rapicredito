@@ -15,4 +15,7 @@ class HttpApi {
   static const String apiQueryOrderListInfo ='microcomputer/produceIncorrectDuck';
   static const String apiQueryProductInfo ='smartBirthplace/feelFestivalMotor';
   static const String apiTestCalculateInfo ='smartBirthplace/testHopelessSightseeing';
+  static const String apiPreSubmitOrder='cheapHeroine/cureRudeIndependence';
+  static const String apiSubmitOrder='cheapHeroine/swallowSeriousFailure';
+
 }

@@ -8,7 +8,7 @@ import 'package:rapicredito/widget/custom_click_view.dart';
 class LoanConfirmMoneyDialog extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _LoanConfirmMoneyDialogState();
-  final Function(String s) clickConfirm;
+  final Function clickConfirm;
 
   const LoanConfirmMoneyDialog({
     Key? key,
