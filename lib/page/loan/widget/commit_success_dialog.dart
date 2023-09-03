@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
@@ -9,11 +10,9 @@ import 'package:rapicredito/widget/custom_image_view.dart';
 class CommitSuccessDialog extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _CommitSuccessDialogState();
-  final Function clickConfirm;
 
   const CommitSuccessDialog({
     Key? key,
-    required this.clickConfirm,
   }) : super(key: key);
 }
 
@@ -80,7 +79,10 @@ class _CommitSuccessDialogState extends State<CommitSuccessDialog> {
             ),
           ),
           CustomButton(
-            onPressed: widget.clickConfirm(),
+            onPressed: () {
+              Get.back();
+              goToMainPage();
+            },
             minWidth: 152.0,
             minHeight: 46.0,
             backgroundColor: Colors.white,
@@ -107,7 +109,10 @@ class _CommitSuccessDialogState extends State<CommitSuccessDialog> {
 
   Widget _buildCancelView() {
     return CustomClickView(
-        onTap: Get.back,
+        onTap: () {
+          Get.back();
+          goToMainPage();
+        },
         child: Container(
           height: 54.0,
           color: Colors.transparent,
@@ -137,8 +142,14 @@ class _CommitSuccessDialogState extends State<CommitSuccessDialog> {
       }
       if (timeEnd <= 0) {
         Get.back();
+        goToMainPage();
       }
     });
+  }
+
+  void goToMainPage() {
+    Get.until((route) =>
+        (route as GetPageRoute).routeName == PageRouterName.mainPage);
   }
 
   @override

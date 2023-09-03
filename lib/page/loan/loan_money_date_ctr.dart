@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
+import 'package:rapicredito/get/getx_extension.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
 import 'package:rapicredito/page/loan/index.dart';
+import 'package:rapicredito/page/loan/widget/commit_success_dialog.dart';
 import 'package:rapicredito/page/loan/widget/loan_confirm_money_dialog.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/utils/string_ext.dart';
@@ -119,8 +121,10 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     param['cleverFightSatisfactionCustom'] = state.detailId;
     param['funnyAustraliaTeamTale'] = state.applyAmount;
     param.addAll(getCommonParam());
+    Get.showLoading();
     var response =
         await HttpRequestManage.instance.postPreSubmitOrderRequest(param);
+    Get.dismiss();
     if (response.isSuccess()) {
       var bean = response.data;
       state.orderId = bean?.disabledLondonPrivatePoolAmericanInstrument ?? -1;
@@ -140,9 +144,12 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     param['disabledLondonPrivatePoolAmericanInstrument'] = state.orderId;
 
     param.addAll(getCommonParam());
+    Get.showLoading();
     var response =
         await HttpRequestManage.instance.postSubmitOrderRequest(param);
+    Get.dismiss();
     if (response.isSuccess()) {
+      showConfirmMoneyDialog();
     } else {
       NetException.toastException(response);
     }
@@ -158,6 +165,14 @@ class LoanMoneyDateCtr extends BaseGetCtr {
             loanAmount: state.loanAmount,
             repaymentDate: state.repaymentDate,
           );
+        });
+  }
+
+  void showCommitSuccessDialog() {
+    showDialog(
+        context: Get.context!,
+        builder: (_) {
+          return const CommitSuccessDialog();
         });
   }
 }
