@@ -54,7 +54,6 @@ class LoanDateTopViewState extends State<LoanDateTopView> {
                   color: Color(0xffD53535),
                   fontWeight: FontWeight.bold),
             )),
-
         const Text(
           'Por favor, elija la fecha de reembolso',
           style: TextStyle(
@@ -114,7 +113,7 @@ class LoanDateTopViewState extends State<LoanDateTopView> {
           borderRadius: BorderRadius.circular(8.0),
         ),
         alignment: Alignment.center,
-        child:  Stack(
+        child: Stack(
           alignment: Alignment.center,
           children: [
             Text('300,000',
@@ -131,5 +130,4 @@ class LoanDateTopViewState extends State<LoanDateTopView> {
           ],
         ));
   }
-
 }

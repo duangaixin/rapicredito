@@ -6,7 +6,11 @@ extension StringSpaceRemove on String {
     return replaceAll(RegExp(r'\s+\b|\b\s'), '');
   }
 }
-
+extension StringWithDollar on String {
+  String strWithDollar() {
+    return '$this \$';
+  }
+}
 extension _FixAutoLines on String {
   String fixAutoLines() {
     return Characters(this).join('\u{200B}');

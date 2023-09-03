@@ -7,7 +7,9 @@ import 'package:rapicredito/model/client_info_bean.dart';
 import 'package:rapicredito/model/config_info_bean.dart';
 import 'package:rapicredito/model/login_info_bean.dart';
 import 'package:rapicredito/model/order_info_bean.dart';
+import 'package:rapicredito/model/product_info_bean.dart';
 import 'package:rapicredito/model/query_photo_info_bean.dart';
+import 'package:rapicredito/model/test_calculate_info_bean.dart';
 import 'package:rapicredito/net/base_response.dart';
 
 class HttpRequestManage {
@@ -90,7 +92,8 @@ extension RequestBussiness on HttpRequestManage {
 
   Future<BaseResponse<List<BankInfoBean>>> postQueryAccountRequest(
       Map<String, dynamic> param) async {
-    return await httpRequest.post<List<BankInfoBean>>(HttpApi.apiQueryAccountInfo,
+    return await httpRequest.post<List<BankInfoBean>>(
+        HttpApi.apiQueryAccountInfo,
         options: Options(contentType: Headers.formUrlEncodedContentType),
         data: param,
         onTransform: (json) =>
@@ -104,29 +107,36 @@ extension RequestBussiness on HttpRequestManage {
         data: param);
   }
 
-
-
-
-
-
-
-
-  Future<BaseResponse> postUploadBigJson(
-      Map<String, dynamic> param) async {
+  Future<BaseResponse> postUploadBigJson(Map<String, dynamic> param) async {
     return await httpRequest.post(HttpApi.apiUploadBigJson,
         options: Options(contentType: Headers.formUrlEncodedContentType),
         data: param,
-        onTransform: (json) => null
-    );
+        onTransform: (json) => null);
   }
 
   Future<BaseResponse<List<OrderInfoBean>>> postQueryOrderListRequest(
       Map<String, dynamic> param) async {
-    return await httpRequest.post<List<OrderInfoBean>>(HttpApi.apiQueryOrderListInfo,
+    return await httpRequest.post<List<OrderInfoBean>>(
+        HttpApi.apiQueryOrderListInfo,
         options: Options(contentType: Headers.formUrlEncodedContentType),
         data: param,
         onTransform: (json) =>
             json.map<OrderInfoBean>((e) => OrderInfoBean.fromJson(e)).toList());
   }
 
+  Future<BaseResponse<ProductInfoBean>> postQueryProductInfoRequest(
+      Map<String, dynamic> param) async {
+    return await httpRequest.post<ProductInfoBean>(HttpApi.apiQueryProductInfo,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        data: param,
+        onTransform: (json) => ProductInfoBean.fromJson(json));
+  }
+
+  Future<BaseResponse<TestCalculateInfoBean>> postTestCalculateRequest(
+      Map<String, dynamic> param) async {
+    return await httpRequest.post<TestCalculateInfoBean>(HttpApi.apiTestCalculateInfo,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        data: param,
+        onTransform: (json) => TestCalculateInfoBean.fromJson(json));
+  }
 }

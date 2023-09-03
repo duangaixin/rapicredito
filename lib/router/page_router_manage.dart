@@ -73,8 +73,8 @@ class PageRouterManage {
         middlewares: [RouteAuthMiddleware()]),
     GetPage(
         name: PageRouterName.loanDatePage,
-        page: () => const LoanDatePage(),
-        binding: LoanDateBinding()),
+        page: () => const LoanMoneyDatePage(),
+        binding: LoanMoneyDateBinding()),
     GetPage(
         name: PageRouterName.rolloverPaymentResultPage,
         page: () => const RolloverPaymentResultPage(),

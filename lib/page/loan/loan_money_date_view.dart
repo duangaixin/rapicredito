@@ -6,8 +6,8 @@ import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
 
-class LoanDatePage extends GetView<LoanDateCtr> {
-  const LoanDatePage({Key? key}) : super(key: key);
+class LoanMoneyDatePage extends GetView<LoanMoneyDateCtr> {
+  const LoanMoneyDatePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class LoanDatePage extends GetView<LoanDateCtr> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  LoanDateTopView(),
+                  const LoanDateTopView(),
                   centerView,
                   bottomView,
                 ],
@@ -64,68 +64,38 @@ class LoanDatePage extends GetView<LoanDateCtr> {
                 padding: const EdgeInsets.only(top: 15.0, bottom: 8.0),
                 child: _buildKeyValueView(
                     title: 'Cantidad a recibir',
-                    content: '876.00',
+                    content: controller.state.amountInHand,
                     fontSize: 15.0,
                     color: const Color(0xff333333),
                     fontWeight: FontWeight.bold)),
             _buildKeyValueView(
               title: 'Interés',
-              content: '876.00',
+              content: controller.state.interest,
             ),
             Padding(
                 padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                 child: _buildKeyValueView(
-                    title: 'Cargo por servicios', content: '876.00')),
+                    title: 'Cargo por servicios', content: '')),
             _buildKeyValueView(
               title: 'IVA',
-              content: '876.00',
+              content: controller.state.iva,
             ),
             Padding(
                 padding: const EdgeInsets.only(top: 8.0, bottom: 11.0),
                 child: _buildKeyValueView(
                   title:
                       'Cargo por servicios de transferencia\n(Cobrado por el Banco)',
-                  content: '876.00',
+                  content: controller.state.bankServiceCharge,
                 )),
             _buildKeyValueView(
                 title: 'Monto del préstamo',
-                content: '876.00',
+                content: controller.state.loanAmount,
                 color: const Color(0xff333333),
                 fontWeight: FontWeight.bold,
                 fontSize: 15.0)
           ],
         ),
       );
-
-  Widget _buildKeyValueView(
-      {String title = '',
-      String content = '',
-      FontWeight fontWeight = FontWeight.normal,
-      double fontSize = 14.0,
-      Color? color}) {
-    return Row(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-              fontSize: fontSize,
-              color: color ?? const Color(0xff666666),
-              fontWeight: fontWeight),
-        ),
-        Text(
-          content,
-          style: TextStyle(
-              fontSize: fontSize,
-              color: color ?? const Color(0xff666666),
-              fontWeight: fontWeight),
-        ),
-      ],
-    );
-  }
 
   Widget get bottomView => Container(
         padding: const EdgeInsets.only(
@@ -137,7 +107,7 @@ class LoanDatePage extends GetView<LoanDateCtr> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
+            const Text(
               'Programa de reembolso',
               style: TextStyle(
                   fontSize: 18.0,
@@ -145,19 +115,22 @@ class LoanDatePage extends GetView<LoanDateCtr> {
                   fontWeight: FontWeight.bold),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 11.0, bottom: 8.0),
+              padding: const EdgeInsets.only(top: 11.0, bottom: 8.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Programa de reembolso',
+                  const Text(
+                    'Program de reembolso',
                     style: TextStyle(fontSize: 14.0, color: Color(0xff666666)),
                   ),
-                  Text(
-                    '876.00',
-                    style: TextStyle(fontSize: 14.0, color: Color(0xff666666)),
-                  ),
+                  Obx(() {
+                    return Text(
+                      controller.state.repaymentDate,
+                      style: const TextStyle(
+                          fontSize: 14.0, color: Color(0xff666666)),
+                    );
+                  }),
                 ],
               ),
             ),
@@ -165,13 +138,14 @@ class LoanDatePage extends GetView<LoanDateCtr> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   'Fecha de pago de tu crédito',
                   style: TextStyle(fontSize: 14.0, color: Color(0xff666666)),
                 ),
                 Text(
-                  '17-01-2021',
-                  style: TextStyle(fontSize: 14.0, color: Color(0xff666666)),
+                  controller.state.repaymentAmount,
+                  style:
+                      const TextStyle(fontSize: 14.0, color: Color(0xff666666)),
                 ),
               ],
             ),
@@ -195,4 +169,33 @@ class LoanDatePage extends GetView<LoanDateCtr> {
           fontWeight: FontWeight.bold,
         ),
       );
+
+  Widget _buildKeyValueView(
+      {String title = '',
+      String content = '',
+      FontWeight fontWeight = FontWeight.normal,
+      double fontSize = 14.0,
+      Color? color}) {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+              fontSize: fontSize,
+              color: color ?? const Color(0xff666666),
+              fontWeight: fontWeight),
+        ),
+        Text(
+          content,
+          style: TextStyle(
+              fontSize: fontSize,
+              color: color ?? const Color(0xff666666),
+              fontWeight: fontWeight),
+        ),
+      ],
+    );
+  }
 }

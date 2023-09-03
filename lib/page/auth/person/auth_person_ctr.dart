@@ -210,5 +210,6 @@ enum AppConfigClickType {
   gender,
   bankNameList,
   bankAccountType,
-  collectionType
+  collectionType,
+  moneyDateType
 }
