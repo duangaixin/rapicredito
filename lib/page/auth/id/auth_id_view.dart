@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/auth/id/index.dart';
-import 'package:rapicredito/page/auth/person/auth_person_ctr.dart';
 import 'package:rapicredito/page/auth/widget/common_auth_agreement_view.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/widget/comon_section_title_view.dart';
@@ -61,7 +60,8 @@ class AuthIdPage extends GetView<AuthIdCtr> {
             child: Row(mainAxisSize: MainAxisSize.max, children: [
               Expanded(child: Obx(() {
                 return idCameraView('Frente', controller.state.idFrontUrl, () {
-                  controller.tackCamera(isFront: true);
+                  //controller.tackCamera(isFront: true);
+                  controller.showSelectDialog(isFront:true);
                 });
               })),
               const SizedBox(
@@ -69,7 +69,8 @@ class AuthIdPage extends GetView<AuthIdCtr> {
               ),
               Expanded(child: Obx(() {
                 return idCameraView('Atrás', controller.state.idBackUrl, () {
-                  controller.tackCamera(isFront: false);
+                //  controller.tackCamera(isFront: false);
+                  controller.showSelectDialog(isFront:false);
                 });
               })),
             ]),

@@ -62,6 +62,33 @@ class AuthIdCtr extends BaseGetCtr {
     });
   }
 
+  void showSelectDialog({bool isFront = true}) {
+    CustomPicker.showSinglePicker(Get.context!,
+        data: ['Tomar fotos', 'Seleccionar del álbum'], onConfirm: (data, p) {
+      if (p == 0) {
+        tackCamera(isFront: isFront);
+      } else if (p == 1) {
+        pickImage(isFront: isFront);
+      }
+    });
+  }
+
+  void pickImage({bool isFront = true}) async {
+    KeyboardUtils.unFocus();
+    PermissionUtil.checkPermission(
+        permissionList: [Permission.camera],
+        onSuccess: () async {
+          XFile? result =
+              await ImagePicker().pickImage(source: ImageSource.gallery);
+          print(result?.path ?? '' + '-----duanxin===path');
+          if (result != null) {
+            var file = File(result.path);
+            _uploadPhotoData(file, isFront);
+          }
+        },
+        onFailed: () {});
+  }
+
   void tackCamera({bool isFront = true, bool isUploadFace = false}) {
     KeyboardUtils.unFocus();
     PermissionUtil.checkPermission(
@@ -82,7 +109,7 @@ class AuthIdCtr extends BaseGetCtr {
     List<CameraDescription> cameraList = await availableCameras();
     var result = await Get.toNamed(PageRouterName.customCameraPage,
         arguments: {'cameraList': cameraList});
-    if(result!=null&& result is XFile){
+    if (result != null && result is XFile) {
       var file = File(result.path);
       _uploadPhotoData(file, true, isUploadFace: true);
     }
@@ -159,12 +186,11 @@ class AuthIdCtr extends BaseGetCtr {
     return param;
   }
 
-  void clickGender(){
+  void clickGender() {
     if (ObjectUtil.isEmptyList(state.genderList)) {
       _postAppConfigInfoRequest(AppConfigClickType.gender);
     } else {
-      _showSelectDialog(
-          state.genderList, AppConfigClickType.gender);
+      _showSelectDialog(state.genderList, AppConfigClickType.gender);
     }
   }
 
@@ -185,7 +211,9 @@ class AuthIdCtr extends BaseGetCtr {
       if (!ObjectUtil.isEmptyList(netList)) {
         var showList = netList.map((e) => e.latestCandle).toList();
         if (clickType == AppConfigClickType.gender) {
-         state.genderList..clear()..addAll(showList);
+          state.genderList
+            ..clear()
+            ..addAll(showList);
         }
         if (!ObjectUtil.isEmptyList(showList)) {
           _showSelectDialog(showList, clickType);
@@ -229,7 +257,7 @@ class AuthIdCtr extends BaseGetCtr {
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
     Get.dismiss();
     if (response.isSuccess()) {
-      Get.until((route) =>route.settings.name==PageRouterName.mainPage);
+      Get.until((route) => route.settings.name == PageRouterName.mainPage);
     } else {
       NetException.toastException(response);
     }
@@ -262,9 +290,7 @@ class AuthIdCtr extends BaseGetCtr {
         _postQueryPhotoInfo(isShowDialog: true);
       });
     } else {
-      Get.dismiss();
-      var errorMsg = response.message ?? 'error';
-      ProgressHUD.showError(errorMsg);
+      ProgressHUD.showError('Upload failed, please upload again-Carga fallida');
     }
   }
 
