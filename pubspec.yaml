@@ -39,8 +39,9 @@ dependencies:
   camera: ^0.10.5+3
   firebase_core: 2.6.1
   firebase_crashlytics: 3.0.14
-  devicesinfo: 0.0.2
-
+#  devicesinfo: 0.0.2
+  devicesinfo:
+    path: ./devicesinfo-master
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -8,6 +8,7 @@ part of 'other_info_bean.dart';
 
 OtherInfoBean _$OtherInfoBeanFromJson(Map<String, dynamic> json) =>
     OtherInfoBean(
+      json['bootTime'] as int?,
       json['dbm'] as String?,
       json['http_proxy_host_port'] as String?,
       json['is_airplane_mode'] as int?,
@@ -19,12 +20,14 @@ OtherInfoBean _$OtherInfoBeanFromJson(Map<String, dynamic> json) =>
       json['last_boot_time'] as int?,
       json['ringer_mode'] as int?,
       json['root_jailbreak'] as int?,
+      SensorData.fromJson(json['sensorData'] as Map<String, dynamic>),
       json['simulator'] as int?,
       json['vpn_address'] as String?,
     );
 
 Map<String, dynamic> _$OtherInfoBeanToJson(OtherInfoBean instance) =>
     <String, dynamic>{
+      'bootTime': instance.bootTime,
       'dbm': instance.dbm,
       'http_proxy_host_port': instance.httpProxyHostPort,
       'is_airplane_mode': instance.isAirplaneMode,
@@ -36,6 +39,41 @@ Map<String, dynamic> _$OtherInfoBeanToJson(OtherInfoBean instance) =>
       'last_boot_time': instance.lastBootTime,
       'ringer_mode': instance.ringerMode,
       'root_jailbreak': instance.rootJailbreak,
+      'sensorData': instance.sensorData,
       'simulator': instance.simulator,
       'vpn_address': instance.vpnAddress,
+    };
+
+SensorData _$SensorDataFromJson(Map<String, dynamic> json) => SensorData(
+      (json['sensor_lists'] as List<dynamic>?)
+          ?.map((e) => Sensor_lists.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$SensorDataToJson(SensorData instance) =>
+    <String, dynamic>{
+      'sensor_lists': instance.sensorLists,
+    };
+
+Sensor_lists _$Sensor_listsFromJson(Map<String, dynamic> json) => Sensor_lists(
+      (json['max_range'] as num?)?.toDouble(),
+      json['min_delay'] as int?,
+      json['name'] as String?,
+      (json['power'] as num?)?.toDouble(),
+      (json['resolution'] as num?)?.toDouble(),
+      json['type'] as int?,
+      json['vendor'] as String?,
+      json['version'] as int?,
+    );
+
+Map<String, dynamic> _$Sensor_listsToJson(Sensor_lists instance) =>
+    <String, dynamic>{
+      'max_range': instance.maxRange,
+      'min_delay': instance.minDelay,
+      'name': instance.name,
+      'power': instance.power,
+      'resolution': instance.resolution,
+      'type': instance.type,
+      'vendor': instance.vendor,
+      'version': instance.version,
     };

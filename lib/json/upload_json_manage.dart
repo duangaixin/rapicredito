@@ -1,5 +1,8 @@
 import 'dart:convert';
 import 'package:devicesinfo/devicesinfo_method_channel.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:rapicredito/model/json/app_list_info_bean.dart';
 import 'package:rapicredito/model/json/battery_info_bean.dart';
 import 'package:rapicredito/model/json/general_info_bean.dart';
@@ -8,21 +11,22 @@ import 'package:rapicredito/model/json/location_info_bean.dart';
 import 'package:rapicredito/model/json/media_count_info_bean.dart';
 import 'package:rapicredito/model/json/net_work_info_bean.dart';
 import 'package:rapicredito/model/json/other_info_bean.dart';
-import 'package:rapicredito/model/json/sim_card_info_bean.dart';
 import 'package:rapicredito/model/json/storage_info_bean.dart';
-import 'package:rapicredito/model/json/upload_app_list_info_bean.dart';
-import 'package:rapicredito/model/json/upload_battery_info_bean.dart';
-import 'package:rapicredito/model/json/upload_general_info_bean.dart';
-import 'package:rapicredito/model/json/upload_hardware_info_bean.dart';
-import 'package:rapicredito/model/json/upload_json_bean.dart';
-import 'package:rapicredito/model/json/upload_location_info_bean.dart';
-import 'package:rapicredito/model/json/upload_net_info_bean.dart';
-import 'package:rapicredito/model/json/upload_other_info_bean.dart';
-import 'package:rapicredito/model/json/upload_storage_info_bean.dart';
+import 'package:rapicredito/model/json/upload/actual_blood_majority.dart';
+import 'package:rapicredito/model/json/upload/back_herb_fair_evening.dart';
+import 'package:rapicredito/model/json/upload/classical_surface.dart';
+import 'package:rapicredito/model/json/upload/compressed_crossroads_tiresome_greedy_pest.dart';
+import 'package:rapicredito/model/json/upload/enough_geography_broom_china.dart';
+import 'package:rapicredito/model/json/upload/frequent_rough_package_hunter.dart';
+import 'package:rapicredito/model/json/upload/lovely_rainbow_show_means.dart';
+import 'package:rapicredito/model/json/upload/red_education_proper_alive_shot.dart';
+import 'package:rapicredito/model/json/upload/spoken_cop_jewelry.dart';
 import 'package:rapicredito/utils/object_util.dart';
 
 class UploadJsonManage {
   static final UploadJsonManage instance = UploadJsonManage._internal();
+  var imei1 = '';
+  var imei2 = '';
 
   factory UploadJsonManage() {
     return instance;
@@ -37,26 +41,49 @@ class UploadJsonManage {
   }
 
   Future<SpokenCopJewelry> collectAllData() async {
-    var jsonBean = SpokenCopJewelry();
+    var jsonBean = SpokenCopJewelry(
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null);
     RedEducationProperAliveShot otherIntoBean = await getOtherDataInfo();
-    ClassicalSurface hardWareInfoBean = await getHardwareInfo();
+
     CompressedCrossroadsTiresomeGreedyPest generalInfoBean =
         await getGeneralData();
+    ClassicalSurface hardWareInfoBean = await getHardwareInfo();
+    EnoughGeographyBroomChina storageInfoBean = await getStorageDataInfo();
+
     List<FrequentRoughPackageHunter> appInfoList = await getAppListDataInfo();
     ActualBloodMajority batteryInfoBean = await getBatteryStatusInfo();
-    EnoughGeographyBroomChina storageInfoBean = await getStorageDataInfo();
+
     LovelyRainbowShowMeans locationInfoBean = await getLocationInfo();
-    BackHerbFairEvening netWorkInfoBean=  await getNetInfo();
+    BackHerbFairEvening netWorkInfoBean = await getNetInfo();
     MediaCountInfoBean? mediaCountInfoBean = await getMediaFileCountInfo();
 
-       jsonBean.redEducationProperAliveShot=otherIntoBean;
+    jsonBean.redEducationProperAliveShot = otherIntoBean;
     jsonBean.classicalSurface = hardWareInfoBean;
     jsonBean.enoughGeographyBroomChina = storageInfoBean;
     jsonBean.compressedCrossroadsTiresomeGreedyPest = generalInfoBean;
     jsonBean.frequentRoughPackageHunter = appInfoList;
     jsonBean.lovelyRainbowShowMeans = locationInfoBean;
     jsonBean.actualBloodMajority = batteryInfoBean;
-    jsonBean.backHerbFairEvening=netWorkInfoBean;
+    jsonBean.backHerbFairEvening = netWorkInfoBean;
     jsonBean.greatGymShaver = mediaCountInfoBean?.audioExternal;
     jsonBean.immediateGuideThinExpensiveJet = mediaCountInfoBean?.audioInternal;
     jsonBean.similarShelterStrictGooseProbableDay =
@@ -66,15 +93,38 @@ class UploadJsonManage {
     jsonBean.recentMeetingNoon = mediaCountInfoBean?.downloadFiles;
     jsonBean.secondFibreSaleswomanElectricLiberation =
         mediaCountInfoBean?.contactGroup;
-    jsonBean.gratefulEncouragementCoral=[];
-
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    jsonBean.electricJulySafeLikelyTrial = packageInfo.packageName;
+    jsonBean.foolishDearCitizenEnoughThem = packageInfo.buildNumber;
+    jsonBean.greatMobileAliveAirplane = packageInfo.version;
+    jsonBean.privatePersonalMudShanghai = DateTime.now().millisecondsSinceEpoch;
     return jsonBean;
   }
 
   ///app 一般手机信息
   Future<CompressedCrossroadsTiresomeGreedyPest> getGeneralData() async {
     var generalData = await MethodChannelDevicesinfo.getGeneralData();
-    var generalInfoBean = CompressedCrossroadsTiresomeGreedyPest();
+    var generalInfoBean = CompressedCrossroadsTiresomeGreedyPest(
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null);
     if (!ObjectUtil.isEmptyString(generalData)) {
       var map = json.decode(generalData!);
       var bean = GeneralInfoBean.fromJson(map);
@@ -85,8 +135,9 @@ class UploadJsonManage {
       generalInfoBean.suddenLiveMachinePureProfessor = bean.localeIso3Language;
       generalInfoBean.enoughSoftBookcase = bean.localeDisplayLanguage;
       generalInfoBean.silentDiscountForgetfulSouvenirs = bean.localeIso3Country;
-
-      generalInfoBean.emptyChainFamousJewel = bean.imei1;
+      imei1 = bean.imei1 ?? '';
+      imei2 = bean.imei2 ?? '';
+      generalInfoBean.emptyChainFamousJewel = imei1;
 
       ///phoneNumber
       generalInfoBean.possibleYoungPioneer = '';
@@ -106,10 +157,6 @@ class UploadJsonManage {
       ///uptimeMillis
       generalInfoBean.gentleSquareSoapAnotherScholarship =
           DateTime.now().millisecondsSinceEpoch;
-
-      ///sensor_list
-      generalInfoBean.changeableConstantRelationCentigradeSunlight = [];
-      print(bean);
     }
 
     var otherInfo = await MethodChannelDevicesinfo.getOtherData();
@@ -118,6 +165,34 @@ class UploadJsonManage {
       var bean = OtherInfoBean.fromJson(map);
       generalInfoBean.strangeRacialDeer = bean.isUsingProxyPort == 0;
       generalInfoBean.primaryCanadianPoisonBestEducation = bean.isUsbDebug == 0;
+      List<ChangeableConstantRelationCentigradeSunlight> dataSource = [];
+      var sensor = bean.sensorData;
+      var list = sensor.sensorLists ?? [];
+      if (!ObjectUtil.isEmptyList(list)) {
+        for (int i = 0; i < list.length; i++) {
+          var module = list[i];
+          var bean = ChangeableConstantRelationCentigradeSunlight(
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+          );
+          bean.everydayMapleChallengingAirline = module.type?.toString();
+          bean.communistBuddhistZooExtraCellar = module.name;
+          bean.theoreticalAttractiveExactMedicine = module.version?.toString();
+          bean.eastDollarChatEveryReason = module.vendor;
+          bean.busyCompositionNorthwest = module.maxRange?.toString();
+          bean.thirstySeaBlueProgressNumber = module.minDelay?.toString();
+          bean.dueIndianBalconySpokenHome = module.power?.toString();
+          bean.socialCanadianChina = module.resolution?.toString();
+          dataSource.add(bean);
+        }
+      }
+      generalInfoBean.changeableConstantRelationCentigradeSunlight = dataSource;
     }
     return generalInfoBean;
   }
@@ -133,7 +208,8 @@ class UploadJsonManage {
       if (!ObjectUtil.isEmptyList(appInfoList)) {
         for (int i = 0; i < appInfoList.length; i++) {
           var bean = appInfoList[i];
-          var uploadAppInfoBean = FrequentRoughPackageHunter();
+          var uploadAppInfoBean = FrequentRoughPackageHunter(
+              null, null, null, null, null, null, null, null);
           uploadAppInfoBean.followingGlasshouseJustBirdManyFlag = bean.appName;
           uploadAppInfoBean.fastChangeableStomachPepper = bean.packageName;
           uploadAppInfoBean.ancientMerchantEgg = bean.firstInstallTime;
@@ -152,7 +228,12 @@ class UploadJsonManage {
   ///电池信息
   Future<ActualBloodMajority> getBatteryStatusInfo() async {
     var batteryInfo = await MethodChannelDevicesinfo.getBatteryStatusData();
-    var batteryBean = ActualBloodMajority();
+    var batteryBean = ActualBloodMajority(
+      null,
+      null,
+      null,
+      null,
+    );
     if (!ObjectUtil.isEmptyString(batteryInfo)) {
       var map = json.decode(batteryInfo!);
       var bean = BatteryInfoBean.fromJson(map);
@@ -160,7 +241,6 @@ class UploadJsonManage {
       batteryBean.noisyHealthyAvenueCastle = bean.batteryPct?.toString();
       batteryBean.freePieceFastIdiom = bean.chargeType?.toString();
       batteryBean.followingStewardBlackConclusion = bean.chargeType?.toString();
-      print(batteryBean);
     }
     return batteryBean;
   }
@@ -168,37 +248,47 @@ class UploadJsonManage {
   ///硬件信息
   Future<ClassicalSurface> getHardwareInfo() async {
     var hardWareInfo = await MethodChannelDevicesinfo.getHardwareData();
-    var hardwareBean = ClassicalSurface();
+    var hardwareBean = ClassicalSurface(
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+    );
     if (!ObjectUtil.isEmptyString(hardWareInfo)) {
       var map = json.decode(hardWareInfo!);
       var bean = HardwareInfoBean.fromJson(map);
 
       hardwareBean.boringToothache = bean.device;
       hardwareBean.certainChurchDivisionRudeSide =
-          int.tryParse(bean.sdkVersionCode ?? '-1');
+          int.tryParse(bean.sdkVersionCode ?? '21');
       hardwareBean.fancyClassShyEasyEgg = bean.release;
       hardwareBean.racialFoggySongInstrument = bean.model;
       hardwareBean.everydayPorterVegetableLuggage = bean.brand;
       hardwareBean.japanesePainfulTown = bean.physicalSize;
       hardwareBean.metalCloseFinalChairwoman = bean.serialNumber;
       hardwareBean.horribleConcertCave = int.tryParse(bean.time ?? '0');
-
-      ///device_height
-      hardwareBean.thoroughIdiomLameSoftballSeaweed = 0;
-
-      ///device_width
-      hardwareBean.extraDistanceBreadGown = 0;
+      Size screenSize = MediaQuery.of(Get.context!).size;
+      double devicePixelRatio = MediaQuery.of(Get.context!).devicePixelRatio;
+      double deviceWidth = screenSize.width * devicePixelRatio;
+      double deviceHeight = screenSize.height * devicePixelRatio;
+      hardwareBean.extraDistanceBreadGown = deviceWidth.toInt();
+      hardwareBean.thoroughIdiomLameSoftballSeaweed = deviceHeight.toInt();
       hardwareBean.cloudyFamiliarCourage = bean.board;
+      hardwareBean.majorMiniskirtUnfitTemperature = imei1;
+      hardwareBean.famousPurposeTechnicalVirtue = imei2;
 
       ///difficultSolidChipsFastSkin
       hardwareBean.difficultSolidChipsFastSkin = bean.cpuType;
-
-      ///imei1
-      hardwareBean.majorMiniskirtUnfitTemperature = '';
-
-      ///imei2
-      hardwareBean.famousPurposeTechnicalVirtue = '';
-      print(bean);
     }
     return hardwareBean;
   }
@@ -206,14 +296,22 @@ class UploadJsonManage {
   ///定位信息
   Future<LovelyRainbowShowMeans> getLocationInfo() async {
     var locationInfo = await MethodChannelDevicesinfo.getLocationAddressData();
-    var locationBean = LovelyRainbowShowMeans();
+    var locationBean = LovelyRainbowShowMeans(
+      null,
+      null,
+      null,
+      null,
+    );
     if (!ObjectUtil.isEmptyString(locationInfo)) {
       var map = json.decode(locationInfo!);
       var bean = LocationInfoBean.fromJson(map);
       locationBean.tastyDepthAdditionAverageViewer = bean.city;
       locationBean.modernFlagEmptyCottageDrug = bean.provice;
       locationBean.clearBrownActor = bean.addressDetails;
-      var locationDetail = IndependentAmbulanceBurialFlag();
+      var locationDetail = IndependentAmbulanceBurialFlag(
+        null,
+        null,
+      );
       locationDetail.happyHeadteacher = bean.latitude;
       locationDetail.guiltyBeanStewardessUsefulBarbershop = bean.longitude;
       locationBean.independentAmbulanceBurialFlag = locationDetail;
@@ -227,8 +325,6 @@ class UploadJsonManage {
     if (!ObjectUtil.isEmptyString(mediaCountInfo)) {
       var map = json.decode(mediaCountInfo!);
       var bean = MediaCountInfoBean.fromJson(map);
-
-      print(bean);
       return bean;
     }
     return null;
@@ -237,11 +333,23 @@ class UploadJsonManage {
   ///网络信息
   Future<BackHerbFairEvening> getNetInfo() async {
     var netInfo = await MethodChannelDevicesinfo.getNetWorkData();
-    var netInfoBean = BackHerbFairEvening();
+    var netInfoBean = BackHerbFairEvening(
+      null,
+      null,
+      null,
+      null,
+    );
     if (!ObjectUtil.isEmptyString(netInfo)) {
       var map = json.decode(netInfo!);
       var bean = NetWorkInfoBean.fromJson(map);
-      var wifi = CottonFrenchFrontLid();
+      // var wifi = CottonFrenchFrontLid();
+
+      var wifi = FalseCattleCarefulPrinting(
+        null,
+        null,
+        null,
+        null,
+      );
       wifi.unhealthyFrontierLastFriend = bean.currentWifi?.bssid;
       wifi.particularMailbox = bean.currentWifi?.ssid;
       wifi.sorryFirmCarbon = bean.currentWifi?.mac;
@@ -251,7 +359,7 @@ class UploadJsonManage {
       netInfoBean.realParcelDeadHungrySaying =
           bean.configuredWifi?.length.toString();
       var list = bean.configuredWifi ?? [];
-      List<CottonFrenchFrontLid>? realList = [];
+      List<FalseCattleCarefulPrinting>? realList = [];
       if (!ObjectUtil.isEmptyList(list)) {
         for (int i = 0; i < list.length; i++) {
           var bean = list[0];
@@ -259,7 +367,13 @@ class UploadJsonManage {
           var ssid = bean.ssid ?? '';
           var mac = bean.mac ?? '';
           var name = bean.name ?? '';
-          var realBean = CottonFrenchFrontLid();
+          //var realBean = CottonFrenchFrontLid();
+          var realBean = FalseCattleCarefulPrinting(
+            null,
+            null,
+            null,
+            null,
+          );
           realBean.unhealthyFrontierLastFriend = bssid;
           realBean.particularMailbox = ssid;
           realBean.sorryFirmCarbon = mac;
@@ -268,27 +382,38 @@ class UploadJsonManage {
         }
         netInfoBean.strongColdLetter = realList;
       }
-
-      print(map);
     }
     return netInfoBean;
   }
 
-  ///手机卡
-  Future<void> getSimCardInfo() async {
-    var simCardInfo = await MethodChannelDevicesinfo.getSimCardData();
-    if (!ObjectUtil.isEmptyString(simCardInfo)) {
-      var map = json.decode(simCardInfo!);
-      var bean = SimCardInfoBean.fromJson(map);
-      print(bean);
-    }
-  }
+  // ///手机卡
+  // Future<void> getSimCardInfo() async {
+  //   var simCardInfo = await MethodChannelDevicesinfo.getSimCardData();
+  //   if (!ObjectUtil.isEmptyString(simCardInfo)) {
+  //     var map = json.decode(simCardInfo!);
+  //     var bean = SimCardInfoBean.fromJson(map);
+  //   }
+  // }
 
   ///内存卡
 
   Future<EnoughGeographyBroomChina> getStorageDataInfo() async {
     var storageInfo = await MethodChannelDevicesinfo.getStorageData();
-    var storageInfoBean = EnoughGeographyBroomChina();
+    var storageInfoBean = EnoughGeographyBroomChina(
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+    );
     if (!ObjectUtil.isEmptyString(storageInfo)) {
       var map = json.decode(storageInfo!);
       var bean = StorageInfoBean.fromJson(map);
@@ -331,7 +456,15 @@ class UploadJsonManage {
   ///其他信息
   Future<RedEducationProperAliveShot> getOtherDataInfo() async {
     var otherInfo = await MethodChannelDevicesinfo.getOtherData();
-    var otherInfoBean = RedEducationProperAliveShot();
+    var otherInfoBean = RedEducationProperAliveShot(
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+    );
     if (!ObjectUtil.isEmptyString(otherInfo)) {
       var map = json.decode(otherInfo!);
       var bean = OtherInfoBean.fromJson(map);
@@ -340,13 +473,11 @@ class UploadJsonManage {
       otherInfoBean.smoothRedRepairsGaySlip = bean.keyboard?.toString();
       otherInfoBean.classicalThickMinister = bean.simulator?.toString();
       otherInfoBean.racialChalkPainfulUniversity = bean.dbm?.toString();
-
-      ///total_boot_time
-      otherInfoBean.fairDifficultMiddlePreciousCloth = '';
+      otherInfoBean.fairDifficultMiddlePreciousCloth =
+          bean.bootTime?.toString();
 
       ///total_boot_time_wake
       otherInfoBean.pureMarriageNoiseThroat = '';
-      print(otherInfoBean);
     }
     return otherInfoBean;
   }

@@ -340,10 +340,9 @@ packages:
   devicesinfo:
     dependency: "direct main"
     description:
-      name: devicesinfo
-      sha256: "5246f57dee58e444ee056ce29e7d6ccd32661596edf60a1a00571fafb6fd3663"
-      url: "https://pub.flutter-io.cn"
-    source: hosted
+      path: devicesinfo-master
+      relative: true
+    source: path
     version: "0.0.2"
   dio:
     dependency: "direct main"
