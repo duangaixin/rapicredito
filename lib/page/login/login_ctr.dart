@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/get/getx_extension.dart';
+import 'package:rapicredito/get/getx_storage_service.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/local/app_constants.dart';
@@ -94,8 +95,9 @@ class LoginCtr extends BaseGetCtr {
       var token = loginInfoBean?.darkPlentyNervousHandbag ?? '';
       var userId = loginInfoBean?.terminalDifferentActionFatFountain ?? -1;
       var firstRegister = loginInfoBean?.cheapFenceScholarEverydayClinic ?? '0';
-      var testFirstRegister =
+      var testFlag =
           loginInfoBean?.delightedGooseFacialUnmarriedHamburger ?? 0;
+      await StorageService.to.setInt(AppConstants.userTestFlagKey,testFlag );
       await UserStore.to.setLoginInfo(token, userId, phoneNum);
       if (isTokenExpired) {
         Get.toNamed(PageRouterName.mainPage);

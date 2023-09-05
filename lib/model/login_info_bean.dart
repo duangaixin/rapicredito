@@ -10,9 +10,11 @@ class LoginInfoBean extends Object {
   String? darkPlentyNervousHandbag;
 
   @JsonKey(name: 'delightedGooseFacialUnmarriedHamburger')
+  ///testCustFlag
   int? delightedGooseFacialUnmarriedHamburger;
 
   @JsonKey(name: 'cheapFenceScholarEverydayClinic')
+  ///newCustFlag
   String? cheapFenceScholarEverydayClinic;
 
   @JsonKey(name: 'terminalDifferentActionFatFountain')

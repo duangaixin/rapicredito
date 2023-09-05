@@ -7,6 +7,7 @@ class AppConstants {
   static const String userTokenKey = 'user_token';
   static const String userIdKey = 'user_id';
   static const String userPhoneKey = 'user_phone';
+  static const String userTestFlagKey = 'user_test_flag';
   static const String useLoginKey = 'user_login';
   static const String webViewTitleKey = 'webView_title';
   static const String webViewUrlKey = 'webView_url';

@@ -3,8 +3,10 @@ import 'package:get/get.dart';
 import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/get/getx_extension.dart';
+import 'package:rapicredito/get/getx_storage_service.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
+import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/model/product_info_bean.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
 import 'package:rapicredito/page/loan/index.dart';
@@ -52,60 +54,70 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     }
   }
 
-  void dealDateList() {
+  void dealDateList(){
+    var testFlag=StorageService.to.getInt(AppConstants.userTestFlagKey );
     if (!ObjectUtil.isEmptyList(state.originList)) {
       List<SelectModel> allDateList = [];
-      state.durationList.clear();
-      for (int i = 0; i < state.originList.length; i++) {
-        var bean = state.originList[i];
-        var duration = bean.strictMedicalPuzzleCafeteria ?? 0;
-        state.durationList.add(duration);
-        var selectBean = SelectModel();
-        selectBean.isSelected = i == 0;
-        selectBean.canClick = true;
-        selectBean.detailId = bean.cleverFightSatisfactionCustom ?? -1;
-        DateTime? dateTime = DateTime.tryParse(state.serverTime);
-        var realDuration = duration + state.configInfoDateDefaultValue;
-        var realDate = dateTime?.add(Duration(days: realDuration));
-        if (realDate != null) {
-          var dateStr = '${realDate.day}-${realDate.month}-${realDate.year}';
-        state.repaymentDate=  selectBean.dateStr = dateStr;
-        }
-        allDateList.add(selectBean);
-      }
-
-      if (allDateList.length == 1) {
-        var bean = state.originList[0];
-        var duration = bean.strictMedicalPuzzleCafeteria ?? 0;
+      if(testFlag==1){
         var selectBeanOne = SelectModel();
         DateTime? dateTimeOne = DateTime.tryParse(state.serverTime);
-        var realDateOne = dateTimeOne?.add(Duration(days: duration * 2));
+        var realDateOne = dateTimeOne?.add(const Duration(days: 91));
         if (realDateOne != null) {
           var dateStr =
               '${realDateOne.day}-${realDateOne.month}-${realDateOne.year}';
-          selectBeanOne.dateStr = dateStr;
+        state.repaymentDate=  selectBeanOne.dateStr = dateStr;
         }
-        selectBeanOne.canClick = false;
-        allDateList.insert(1, selectBeanOne);
+        selectBeanOne.isSelected=true;
+        selectBeanOne.canClick = true;
+        allDateList.add(selectBeanOne);
         var selectBeanTwo = SelectModel();
         DateTime? dateTimeTwo = DateTime.tryParse(state.serverTime);
-        var realDateTwo = dateTimeTwo?.add(Duration(days: duration * 3));
+        var realDateTwo = dateTimeTwo?.add(const Duration(days: 91 * 2));
         if (realDateTwo != null) {
           var dateStr =
               '${realDateTwo.day}-${realDateTwo.month}-${realDateTwo.year}';
           selectBeanTwo.dateStr = dateStr;
         }
         selectBeanTwo.canClick = false;
-        allDateList.insert(2, selectBeanTwo);
-      } else {
-        if (!ObjectUtil.isEmptyList(state.durationList)) {
-          var maxDuration = state.durationList
-              .reduce((curr, next) => curr > next ? curr : next);
-          var minDuration = state.durationList
-              .reduce((curr, next) => curr < next ? curr : next);
+        selectBeanTwo.isSelected = false;
+        allDateList.add(selectBeanTwo);
+        var selectBeanThree = SelectModel();
+        DateTime? dateTimeThree = DateTime.tryParse(state.serverTime);
+        var realDateThree= dateTimeThree?.add(const Duration(days: 91 * 3));
+        if (realDateThree != null) {
+          var dateStr =
+              '${realDateThree.day}-${realDateThree.month}-${realDateThree.year}';
+          selectBeanThree.dateStr = dateStr;
+        }
+        selectBeanThree.canClick = false;
+        selectBeanThree.isSelected = false;
+        allDateList.add(selectBeanThree);
+      }else{
+        state.durationList.clear();
+        for (int i = 0; i < state.originList.length; i++) {
+          var bean = state.originList[i];
+          var duration = bean.strictMedicalPuzzleCafeteria ?? 0;
+          state.durationList.add(duration);
+          var selectBean = SelectModel();
+          selectBean.isSelected = i == 0;
+          selectBean.canClick = true;
+          selectBean.detailId = bean.cleverFightSatisfactionCustom ?? -1;
+          DateTime? dateTime = DateTime.tryParse(state.serverTime);
+          var realDuration = duration + state.configInfoDateDefaultValue;
+          var realDate = dateTime?.add(Duration(days: realDuration));
+          if (realDate != null) {
+            var dateStr = '${realDate.day}-${realDate.month}-${realDate.year}';
+            state.repaymentDate=  selectBean.dateStr = dateStr;
+          }
+          allDateList.add(selectBean);
+        }
+
+        if (allDateList.length == 1) {
+          var bean = state.originList[0];
+          var duration = bean.strictMedicalPuzzleCafeteria ?? 0;
           var selectBeanOne = SelectModel();
           DateTime? dateTimeOne = DateTime.tryParse(state.serverTime);
-          var realDateOne = dateTimeOne?.add(Duration(days: maxDuration+minDuration));
+          var realDateOne = dateTimeOne?.add(Duration(days: duration * 2));
           if (realDateOne != null) {
             var dateStr =
                 '${realDateOne.day}-${realDateOne.month}-${realDateOne.year}';
@@ -115,7 +127,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
           allDateList.insert(1, selectBeanOne);
           var selectBeanTwo = SelectModel();
           DateTime? dateTimeTwo = DateTime.tryParse(state.serverTime);
-          var realDateTwo = dateTimeTwo?.add(Duration(days: maxDuration+2*minDuration));
+          var realDateTwo = dateTimeTwo?.add(Duration(days: duration * 3));
           if (realDateTwo != null) {
             var dateStr =
                 '${realDateTwo.day}-${realDateTwo.month}-${realDateTwo.year}';
@@ -123,6 +135,33 @@ class LoanMoneyDateCtr extends BaseGetCtr {
           }
           selectBeanTwo.canClick = false;
           allDateList.insert(2, selectBeanTwo);
+        } else {
+          if (!ObjectUtil.isEmptyList(state.durationList)) {
+            var maxDuration = state.durationList
+                .reduce((curr, next) => curr > next ? curr : next);
+            var minDuration = state.durationList
+                .reduce((curr, next) => curr < next ? curr : next);
+            var selectBeanOne = SelectModel();
+            DateTime? dateTimeOne = DateTime.tryParse(state.serverTime);
+            var realDateOne = dateTimeOne?.add(Duration(days: maxDuration+minDuration));
+            if (realDateOne != null) {
+              var dateStr =
+                  '${realDateOne.day}-${realDateOne.month}-${realDateOne.year}';
+              selectBeanOne.dateStr = dateStr;
+            }
+            selectBeanOne.canClick = false;
+            allDateList.insert(1, selectBeanOne);
+            var selectBeanTwo = SelectModel();
+            DateTime? dateTimeTwo = DateTime.tryParse(state.serverTime);
+            var realDateTwo = dateTimeTwo?.add(Duration(days: maxDuration+2*minDuration));
+            if (realDateTwo != null) {
+              var dateStr =
+                  '${realDateTwo.day}-${realDateTwo.month}-${realDateTwo.year}';
+              selectBeanTwo.dateStr = dateStr;
+            }
+            selectBeanTwo.canClick = false;
+            allDateList.insert(2, selectBeanTwo);
+          }
         }
       }
 
