@@ -32,6 +32,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
   }
 
   Future<void> postQueryProductRequest() async {
+    print('3333333333-dx');
     var param = <String, dynamic>{};
     param.addAll(getCommonParam());
     var response =
@@ -48,6 +49,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
         state.applyAmount = topBean.cleverMaidActualFoot ?? 0.0;
         dealMoneyList(topBean);
         dealDateList();
+        print('444444444-dx');
       }
     } else {
       NetException.toastException(response);
@@ -208,6 +210,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
   }
 
   Future<void> postTestCalculateRequest({bool isShowDialog = false}) async {
+    print('555555555-dx');
     if (isShowDialog) {
       Get.showLoading();
     }
@@ -218,6 +221,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     param.addAll(getCommonParam());
     var response =
         await HttpRequestManage.instance.postTestCalculateRequest(param);
+    print('6666666-dx');
     if (isShowDialog) {
       Get.dismiss();
     }
@@ -261,6 +265,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     }
     param['everydayMapleChallengingAirline'] = typeStr;
     param.addAll(getCommonParam());
+    print('111111111111111-dx');
     var response = await HttpRequestManage.instance.postAppConfigInfo(param);
     if (response.isSuccess()) {
       var netList = response.data ?? [];
@@ -271,6 +276,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
           state.configInfoDateDefaultValue = int.tryParse(code) ?? 0;
         }
       }
+      print('22222222222-dx');
     } else {
       NetException.toastException(response);
     }
