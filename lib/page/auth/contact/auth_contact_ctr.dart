@@ -219,6 +219,10 @@ class AuthContactCtr extends BaseGetCtr {
   @override
   void onClose() {
     super.onClose();
+    phoneOneCtr.removeListener(_btnCanClick);
+    nameOneCtr.removeListener(_btnCanClick);
+    phoneTwoCtr.removeListener(_btnCanClick);
+    nameTwoCtr.removeListener(_btnCanClick);
     phoneOneCtr.dispose();
     nameOneCtr.dispose();
     phoneTwoCtr.dispose();

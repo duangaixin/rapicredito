@@ -92,25 +92,6 @@ class LoginTextFieldState extends State<LoginTextField> {
       onTap: () => widget.controller.clear(),
     );
 
-    // Widget pwdVisible = _isHideDelete
-    //     ? const SizedBox.shrink()
-    //     : Container(
-    //         margin: const EdgeInsetsDirectional.only(end: 12.0),
-    //         child: GestureDetector(
-    //           behavior: HitTestBehavior.opaque,
-    //           child: Icon(
-    //             _isShowPwd ? Icons.visibility : Icons.visibility_off,
-    //             size: 20,
-    //             color: const Color(0xFFDEDEDE),
-    //           ),
-    //           onTap: () {
-    //             setState(() {
-    //               _isShowPwd = !_isShowPwd;
-    //             });
-    //           },
-    //         ),
-    //       );
-
     return Stack(
       alignment: Alignment.centerRight,
       children: <Widget>[
@@ -119,7 +100,6 @@ class LoginTextFieldState extends State<LoginTextField> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            // if (!widget.isInputPwd) const SizedBox.shrink() else pwdVisible,
             if (_isHideDelete) const SizedBox.shrink() else clear
           ],
         ),

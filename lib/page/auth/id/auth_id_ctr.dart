@@ -30,11 +30,7 @@ import 'package:rapicredito/widget/progress_hud_view.dart';
 class AuthIdCtr extends BaseGetCtr {
   final state = AuthIdState();
   TextEditingController idNumCtr = TextEditingController();
-
-  //姓
   TextEditingController firstNameCtr = TextEditingController();
-
-  //名
   TextEditingController secondNameCtr = TextEditingController();
 
   @override
@@ -328,6 +324,9 @@ class AuthIdCtr extends BaseGetCtr {
   @override
   void dispose() {
     super.dispose();
+    idNumCtr.removeListener(_btnCanClick);
+    firstNameCtr.removeListener(_btnCanClick);
+    secondNameCtr.removeListener(_btnCanClick);
     idNumCtr.dispose();
     firstNameCtr.dispose();
     secondNameCtr.dispose();

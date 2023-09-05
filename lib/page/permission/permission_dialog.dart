@@ -181,14 +181,6 @@ class _PermissionDialogState extends State<PermissionDialog> {
           )
         ],
       ),
-
-      // child: CustomButton(
-      //   text: 'OK',
-      //   padding: const EdgeInsets.symmetric(horizontal: 50.0),
-      //   onPressed: () {
-      //     Navigator.pop(context);
-      //   },
-      // ),
     );
   }
 }

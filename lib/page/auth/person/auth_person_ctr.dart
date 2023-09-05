@@ -196,6 +196,7 @@ class AuthPersonCtr extends BaseGetCtr {
 
   @override
   void onClose() {
+    emailCtr.removeListener(_btnCanClick);
     emailCtr.dispose();
     super.onClose();
   }

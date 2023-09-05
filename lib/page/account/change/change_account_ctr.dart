@@ -353,6 +353,10 @@ class ChangeAccountCtr extends BaseGetCtr {
   @override
   void onClose() {
     super.onClose();
+    walletAccountCtr.removeListener(_walletBtnCanClick);
+    walletAccountConfirmCtr.removeListener(_walletBtnCanClick);
+    bankAccountCtr.removeListener(_bankBtnCanClick);
+    bankAccountConfirmCtr.removeListener(_bankBtnCanClick);
     walletAccountCtr.dispose();
     walletAccountConfirmCtr.dispose();
     bankAccountConfirmCtr.dispose();
