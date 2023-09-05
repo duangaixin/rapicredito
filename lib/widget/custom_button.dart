@@ -15,8 +15,8 @@ class CustomButton extends StatelessWidget {
     this.padding = const EdgeInsets.symmetric(horizontal: 16.0),
     this.radius = 2.0,
     this.side = BorderSide.none,
-    this.fontWeight=FontWeight.normal,
-    this.textAlign=TextAlign.start,
+    this.fontWeight = FontWeight.normal,
+    this.textAlign = TextAlign.start,
     required this.onPressed,
   });
 
@@ -71,9 +71,8 @@ class CustomButton extends StatelessWidget {
         child: Text(
           text,
           textAlign: textAlign,
-          style: TextStyle(fontSize: fontSize,fontWeight: fontWeight,
-          color: textColor
-          ),
+          style: TextStyle(
+              fontSize: fontSize, fontWeight: fontWeight, color: textColor),
         ));
   }
 }

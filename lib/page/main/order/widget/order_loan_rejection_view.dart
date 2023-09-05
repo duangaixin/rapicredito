@@ -9,7 +9,9 @@ import 'package:rapicredito/widget/custom_image_view.dart';
 ///拒绝放款4
 class OrderLoanRejectionView extends GetView<MainOrderCtr> {
   final OrderInfoBean bean;
-  const OrderLoanRejectionView({Key? key,required this.bean}) : super(key: key);
+
+  const OrderLoanRejectionView({Key? key, required this.bean})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +60,8 @@ class OrderLoanRejectionView extends GetView<MainOrderCtr> {
                 padding: const EdgeInsets.only(top: 6.0),
                 child: Text(
                   appName,
-                  style: const TextStyle(fontSize: 14.0, color: Color(0xff333333)),
+                  style:
+                      const TextStyle(fontSize: 14.0, color: Color(0xff333333)),
                 ))
           ],
         )

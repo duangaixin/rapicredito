@@ -11,13 +11,14 @@ class LoanMoneyDateState {
   set loadState(value) => _loadState.value = value;
 
   int configInfoDateDefaultValue = 0;
-  String serverTime='';
+  String serverTime = '';
   int productId = -1;
   int detailId = -1;
   double applyAmount = -1;
   int orderId = -1;
-  List<SkillfulFingerFarSide> originList=[];
-  List<int> durationList=[];
+  List<SkillfulFingerFarSide> originList = [];
+  List<int> durationList = [];
+
   ///到手金额
   String amountInHand = '';
 
@@ -46,14 +47,14 @@ class LoanMoneyDateState {
 
   set repaymentDate(value) => _repaymentDate.value = value;
 
-  RxList<SelectModel> moneyList=<SelectModel>[].obs;
+  RxList<SelectModel> moneyList = <SelectModel>[].obs;
   final RxInt _moneySelectIndex = 0.obs;
 
   int get moneySelectIndex => _moneySelectIndex.value;
 
   set moneySelectIndex(value) => _moneySelectIndex.value = value;
 
-  RxList<SelectModel> dateList=<SelectModel>[].obs;
+  RxList<SelectModel> dateList = <SelectModel>[].obs;
 
   final RxInt _dateSelectIndex = 0.obs;
 

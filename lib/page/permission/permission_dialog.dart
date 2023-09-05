@@ -58,7 +58,7 @@ class _PermissionDialogState extends State<PermissionDialog> {
         mainAxisSize: MainAxisSize.max,
         children: [
           const Padding(
-            padding: EdgeInsets.only( left: 16.0, right: 16.0),
+            padding: EdgeInsets.only(left: 16.0, right: 16.0),
             child: Text(
               'Hi.there To access your eligibility and facilitate faster disbursal of your loan, we need these permissions',
               style: TextStyle(fontSize: 15.0, color: Color(0xff666666)),
@@ -156,7 +156,8 @@ class _PermissionDialogState extends State<PermissionDialog> {
                     text: 'SALTAR',
                     textColor: const Color(0xff333333),
                     fontWeight: FontWeight.bold,
-                    side: const BorderSide(color: Color(0xff333333),width: 1.0),
+                    side:
+                        const BorderSide(color: Color(0xff333333), width: 1.0),
                   ),
                 ),
                 const SizedBox(
@@ -164,17 +165,16 @@ class _PermissionDialogState extends State<PermissionDialog> {
                 ),
                 Expanded(
                   child: CustomButton(
-                    onPressed: () {},
-                    minHeight: 46.0,
-                    backgroundColor: const Color(0xffB8EF17),
-                    disabledBackgroundColor: const Color(0xffB8EF17),
-                    fontSize: 15.0,
-                    radius: 8.0,
-                    text: 'ACEPTOY\nCONTINUAR',
-                    textColor: const Color(0xff333333),
-                    textAlign: TextAlign.center,
-                    fontWeight: FontWeight.bold
-                  ),
+                      onPressed: () {},
+                      minHeight: 46.0,
+                      backgroundColor: const Color(0xffB8EF17),
+                      disabledBackgroundColor: const Color(0xffB8EF17),
+                      fontSize: 15.0,
+                      radius: 8.0,
+                      text: 'ACEPTOY\nCONTINUAR',
+                      textColor: const Color(0xff333333),
+                      textAlign: TextAlign.center,
+                      fontWeight: FontWeight.bold),
                 ),
               ],
             ),

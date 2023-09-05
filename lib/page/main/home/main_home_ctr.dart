@@ -21,10 +21,10 @@ class MainHomeCtr extends BaseGetCtr {
     super.onReady();
   }
 
-   void goToAuthPage(){
-     KeyboardUtils.unFocus();
+  void goToAuthPage() {
+    KeyboardUtils.unFocus();
     Get.toNamed(PageRouterName.authPersonPage);
-   }
+  }
 
   void refreshInfo() {
     state.isRefresh = true;

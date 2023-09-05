@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 
-
 class DateSelectDialog extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _DateSelectDialogState();
@@ -35,7 +34,7 @@ class _DateSelectDialogState extends State<DateSelectDialog> {
   }
 
   Widget _buildDialog() {
-    return  Container(
+    return Container(
       width: double.infinity,
       height: 371.0,
       decoration: const BoxDecoration(
@@ -43,7 +42,6 @@ class _DateSelectDialogState extends State<DateSelectDialog> {
               image: AssetImage(Resource.assetsImageDateSelectDialog),
               fit: BoxFit.cover)),
     );
-
   }
 
   Widget _buildBottomView() {

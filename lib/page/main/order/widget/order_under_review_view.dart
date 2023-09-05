@@ -27,8 +27,8 @@ class OrderUnderReviewView extends GetView<MainOrderCtr> {
   }
 
   Widget _buildShowInfoView() {
-   var applyAmount=  bean.funnyAustraliaTeamTale??'';
-   var submitTime=bean.luckyExperience??'';
+    var applyAmount = bean.funnyAustraliaTeamTale ?? '';
+    var submitTime = bean.luckyExperience ?? '';
     return Container(
       margin: const EdgeInsets.only(top: 13.0, bottom: 14.0),
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),

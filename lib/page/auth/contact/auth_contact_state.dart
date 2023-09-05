@@ -10,6 +10,7 @@ class AuthContactState {
   set loadState(value) => _loadState.value = value;
   List<String?> relationshipShowList = [];
   List<ConfigInfoBean> relationshipOriginList = [];
+
   ///关系1
   final RxString _relationshipOne = ''.obs;
 
@@ -23,7 +24,6 @@ class AuthContactState {
   String get relationshipTwo => _relationshipTwo.value;
 
   set relationshipTwo(value) => _relationshipTwo.value = value;
-
 
   final RxBool _btnDisableClick = true.obs;
 

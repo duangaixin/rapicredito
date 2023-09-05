@@ -36,7 +36,7 @@ class CustomEditView extends StatefulWidget {
   final TextStyle? hintStyle;
   final TextStyle? editStyle;
   final Widget? rightWidget;
-  final int?maxLength;
+  final int? maxLength;
   final FocusNode? focusNode;
   final Function(String s)? submitAction;
   final Function(String s)? textChangeAction;

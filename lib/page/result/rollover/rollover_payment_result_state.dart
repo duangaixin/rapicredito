@@ -1,4 +1,3 @@
-
 import 'package:get/get.dart';
 
 class RolloverPaymentResultState {
@@ -9,5 +8,3 @@ class RolloverPaymentResultState {
 
   set timeEnd(value) => _timeEnd.value = value;
 }
-
-

@@ -97,9 +97,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
         }
         selectBeanTwo.canClick = false;
         allDateList.insert(2, selectBeanTwo);
-      } else {
-
-      }
+      } else {}
 
       state.dateList
         ..clear()

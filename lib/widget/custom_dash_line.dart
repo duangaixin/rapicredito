@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class CustomDashLine extends StatelessWidget {
   final double height;
   final Color color;
@@ -9,7 +8,7 @@ class CustomDashLine extends StatelessWidget {
 
   const CustomDashLine(
       {super.key,
-        this.width=double.infinity,
+      this.width = double.infinity,
       this.height = 1,
       this.color = Colors.black,
       this.dashWidth = 10.0});

@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class AuthIdState {
-  List<String?> genderList=[];
+  List<String?> genderList = [];
 
   double imageWidth = 167.0;
 
@@ -41,8 +41,7 @@ class AuthIdState {
 
   set btnDisableClick(value) => _btnDisableClick.value = value;
 
-   int? birthYear;
-   int? birthMonth;
-   int? birthDay;
-
+  int? birthYear;
+  int? birthMonth;
+  int? birthDay;
 }

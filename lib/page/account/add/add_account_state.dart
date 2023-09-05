@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:rapicredito/model/config_info_bean.dart';
 import 'package:rapicredito/model/key_value_bean.dart';
 
-
 class AddAccountState {
   List<String> accountTypeList = ['Billetera Móvil', 'Cuenta Bancaria'];
 

@@ -43,19 +43,19 @@ class ChangeWalletView extends GetView<ChangeAccountCtr> {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 55.0, right: 55.0, top: 26.0),
-            child: Obx((){
-              return  CustomColorButton(
+            child: Obx(() {
+              return CustomColorButton(
                 realClick: controller.postSaveAccountRequest,
                 disableClick: controller.disableWalletClickToast,
                 disableColors: const [
                   Color(0xffF5F6F4),
                   Color(0xffF5F6F4),
                 ],
-                disable:  controller.state.walletBtnDisableClick,
+                disable: controller.state.walletBtnDisableClick,
                 colors: const [Color(0xffB8EF17), Color(0xffB8EF17)],
                 height: 46.0,
                 borderRadius: BorderRadius.circular(8.0),
-                btnContent:  Text(
+                btnContent: Text(
                   'Confirmar',
                   style: TextStyle(
                       fontSize: 15.0,
@@ -65,10 +65,7 @@ class ChangeWalletView extends GetView<ChangeAccountCtr> {
                       fontWeight: FontWeight.bold),
                 ),
               );
-            })
-
-
-           ,
+            }),
           ),
         ],
       );
@@ -140,17 +137,16 @@ class ChangeWalletView extends GetView<ChangeAccountCtr> {
                                         color: Color(0xff333333)),
                                     children: <TextSpan>[
                                   TextSpan(
-                                    text: value,
-                                    style: const TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        fontSize: 15.0,
-                                        color: Color(0xff333333)
-
-                                    ),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        controller.goToWebViewPage('百度', value);
-                                      }),
+                                      text: value,
+                                      style: const TextStyle(
+                                          decoration: TextDecoration.underline,
+                                          fontSize: 15.0,
+                                          color: Color(0xff333333)),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          controller.goToWebViewPage(
+                                              '百度', value);
+                                        }),
                                 ])));
                       }))
                 ],

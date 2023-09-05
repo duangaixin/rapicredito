@@ -137,8 +137,8 @@ class _MessageInputDialogState extends State<MessageInputDialog> {
             alignment: Alignment.center,
             width: 36.0,
             height: 36.0,
-            decoration:
-                const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+            decoration: const BoxDecoration(
+                shape: BoxShape.circle, color: Colors.white),
             child: const Text(
               'X',
               style: TextStyle(color: Color(0xff111111), fontSize: 16.0),

@@ -38,9 +38,10 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
                         horizontal: 15.0, vertical: 5.0),
                     decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-                        border:
-                            Border.all(color: const Color(0xff333333), width: 1.0)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(4.0)),
+                        border: Border.all(
+                            color: const Color(0xff333333), width: 1.0)),
                     child: const Text(
                       '91 Días',
                       style:
@@ -110,7 +111,7 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
                       ),
                     ],
                   )),
-               Padding(
+              Padding(
                 padding: const EdgeInsets.only(top: 26.0, bottom: 30.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,8 +136,8 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20.0),
-                child: _buildBottomItemView(
-                    'Bajo', 'cargo por servicio', '-10%', const Color(0xff1E1E1E)),
+                child: _buildBottomItemView('Bajo', 'cargo por servicio',
+                    '-10%', const Color(0xff1E1E1E)),
               ),
               const Padding(
                 padding: EdgeInsets.only(bottom: 30.0),

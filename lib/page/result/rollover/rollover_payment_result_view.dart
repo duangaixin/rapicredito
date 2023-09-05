@@ -49,7 +49,7 @@ class RolloverPaymentResultPage extends GetView<RolloverPaymentResultCtr> {
               ),
               Container(
                 margin: const EdgeInsets.only(top: 44.0, bottom: 4.0),
-                child:  CustomButton(
+                child: CustomButton(
                   onPressed: Get.back,
                   minWidth: 265.0,
                   minHeight: 46.0,

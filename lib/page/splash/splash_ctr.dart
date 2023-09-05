@@ -10,8 +10,8 @@ class SplashCtr extends BaseGetCtr {
   @override
   void onInit() {
     super.onInit();
-      for (var image in state.guideList) {
-        precacheImage(AssetImage(image), Get.context!);
-      }
+    for (var image in state.guideList) {
+      precacheImage(AssetImage(image), Get.context!);
+    }
   }
 }

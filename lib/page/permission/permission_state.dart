@@ -1,4 +1,1 @@
-
-class PermissionState {
-
-}
+class PermissionState {}

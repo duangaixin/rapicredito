@@ -12,7 +12,8 @@ class CustomColorButton extends StatelessWidget {
     this.realClick,
     this.btnTxt,
     this.btnContent,
-    this.disable = false, this.disableClick,
+    this.disable = false,
+    this.disableClick,
   }) : super(key: key);
   final Widget? btnContent;
   final List<Color>? colors;

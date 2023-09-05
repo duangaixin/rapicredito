@@ -34,7 +34,7 @@ class AuthContactPage extends GetView<AuthContactCtr> {
                     editTitle: 'Relación',
                     hintText: 'Por favor elige',
                     editContent: controller.state.relationshipOne,
-                    action:controller.clickRelationOne,
+                    action: controller.clickRelationOne,
                   );
                 }),
                 CustomEditView(
@@ -80,7 +80,7 @@ class AuthContactPage extends GetView<AuthContactCtr> {
                     editTitle: 'Relación',
                     hintText: 'Por favor elige',
                     editContent: controller.state.relationshipTwo,
-                    action:controller.clickRelationTwo,
+                    action: controller.clickRelationTwo,
                   );
                 }),
                 CustomEditView(
@@ -123,7 +123,7 @@ class AuthContactPage extends GetView<AuthContactCtr> {
                 colors: const [Color(0xffB8EF17), Color(0xffB8EF17)],
                 height: 46.0,
                 borderRadius: BorderRadius.circular(8.0),
-                btnContent:  Text(
+                btnContent: Text(
                   'Registrarse',
                   style: TextStyle(
                       fontSize: 15.0,
@@ -146,19 +146,18 @@ class AuthContactPage extends GetView<AuthContactCtr> {
   Widget build(BuildContext context) {
     return CustomPageBgView(
         title: 'Contacto de emergencia',
-        content:  Obx(() {
+        content: Obx(() {
           return LoadContainerView(
-              contentView:  SingleChildScrollView(
+              contentView: SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
                   children: [oneContactView, twoContactView, bottomView],
                 ),
-              ), loadState: controller.state.loadState);
-        })
-
-       );
+              ),
+              loadState: controller.state.loadState);
+        }));
 //  double bottom = MediaQuery.of(context).viewInsets.bottom;
     // return CustomPageBgView(
     //     title: 'Contacto de emergencia',

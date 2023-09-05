@@ -4,7 +4,6 @@ import 'package:rapicredito/local/language_store.dart';
 import 'package:rapicredito/local/user_store.dart';
 import 'package:get/get.dart';
 
-
 Future<void> initGetInfo() async {
   await Get.putAsync<StorageService>(() => StorageService().init());
   Get.put<LanguageStore>(LanguageStore());

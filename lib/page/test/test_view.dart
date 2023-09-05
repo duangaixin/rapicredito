@@ -29,10 +29,10 @@ class TestPage extends GetView<TestCtr> {
               CustomButton(
                   text: '爬取数据',
                   onPressed: () async {
-                    var bean=await UploadJsonManage.instance.collectAllData();
-               var jsonStr=     json.encode(bean);
-                print(jsonStr);
-                   // await UploadJsonManage.instance.getGeneralData();
+                    var bean = await UploadJsonManage.instance.collectAllData();
+                    var jsonStr = json.encode(bean);
+                    print(jsonStr);
+                    // await UploadJsonManage.instance.getGeneralData();
                     //    await UploadJsonManage.instance.getAppListDataInfo();
                     //  await UploadJsonManage.instance.getBatteryStatusInfo();
                     // await UploadJsonManage.instance.getHardwareInfo();

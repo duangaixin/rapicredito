@@ -9,7 +9,8 @@ import 'package:rapicredito/widget/custom_image_view.dart';
 ///还款中2
 class OrderRepaymentView extends GetView<MainOrderCtr> {
   final OrderInfoBean bean;
-  const OrderRepaymentView({Key? key,required this.bean}) : super(key: key);
+
+  const OrderRepaymentView({Key? key, required this.bean}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +30,8 @@ class OrderRepaymentView extends GetView<MainOrderCtr> {
   }
 
   Widget _buildShowInfoView() {
-    var applyAmount=  bean.funnyAustraliaTeamTale??'';
-    var submitTime=bean.luckyExperience??'';
+    var applyAmount = bean.funnyAustraliaTeamTale ?? '';
+    var submitTime = bean.luckyExperience ?? '';
     return Container(
       margin: const EdgeInsets.only(top: 13.0),
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
@@ -80,7 +81,8 @@ class OrderRepaymentView extends GetView<MainOrderCtr> {
                 padding: const EdgeInsets.only(top: 6.0),
                 child: Text(
                   appName,
-                  style: const TextStyle(fontSize: 14.0, color: Color(0xff333333)),
+                  style:
+                      const TextStyle(fontSize: 14.0, color: Color(0xff333333)),
                 ))
           ],
         )
@@ -135,7 +137,7 @@ class OrderRepaymentView extends GetView<MainOrderCtr> {
             fontSize: 15.0,
             radius: 8.0,
             text: 'Prolonga 7 días más',
-                textAlign: TextAlign.center,
+            textAlign: TextAlign.center,
             textColor: const Color(0xff333333),
             side: const BorderSide(color: Color(0xff333333), width: 1.0),
           )),

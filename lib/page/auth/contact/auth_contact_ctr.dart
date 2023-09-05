@@ -38,7 +38,7 @@ class AuthContactCtr extends BaseGetCtr {
     _requestInitData();
   }
 
-  void _requestInitData()async{
+  void _requestInitData() async {
     await _postAppConfigInfoRequest(AppConfigClickType.relationOne);
     await _postQueryAuthPersonRequest();
   }
@@ -84,10 +84,12 @@ class AuthContactCtr extends BaseGetCtr {
 
   Map<String, dynamic> _collectContactParam() {
     Map<String, dynamic> param = {};
-    param['rainyMonthDiscount'] = _getCode(state.relationshipOriginList, state.relationshipOne);
+    param['rainyMonthDiscount'] =
+        _getCode(state.relationshipOriginList, state.relationshipOne);
     param['pureDollFailure'] = phoneOneCtr.text.strRvSpace();
     param['communistBuddhistZooExtraCellar'] = nameOneCtr.text.trim();
-    param['instantMerchantMidday'] =_getCode(state.relationshipOriginList, state.relationshipTwo);
+    param['instantMerchantMidday'] =
+        _getCode(state.relationshipOriginList, state.relationshipTwo);
     param['theoreticalAppleFlatLateFriendship'] = phoneTwoCtr.text.strRvSpace();
     param['quickNonDetermination'] = nameTwoCtr.text.trim();
     param.addAll(getCommonParam());
@@ -126,7 +128,9 @@ class AuthContactCtr extends BaseGetCtr {
     if (response.isSuccess()) {
       var netList = response.data ?? [];
       if (!ObjectUtil.isEmptyList(netList)) {
-        state.relationshipOriginList..clear()..addAll(netList);
+        state.relationshipOriginList
+          ..clear()
+          ..addAll(netList);
         var showList = netList.map((e) => e.latestCandle).toList();
         state.relationshipShowList
           ..clear()
@@ -143,16 +147,18 @@ class AuthContactCtr extends BaseGetCtr {
         await HttpRequestManage.instance.postQueryAuthInfoRequest(param);
     if (response.isSuccess()) {
       var authInfoBean = response.data;
-      state.relationshipOne = _getName(state.relationshipOriginList, authInfoBean?.rainyMonthDiscount ?? '') ;
+      state.relationshipOne = _getName(
+          state.relationshipOriginList, authInfoBean?.rainyMonthDiscount ?? '');
       phoneOneCtr.text = authInfoBean?.pureDollFailure ?? '';
       nameOneCtr.text = authInfoBean?.communistBuddhistZooExtraCellar ?? '';
-      state.relationshipTwo =_getName(state.relationshipOriginList, authInfoBean?.instantMerchantMidday ?? '') ;
+      state.relationshipTwo = _getName(state.relationshipOriginList,
+          authInfoBean?.instantMerchantMidday ?? '');
       phoneTwoCtr.text = authInfoBean?.theoreticalAppleFlatLateFriendship ?? '';
       nameTwoCtr.text = authInfoBean?.quickNonDetermination ?? '';
       _btnCanClick();
-      state.loadState=LoadState.succeed;
+      state.loadState = LoadState.succeed;
     } else {
-      state.loadState=LoadState.failed;
+      state.loadState = LoadState.failed;
       NetException.toastException(response);
     }
   }
@@ -193,6 +199,7 @@ class AuthContactCtr extends BaseGetCtr {
     }
     return true;
   }
+
   String _getCode(List<ConfigInfoBean> dataSource, String value) {
     if (!ObjectUtil.isEmptyList(dataSource)) {
       for (int i = 0; i < dataSource.length; i++) {
@@ -216,6 +223,7 @@ class AuthContactCtr extends BaseGetCtr {
     }
     return '';
   }
+
   @override
   void onClose() {
     super.onClose();

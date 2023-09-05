@@ -14,7 +14,6 @@ class CompressUtil {
         file.path, targetPath,
         quality: 60);
     File compressedFile = File(result!.path);
-    print(compressedFile.path+'-----duanxin');
     return compressedFile;
   }
 }

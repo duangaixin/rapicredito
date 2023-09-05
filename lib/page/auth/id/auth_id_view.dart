@@ -61,7 +61,7 @@ class AuthIdPage extends GetView<AuthIdCtr> {
               Expanded(child: Obx(() {
                 return idCameraView('Frente', controller.state.idFrontUrl, () {
                   //controller.tackCamera(isFront: true);
-                  controller.showSelectDialog(isFront:true);
+                  controller.showSelectDialog(isFront: true);
                 });
               })),
               const SizedBox(
@@ -69,8 +69,8 @@ class AuthIdPage extends GetView<AuthIdCtr> {
               ),
               Expanded(child: Obx(() {
                 return idCameraView('Atrás', controller.state.idBackUrl, () {
-                //  controller.tackCamera(isFront: false);
-                  controller.showSelectDialog(isFront:false);
+                  //  controller.tackCamera(isFront: false);
+                  controller.showSelectDialog(isFront: false);
                 });
               })),
             ]),

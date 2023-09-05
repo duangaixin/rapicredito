@@ -135,19 +135,23 @@ extension RequestBussiness on HttpRequestManage {
 
   Future<BaseResponse<TestCalculateInfoBean>> postTestCalculateRequest(
       Map<String, dynamic> param) async {
-    return await httpRequest.post<TestCalculateInfoBean>(HttpApi.apiTestCalculateInfo,
+    return await httpRequest.post<TestCalculateInfoBean>(
+        HttpApi.apiTestCalculateInfo,
         options: Options(contentType: Headers.formUrlEncodedContentType),
         data: param,
         onTransform: (json) => TestCalculateInfoBean.fromJson(json));
   }
 
-  Future<BaseResponse<PreSubmitOrderBean>> postPreSubmitOrderRequest(Map<String, dynamic> param) async {
+  Future<BaseResponse<PreSubmitOrderBean>> postPreSubmitOrderRequest(
+      Map<String, dynamic> param) async {
     return await httpRequest.post<PreSubmitOrderBean>(HttpApi.apiPreSubmitOrder,
         options: Options(contentType: Headers.formUrlEncodedContentType),
         data: param,
-        onTransform: (json) =>PreSubmitOrderBean.fromJson(json));
+        onTransform: (json) => PreSubmitOrderBean.fromJson(json));
   }
-  Future<BaseResponse> postSubmitOrderRequest(Map<String, dynamic> param) async {
+
+  Future<BaseResponse> postSubmitOrderRequest(
+      Map<String, dynamic> param) async {
     return await httpRequest.post(HttpApi.apiSubmitOrder,
         options: Options(contentType: Headers.formUrlEncodedContentType),
         data: param,

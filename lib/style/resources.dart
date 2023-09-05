@@ -26,14 +26,12 @@ class Resource {
       'assets/image/main/home_info_bg.png';
   static const String assetsImageAuthTitleBg =
       'assets/image/auth/auth_title_bg.png';
-  static const String assetsImageHomeTitleAction=
+  static const String assetsImageHomeTitleAction =
       'assets/image/main/home_title_action.png';
-
 
   static const String assetsImageLoginClear =
       'assets/image/login/login_clear.png';
-  static const String assetsImageLoanLock =
-      'assets/image/main/loan_lock.png';
+  static const String assetsImageLoanLock = 'assets/image/main/loan_lock.png';
   static const String assetsImageAuthCameraBg =
       'assets/image/auth/auth_camera_bg.png';
   static const String assetsImageAuthFace = 'assets/image/auth/auth_face.png';
@@ -51,8 +49,7 @@ class Resource {
       'assets/image/other/commit_success_dialog.png';
   static const String assetsImageMineClient =
       'assets/image/main/mine_client.png';
-  static const String assetsImageMinePhone =
-      'assets/image/main/mine_phone.png';
+  static const String assetsImageMinePhone = 'assets/image/main/mine_phone.png';
   static const String assetsImageMineSetting =
       'assets/image/main/mine_setting.png';
   static const String assetsImageMineSignAgreement =
@@ -65,5 +62,4 @@ class Resource {
       'assets/image/main/order_error_info.png';
   static const String assetsImageOrderEmpty =
       'assets/image/main/order_empty_view.png';
-
 }
