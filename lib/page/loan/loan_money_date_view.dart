@@ -87,12 +87,15 @@ class LoanMoneyDatePage extends GetView<LoanMoneyDateCtr> {
                       'Cargo por servicios de transferencia\n(Cobrado por el Banco)',
                   content: controller.state.bankServiceCharge,
                 )),
-            _buildKeyValueView(
-                title: 'Monto del préstamo',
-                content: controller.state.loanAmount,
-                color: const Color(0xff333333),
-                fontWeight: FontWeight.bold,
-                fontSize: 15.0)
+            Obx((){
+              return  _buildKeyValueView(
+                  title: 'Monto de devolución',
+                  content: '${controller.state.applyAmount}\$',
+                  color: const Color(0xff333333),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15.0);
+            })
+
           ],
         ),
       );

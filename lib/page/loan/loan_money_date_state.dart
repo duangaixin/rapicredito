@@ -14,7 +14,7 @@ class LoanMoneyDateState {
   String serverTime = '';
   int productId = -1;
   int detailId = -1;
-  double applyAmount = -1;
+
   int orderId = -1;
   List<SkillfulFingerFarSide> originList = [];
   List<int> durationList = [];
@@ -34,9 +34,6 @@ class LoanMoneyDateState {
   ///银行收取服务费
   String bankServiceCharge = '';
 
-  ///借款金额
-  String loanAmount = '';
-
   ///还款金额
   String repaymentAmount = '';
 
@@ -46,6 +43,15 @@ class LoanMoneyDateState {
   String get repaymentDate => _repaymentDate.value;
 
   set repaymentDate(value) => _repaymentDate.value = value;
+  ///借款金额
+  final RxDouble _applyAmount = 0.0.obs;
+
+  double get applyAmount => _applyAmount.value;
+
+  set applyAmount(value) => _applyAmount.value = value;
+
+
+
 
   RxList<SelectModel> moneyList = <SelectModel>[].obs;
   final RxInt _moneySelectIndex = 0.obs;

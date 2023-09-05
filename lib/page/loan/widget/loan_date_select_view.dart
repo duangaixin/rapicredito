@@ -140,6 +140,7 @@ class LoanDateTopView extends GetView<LoanMoneyDateCtr> {
     var bean = controller.state.dateList[index];
     var content = bean.dateStr;
     var canClick = bean.canClick;
+
     return Obx(() {
       var isSelected = controller.state.dateSelectIndex == index;
       var bgColor = isSelected ? const Color(0xff333333) : Colors.white;
@@ -151,6 +152,7 @@ class LoanDateTopView extends GetView<LoanMoneyDateCtr> {
               controller.state.dateList[index].isSelected =
                   controller.state.dateSelectIndex == index;
               controller.state.detailId = bean.detailId;
+              controller.state.repaymentDate=bean.dateStr;
               controller.postTestCalculateRequest(isShowDialog: true);
             }
           }

@@ -69,7 +69,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
         var realDate = dateTime?.add(Duration(days: realDuration));
         if (realDate != null) {
           var dateStr = '${realDate.day}-${realDate.month}-${realDate.year}';
-          selectBean.dateStr = dateStr;
+        state.repaymentDate=  selectBean.dateStr = dateStr;
         }
         allDateList.add(selectBean);
       }
@@ -97,7 +97,34 @@ class LoanMoneyDateCtr extends BaseGetCtr {
         }
         selectBeanTwo.canClick = false;
         allDateList.insert(2, selectBeanTwo);
-      } else {}
+      } else {
+        if (!ObjectUtil.isEmptyList(state.durationList)) {
+          var maxDuration = state.durationList
+              .reduce((curr, next) => curr > next ? curr : next);
+          var minDuration = state.durationList
+              .reduce((curr, next) => curr < next ? curr : next);
+          var selectBeanOne = SelectModel();
+          DateTime? dateTimeOne = DateTime.tryParse(state.serverTime);
+          var realDateOne = dateTimeOne?.add(Duration(days: maxDuration+minDuration));
+          if (realDateOne != null) {
+            var dateStr =
+                '${realDateOne.day}-${realDateOne.month}-${realDateOne.year}';
+            selectBeanOne.dateStr = dateStr;
+          }
+          selectBeanOne.canClick = false;
+          allDateList.insert(1, selectBeanOne);
+          var selectBeanTwo = SelectModel();
+          DateTime? dateTimeTwo = DateTime.tryParse(state.serverTime);
+          var realDateTwo = dateTimeTwo?.add(Duration(days: maxDuration+2*minDuration));
+          if (realDateTwo != null) {
+            var dateStr =
+                '${realDateTwo.day}-${realDateTwo.month}-${realDateTwo.year}';
+            selectBeanTwo.dateStr = dateStr;
+          }
+          selectBeanTwo.canClick = false;
+          allDateList.insert(2, selectBeanTwo);
+        }
+      }
 
       state.dateList
         ..clear()
@@ -257,7 +284,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
           return LoanConfirmMoneyDialog(
             clickConfirm: postSubmitOrderRequest,
             amountInHand: state.amountInHand,
-            loanAmount: state.loanAmount,
+            loanAmount: state.applyAmount.toString(),
             repaymentDate: state.repaymentDate,
           );
         });
