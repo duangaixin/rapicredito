@@ -69,7 +69,7 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
                               bottom: 16.0,
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
-                                children: const [
+                                children: [
                                   Text(
                                     'Cantidad máxima',
                                     style: TextStyle(
@@ -79,7 +79,7 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
                                   Padding(
                                     padding: EdgeInsets.only(top: 13.0),
                                     child: Text(
-                                      '222222',
+                                      '50000',
                                       style: TextStyle(
                                           fontSize: 30.0,
                                           color: Color(0xff333333)),

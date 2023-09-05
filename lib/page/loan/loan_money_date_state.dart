@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:rapicredito/model/product_info_bean.dart';
+import 'package:rapicredito/page/loan/index.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
 
 class LoanMoneyDateState {
@@ -8,12 +10,14 @@ class LoanMoneyDateState {
 
   set loadState(value) => _loadState.value = value;
 
-  int configInfoDefaultValue = 0;
+  int configInfoDateDefaultValue = 0;
+  String serverTime='';
   int productId = -1;
   int detailId = -1;
   double applyAmount = -1;
   int orderId = -1;
-
+  List<SkillfulFingerFarSide> originList=[];
+  List<int> durationList=[];
   ///到手金额
   String amountInHand = '';
 
@@ -41,4 +45,19 @@ class LoanMoneyDateState {
   String get repaymentDate => _repaymentDate.value;
 
   set repaymentDate(value) => _repaymentDate.value = value;
+
+  RxList<SelectModel> moneyList=<SelectModel>[].obs;
+  final RxInt _moneySelectIndex = 0.obs;
+
+  int get moneySelectIndex => _moneySelectIndex.value;
+
+  set moneySelectIndex(value) => _moneySelectIndex.value = value;
+
+  RxList<SelectModel> dateList=<SelectModel>[].obs;
+
+  final RxInt _dateSelectIndex = 0.obs;
+
+  int get dateSelectIndex => _dateSelectIndex.value;
+
+  set dateSelectIndex(value) => _dateSelectIndex.value = value;
 }

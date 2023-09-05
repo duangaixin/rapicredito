@@ -10,9 +10,11 @@ class ProductInfoBean extends Object {
   List<SkillfulFingerFarSide>? skillfulFingerFarSide;
 
   @JsonKey(name: 'brightGarbageAidsGallon')
+  ///productId
   int? brightGarbageAidsGallon;
 
   @JsonKey(name: 'changeableBloodFridge')
+  ///serverTime
   String? changeableBloodFridge;
 
   ProductInfoBean(this.skillfulFingerFarSide,this.brightGarbageAidsGallon,this.changeableBloodFridge,);
@@ -28,21 +30,29 @@ class ProductInfoBean extends Object {
 class SkillfulFingerFarSide extends Object {
 
   @JsonKey(name: 'spokenMaleSailor')
+  ///minCreditAmount
   double? spokenMaleSailor;
 
   @JsonKey(name: 'greedyEraserSpiritualLeaf')
+  ///rate
   double? greedyEraserSpiritualLeaf;
 
   @JsonKey(name: 'cleverFightSatisfactionCustom')
+  ///detailId
   int? cleverFightSatisfactionCustom;
 
   @JsonKey(name: 'disabledAirmailCabRoundaboutFingernail')
+  ///incrAmount
   double? disabledAirmailCabRoundaboutFingernail;
 
   @JsonKey(name: 'cleverMaidActualFoot')
+
+  ///maxCreditAmount
   double? cleverMaidActualFoot;
 
   @JsonKey(name: 'strictMedicalPuzzleCafeteria')
+
+  ///duration
   int? strictMedicalPuzzleCafeteria;
 
   SkillfulFingerFarSide(this.spokenMaleSailor,this.greedyEraserSpiritualLeaf,this.cleverFightSatisfactionCustom,this.disabledAirmailCabRoundaboutFingernail,this.cleverMaidActualFoot,this.strictMedicalPuzzleCafeteria,);
