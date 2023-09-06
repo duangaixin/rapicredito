@@ -1,14 +1,18 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/get/getx_extension.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
+import 'package:rapicredito/page/dialog/go_setting_dialog.dart';
+import 'package:rapicredito/page/main/app_main_ctr.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/object_util.dart';
+import 'package:rapicredito/utils/permission_util.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_picker.dart';
 import 'package:rapicredito/widget/progress_hud_view.dart';
@@ -82,16 +86,61 @@ class AuthPersonCtr extends BaseGetCtr {
     return param;
   }
 
-  void postSaveAuthPersonRequest() async {
+  void clickSubmit() async {
+    Get.showLoading();
+    await postSaveAuthPersonRequest();
+    var appMainCtr = Get.find<AppMainCtr>();
+    var status = await appMainCtr.postQueryIsNeedUploadJsonRequest();
+    Get.dismiss();
+    if (status == '0') {
+      PermissionUtil.checkPermission(
+          permissionList: [
+            Permission.camera,
+            Permission.camera,
+            Permission.sms,
+            Permission.calendar,
+            Permission.phone
+          ],
+          onSuccess: () {
+            appMainCtr.postUploadJsonRequest();
+            Get.toNamed(PageRouterName.authContactPage);
+
+          },
+          onFailed: (){
+            Get.toNamed(PageRouterName.authContactPage);
+          },
+          goSetting: () {
+            Get.toNamed(PageRouterName.authContactPage);
+          //  showGoSettingDialog();
+          });
+    }else{
+      Get.toNamed(PageRouterName.authContactPage);
+    }
+  }
+
+
+  void showGoSettingDialog() {
+    showDialog(
+        context: Get.context!,
+        barrierDismissible: false,
+        builder: (_) {
+          return GoSettingDialog(
+            clickConfirm: () {
+              openAppSettings();
+            },
+          );
+        });
+  }
+
+  Future<void> postSaveAuthPersonRequest() async {
     KeyboardUtils.unFocus();
     if (!_validate()) return;
     Map<String, dynamic> param = _collectPersonParam();
-    Get.showLoading();
     var response =
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
-    Get.dismiss();
+
     if (response.isSuccess()) {
-      Get.toNamed(PageRouterName.authContactPage);
+      //Get.toNamed(PageRouterName.authContactPage);
     } else {
       NetException.toastException(response);
     }

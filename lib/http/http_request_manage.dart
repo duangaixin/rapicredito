@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/http/http_api.dart';
+import 'package:rapicredito/model/app_setting_info_bean.dart';
 import 'package:rapicredito/model/auth_info_bean.dart';
 import 'package:rapicredito/model/bank_info_bean.dart';
 import 'package:rapicredito/model/client_info_bean.dart';
 import 'package:rapicredito/model/config_info_bean.dart';
+import 'package:rapicredito/model/home_product_info_bean.dart';
 import 'package:rapicredito/model/login_info_bean.dart';
 import 'package:rapicredito/model/order_info_bean.dart';
 import 'package:rapicredito/model/pre_submit_order_bean.dart';
@@ -25,6 +27,24 @@ class HttpRequestManage {
 }
 
 extension RequestBussiness on HttpRequestManage {
+  Future<BaseResponse<AppSettingInfoBean>> postAppSettingInfo(
+      Map<String, dynamic> param) async {
+    return await httpRequest.post<AppSettingInfoBean>(HttpApi.apiSettingInfo,
+        data: param,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        onTransform: (json) => AppSettingInfoBean.fromJson(json));
+  }
+
+  Future<BaseResponse<List<ConfigInfoBean>>> postAppConfigInfo(
+      Map<String, dynamic> param) async {
+    return await httpRequest.post<List<ConfigInfoBean>>(HttpApi.apiConfigInfo,
+        data: param,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        onTransform: (json) => json
+            .map<ConfigInfoBean>((e) => ConfigInfoBean.fromJson(e))
+            .toList());
+  }
+
   Future<BaseResponse<String>> postSendCodeRequest(
       Map<String, dynamic> param) async {
     return await httpRequest.post<String>(HttpApi.apiSendCode,
@@ -41,16 +61,6 @@ extension RequestBussiness on HttpRequestManage {
         options: Options(contentType: Headers.formUrlEncodedContentType),
         data: param,
         onTransform: (json) => LoginInfoBean.fromJson(json));
-  }
-
-  Future<BaseResponse<List<ConfigInfoBean>>> postAppConfigInfo(
-      Map<String, dynamic> param) async {
-    return await httpRequest.post<List<ConfigInfoBean>>(HttpApi.apiConfigInfo,
-        data: param,
-        options: Options(contentType: Headers.formUrlEncodedContentType),
-        onTransform: (json) => json
-            .map<ConfigInfoBean>((e) => ConfigInfoBean.fromJson(e))
-            .toList());
   }
 
   Future<BaseResponse<String>> postUploadPhotoRequest(param) async {
@@ -108,13 +118,6 @@ extension RequestBussiness on HttpRequestManage {
         data: param);
   }
 
-  Future<BaseResponse> postUploadBigJson(Map<String, dynamic> param) async {
-    return await httpRequest.post(HttpApi.apiUploadBigJson,
-        options: Options(contentType: Headers.formUrlEncodedContentType),
-        data: param,
-        onTransform: (json) => null);
-  }
-
   Future<BaseResponse<List<OrderInfoBean>>> postQueryOrderListRequest(
       Map<String, dynamic> param) async {
     return await httpRequest.post<List<OrderInfoBean>>(
@@ -156,5 +159,31 @@ extension RequestBussiness on HttpRequestManage {
         options: Options(contentType: Headers.formUrlEncodedContentType),
         data: param,
         onTransform: (json) => null);
+  }
+
+  Future<BaseResponse<List<HomeProductInfoBean>>> postIsHomeManyProductRequest(
+      Map<String, dynamic> param) async {
+    return await httpRequest.post<List<HomeProductInfoBean>>(
+        HttpApi.apiIsManyProduct,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        data: param,
+        onTransform: (json) => json
+            .map<HomeProductInfoBean>((e) => HomeProductInfoBean.fromJson(e))
+            .toList());
+  }
+
+  Future<BaseResponse> postUploadBigJson(Map<String, dynamic> param) async {
+    return await httpRequest.post(HttpApi.apiUploadBigJson,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        data: param,
+        onTransform: (json) => null);
+  }
+
+  Future<BaseResponse<String>> postIsNeedUploadBigJson(
+      Map<String, dynamic> param) async {
+    return await httpRequest.post<String>(HttpApi.apiIsNeedUploadBigJson,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        data: param,
+        onTransform: (json) => json['fullMankind']);
   }
 }

@@ -12,4 +12,6 @@ class MainMineState {
   String get userName => _userName.value;
 
   set userName(value) => _userName.value = value;
+
+  bool isRefresh = false;
 }

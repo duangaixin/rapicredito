@@ -27,8 +27,8 @@ class UserStore extends GetxController {
     mToken = token;
     mUserId = userId;
     mUserPhone = userPhone;
-    var mineCtr = Get.find<MainMineCtr>();
-    mineCtr.refreshInfo();
+    // var mineCtr = Get.find<MainMineCtr>();
+    // mineCtr.refreshInfo();
   }
 
   Future<void> loginOut() async {

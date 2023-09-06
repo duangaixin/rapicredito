@@ -62,4 +62,16 @@ class Resource {
       'assets/image/main/order_error_info.png';
   static const String assetsImageOrderEmpty =
       'assets/image/main/order_empty_view.png';
+  static const String assetsImageHomeManyFireThree =
+      'assets/image/main/home_many_fire_three.png';
+  static const String assetsImageHomeManyFireTwo =
+      'assets/image/main/home_many_fire_Two.png';
+  static const String assetsImageHomeManyFireOne =
+      'assets/image/main/home_many_fire_one.png';
+  static const String assetsImageHomeManyGoalOne =
+      'assets/image/main/home_many_goal_one.png';
+  static const String assetsImageHomeManyGoalTwo =
+      'assets/image/main/home_many_goal_two.png';
+  static const String assetsImageHomeManyGoalThree =
+      'assets/image/main/home_many_goal_three.png';
 }

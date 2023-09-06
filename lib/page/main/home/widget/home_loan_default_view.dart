@@ -71,20 +71,22 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Cantidad máxima',
                                     style: TextStyle(
                                         fontSize: 14.0,
                                         color: Color(0xff999999)),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.only(top: 13.0),
-                                    child: Text(
-                                      '50000',
-                                      style: TextStyle(
-                                          fontSize: 30.0,
-                                          color: Color(0xff333333)),
-                                    ),
+                                    padding: const EdgeInsets.only(top: 13.0),
+                                    child: Obx(() {
+                                      return Text(
+                                        controller.state.maxAmount,
+                                        style: const TextStyle(
+                                            fontSize: 30.0,
+                                            color: Color(0xff333333)),
+                                      );
+                                    }),
                                   )
                                 ],
                               )),

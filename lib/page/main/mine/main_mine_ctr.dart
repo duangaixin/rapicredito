@@ -26,11 +26,18 @@ class MainMineCtr extends BaseGetCtr {
     super.onReady();
   }
 
-  void refreshInfo() async {
+  void requestInitData() async {
     if (UserStore.to.hasToken) {
       await _postQueryAuthPersonRequest(isShowDialog: false);
     }
-    refreshController.refreshCompleted();
+    if (state.isRefresh) {
+      refreshController.refreshCompleted();
+    }
+  }
+
+  void refreshInfo() async {
+    state.isRefresh = true;
+    requestInitData();
   }
 
   Future<void> _postQueryAuthPersonRequest({bool isShowDialog = true}) async {

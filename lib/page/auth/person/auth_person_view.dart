@@ -76,7 +76,7 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
                                 return CustomColorButton(
                                   disableClick: controller.disableClickToast,
                                   realClick:
-                                      controller.postSaveAuthPersonRequest,
+                                      controller.clickSubmit,
                                   disableColors: const [
                                     Color(0xffF5F6F4),
                                     Color(0xffF5F6F4),
