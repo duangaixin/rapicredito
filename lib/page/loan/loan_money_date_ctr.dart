@@ -32,7 +32,6 @@ class LoanMoneyDateCtr extends BaseGetCtr {
   }
 
   Future<void> postQueryProductRequest() async {
-    print('3333333333-dx');
     var param = <String, dynamic>{};
     param.addAll(getCommonParam());
     var response =
@@ -49,27 +48,26 @@ class LoanMoneyDateCtr extends BaseGetCtr {
         state.applyAmount = topBean.cleverMaidActualFoot ?? 0.0;
         dealMoneyList(topBean);
         dealDateList();
-        print('444444444-dx');
       }
     } else {
       NetException.toastException(response);
     }
   }
 
-  void dealDateList(){
-    var testFlag=StorageService.to.getInt(AppConstants.userTestFlagKey );
+  void dealDateList() {
+    var testFlag = StorageService.to.getInt(AppConstants.userTestFlagKey);
     if (!ObjectUtil.isEmptyList(state.originList)) {
       List<SelectModel> allDateList = [];
-      if(testFlag==1){
+      if (testFlag == 1) {
         var selectBeanOne = SelectModel();
         DateTime? dateTimeOne = DateTime.tryParse(state.serverTime);
         var realDateOne = dateTimeOne?.add(const Duration(days: 91));
         if (realDateOne != null) {
           var dateStr =
               '${realDateOne.day}-${realDateOne.month}-${realDateOne.year}';
-        state.repaymentDate=  selectBeanOne.dateStr = dateStr;
+          state.repaymentDate = selectBeanOne.dateStr = dateStr;
         }
-        selectBeanOne.isSelected=true;
+        selectBeanOne.isSelected = true;
         selectBeanOne.canClick = true;
         allDateList.add(selectBeanOne);
         var selectBeanTwo = SelectModel();
@@ -85,7 +83,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
         allDateList.add(selectBeanTwo);
         var selectBeanThree = SelectModel();
         DateTime? dateTimeThree = DateTime.tryParse(state.serverTime);
-        var realDateThree= dateTimeThree?.add(const Duration(days: 91 * 3));
+        var realDateThree = dateTimeThree?.add(const Duration(days: 91 * 3));
         if (realDateThree != null) {
           var dateStr =
               '${realDateThree.day}-${realDateThree.month}-${realDateThree.year}';
@@ -94,7 +92,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
         selectBeanThree.canClick = false;
         selectBeanThree.isSelected = false;
         allDateList.add(selectBeanThree);
-      }else{
+      } else {
         state.durationList.clear();
         for (int i = 0; i < state.originList.length; i++) {
           var bean = state.originList[i];
@@ -109,12 +107,13 @@ class LoanMoneyDateCtr extends BaseGetCtr {
           var realDate = dateTime?.add(Duration(days: realDuration));
           if (realDate != null) {
             var dateStr = '${realDate.day}-${realDate.month}-${realDate.year}';
-            state.repaymentDate=  selectBean.dateStr = dateStr;
+            state.repaymentDate = selectBean.dateStr = dateStr;
           }
           allDateList.add(selectBean);
         }
 
-        if (allDateList.length == 1) {
+        if (allDateList.length <2) {
+          ///single
           var bean = state.originList[0];
           var duration = bean.strictMedicalPuzzleCafeteria ?? 0;
           var selectBeanOne = SelectModel();
@@ -126,6 +125,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
             selectBeanOne.dateStr = dateStr;
           }
           selectBeanOne.canClick = false;
+          selectBeanOne.isSelected=false;
           allDateList.insert(1, selectBeanOne);
           var selectBeanTwo = SelectModel();
           DateTime? dateTimeTwo = DateTime.tryParse(state.serverTime);
@@ -136,8 +136,10 @@ class LoanMoneyDateCtr extends BaseGetCtr {
             selectBeanTwo.dateStr = dateStr;
           }
           selectBeanTwo.canClick = false;
+          selectBeanOne.isSelected=false;
           allDateList.insert(2, selectBeanTwo);
         } else {
+          ///many
           if (!ObjectUtil.isEmptyList(state.durationList)) {
             var maxDuration = state.durationList
                 .reduce((curr, next) => curr > next ? curr : next);
@@ -145,23 +147,27 @@ class LoanMoneyDateCtr extends BaseGetCtr {
                 .reduce((curr, next) => curr < next ? curr : next);
             var selectBeanOne = SelectModel();
             DateTime? dateTimeOne = DateTime.tryParse(state.serverTime);
-            var realDateOne = dateTimeOne?.add(Duration(days: maxDuration+minDuration));
+            var realDateOne =
+                dateTimeOne?.add(Duration(days: maxDuration + minDuration));
             if (realDateOne != null) {
               var dateStr =
                   '${realDateOne.day}-${realDateOne.month}-${realDateOne.year}';
               selectBeanOne.dateStr = dateStr;
             }
             selectBeanOne.canClick = false;
+            selectBeanOne.isSelected=false;
             allDateList.insert(1, selectBeanOne);
             var selectBeanTwo = SelectModel();
             DateTime? dateTimeTwo = DateTime.tryParse(state.serverTime);
-            var realDateTwo = dateTimeTwo?.add(Duration(days: maxDuration+2*minDuration));
+            var realDateTwo =
+                dateTimeTwo?.add(Duration(days: maxDuration + 2 * minDuration));
             if (realDateTwo != null) {
               var dateStr =
                   '${realDateTwo.day}-${realDateTwo.month}-${realDateTwo.year}';
               selectBeanTwo.dateStr = dateStr;
             }
             selectBeanTwo.canClick = false;
+            selectBeanTwo.isSelected=false;
             allDateList.insert(2, selectBeanTwo);
           }
         }
@@ -201,6 +207,8 @@ class LoanMoneyDateCtr extends BaseGetCtr {
         selectBean.isSelected = i == 0;
         if (i == 1 || i == 2) {
           selectBean.canClick = false;
+        } else {
+          selectBean.canClick = true;
         }
         selectBean.money = money;
         selectBean.itemId = i;
@@ -210,7 +218,6 @@ class LoanMoneyDateCtr extends BaseGetCtr {
   }
 
   Future<void> postTestCalculateRequest({bool isShowDialog = false}) async {
-    print('555555555-dx');
     if (isShowDialog) {
       Get.showLoading();
     }
@@ -221,7 +228,6 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     param.addAll(getCommonParam());
     var response =
         await HttpRequestManage.instance.postTestCalculateRequest(param);
-    print('6666666-dx');
     if (isShowDialog) {
       Get.dismiss();
     }
@@ -265,7 +271,6 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     }
     param['everydayMapleChallengingAirline'] = typeStr;
     param.addAll(getCommonParam());
-    print('111111111111111-dx');
     var response = await HttpRequestManage.instance.postAppConfigInfo(param);
     if (response.isSuccess()) {
       var netList = response.data ?? [];
@@ -276,7 +281,6 @@ class LoanMoneyDateCtr extends BaseGetCtr {
           state.configInfoDateDefaultValue = int.tryParse(code) ?? 0;
         }
       }
-      print('22222222222-dx');
     } else {
       NetException.toastException(response);
     }
