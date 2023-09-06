@@ -16,8 +16,12 @@ class LoanMoneyDateState {
   int detailId = -1;
 
   int orderId = -1;
+  String contractName = '';
+  String contractUrl = '';
   List<SkillfulFingerFarSide> originList = [];
   List<int> durationList = [];
+
+  double incrementStep = 0.0;
 
   ///到手金额
   String amountInHand = '';
@@ -43,15 +47,13 @@ class LoanMoneyDateState {
   String get repaymentDate => _repaymentDate.value;
 
   set repaymentDate(value) => _repaymentDate.value = value;
+
   ///借款金额
   final RxDouble _applyAmount = 0.0.obs;
 
   double get applyAmount => _applyAmount.value;
 
   set applyAmount(value) => _applyAmount.value = value;
-
-
-
 
   RxList<SelectModel> moneyList = <SelectModel>[].obs;
   final RxInt _moneySelectIndex = 0.obs;

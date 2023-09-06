@@ -57,6 +57,7 @@ class AuthContactCtr extends BaseGetCtr {
   }
 
   void _showSelectDialog(List netList, AppConfigClickType clickType) {
+    KeyboardUtils.unFocus();
     dynamic selectData;
     if (clickType == AppConfigClickType.relationOne) {
       selectData = state.relationshipOne;
@@ -106,6 +107,7 @@ class AuthContactCtr extends BaseGetCtr {
   }
 
   void clickRelationTwo() {
+
     if (ObjectUtil.isEmptyList(state.relationshipShowList)) {
       _postAppConfigInfoRequest(AppConfigClickType.relationTwo);
     } else {

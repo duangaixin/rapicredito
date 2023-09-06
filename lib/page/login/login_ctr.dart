@@ -115,6 +115,7 @@ class LoginCtr extends BaseGetCtr {
   @override
   void onClose() {
     _subscription?.cancel();
+    codeCtr.removeListener(_btnCanClick);
     phoneCtr.dispose();
     codeCtr.dispose();
     super.onClose();

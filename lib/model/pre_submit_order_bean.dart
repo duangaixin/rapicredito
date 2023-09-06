@@ -7,18 +7,23 @@ part 'pre_submit_order_bean.g.dart';
 class PreSubmitOrderBean extends Object {
 
   @JsonKey(name: 'looseBunFacialSaladNeatAlarm')
+  ///orderNo
   String? looseBunFacialSaladNeatAlarm;
 
   @JsonKey(name: 'disabledLondonPrivatePoolAmericanInstrument')
+  ///orderId
   int? disabledLondonPrivatePoolAmericanInstrument;
 
   @JsonKey(name: 'mildSomeBathtub')
+  ///mobile
   String? mildSomeBathtub;
 
   @JsonKey(name: 'enoughBrickDoor')
+  ///orderStatus
   int? enoughBrickDoor;
 
   @JsonKey(name: 'folkElephantBotany')
+  ///contractList
   List<FolkElephantBotany>? folkElephantBotany;
 
   PreSubmitOrderBean(this.looseBunFacialSaladNeatAlarm,this.disabledLondonPrivatePoolAmericanInstrument,this.mildSomeBathtub,this.enoughBrickDoor,this.folkElephantBotany,);
@@ -34,15 +39,19 @@ class PreSubmitOrderBean extends Object {
 class FolkElephantBotany extends Object {
 
   @JsonKey(name: 'africanDessertUncertainThisRank')
+  ///tip
   String? africanDessertUncertainThisRank;
 
   @JsonKey(name: 'hopelessBritainBoringHaircut')
+  ///nameEn
   String? hopelessBritainBoringHaircut;
 
   @JsonKey(name: 'northernMarriageCommunism')
+  ///url
   String? northernMarriageCommunism;
 
   @JsonKey(name: 'communistBuddhistZooExtraCellar')
+  ///name
   String? communistBuddhistZooExtraCellar;
 
   FolkElephantBotany(this.africanDessertUncertainThisRank,this.hopelessBritainBoringHaircut,this.northernMarriageCommunism,this.communistBuddhistZooExtraCellar,);

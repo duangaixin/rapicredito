@@ -100,7 +100,8 @@ class TestPage extends GetView<TestCtr> {
                         barrierDismissible: false,
                         builder: (_) {
                           return LoanConfirmMoneyDialog(
-                            clickConfirm: (String s) {},
+                            clickConfirm: () {},
+                            clickWebView: () {},
                           );
                         });
                   }),

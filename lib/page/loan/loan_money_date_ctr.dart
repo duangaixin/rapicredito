@@ -12,6 +12,7 @@ import 'package:rapicredito/page/auth/person/index.dart';
 import 'package:rapicredito/page/loan/index.dart';
 import 'package:rapicredito/page/loan/widget/commit_success_dialog.dart';
 import 'package:rapicredito/page/loan/widget/loan_confirm_money_dialog.dart';
+import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
@@ -46,15 +47,17 @@ class LoanMoneyDateCtr extends BaseGetCtr {
         var topBean = productList[0];
         state.detailId = topBean.cleverFightSatisfactionCustom ?? -1;
         state.applyAmount = topBean.cleverMaidActualFoot ?? 0.0;
-        dealMoneyList(topBean);
-        dealDateList();
+        state.incrementStep =
+            topBean.disabledAirmailCabRoundaboutFingernail ?? 0.0;
+        _dealMoneyList(topBean);
+        _dealDateList();
       }
     } else {
       NetException.toastException(response);
     }
   }
 
-  void dealDateList() {
+  void _dealDateList() {
     var testFlag = StorageService.to.getInt(AppConstants.userTestFlagKey);
     if (!ObjectUtil.isEmptyList(state.originList)) {
       List<SelectModel> allDateList = [];
@@ -112,7 +115,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
           allDateList.add(selectBean);
         }
 
-        if (allDateList.length <2) {
+        if (allDateList.length < 2) {
           ///single
           var bean = state.originList[0];
           var duration = bean.strictMedicalPuzzleCafeteria ?? 0;
@@ -125,7 +128,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
             selectBeanOne.dateStr = dateStr;
           }
           selectBeanOne.canClick = false;
-          selectBeanOne.isSelected=false;
+          selectBeanOne.isSelected = false;
           allDateList.insert(1, selectBeanOne);
           var selectBeanTwo = SelectModel();
           DateTime? dateTimeTwo = DateTime.tryParse(state.serverTime);
@@ -136,7 +139,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
             selectBeanTwo.dateStr = dateStr;
           }
           selectBeanTwo.canClick = false;
-          selectBeanOne.isSelected=false;
+          selectBeanOne.isSelected = false;
           allDateList.insert(2, selectBeanTwo);
         } else {
           ///many
@@ -155,7 +158,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
               selectBeanOne.dateStr = dateStr;
             }
             selectBeanOne.canClick = false;
-            selectBeanOne.isSelected=false;
+            selectBeanOne.isSelected = false;
             allDateList.insert(1, selectBeanOne);
             var selectBeanTwo = SelectModel();
             DateTime? dateTimeTwo = DateTime.tryParse(state.serverTime);
@@ -167,7 +170,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
               selectBeanTwo.dateStr = dateStr;
             }
             selectBeanTwo.canClick = false;
-            selectBeanTwo.isSelected=false;
+            selectBeanTwo.isSelected = false;
             allDateList.insert(2, selectBeanTwo);
           }
         }
@@ -179,7 +182,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     }
   }
 
-  void dealMoneyList(SkillfulFingerFarSide bean) {
+  void _dealMoneyList(SkillfulFingerFarSide bean) {
     List netAmountList = [];
     var minAmount = bean.spokenMaleSailor ?? 0;
     var maxAmount = bean.cleverMaidActualFoot ?? 0;
@@ -299,6 +302,12 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     if (response.isSuccess()) {
       var bean = response.data;
       state.orderId = bean?.disabledLondonPrivatePoolAmericanInstrument ?? -1;
+      var contractList = bean?.folkElephantBotany ?? [];
+      if (!ObjectUtil.isEmptyList(contractList)) {
+        var bean = contractList[0];
+        state.contractName = bean.communistBuddhistZooExtraCellar ?? '';
+        state.contractUrl = bean.northernMarriageCommunism ?? '';
+      }
       showConfirmMoneyDialog();
     } else {
       NetException.toastException(response);
@@ -310,17 +319,14 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     param['brightGarbageAidsGallon'] = state.productId;
     param['cleverFightSatisfactionCustom'] = state.detailId;
     param['funnyAustraliaTeamTale'] = state.applyAmount;
-
-    ///orderId
     param['disabledLondonPrivatePoolAmericanInstrument'] = state.orderId;
-
     param.addAll(getCommonParam());
     Get.showLoading();
     var response =
         await HttpRequestManage.instance.postSubmitOrderRequest(param);
     Get.dismiss();
     if (response.isSuccess()) {
-      showConfirmMoneyDialog();
+      showCommitSuccessDialog();
     } else {
       NetException.toastException(response);
     }
@@ -335,6 +341,11 @@ class LoanMoneyDateCtr extends BaseGetCtr {
             amountInHand: state.amountInHand,
             loanAmount: state.applyAmount.toString(),
             repaymentDate: state.repaymentDate,
+            contractName: state.contractName,
+            contractUrl: state.contractUrl,
+            clickWebView: () {
+              goToWebViewPage(state.contractName, state.contractUrl);
+            },
           );
         });
   }
@@ -345,6 +356,13 @@ class LoanMoneyDateCtr extends BaseGetCtr {
         builder: (_) {
           return const CommitSuccessDialog();
         });
+  }
+
+  void goToWebViewPage(String title, String webViewUrl) {
+    Get.toNamed(PageRouterName.webViewPage, arguments: {
+      AppConstants.webViewTitleKey: title,
+      AppConstants.webViewUrlKey: webViewUrl
+    });
   }
 }
 

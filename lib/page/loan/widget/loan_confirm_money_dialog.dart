@@ -4,26 +4,34 @@ import 'package:get/get.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
+import 'package:rapicredito/widget/progress_hud_view.dart';
 
 class LoanConfirmMoneyDialog extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _LoanConfirmMoneyDialogState();
   final Function clickConfirm;
+  final Function clickWebView;
   final String? amountInHand;
   final String? loanAmount;
   final String? repaymentDate;
+  final String? contractUrl;
+  final String? contractName;
 
   const LoanConfirmMoneyDialog(
       {Key? key,
       required this.clickConfirm,
+      required this.clickWebView,
       this.amountInHand,
       this.loanAmount,
-      this.repaymentDate})
+      this.repaymentDate,
+      this.contractUrl,
+      this.contractName})
       : super(key: key);
 }
 
 class _LoanConfirmMoneyDialogState extends State<LoanConfirmMoneyDialog> {
   final TextEditingController ctr = TextEditingController();
+  bool isSelectd = false;
 
   @override
   Widget build(BuildContext context) {
@@ -106,14 +114,33 @@ class _LoanConfirmMoneyDialogState extends State<LoanConfirmMoneyDialog> {
     return Row(
       mainAxisSize: MainAxisSize.max,
       children: [
-        Container(
-          width: 23.0,
-          height: 23.0,
-          margin: const EdgeInsets.only(top: 15.0, right: 5.0, bottom: 19.0),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4.0),
-              border: Border.all(color: const Color(0xff666666), width: 1.0)),
-        ),
+        CustomClickView(
+            onTap: () {
+              if (mounted) {
+                setState(() {
+                  isSelectd = !isSelectd;
+                });
+              }
+            },
+            child: Container(
+              width: 23.0,
+              height: 23.0,
+              alignment: Alignment.center,
+              margin:
+                  const EdgeInsets.only(top: 15.0, right: 5.0, bottom: 19.0),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4.0),
+                  border:
+                      Border.all(color: const Color(0xff666666), width: 1.0)),
+              child: Visibility(
+                visible: isSelectd,
+                child: const Text(
+                  '√',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 19.0, color: Color(0xff333333)),
+                ),
+              ),
+            )),
         Expanded(
             child: RichText(
                 text: TextSpan(
@@ -122,10 +149,13 @@ class _LoanConfirmMoneyDialogState extends State<LoanConfirmMoneyDialog> {
                         fontSize: 14.0, color: Color(0xff666666)),
                     children: <TextSpan>[
               TextSpan(
-                  text: Strings.autoLineString('Contrato de crédito'),
+                  text: Strings.autoLineString(widget.contractName ?? ''),
                   style:
                       const TextStyle(fontSize: 14.0, color: Color(0xff0A9BAE)),
-                  recognizer: TapGestureRecognizer()..onTap = () {}),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      widget.clickWebView();
+                    }),
               TextSpan(
                   text: Strings.autoLineString(' detenidamente'),
                   style: const TextStyle(
@@ -159,8 +189,12 @@ class _LoanConfirmMoneyDialogState extends State<LoanConfirmMoneyDialog> {
         Expanded(
             child: CustomButton(
           onPressed: () {
-            Get.back();
-            widget.clickConfirm();
+            if (isSelectd) {
+              Get.back();
+              widget.clickConfirm();
+            } else {
+              ProgressHUD.showInfo('Por favor marque el acuerdo primero');
+            }
           },
           minWidth: 152.0,
           minHeight: 46.0,

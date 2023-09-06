@@ -44,11 +44,11 @@ class LoanDateTopView extends GetView<LoanMoneyDateCtr> {
               'Obtén un descuento en tu próximo préstamo',
               style: TextStyle(fontSize: 15.0, color: Color(0xffD53535)),
             )),
-        const Padding(
-            padding: EdgeInsets.only(left: 7.0, bottom: 16.0),
+        Padding(
+            padding: const EdgeInsets.only(left: 7.0, bottom: 16.0),
             child: Text(
-              '100\$',
-              style: TextStyle(
+              '${controller.state.incrementStep.toString()}\$',
+              style: const TextStyle(
                   fontSize: 15.0,
                   color: Color(0xffD53535),
                   fontWeight: FontWeight.bold),
@@ -152,7 +152,7 @@ class LoanDateTopView extends GetView<LoanMoneyDateCtr> {
               controller.state.dateList[index].isSelected =
                   controller.state.dateSelectIndex == index;
               controller.state.detailId = bean.detailId;
-              controller.state.repaymentDate=bean.dateStr;
+              controller.state.repaymentDate = bean.dateStr;
               controller.postTestCalculateRequest(isShowDialog: true);
             }
           }
