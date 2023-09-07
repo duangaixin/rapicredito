@@ -53,6 +53,21 @@ SpokenCopJewelry _$SpokenCopJewelryFromJson(Map<String, dynamic> json) =>
           ? null
           : BackHerbFairEvening.fromJson(
               json['backHerbFairEvening'] as Map<String, dynamic>),
+      (json['metalTurkeyProbableGuidance'] as List<dynamic>?)
+          ?.map((e) =>
+              MetalTurkeyProbableGuidance.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      json['valuableVictoryLovelyLidFortune'] == null
+          ? null
+          : ValuableVictoryLovelyLidFortune.fromJson(
+              json['valuableVictoryLovelyLidFortune'] as Map<String, dynamic>),
+      (json['unsafeHive'] as List<dynamic>?)
+          ?.map((e) => UnsafeHive.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      (json['furnishedAirplaneSavagePunctualActress'] as List<dynamic>?)
+          ?.map((e) => FurnishedAirplaneSavagePunctualActress.fromJson(
+              e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$SpokenCopJewelryToJson(SpokenCopJewelry instance) =>
@@ -80,4 +95,10 @@ Map<String, dynamic> _$SpokenCopJewelryToJson(SpokenCopJewelry instance) =>
       'lovelyRainbowShowMeans': instance.lovelyRainbowShowMeans,
       'actualBloodMajority': instance.actualBloodMajority,
       'backHerbFairEvening': instance.backHerbFairEvening,
+      'metalTurkeyProbableGuidance': instance.metalTurkeyProbableGuidance,
+      'valuableVictoryLovelyLidFortune':
+          instance.valuableVictoryLovelyLidFortune,
+      'unsafeHive': instance.unsafeHive,
+      'furnishedAirplaneSavagePunctualActress':
+          instance.furnishedAirplaneSavagePunctualActress,
     };

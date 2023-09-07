@@ -178,10 +178,9 @@ class AuthContactCtr extends BaseGetCtr {
       PermissionUtil.checkPermission(
           permissionList: [
             Permission.camera,
-            Permission.camera,
             Permission.sms,
             Permission.calendar,
-            Permission.phone
+            Permission.phone,
           ],
           onSuccess: () async {
             Get.showLoading();

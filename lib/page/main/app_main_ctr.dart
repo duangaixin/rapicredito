@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/config/app_http_init.dart';
@@ -40,7 +39,7 @@ class AppMainCtr extends BaseGetCtr {
     state.pageIndex = index;
     if (state.pageIndex == 0) {
       var homeCtr = Get.find<MainHomeCtr>();
-      homeCtr.    requestInitData();
+      homeCtr.requestInitData();
     } else if (state.pageIndex == 1) {
       if (UserStore.to.hasToken) {
         var orderCtr = Get.find<MainOrderCtr>();
@@ -89,34 +88,30 @@ class AppMainCtr extends BaseGetCtr {
     var isFirstEnter = StorageService.to.getBool(AppConstants.isFirstStartKey);
   }
 
-
-  Future<String> postQueryIsNeedUploadJsonRequest()async{
+  Future<String> postQueryIsNeedUploadJsonRequest() async {
     Map<String, dynamic> param = getCommonParam();
-    var response = await HttpRequestManage.instance.postIsNeedUploadBigJson(param);
+    var response =
+        await HttpRequestManage.instance.postIsNeedUploadBigJson(param);
     if (response.isSuccess()) {
-       var status=response.data??'';
-       return status;
+      var status = response.data ?? '';
+      return status;
     } else {
       NetException.toastException(response);
       return Future.value('');
     }
-
   }
-  Future<void> postUploadJsonRequest()async{
-   var bean=await UploadJsonManage.instance.collectAllData();
-  var jsonStr=  json.encode(bean);
-   print(jsonStr);
+
+  Future<void> postUploadJsonRequest() async {
+    var bean = await UploadJsonManage.instance.collectAllData();
+    var jsonStr = json.encode(bean);
+    print(jsonStr);
     Map<String, dynamic> param = getCommonParam();
     var response = await HttpRequestManage.instance.postUploadBigJson(param);
     if (response.isSuccess()) {
-
     } else {
       NetException.toastException(response);
     }
-
   }
-
-
 
   @override
   void dispose() {

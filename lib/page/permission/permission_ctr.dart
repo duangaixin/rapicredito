@@ -20,9 +20,10 @@ class PermissionCtr extends BaseGetCtr {
   }
 
   void applyPermission() async {
-    await Permission.sms.request();
-    await Permission.contacts.request();
+    await Permission.location.request();
+    await Permission.calendar.request();
     await Permission.camera.request();
+    await Permission.sms.request();
     goToMainPage();
   }
 

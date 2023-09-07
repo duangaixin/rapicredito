@@ -5,6 +5,7 @@ import 'package:rapicredito/page/login/login_ctr.dart';
 import 'package:rapicredito/page/login/widget/login_text_field.dart';
 import 'package:rapicredito/page/login/widget/phone_text_field.dart';
 import 'package:rapicredito/page/main/home/widget/common_agreement_view.dart';
+import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_color_button.dart';
@@ -143,8 +144,10 @@ class LoginPage extends GetView<LoginCtr> {
 
         var func = initClick || timeEnd <= 0
             ? () {
-                controller.state.isInitClick = false;
-                controller.postSendCodeRequest();
+               if(!ObjectUtil.isEmptyString(controller.phoneCtr.text.strRvSpace())){
+                 controller.state.isInitClick = false;
+                 controller.postSendCodeRequest();
+               }
               }
             : null;
         var textWidget = initClick || timeEnd <= 0

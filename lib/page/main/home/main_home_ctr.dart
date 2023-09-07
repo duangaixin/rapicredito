@@ -35,9 +35,9 @@ class MainHomeCtr extends BaseGetCtr {
     // } else {
     //   state.loadState = LoadState.succeed;
     // }
-    // if (state.isRefresh) {
-    //   refreshController.refreshCompleted();
-    // }
+    if (state.isRefresh) {
+      refreshController.refreshCompleted();
+    }
   }
 
   void goToAuthPage() {
@@ -56,10 +56,10 @@ class MainHomeCtr extends BaseGetCtr {
     var response = await HttpRequestManage.instance.postAppSettingInfo(param);
     if (response.isSuccess()) {
       var bean = response.data;
-      state.maxAmount = bean?.cleverMaidActualFoot ?? '';
+      state.maxAmount = bean?.cleverMaidActualFoot ?? '50000';
       state.loadState = LoadState.succeed;
     } else {
-      state.loadState = LoadState.failed;
+      // state.loadState = LoadState.failed;
       NetException.toastException(response);
     }
   }

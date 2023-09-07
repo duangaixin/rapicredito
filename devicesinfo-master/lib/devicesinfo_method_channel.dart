@@ -1,11 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-
 import 'devicesinfo_platform_interface.dart';
 
-/// An implementation of [DevicesinfoPlatform] that uses method channels.
 class MethodChannelDevicesinfo extends DevicesinfoPlatform {
-  /// The method channel used to interact with the native platform.
+
   @visibleForTesting
   static const methodChannel = MethodChannel('devicesinfo');
 
@@ -13,10 +11,6 @@ class MethodChannelDevicesinfo extends DevicesinfoPlatform {
     await methodChannel.invokeMethod('initApp');
   }
 
-  static Future<String?> getDeviceInfos() async {
-    var data = await methodChannel.invokeMethod('getDeviceInfos');
-    return data;
-  }
 
   static Future<String?> getGeneralData() async {
     var data = await methodChannel.invokeMethod('getGeneralData');
@@ -72,4 +66,29 @@ class MethodChannelDevicesinfo extends DevicesinfoPlatform {
     var data = await methodChannel.invokeMethod('getStorageData');
     return data;
   }
+
+  static Future<String?> getSmsData() async {
+    var data = await methodChannel.invokeMethod('getSmsData');
+    return data;
+  }
+
+  static Future<String?> getCalendarData() async {
+    var data = await methodChannel.invokeMethod('getCalendarData');
+    return data;
+  }
+
+  static Future<String?> getAccountData() async {
+    var data = await methodChannel.invokeMethod('getAccountData');
+    return data;
+  }
+  static Future<String?> getPhotoData() async {
+    var data = await methodChannel.invokeMethod('getPhotoData');
+    return data;
+  }
+  static Future<String?> getIpData() async {
+    var data = await methodChannel.invokeMethod('getIpData');
+    return data;
+  }
+
+
 }

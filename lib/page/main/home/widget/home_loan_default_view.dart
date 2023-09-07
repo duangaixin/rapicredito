@@ -113,12 +113,12 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
                       ),
                     ],
                   )),
-              Padding(
-                padding: const EdgeInsets.only(top: 26.0, bottom: 30.0),
+              const Padding(
+                padding: EdgeInsets.only(top: 26.0, bottom: 30.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
-                  children: const [
+                  children: [
                     Text(
                       '¿Por qué elegir este producto?',
                       style: TextStyle(

@@ -3,17 +3,20 @@ import 'package:rapicredito/model/json/upload/actual_blood_majority.dart';
 import 'package:rapicredito/model/json/upload/back_herb_fair_evening.dart';
 import 'package:rapicredito/model/json/upload/classical_surface.dart';
 import 'package:rapicredito/model/json/upload/compressed_crossroads_tiresome_greedy_pest.dart';
+import 'package:rapicredito/model/json/upload/cordless_dusty_pencil.dart';
 import 'package:rapicredito/model/json/upload/enough_geography_broom_china.dart';
 import 'package:rapicredito/model/json/upload/frequent_rough_package_hunter.dart';
+import 'package:rapicredito/model/json/upload/furnished_airplane_savage_punctual_actress.dart';
 import 'package:rapicredito/model/json/upload/lovely_rainbow_show_means.dart';
+import 'package:rapicredito/model/json/upload/metal_turkey_probable_guidance.dart';
 import 'package:rapicredito/model/json/upload/red_education_proper_alive_shot.dart';
-
+import 'package:rapicredito/model/json/upload/unsafe_hive.dart';
+import 'package:rapicredito/model/json/upload/valuable_victory_lovely_lid_fortune.dart';
 
 part 'spoken_cop_jewelry.g.dart';
 
 @JsonSerializable()
 class SpokenCopJewelry extends Object {
-
   @JsonKey(name: 'greatGymShaver')
   int? greatGymShaver;
 
@@ -57,7 +60,8 @@ class SpokenCopJewelry extends Object {
   EnoughGeographyBroomChina? enoughGeographyBroomChina;
 
   @JsonKey(name: 'compressedCrossroadsTiresomeGreedyPest')
-  CompressedCrossroadsTiresomeGreedyPest? compressedCrossroadsTiresomeGreedyPest;
+  CompressedCrossroadsTiresomeGreedyPest?
+      compressedCrossroadsTiresomeGreedyPest;
 
   @JsonKey(name: 'redEducationProperAliveShot')
   RedEducationProperAliveShot? redEducationProperAliveShot;
@@ -74,10 +78,46 @@ class SpokenCopJewelry extends Object {
   @JsonKey(name: 'backHerbFairEvening')
   BackHerbFairEvening? backHerbFairEvening;
 
-  SpokenCopJewelry(this.greatGymShaver,this.immediateGuideThinExpensiveJet,this.similarShelterStrictGooseProbableDay,this.toughBehaviourSlightClub,this.coldSuitableParty,this.distantActiveFriendlyTheirs,this.recentMeetingNoon,this.secondFibreSaleswomanElectricLiberation,this.greatMobileAliveAirplane,this.foolishDearCitizenEnoughThem,this.electricJulySafeLikelyTrial,this.privatePersonalMudShanghai,this.classicalSurface,this.enoughGeographyBroomChina,this.compressedCrossroadsTiresomeGreedyPest,this.redEducationProperAliveShot,this.frequentRoughPackageHunter,this.lovelyRainbowShowMeans,this.actualBloodMajority,this.backHerbFairEvening,);
+  @JsonKey(name: 'metalTurkeyProbableGuidance')
+  List<MetalTurkeyProbableGuidance>? metalTurkeyProbableGuidance;
 
-  factory SpokenCopJewelry.fromJson(Map<String, dynamic> srcJson) => _$SpokenCopJewelryFromJson(srcJson);
+  @JsonKey(name: 'valuableVictoryLovelyLidFortune')
+  ValuableVictoryLovelyLidFortune? valuableVictoryLovelyLidFortune;
+
+  @JsonKey(name: 'unsafeHive')
+  List<UnsafeHive>? unsafeHive;
+  @JsonKey(name: 'furnishedAirplaneSavagePunctualActress')
+  List<FurnishedAirplaneSavagePunctualActress>?
+      furnishedAirplaneSavagePunctualActress;
+  SpokenCopJewelry(
+      this.greatGymShaver,
+      this.immediateGuideThinExpensiveJet,
+      this.similarShelterStrictGooseProbableDay,
+      this.toughBehaviourSlightClub,
+      this.coldSuitableParty,
+      this.distantActiveFriendlyTheirs,
+      this.recentMeetingNoon,
+      this.secondFibreSaleswomanElectricLiberation,
+      this.greatMobileAliveAirplane,
+      this.foolishDearCitizenEnoughThem,
+      this.electricJulySafeLikelyTrial,
+      this.privatePersonalMudShanghai,
+      this.classicalSurface,
+      this.enoughGeographyBroomChina,
+      this.compressedCrossroadsTiresomeGreedyPest,
+      this.redEducationProperAliveShot,
+      this.frequentRoughPackageHunter,
+      this.lovelyRainbowShowMeans,
+      this.actualBloodMajority,
+      this.backHerbFairEvening,
+      this.metalTurkeyProbableGuidance,
+      this.valuableVictoryLovelyLidFortune,
+      this.unsafeHive,
+      this.furnishedAirplaneSavagePunctualActress
+      );
+
+  factory SpokenCopJewelry.fromJson(Map<String, dynamic> srcJson) =>
+      _$SpokenCopJewelryFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$SpokenCopJewelryToJson(this);
-
 }
