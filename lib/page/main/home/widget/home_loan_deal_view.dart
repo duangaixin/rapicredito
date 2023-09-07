@@ -7,6 +7,7 @@ import 'package:rapicredito/page/main/home/widget/common_loan_money_view.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
+
 class HomeLoanDealView extends GetView<MainHomeCtr> {
   const HomeLoanDealView({Key? key}) : super(key: key);
 
