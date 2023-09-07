@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
 import 'package:rapicredito/page/auth/widget/common_auth_agreement_view.dart';
+import 'package:rapicredito/router/page_router_name.dart';
+import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/comon_section_title_view.dart';
+import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_color_button.dart';
 import 'package:rapicredito/widget/custom_edit_view.dart';
+import 'package:rapicredito/widget/custom_image_view.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
 import 'package:rapicredito/widget/custom_select_view.dart';
 
@@ -16,6 +22,7 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
     return CustomPageBgView(
       resizeToAvoidBottomInset: false,
       title: 'Información básica',
+      actions: [rightView],
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.max,
@@ -53,6 +60,11 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
                               keyboardType: TextInputType.emailAddress,
                               hintStyle: const TextStyle(
                                   color: Color(0xffD53535), fontSize: 15.0),
+                              inputFormatter: [
+                                FilteringTextInputFormatter.deny(
+                                  RegExp(controller.state.regexNotNull),
+                                )
+                              ],
                             ),
                             Obx(() {
                               return CustomSelectView(
@@ -75,8 +87,7 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
                               child: Obx(() {
                                 return CustomColorButton(
                                   disableClick: controller.disableClickToast,
-                                  realClick:
-                                      controller.clickSubmit,
+                                  realClick: controller.clickSubmit,
                                   disableColors: const [
                                     Color(0xffF5F6F4),
                                     Color(0xffF5F6F4),
@@ -113,4 +124,21 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
       ),
     );
   }
+
+  Widget get rightView => CustomClickView(
+        onTap: () {
+          Get.toNamed(PageRouterName.clientPage, arguments: {
+            AppConstants.fromPageNameKey: PageRouterName.clientPage
+          });
+        },
+        child: Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.only(right: 16.0, left: 5.0),
+            child: const CustomImageView(
+              Resource.assetsImageHomeTitleAction,
+              imageType: ImageType.assets,
+              width: 17.81,
+              height: 19.0,
+            )),
+      );
 }

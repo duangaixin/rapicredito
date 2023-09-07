@@ -4,6 +4,6 @@ import 'package:rapicredito/page/main/mine/client/index.dart';
 class ClientBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<ClientCtr>(() => ClientCtr());
+    Get.put<ClientCtr>( ClientCtr());
   }
 }

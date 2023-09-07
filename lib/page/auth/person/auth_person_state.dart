@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 
 class AuthPersonState {
+  String regexNotNull = '[\\s]';
+  String regexFirstNotNull = r'^(\S){1}';
   List<String?> incomeList = [];
   List<String?> familyList = [];
   List<String?> educationalList = [];

@@ -124,7 +124,7 @@ class AuthIdCtr extends BaseGetCtr {
       state.birthDay = res.day;
       state.birthMonth = res.month;
       state.birthYear = res.year;
-      state.birth = '${res.day}-${res.month}-${res.year}';
+      state.birth = '${res.day.toString().padLeft(2,'0')}-${res.month.toString().padLeft(2,'0')}-${res.year}';
       _btnCanClick();
     }, selectDate: selectData);
   }
@@ -147,7 +147,7 @@ class AuthIdCtr extends BaseGetCtr {
   void disableClickToast() {
     if (state.btnDisableClick) {
       ProgressHUD.showInfo(
-          'Please fill in all information completely——Por favor complete toda la información completamente');
+          'Por favor complete toda la información completamente');
     }
   }
 

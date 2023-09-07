@@ -72,7 +72,7 @@ class AuthPersonCtr extends BaseGetCtr {
   void disableClickToast() {
     if (state.btnDisableClick) {
       ProgressHUD.showInfo(
-          'Please fill in all information completely——Por favor complete toda la información completamente');
+          'Por favor complete toda la información completamente');
     }
   }
 
@@ -103,20 +103,17 @@ class AuthPersonCtr extends BaseGetCtr {
           onSuccess: () {
             appMainCtr.postUploadJsonRequest();
             Get.toNamed(PageRouterName.authContactPage);
-
           },
-          onFailed: (){
+          onFailed: () {
             Get.toNamed(PageRouterName.authContactPage);
           },
           goSetting: () {
             Get.toNamed(PageRouterName.authContactPage);
-          //  showGoSettingDialog();
           });
-    }else{
+    } else {
       Get.toNamed(PageRouterName.authContactPage);
     }
   }
-
 
   void showGoSettingDialog() {
     showDialog(

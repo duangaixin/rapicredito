@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/page/auth/id/index.dart';
 import 'package:rapicredito/page/auth/widget/common_auth_agreement_view.dart';
+import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/widget/comon_section_title_view.dart';
 import 'package:rapicredito/style/index.dart';
@@ -206,8 +208,7 @@ class AuthIdPage extends GetView<AuthIdCtr> {
                   controller: controller.idNumCtr,
                   editTitle: 'Número de documento',
                   hintText: 'Introducir texto',
-                  maxLength: 10,
-                  keyboardType: TextInputType.number,
+                  maxLength: 20,
                 ),
                 CustomEditView(
                   controller: controller.firstNameCtr,
@@ -244,6 +245,7 @@ class AuthIdPage extends GetView<AuthIdCtr> {
   Widget build(BuildContext context) {
     return CustomPageBgView(
         title: 'Información básica',
+        actions: [rightView],
         content: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
@@ -253,4 +255,21 @@ class AuthIdPage extends GetView<AuthIdCtr> {
           ),
         ));
   }
+
+  Widget get rightView => CustomClickView(
+        onTap: () {
+          Get.toNamed(PageRouterName.clientPage, arguments: {
+            AppConstants.fromPageNameKey: PageRouterName.clientPage
+          });
+        },
+        child: Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.only(right: 16.0, left: 5.0),
+            child: const CustomImageView(
+              Resource.assetsImageHomeTitleAction,
+              imageType: ImageType.assets,
+              width: 17.81,
+              height: 19.0,
+            )),
+      );
 }

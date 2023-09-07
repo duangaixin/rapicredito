@@ -33,7 +33,24 @@
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
+    <!-- Provide required visibility configuration for API level 30 and above -->
 
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+        </intent>
+    </queries>
+    <queries>
+        <!-- If your app checks for call support -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="tel" />
+        </intent>
+
+    </queries>
     <application
         android:name=".MyApp"
         android:icon="@mipmap/ic_launcher"

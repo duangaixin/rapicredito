@@ -54,7 +54,9 @@ class CustomPicker {
     DateItemModel dateItemModel = DateItemModel.parse(mode);
     DateTime dateTime = DateTime.now();
     var maxYear = dateTime.year - 10;
-    maxDate ??= PDuration(year: maxYear);
+    var maxMonth=dateTime.month;
+    var maxDay=dateTime.day;
+    maxDate ??= PDuration(year: maxYear,month: maxMonth,day: maxDay);
     minDate ??= PDuration(year: 1950, month: 1, day: 1);
 
     if ((dateItemModel.day || dateItemModel.year)) {
@@ -116,6 +118,5 @@ PickerStyle customizeStyle() {
       commitButton: commitButton,
       headDecoration: headDecoration,
       backgroundColor: Colors.white,
-      textColor: const Color(0xff666666),
-      textSize: 13.0);
+      textColor: const Color(0xff666666));
 }

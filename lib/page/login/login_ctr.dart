@@ -36,11 +36,18 @@ class LoginCtr extends BaseGetCtr {
       }
     }
     state.isInitClick = true;
-    codeCtr.addListener(_btnCanClick);
+    phoneCtr.addListener(_btnLoginCanClick);
+    phoneCtr.addListener(_btnOptCanClick);
+    codeCtr.addListener(_btnLoginCanClick);
   }
 
-  void _btnCanClick() {
-    state.btnDisableClick = ObjectUtil.isEmptyString(codeCtr.text);
+  void _btnOptCanClick() {
+    state.btnOptDisableClick = ObjectUtil.isEmptyString(phoneCtr.text);
+  }
+
+  void _btnLoginCanClick() {
+    state.btnLoginDisableClick = ObjectUtil.isEmptyString(phoneCtr.text) ||
+        ObjectUtil.isEmptyString(codeCtr.text);
   }
 
   void _startTimer() {
@@ -54,7 +61,6 @@ class LoginCtr extends BaseGetCtr {
 
   void postSendCodeRequest() async {
     KeyboardUtils.unFocus();
-    _startTimer();
     var param = <String, dynamic>{};
     param['swiftMeansEitherPine'] = phoneCtr.text.strRvSpace();
     param.addAll(getCommonParam());
@@ -62,7 +68,9 @@ class LoginCtr extends BaseGetCtr {
     var response = await HttpRequestManage.instance.postSendCodeRequest(param);
     Get.dismiss();
     if (response.isSuccess()) {
-      var codeStr = response.data ?? '';
+      state.isInitClick = false;
+      _startTimer();
+      // var codeStr = response.data ?? '';
     } else {
       NetException.toastException(response);
     }
@@ -70,7 +78,6 @@ class LoginCtr extends BaseGetCtr {
 
   void postLoginRequest() async {
     KeyboardUtils.unFocus();
-    _startTimer();
     var param = <String, dynamic>{};
     var phoneNum = phoneCtr.text.strRvSpace();
 
@@ -95,9 +102,8 @@ class LoginCtr extends BaseGetCtr {
       var token = loginInfoBean?.darkPlentyNervousHandbag ?? '';
       var userId = loginInfoBean?.terminalDifferentActionFatFountain ?? -1;
       var firstRegister = loginInfoBean?.cheapFenceScholarEverydayClinic ?? '0';
-      var testFlag =
-          loginInfoBean?.delightedGooseFacialUnmarriedHamburger ?? 0;
-      await StorageService.to.setInt(AppConstants.userTestFlagKey,testFlag );
+      var testFlag = loginInfoBean?.delightedGooseFacialUnmarriedHamburger ?? 0;
+      await StorageService.to.setInt(AppConstants.userTestFlagKey, testFlag);
       await UserStore.to.setLoginInfo(token, userId, phoneNum);
       if (isTokenExpired) {
         Get.toNamed(PageRouterName.mainPage);
@@ -115,7 +121,11 @@ class LoginCtr extends BaseGetCtr {
   @override
   void onClose() {
     _subscription?.cancel();
-    codeCtr.removeListener(_btnCanClick);
+    phoneCtr.text = '';
+    codeCtr.text = '';
+    phoneCtr.removeListener(_btnOptCanClick);
+    phoneCtr.removeListener(_btnLoginCanClick);
+    codeCtr.removeListener(_btnLoginCanClick);
     phoneCtr.dispose();
     codeCtr.dispose();
     super.onClose();

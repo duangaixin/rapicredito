@@ -109,21 +109,28 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
               iconHeight: 22,
               iconWith: 22,
               iconPath: Resource.assetsImageMineSignAgreement,
-              onTap: () {},
+              onTap: () {
+                ctr.goToWebViewPage('百度', 'https://www.baidu.com/');
+              },
               content: 'Avisos de Privacidad',
             ),
             CommonSettingClickView(
               iconHeight: 22,
               iconWith: 22,
               iconPath: Resource.assetsImageMineClient,
-              onTap: () {},
+              onTap: () {
+                ctr.goToWebViewPage('百度', 'https://www.baidu.com/');
+              },
               content: 'Servicio al cliente en línea',
             ),
             CommonSettingClickView(
               iconHeight: 24.0,
               iconWith: 25.0,
               iconPath: Resource.assetsImageMineSupplyAgreement,
-              onTap: ctr.goToTestPage,
+              onTap: () {
+                ctr.goToTestPage();
+                //ctr.goToWebViewPage('百度', 'https://www.baidu.com/');
+              },
               content: 'Atención al cliente',
             ),
           ],

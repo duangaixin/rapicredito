@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
@@ -7,6 +8,8 @@ import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/page/main/mine/client/index.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
+import 'package:rapicredito/widget/progress_hud_view.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ClientCtr extends BaseGetCtr {
   final state = ClientState();
@@ -32,17 +35,17 @@ class ClientCtr extends BaseGetCtr {
 
       if (!ObjectUtil.isEmptyList(modelList)) {
         var clientListBean =
-            ClientListBean(title: 'Teléfono', itemList: modelList);
+            ClientListBean(title: 'Teléfono', type: '1', itemList: modelList);
         state.dataSource.add(clientListBean);
       }
       if (!ObjectUtil.isEmptyList(modelList)) {
         var clientListBean =
-            ClientListBean(title: 'Whatsapp', itemList: whatAppList);
+            ClientListBean(title: 'Whatsapp', type: '2', itemList: whatAppList);
         state.dataSource.add(clientListBean);
       }
       if (!ObjectUtil.isEmptyList(modelList)) {
-        var clientListBean =
-            ClientListBean(title: 'Correo electrónico', itemList: emailList);
+        var clientListBean = ClientListBean(
+            title: 'Correo electrónico', type: '3', itemList: emailList);
         state.dataSource.add(clientListBean);
       }
       state.loadState = LoadState.succeed;
@@ -50,5 +53,32 @@ class ClientCtr extends BaseGetCtr {
       state.loadState = LoadState.failed;
       NetException.toastException(response);
     }
+  }
+
+  void callPhone(String phoneNumber) async {
+    Uri url = Uri.parse('tel:$phoneNumber');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+      await copyStr(phoneNumber);
+    } else {
+      ProgressHUD.showError('Fracaso al abrir el enlace');
+    }
+  }
+
+  void jumpWhatsapp(String phone) async {
+    Uri url = Uri.parse('https://api.whatsapp.com/send?phone=$phone');
+    await launchUrl(url);
+    await copyStr(phone);
+  }
+
+  void sendEmail(String email) async {
+    Uri url = Uri.parse('mailto:$email');
+    await launchUrl(url);
+    await copyStr(email);
+  }
+
+  Future<void> copyStr(String str) async {
+    await Clipboard.setData(ClipboardData(text: str));
+    ProgressHUD.showSuccess('Copiar con éxito');
   }
 }

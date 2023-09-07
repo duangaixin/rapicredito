@@ -10,6 +10,7 @@ import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_color_button.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
+import 'package:rapicredito/widget/progress_hud_view.dart';
 
 class LoginPage extends GetView<LoginCtr> {
   const LoginPage({Key? key}) : super(key: key);
@@ -31,13 +32,12 @@ class LoginPage extends GetView<LoginCtr> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding:
-                              const EdgeInsets.only(top: 59.0, bottom: 80.0),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 59.0, bottom: 80.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
+                            children: [
                               Text(
                                 'Cantidad máxima',
                                 style: TextStyle(
@@ -89,7 +89,7 @@ class LoginPage extends GetView<LoginCtr> {
                                 Color(0xffF5F6F4),
                                 Color(0xffF5F6F4)
                               ],
-                              disable: controller.state.btnDisableClick,
+                              disable: controller.state.btnLoginDisableClick,
                               colors: const [
                                 Color(0xffB8EF17),
                                 Color(0xffB8EF17)
@@ -100,7 +100,7 @@ class LoginPage extends GetView<LoginCtr> {
                                 'Continúa',
                                 style: TextStyle(
                                     fontSize: 15.0,
-                                    color: controller.state.btnDisableClick
+                                    color: controller.state.btnLoginDisableClick
                                         ? const Color(0xffC4BFBF)
                                         : const Color(0xff333333),
                                     fontWeight: FontWeight.bold),
@@ -144,10 +144,13 @@ class LoginPage extends GetView<LoginCtr> {
 
         var func = initClick || timeEnd <= 0
             ? () {
-               if(!ObjectUtil.isEmptyString(controller.phoneCtr.text.strRvSpace())){
-                 controller.state.isInitClick = false;
-                 controller.postSendCodeRequest();
-               }
+                if (!ObjectUtil.isEmptyString(
+                    controller.phoneCtr.text.strRvSpace())) {
+                  controller.postSendCodeRequest();
+                } else {
+                  ProgressHUD.showInfo(
+                      'Por favor ingrese el número de teléfono móvil');
+                }
               }
             : null;
         var textWidget = initClick || timeEnd <= 0
@@ -158,22 +161,30 @@ class LoginPage extends GetView<LoginCtr> {
             : RichText(
                 text: TextSpan(text: str, style: style, children: <TextSpan>[
                 TextSpan(
-                    text: timeEnd.toString(),
+                    text: '${timeEnd.toString().padLeft(2, '0')}s',
                     style: const TextStyle(
                         fontSize: 14.0, color: Color(0xff044952))),
               ]));
 
         return CustomClickView(
           onTap: func,
-          child: Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 12.0, vertical: 11.0),
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-                border: Border.all(color: borderColor, width: 1.0)),
-            child: textWidget,
-          ),
+          child: Obx(() {
+            return Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12.0, vertical: 11.0),
+              decoration: BoxDecoration(
+                  color: controller.state.btnOptDisableClick
+                      ? const Color(0xffF5F6F4)
+                      : Colors.white,
+                  borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+                  border: Border.all(
+                      color: controller.state.btnOptDisableClick
+                          ? Colors.transparent
+                          : borderColor,
+                      width: 1.0)),
+              child: textWidget,
+            );
+          }),
         );
       });
 }

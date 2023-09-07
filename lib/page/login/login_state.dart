@@ -14,9 +14,16 @@ class LoginState {
 
   set isInitClick(value) => _isInitClick.value = value;
 
-  final RxBool _btnDisableClick = true.obs;
+  final RxBool _btnLoginDisableClick = true.obs;
 
-  bool get btnDisableClick => _btnDisableClick.value;
+  bool get btnLoginDisableClick => _btnLoginDisableClick.value;
 
-  set btnDisableClick(value) => _btnDisableClick.value = value;
+  set btnLoginDisableClick(value) => _btnLoginDisableClick.value = value;
+
+
+  final RxBool _btnOptDisableClick = true.obs;
+
+  bool get btnOptDisableClick => _btnOptDisableClick.value;
+
+  set btnOptDisableClick(value) => _btnOptDisableClick.value = value;
 }

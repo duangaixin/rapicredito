@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/main/home/widget/common_agreement_view.dart';
 import 'package:rapicredito/page/main/mine/client/index.dart';
+import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
 
@@ -41,6 +42,7 @@ class ClientPage extends GetView<ClientCtr> {
   Widget _buildListItemView(int index) {
     var clientInfoBean = controller.state.dataSource[index];
     var title = clientInfoBean?.title ?? '';
+    var type=clientInfoBean?.type??'';
     var itemList = clientInfoBean?.itemList ?? [];
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -62,7 +64,7 @@ class ClientPage extends GetView<ClientCtr> {
                 childAspectRatio: Get.size.width / 38),
             itemBuilder: (context, index) {
               var value = itemList[index]?.latestCandle ?? '';
-              return _buildGridItemView(index, value);
+              return _buildGridItemView(index, value,type);
             },
             itemCount: itemList.length,
             physics: const NeverScrollableScrollPhysics(),
@@ -77,12 +79,27 @@ class ClientPage extends GetView<ClientCtr> {
     );
   }
 
-  Widget _buildGridItemView(int index, String value) => SizedBox(
-        width: double.infinity,
-        child: Text(
-          value,
-          textAlign: index % 2 == 0 ? TextAlign.left : TextAlign.right,
-          style: const TextStyle(fontSize: 15.0, color: Color(0xff666666)),
-        ),
-      );
+  Widget _buildGridItemView(int index, String value,String type) => CustomClickView(
+      onTap: (){
+        if(type=='1'){
+          controller.callPhone(value);
+        }else if(type=='2'){
+          controller.jumpWhatsapp(value);
+        }else if(type=='3'){
+         controller.sendEmail(value);
+        }
+      },
+      child:
+
+  SizedBox(
+    width: double.infinity,
+    child: Text(
+      value,
+      textAlign: index % 2 == 0 ? TextAlign.left : TextAlign.right,
+      style: const TextStyle(fontSize: 15.0, color: Color(0xff666666)),
+    ),
+  )
+  )
+
+    ;
 }

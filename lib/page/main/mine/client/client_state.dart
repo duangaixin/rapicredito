@@ -14,7 +14,8 @@ class ClientState {
 
 class ClientListBean {
   String? title;
+  String? type;
   List<ClientInfoItemBean?> itemList;
 
-  ClientListBean({this.title, required this.itemList});
+  ClientListBean({this.title,this.type, required this.itemList});
 }

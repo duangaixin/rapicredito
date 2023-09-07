@@ -83,7 +83,7 @@ class AuthContactCtr extends BaseGetCtr {
   void disableClickToast() {
     if (state.btnDisableClick) {
       ProgressHUD.showInfo(
-          'Please fill in all information completely——Por favor complete toda la información completamente');
+          'Por favor complete toda la información completamente');
     }
   }
 
