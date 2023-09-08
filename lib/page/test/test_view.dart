@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/json/upload_json_manage.dart';
-import 'package:rapicredito/page/dialog/date_select_dialog.dart';
 import 'package:rapicredito/page/dialog/message_input_dialog.dart';
 import 'package:rapicredito/page/dialog/pay_dialog.dart';
 import 'package:rapicredito/page/loan/widget/commit_success_dialog.dart';
@@ -63,18 +62,6 @@ class TestPage extends GetView<TestCtr> {
                         barrierDismissible: false,
                         builder: (_) {
                           return PayDialog(
-                            clickConfirm: () {},
-                          );
-                        });
-                  }),
-              CustomButton(
-                  text: '日期选择弹窗',
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (_) {
-                          return DateSelectDialog(
                             clickConfirm: () {},
                           );
                         });

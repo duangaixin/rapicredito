@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 
-class DateSelectDialog extends StatefulWidget {
+class DateMoneySelectDialog extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _DateSelectDialogState();
-  final Function clickConfirm;
+  State<StatefulWidget> createState() => _DateMoneySelectDialogState();
 
-  const DateSelectDialog({
+  const DateMoneySelectDialog({
     Key? key,
-    required this.clickConfirm,
   }) : super(key: key);
 }
 
-class _DateSelectDialogState extends State<DateSelectDialog> {
+class _DateMoneySelectDialogState extends State<DateMoneySelectDialog> {
   final TextEditingController ctr = TextEditingController();
 
   @override
@@ -48,7 +47,7 @@ class _DateSelectDialogState extends State<DateSelectDialog> {
     return Container(
       margin: const EdgeInsets.only(top: 20.0),
       child: CustomButton(
-        onPressed: widget.clickConfirm(),
+        onPressed: Get.back,
         minWidth: 265.0,
         minHeight: 46.0,
         backgroundColor: const Color(0xffB8EF17),

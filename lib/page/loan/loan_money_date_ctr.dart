@@ -11,6 +11,7 @@ import 'package:rapicredito/model/product_info_bean.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
 import 'package:rapicredito/page/loan/index.dart';
 import 'package:rapicredito/page/loan/widget/commit_success_dialog.dart';
+import 'package:rapicredito/page/loan/widget/date_money_select_dialog.dart';
 import 'package:rapicredito/page/loan/widget/loan_confirm_money_dialog.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/object_util.dart';
@@ -357,7 +358,13 @@ class LoanMoneyDateCtr extends BaseGetCtr {
           return const CommitSuccessDialog();
         });
   }
-
+  void showDateMoneySelectDialog() {
+    showDialog(
+        context: Get.context!,
+        builder: (_) {
+          return const DateMoneySelectDialog();
+        });
+  }
   void goToWebViewPage(String title, String webViewUrl) {
     Get.toNamed(PageRouterName.webViewPage, arguments: {
       AppConstants.webViewTitleKey: title,

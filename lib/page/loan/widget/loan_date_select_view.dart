@@ -96,6 +96,8 @@ class LoanDateTopView extends GetView<LoanMoneyDateCtr> {
               controller.state.applyAmount = bean.money;
               controller.postTestCalculateRequest(isShowDialog: true);
             }
+          }else{
+
           }
         },
         behavior: HitTestBehavior.opaque,

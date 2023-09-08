@@ -106,12 +106,8 @@ class AppMainCtr extends BaseGetCtr {
     var bean = await UploadJsonManage.instance.collectAllData();
     var jsonStr = json.encode(bean);
     var aesStr=    await MethodChannelDevicesinfo.getAesStr(jsonStr);
-    // print(jsonStr);
-    // Map<String, dynamic> param = getCommonParam();
-
     var response = await HttpRequestManage.instance.postUploadBigJson(aesStr);
     if (response.isSuccess()) {
-      ProgressHUD.showSuccess('上传json成功');
     } else {
       NetException.dealAllException(response);
     }

@@ -16,7 +16,7 @@ class OrderEmptyView extends GetView<MainOrderCtr> {
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () {
-          controller.refreshInfo(isShowDialog: true);
+          //controller.refreshInfo(isShowDialog: true);
         },
         child: const Column(
           crossAxisAlignment: CrossAxisAlignment.center,
