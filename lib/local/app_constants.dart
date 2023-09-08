@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 
 class AppConstants {
   static const bool inProduction = !kProfileMode && kReleaseMode;
-  static const String isFirstStartKey = 'is_first_start';
+  static const String notFirstStartKey = 'not_first_start';
   static const String appLanguageKey = 'app_language';
   static const String userTokenKey = 'user_token';
   static const String userIdKey = 'user_id';

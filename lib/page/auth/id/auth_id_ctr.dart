@@ -216,7 +216,7 @@ class AuthIdCtr extends BaseGetCtr {
         }
       }
     } else {
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 
@@ -241,7 +241,7 @@ class AuthIdCtr extends BaseGetCtr {
       }
       _btnCanClick();
     } else {
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 
@@ -255,7 +255,7 @@ class AuthIdCtr extends BaseGetCtr {
     if (response.isSuccess()) {
       Get.until((route) => route.settings.name == PageRouterName.mainPage);
     } else {
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 

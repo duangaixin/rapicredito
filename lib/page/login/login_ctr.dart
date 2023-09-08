@@ -72,7 +72,7 @@ class LoginCtr extends BaseGetCtr {
       _startTimer();
       // var codeStr = response.data ?? '';
     } else {
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 

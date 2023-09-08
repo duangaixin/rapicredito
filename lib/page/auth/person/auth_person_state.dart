@@ -7,6 +7,9 @@ class AuthPersonState {
   List<String?> familyList = [];
   List<String?> educationalList = [];
 
+  List<String>emailEndList=['@gmail.com','@hotmail.com','@yahoo.com','@outlook.com','@msn.com'];
+  String endEmailStr='';
+  bool endEmailCanShow=true;
   ///收入
   final RxString _income = ''.obs;
 

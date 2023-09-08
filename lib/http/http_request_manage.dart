@@ -172,9 +172,9 @@ extension RequestBussiness on HttpRequestManage {
             .toList());
   }
 
-  Future<BaseResponse> postUploadBigJson(Map<String, dynamic> param) async {
+  Future<BaseResponse> postUploadBigJson(dynamic param) async {
     return await httpRequest.post(HttpApi.apiUploadBigJson,
-        options: Options(contentType: Headers.formUrlEncodedContentType),
+        options: Options(contentType: Headers.jsonContentType),
         data: param,
         onTransform: (json) => null);
   }

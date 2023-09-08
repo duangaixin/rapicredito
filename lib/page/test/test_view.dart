@@ -1,9 +1,6 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'package:get/get.dart';
 import 'package:rapicredito/json/upload_json_manage.dart';
 import 'package:rapicredito/page/dialog/date_select_dialog.dart';
 import 'package:rapicredito/page/dialog/message_input_dialog.dart';
@@ -17,7 +14,8 @@ import 'package:rapicredito/widget/custom_page_bg_view.dart';
 import 'package:rapicredito/widget/custom_picker.dart';
 
 class TestPage extends GetView<TestCtr> {
-  const TestPage({Key? key}) : super(key: key);
+  const TestPage({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,17 +29,6 @@ class TestPage extends GetView<TestCtr> {
                   onPressed: () async {
                     var bean = await UploadJsonManage.instance.collectAllData();
                     var jsonStr = json.encode(bean);
-                    print(jsonStr);
-                    // await UploadJsonManage.instance.getGeneralData();
-                    //    await UploadJsonManage.instance.getAppListDataInfo();
-                    //  await UploadJsonManage.instance.getBatteryStatusInfo();
-                    // await UploadJsonManage.instance.getHardwareInfo();
-                    // await UploadJsonManage.instance.getLocationInfo();
-                    // await UploadJsonManage.instance.getMediaFileCountInfo();
-                    // await UploadJsonManage.instance.getNetInfo();
-                    //  await UploadJsonManage.instance.getSimCardInfo();
-                    //    await UploadJsonManage.instance.getStorageDataInfo();
-                    //      await UploadJsonManage.instance.getOtherDataInfo();
                   }),
               CustomButton(
                   text: '设置页面',

@@ -53,12 +53,12 @@ class MainMineCtr extends BaseGetCtr {
     }
     if (response.isSuccess()) {
       var authInfoBean = response.data;
-      state.phoneNum = authInfoBean?.pureDollFailure ?? '+57 954-566670';
+      state.phoneNum = authInfoBean?.pureDollFailure ?? '';
       //authInfoBean?.communistBuddhistZooExtraCellar??'';
       state.userName =
-          authInfoBean?.pacificCheapMineralCrazyLamb ?? 'Ronald Lamb';
+          authInfoBean?.pacificCheapMineralCrazyLamb ?? 'RapiCrédito';
     } else {
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 

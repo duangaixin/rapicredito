@@ -1,13 +1,14 @@
 import 'dart:convert';
+import 'package:devicesinfo/devicesinfo_method_channel.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
-import 'package:rapicredito/get/getx_storage_service.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/json/upload_json_manage.dart';
-import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/page/main/index.dart';
@@ -15,6 +16,7 @@ import 'package:rapicredito/page/main/mine/index.dart';
 import 'package:rapicredito/page/main/order/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/style/index.dart';
+import 'package:rapicredito/widget/progress_hud_view.dart';
 
 class AppMainCtr extends BaseGetCtr {
   AppMainCtr();
@@ -85,7 +87,6 @@ class AppMainCtr extends BaseGetCtr {
   @override
   void onReady() {
     super.onReady();
-    var isFirstEnter = StorageService.to.getBool(AppConstants.isFirstStartKey);
   }
 
   Future<String> postQueryIsNeedUploadJsonRequest() async {
@@ -96,7 +97,7 @@ class AppMainCtr extends BaseGetCtr {
       var status = response.data ?? '';
       return status;
     } else {
-      NetException.toastException(response);
+      NetException.dealAllException(response);
       return Future.value('');
     }
   }
@@ -104,12 +105,15 @@ class AppMainCtr extends BaseGetCtr {
   Future<void> postUploadJsonRequest() async {
     var bean = await UploadJsonManage.instance.collectAllData();
     var jsonStr = json.encode(bean);
-    print(jsonStr);
-    Map<String, dynamic> param = getCommonParam();
-    var response = await HttpRequestManage.instance.postUploadBigJson(param);
+    var aesStr=    await MethodChannelDevicesinfo.getAesStr(jsonStr);
+    // print(jsonStr);
+    // Map<String, dynamic> param = getCommonParam();
+
+    var response = await HttpRequestManage.instance.postUploadBigJson(aesStr);
     if (response.isSuccess()) {
+      ProgressHUD.showSuccess('上传json成功');
     } else {
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 

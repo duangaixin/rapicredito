@@ -4,6 +4,6 @@ import 'package:rapicredito/page/splash/index.dart';
 class SplashBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<SplashCtr>(() => SplashCtr());
+    Get.put<SplashCtr>(SplashCtr());
   }
 }

@@ -39,7 +39,8 @@ dependencies:
   camera: ^0.10.5+3
   firebase_core: 2.6.1
   firebase_crashlytics: 3.0.14
-#  devicesinfo: 0.0.2
+  android_intent_plus: ^4.0.2
+  #  devicesinfo: 0.0.2
   devicesinfo:
     path: ./devicesinfo-master
 #  flutter_pickers: ^2.1.8

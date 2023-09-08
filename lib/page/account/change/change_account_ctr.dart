@@ -149,7 +149,7 @@ class ChangeAccountCtr extends BaseGetCtr {
         }
       }
     } else {
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 
@@ -232,7 +232,7 @@ class ChangeAccountCtr extends BaseGetCtr {
       state.loadState = LoadState.succeed;
     } else {
       state.loadState = LoadState.failed;
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 
@@ -245,7 +245,7 @@ class ChangeAccountCtr extends BaseGetCtr {
     Get.dismiss();
     if (response.isSuccess()) {
     } else {
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 

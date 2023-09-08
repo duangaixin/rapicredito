@@ -20,10 +20,12 @@ import 'package:rapicredito/widget/progress_hud_view.dart';
 class AuthPersonCtr extends BaseGetCtr {
   final state = AuthPersonState();
   TextEditingController emailCtr = TextEditingController();
+  FocusNode emailFocusNode = FocusNode();
 
   @override
   void onInit() {
     super.onInit();
+    emailCtr.addListener(_showSelectEndStr);
     emailCtr.addListener(_btnCanClick);
   }
 
@@ -31,6 +33,16 @@ class AuthPersonCtr extends BaseGetCtr {
   void onReady() {
     super.onReady();
     _postQueryAuthPersonRequest();
+  }
+
+  void _showSelectEndStr() {
+    if (!ObjectUtil.isEmptyString(emailCtr.text) &&
+        emailFocusNode.hasFocus &&
+        emailCtr.text.endsWith('@')) {
+      _showSelectEmailEndStrDialog();
+    } else {
+      state.endEmailCanShow = true;
+    }
   }
 
   void _btnCanClick() {
@@ -42,6 +54,26 @@ class AuthPersonCtr extends BaseGetCtr {
       state.btnDisableClick = true;
     } else {
       state.btnDisableClick = false;
+    }
+  }
+
+  void _showSelectEmailEndStrDialog() {
+    if (state.endEmailCanShow) {
+      KeyboardUtils.unFocus();
+      CustomPicker.showSinglePicker(Get.context!, data: state.emailEndList,
+          onConfirm: (data, p) {
+        state.endEmailCanShow = false;
+        state.endEmailStr = data;
+        if (emailCtr.text.endsWith('@')) {
+          emailCtr.text = emailCtr.text.replaceAll('@', '') + state.endEmailStr;
+        } else {
+          emailCtr.text = emailCtr.text + state.endEmailStr;
+        }
+
+        emailCtr.selection = TextSelection.fromPosition(
+            TextPosition(offset: emailCtr.text.length));
+        _btnCanClick();
+      }, selectData: state.endEmailStr);
     }
   }
 
@@ -138,7 +170,7 @@ class AuthPersonCtr extends BaseGetCtr {
     if (response.isSuccess()) {
       //Get.toNamed(PageRouterName.authContactPage);
     } else {
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 
@@ -156,7 +188,7 @@ class AuthPersonCtr extends BaseGetCtr {
       state.educationalLevel = authInfoBean?.thesePopCrossCountryside ?? '';
       _btnCanClick();
     } else {
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 
@@ -223,7 +255,7 @@ class AuthPersonCtr extends BaseGetCtr {
         }
       }
     } else {
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 
@@ -245,7 +277,9 @@ class AuthPersonCtr extends BaseGetCtr {
 
   @override
   void onClose() {
+    emailCtr.removeListener(_showSelectEndStr);
     emailCtr.removeListener(_btnCanClick);
+    emailFocusNode.dispose();
     emailCtr.dispose();
     super.onClose();
   }
@@ -261,5 +295,5 @@ enum AppConfigClickType {
   bankNameList,
   bankAccountType,
   collectionType,
-  moneyDateType
+  moneyDateType,
 }

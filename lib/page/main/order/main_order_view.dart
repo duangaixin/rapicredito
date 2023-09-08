@@ -20,15 +20,13 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: Obx(() {
-      return LoadContainerView(
-          contentView: PullToRefreshView(
-            ctr.refreshController,
-            onRefresh: ctr.refreshInfo,
-            enablePullUp: false,
-            child: contentView,
-          ),
-          emptyView: const OrderEmptyView(),
-          loadState: ctr.state.loadState);
+      return PullToRefreshView(ctr.refreshController,
+          onRefresh: ctr.refreshInfo,
+          enablePullUp: false,
+          child: LoadContainerView(
+              contentView: contentView,
+              emptyView: const OrderEmptyView(),
+              loadState: ctr.state.loadState));
     }));
   }
 

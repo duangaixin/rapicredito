@@ -56,11 +56,11 @@ class MainHomeCtr extends BaseGetCtr {
     var response = await HttpRequestManage.instance.postAppSettingInfo(param);
     if (response.isSuccess()) {
       var bean = response.data;
-      state.maxAmount = bean?.cleverMaidActualFoot ?? '50000';
-      state.loadState = LoadState.succeed;
+      state.maxAmount = bean?.cleverMaidActualFoot ?? '10000';
+      //state.loadState = LoadState.succeed;
     } else {
       // state.loadState = LoadState.failed;
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 
@@ -95,7 +95,7 @@ class MainHomeCtr extends BaseGetCtr {
       }
     } else {
       state.loadState = LoadState.failed;
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 }

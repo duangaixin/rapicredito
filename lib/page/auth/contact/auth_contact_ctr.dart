@@ -142,7 +142,7 @@ class AuthContactCtr extends BaseGetCtr {
           ..addAll(showList);
       }
     } else {
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 
@@ -164,7 +164,7 @@ class AuthContactCtr extends BaseGetCtr {
       state.loadState = LoadState.succeed;
     } else {
       state.loadState = LoadState.failed;
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 
@@ -218,9 +218,9 @@ class AuthContactCtr extends BaseGetCtr {
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
     Get.dismiss();
     if (response.isSuccess()) {
-      // Get.toNamed(PageRouterName.authIdPage);
+     //  Get.toNamed(PageRouterName.authIdPage);
     } else {
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 

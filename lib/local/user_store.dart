@@ -41,6 +41,6 @@ class UserStore extends GetxController {
   }
 
   Future<bool> setAlreadyOpen() {
-    return StorageService.to.setBool(AppConstants.isFirstStartKey, true);
+    return StorageService.to.setBool(AppConstants.notFirstStartKey, true);
   }
 }

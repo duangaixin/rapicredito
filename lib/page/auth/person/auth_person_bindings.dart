@@ -4,6 +4,6 @@ import 'package:rapicredito/page/auth/person/index.dart';
 class AuthPersonBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<AuthPersonCtr>(() => AuthPersonCtr());
+    Get.lazyPut<AuthPersonCtr>(() => AuthPersonCtr(),fenix: true);
   }
 }

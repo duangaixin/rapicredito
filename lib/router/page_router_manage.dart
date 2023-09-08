@@ -27,7 +27,8 @@ class PageRouterManage {
     GetPage(
         name: PageRouterName.initial,
         page: () => const PermissionPage(),
-        binding: PermissionBinding()),
+        binding: PermissionBinding(),
+        middlewares: [RoutePermissionMiddleware()]),
     GetPage(
       name: PageRouterName.splashPage,
       page: () => const SplashPage(),

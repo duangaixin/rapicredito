@@ -133,7 +133,7 @@ class AddAccountCtr extends BaseGetCtr {
         }
       }
     } else {
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 
@@ -182,7 +182,7 @@ class AddAccountCtr extends BaseGetCtr {
     Get.dismiss();
     if (response.isSuccess()) {
     } else {
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 

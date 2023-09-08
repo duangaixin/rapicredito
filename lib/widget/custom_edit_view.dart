@@ -100,7 +100,6 @@ class CustomEditViewState extends State<CustomEditView> {
       maxLines: null,
       minLines: 1,
       textInputAction: TextInputAction.done,
-      cursorColor: const Color(0xff2E82FF),
       style: widget.editStyle ??
           const TextStyle(fontSize: 15.0, color: Color(0xff222222)),
       decoration: InputDecoration(

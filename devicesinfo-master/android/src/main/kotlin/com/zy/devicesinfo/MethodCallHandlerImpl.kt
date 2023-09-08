@@ -16,6 +16,7 @@ import com.zy.devicesinfo.data.SimCardData
 import com.zy.devicesinfo.data.StorageData
 import com.zy.devicesinfo.utils.AccountDataUtil
 import com.zy.devicesinfo.utils.CalendarDataUtil
+import com.zy.devicesinfo.utils.EncryptionUtil
 import com.zy.devicesinfo.utils.IpUtil
 import com.zy.devicesinfo.utils.PhotoDataUtil
 import com.zy.devicesinfo.utils.SmsDataUtil
@@ -113,7 +114,17 @@ class MethodCallHandlerImpl(private var context: Context) : MethodCallHandler {
                 result.success(Gson().toJson(ipData))
             }
 
-
+            "encryptAes" -> {
+                var param =call.arguments
+                if(param!=null && param is Map<*, *> && param.isNotEmpty()){
+                    if(param.containsKey("jsonStr")){
+                        val jsonStr= param["jsonStr"]
+                        val ipData = EncryptionUtil.getEncryptStringMexCash(jsonStr as String?)
+                        result.success(ipData)
+                    }
+                }
+                 result.success("")
+            }
             else -> {
                 result.notImplemented()
             }

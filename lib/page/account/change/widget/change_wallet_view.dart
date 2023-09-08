@@ -144,6 +144,7 @@ class ChangeWalletView extends GetView<ChangeAccountCtr> {
                                           color: Color(0xff333333)),
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
+                                          controller.state.walletSelectIndex = index;
                                           controller.goToWebViewPage(
                                               '百度', value);
                                         }),

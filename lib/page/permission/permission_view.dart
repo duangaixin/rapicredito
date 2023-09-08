@@ -156,13 +156,13 @@ class PermissionPage extends GetView<PermissionCtr> {
               children: [
                 Expanded(
                   child: CustomButton(
-                    onPressed: controller.goToMainPage,
+                    onPressed: controller.exitApp,
                     minHeight: 46.0,
                     backgroundColor: Colors.transparent,
                     disabledBackgroundColor: Colors.transparent,
                     fontSize: 15.0,
                     radius: 8.0,
-                    text: 'SALTAR',
+                    text: 'RECHAZO',
                     textColor: const Color(0xff333333),
                     fontWeight: FontWeight.bold,
                     side:

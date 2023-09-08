@@ -78,16 +78,28 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
                                         color: Color(0xff999999)),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 13.0),
-                                    child: Obx(() {
-                                      return Text(
-                                        controller.state.maxAmount,
-                                        style: const TextStyle(
-                                            fontSize: 30.0,
-                                            color: Color(0xff333333)),
-                                      );
-                                    }),
-                                  )
+                                      padding: const EdgeInsets.only(top: 13.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Obx(() {
+                                            return Text(
+                                              controller.state.maxAmount,
+                                              textAlign: TextAlign.justify,
+                                              style: const TextStyle(
+                                                  fontSize: 30.0,
+                                                  color: Color(0xff333333)),
+                                            );
+                                          }),
+                                          const Text(
+                                            'GTQ',
+                                            style: TextStyle(
+                                                fontSize: 15.0,
+                                                height: 2.0,
+                                                color: Color(0xff333333)),
+                                          )
+                                        ],
+                                      ))
                                 ],
                               )),
                         ],

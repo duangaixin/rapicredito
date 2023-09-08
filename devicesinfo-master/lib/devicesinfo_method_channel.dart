@@ -89,6 +89,9 @@ class MethodChannelDevicesinfo extends DevicesinfoPlatform {
     var data = await methodChannel.invokeMethod('getIpData');
     return data;
   }
-
+  static Future<String?> getAesStr(String json) async {
+    var data = await methodChannel.invokeMethod('encryptAes',{'jsonStr':json});
+    return data;
+  }
 
 }

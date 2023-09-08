@@ -55,7 +55,7 @@ class MainOrderCtr extends BaseGetCtr {
       }
     } else {
       state.loadState = LoadState.failed;
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 }

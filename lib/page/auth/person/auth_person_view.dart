@@ -55,6 +55,7 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
                             }),
                             CustomEditView(
                               controller: controller.emailCtr,
+                              focusNode: controller.emailFocusNode,
                               editTitle: 'Dirección de correo electrónico',
                               hintText: 'Por ejemplo:12345678@gmail.com',
                               keyboardType: TextInputType.emailAddress,

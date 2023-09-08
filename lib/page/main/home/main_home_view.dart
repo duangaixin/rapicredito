@@ -18,21 +18,23 @@ class MainHomePage extends GetKeepStateView<MainHomeCtr> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(() {
-        return LoadContainerView(
-            onReload: ctr.refreshInfo,
-            contentView: PullToRefreshView(
-              ctr.refreshController,
-              onRefresh: ctr.refreshInfo,
-              enablePullUp: false,
-              child: ctr.state.originNetList.length > 1
-                  ? HomeManyProductView()
-                  : HomeLoanDefaultView(),
-              //    child: HomeLoanFailureView(),
-              //  child: HomeLoanDealView(),
-              //   child: HomeLoanAuditView()
-              //  child: HomeRefusalToLendView()
-            ),
-            loadState: ctr.state.loadState);
+        return PullToRefreshView(
+          ctr.refreshController,
+          onRefresh: ctr.refreshInfo,
+          enablePullUp: false,
+          child: LoadContainerView(
+              onReload: ctr.refreshInfo,
+              loadState: ctr.state.loadState,
+              contentView: HomeLoanDefaultView()
+              // contentView: ctr.state.originNetList.length > 1
+              //     ? HomeManyProductView()
+              //     : HomeLoanDefaultView(),
+              //    contentView:  HomeLoanFailureView(),
+              //  contentView: omeLoanDealView(),
+              //   contentView:  HomeLoanAuditView()
+              //  contentView: HomeRefusalToLendView()
+              ),
+        );
       }),
     );
   }

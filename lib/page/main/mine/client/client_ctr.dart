@@ -51,7 +51,7 @@ class ClientCtr extends BaseGetCtr {
       state.loadState = LoadState.succeed;
     } else {
       state.loadState = LoadState.failed;
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 

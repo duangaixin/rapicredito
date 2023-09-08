@@ -53,7 +53,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
         _dealDateList();
       }
     } else {
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 
@@ -262,7 +262,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
       state.loadState = LoadState.succeed;
     } else {
       state.loadState = LoadState.failed;
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 
@@ -285,7 +285,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
         }
       }
     } else {
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 
@@ -310,7 +310,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
       }
       showConfirmMoneyDialog();
     } else {
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 
@@ -328,7 +328,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     if (response.isSuccess()) {
       showCommitSuccessDialog();
     } else {
-      NetException.toastException(response);
+      NetException.dealAllException(response);
     }
   }
 
