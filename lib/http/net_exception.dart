@@ -26,8 +26,7 @@ class NetException {
           if (e is SocketException) {
             showNoNetDialog();
             return;
-          }
-        else  if (e is HttpException) {
+          } else if (e is HttpException) {
             showNoNetDialog();
             return;
           } else if (e is FormatException) {
@@ -40,7 +39,7 @@ class NetException {
           showNoNetDialog();
         }
       }
-    }else{
+    } else {
       showNoNetDialog();
     }
   }
@@ -53,9 +52,7 @@ class NetException {
           return NoNetDialog(
             clickConfirm: () {
               const intent = AndroidIntent(
-             //   action: 'android.net.wifi.PICK_WIFI_NETWORK'
-                    action: 'android.settings.AIRPLANE_MODE_SETTINGS'
-              );
+                  action: 'android.settings.AIRPLANE_MODE_SETTINGS');
               intent.launch();
             },
           );
