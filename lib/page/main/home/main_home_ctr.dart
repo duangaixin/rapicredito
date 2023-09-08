@@ -56,7 +56,7 @@ class MainHomeCtr extends BaseGetCtr {
     var response = await HttpRequestManage.instance.postAppSettingInfo(param);
     if (response.isSuccess()) {
       var bean = response.data;
-      state.maxAmount = bean?.cleverMaidActualFoot ?? '10000';
+      state.maxAmount = bean?.cleverMaidActualFoot ?? '--';
       //state.loadState = LoadState.succeed;
     } else {
       // state.loadState = LoadState.failed;

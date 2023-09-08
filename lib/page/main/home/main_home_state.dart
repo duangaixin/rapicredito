@@ -15,7 +15,7 @@ class MainHomeState {
   List<HomeProductInfoBean> otherOrderList = [];
   List<HomeProductInfoBean> notPlaceOrderList = [];
   List<HomeProductInfoBean> dataSource = [];
-  final RxString _maxAmount = '10000'.obs;
+  final RxString _maxAmount = '--'.obs;
 
   String get maxAmount => _maxAmount.value;
 

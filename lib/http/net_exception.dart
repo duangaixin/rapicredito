@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:android_intent_plus/android_intent.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -51,7 +52,11 @@ class NetException {
         builder: (_) {
           return NoNetDialog(
             clickConfirm: () {
-              openAppSettings();
+              const intent = AndroidIntent(
+             //   action: 'android.net.wifi.PICK_WIFI_NETWORK'
+                    action: 'android.settings.AIRPLANE_MODE_SETTINGS'
+              );
+              intent.launch();
             },
           );
         });
