@@ -64,6 +64,8 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
                   child: CustomImageView(
                     imageUrl,
                     shape: BoxShape.circle,
+                    memCacheHeight: 75,
+                    memCacheWidth: 75,
                     width: 75.0,
                     height: 75.0,
                     margin: const EdgeInsets.only(right: 23.0, left: 7.0),
