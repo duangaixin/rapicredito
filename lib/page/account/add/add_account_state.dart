@@ -3,6 +3,7 @@ import 'package:rapicredito/model/config_info_bean.dart';
 import 'package:rapicredito/model/key_value_bean.dart';
 
 class AddAccountState {
+  String regexFirstNotNull = r'^(\S){1}';
   List<String> accountTypeList = ['Billetera Móvil', 'Cuenta Bancaria'];
 
   String collectionTypeCode = '';

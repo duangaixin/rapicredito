@@ -5,6 +5,8 @@ import 'package:rapicredito/page/main/home/widget/common_app_bar_view.dart';
 import 'package:rapicredito/page/main/mine/index.dart';
 import 'package:rapicredito/page/main/mine/widget/common_setting_click_view.dart';
 import 'package:rapicredito/style/index.dart';
+import 'package:rapicredito/utils/object_util.dart';
+import 'package:rapicredito/widget/custom_image_view.dart';
 import 'package:rapicredito/widget/pull_to_refresh_view.dart';
 
 class MainMinePage extends GetKeepStateView<MainMineCtr> {
@@ -40,14 +42,33 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              margin: const EdgeInsets.only(right: 23.0, left: 7.0),
-              height: 75.0,
-              width: 75.0,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(37.5),
-                  color: const Color(0xffB6EF13)),
-            ),
+            Obx(() {
+              var imageUrl = ctr.state.userImageUrl;
+              var isUrlNotExist = ObjectUtil.isEmptyString(imageUrl);
+              return Visibility(
+                  visible: isUrlNotExist,
+                  child: Container(
+                    margin: const EdgeInsets.only(right: 23.0, left: 7.0),
+                    height: 75.0,
+                    width: 75.0,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(37.5),
+                        color: const Color(0xffB6EF13)),
+                  ));
+            }),
+            Obx(() {
+              var imageUrl = ctr.state.userImageUrl;
+              var isUrlNotExist = ObjectUtil.isEmptyString(imageUrl);
+              return Visibility(
+                  visible: !isUrlNotExist,
+                  child: CustomImageView(
+                    imageUrl,
+                    shape: BoxShape.circle,
+                    width: 75.0,
+                    height: 75.0,
+                    margin: const EdgeInsets.only(right: 23.0, left: 7.0),
+                  ));
+            }),
             Expanded(
                 child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,6 +1,10 @@
 class HttpApi {
-  static const String apiBaseUrl =
-      'https://glby.ultracreditosmx.com/rapicredito/';
+   static const String apiBaseUrl =
+    'https://glby.ultracreditosmx.com/rapicredito/';
+  ///debug
+    //  static const String apiBaseUrl = 'https://test.rapicreditoco.com/';
+  ///release
+//  static const String apiBaseUrl ='https://www.rapicreditoco.com/ ';
   static const String apiSendCode = 'italy/pushHarmfulConstruction';
   static const String apiLogin = 'italy/inventBetterMoon';
   static const String apiConfigInfo = 'facialHis/studyCompressedNortheast';
@@ -12,7 +16,8 @@ class HttpApi {
   static const String apiQueryClientInfo = 'facialHis/paySnowyTax';
   static const String apiQueryAccountInfo = 'curtain/realisePoisonousDesk';
   static const String apiSaveAccountInfo = 'curtain/landAttractivePath';
-  static const String apiIsNeedUploadBigJson ='cheapHeroine/regardIndeedDictation';
+  static const String apiIsNeedUploadBigJson =
+      'cheapHeroine/regardIndeedDictation';
   static const String apiUploadBigJson = 'champion/questionMexicanDriver';
   static const String apiQueryOrderListInfo =
       'microcomputer/produceIncorrectDuck';
@@ -21,6 +26,7 @@ class HttpApi {
       'smartBirthplace/testHopelessSightseeing';
   static const String apiPreSubmitOrder = 'cheapHeroine/cureRudeIndependence';
   static const String apiSubmitOrder = 'cheapHeroine/swallowSeriousFailure';
-  static const String apiQueryHomeDefaultMoney = 'facialHis/instructLikelyTailor';
+  static const String apiQueryHomeDefaultMoney =
+      'facialHis/instructLikelyTailor';
   static const String apiIsManyProduct = 'businessman/dismissThatRail';
 }

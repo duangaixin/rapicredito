@@ -213,10 +213,8 @@ class AuthContactCtr extends BaseGetCtr {
     KeyboardUtils.unFocus();
     if (!_validate()) return;
     Map<String, dynamic> param = _collectContactParam();
-    Get.showLoading();
     var response =
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
-    Get.dismiss();
     if (response.isSuccess()) {
      //  Get.toNamed(PageRouterName.authIdPage);
     } else {

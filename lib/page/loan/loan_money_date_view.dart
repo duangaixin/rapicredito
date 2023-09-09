@@ -91,7 +91,8 @@ class LoanMoneyDatePage extends GetView<LoanMoneyDateCtr> {
             Obx(() {
               return _buildKeyValueView(
                   title: 'Monto del préstamo',
-                  content: '${controller.state.applyAmount}\$',
+                  content: controller
+                      .addEndZero(controller.state.applyAmount.toString()),
                   color: const Color(0xff333333),
                   fontWeight: FontWeight.bold,
                   fontSize: 15.0);

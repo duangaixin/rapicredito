@@ -316,8 +316,7 @@ class AuthIdCtr extends BaseGetCtr {
       }
       _btnCanClick();
     } else {
-      var errorMsg = response.message ?? 'error';
-      ProgressHUD.showError(errorMsg);
+      NetException.dealAllException(response);
     }
   }
 

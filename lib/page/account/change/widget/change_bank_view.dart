@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/account/change/index.dart';
 import 'package:rapicredito/page/auth/person/auth_person_ctr.dart';
@@ -62,6 +63,11 @@ class ChangeBankView extends GetView<ChangeAccountCtr> {
               key: GlobalKey(),
               maxLength: 16,
               keyboardType: TextInputType.number,
+              inputFormatter: [
+                FilteringTextInputFormatter.deny(
+                  RegExp(controller.state.regexFirstNotNull),
+                )
+              ],
               controller: controller.bankAccountCtr,
               editTitle: 'Numero de cuenta',
               hintText: 'Introducir texto',
@@ -73,6 +79,11 @@ class ChangeBankView extends GetView<ChangeAccountCtr> {
               key: GlobalKey(),
               maxLength: 16,
               keyboardType: TextInputType.number,
+              inputFormatter: [
+                FilteringTextInputFormatter.deny(
+                  RegExp(controller.state.regexFirstNotNull),
+                )
+              ],
               controller: controller.bankAccountConfirmCtr,
               editTitle: 'Confirmar Numero de cuenta',
               hintText: 'Introducir texto',

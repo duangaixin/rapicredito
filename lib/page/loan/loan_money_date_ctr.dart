@@ -68,7 +68,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
         var realDateOne = dateTimeOne?.add(const Duration(days: 91));
         if (realDateOne != null) {
           var dateStr =
-              '${realDateOne.day}-${realDateOne.month}-${realDateOne.year}';
+              '${realDateOne.day.toString().padLeft(2, '0')}-${realDateOne.month.toString().padLeft(2, '0')}-${realDateOne.year}';
           state.repaymentDate = selectBeanOne.dateStr = dateStr;
         }
         selectBeanOne.isSelected = true;
@@ -79,7 +79,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
         var realDateTwo = dateTimeTwo?.add(const Duration(days: 91 * 2));
         if (realDateTwo != null) {
           var dateStr =
-              '${realDateTwo.day}-${realDateTwo.month}-${realDateTwo.year}';
+              '${realDateTwo.day.toString().padLeft(2, '0')}-${realDateTwo.month.toString().padLeft(2, '0')}-${realDateTwo.year}';
           selectBeanTwo.dateStr = dateStr;
         }
         selectBeanTwo.canClick = false;
@@ -90,7 +90,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
         var realDateThree = dateTimeThree?.add(const Duration(days: 91 * 3));
         if (realDateThree != null) {
           var dateStr =
-              '${realDateThree.day}-${realDateThree.month}-${realDateThree.year}';
+              '${realDateThree.day.toString().padLeft(2, '0')}-${realDateThree.month.toString().padLeft(2, '0')}-${realDateThree.year}';
           selectBeanThree.dateStr = dateStr;
         }
         selectBeanThree.canClick = false;
@@ -110,7 +110,8 @@ class LoanMoneyDateCtr extends BaseGetCtr {
           var realDuration = duration + state.configInfoDateDefaultValue;
           var realDate = dateTime?.add(Duration(days: realDuration));
           if (realDate != null) {
-            var dateStr = '${realDate.day}-${realDate.month}-${realDate.year}';
+            var dateStr =
+                '${realDate.day.toString().padLeft(2, '0')}-${realDate.month.toString().padLeft(2, '0')}-${realDate.year}';
             state.repaymentDate = selectBean.dateStr = dateStr;
           }
           allDateList.add(selectBean);
@@ -125,7 +126,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
           var realDateOne = dateTimeOne?.add(Duration(days: duration * 2));
           if (realDateOne != null) {
             var dateStr =
-                '${realDateOne.day}-${realDateOne.month}-${realDateOne.year}';
+                '${realDateOne.day.toString().padLeft(2, '0')}-${realDateOne.month.toString().padLeft(2, '0')}-${realDateOne.year}';
             selectBeanOne.dateStr = dateStr;
           }
           selectBeanOne.canClick = false;
@@ -136,7 +137,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
           var realDateTwo = dateTimeTwo?.add(Duration(days: duration * 3));
           if (realDateTwo != null) {
             var dateStr =
-                '${realDateTwo.day}-${realDateTwo.month}-${realDateTwo.year}';
+                '${realDateTwo.day.toString().padLeft(2, '0')}-${realDateTwo.month.toString().padLeft(2, '0')}-${realDateTwo.year}';
             selectBeanTwo.dateStr = dateStr;
           }
           selectBeanTwo.canClick = false;
@@ -155,7 +156,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
                 dateTimeOne?.add(Duration(days: maxDuration + minDuration));
             if (realDateOne != null) {
               var dateStr =
-                  '${realDateOne.day}-${realDateOne.month}-${realDateOne.year}';
+                  '${realDateOne.day.toString().padLeft(2, '0')}-${realDateOne.month.toString().padLeft(2, '0')}-${realDateOne.year}';
               selectBeanOne.dateStr = dateStr;
             }
             selectBeanOne.canClick = false;
@@ -167,7 +168,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
                 dateTimeTwo?.add(Duration(days: maxDuration + 2 * minDuration));
             if (realDateTwo != null) {
               var dateStr =
-                  '${realDateTwo.day}-${realDateTwo.month}-${realDateTwo.year}';
+                  '${realDateTwo.day.toString().padLeft(2, '0')}-${realDateTwo.month.toString().padLeft(2, '0')}-${realDateTwo.year}';
               selectBeanTwo.dateStr = dateStr;
             }
             selectBeanTwo.canClick = false;
@@ -237,29 +238,37 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     }
     if (response.isSuccess()) {
       var bean = response.data;
+      // state.amountInHand =
+      //     bean?.technicalPastSillyAirline?.toString().strWithDollar() ?? '';
+      // state.interest =
+      //     bean?.freshBookcaseModestPing?.toString().strWithDollar() ?? '';
+      // state.serviceCharge =
+      //     bean?.centigradeDeal?.toString().strWithDollar() ?? '';
+      // state.iva =
+      //     bean?.triangleRemarkIllBattery?.toString().strWithDollar() ?? '';
+      // state.repaymentAmount = bean?.everyFlashMerchantPostcodeHotTongue
+      //         ?.toString()
+      //         .strWithDollar() ??
+      //     '';
       state.amountInHand =
-          bean?.technicalPastSillyAirline?.toString().strWithDollar() ?? '';
+          addEndZero(bean?.technicalPastSillyAirline?.toString() ?? '');
       state.interest =
-          bean?.freshBookcaseModestPing?.toString().strWithDollar() ?? '';
-      state.serviceCharge =
-          bean?.centigradeDeal?.toString().strWithDollar() ?? '';
-      state.iva =
-          bean?.triangleRemarkIllBattery?.toString().strWithDollar() ?? '';
-
+          addEndZero(bean?.freshBookcaseModestPing?.toString() ?? '');
+      state.serviceCharge = addEndZero(bean?.centigradeDeal?.toString() ?? '');
+      state.iva = addEndZero(bean?.triangleRemarkIllBattery?.toString() ?? '');
+      state.repaymentAmount = addEndZero(
+          bean?.everyFlashMerchantPostcodeHotTongue.toString() ?? '');
       var extList = bean?.farLatterInterestingLabourerLooseRunner ?? [];
       if (!ObjectUtil.isEmptyList(extList)) {
-        var amount = extList[0]
-                .americanHappinessBankPianist
-                ?.toString()
-                .strWithDollar() ??
-            '';
-        state.bankServiceCharge = amount;
+        // var amount = extList[0]
+        //         .americanHappinessBankPianist
+        //         ?.toString()
+        //         .strWithDollar() ??
+        //     '';
+        // state.bankServiceCharge = amount;
+        state.bankServiceCharge = addEndZero(
+            extList[0].americanHappinessBankPianist?.toString() ?? '');
       }
-
-      state.repaymentAmount = bean?.everyFlashMerchantPostcodeHotTongue
-              ?.toString()
-              .strWithDollar() ??
-          '';
       state.loadState = LoadState.succeed;
     } else {
       state.loadState = LoadState.failed;
@@ -340,7 +349,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
           return LoanConfirmMoneyDialog(
             clickConfirm: postSubmitOrderRequest,
             amountInHand: state.amountInHand,
-            loanAmount: state.applyAmount.toString(),
+            loanAmount: addEndZero(state.applyAmount.toString()),
             repaymentDate: state.repaymentDate,
             contractName: state.contractName,
             contractUrl: state.contractUrl,
@@ -358,6 +367,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
           return const CommitSuccessDialog();
         });
   }
+
   void showDateMoneySelectDialog() {
     showDialog(
         context: Get.context!,
@@ -365,11 +375,32 @@ class LoanMoneyDateCtr extends BaseGetCtr {
           return const DateMoneySelectDialog();
         });
   }
+
   void goToWebViewPage(String title, String webViewUrl) {
     Get.toNamed(PageRouterName.webViewPage, arguments: {
       AppConstants.webViewTitleKey: title,
       AppConstants.webViewUrlKey: webViewUrl
     });
+  }
+
+  String addEndZero(String str) {
+    if (!ObjectUtil.isEmptyString(str) &&
+        str.contains('.') &&
+        str.endsWith('.0')) {
+      return '${str}0'.strWithDollar();
+    }
+    return str;
+  }
+
+  String dealEndZero(String str) {
+    if (!ObjectUtil.isEmptyString(str) ){
+      if(str.endsWith('.0')||str.endsWith('.00')){
+        var index= str.indexOf('.');
+        var newStr=str.substring(0,index);
+        return newStr;
+      }
+    }
+    return str;
   }
 }
 

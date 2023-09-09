@@ -110,7 +110,6 @@ class _CommitSuccessDialogState extends State<CommitSuccessDialog> {
   Widget _buildCancelView() {
     return CustomClickView(
         onTap: () {
-          Get.back();
           goToMainPage();
         },
         child: Container(
@@ -141,7 +140,6 @@ class _CommitSuccessDialogState extends State<CommitSuccessDialog> {
         setState(() {});
       }
       if (timeEnd <= 0) {
-        Get.back();
         goToMainPage();
       }
     });

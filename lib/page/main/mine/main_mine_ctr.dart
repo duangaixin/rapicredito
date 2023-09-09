@@ -16,19 +16,10 @@ class MainMineCtr extends BaseGetCtr {
   final state = MainMineState();
   var refreshController = RefreshController();
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
   void requestInitData() async {
     if (UserStore.to.hasToken) {
       await _postQueryAuthPersonRequest(isShowDialog: false);
+      await _postQueryPhotoInfo();
     }
     if (state.isRefresh) {
       refreshController.refreshCompleted();
@@ -44,7 +35,6 @@ class MainMineCtr extends BaseGetCtr {
     if (isShowDialog) {
       Get.showLoading();
     }
-
     Map<String, dynamic> param = getCommonParam();
     var response =
         await HttpRequestManage.instance.postQueryAuthInfoRequest(param);
@@ -54,9 +44,26 @@ class MainMineCtr extends BaseGetCtr {
     if (response.isSuccess()) {
       var authInfoBean = response.data;
       state.phoneNum = authInfoBean?.pureDollFailure ?? '';
-      //authInfoBean?.communistBuddhistZooExtraCellar??'';
       state.userName =
           authInfoBean?.pacificCheapMineralCrazyLamb ?? 'RapiCrédito';
+    } else {
+      NetException.dealAllException(response);
+    }
+  }
+
+  Future<void> _postQueryPhotoInfo({bool isShowDialog = false}) async {
+    if (isShowDialog) {
+      Get.showLoading();
+    }
+    var param = <String, dynamic>{};
+    param.addAll(getCommonParam());
+    var response = await HttpRequestManage.instance.postQueryPhotoInfo(param);
+    if (isShowDialog) {
+      Get.dismiss();
+    }
+    if (response.isSuccess()) {
+      var photoBean = response.data;
+      state.userImageUrl = photoBean?.dueReligionFoggyCustom ?? '';
     } else {
       NetException.dealAllException(response);
     }

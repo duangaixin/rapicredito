@@ -96,8 +96,8 @@ class LoanDateTopView extends GetView<LoanMoneyDateCtr> {
               controller.state.applyAmount = bean.money;
               controller.postTestCalculateRequest(isShowDialog: true);
             }
-          }else{
-
+          } else {
+            controller.showDateMoneySelectDialog();
           }
         },
         behavior: HitTestBehavior.opaque,
@@ -115,7 +115,7 @@ class LoanDateTopView extends GetView<LoanMoneyDateCtr> {
             child: Stack(
               alignment: Alignment.center,
               children: [
-                Text(content,
+                Text(controller.dealEndZero(content),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -157,6 +157,8 @@ class LoanDateTopView extends GetView<LoanMoneyDateCtr> {
               controller.state.repaymentDate = bean.dateStr;
               controller.postTestCalculateRequest(isShowDialog: true);
             }
+          } else {
+            controller.showDateMoneySelectDialog();
           }
         },
         behavior: HitTestBehavior.opaque,

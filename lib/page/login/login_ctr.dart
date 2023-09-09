@@ -76,6 +76,13 @@ class LoginCtr extends BaseGetCtr {
     }
   }
 
+  void showTip(){
+    if(ObjectUtil.isEmptyString(phoneCtr.text.strRvSpace())){
+      ProgressHUD.showInfo('Por favor, introduzca un número de teléfono correcto');
+    }
+  }
+
+
   void postLoginRequest() async {
     KeyboardUtils.unFocus();
     var param = <String, dynamic>{};
