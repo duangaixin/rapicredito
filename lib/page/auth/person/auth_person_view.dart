@@ -19,6 +19,7 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
 
   @override
   Widget build(BuildContext context) {
+    controller.buildContext = context;
     return CustomPageBgView(
       resizeToAvoidBottomInset: false,
       title: 'Información básica',
@@ -53,19 +54,23 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
                                 action: controller.clickIncome,
                               );
                             }),
-                            CustomEditView(
-                              controller: controller.emailCtr,
-                              focusNode: controller.emailFocusNode,
-                              editTitle: 'Dirección de correo electrónico',
-                              hintText: 'Por ejemplo:12345678@gmail.com',
-                              keyboardType: TextInputType.emailAddress,
-                              hintStyle: const TextStyle(
-                                  color: Color(0xffD53535), fontSize: 15.0),
-                              inputFormatter: [
-                                FilteringTextInputFormatter.deny(
-                                  RegExp(controller.state.regexNotNull),
-                                )
-                              ],
+                            CompositedTransformTarget(
+                              link: controller.state.layerLink,
+                              child: CustomEditView(
+                                controller: controller.emailCtr,
+                                focusNode: controller.emailFocusNode,
+                                key: controller.state.emailKey,
+                                editTitle: 'Dirección de correo electrónico',
+                                hintText: 'Por ejemplo:12345678@gmail.com',
+                                keyboardType: TextInputType.emailAddress,
+                                hintStyle: const TextStyle(
+                                    color: Color(0xffD53535), fontSize: 15.0),
+                                inputFormatter: [
+                                  FilteringTextInputFormatter.deny(
+                                    RegExp(controller.state.regexNotNull),
+                                  )
+                                ],
+                              ),
                             ),
                             Obx(() {
                               return CustomSelectView(
@@ -142,4 +147,7 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
               height: 19.0,
             )),
       );
+
+
+
 }

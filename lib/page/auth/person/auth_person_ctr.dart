@@ -7,6 +7,7 @@ import 'package:rapicredito/get/getx_extension.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
+import 'package:rapicredito/page/auth/person/widget/email_select_list_view.dart';
 import 'package:rapicredito/page/dialog/go_setting_dialog.dart';
 import 'package:rapicredito/page/main/app_main_ctr.dart';
 import 'package:rapicredito/router/page_router_name.dart';
@@ -21,28 +22,30 @@ class AuthPersonCtr extends BaseGetCtr {
   final state = AuthPersonState();
   TextEditingController emailCtr = TextEditingController();
   FocusNode emailFocusNode = FocusNode();
+  OverlayEntry? overlayEntry;
+  BuildContext? buildContext;
 
   @override
   void onInit() {
     super.onInit();
-    emailCtr.addListener(_showSelectEndStr);
     emailCtr.addListener(_btnCanClick);
+    emailCtr.addListener(_emailEndListener);
+  }
+
+  void _emailEndListener() {
+    if (!ObjectUtil.isEmptyString(emailCtr.text) &&
+        emailFocusNode.hasFocus &&
+        emailCtr.text.endsWith('@')) {
+      showOverlay();
+    } else {
+      dismissOverlay();
+    }
   }
 
   @override
   void onReady() {
     super.onReady();
     _postQueryAuthPersonRequest();
-  }
-
-  void _showSelectEndStr() {
-    if (!ObjectUtil.isEmptyString(emailCtr.text) &&
-        emailFocusNode.hasFocus &&
-        emailCtr.text.endsWith('@')) {
-      _showSelectEmailEndStrDialog();
-    } else {
-      state.endEmailCanShow = true;
-    }
   }
 
   void _btnCanClick() {
@@ -54,26 +57,6 @@ class AuthPersonCtr extends BaseGetCtr {
       state.btnDisableClick = true;
     } else {
       state.btnDisableClick = false;
-    }
-  }
-
-  void _showSelectEmailEndStrDialog() {
-    if (state.endEmailCanShow) {
-      KeyboardUtils.unFocus();
-      CustomPicker.showSinglePicker(Get.context!, data: state.emailEndList,
-          onConfirm: (data, p) {
-        state.endEmailCanShow = false;
-        state.endEmailStr = data;
-        if (emailCtr.text.endsWith('@')) {
-          emailCtr.text = emailCtr.text.replaceAll('@', '') + state.endEmailStr;
-        } else {
-          emailCtr.text = emailCtr.text + state.endEmailStr;
-        }
-
-        emailCtr.selection = TextSelection.fromPosition(
-            TextPosition(offset: emailCtr.text.length));
-        _btnCanClick();
-      }, selectData: state.endEmailStr);
     }
   }
 
@@ -168,7 +151,6 @@ class AuthPersonCtr extends BaseGetCtr {
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
 
     if (response.isSuccess()) {
-      //Get.toNamed(PageRouterName.authContactPage);
     } else {
       NetException.dealAllException(response);
     }
@@ -277,12 +259,44 @@ class AuthPersonCtr extends BaseGetCtr {
 
   @override
   void onClose() {
-    emailCtr.removeListener(_showSelectEndStr);
+    dismissOverlay();
+    emailCtr.removeListener(_emailEndListener);
     emailCtr.removeListener(_btnCanClick);
     emailFocusNode.dispose();
     emailCtr.dispose();
     super.onClose();
   }
+
+  void showOverlay() {
+    if (overlayEntry == null) {
+      overlayEntry = overlay;
+      if (overlayEntry != null) {
+        Overlay.of(buildContext!).insert(overlayEntry!);
+      }
+    }
+  }
+
+  void dismissOverlay() {
+    if (overlayEntry != null) {
+      overlayEntry?.remove();
+      overlayEntry = null;
+    }
+  }
+
+  OverlayEntry get overlay => OverlayEntry(builder: (ctx) {
+        final renderBox =
+            state.emailKey.currentContext?.findRenderObject() as RenderBox;
+        final size = renderBox.size;
+        return Positioned(
+          width: size.width,
+          child: CompositedTransformFollower(
+            link: state.layerLink,
+            showWhenUnlinked: false,
+            offset: Offset(0, size.height + 8),
+            child: const EmailSelectListView(),
+          ),
+        );
+      });
 }
 
 enum AppConfigClickType {

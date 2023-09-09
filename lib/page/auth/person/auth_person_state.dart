@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AuthPersonState {
@@ -5,10 +6,18 @@ class AuthPersonState {
   List<String?> incomeList = [];
   List<String?> familyList = [];
   List<String?> educationalList = [];
+  final GlobalKey emailKey = GlobalKey();
+  final LayerLink layerLink = LayerLink();
 
   List<String>emailEndList=['@gmail.com','@hotmail.com','@yahoo.com','@outlook.com','@msn.com'];
   String endEmailStr='';
-  bool endEmailCanShow=true;
+
+
+  final RxInt _emailSelectIndex = (-1).obs;
+
+  int get emailSelectIndex  => _emailSelectIndex .value;
+
+  set emailSelectIndex (value) => _emailSelectIndex .value = value;
   ///收入
   final RxString _income = ''.obs;
 
