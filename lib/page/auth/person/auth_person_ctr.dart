@@ -52,8 +52,7 @@ class AuthPersonCtr extends BaseGetCtr {
     if (ObjectUtil.isEmptyString(state.income) ||
         ObjectUtil.isEmptyString(state.familyCount) ||
         ObjectUtil.isEmptyString(state.educationalLevel) ||
-        ObjectUtil.isEmptyString(emailCtr.text) ||
-        !GetUtils.isEmail(emailCtr.text)) {
+        ObjectUtil.isEmptyString(emailCtr.text)) {
       state.btnDisableClick = true;
     } else {
       state.btnDisableClick = false;
