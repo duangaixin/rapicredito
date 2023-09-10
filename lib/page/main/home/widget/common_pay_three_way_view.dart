@@ -12,7 +12,7 @@ class CommonPayThreeWayView extends GetView<MainHomeCtr> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16.0),
+      margin: const EdgeInsets.symmetric(horizontal: 16.0),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8.0),
@@ -30,7 +30,12 @@ class CommonPayThreeWayView extends GetView<MainHomeCtr> {
             color: Color(0xffE2E5DA),
             dashWidth: 5.0,
           ),
-          centerPayView
+          centerPayView,
+          const CustomDashLine(
+            color: Color(0xffE2E5DA),
+            dashWidth: 5.0,
+          ),
+          bottomPayView
         ],
       );
 

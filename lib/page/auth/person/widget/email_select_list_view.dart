@@ -11,8 +11,7 @@ class EmailSelectListView extends GetView<AuthPersonCtr> {
     return Material(
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.grey[50], borderRadius: BorderRadius.circular(8.0),
-          // border: Border.all(color: Colors.white54,width: 1.0)
+          color: const Color(0xffF9F9F9), borderRadius: BorderRadius.circular(8.0),
         ),
         child: ListView.builder(
             shrinkWrap: true,

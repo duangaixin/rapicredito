@@ -74,4 +74,6 @@ class Resource {
       'assets/image/main/home_many_goal_two.png';
   static const String assetsImageHomeManyGoalThree =
       'assets/image/main/home_many_goal_three.png';
+  static const String assetsImageHomeLoanOverdue =
+      'assets/image/main/home_loan_overdue.png';
 }

@@ -12,7 +12,7 @@ class CommonPayTwoWayView extends GetView<MainHomeCtr> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16.0),
+      margin: const EdgeInsets.symmetric(horizontal: 16.0),
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8.0),
@@ -27,8 +27,8 @@ class CommonPayTwoWayView extends GetView<MainHomeCtr> {
         children: [
           Container(
             alignment: Alignment.center,
-            padding: EdgeInsets.only(top: 20.0, bottom: 16.0),
-            child: Text(
+            padding: const EdgeInsets.only(top: 20.0, bottom: 16.0),
+            child: const Text(
               'Método de devolver',
               style: TextStyle(
                   fontSize: 15.0,
