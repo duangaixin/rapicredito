@@ -7,6 +7,8 @@ import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
+import '../../main/home/index.dart';
+
 class CommitSuccessDialog extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _CommitSuccessDialogState();
@@ -146,6 +148,8 @@ class _CommitSuccessDialogState extends State<CommitSuccessDialog> {
   }
 
   void goToMainPage() {
+    var mainHomeCtr = Get.find<MainHomeCtr>();
+    mainHomeCtr.requestInitData();
     Get.until((route) =>
         (route as GetPageRoute).routeName == PageRouterName.mainPage);
   }

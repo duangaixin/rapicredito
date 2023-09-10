@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_pickers/time_picker/model/pduration.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -17,6 +18,7 @@ import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/page/auth/id/index.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
+import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/compress_util.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
@@ -124,7 +126,8 @@ class AuthIdCtr extends BaseGetCtr {
       state.birthDay = res.day;
       state.birthMonth = res.month;
       state.birthYear = res.year;
-      state.birth = '${res.day.toString().padLeft(2,'0')}-${res.month.toString().padLeft(2,'0')}-${res.year}';
+      state.birth =
+          '${res.day.toString().padLeft(2, '0')}-${res.month.toString().padLeft(2, '0')}-${res.year}';
       _btnCanClick();
     }, selectDate: selectData);
   }
@@ -253,6 +256,8 @@ class AuthIdCtr extends BaseGetCtr {
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
     Get.dismiss();
     if (response.isSuccess()) {
+      var mainHomeCtr = Get.find<MainHomeCtr>();
+      mainHomeCtr.requestInitData();
       Get.until((route) => route.settings.name == PageRouterName.mainPage);
     } else {
       NetException.dealAllException(response);
