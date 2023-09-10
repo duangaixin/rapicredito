@@ -33,7 +33,28 @@ extension RequestBussiness on HttpRequestManage {
     return await httpRequest.post<HomeOrderInfoBean>(HttpApi.apiOrderInfo,
         data: param,
         options: Options(contentType: Headers.formUrlEncodedContentType),
-        onTransform:(json) => HomeOrderInfoBean.fromJson(json));
+        onTransform: (json) => HomeOrderInfoBean.fromJson(json));
+  }
+
+  Future<BaseResponse> postRepayUrlInfo(Map<String, dynamic> param) async {
+    return await httpRequest.post(HttpApi.apiRepayInfo,
+        data: param,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        onTransform: (json) => null);
+  }
+
+  Future<BaseResponse> postChannelListInfo(Map<String, dynamic> param) async {
+    return await httpRequest.post(HttpApi.apiChannelListInfo,
+        data: param,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        onTransform: (json) => null);
+  }
+
+  Future<BaseResponse> postPayInfo(Map<String, dynamic> param) async {
+    return await httpRequest.post(HttpApi.apiPayInfo,
+        data: param,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        onTransform: (json) => null);
   }
 
   Future<BaseResponse<AppSettingInfoBean>> postAppSettingInfo(

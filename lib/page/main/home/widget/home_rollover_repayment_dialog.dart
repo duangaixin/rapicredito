@@ -12,9 +12,7 @@ class HomeRolloverRepaymentDialog extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _HomeRolloverRepaymentDialogState();
 
-  const HomeRolloverRepaymentDialog({
-    Key? key,
-  }) : super(key: key);
+  const HomeRolloverRepaymentDialog({Key? key}) : super(key: key);
 }
 
 class _HomeRolloverRepaymentDialogState

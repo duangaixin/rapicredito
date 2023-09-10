@@ -244,6 +244,7 @@ class ChangeAccountCtr extends BaseGetCtr {
         await HttpRequestManage.instance.postSaveAccountInfoRequest(param);
     Get.dismiss();
     if (response.isSuccess()) {
+      Get.back(result: true);
     } else {
       NetException.dealAllException(response);
     }

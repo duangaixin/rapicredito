@@ -15,6 +15,7 @@ class MainHomeState {
   List<HomeProductInfoBean> otherOrderList = [];
   List<HomeProductInfoBean> notPlaceOrderList = [];
   List<HomeProductInfoBean> dataSource = [];
+  int orderId=-1;
   ///借款金额
   double creditAmount = 0.0;
   String applyDate = '';

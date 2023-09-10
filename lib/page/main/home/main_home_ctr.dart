@@ -32,6 +32,7 @@ class MainHomeCtr extends BaseGetCtr {
   }
 
   void requestInitData() async {
+    await postQueryRepayUrlRequest();
     if (UserStore.to.hasToken) {
       await _postQueryOrderInfoRequest();
     } else {
@@ -65,6 +66,7 @@ class MainHomeCtr extends BaseGetCtr {
     var response = await HttpRequestManage.instance.postOrderInfo(param);
     if (response.isSuccess()) {
       var bean = response.data;
+      state.orderId = bean?.disabledLondonPrivatePoolAmericanInstrument ?? -1;
       state.overdueStatus = bean?.centralTechnologyAboveCarefulTomato ?? -1;
       state.loanStatus = bean?.federalDirectorySituation ?? -1;
       state.creditAmount = bean?.sharpStrictRelationship ?? 0.0;
@@ -75,6 +77,9 @@ class MainHomeCtr extends BaseGetCtr {
 
       state.canRolloverPay = (bean?.endlessPie ?? 0) == 1;
       state.rolloverPayDay = bean?.strictMedicalPuzzleCafeteria ?? 0;
+
+      // state.overdueStatus=0;
+      // state.canRolloverPay=true;
 
       if (state.overdueStatus == -1) {
         await postQueryHomeDefaultInfoRequest();
@@ -110,9 +115,40 @@ class MainHomeCtr extends BaseGetCtr {
     }
   }
 
-  void goToChangeAccountPage() {
+  Future<void> postQueryRepayUrlRequest() async {
+    Map<String, dynamic> param = getCommonParam();
+    var response = await HttpRequestManage.instance.postRepayUrlInfo(param);
+    if (response.isSuccess()) {
+
+    } else {
+      NetException.dealAllException(response);
+    }
+  }
+
+  Future<void> postQueryChannelListRequest() async {
+    Map<String, dynamic> param = getCommonParam();
+    var response = await HttpRequestManage.instance.postChannelListInfo(param);
+    if (response.isSuccess()) {
+    } else {
+      NetException.dealAllException(response);
+    }
+  }
+
+  Future<void> postQueryPayInfoRequest() async {
+    Map<String, dynamic> param = getCommonParam();
+    var response = await HttpRequestManage.instance.postPayInfo(param);
+    if (response.isSuccess()) {
+    } else {
+      NetException.dealAllException(response);
+    }
+  }
+
+  void goToChangeAccountPage() async {
     KeyboardUtils.unFocus();
-    Get.toNamed(PageRouterName.changeAccountPage);
+    var result = await Get.toNamed(PageRouterName.changeAccountPage);
+    if (result != null && result) {
+      requestInitData();
+    }
   }
 
   String dealEndZero(String str) {
