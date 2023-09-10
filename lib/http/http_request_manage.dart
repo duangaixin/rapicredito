@@ -6,6 +6,7 @@ import 'package:rapicredito/model/auth_info_bean.dart';
 import 'package:rapicredito/model/bank_info_bean.dart';
 import 'package:rapicredito/model/client_info_bean.dart';
 import 'package:rapicredito/model/config_info_bean.dart';
+import 'package:rapicredito/model/home_order_info_bean.dart';
 import 'package:rapicredito/model/home_product_info_bean.dart';
 import 'package:rapicredito/model/login_info_bean.dart';
 import 'package:rapicredito/model/order_info_bean.dart';
@@ -27,6 +28,14 @@ class HttpRequestManage {
 }
 
 extension RequestBussiness on HttpRequestManage {
+  Future<BaseResponse<HomeOrderInfoBean>> postOrderInfo(
+      Map<String, dynamic> param) async {
+    return await httpRequest.post<HomeOrderInfoBean>(HttpApi.apiOrderInfo,
+        data: param,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        onTransform:(json) => HomeOrderInfoBean.fromJson(json));
+  }
+
   Future<BaseResponse<AppSettingInfoBean>> postAppSettingInfo(
       Map<String, dynamic> param) async {
     return await httpRequest.post<AppSettingInfoBean>(HttpApi.apiSettingInfo,

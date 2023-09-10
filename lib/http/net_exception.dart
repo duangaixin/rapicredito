@@ -35,8 +35,6 @@ class NetException {
             showNoNetDialog();
             return;
           }
-        } else {
-          showNoNetDialog();
         }
       }
     } else {

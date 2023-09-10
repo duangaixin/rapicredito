@@ -39,6 +39,8 @@ class Resource {
       'assets/image/auth/auth_take_camera.png';
   static const String assetsImageMessageDialog =
       'assets/image/other/message_top_dialog.png';
+  static const String assetsImageNotFound =
+      'assets/image/other/not_found.png';
   static const String assetsImageDateSelectDialog =
       'assets/image/other/date_select_dialog.png';
   static const String assetsImageResultTip =
@@ -76,4 +78,7 @@ class Resource {
       'assets/image/main/home_many_goal_three.png';
   static const String assetsImageHomeLoanOverdue =
       'assets/image/main/home_loan_overdue.png';
+  static const String assetsImageHomeRecommendBg =
+      'assets/image/main/home_recommend_bg.png';
+
 }

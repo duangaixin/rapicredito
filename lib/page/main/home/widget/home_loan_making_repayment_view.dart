@@ -26,11 +26,14 @@ class HomeLoanMakingRepaymentView extends GetView<MainHomeCtr> {
             const SizedBox(
               height: 20.0,
             ),
-            const CommonPayTwoWayView(),
-            const SizedBox(
-              height: 19.0,
+            Container(
+              margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 20.0),
+              child: const CommonPayTwoWayView(),
             ),
-            const CommonPayThreeWayView(),
+            Container(
+              margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 19.0),
+              child: const CommonPayThreeWayView(),
+            ),
             moneyInfoView
           ],
         ));

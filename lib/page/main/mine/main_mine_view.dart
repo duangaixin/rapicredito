@@ -63,6 +63,7 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
                   visible: !isUrlNotExist,
                   child: CustomImageView(
                     imageUrl,
+                    placeholder: Resource.assetsImageAuthCameraBg,
                     shape: BoxShape.circle,
                     memCacheHeight: 75,
                     memCacheWidth: 75,
@@ -89,7 +90,7 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
                     padding: const EdgeInsets.only(top: 16.0),
                     child: Obx(() {
                       return Text(
-                        ctr.state.phoneNum,
+                      '+57 ${ctr.state.phoneNum}',
                         style: const TextStyle(
                           fontSize: 18.0,
                           color: Color(0xff333333),

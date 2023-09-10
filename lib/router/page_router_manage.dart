@@ -13,6 +13,7 @@ import 'package:rapicredito/page/main/mine/client/index.dart';
 import 'package:rapicredito/page/main/mine/setting/index.dart';
 import 'package:rapicredito/page/notfound/not_found_page.dart';
 import 'package:rapicredito/page/permission/index.dart';
+import 'package:rapicredito/page/result/repayment/index.dart';
 import 'package:rapicredito/page/result/rollover/index.dart';
 import 'package:rapicredito/page/splash/index.dart';
 import 'package:rapicredito/page/test/index.dart';
@@ -96,6 +97,10 @@ class PageRouterManage {
         name: PageRouterName.testPage,
         page: () => const TestPage(),
         binding: TestBinding()),
+    GetPage(
+        name: PageRouterName.repaymentResultPage,
+        page: () => const RepaymentResultPage(),
+        binding: RepaymentResultBinding()),
     GetPage(
         name: PageRouterName.notFoundPage, page: () => const NotFoundPage()),
   ];

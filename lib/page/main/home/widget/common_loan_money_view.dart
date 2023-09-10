@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/style/resources.dart';
+import 'package:rapicredito/utils/text_util.dart';
 
-class CommonLoanMoneyView extends StatefulWidget {
+class CommonLoanMoneyView extends GetView<MainHomeCtr> {
   const CommonLoanMoneyView({
     Key? key,
   }) : super(key: key);
 
-  @override
-  CommonLoanMoneyViewState createState() => CommonLoanMoneyViewState();
-}
-
-class CommonLoanMoneyViewState extends State<CommonLoanMoneyView> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,8 +32,8 @@ class CommonLoanMoneyViewState extends State<CommonLoanMoneyView> {
                 style: TextStyle(fontSize: 15.0, color: Color(0xff333333)),
               )),
           Text(
-            '300,702GTQ',
-            style: TextStyle(
+            '${TextUtil.formatComma3(controller.state.creditAmount)}GTQ',
+            style: const TextStyle(
                 fontSize: 30.0,
                 color: Color(0xff333333),
                 fontWeight: FontWeight.bold),
@@ -52,11 +49,11 @@ class CommonLoanMoneyViewState extends State<CommonLoanMoneyView> {
             'Fecha de aplicación',
             style: TextStyle(fontSize: 15.0, color: Color(0xff333333)),
           ),
-          const Padding(
-              padding: EdgeInsets.only(top: 10.0, bottom: 11.0),
+          Padding(
+              padding: const EdgeInsets.only(top: 10.0, bottom: 11.0),
               child: Text(
-                '30-11-2021',
-                style: TextStyle(fontSize: 15.0, color: Color(0xff333333)),
+                controller.state.applyDate,
+                style: const TextStyle(fontSize: 15.0, color: Color(0xff333333)),
               )),
         ],
       ),

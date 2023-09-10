@@ -4,6 +4,7 @@ import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
+import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
@@ -28,7 +29,13 @@ class MainHomeCtr extends BaseGetCtr {
   }
 
   void requestInitData() async {
-    await postQueryHomeDefaultInfoRequest();
+    if(UserStore.to.hasToken){
+      await _postQueryOrderInfoRequest();
+    }else{
+      state.loanStatus=-1;
+      await postQueryHomeDefaultInfoRequest();
+    }
+
     // await postIsHomeManyProductRequest();
     // if (state.originNetList.length == 1) {
     //   await postQueryHomeDefaultInfoRequest();
@@ -50,6 +57,29 @@ class MainHomeCtr extends BaseGetCtr {
     requestInitData();
   }
 
+  Future<void> _postQueryOrderInfoRequest() async {
+    Map<String, dynamic> param = getCommonParam();
+    var response = await HttpRequestManage.instance.postOrderInfo(param);
+    if (response.isSuccess()) {
+      var bean = response.data;
+      state.overdueStatus = bean?.centralTechnologyAboveCarefulTomato ?? -1;
+      state.loanStatus = bean?.federalDirectorySituation ?? -1;
+      state.overdueStatus=2;
+      state.loanStatus=2;
+
+      state.creditAmount=bean?.sharpStrictRelationship??0.0;
+      state.applyDate=bean?.valuableRussianForestCop??'';
+      if(state.overdueStatus==-1){
+        await postQueryHomeDefaultInfoRequest();
+      }else {
+       state.loadState=LoadState.succeed;
+      }
+    } else {
+      state.loadState=LoadState.failed;
+      NetException.dealAllException(response);
+    }
+  }
+
   Future<void> postQueryHomeDefaultInfoRequest() async {
     Map<String, dynamic> param = getCommonParam();
     param['crazyPeopleReadyBravery'] = 'cleverMaidActualFoot';
@@ -57,45 +87,50 @@ class MainHomeCtr extends BaseGetCtr {
     if (response.isSuccess()) {
       var bean = response.data;
       state.maxAmount = bean?.cleverMaidActualFoot ?? '--';
-      //state.loadState = LoadState.succeed;
-    } else {
-      // state.loadState = LoadState.failed;
-      NetException.dealAllException(response);
-    }
-  }
-
-  Future<void> postIsHomeManyProductRequest() async {
-    Map<String, dynamic> param = getCommonParam();
-    var response =
-        await HttpRequestManage.instance.postIsHomeManyProductRequest(param);
-    if (response.isSuccess()) {
-      var netList = response.data ?? [];
-      if (!ObjectUtil.isEmptyList(netList)) {
-        state.originNetList
-          ..clear()
-          ..addAll(netList);
-        if (state.originNetList.length > 1) {
-          for (int i = 0; i < state.originNetList.length; i++) {
-            var bean = state.originNetList[i];
-            var status = bean.shortHelmetModernLatterGiftedDifference ?? '0';
-            if (status == '0') {
-              state.notPlaceOrderList.add(bean);
-            } else {
-              state.otherOrderList.add(bean);
-            }
-            if(!ObjectUtil.isEmptyList(state.otherOrderList)){
-              state.dataSource.addAll(state.otherOrderList);
-            }
-
-            if(!ObjectUtil.isEmptyList(state.otherOrderList)){
-
-            }
-          }
-        }
-      }
+      state.loadState = LoadState.succeed;
     } else {
       state.loadState = LoadState.failed;
       NetException.dealAllException(response);
     }
   }
+
+  void goToChangeAccountPage(){
+    KeyboardUtils.unFocus();
+    Get.toNamed(PageRouterName.changeAccountPage);
+  }
+
+
+
+  // Future<void> postIsHomeManyProductRequest() async {
+  //   Map<String, dynamic> param = getCommonParam();
+  //   var response =
+  //       await HttpRequestManage.instance.postIsHomeManyProductRequest(param);
+  //   if (response.isSuccess()) {
+  //     var netList = response.data ?? [];
+  //     if (!ObjectUtil.isEmptyList(netList)) {
+  //       state.originNetList
+  //         ..clear()
+  //         ..addAll(netList);
+  //       if (state.originNetList.length > 1) {
+  //         for (int i = 0; i < state.originNetList.length; i++) {
+  //           var bean = state.originNetList[i];
+  //           var status = bean.shortHelmetModernLatterGiftedDifference ?? '0';
+  //           if (status == '0') {
+  //             state.notPlaceOrderList.add(bean);
+  //           } else {
+  //             state.otherOrderList.add(bean);
+  //           }
+  //           if (!ObjectUtil.isEmptyList(state.otherOrderList)) {
+  //             state.dataSource.addAll(state.otherOrderList);
+  //           }
+  //
+  //           if (!ObjectUtil.isEmptyList(state.otherOrderList)) {}
+  //         }
+  //       }
+  //     }
+  //   } else {
+  //     state.loadState = LoadState.failed;
+  //     NetException.dealAllException(response);
+  //   }
+  // }
 }

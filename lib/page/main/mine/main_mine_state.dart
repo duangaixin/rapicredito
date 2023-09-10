@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class MainMineState {
-  final RxString _phoneNum = '+57'.obs;
+  final RxString _phoneNum = ''.obs;
 
   String get phoneNum => _phoneNum.value;
 

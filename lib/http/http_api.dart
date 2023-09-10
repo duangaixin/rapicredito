@@ -9,6 +9,7 @@ class HttpApi {
   static const String apiLogin = 'italy/inventBetterMoon';
   static const String apiConfigInfo = 'facialHis/studyCompressedNortheast';
   static const String apiSettingInfo = 'facialHis/instructLikelyTailor';
+  static const String apiOrderInfo = 'facialHis/plusValuablePalace';
   static const String apiUploadIdPhoto = 'curtain/defeatUntrueToday';
   static const String apiQueryPhoto = 'curtain/completeProbableFortnight';
   static const String apiSaveAuthInfo = 'curtain/digitalSmallLung';

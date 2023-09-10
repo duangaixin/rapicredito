@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/json/upload_json_manage.dart';
 import 'package:rapicredito/page/dialog/message_input_dialog.dart';
-import 'package:rapicredito/page/dialog/pay_dialog.dart';
-import 'package:rapicredito/page/loan/widget/commit_success_dialog.dart';
-import 'package:rapicredito/page/loan/widget/loan_confirm_money_dialog.dart';
+import 'package:rapicredito/page/main/home/widget/home_recommend_dialog.dart';
+import 'package:rapicredito/page/main/home/widget/home_rollover_repayment_dialog.dart';
 import 'package:rapicredito/page/test/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/widget/custom_button.dart';
@@ -14,7 +13,6 @@ import 'package:rapicredito/widget/custom_picker.dart';
 
 class TestPage extends GetView<TestCtr> {
   const TestPage({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -40,43 +38,38 @@ class TestPage extends GetView<TestCtr> {
                     Get.toNamed(PageRouterName.clientPage);
                   }),
               CustomButton(
+                  text: '未找到',
+                  onPressed: () {
+                    Get.toNamed(PageRouterName.notFoundPage);
+                  }),
+              CustomButton(
+                  text: '还款成功',
+                  onPressed: () {
+                    Get.toNamed(PageRouterName.repaymentResultPage);
+                  }),
+              CustomButton(
                   text: '展期还款成功',
                   onPressed: () {
                     Get.toNamed(PageRouterName.rolloverPaymentResultPage);
                   }),
               CustomButton(
-                  text: '提交成功弹窗',
+                  text: '展期还款弹窗',
                   onPressed: () {
                     showDialog(
                         context: context,
                         barrierDismissible: false,
                         builder: (_) {
-                          return const CommitSuccessDialog();
+                          return const HomeRolloverRepaymentDialog();
                         });
                   }),
               CustomButton(
-                  text: '支付弹窗',
+                  text: '推荐弹窗',
                   onPressed: () {
                     showDialog(
                         context: context,
                         barrierDismissible: false,
                         builder: (_) {
-                          return PayDialog(
-                            clickConfirm: () {},
-                          );
-                        });
-                  }),
-              CustomButton(
-                  text: '金额确认弹窗',
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (_) {
-                          return LoanConfirmMoneyDialog(
-                            clickConfirm: () {},
-                            clickWebView: () {},
-                          );
+                          return const HomeRecommendDialog();
                         });
                   }),
               CustomButton(

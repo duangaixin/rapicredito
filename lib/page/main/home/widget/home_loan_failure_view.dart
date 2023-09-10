@@ -24,7 +24,7 @@ class HomeLoanFailureView extends GetView<MainHomeCtr> {
           padding: const EdgeInsets.only(
               top: 25.0, left: 55.0, right: 55.0, bottom: 46.0),
           child: CustomButton(
-            onPressed: () {},
+            onPressed: controller.goToChangeAccountPage,
             minWidth: 265.0,
             minHeight: 46.0,
             backgroundColor: const Color(0xffB8EF17),
@@ -33,6 +33,7 @@ class HomeLoanFailureView extends GetView<MainHomeCtr> {
             radius: 8.0,
             text: 'Actualizar cuenta receptora',
             textColor: const Color(0xff333333),
+            fontWeight: FontWeight.bold,
           ),
         ),
         errorTipView,
@@ -47,7 +48,7 @@ class HomeLoanFailureView extends GetView<MainHomeCtr> {
         decoration: BoxDecoration(
             color: const Color(0xffF9F9F9),
             borderRadius: BorderRadius.circular(8.0)),
-        child: Column(
+        child: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
