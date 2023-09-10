@@ -21,39 +21,26 @@ class MainHomeCtr extends BaseGetCtr {
   var refreshController = RefreshController();
 
   @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
   void onReady() {
     super.onReady();
     requestInitData();
   }
 
   void requestInitData() async {
-    await postQueryRepayUrlRequest();
     if (UserStore.to.hasToken) {
       await _postQueryOrderInfoRequest();
+      // await postIsHomeManyProductRequest();
+      // if (state.originNetList.length == 1) {
+      // await _postQueryOrderInfoRequest();
+      // }
     } else {
       state.loanStatus = -1;
       await postQueryHomeDefaultInfoRequest();
     }
 
-    // await postIsHomeManyProductRequest();
-    // if (state.originNetList.length == 1) {
-    //   await postQueryHomeDefaultInfoRequest();
-    // } else {
-    //   state.loadState = LoadState.succeed;
-    // }
     if (state.isRefresh) {
       refreshController.refreshCompleted();
     }
-  }
-
-  void goToAuthPage() {
-    KeyboardUtils.unFocus();
-    Get.toNamed(PageRouterName.authPersonPage);
   }
 
   void refreshInfo() {
@@ -83,6 +70,7 @@ class MainHomeCtr extends BaseGetCtr {
 
       if (state.overdueStatus == -1) {
         await postQueryHomeDefaultInfoRequest();
+      } else if (state.overdueStatus == 0) {
       } else {
         state.loadState = LoadState.succeed;
       }
@@ -90,15 +78,6 @@ class MainHomeCtr extends BaseGetCtr {
       state.loadState = LoadState.failed;
       NetException.dealAllException(response);
     }
-  }
-
-  void showRolloverPayDialog() {
-    showDialog(
-        context: Get.context!,
-        barrierDismissible: false,
-        builder: (_) {
-          return const HomeRolloverRepaymentDialog();
-        });
   }
 
   Future<void> postQueryHomeDefaultInfoRequest() async {
@@ -115,11 +94,20 @@ class MainHomeCtr extends BaseGetCtr {
     }
   }
 
+  Future<void> postQueryRecommendListRequest() async {
+    Map<String, dynamic> param = getCommonParam();
+    var response =
+        await HttpRequestManage.instance.postRecommendListInfo(param);
+    if (response.isSuccess()) {
+    } else {
+      NetException.dealAllException(response);
+    }
+  }
+
   Future<void> postQueryRepayUrlRequest() async {
     Map<String, dynamic> param = getCommonParam();
     var response = await HttpRequestManage.instance.postRepayUrlInfo(param);
     if (response.isSuccess()) {
-
     } else {
       NetException.dealAllException(response);
     }
@@ -143,12 +131,26 @@ class MainHomeCtr extends BaseGetCtr {
     }
   }
 
+  void goToAuthPage() {
+    KeyboardUtils.unFocus();
+    Get.toNamed(PageRouterName.authPersonPage);
+  }
+
   void goToChangeAccountPage() async {
     KeyboardUtils.unFocus();
     var result = await Get.toNamed(PageRouterName.changeAccountPage);
     if (result != null && result) {
       requestInitData();
     }
+  }
+
+  void showRolloverPayDialog() {
+    showDialog(
+        context: Get.context!,
+        barrierDismissible: false,
+        builder: (_) {
+          return const HomeRolloverRepaymentDialog();
+        });
   }
 
   String dealEndZero(String str) {

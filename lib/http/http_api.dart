@@ -11,6 +11,7 @@ class HttpApi {
   static const String apiSettingInfo = 'facialHis/instructLikelyTailor';
   static const String apiOrderInfo = 'facialHis/plusValuablePalace';
   static const String apiRepayInfo = 'cheapHeroine/maskRacialFortnight';
+  static const String apiRecommendList ='curtain/blowTastyPeace';
   static const String apiChannelListInfo = 'apartment/honourSteepCrop';
   static const String apiPayInfo ='apartment/borrowEgyptianSoul';
 

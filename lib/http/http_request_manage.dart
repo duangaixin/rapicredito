@@ -36,6 +36,12 @@ extension RequestBussiness on HttpRequestManage {
         onTransform: (json) => HomeOrderInfoBean.fromJson(json));
   }
 
+  Future<BaseResponse> postRecommendListInfo(Map<String, dynamic> param) async {
+    return await httpRequest.post(HttpApi.apiRecommendList,
+        data: param,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        onTransform: (json) => null);
+  }
   Future<BaseResponse> postRepayUrlInfo(Map<String, dynamic> param) async {
     return await httpRequest.post(HttpApi.apiRepayInfo,
         data: param,
