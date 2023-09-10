@@ -11,6 +11,8 @@ class CommonLoanMoneyView extends GetView<MainHomeCtr> {
 
   @override
   Widget build(BuildContext context) {
+    var loanMoney = TextUtil.formatComma3(
+        controller.dealEndZero(controller.state.creditAmount.toString()));
     return Container(
       alignment: Alignment.center,
       width: double.infinity,
@@ -32,7 +34,7 @@ class CommonLoanMoneyView extends GetView<MainHomeCtr> {
                 style: TextStyle(fontSize: 15.0, color: Color(0xff333333)),
               )),
           Text(
-            '${TextUtil.formatComma3(controller.state.creditAmount)}GTQ',
+            '${loanMoney}GTQ',
             style: const TextStyle(
                 fontSize: 30.0,
                 color: Color(0xff333333),
@@ -53,7 +55,8 @@ class CommonLoanMoneyView extends GetView<MainHomeCtr> {
               padding: const EdgeInsets.only(top: 10.0, bottom: 11.0),
               child: Text(
                 controller.state.applyDate,
-                style: const TextStyle(fontSize: 15.0, color: Color(0xff333333)),
+                style:
+                    const TextStyle(fontSize: 15.0, color: Color(0xff333333)),
               )),
         ],
       ),

@@ -29,10 +29,10 @@ class MainHomeCtr extends BaseGetCtr {
   }
 
   void requestInitData() async {
-    if(UserStore.to.hasToken){
+    if (UserStore.to.hasToken) {
       await _postQueryOrderInfoRequest();
-    }else{
-      state.loanStatus=-1;
+    } else {
+      state.loanStatus = -1;
       await postQueryHomeDefaultInfoRequest();
     }
 
@@ -64,18 +64,15 @@ class MainHomeCtr extends BaseGetCtr {
       var bean = response.data;
       state.overdueStatus = bean?.centralTechnologyAboveCarefulTomato ?? -1;
       state.loanStatus = bean?.federalDirectorySituation ?? -1;
-      state.overdueStatus=2;
-      state.loanStatus=2;
-
-      state.creditAmount=bean?.sharpStrictRelationship??0.0;
-      state.applyDate=bean?.valuableRussianForestCop??'';
-      if(state.overdueStatus==-1){
+      state.creditAmount = bean?.sharpStrictRelationship ?? 0.0;
+      state.applyDate = bean?.valuableRussianForestCop ?? '';
+      if (state.overdueStatus == -1) {
         await postQueryHomeDefaultInfoRequest();
-      }else {
-       state.loadState=LoadState.succeed;
+      } else {
+        state.loadState = LoadState.succeed;
       }
     } else {
-      state.loadState=LoadState.failed;
+      state.loadState = LoadState.failed;
       NetException.dealAllException(response);
     }
   }
@@ -94,43 +91,50 @@ class MainHomeCtr extends BaseGetCtr {
     }
   }
 
-  void goToChangeAccountPage(){
+  void goToChangeAccountPage() {
     KeyboardUtils.unFocus();
     Get.toNamed(PageRouterName.changeAccountPage);
   }
-
-
-
-  // Future<void> postIsHomeManyProductRequest() async {
-  //   Map<String, dynamic> param = getCommonParam();
-  //   var response =
-  //       await HttpRequestManage.instance.postIsHomeManyProductRequest(param);
-  //   if (response.isSuccess()) {
-  //     var netList = response.data ?? [];
-  //     if (!ObjectUtil.isEmptyList(netList)) {
-  //       state.originNetList
-  //         ..clear()
-  //         ..addAll(netList);
-  //       if (state.originNetList.length > 1) {
-  //         for (int i = 0; i < state.originNetList.length; i++) {
-  //           var bean = state.originNetList[i];
-  //           var status = bean.shortHelmetModernLatterGiftedDifference ?? '0';
-  //           if (status == '0') {
-  //             state.notPlaceOrderList.add(bean);
-  //           } else {
-  //             state.otherOrderList.add(bean);
-  //           }
-  //           if (!ObjectUtil.isEmptyList(state.otherOrderList)) {
-  //             state.dataSource.addAll(state.otherOrderList);
-  //           }
-  //
-  //           if (!ObjectUtil.isEmptyList(state.otherOrderList)) {}
-  //         }
-  //       }
-  //     }
-  //   } else {
-  //     state.loadState = LoadState.failed;
-  //     NetException.dealAllException(response);
-  //   }
-  // }
+  String dealEndZero(String str) {
+    if (!ObjectUtil.isEmptyString(str) ){
+      if(str.endsWith('.0')||str.endsWith('.00')){
+        var index= str.indexOf('.');
+        var newStr=str.substring(0,index);
+        return newStr;
+      }
+    }
+    return str;
+  }
+// Future<void> postIsHomeManyProductRequest() async {
+//   Map<String, dynamic> param = getCommonParam();
+//   var response =
+//       await HttpRequestManage.instance.postIsHomeManyProductRequest(param);
+//   if (response.isSuccess()) {
+//     var netList = response.data ?? [];
+//     if (!ObjectUtil.isEmptyList(netList)) {
+//       state.originNetList
+//         ..clear()
+//         ..addAll(netList);
+//       if (state.originNetList.length > 1) {
+//         for (int i = 0; i < state.originNetList.length; i++) {
+//           var bean = state.originNetList[i];
+//           var status = bean.shortHelmetModernLatterGiftedDifference ?? '0';
+//           if (status == '0') {
+//             state.notPlaceOrderList.add(bean);
+//           } else {
+//             state.otherOrderList.add(bean);
+//           }
+//           if (!ObjectUtil.isEmptyList(state.otherOrderList)) {
+//             state.dataSource.addAll(state.otherOrderList);
+//           }
+//
+//           if (!ObjectUtil.isEmptyList(state.otherOrderList)) {}
+//         }
+//       }
+//     }
+//   } else {
+//     state.loadState = LoadState.failed;
+//     NetException.dealAllException(response);
+//   }
+// }
 }

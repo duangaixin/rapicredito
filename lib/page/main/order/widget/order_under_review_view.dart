@@ -27,7 +27,7 @@ class OrderUnderReviewView extends GetView<MainOrderCtr> {
   }
 
   Widget _buildShowInfoView() {
-    var applyAmount = bean.funnyAustraliaTeamTale ?? '';
+    var applyAmount = bean.funnyAustraliaTeamTale ?? 0.0;
     var submitTime = bean.luckyExperience ?? '';
     return Container(
       margin: const EdgeInsets.only(top: 13.0, bottom: 14.0),
@@ -38,7 +38,7 @@ class OrderUnderReviewView extends GetView<MainOrderCtr> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildKeyValueView('Monto del préstamo', applyAmount),
+          _buildKeyValueView('Monto del préstamo', applyAmount.toString()),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: _buildKeyValueView('Fecha de aplicación', submitTime),

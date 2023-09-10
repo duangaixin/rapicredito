@@ -46,8 +46,7 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
   Widget get orderListView => ListView.builder(
         padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 0.0),
         shrinkWrap: true,
-        //   itemCount: ctr.state.dataSource.length,
-        itemCount: 5,
+        itemCount: ctr.state.dataSource.length,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           return _buildListItemView(index);

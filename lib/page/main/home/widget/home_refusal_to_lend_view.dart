@@ -49,7 +49,7 @@ class HomeRefusalToLendView extends GetView<MainHomeCtr> {
         decoration: BoxDecoration(
             color: const Color(0xffF9F9F9),
             borderRadius: BorderRadius.circular(8.0)),
-        child: Column(
+        child: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [

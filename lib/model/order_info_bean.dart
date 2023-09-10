@@ -7,10 +7,10 @@ part 'order_info_bean.g.dart';
 class OrderInfoBean extends Object {
 
   @JsonKey(name: 'disabledLondonPrivatePoolAmericanInstrument')
-  String? disabledLondonPrivatePoolAmericanInstrument;
+  int? disabledLondonPrivatePoolAmericanInstrument;
 
   @JsonKey(name: 'smokeCampSpanishLift')
-  String? smokeCampSpanishLift;
+  int? smokeCampSpanishLift;
 
   @JsonKey(name: 'shortHelmetModernLatterGiftedDifference')
   String? shortHelmetModernLatterGiftedDifference;
@@ -28,13 +28,13 @@ class OrderInfoBean extends Object {
   String? aggressiveExamUsedBackStove;
 
   @JsonKey(name: 'funnyAustraliaTeamTale')
-  String? funnyAustraliaTeamTale;
+  double? funnyAustraliaTeamTale;
 
   @JsonKey(name: 'luckyExperience')
   String? luckyExperience;
 
   @JsonKey(name: 'interestingComradeHairIntroduction')
-  String? interestingComradeHairIntroduction;
+  double? interestingComradeHairIntroduction;
 
   @JsonKey(name: 'disabledBusyEngine')
   String? disabledBusyEngine;
@@ -43,7 +43,7 @@ class OrderInfoBean extends Object {
   String? mexicanMedicalCan;
 
   @JsonKey(name: 'passiveHis')
-  String? passiveHis;
+  int? passiveHis;
 
   @JsonKey(name: 'endlessPie')
   String? endlessPie;
