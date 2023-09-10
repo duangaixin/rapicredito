@@ -5,6 +5,7 @@ import 'package:rapicredito/page/main/home/widget/common_app_bar_view.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
+///拒绝放款
 class HomeRefusalToLendView extends GetView<MainHomeCtr> {
   const HomeRefusalToLendView({Key? key}) : super(key: key);
 

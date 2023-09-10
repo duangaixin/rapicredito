@@ -6,7 +6,7 @@ import 'package:rapicredito/page/main/home/widget/common_app_bar_view.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
-
+///默认
 class HomeLoanDefaultView extends GetView<MainHomeCtr> {
   const HomeLoanDefaultView({Key? key}) : super(key: key);
 

@@ -6,7 +6,7 @@ import 'package:rapicredito/page/main/home/widget/common_loan_money_view.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
-
+///放款失败
 class HomeLoanFailureView extends GetView<MainHomeCtr> {
   const HomeLoanFailureView({Key? key}) : super(key: key);
 

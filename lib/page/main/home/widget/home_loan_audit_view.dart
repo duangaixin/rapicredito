@@ -6,6 +6,7 @@ import 'package:rapicredito/page/main/home/widget/common_app_bar_view.dart';
 import 'package:rapicredito/page/main/home/widget/common_loan_money_view.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 
+///等待审核
 class HomeLoanAuditView extends GetView<MainHomeCtr> {
   const HomeLoanAuditView({Key? key}) : super(key: key);
 
