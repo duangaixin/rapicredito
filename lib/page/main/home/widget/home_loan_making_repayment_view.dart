@@ -39,23 +39,26 @@ class HomeLoanMakingRepaymentView extends GetView<MainHomeCtr> {
         ));
   }
 
-  Widget get overdueBtnView => Container(
-        alignment: Alignment.center,
-        margin: const EdgeInsets.only(top: 20.0, bottom: 19.0),
-        child: CustomButton(
-          onPressed: () {},
-          minWidth: 152.0,
-          minHeight: 46.0,
-          backgroundColor: Colors.white,
-          disabledBackgroundColor: Colors.white,
-          fontSize: 15.0,
-          radius: 8.0,
-          text: 'Prórroga de pago\nde 7 días',
-          textAlign: TextAlign.center,
-          textColor: const Color(0xff333333),
-          fontWeight: FontWeight.bold,
-          side: const BorderSide(color: Color(0xff333333), width: 1.0),
-        ),
+  Widget get overdueBtnView => Visibility(
+        visible: controller.state.canRolloverPay,
+        child: Container(
+            alignment: Alignment.center,
+            margin: const EdgeInsets.only(top: 20.0),
+            child: CustomButton(
+              onPressed: controller.showRolloverPayDialog,
+              minWidth: 152.0,
+              minHeight: 46.0,
+              backgroundColor: Colors.white,
+              disabledBackgroundColor: Colors.white,
+              fontSize: 15.0,
+              radius: 8.0,
+              text:
+                  'Prórroga de pago\nde ${controller.state.rolloverPayDay} días',
+              textAlign: TextAlign.center,
+              textColor: const Color(0xff333333),
+              fontWeight: FontWeight.bold,
+              side: const BorderSide(color: Color(0xff333333), width: 1.0),
+            )),
       );
 
   Widget get moneyInfoView => Container(
@@ -66,6 +69,7 @@ class HomeLoanMakingRepaymentView extends GetView<MainHomeCtr> {
           children: [
             overdueBtnView,
             Container(
+              margin: const EdgeInsets.only(top: 19.0),
               padding: const EdgeInsets.only(
                   top: 13.0, left: 18.0, right: 15.0, bottom: 20.0),
               decoration: BoxDecoration(
@@ -84,10 +88,18 @@ class HomeLoanMakingRepaymentView extends GetView<MainHomeCtr> {
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  _buildKeyValueView('Monto de devolución', ''),
-                  _buildKeyValueView('Fecha de pago de tu crédito', ''),
-                  _buildKeyValueView('Monto del préstamo', ''),
-                  _buildKeyValueView('Interés', '')
+                  _buildKeyValueView(
+                      'Monto de devolución',
+                      controller.addEndZero(
+                          controller.state.repaymentAmount.toString())),
+                  _buildKeyValueView('Fecha de pago de tu crédito',
+                      controller.state.repaymentDate),
+                  _buildKeyValueView(
+                      'Monto del préstamo',
+                      controller.addEndZero(
+                          controller.state.creditAmount.toString())),
+                  _buildKeyValueView(
+                      'Interés', controller.state.interest.toString())
                 ],
               ),
             )

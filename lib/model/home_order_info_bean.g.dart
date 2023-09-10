@@ -30,6 +30,8 @@ HomeOrderInfoBean _$HomeOrderInfoBeanFromJson(Map<String, dynamic> json) =>
       json['nextCounterConvenienceHandkerchief'] as String?,
       json['strictMedicalPuzzleCafeteria'] as int?,
       json['paleSuiteUnderwearHot'] as String?,
+      json['indeedSoftMomEnoughPill'] as String?,
+      json['endlessPie'] as int?,
     );
 
 Map<String, dynamic> _$HomeOrderInfoBeanToJson(HomeOrderInfoBean instance) =>
@@ -64,4 +66,6 @@ Map<String, dynamic> _$HomeOrderInfoBeanToJson(HomeOrderInfoBean instance) =>
           instance.nextCounterConvenienceHandkerchief,
       'strictMedicalPuzzleCafeteria': instance.strictMedicalPuzzleCafeteria,
       'paleSuiteUnderwearHot': instance.paleSuiteUnderwearHot,
+      'indeedSoftMomEnoughPill': instance.indeedSoftMomEnoughPill,
+      'endlessPie': instance.endlessPie,
     };

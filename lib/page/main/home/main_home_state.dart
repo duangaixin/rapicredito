@@ -15,9 +15,23 @@ class MainHomeState {
   List<HomeProductInfoBean> otherOrderList = [];
   List<HomeProductInfoBean> notPlaceOrderList = [];
   List<HomeProductInfoBean> dataSource = [];
+  ///借款金额
   double creditAmount = 0.0;
   String applyDate = '';
 
+  ///还款金额
+  double repaymentAmount = 0.0;
+
+  ///还款日期
+  String repaymentDate = '';
+
+
+  ///利息
+  double interest = 0.0;
+  ///是否支持展期支付
+ bool canRolloverPay=false;
+  ///展示支付按钮时间
+  int rolloverPayDay=0;
   final RxInt _overdueStatus = (-1).obs;
 
   int get overdueStatus => _overdueStatus.value;

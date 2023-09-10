@@ -2,10 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'home_order_info_bean.g.dart';
 
-
 @JsonSerializable()
 class HomeOrderInfoBean extends Object {
-
   @JsonKey(name: 'spiritualPlanetEggplantRelation')
   String? spiritualPlanetEggplantRelation;
 
@@ -49,7 +47,7 @@ class HomeOrderInfoBean extends Object {
   double? interestingComradeHairIntroduction;
 
   @JsonKey(name: 'looseBunFacialSaladNeatAlarm')
-  String ?looseBunFacialSaladNeatAlarm;
+  String? looseBunFacialSaladNeatAlarm;
 
   @JsonKey(name: 'triangleRemarkIllBattery')
   double? triangleRemarkIllBattery;
@@ -67,17 +65,42 @@ class HomeOrderInfoBean extends Object {
   String? nextCounterConvenienceHandkerchief;
 
   @JsonKey(name: 'strictMedicalPuzzleCafeteria')
+  ///duration
   int? strictMedicalPuzzleCafeteria;
 
   @JsonKey(name: 'paleSuiteUnderwearHot')
   String? paleSuiteUnderwearHot;
+  @JsonKey(name: 'indeedSoftMomEnoughPill')
+  String? indeedSoftMomEnoughPill;
+  @JsonKey(name: 'endlessPie')
+   int?endlessPie;
+  HomeOrderInfoBean(
+      this.spiritualPlanetEggplantRelation,
+      this.federalDirectorySituation,
+      this.disabledLondonPrivatePoolAmericanInstrument,
+      this.eachGeometryLameCafe,
+      this.powerfulBalconyForgetfulFlash,
+      this.valuableRussianForestCop,
+      this.violentPartRudeGreeting,
+      this.extraordinaryRussianThoroughText,
+      this.freshBookcaseModestPing,
+      this.centralTechnologyAboveCarefulTomato,
+      this.modestExpensiveBrunch,
+      this.sharpStrictRelationship,
+      this.halfClassicalPlayerLot,
+      this.interestingComradeHairIntroduction,
+      this.looseBunFacialSaladNeatAlarm,
+      this.triangleRemarkIllBattery,
+      this.frequentSuddenMosquitoNonCourse,
+      this.civilCompanyDirectionFondPercentage,
+      this.valuableRabbitFarm,
+      this.nextCounterConvenienceHandkerchief,
+      this.strictMedicalPuzzleCafeteria,
+      this.paleSuiteUnderwearHot,
+      this.indeedSoftMomEnoughPill,this.endlessPie);
 
-  HomeOrderInfoBean(this.spiritualPlanetEggplantRelation,this.federalDirectorySituation,this.disabledLondonPrivatePoolAmericanInstrument,this.eachGeometryLameCafe,this.powerfulBalconyForgetfulFlash,this.valuableRussianForestCop,this.violentPartRudeGreeting,this.extraordinaryRussianThoroughText,this.freshBookcaseModestPing,this.centralTechnologyAboveCarefulTomato,this.modestExpensiveBrunch,this.sharpStrictRelationship,this.halfClassicalPlayerLot,this.interestingComradeHairIntroduction,this.looseBunFacialSaladNeatAlarm,this.triangleRemarkIllBattery,this.frequentSuddenMosquitoNonCourse,this.civilCompanyDirectionFondPercentage,this.valuableRabbitFarm,this.nextCounterConvenienceHandkerchief,this.strictMedicalPuzzleCafeteria,this.paleSuiteUnderwearHot,);
-
-  factory HomeOrderInfoBean.fromJson(Map<String, dynamic> srcJson) => _$HomeOrderInfoBeanFromJson(srcJson);
+  factory HomeOrderInfoBean.fromJson(Map<String, dynamic> srcJson) =>
+      _$HomeOrderInfoBeanFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$HomeOrderInfoBeanToJson(this);
-
 }
-
-
