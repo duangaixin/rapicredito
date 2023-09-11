@@ -60,7 +60,6 @@ flutter:
   assets:
     - assets/image/
     - assets/image/main/
-    - assets/image/splash/
     - assets/image/auth/
     - assets/image/login/
     - assets/image/other/

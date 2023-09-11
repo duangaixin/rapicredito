@@ -14,6 +14,9 @@ enum DateMode {
   /// 【yyyy-MM-dd】年月日
   YMD,
 
+  /// 【yyyy-MM-dd】日月年
+  DMY,
+
   /// 【yyyy-MM】年月
   YM,
 
@@ -49,5 +52,6 @@ enum DateMode {
 
   /// 【HH】时
   H,
+
 }
 

@@ -37,7 +37,7 @@ class CustomPicker {
   }
 
   static void showDatePicker(BuildContext context,
-      {DateMode mode = DateMode.YMD,
+      {DateMode mode = DateMode.DMY,
       PDuration? selectDate,
       PDuration? maxDate,
       PDuration? minDate,

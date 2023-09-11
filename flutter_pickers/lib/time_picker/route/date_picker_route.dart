@@ -736,9 +736,10 @@ class _PickerState extends State<_PickerContentView> {
   Widget _renderItemView() {
     // 选择器
     List<Widget> pickerList = [];
-    if (_dateItemModel.year) pickerList.add(pickerView(DateType.Year));
-    if (_dateItemModel.month) pickerList.add(pickerView(DateType.Month));
     if (_dateItemModel.day) pickerList.add(pickerView(DateType.Day));
+    if (_dateItemModel.month) pickerList.add(pickerView(DateType.Month));
+    if (_dateItemModel.year) pickerList.add(pickerView(DateType.Year));
+
     if (_dateItemModel.hour) pickerList.add(pickerView(DateType.Hour));
     if (_dateItemModel.minute) pickerList.add(pickerView(DateType.Minute));
     if (_dateItemModel.second) pickerList.add(pickerView(DateType.Second));

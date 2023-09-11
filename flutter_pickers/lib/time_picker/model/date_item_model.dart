@@ -40,6 +40,7 @@ const DateModeMap = {
   DateMode.YMDHM: '年月日时分',
   DateMode.YMDH: '年月日时',
   DateMode.YMD: '年月日',
+  DateMode.DMY: '日月年',
   DateMode.YM: '年月',
   DateMode.Y: '年',
   DateMode.MDHMS: '月日时分秒',
