@@ -68,10 +68,10 @@ class MainHomeCtr extends BaseGetCtr {
       var repayTypeFlag = bean?.cottonScreamMusicalAnybody ?? '';
 
       ///delete
-      state.overdueStatus = 0;
-      state.canRolloverPay = true;
-      repayTypeFlag = '1,1,1,1,1';
-      state.loadState = LoadState.succeed;
+      // state.overdueStatus = 0;
+      // state.canRolloverPay = true;
+      // repayTypeFlag = '1,1,1,1,1';
+      // state.loadState = LoadState.succeed;
 
       if (state.overdueStatus == -1) {
         await postQueryHomeDefaultInfoRequest();
@@ -138,8 +138,6 @@ class MainHomeCtr extends BaseGetCtr {
     }
    param['terminalSongHelpfulDeadDiamond']=payTypeStr;
     param['australianPhysicistBroadPileChart']=payMethod;
-
-
     var response = await HttpRequestManage.instance.postRepayUrlInfo(param);
     if (response.isSuccess()) {
     } else {
