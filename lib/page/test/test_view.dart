@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/json/upload_json_manage.dart';
 import 'package:rapicredito/local/app_constants.dart';
-import 'package:rapicredito/page/dialog/message_input_dialog.dart';
+import 'package:rapicredito/page/loan/widget/commit_success_dialog.dart';
 import 'package:rapicredito/page/main/home/widget/home_recommend_dialog.dart';
 import 'package:rapicredito/page/main/home/widget/home_rollover_repayment_dialog.dart';
 import 'package:rapicredito/page/test/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
-import 'package:rapicredito/widget/custom_picker.dart';
 
 class TestPage extends GetView<TestCtr> {
   const TestPage({super.key});
@@ -73,7 +72,6 @@ class TestPage extends GetView<TestCtr> {
                           return const HomeRecommendDialog();
                         });
                   }),
-
               CustomButton(
                   text: '个人信息',
                   onPressed: () {

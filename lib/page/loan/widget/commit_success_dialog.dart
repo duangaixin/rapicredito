@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
-import '../../main/home/index.dart';
 
 class CommitSuccessDialog extends StatefulWidget {
   @override
@@ -146,11 +146,10 @@ class _CommitSuccessDialogState extends State<CommitSuccessDialog> {
     });
   }
 
-  void goToMainPage() {
+  void goToMainPage() async {
     var mainHomeCtr = Get.find<MainHomeCtr>();
     mainHomeCtr.requestInitData();
-    Get.until((route) =>
-        (route as GetPageRoute).routeName == PageRouterName.mainPage);
+    Get.until((route) => route.settings.name == PageRouterName.mainPage);
   }
 
   @override

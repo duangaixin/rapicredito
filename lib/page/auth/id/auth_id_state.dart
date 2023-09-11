@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AuthIdState {
@@ -40,6 +41,9 @@ class AuthIdState {
   bool get btnDisableClick => _btnDisableClick.value;
 
   set btnDisableClick(value) => _btnDisableClick.value = value;
+  GlobalKey frontKey = GlobalKey();
+  GlobalKey behindKey = GlobalKey();
+  GlobalKey faceKey = GlobalKey();
 
   int? birthYear;
   int? birthMonth;

@@ -9,6 +9,7 @@ import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/page/main/mine/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
+import 'package:rapicredito/widget/progress_hud_view.dart';
 
 class MainMineCtr extends BaseGetCtr {
   MainMineCtr();
@@ -43,7 +44,7 @@ class MainMineCtr extends BaseGetCtr {
     }
     if (response.isSuccess()) {
       var authInfoBean = response.data;
-      state.phoneNum = authInfoBean?.pureDollFailure ?? '';
+      state.phoneNum = authInfoBean?.undividedMay ?? '';
       state.userName =
           authInfoBean?.pacificCheapMineralCrazyLamb ?? 'RapiCrédito';
     } else {
@@ -63,7 +64,13 @@ class MainMineCtr extends BaseGetCtr {
     }
     if (response.isSuccess()) {
       var photoBean = response.data;
-      state.userImageUrl = photoBean?.dueReligionFoggyCustom ?? '';
+
+     var userUrl= photoBean?.dueReligionFoggyCustom ?? '';
+     if(state.userImageUrl!=userUrl){
+       state.userImageUrl=userUrl;
+     }else{
+       ProgressHUD.showInfo('我是相等的');
+     }
     } else {
       NetException.dealAllException(response);
     }

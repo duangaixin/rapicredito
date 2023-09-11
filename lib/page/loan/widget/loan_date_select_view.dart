@@ -70,7 +70,7 @@ class LoanDateTopView extends GetView<LoanMoneyDateCtr> {
             itemBuilder: (context, index) {
               return _buildDateItemView(index);
             },
-            itemCount: 3,
+            itemCount:controller.state.dateList.length,
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             primary: false),

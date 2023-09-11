@@ -32,9 +32,12 @@ class ClientPage extends GetView<ClientCtr> {
               return _buildListItemView(index);
             },
           )),
-          const Padding(
-            padding: EdgeInsets.only(bottom: 25.0, left: 16.0, right: 16.0),
-            child: CommonAgreeView(),
+        Padding(
+            padding: const EdgeInsets.only(bottom: 25.0, left: 16.0, right: 16.0),
+            child: Text(
+              controller.state.tip,
+              style: const TextStyle(fontSize: 15.0, color: Color(0xff666666)),
+            ),
           )
         ],
       );

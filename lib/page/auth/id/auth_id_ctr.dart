@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_pickers/time_picker/model/pduration.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -18,7 +18,6 @@ import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/page/auth/id/index.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
-import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/compress_util.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
@@ -78,7 +77,9 @@ class AuthIdCtr extends BaseGetCtr {
         onSuccess: () async {
           XFile? result =
               await ImagePicker().pickImage(source: ImageSource.gallery);
-          print(result?.path ?? '' + '-----duanxin===path');
+          if (kDebugMode) {
+            print(result?.path ?? '' '-----image===path');
+          }
           if (result != null) {
             var file = File(result.path);
             _uploadPhotoData(file, isFront);
@@ -94,7 +95,9 @@ class AuthIdCtr extends BaseGetCtr {
         onSuccess: () async {
           XFile? result =
               await ImagePicker().pickImage(source: ImageSource.camera);
-          print(result?.path ?? '' + '-----duanxin===path');
+          if (kDebugMode) {
+            print(result?.path ?? '' '-----image===path');
+          }
           if (result != null) {
             var file = File(result.path);
             _uploadPhotoData(file, isFront, isUploadFace: isUploadFace);
@@ -265,10 +268,12 @@ class AuthIdCtr extends BaseGetCtr {
       NetException.dealAllException(response);
     }
   }
+
   void _goToAddAccountPage() {
     KeyboardUtils.unFocus();
     Get.toNamed(PageRouterName.accountPage);
   }
+
   void _uploadPhotoData(File file, bool isFront,
       {bool isUploadFace = false}) async {
     var compressFile = await CompressUtil.compressImage(file);
@@ -287,6 +292,7 @@ class AuthIdCtr extends BaseGetCtr {
       'contraryScientificRightNone': 'es',
       'everydayMapleChallengingAirline': isUploadFace ? '01' : '00'
     });
+
     Get.showLoading();
     var response =
         await HttpRequestManage.instance.postUploadPhotoRequest(formData);

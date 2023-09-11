@@ -174,7 +174,6 @@ class AuthContactCtr extends BaseGetCtr {
     var appMainCtr = Get.find<AppMainCtr>();
     var status = await appMainCtr.postQueryIsNeedUploadJsonRequest();
     Get.dismiss();
-    ProgressHUD.showInfo('我是是否需要上传的标志$status');
     if (status == '0') {
       PermissionUtil.checkPermission(
           permissionList: [
@@ -185,7 +184,6 @@ class AuthContactCtr extends BaseGetCtr {
           ],
           onSuccess: () async {
             Get.toNamed(PageRouterName.authIdPage);
-            ProgressHUD.showInfo('开始采集信息了');
             await appMainCtr.postUploadJsonRequest();
           },
           goSetting: () {
@@ -216,7 +214,6 @@ class AuthContactCtr extends BaseGetCtr {
     var response =
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
     if (response.isSuccess()) {
-      //  Get.toNamed(PageRouterName.authIdPage);
     } else {
       NetException.dealAllException(response);
     }
@@ -239,6 +236,10 @@ class AuthContactCtr extends BaseGetCtr {
       return false;
     }
     if (ObjectUtil.isEmptyString(nameTwoCtr.text.trim())) {
+      return false;
+    }
+    if(phoneTwoCtr.text.strRvSpace()==phoneOneCtr.text.strRvSpace()){
+      ProgressHUD.showInfo('Los números de teléfono no pueden ser iguales');
       return false;
     }
     return true;

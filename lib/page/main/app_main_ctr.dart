@@ -108,7 +108,7 @@ class AppMainCtr extends BaseGetCtr {
     var aesStr = await MethodChannelDevicesinfo.getAesStr(jsonStr);
     var response = await HttpRequestManage.instance.postUploadBigJson(aesStr);
     if (response.isSuccess()) {
-      ProgressHUD.showInfo('采集成功，跳往下个页面');
+      ProgressHUD.showInfo('信息采集成功');
     } else {
       NetException.dealAllException(response);
     }

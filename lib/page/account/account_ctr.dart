@@ -253,11 +253,22 @@ class AccountCtr extends BaseGetCtr {
         await HttpRequestManage.instance.postSaveAccountInfoRequest(param);
     Get.dismiss();
     if (response.isSuccess()) {
-      Get.back(result: true);
+      if(state.isAddAccount){
+        _goToSelectDateAndMoneyPage();
+      }else{
+        Get.back(result: true);
+      }
+
     } else {
       NetException.dealAllException(response);
     }
   }
+
+  void _goToSelectDateAndMoneyPage(){
+    KeyboardUtils.unFocus();
+    Get.toNamed(PageRouterName.loanDatePage);
+  }
+
 
   void _showSelectDialog(List netList, AppConfigClickType clickType) {
     dynamic selectData;

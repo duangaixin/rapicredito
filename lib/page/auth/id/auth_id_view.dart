@@ -17,14 +17,14 @@ import 'package:rapicredito/widget/custom_select_view.dart';
 class AuthIdPage extends GetView<AuthIdCtr> {
   const AuthIdPage({Key? key}) : super(key: key);
 
-  Widget idCameraView(String title, String imageUrl, VoidCallback func) =>
+  Widget idCameraView(Key key,String title, String imageUrl, VoidCallback func) =>
       CustomClickView(
           onTap: func,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               CustomImageView(
-                key: GlobalKey(),
+                key: key,
                 ObjectUtil.isEmptyString(imageUrl)
                     ? Resource.assetsImageAuthTakeCamera
                     : imageUrl,
@@ -63,7 +63,9 @@ class AuthIdPage extends GetView<AuthIdCtr> {
             padding: const EdgeInsets.only(top: 28.0, left: 16.0, right: 16.0),
             child: Row(mainAxisSize: MainAxisSize.max, children: [
               Expanded(child: Obx(() {
-                return idCameraView('Frente', controller.state.idFrontUrl, () {
+                return idCameraView(
+                    controller.state.frontKey,
+                    'Frente', controller.state.idFrontUrl, () {
                   //controller.tackCamera(isFront: true);
                   controller.showSelectDialog(isFront: true);
                 });
@@ -72,7 +74,9 @@ class AuthIdPage extends GetView<AuthIdCtr> {
                 width: 10.0,
               ),
               Expanded(child: Obx(() {
-                return idCameraView('Atrás', controller.state.idBackUrl, () {
+                return idCameraView(
+                    controller.state.behindKey,
+                    'Atrás', controller.state.idBackUrl, () {
                   //  controller.tackCamera(isFront: false);
                   controller.showSelectDialog(isFront: false);
                 });
@@ -94,6 +98,7 @@ class AuthIdPage extends GetView<AuthIdCtr> {
                 ObjectUtil.isEmptyString(controller.state.faceUrl)
                     ? Resource.assetsImageAuthCameraBg
                     : controller.state.faceUrl,
+                key: controller.state.faceKey,
                 imageType: ObjectUtil.isEmptyString(controller.state.faceUrl)
                     ? ImageType.assets
                     : ImageType.network,

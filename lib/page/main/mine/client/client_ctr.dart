@@ -28,6 +28,7 @@ class ClientCtr extends BaseGetCtr {
     Get.dismiss();
     if (response.isSuccess()) {
       var clientInfoBean = response.data;
+      state.tip=clientInfoBean?.aggressiveExamUsedBackStove??'';
       var modelList = clientInfoBean?.stillEmbassyVillagerReviewer ?? [];
       var whatAppList =
           clientInfoBean?.busyChimneyLiquidStadiumRectangleArithmetic ?? [];

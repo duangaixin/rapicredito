@@ -10,6 +10,8 @@ class ClientState {
   set loadState(value) => _loadState.value = value;
 
   List<ClientListBean?> dataSource = [];
+
+  String tip='';
 }
 
 class ClientListBean {

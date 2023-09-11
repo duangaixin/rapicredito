@@ -63,7 +63,7 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
                   visible: !isUrlNotExist,
                   child: CustomImageView(
                     imageUrl,
-                    placeholder: Resource.assetsImageAuthCameraBg,
+                    placeholder: Resource.assetsImageAuthTakeCamera,
                     shape: BoxShape.circle,
                     memCacheHeight: 75,
                     memCacheWidth: 75,
