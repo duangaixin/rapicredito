@@ -147,7 +147,4 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
               height: 19.0,
             )),
       );
-
-
-
 }

@@ -65,13 +65,29 @@ class MainHomeCtr extends BaseGetCtr {
 
       state.canRolloverPay = (bean?.endlessPie ?? 0) == 1;
       state.rolloverPayDay = bean?.strictMedicalPuzzleCafeteria ?? 0;
+      var repayTypeFlag = bean?.cottonScreamMusicalAnybody ?? '';
 
-      // state.overdueStatus=0;
-      // state.canRolloverPay=true;
+      ///delete
+      state.overdueStatus = 0;
+      state.canRolloverPay = true;
+      repayTypeFlag = '1,1,1,1,1';
+      state.loadState = LoadState.succeed;
 
       if (state.overdueStatus == -1) {
         await postQueryHomeDefaultInfoRequest();
       } else if (state.overdueStatus == 0) {
+        if (!ObjectUtil.isEmptyString(repayTypeFlag)) {
+          var payTypeList = repayTypeFlag.split(',');
+          if (!ObjectUtil.isEmptyList(payTypeList)) {
+            if (payTypeList.length >= 5) {
+              state.onePayShow = payTypeList[0] == '1';
+              state.twoPayShow = payTypeList[1] == '1';
+              state.threePayShow = payTypeList[2] == '1';
+              state.fourPayShow = payTypeList[3] == '1';
+              state.fivePayShow = payTypeList[4] == '1';
+            }
+          }
+        }
       } else {
         state.loadState = LoadState.succeed;
       }
@@ -105,8 +121,25 @@ class MainHomeCtr extends BaseGetCtr {
     }
   }
 
-  Future<void> postQueryRepayUrlRequest() async {
+  Future<void> postQueryRepayUrlRequest(PayType payType) async {
     Map<String, dynamic> param = getCommonParam();
+    var payTypeStr = '00';
+    var payMethod = '';
+    if (payType == PayType.payOne) {
+      payMethod = '1';
+    } else if (payType == PayType.payTwo) {
+      payMethod = '1';
+    } else if (payType == PayType.payThree) {
+      payMethod = '4';
+    } else if (payType == PayType.payFour) {
+      payMethod = '2';
+    } else if (payType == PayType.payFive) {
+      payMethod = '3';
+    }
+   param['terminalSongHelpfulDeadDiamond']=payTypeStr;
+    param['australianPhysicistBroadPileChart']=payMethod;
+
+
     var response = await HttpRequestManage.instance.postRepayUrlInfo(param);
     if (response.isSuccess()) {
     } else {
@@ -208,3 +241,5 @@ class MainHomeCtr extends BaseGetCtr {
 //   }
 // }
 }
+
+enum PayType { payOne, payTwo, payThree, payFour, payFive }

@@ -25,16 +25,32 @@ class CommonPayThreeWayView extends GetView<MainHomeCtr> {
         mainAxisSize: MainAxisSize.min,
         children: [
           onePayView,
-          const CustomDashLine(
-            color: Color(0xffE2E5DA),
-            dashWidth: 5.0,
-          ),
-          centerPayView,
-          const CustomDashLine(
-            color: Color(0xffE2E5DA),
-            dashWidth: 5.0,
-          ),
-          bottomPayView
+          Visibility(
+              visible: controller.state.fourPayShow,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const CustomDashLine(
+                    color: Color(0xffE2E5DA),
+                    dashWidth: 5.0,
+                  ),
+                  centerPayView,
+                ],
+              )),
+          Visibility(
+              visible: controller.state.fivePayShow,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const CustomDashLine(
+                    color: Color(0xffE2E5DA),
+                    dashWidth: 5.0,
+                  ),
+                  bottomPayView
+                ],
+              )),
         ],
       );
 
@@ -44,42 +60,45 @@ class CommonPayThreeWayView extends GetView<MainHomeCtr> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Row(
-                  mainAxisSize: MainAxisSize.min,
+            Visibility(
+                visible: controller.state.threePayShow,
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CustomImageView(
-                      Resource.assetsImageAuthTakeCamera,
-                      imageType: ImageType.assets,
-                      width: 63.43,
-                      height: 37.0,
-                      margin: EdgeInsets.only(right: 16.0),
+                    const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CustomImageView(
+                          Resource.assetsImageAuthTakeCamera,
+                          imageType: ImageType.assets,
+                          width: 63.43,
+                          height: 37.0,
+                          margin: EdgeInsets.only(right: 16.0),
+                        ),
+                        Text(
+                          'Efectivo',
+                          style: TextStyle(
+                              fontSize: 16.0, color: Color(0xff101F36)),
+                        ),
+                      ],
                     ),
-                    Text(
-                      'Efectivo',
-                      style:
-                          TextStyle(fontSize: 16.0, color: Color(0xff101F36)),
-                    ),
+                    CustomButton(
+                      onPressed: () {
+                        controller.postQueryRepayUrlRequest(PayType.payThree);
+                      },
+                      minWidth: 111.0,
+                      minHeight: 46.0,
+                      backgroundColor: const Color(0xffB8EF17),
+                      disabledBackgroundColor: const Color(0xffB8EF17),
+                      fontSize: 15.0,
+                      radius: 8.0,
+                      text: 'Pagar',
+                      textColor: const Color(0xff333333),
+                      fontWeight: FontWeight.bold,
+                    )
                   ],
-                ),
-                CustomButton(
-                  onPressed: () {},
-                  minWidth: 111.0,
-                  minHeight: 46.0,
-                  backgroundColor: const Color(0xffB8EF17),
-                  disabledBackgroundColor: const Color(0xffB8EF17),
-                  fontSize: 15.0,
-                  radius: 8.0,
-                  text: 'Pagar',
-                  textColor: const Color(0xff333333),
-                  fontWeight: FontWeight.bold,
-                )
-              ],
-            ),
-
+                )),
             Container(
               margin: EdgeInsets.only(top: 20.0, bottom: 20.0),
               padding: EdgeInsets.only(
@@ -93,43 +112,43 @@ class CommonPayThreeWayView extends GetView<MainHomeCtr> {
                 children: [
                   Expanded(
                       child: CustomImageView(
-                        Resource.assetsImageAuthTakeCamera,
-                        imageType: ImageType.assets,
-                        width: 43.44,
-                        height: 15.51,
-                        margin: EdgeInsets.only(right: 10.0),
-                      )),
+                    Resource.assetsImageAuthTakeCamera,
+                    imageType: ImageType.assets,
+                    width: 43.44,
+                    height: 15.51,
+                    margin: EdgeInsets.only(right: 10.0),
+                  )),
                   Expanded(
                       child: CustomImageView(
-                        Resource.assetsImageAuthTakeCamera,
-                        imageType: ImageType.assets,
-                        width: 43.44,
-                        height: 15.51,
-                        margin: EdgeInsets.only(right: 10.0),
-                      )),
+                    Resource.assetsImageAuthTakeCamera,
+                    imageType: ImageType.assets,
+                    width: 43.44,
+                    height: 15.51,
+                    margin: EdgeInsets.only(right: 10.0),
+                  )),
                   Expanded(
                       child: CustomImageView(
-                        Resource.assetsImageAuthTakeCamera,
-                        imageType: ImageType.assets,
-                        width: 43.44,
-                        height: 15.51,
-                        margin: EdgeInsets.only(right: 10.0),
-                      )),
+                    Resource.assetsImageAuthTakeCamera,
+                    imageType: ImageType.assets,
+                    width: 43.44,
+                    height: 15.51,
+                    margin: EdgeInsets.only(right: 10.0),
+                  )),
                   Expanded(
                       child: CustomImageView(
-                        Resource.assetsImageAuthTakeCamera,
-                        imageType: ImageType.assets,
-                        width: 43.44,
-                        height: 15.51,
-                        margin: EdgeInsets.only(right: 10.0),
-                      )),
+                    Resource.assetsImageAuthTakeCamera,
+                    imageType: ImageType.assets,
+                    width: 43.44,
+                    height: 15.51,
+                    margin: EdgeInsets.only(right: 10.0),
+                  )),
                   Expanded(
                       child: CustomImageView(
-                        Resource.assetsImageAuthTakeCamera,
-                        imageType: ImageType.assets,
-                        width: 60,
-                        height: 15.51,
-                      )),
+                    Resource.assetsImageAuthTakeCamera,
+                    imageType: ImageType.assets,
+                    width: 60,
+                    height: 15.51,
+                  )),
                 ],
               ),
             )
@@ -166,7 +185,9 @@ class CommonPayThreeWayView extends GetView<MainHomeCtr> {
                 ],
               ),
               CustomButton(
-                onPressed: () {},
+                onPressed: () {
+                  controller.postQueryRepayUrlRequest(PayType.payFour);
+                },
                 minWidth: 111.0,
                 minHeight: 46.0,
                 backgroundColor: const Color(0xffB8EF17),
@@ -179,11 +200,8 @@ class CommonPayThreeWayView extends GetView<MainHomeCtr> {
               )
             ],
           ),
-
         ],
       ));
-
-
 
   Widget get bottomPayView => Container(
       padding: const EdgeInsets.only(
@@ -206,13 +224,14 @@ class CommonPayThreeWayView extends GetView<MainHomeCtr> {
                   ),
                   Text(
                     'PSE',
-                    style:
-                    TextStyle(fontSize: 16.0, color: Color(0xff101F36)),
+                    style: TextStyle(fontSize: 16.0, color: Color(0xff101F36)),
                   ),
                 ],
               ),
               CustomButton(
-                onPressed: () {},
+                onPressed: () {
+                  controller.postQueryRepayUrlRequest(PayType.payFive);
+                },
                 minWidth: 111.0,
                 minHeight: 46.0,
                 backgroundColor: const Color(0xffB8EF17),
@@ -225,7 +244,6 @@ class CommonPayThreeWayView extends GetView<MainHomeCtr> {
               )
             ],
           ),
-
         ],
       ));
 }

@@ -65,6 +65,7 @@ class HomeOrderInfoBean extends Object {
   String? nextCounterConvenienceHandkerchief;
 
   @JsonKey(name: 'strictMedicalPuzzleCafeteria')
+
   ///duration
   int? strictMedicalPuzzleCafeteria;
 
@@ -73,7 +74,12 @@ class HomeOrderInfoBean extends Object {
   @JsonKey(name: 'indeedSoftMomEnoughPill')
   String? indeedSoftMomEnoughPill;
   @JsonKey(name: 'endlessPie')
-   int?endlessPie;
+  int? endlessPie;
+  @JsonKey(name: 'cottonScreamMusicalAnybody')
+
+  ///repayTypeFlag
+  String? cottonScreamMusicalAnybody;
+
   HomeOrderInfoBean(
       this.spiritualPlanetEggplantRelation,
       this.federalDirectorySituation,
@@ -97,7 +103,9 @@ class HomeOrderInfoBean extends Object {
       this.nextCounterConvenienceHandkerchief,
       this.strictMedicalPuzzleCafeteria,
       this.paleSuiteUnderwearHot,
-      this.indeedSoftMomEnoughPill,this.endlessPie);
+      this.indeedSoftMomEnoughPill,
+      this.endlessPie,
+      this.cottonScreamMusicalAnybody);
 
   factory HomeOrderInfoBean.fromJson(Map<String, dynamic> srcJson) =>
       _$HomeOrderInfoBeanFromJson(srcJson);

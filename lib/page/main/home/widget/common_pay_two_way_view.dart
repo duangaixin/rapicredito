@@ -35,16 +35,32 @@ class CommonPayTwoWayView extends GetView<MainHomeCtr> {
                   fontWeight: FontWeight.bold),
             ),
           ),
-          const CustomDashLine(
-            color: Color(0xffE2E5DA),
-            dashWidth: 5.0,
-          ),
-          centerPayView,
-          const CustomDashLine(
-            color: Color(0xffE2E5DA),
-            dashWidth: 5.0,
-          ),
-          bottomPayView
+          Visibility(
+              visible: controller.state.onePayShow,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const CustomDashLine(
+                    color: Color(0xffE2E5DA),
+                    dashWidth: 5.0,
+                  ),
+                  centerPayView
+                ],
+              )),
+          Visibility(
+              visible: controller.state.twoPayShow,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const CustomDashLine(
+                    color: Color(0xffE2E5DA),
+                    dashWidth: 5.0,
+                  ),
+                  bottomPayView
+                ],
+              )),
         ],
       );
 
@@ -87,7 +103,9 @@ class CommonPayTwoWayView extends GetView<MainHomeCtr> {
               ],
             ),
             CustomButton(
-              onPressed: () {},
+              onPressed: () {
+                controller.postQueryRepayUrlRequest(PayType.payOne);
+              },
               minWidth: 111.0,
               minHeight: 46.0,
               backgroundColor: const Color(0xffB8EF17),
@@ -128,7 +146,9 @@ class CommonPayTwoWayView extends GetView<MainHomeCtr> {
                 ],
               ),
               CustomButton(
-                onPressed: () {},
+                onPressed: () {
+                  controller.postQueryRepayUrlRequest(PayType.payTwo);
+                },
                 minWidth: 111.0,
                 minHeight: 46.0,
                 backgroundColor: const Color(0xffB8EF17),

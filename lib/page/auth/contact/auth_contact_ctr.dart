@@ -238,7 +238,7 @@ class AuthContactCtr extends BaseGetCtr {
     if (ObjectUtil.isEmptyString(nameTwoCtr.text.trim())) {
       return false;
     }
-    if(phoneTwoCtr.text.strRvSpace()==phoneOneCtr.text.strRvSpace()){
+    if (phoneTwoCtr.text.strRvSpace() == phoneOneCtr.text.strRvSpace()) {
       ProgressHUD.showInfo('Los números de teléfono no pueden ser iguales');
       return false;
     }

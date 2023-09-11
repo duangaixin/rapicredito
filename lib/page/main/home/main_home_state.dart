@@ -33,6 +33,14 @@ class MainHomeState {
  bool canRolloverPay=false;
   ///展示支付按钮时间
   int rolloverPayDay=0;
+
+  bool onePayShow=true;
+  bool twoPayShow=true;
+  bool threePayShow=true;
+  bool fourPayShow=true;
+  bool fivePayShow=true;
+
+
   final RxInt _overdueStatus = (-1).obs;
 
   int get overdueStatus => _overdueStatus.value;

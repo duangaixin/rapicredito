@@ -9,15 +9,21 @@ class AuthPersonState {
   final GlobalKey emailKey = GlobalKey();
   final LayerLink layerLink = LayerLink();
 
-  List<String>emailEndList=['@gmail.com','@hotmail.com','@yahoo.com','@outlook.com','@msn.com'];
-  String endEmailStr='';
-
+  List<String> emailEndList = [
+    '@gmail.com',
+    '@hotmail.com',
+    '@yahoo.com',
+    '@outlook.com',
+    '@msn.com'
+  ];
+  String endEmailStr = '';
 
   final RxInt _emailSelectIndex = (-1).obs;
 
-  int get emailSelectIndex  => _emailSelectIndex .value;
+  int get emailSelectIndex => _emailSelectIndex.value;
 
-  set emailSelectIndex (value) => _emailSelectIndex .value = value;
+  set emailSelectIndex(value) => _emailSelectIndex.value = value;
+
   ///收入
   final RxString _income = ''.obs;
 
