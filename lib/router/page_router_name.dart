@@ -9,8 +9,7 @@ class PageRouterName {
   static const String authPersonPage = '/authPersonPage';
   static const String authContactPage = '/authContactPage';
   static const String authIdPage = '/authIdPage';
-  static const String addAccountPage = '/addAccountPage';
-  static const String changeAccountPage = '/changeAccountPage';
+  static const String accountPage = '/accountPage';
   static const String clientPage = '/clientPage';
   static const String loanDatePage = '/loanDatePage';
   static const String rolloverPaymentResultPage = '/rolloverPaymentResultPage';

@@ -13,4 +13,6 @@ class AppConstants {
   static const String webViewUrlKey = 'webView_url';
   static const String isTokenExpired = 'isTokenExpired';
   static const String fromPageNameKey = 'fromPageNameKey';
+  static const String isFromAddAccountKey = 'isFromAddAccountKey';
+
 }

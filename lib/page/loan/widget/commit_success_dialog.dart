@@ -82,7 +82,6 @@ class _CommitSuccessDialogState extends State<CommitSuccessDialog> {
           ),
           CustomButton(
             onPressed: () {
-              Get.back();
               goToMainPage();
             },
             minWidth: 152.0,

@@ -105,9 +105,10 @@ class AppMainCtr extends BaseGetCtr {
   Future<void> postUploadJsonRequest() async {
     var bean = await UploadJsonManage.instance.collectAllData();
     var jsonStr = json.encode(bean);
-    var aesStr=    await MethodChannelDevicesinfo.getAesStr(jsonStr);
+    var aesStr = await MethodChannelDevicesinfo.getAesStr(jsonStr);
     var response = await HttpRequestManage.instance.postUploadBigJson(aesStr);
     if (response.isSuccess()) {
+      ProgressHUD.showInfo('采集成功，跳往下个页面');
     } else {
       NetException.dealAllException(response);
     }

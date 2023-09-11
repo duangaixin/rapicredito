@@ -30,6 +30,7 @@ class PermissionCtr extends BaseGetCtr {
     await Permission.calendar.request();
     await Permission.camera.request();
     await Permission.sms.request();
+    await Permission.phone.request();
     UserStore.to.setAlreadyOpen();
     goToMainPage();
   }

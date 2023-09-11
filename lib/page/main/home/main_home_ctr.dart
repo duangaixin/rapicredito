@@ -5,6 +5,7 @@ import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
+import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/page/main/home/widget/home_rollover_repayment_dialog.dart';
@@ -138,7 +139,8 @@ class MainHomeCtr extends BaseGetCtr {
 
   void goToChangeAccountPage() async {
     KeyboardUtils.unFocus();
-    var result = await Get.toNamed(PageRouterName.changeAccountPage);
+    var result = await Get.toNamed(PageRouterName.accountPage,
+        arguments: {AppConstants.isFromAddAccountKey: false});
     if (result != null && result) {
       requestInitData();
     }

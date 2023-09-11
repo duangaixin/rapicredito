@@ -256,14 +256,19 @@ class AuthIdCtr extends BaseGetCtr {
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
     Get.dismiss();
     if (response.isSuccess()) {
-      var mainHomeCtr = Get.find<MainHomeCtr>();
-      mainHomeCtr.requestInitData();
-      Get.until((route) => route.settings.name == PageRouterName.mainPage);
+      _goToAddAccountPage();
+      // var mainHomeCtr = Get.find<MainHomeCtr>();
+      // mainHomeCtr.requestInitData();
+      // Get.toNamed(PageRouterName.addAccountPage);
+      //Get.until((route) => route.settings.name == PageRouterName.mainPage);
     } else {
       NetException.dealAllException(response);
     }
   }
-
+  void _goToAddAccountPage() {
+    KeyboardUtils.unFocus();
+    Get.toNamed(PageRouterName.accountPage);
+  }
   void _uploadPhotoData(File file, bool isFront,
       {bool isUploadFace = false}) async {
     var compressFile = await CompressUtil.compressImage(file);

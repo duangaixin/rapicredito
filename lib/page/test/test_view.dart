@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/json/upload_json_manage.dart';
+import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/page/dialog/message_input_dialog.dart';
 import 'package:rapicredito/page/main/home/widget/home_recommend_dialog.dart';
 import 'package:rapicredito/page/main/home/widget/home_rollover_repayment_dialog.dart';
@@ -118,12 +119,13 @@ class TestPage extends GetView<TestCtr> {
               CustomButton(
                   text: '添加账户',
                   onPressed: () {
-                    Get.toNamed(PageRouterName.addAccountPage);
+                    Get.toNamed(PageRouterName.accountPage);
                   }),
               CustomButton(
                   text: '修改账户',
                   onPressed: () {
-                    Get.toNamed(PageRouterName.changeAccountPage);
+                    Get.toNamed(PageRouterName.accountPage,
+                        arguments: {AppConstants.isFromAddAccountKey: false});
                   }),
               CustomButton(
                   text: '首贷单金额单期限',

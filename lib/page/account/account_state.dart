@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
 import 'package:rapicredito/model/config_info_bean.dart';
 import 'package:rapicredito/model/key_value_bean.dart';
+import 'package:rapicredito/widget/load_container_view.dart';
 
-class AddAccountState {
-  String regexFirstNotNull = r'^(\S){1}';
+class AccountState {
   List<String> accountTypeList = ['Billetera Móvil', 'Cuenta Bancaria'];
-
+  bool isAddAccount=true;
   String collectionTypeCode = '';
 
   List<ConfigInfoBean> originAccountList = [];
@@ -13,6 +13,11 @@ class AddAccountState {
   List<ConfigInfoBean> originBankTypeList = [];
 
   RxList<KeyValueBean> walletList = <KeyValueBean>[].obs;
+  final _loadState = LoadState.loading.obs;
+
+  LoadState get loadState => _loadState.value;
+
+  set loadState(value) => _loadState.value = value;
   final RxInt _walletSelectIndex = 0.obs;
 
   int get walletSelectIndex => _walletSelectIndex.value;

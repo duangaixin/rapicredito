@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:rapicredito/page/account/add/index.dart';
+import 'package:rapicredito/page/account/index.dart';
 import 'package:rapicredito/page/auth/person/auth_person_ctr.dart';
 import 'package:rapicredito/widget/custom_color_button.dart';
 import 'package:rapicredito/widget/custom_edit_view.dart';
 import 'package:rapicredito/widget/custom_select_view.dart';
 
-class AddBankView extends GetView<AddAccountCtr> {
-  const AddBankView({Key? key}) : super(key: key);
+class BankView extends GetView<AccountCtr> {
+  const BankView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,8 @@ class AddBankView extends GetView<AddAccountCtr> {
                 editContent: controller.state.bankName,
                 action: () {
                   controller.postAppConfigInfoRequest(
-                      AppConfigClickType.bankNameList);
+                      AppConfigClickType.bankNameList,
+                      isShowDialog: true);
                 },
               );
             }),
@@ -50,7 +51,8 @@ class AddBankView extends GetView<AddAccountCtr> {
                 editContent: controller.state.bankType,
                 action: () {
                   controller.postAppConfigInfoRequest(
-                      AppConfigClickType.bankAccountType);
+                      AppConfigClickType.bankAccountType,
+                      isShowDialog: true);
                 },
               );
             }),
@@ -61,11 +63,7 @@ class AddBankView extends GetView<AddAccountCtr> {
               key: GlobalKey(),
               maxLength: 16,
               keyboardType: TextInputType.number,
-              inputFormatter: [
-                FilteringTextInputFormatter.deny(
-                  RegExp(controller.state.regexFirstNotNull),
-                )
-              ],
+              inputFormatter: [],
               controller: controller.bankAccountCtr,
               editTitle: 'Numero de cuenta',
               hintText: 'Introducir texto',
@@ -77,11 +75,7 @@ class AddBankView extends GetView<AddAccountCtr> {
               key: GlobalKey(),
               maxLength: 16,
               keyboardType: TextInputType.number,
-              inputFormatter: [
-                FilteringTextInputFormatter.deny(
-                  RegExp(controller.state.regexFirstNotNull),
-                )
-              ],
+              inputFormatter: [],
               controller: controller.bankAccountConfirmCtr,
               editTitle: 'Confirmar Numero de cuenta',
               hintText: 'Introducir texto',

@@ -174,6 +174,7 @@ class AuthContactCtr extends BaseGetCtr {
     var appMainCtr = Get.find<AppMainCtr>();
     var status = await appMainCtr.postQueryIsNeedUploadJsonRequest();
     Get.dismiss();
+    ProgressHUD.showInfo('我是是否需要上传的标志$status');
     if (status == '0') {
       PermissionUtil.checkPermission(
           permissionList: [
@@ -183,10 +184,9 @@ class AuthContactCtr extends BaseGetCtr {
             Permission.phone,
           ],
           onSuccess: () async {
-            Get.showLoading();
-            await appMainCtr.postUploadJsonRequest();
-            Get.dismiss();
             Get.toNamed(PageRouterName.authIdPage);
+            ProgressHUD.showInfo('开始采集信息了');
+            await appMainCtr.postUploadJsonRequest();
           },
           goSetting: () {
             showGoSettingDialog();
@@ -216,7 +216,7 @@ class AuthContactCtr extends BaseGetCtr {
     var response =
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
     if (response.isSuccess()) {
-     //  Get.toNamed(PageRouterName.authIdPage);
+      //  Get.toNamed(PageRouterName.authIdPage);
     } else {
       NetException.dealAllException(response);
     }

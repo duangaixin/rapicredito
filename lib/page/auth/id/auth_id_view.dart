@@ -31,6 +31,8 @@ class AuthIdPage extends GetView<AuthIdCtr> {
                 imageType: ObjectUtil.isEmptyString(imageUrl)
                     ? ImageType.assets
                     : ImageType.network,
+                memCacheWidth: controller.state.imageWidth.toInt(),
+                memCacheHeight: 91,
                 width: controller.state.imageWidth,
                 placeholder: Resource.assetsImageAuthTakeCamera,
                 height: 91.0,
@@ -96,6 +98,8 @@ class AuthIdPage extends GetView<AuthIdCtr> {
                     ? ImageType.assets
                     : ImageType.network,
                 placeholder: Resource.assetsImageAuthCameraBg,
+                memCacheHeight: 91,
+                memCacheWidth: 167,
                 width: 167.0,
                 height: 91.0,
                 radius: 8.0,
