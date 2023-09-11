@@ -73,29 +73,7 @@ class TestPage extends GetView<TestCtr> {
                           return const HomeRecommendDialog();
                         });
                   }),
-              CustomButton(
-                  text: '输入弹窗',
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (_) {
-                          return MessageInputDialog(
-                            clickConfirm: (String s) {},
-                          );
-                        });
-                  }),
-              CustomButton(
-                  text: '权限页面',
-                  onPressed: () {
-                    Get.toNamed(PageRouterName.permissionPage);
-                  }),
-              CustomButton(
-                  text: '底部弹窗',
-                  onPressed: () {
-                    CustomPicker.showSinglePicker(context,
-                        data: ['1', '2', '3', '4']);
-                  }),
+
               CustomButton(
                   text: '个人信息',
                   onPressed: () {

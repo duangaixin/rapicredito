@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/account/index.dart';
 import 'package:rapicredito/page/auth/person/auth_person_ctr.dart';
@@ -63,7 +62,6 @@ class BankView extends GetView<AccountCtr> {
               key: GlobalKey(),
               maxLength: 16,
               keyboardType: TextInputType.number,
-              inputFormatter: [],
               controller: controller.bankAccountCtr,
               editTitle: 'Numero de cuenta',
               hintText: 'Introducir texto',
@@ -75,7 +73,6 @@ class BankView extends GetView<AccountCtr> {
               key: GlobalKey(),
               maxLength: 16,
               keyboardType: TextInputType.number,
-              inputFormatter: [],
               controller: controller.bankAccountConfirmCtr,
               editTitle: 'Confirmar Numero de cuenta',
               hintText: 'Introducir texto',

@@ -56,17 +56,4 @@ class AccountState {
 
   set bankBtnDisableClick(value) => _bankBtnDisableClick.value = value;
 
-// ///银行名称是否可编辑
-// final RxBool _bankNameEnable = true.obs;
-//
-// bool get bankNameEnable => _bankNameEnable.value;
-//
-// set bankNameEnable(value) => _bankNameEnable.value = value;
-
-// ///银行类型是否可编辑
-// final RxBool _bankTypeEnable = true.obs;
-//
-// bool get bankTypeEnable => _bankTypeEnable.value;
-//
-// set bankTypeEnable(value) => _bankTypeEnable.value = value;
 }
