@@ -3,6 +3,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/get/getx_extension.dart';
+import 'package:rapicredito/get/getx_storage_service.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/local/app_constants.dart';
@@ -16,6 +17,12 @@ class MainMineCtr extends BaseGetCtr {
 
   final state = MainMineState();
   var refreshController = RefreshController();
+
+  @override
+  void onInit() {
+    state.phoneNum = StorageService.to.getString(AppConstants.userPhoneKey);
+    super.onInit();
+  }
 
   void requestInitData() async {
     if (UserStore.to.hasToken) {
@@ -44,7 +51,6 @@ class MainMineCtr extends BaseGetCtr {
     }
     if (response.isSuccess()) {
       var authInfoBean = response.data;
-      state.phoneNum = authInfoBean?.undividedMay ?? '';
       state.userName =
           authInfoBean?.pacificCheapMineralCrazyLamb ?? 'RapiCrédito';
     } else {
@@ -65,12 +71,12 @@ class MainMineCtr extends BaseGetCtr {
     if (response.isSuccess()) {
       var photoBean = response.data;
 
-     var userUrl= photoBean?.dueReligionFoggyCustom ?? '';
-     if(state.userImageUrl!=userUrl){
-       state.userImageUrl=userUrl;
-     }else{
-       ProgressHUD.showInfo('我是相等的');
-     }
+      var userUrl = photoBean?.dueReligionFoggyCustom ?? '';
+      if (state.userImageUrl != userUrl) {
+        state.userImageUrl = userUrl;
+      } else {
+        ProgressHUD.showInfo('我是相等的');
+      }
     } else {
       NetException.dealAllException(response);
     }

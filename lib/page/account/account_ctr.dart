@@ -247,28 +247,33 @@ class AccountCtr extends BaseGetCtr {
 
   void postSaveAccountRequest() async {
     KeyboardUtils.unFocus();
+    var canNext = false;
+    if (state.accountTypeSelectIndex == 0) {
+      canNext = _validateWallet();
+    } else {
+      canNext = _validateBank();
+    }
+    if(!canNext)return;
     Map<String, dynamic> param = collectAccountParam();
     Get.showLoading();
     var response =
         await HttpRequestManage.instance.postSaveAccountInfoRequest(param);
     Get.dismiss();
     if (response.isSuccess()) {
-      if(state.isAddAccount){
+      if (state.isAddAccount) {
         _goToSelectDateAndMoneyPage();
-      }else{
+      } else {
         Get.back(result: true);
       }
-
     } else {
       NetException.dealAllException(response);
     }
   }
 
-  void _goToSelectDateAndMoneyPage(){
+  void _goToSelectDateAndMoneyPage() {
     KeyboardUtils.unFocus();
     Get.toNamed(PageRouterName.loanDatePage);
   }
-
 
   void _showSelectDialog(List netList, AppConfigClickType clickType) {
     dynamic selectData;
@@ -347,11 +352,29 @@ class AccountCtr extends BaseGetCtr {
     });
   }
 
+  bool _validateWallet() {
+    if (walletAccountConfirmCtr.text.strRvSpace() !=
+        walletAccountCtr.text.strRvSpace()) {
+      ProgressHUD.showInfo(
+          'Por favor, rellene el mismo número de cuenta de billetera');
+      return false;
+    }
+    return true;
+  }
+
+  bool _validateBank() {
+    if (bankAccountConfirmCtr.text.strRvSpace() !=
+        bankAccountCtr.text.strRvSpace()) {
+      ProgressHUD.showInfo(
+          'Por favor, introduzca el mismo número de cuenta bancaria');
+      return false;
+    }
+    return true;
+  }
+
   void _walletBtnCanClick() {
     if (ObjectUtil.isEmptyString(walletAccountCtr.text.strRvSpace()) ||
-        ObjectUtil.isEmptyString(walletAccountConfirmCtr.text.strRvSpace()) ||
-        walletAccountConfirmCtr.text.strRvSpace() !=
-            walletAccountCtr.text.strRvSpace()) {
+        ObjectUtil.isEmptyString(walletAccountConfirmCtr.text.strRvSpace())) {
       state.walletBtnDisableClick = true;
     } else {
       state.walletBtnDisableClick = false;
@@ -361,8 +384,6 @@ class AccountCtr extends BaseGetCtr {
   void _bankBtnCanClick() {
     if (ObjectUtil.isEmptyString(bankAccountCtr.text.strRvSpace()) ||
         ObjectUtil.isEmptyString(bankAccountConfirmCtr.text.strRvSpace()) ||
-        bankAccountConfirmCtr.text.strRvSpace() !=
-            bankAccountCtr.text.strRvSpace() ||
         ObjectUtil.isEmptyString(state.bankType) ||
         ObjectUtil.isEmptyString(state.bankName)) {
       state.bankBtnDisableClick = true;

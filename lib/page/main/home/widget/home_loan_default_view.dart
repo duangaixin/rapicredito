@@ -4,8 +4,10 @@ import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/page/main/home/widget/common_agreement_view.dart';
 import 'package:rapicredito/page/main/home/widget/common_app_bar_view.dart';
 import 'package:rapicredito/style/index.dart';
+import 'package:rapicredito/utils/text_util.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
+
 ///默认
 class HomeLoanDefaultView extends GetView<MainHomeCtr> {
   const HomeLoanDefaultView({Key? key}) : super(key: key);
@@ -83,8 +85,14 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
                                           Obx(() {
+                                            var showStr =
+                                                controller.state.maxAmount;
+                                            if (!showStr.contains('-')) {
+                                              showStr = TextUtil.formatComma3(
+                                                  controller.state.maxAmount);
+                                            }
                                             return Text(
-                                              controller.state.maxAmount,
+                                              showStr,
                                               textAlign: TextAlign.justify,
                                               style: const TextStyle(
                                                   fontSize: 30.0,

@@ -237,14 +237,19 @@ class AuthIdCtr extends BaseGetCtr {
       firstNameCtr.text = authInfoBean?.puzzledConditionFamiliarUnion ?? '';
       secondNameCtr.text = authInfoBean?.pacificCheapMineralCrazyLamb ?? '';
       state.gender = authInfoBean?.fairJarExitPair ?? '';
-      state.birth = authInfoBean?.juicyGayPresentation ?? '';
-      if (!ObjectUtil.isEmptyString(state.birth)) {
-        List<String> birthList = state.birth.split('-');
+     var birthStr = authInfoBean?.juicyGayPresentation ?? '';
+      if (!ObjectUtil.isEmptyString(birthStr)) {
+        List<String> birthList = birthStr.split('-');
         if (!ObjectUtil.isEmptyList(birthList) && birthList.length == 3) {
-          state.birthYear = int.tryParse(birthList[2]);
-          state.birthMonth = int.tryParse(birthList[1]);
-          state.birthDay = int.tryParse(birthList[0]);
+         var year= birthList[2];
+       var month=  birthList[1];
+       var day= birthList[0];
+          state.birthYear = int.tryParse(year);
+          state.birthMonth = int.tryParse(month);
+          state.birthDay = int.tryParse(day);
+          state.birth= '${day.padLeft(2,'0')}-${month.padLeft(2,'0')}-$year';
         }
+
       }
       _btnCanClick();
     } else {
@@ -261,10 +266,6 @@ class AuthIdCtr extends BaseGetCtr {
     Get.dismiss();
     if (response.isSuccess()) {
       _goToAddAccountPage();
-      // var mainHomeCtr = Get.find<MainHomeCtr>();
-      // mainHomeCtr.requestInitData();
-      // Get.toNamed(PageRouterName.addAccountPage);
-      //Get.until((route) => route.settings.name == PageRouterName.mainPage);
     } else {
       NetException.dealAllException(response);
     }

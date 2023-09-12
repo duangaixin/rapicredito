@@ -171,15 +171,23 @@ class AuthContactCtr extends BaseGetCtr {
 
   void showPermissionDialog() {
     showDialog(
+        barrierDismissible: false,
         context: Get.context!,
         builder: (_) {
-          return PermissionDialog(rightClickConfirm: () {
-            uploadJson();
-          });
+          return Dialog(
+            shape: const RoundedRectangleBorder(
+                borderRadius:
+                BorderRadius.all(Radius.circular(8.0))),
+            insetPadding:
+            const EdgeInsets.symmetric(horizontal: 20.0),
+            child: PermissionDialog(rightClickConfirm: () {
+              _uploadJson();
+            }),
+          );
         });
   }
 
-  void uploadJson() async {
+  void _uploadJson() async {
     var appMainCtr = Get.find<AppMainCtr>();
     var status = await appMainCtr.postQueryIsNeedUploadJsonRequest();
     if (status == '0') {

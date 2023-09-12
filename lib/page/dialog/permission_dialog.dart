@@ -121,6 +121,7 @@ class _PermissionDialogState extends State<PermissionDialog> {
           Expanded(
             child: CustomButton(
                 onPressed: () {
+                  Get.back();
                   widget.rightClickConfirm();
                 },
                 minHeight: 46.0,

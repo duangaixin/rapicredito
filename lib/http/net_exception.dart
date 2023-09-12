@@ -32,17 +32,11 @@ class NetException {
             return;
           } else if (e is FormatException) {
             ProgressHUD.showError('Pengecualian dalam format data');
-          } else {
-            showNoNetDialog();
-            return;
           }
         } else {
-          showNoNetDialog();
-          return;
+          ProgressHUD.showError('unknow error');
         }
       }
-    } else {
-      showNoNetDialog();
     }
   }
 

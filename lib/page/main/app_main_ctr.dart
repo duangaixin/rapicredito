@@ -7,9 +7,11 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/get/getx_extension.dart';
+import 'package:rapicredito/get/getx_storage_service.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/json/upload_json_manage.dart';
+import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/page/main/index.dart';
@@ -17,6 +19,7 @@ import 'package:rapicredito/page/main/mine/index.dart';
 import 'package:rapicredito/page/main/order/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/style/index.dart';
+import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/widget/progress_hud_view.dart';
 
 class AppMainCtr extends BaseGetCtr {
@@ -51,6 +54,10 @@ class AppMainCtr extends BaseGetCtr {
     } else if (state.pageIndex == 2) {
       if (UserStore.to.hasToken) {
         var mineCtr = Get.find<MainMineCtr>();
+        var phoneNum = UserStore.to.mUserPhone;
+        if (!ObjectUtil.isEmptyString(phoneNum)) {
+          mineCtr.state.phoneNum = phoneNum;
+        }
         mineCtr.refreshInfo();
       }
     }
