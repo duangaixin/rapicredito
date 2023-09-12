@@ -49,7 +49,11 @@
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="tel" />
         </intent>
-
+<!--        <intent>-->
+<!--            <action android:name="android.intent.action.VIEW" />-->
+<!--            <category android:name="android.intent.category.BROWSABLE" />-->
+<!--            <data android:scheme="https" />-->
+<!--        </intent>-->
     </queries>
     <application
         android:name=".MyApp"
@@ -83,7 +87,7 @@
 
         <provider
             android:name=".PickPhotoProvider"
-            android:authorities="com.loan.credito.cash.credit.efectivo.profin.prestamo.dinero.rapicredito"
+            android:authorities="com.loan.credito.cash.credit.efectivo.profin"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

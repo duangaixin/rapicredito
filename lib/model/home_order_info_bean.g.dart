@@ -8,6 +8,15 @@ part of 'home_order_info_bean.dart';
 
 HomeOrderInfoBean _$HomeOrderInfoBeanFromJson(Map<String, dynamic> json) =>
     HomeOrderInfoBean(
+      (json['unusualPing'] as num?)?.toDouble(),
+      json['prettyRefrigeratorSleepyPaleNovelist'] as String?,
+      json['valuableCurrencyBackSkiPineapple'] as String,
+      json['aggressiveExamUsedBackStove'] as String,
+      json['quietGreekFairDebt'] as String,
+      (json['unsafeLicenseNut'] as num).toDouble(),
+      json['richChangeableMuchFebruary'] as String,
+      json['busyBellyShower'] as String,
+      (json['dayLateFee'] as num).toDouble(),
       json['spiritualPlanetEggplantRelation'] as String?,
       json['federalDirectorySituation'] as int?,
       json['disabledLondonPrivatePoolAmericanInstrument'] as int?,
@@ -31,12 +40,23 @@ HomeOrderInfoBean _$HomeOrderInfoBeanFromJson(Map<String, dynamic> json) =>
       json['strictMedicalPuzzleCafeteria'] as int?,
       json['paleSuiteUnderwearHot'] as String?,
       json['indeedSoftMomEnoughPill'] as String?,
-      json['endlessPie'] as int?,
+      json['endlessPie'] as String?,
       json['cottonScreamMusicalAnybody'] as String?,
     );
 
 Map<String, dynamic> _$HomeOrderInfoBeanToJson(HomeOrderInfoBean instance) =>
     <String, dynamic>{
+      'unusualPing': instance.unusualPing,
+      'prettyRefrigeratorSleepyPaleNovelist':
+          instance.prettyRefrigeratorSleepyPaleNovelist,
+      'valuableCurrencyBackSkiPineapple':
+          instance.valuableCurrencyBackSkiPineapple,
+      'aggressiveExamUsedBackStove': instance.aggressiveExamUsedBackStove,
+      'quietGreekFairDebt': instance.quietGreekFairDebt,
+      'unsafeLicenseNut': instance.unsafeLicenseNut,
+      'richChangeableMuchFebruary': instance.richChangeableMuchFebruary,
+      'busyBellyShower': instance.busyBellyShower,
+      'dayLateFee': instance.dayLateFee,
       'spiritualPlanetEggplantRelation':
           instance.spiritualPlanetEggplantRelation,
       'federalDirectorySituation': instance.federalDirectorySituation,

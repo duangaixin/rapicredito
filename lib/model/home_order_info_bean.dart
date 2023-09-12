@@ -4,6 +4,25 @@ part 'home_order_info_bean.g.dart';
 
 @JsonSerializable()
 class HomeOrderInfoBean extends Object {
+  @JsonKey(name: 'unusualPing')
+  double? unusualPing;
+  @JsonKey(name: 'prettyRefrigeratorSleepyPaleNovelist')
+  String? prettyRefrigeratorSleepyPaleNovelist;
+  @JsonKey(name: 'valuableCurrencyBackSkiPineapple')
+  String valuableCurrencyBackSkiPineapple;
+  @JsonKey(name: 'aggressiveExamUsedBackStove')
+  String aggressiveExamUsedBackStove;
+  @JsonKey(name: 'quietGreekFairDebt')
+  String quietGreekFairDebt;
+  @JsonKey(name: 'unsafeLicenseNut')
+  double unsafeLicenseNut;
+  @JsonKey(name: 'richChangeableMuchFebruary')
+  String richChangeableMuchFebruary;
+  @JsonKey(name: 'busyBellyShower')
+  String busyBellyShower;
+  @JsonKey(name: 'dayLateFee')
+  double dayLateFee;
+
   @JsonKey(name: 'spiritualPlanetEggplantRelation')
   String? spiritualPlanetEggplantRelation;
 
@@ -74,13 +93,22 @@ class HomeOrderInfoBean extends Object {
   @JsonKey(name: 'indeedSoftMomEnoughPill')
   String? indeedSoftMomEnoughPill;
   @JsonKey(name: 'endlessPie')
-  int? endlessPie;
+  String? endlessPie;
   @JsonKey(name: 'cottonScreamMusicalAnybody')
 
   ///repayTypeFlag
   String? cottonScreamMusicalAnybody;
 
   HomeOrderInfoBean(
+      this.unusualPing,
+      this.prettyRefrigeratorSleepyPaleNovelist,
+      this.valuableCurrencyBackSkiPineapple,
+      this.aggressiveExamUsedBackStove,
+      this.quietGreekFairDebt,
+      this.unsafeLicenseNut,
+      this.richChangeableMuchFebruary,
+      this.busyBellyShower,
+      this.dayLateFee,
       this.spiritualPlanetEggplantRelation,
       this.federalDirectorySituation,
       this.disabledLondonPrivatePoolAmericanInstrument,

@@ -114,11 +114,11 @@ class LoginCtr extends BaseGetCtr {
       await UserStore.to.setLoginInfo(token, userId, phoneNum);
       if (isTokenExpired) {
         Get.toNamed(PageRouterName.mainPage);
-        var mainHomeCtr = Get.find<MainHomeCtr>();
-        mainHomeCtr.refreshInfo();
       } else {
         Get.back();
       }
+      var mainHomeCtr = Get.find<MainHomeCtr>();
+      mainHomeCtr.refreshInfo();
     } else {
       NetException.dealAllException(response);
     }

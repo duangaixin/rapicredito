@@ -80,5 +80,6 @@ class Resource {
       'assets/image/main/home_loan_overdue.png';
   static const String assetsImageHomeRecommendBg =
       'assets/image/main/home_recommend_bg.png';
-
+  static const String assetsImageLogo =
+      'assets/image/other/logo.png';
 }

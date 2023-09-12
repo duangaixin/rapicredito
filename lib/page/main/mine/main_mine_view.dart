@@ -47,13 +47,15 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
               var isUrlNotExist = ObjectUtil.isEmptyString(imageUrl);
               return Visibility(
                   visible: isUrlNotExist,
-                  child: Container(
-                    margin: const EdgeInsets.only(right: 23.0, left: 7.0),
-                    height: 75.0,
+                  child: const CustomImageView(
+                  Resource.assetsImageLogo,
+                    imageType: ImageType.assets,
+                    shape: BoxShape.circle,
+                    memCacheHeight: 75,
+                    memCacheWidth: 75,
                     width: 75.0,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(37.5),
-                        color: const Color(0xffB6EF13)),
+                    height: 75.0,
+                    margin: EdgeInsets.only(right: 23.0, left: 7.0),
                   ));
             }),
             Obx(() {
@@ -63,7 +65,7 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
                   visible: !isUrlNotExist,
                   child: CustomImageView(
                     imageUrl,
-                    placeholder: Resource.assetsImageAuthTakeCamera,
+                    placeholder:Resource.assetsImageLogo,
                     shape: BoxShape.circle,
                     memCacheHeight: 75,
                     memCacheWidth: 75,

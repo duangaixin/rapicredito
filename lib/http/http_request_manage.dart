@@ -10,6 +10,7 @@ import 'package:rapicredito/model/home_order_info_bean.dart';
 import 'package:rapicredito/model/home_product_info_bean.dart';
 import 'package:rapicredito/model/login_info_bean.dart';
 import 'package:rapicredito/model/order_info_bean.dart';
+import 'package:rapicredito/model/pay_url_info_bean.dart';
 import 'package:rapicredito/model/pre_submit_order_bean.dart';
 import 'package:rapicredito/model/product_info_bean.dart';
 import 'package:rapicredito/model/query_photo_info_bean.dart';
@@ -42,11 +43,11 @@ extension RequestBussiness on HttpRequestManage {
         options: Options(contentType: Headers.formUrlEncodedContentType),
         onTransform: (json) => null);
   }
-  Future<BaseResponse> postRepayUrlInfo(Map<String, dynamic> param) async {
-    return await httpRequest.post(HttpApi.apiRepayInfo,
+  Future<BaseResponse<PayUrlInfoBean>> postRepayUrlInfo(Map<String, dynamic> param) async {
+    return await httpRequest.post<PayUrlInfoBean>(HttpApi.apiRepayInfo,
         data: param,
         options: Options(contentType: Headers.formUrlEncodedContentType),
-        onTransform: (json) => null);
+        onTransform: (json) => PayUrlInfoBean.fromJson(json));
   }
 
   Future<BaseResponse> postChannelListInfo(Map<String, dynamic> param) async {

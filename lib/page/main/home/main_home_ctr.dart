@@ -3,10 +3,12 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
+import 'package:rapicredito/get/getx_extension.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/local/user_store.dart';
+import 'package:rapicredito/model/pay_url_info_bean.dart';
 import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/page/main/home/widget/home_rollover_repayment_dialog.dart';
 import 'package:rapicredito/router/page_router_name.dart';
@@ -14,6 +16,7 @@ import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainHomeCtr extends BaseGetCtr {
   MainHomeCtr();
@@ -35,7 +38,7 @@ class MainHomeCtr extends BaseGetCtr {
       // await _postQueryOrderInfoRequest();
       // }
     } else {
-      state.loanStatus = -1;
+      state.overdueStatus = -1;
       await postQueryHomeDefaultInfoRequest();
     }
 
@@ -85,6 +88,7 @@ class MainHomeCtr extends BaseGetCtr {
               state.threePayShow = payTypeList[2] == '1';
               state.fourPayShow = payTypeList[3] == '1';
               state.fivePayShow = payTypeList[4] == '1';
+              state.loadState = LoadState.succeed;
             }
           }
         }
@@ -122,6 +126,7 @@ class MainHomeCtr extends BaseGetCtr {
   }
 
   Future<void> postQueryRepayUrlRequest(PayType payType) async {
+    Get.showLoading();
     Map<String, dynamic> param = getCommonParam();
     var payTypeStr = '00';
     var payMethod = '';
@@ -136,10 +141,24 @@ class MainHomeCtr extends BaseGetCtr {
     } else if (payType == PayType.payFive) {
       payMethod = '3';
     }
-   param['terminalSongHelpfulDeadDiamond']=payTypeStr;
-    param['australianPhysicistBroadPileChart']=payMethod;
+    param['terminalSongHelpfulDeadDiamond'] = payTypeStr;
+    param['australianPhysicistBroadPileChart'] = payMethod;
     var response = await HttpRequestManage.instance.postRepayUrlInfo(param);
+    Get.dismiss();
     if (response.isSuccess()) {
+      PayUrlInfoBean? bean = response.data;
+      var openUrl = '';
+      if (payType == PayType.payThree) {
+        openUrl = bean?.instantThatEducation ?? '';
+      } else {
+        openUrl = bean?.northernMarriageCommunism ?? '';
+      }
+      var openWay = bean?.loudEndlessMexico ?? '0';
+      if (openWay == '1') {
+        _openBrowser(openUrl);
+      } else {
+        _goToWebViewPage('', openUrl);
+      }
     } else {
       NetException.dealAllException(response);
     }
@@ -206,6 +225,24 @@ class MainHomeCtr extends BaseGetCtr {
     return str;
   }
 
+  void _openBrowser(String url) async {
+    if (!ObjectUtil.isEmptyString(url)) {
+      Uri uri = Uri.parse(url);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        throw 'Cannot open $url';
+      }
+    }
+  }
+
+  void _goToWebViewPage(String title, String webViewUrl) {
+    KeyboardUtils.unFocus();
+    Get.toNamed(PageRouterName.webViewPage, arguments: {
+      AppConstants.webViewTitleKey: title,
+      AppConstants.webViewUrlKey: webViewUrl
+    });
+  }
 // Future<void> postIsHomeManyProductRequest() async {
 //   Map<String, dynamic> param = getCommonParam();
 //   var response =
