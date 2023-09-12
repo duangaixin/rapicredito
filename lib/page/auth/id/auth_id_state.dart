@@ -45,6 +45,11 @@ class AuthIdState {
   GlobalKey behindKey = GlobalKey();
   GlobalKey faceKey = GlobalKey();
 
+  bool isInitRequest=true;
+  bool isUploadFront=false;
+  bool isUploadBehind=false;
+  bool isUploadFace=false;
+
   int? birthYear;
   int? birthMonth;
   int? birthDay;

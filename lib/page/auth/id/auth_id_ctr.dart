@@ -37,6 +37,7 @@ class AuthIdCtr extends BaseGetCtr {
   @override
   void onInit() {
     super.onInit();
+    state.isInitRequest = true;
     state.imageWidth = ScreenUtil.getScreenH(Get.context!) - 32 - 10 - 1;
     idNumCtr.addListener(_btnCanClick);
     firstNameCtr.addListener(_btnCanClick);
@@ -297,11 +298,24 @@ class AuthIdCtr extends BaseGetCtr {
     var response =
         await HttpRequestManage.instance.postUploadPhotoRequest(formData);
     Get.dismiss();
+    if (isUploadFace) {
+      state.isUploadFace = true;
+    }else{
+      if (isFront) {
+        state.isUploadFront = true;
+      } else {
+        state.isUploadBehind = true;
+      }
+    }
+
     if (response.isSuccess()) {
       Future.delayed(const Duration(milliseconds: 50), () {
         _postQueryPhotoInfo(isShowDialog: true);
       });
     } else {
+      state.isUploadFront = false;
+      state.isUploadBehind = false;
+      state.isUploadFace = false;
       ProgressHUD.showError('Upload failed, please upload again-Carga fallida');
     }
   }
@@ -319,19 +333,45 @@ class AuthIdCtr extends BaseGetCtr {
     if (response.isSuccess()) {
       var photoBean = response.data;
       var frontUrl = photoBean?.tastelessAmericanPlateCattle ?? '';
-      if (state.idFrontUrl != frontUrl) {
-        state.idFrontUrl = frontUrl;
-      }
       var backUrl = photoBean?.hugeNeed ?? '';
-      if (state.idBackUrl != backUrl) {
-        state.idBackUrl = backUrl;
-      }
       var faceUrl = photoBean?.dueReligionFoggyCustom ?? '';
-      if (state.faceUrl != faceUrl) {
-        state.faceUrl = faceUrl;
+      if (state.isInitRequest) {
+        if (state.idFrontUrl != frontUrl) {
+          state.idFrontUrl = frontUrl;
+        }
+        if (state.idBackUrl != backUrl) {
+          state.idBackUrl = backUrl;
+        }
+        if (state.faceUrl != faceUrl) {
+          state.faceUrl = faceUrl;
+        }
+        state.isInitRequest = false;
+      } else {
+        if (state.isUploadFront) {
+          if (state.idFrontUrl != frontUrl) {
+            state.idFrontUrl = frontUrl;
+          }
+        }
+        if (state.isUploadBehind) {
+          if (state.idBackUrl != backUrl) {
+            state.idBackUrl = backUrl;
+          }
+        }
+        if (state.isUploadFace) {
+          if (state.faceUrl != faceUrl) {
+            state.faceUrl = faceUrl;
+          }
+        }
+        state.isUploadFront = false;
+        state.isUploadBehind = false;
+        state.isUploadFace = false;
       }
+
       _btnCanClick();
     } else {
+      state.isUploadFront = false;
+      state.isUploadBehind = false;
+      state.isUploadFace = false;
       NetException.dealAllException(response);
     }
   }
