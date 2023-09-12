@@ -6,6 +6,7 @@ import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
+import 'package:rapicredito/get/getx_extension.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/json/upload_json_manage.dart';
@@ -84,15 +85,12 @@ class AppMainCtr extends BaseGetCtr {
     ];
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
   Future<String> postQueryIsNeedUploadJsonRequest() async {
+    Get.showLoading();
     Map<String, dynamic> param = getCommonParam();
     var response =
         await HttpRequestManage.instance.postIsNeedUploadBigJson(param);
+    Get.dismiss();
     if (response.isSuccess()) {
       var status = response.data ?? '';
       return status;

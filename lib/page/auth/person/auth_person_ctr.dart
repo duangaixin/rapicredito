@@ -71,16 +71,16 @@ class AuthPersonCtr extends BaseGetCtr {
     }
     CustomPicker.showSinglePicker(Get.context!, data: netList,
         onConfirm: (data, p) {
-      selectData = data;
-      if (clickType == AppConfigClickType.incomeType) {
-        state.income = data;
-      } else if (clickType == AppConfigClickType.familyCount) {
-        state.familyCount = data;
-      } else if (clickType == AppConfigClickType.educationalLevel) {
-        state.educationalLevel = data;
-      }
-      _btnCanClick();
-    }, selectData: selectData);
+          selectData = data;
+          if (clickType == AppConfigClickType.incomeType) {
+            state.income = data;
+          } else if (clickType == AppConfigClickType.familyCount) {
+            state.familyCount = data;
+          } else if (clickType == AppConfigClickType.educationalLevel) {
+            state.educationalLevel = data;
+          }
+          _btnCanClick();
+        }, selectData: selectData);
   }
 
   void disableClickToast() {
@@ -101,32 +101,30 @@ class AuthPersonCtr extends BaseGetCtr {
   }
 
   void clickSubmit() async {
-    Get.showLoading();
     await postSaveAuthPersonRequest();
-    var appMainCtr = Get.find<AppMainCtr>();
-    var status = await appMainCtr.postQueryIsNeedUploadJsonRequest();
-    Get.dismiss();
-    if (status == '0') {
-      PermissionUtil.checkPermission(
-          permissionList: [
-            Permission.camera,
-            Permission.sms,
-            Permission.calendar,
-            Permission.phone,
-          ],
-          onSuccess: () {
-            appMainCtr.postUploadJsonRequest();
-            Get.toNamed(PageRouterName.authContactPage);
-          },
-          onFailed: () {
-            Get.toNamed(PageRouterName.authContactPage);
-          },
-          goSetting: () {
-            Get.toNamed(PageRouterName.authContactPage);
-          });
-    } else {
-      Get.toNamed(PageRouterName.authContactPage);
-    }
+    // var appMainCtr = Get.find<AppMainCtr>();
+    // var status = await appMainCtr.postQueryIsNeedUploadJsonRequest();
+    // if (status == '0') {
+    //   PermissionUtil.checkPermission(
+    //       permissionList: [
+    //         Permission.camera,
+    //         Permission.sms,
+    //         Permission.calendar,
+    //         Permission.phone,
+    //       ],
+    //       onSuccess: () {
+    //         appMainCtr.postUploadJsonRequest();
+    //         Get.toNamed(PageRouterName.authContactPage);
+    //       },
+    //       onFailed: () {
+    //         Get.toNamed(PageRouterName.authContactPage);
+    //       },
+    //       goSetting: () {
+    //         Get.toNamed(PageRouterName.authContactPage);
+    //       });
+    // } else {
+    //   Get.toNamed(PageRouterName.authContactPage);
+    // }
   }
 
   void showGoSettingDialog() {
@@ -145,11 +143,13 @@ class AuthPersonCtr extends BaseGetCtr {
   Future<void> postSaveAuthPersonRequest() async {
     KeyboardUtils.unFocus();
     if (!_validate()) return;
+    Get.showLoading();
     Map<String, dynamic> param = _collectPersonParam();
     var response =
-        await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
-
+    await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
+    Get.dismiss();
     if (response.isSuccess()) {
+      Get.toNamed(PageRouterName.authContactPage);
     } else {
       NetException.dealAllException(response);
     }
@@ -159,7 +159,7 @@ class AuthPersonCtr extends BaseGetCtr {
     Map<String, dynamic> param = getCommonParam();
     Get.showLoading();
     var response =
-        await HttpRequestManage.instance.postQueryAuthInfoRequest(param);
+    await HttpRequestManage.instance.postQueryAuthInfoRequest(param);
     Get.dismiss();
     if (response.isSuccess()) {
       var authInfoBean = response.data;
@@ -282,9 +282,10 @@ class AuthPersonCtr extends BaseGetCtr {
     }
   }
 
-  OverlayEntry get overlay => OverlayEntry(builder: (ctx) {
+  OverlayEntry get overlay =>
+      OverlayEntry(builder: (ctx) {
         final renderBox =
-            state.emailKey.currentContext?.findRenderObject() as RenderBox;
+        state.emailKey.currentContext?.findRenderObject() as RenderBox;
         final size = renderBox.size;
         return Positioned(
           width: size.width,

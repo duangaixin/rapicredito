@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/json/upload_json_manage.dart';
 import 'package:rapicredito/local/app_constants.dart';
-import 'package:rapicredito/page/loan/widget/commit_success_dialog.dart';
+import 'package:rapicredito/page/dialog/permission_dialog.dart';
 import 'package:rapicredito/page/main/home/widget/home_recommend_dialog.dart';
 import 'package:rapicredito/page/main/home/widget/home_rollover_repayment_dialog.dart';
 import 'package:rapicredito/page/test/index.dart';
@@ -31,6 +31,23 @@ class TestPage extends GetView<TestCtr> {
                   text: '设置页面',
                   onPressed: () {
                     Get.toNamed(PageRouterName.settingPage);
+                  }),
+              CustomButton(
+                  text: '权限弹窗',
+                  onPressed: () {
+                    showDialog(
+                        barrierDismissible: false,
+                        context: Get.context!,
+                        builder: (_) {
+                          return Dialog(
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8.0))),
+                            insetPadding:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: PermissionDialog(rightClickConfirm: () {}),
+                          );
+                        });
                   }),
               CustomButton(
                   text: '客服',

@@ -349,7 +349,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
           return LoanConfirmMoneyDialog(
             clickConfirm: postSubmitOrderRequest,
             amountInHand: state.amountInHand,
-            loanAmount: addEndZero(state.applyAmount.toString()),
+            repaymentAmount: addEndZero(state.repaymentAmount.toString()),
             repaymentDate: state.repaymentDate,
             contractName: state.contractName,
             contractUrl: state.contractUrl,

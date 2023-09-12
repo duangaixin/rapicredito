@@ -12,7 +12,7 @@ class LoanConfirmMoneyDialog extends StatefulWidget {
   final Function clickConfirm;
   final Function clickWebView;
   final String? amountInHand;
-  final String? loanAmount;
+  final String? repaymentAmount;
   final String? repaymentDate;
   final String? contractUrl;
   final String? contractName;
@@ -22,7 +22,7 @@ class LoanConfirmMoneyDialog extends StatefulWidget {
       required this.clickConfirm,
       required this.clickWebView,
       this.amountInHand,
-      this.loanAmount,
+      this.repaymentAmount,
       this.repaymentDate,
       this.contractUrl,
       this.contractName})
@@ -31,7 +31,7 @@ class LoanConfirmMoneyDialog extends StatefulWidget {
 
 class _LoanConfirmMoneyDialogState extends State<LoanConfirmMoneyDialog> {
   final TextEditingController ctr = TextEditingController();
-  bool isSelectd = false;
+  bool isSelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class _LoanConfirmMoneyDialogState extends State<LoanConfirmMoneyDialog> {
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child:
-                _buildItemView('Monto de devolución', '${widget.loanAmount}\$'),
+                _buildItemView('Monto de devolución', '${widget.repaymentAmount}\$'),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
@@ -118,7 +118,7 @@ class _LoanConfirmMoneyDialogState extends State<LoanConfirmMoneyDialog> {
             onTap: () {
               if (mounted) {
                 setState(() {
-                  isSelectd = !isSelectd;
+                  isSelected = !isSelected;
                 });
               }
             },
@@ -133,7 +133,7 @@ class _LoanConfirmMoneyDialogState extends State<LoanConfirmMoneyDialog> {
                   border:
                       Border.all(color: const Color(0xff666666), width: 1.0)),
               child: Visibility(
-                visible: isSelectd,
+                visible: isSelected,
                 child: const Text(
                   '√',
                   textAlign: TextAlign.center,
@@ -189,7 +189,7 @@ class _LoanConfirmMoneyDialogState extends State<LoanConfirmMoneyDialog> {
         Expanded(
             child: CustomButton(
           onPressed: () {
-            if (isSelectd) {
+            if (isSelected) {
               Get.back();
               widget.clickConfirm();
             } else {

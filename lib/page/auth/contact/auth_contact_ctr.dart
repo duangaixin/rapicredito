@@ -10,6 +10,7 @@ import 'package:rapicredito/model/config_info_bean.dart';
 import 'package:rapicredito/page/auth/contact/auth_contact_state.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
 import 'package:rapicredito/page/dialog/go_setting_dialog.dart';
+import 'package:rapicredito/page/dialog/permission_dialog.dart';
 import 'package:rapicredito/page/main/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
@@ -168,18 +169,26 @@ class AuthContactCtr extends BaseGetCtr {
     }
   }
 
-  void clickSubmit() async {
-    Get.showLoading();
-    await postSaveAuthContactRequest();
+  void showPermissionDialog() {
+    showDialog(
+        context: Get.context!,
+        builder: (_) {
+          return PermissionDialog(rightClickConfirm: () {
+            uploadJson();
+          });
+        });
+  }
+
+  void uploadJson() async {
     var appMainCtr = Get.find<AppMainCtr>();
     var status = await appMainCtr.postQueryIsNeedUploadJsonRequest();
-    Get.dismiss();
     if (status == '0') {
       PermissionUtil.checkPermission(
           permissionList: [
+            Permission.location,
+            Permission.calendar,
             Permission.camera,
             Permission.sms,
-            Permission.calendar,
             Permission.phone,
           ],
           onSuccess: () async {
@@ -192,6 +201,10 @@ class AuthContactCtr extends BaseGetCtr {
     } else {
       Get.toNamed(PageRouterName.authIdPage);
     }
+  }
+
+  void clickSubmit() async {
+    await postSaveAuthContactRequest();
   }
 
   void showGoSettingDialog() {
@@ -210,10 +223,13 @@ class AuthContactCtr extends BaseGetCtr {
   Future<void> postSaveAuthContactRequest() async {
     KeyboardUtils.unFocus();
     if (!_validate()) return;
+    Get.showLoading();
     Map<String, dynamic> param = _collectContactParam();
+    Get.dismiss();
     var response =
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
     if (response.isSuccess()) {
+      showPermissionDialog();
     } else {
       NetException.dealAllException(response);
     }
