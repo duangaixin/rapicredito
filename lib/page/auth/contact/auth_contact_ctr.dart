@@ -233,9 +233,9 @@ class AuthContactCtr extends BaseGetCtr {
     if (!_validate()) return;
     Get.showLoading();
     Map<String, dynamic> param = _collectContactParam();
-    Get.dismiss();
     var response =
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
+    Get.dismiss();
     if (response.isSuccess()) {
       showPermissionDialog();
     } else {

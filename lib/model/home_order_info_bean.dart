@@ -9,19 +9,19 @@ class HomeOrderInfoBean extends Object {
   @JsonKey(name: 'prettyRefrigeratorSleepyPaleNovelist')
   String? prettyRefrigeratorSleepyPaleNovelist;
   @JsonKey(name: 'valuableCurrencyBackSkiPineapple')
-  String valuableCurrencyBackSkiPineapple;
+  String? valuableCurrencyBackSkiPineapple;
   @JsonKey(name: 'aggressiveExamUsedBackStove')
-  String aggressiveExamUsedBackStove;
+  String ?aggressiveExamUsedBackStove;
   @JsonKey(name: 'quietGreekFairDebt')
-  String quietGreekFairDebt;
+  String ?quietGreekFairDebt;
   @JsonKey(name: 'unsafeLicenseNut')
-  double unsafeLicenseNut;
+  double? unsafeLicenseNut;
   @JsonKey(name: 'richChangeableMuchFebruary')
-  String richChangeableMuchFebruary;
+  String? richChangeableMuchFebruary;
   @JsonKey(name: 'busyBellyShower')
-  String busyBellyShower;
+  String ?busyBellyShower;
   @JsonKey(name: 'dayLateFee')
-  double dayLateFee;
+  double ?dayLateFee;
 
   @JsonKey(name: 'spiritualPlanetEggplantRelation')
   String? spiritualPlanetEggplantRelation;
