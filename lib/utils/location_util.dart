@@ -7,25 +7,6 @@ import 'package:rapicredito/model/json/location_info_bean.dart';
 import 'package:rapicredito/utils/object_util.dart';
 
 class LocationUtil {
-  static Future<Map<String, String>> getGoogleLocation() async {
-    MethodChannel channel = const MethodChannel('originInfoPlugin');
-    var param = await channel.invokeMethod('getGoogleLocation');
-    var paramMap = <String, String>{};
-    if (param != null && param is Map) {
-      if (param.isNotEmpty) {
-        if (param.containsKey('latitude')) {
-          var latitude = param['latitude'];
-          param['latitude'] = latitude;
-        }
-        if (param.containsKey('longitude')) {
-          var longitude = param['longitude'];
-          param['longitude'] = longitude;
-        }
-      }
-    }
-    return paramMap;
-  }
-
   static Future getLocation() async {
     MethodChannelDevicesinfo.initApp();
     var locationInfo = await MethodChannelDevicesinfo.getLocationAddressData();
@@ -42,11 +23,9 @@ class LocationUtil {
           longitude == '0' ||
           longitude == '0.0' ||
           longitude == '0.00') {
-        var paramMap = await getGoogleLocation();
-        var latitude = paramMap['latitude'];
-        var longitude = paramMap['longitude'];
-        await StorageService.to
-            .setString(AppConstants.locationKey, '$longitude,$latitude');
+        MethodChannel channel = const MethodChannel('originInfoPlugin');
+        var locationStr= await channel.invokeMethod('getGoogleLocation');
+        await StorageService.to.setString(AppConstants.locationKey, locationStr);
       } else {
         await StorageService.to
             .setString(AppConstants.locationKey, '$longitude,$latitude');

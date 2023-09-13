@@ -75,10 +75,9 @@ public class OriginInfoPlugin implements FlutterPlugin {
                     if (location != null) {
                      Double latitude=   location.getLatitude();
                      Double longitude= location.getLongitude();
-                        Map<String,String> param= new HashMap();
-                        param.put("latitude",latitude.toString());
-                        param.put("longitude",longitude.toString());
-                        mResult.success(location);
+                        StringBuilder sb = new StringBuilder();
+                        sb.append(longitude.toString()+','+ latitude);
+                        mResult.success(sb.toString());
                     }
                 });
 
