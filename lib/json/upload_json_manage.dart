@@ -3,6 +3,8 @@ import 'package:devicesinfo/devicesinfo_method_channel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:rapicredito/get/getx_storage_service.dart';
+import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/model/json/account_info_bean.dart';
 import 'package:rapicredito/model/json/app_list_info_bean.dart';
 import 'package:rapicredito/model/json/battery_info_bean.dart';
@@ -429,6 +431,8 @@ class UploadJsonManage {
       locationDetail.happyHeadteacher = bean.latitude;
       locationDetail.guiltyBeanStewardessUsefulBarbershop = bean.longitude;
       locationBean.independentAmbulanceBurialFlag = locationDetail;
+      await StorageService.to.setString(
+          AppConstants.locationKey, '${bean.longitude},${bean.longitude}');
     }
     return locationBean;
   }

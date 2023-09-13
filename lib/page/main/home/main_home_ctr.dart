@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
@@ -9,11 +10,14 @@ import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/model/pay_url_info_bean.dart';
+import 'package:rapicredito/page/dialog/go_setting_dialog.dart';
 import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/page/main/home/widget/home_rollover_repayment_dialog.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
+import 'package:rapicredito/utils/location_util.dart';
 import 'package:rapicredito/utils/object_util.dart';
+import 'package:rapicredito/utils/permission_util.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -25,9 +29,41 @@ class MainHomeCtr extends BaseGetCtr {
   var refreshController = RefreshController();
 
   @override
+  void onInit() {
+    super.onInit();
+    _requestLocation();
+  }
+
+  @override
   void onReady() {
     super.onReady();
     requestInitData();
+  }
+
+  void _requestLocation() {
+    PermissionUtil.checkPermission(
+        permissionList: [
+          Permission.location,
+        ],
+        onSuccess: () async {
+          await LocationUtil.getLocation();
+        },
+        goSetting: () {
+          showGoSettingDialog();
+        });
+  }
+
+  void showGoSettingDialog() {
+    showDialog(
+        context: Get.context!,
+        barrierDismissible: false,
+        builder: (_) {
+          return GoSettingDialog(
+            clickConfirm: () {
+              openAppSettings();
+            },
+          );
+        });
   }
 
   void requestInitData() async {

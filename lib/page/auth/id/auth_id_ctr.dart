@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:camera/camera.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_pickers/time_picker/model/pduration.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -94,27 +94,28 @@ class AuthIdCtr extends BaseGetCtr {
     PermissionUtil.checkPermission(
         permissionList: [Permission.camera],
         onSuccess: () async {
-          XFile? result =
-              await ImagePicker().pickImage(source: ImageSource.camera);
-          if (kDebugMode) {
-            print(result?.path ?? '' '-----image===path');
-          }
-          if (result != null) {
-            var file = File(result.path);
+          MethodChannel channel = const MethodChannel('originInfoPlugin');
+          var isFrontValue = isUploadFace ? 1 : 0;
+          var path = await channel
+              .invokeMethod('takeCamera', {'isFront': isFrontValue});
+          if (!ObjectUtil.isEmptyString(path)) {
+            var file = File(path);
             _uploadPhotoData(file, isFront, isUploadFace: isUploadFace);
+          } else {
+            ProgressHUD.showError('Error al tomar la foto, inténtelo de nuevo');
           }
+
+          // XFile? result =
+          //     await ImagePicker().pickImage(source: ImageSource.camera);
+          // if (kDebugMode) {
+          //   print(result?.path ?? '' '-----image===path');
+          // }
+          // if (result != null) {
+          //   var file = File(result.path);
+          //   _uploadPhotoData(file, isFront, isUploadFace: isUploadFace);
+          // }
         },
         onFailed: () {});
-  }
-
-  void goToCustomCamera() async {
-    List<CameraDescription> cameraList = await availableCameras();
-    var result = await Get.toNamed(PageRouterName.customCameraPage,
-        arguments: {'cameraList': cameraList});
-    if (result != null && result is XFile) {
-      var file = File(result.path);
-      _uploadPhotoData(file, true, isUploadFace: true);
-    }
   }
 
   void showDateDialog() {
@@ -237,19 +238,18 @@ class AuthIdCtr extends BaseGetCtr {
       firstNameCtr.text = authInfoBean?.puzzledConditionFamiliarUnion ?? '';
       secondNameCtr.text = authInfoBean?.pacificCheapMineralCrazyLamb ?? '';
       state.gender = authInfoBean?.fairJarExitPair ?? '';
-     var birthStr = authInfoBean?.juicyGayPresentation ?? '';
+      var birthStr = authInfoBean?.juicyGayPresentation ?? '';
       if (!ObjectUtil.isEmptyString(birthStr)) {
         List<String> birthList = birthStr.split('-');
         if (!ObjectUtil.isEmptyList(birthList) && birthList.length == 3) {
-         var year= birthList[2];
-       var month=  birthList[1];
-       var day= birthList[0];
+          var year = birthList[2];
+          var month = birthList[1];
+          var day = birthList[0];
           state.birthYear = int.tryParse(year);
           state.birthMonth = int.tryParse(month);
           state.birthDay = int.tryParse(day);
-          state.birth= '${day.padLeft(2,'0')}-${month.padLeft(2,'0')}-$year';
+          state.birth = '${day.padLeft(2, '0')}-${month.padLeft(2, '0')}-$year';
         }
-
       }
       _btnCanClick();
     } else {
@@ -301,7 +301,7 @@ class AuthIdCtr extends BaseGetCtr {
     Get.dismiss();
     if (isUploadFace) {
       state.isUploadFace = true;
-    }else{
+    } else {
       if (isFront) {
         state.isUploadFront = true;
       } else {
@@ -387,4 +387,14 @@ class AuthIdCtr extends BaseGetCtr {
     firstNameCtr.dispose();
     secondNameCtr.dispose();
   }
+
+// void goToCustomCamera() async {
+//   List<CameraDescription> cameraList = await availableCameras();
+//   var result = await Get.toNamed(PageRouterName.customCameraPage,
+//       arguments: {'cameraList': cameraList});
+//   if (result != null && result is XFile) {
+//     var file = File(result.path);
+//     _uploadPhotoData(file, true, isUploadFace: true);
+//   }
+// }
 }

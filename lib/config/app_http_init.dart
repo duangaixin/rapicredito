@@ -90,7 +90,8 @@ Future<Map<String, dynamic>> _getDefParam() async {
 
 Interceptors? getNetInterceptors() {
   if (!isReleaseBuild()) {
-    return Interceptors()..add(LoggingInterceptor());
+    return Interceptors()
+      ..add(LoggingInterceptor());
   }
   return null;
 }
@@ -98,9 +99,10 @@ Interceptors? getNetInterceptors() {
 Map<String, dynamic> getCommonParam() {
   var commonParam = <String, dynamic>{};
   var userId = StorageService.to.getInt(AppConstants.userIdKey);
+  var locationStr = StorageService.to.getString(AppConstants.locationKey);
   commonParam['madUnableBackacheCanal'] = '204';
   commonParam['terminalDifferentActionFatFountain'] = userId;
-  commonParam['dailyFortuneQuantity'] = '0.0,0.0';
+  commonParam['dailyFortuneQuantity'] = locationStr;
   commonParam['contraryScientificRightNone'] = 'es';
   return commonParam;
 }

@@ -12,6 +12,7 @@ import 'package:rapicredito/page/dialog/go_setting_dialog.dart';
 import 'package:rapicredito/page/main/app_main_ctr.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
+import 'package:rapicredito/utils/location_util.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/utils/permission_util.dart';
 import 'package:rapicredito/utils/string_ext.dart';
@@ -30,6 +31,20 @@ class AuthPersonCtr extends BaseGetCtr {
     super.onInit();
     emailCtr.addListener(_btnCanClick);
     emailCtr.addListener(_emailEndListener);
+    _requestLocation();
+  }
+
+  void _requestLocation() {
+    PermissionUtil.checkPermission(
+        permissionList: [
+          Permission.location,
+        ],
+        onSuccess: () async {
+          await LocationUtil.getLocation();
+        },
+        goSetting: () {
+          showGoSettingDialog();
+        });
   }
 
   void _emailEndListener() {
