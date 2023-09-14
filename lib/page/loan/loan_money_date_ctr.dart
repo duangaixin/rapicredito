@@ -175,13 +175,11 @@ class LoanMoneyDateCtr extends BaseGetCtr {
             selectBeanTwo.canClick = false;
             selectBeanTwo.isSelected = false;
             allDateList.insert(2, selectBeanTwo);
-
-            var bean = allDateList[0];
-            bean.isSelected = false;
           }
         }
       }
-
+      var bean = allDateList[0];
+      bean.isSelected = allDateList.length==1;
       state.dateList
         ..clear()
         ..addAll(allDateList);

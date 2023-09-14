@@ -133,9 +133,7 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
 
   Widget get rightView => CustomClickView(
         onTap: () {
-          Get.toNamed(PageRouterName.clientPage, arguments: {
-            AppConstants.fromPageNameKey: PageRouterName.clientPage
-          });
+          controller.goToClientPage();
         },
         child: Container(
             alignment: Alignment.center,

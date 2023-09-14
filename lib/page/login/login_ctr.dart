@@ -113,7 +113,7 @@ class LoginCtr extends BaseGetCtr {
       var testFlag = loginInfoBean?.delightedGooseFacialUnmarriedHamburger ?? 0;
       await StorageService.to.setInt(AppConstants.userTestFlagKey, testFlag);
       await UserStore.to.setLoginInfo(token, userId, phoneNum);
-      //await setCrispInfo(testFlag.toString(), phoneNum);
+      await setCrispInfo(testFlag.toString(), phoneNum);
       if (isTokenExpired) {
         Get.toNamed(PageRouterName.mainPage);
       } else {

@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:rapicredito/config/app_http_init.dart';
@@ -10,7 +11,7 @@ import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/page/main/mine/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
-
+import 'package:rapicredito/utils/keyboard_util.dart';
 
 class MainMineCtr extends BaseGetCtr {
   MainMineCtr();
@@ -85,7 +86,14 @@ class MainMineCtr extends BaseGetCtr {
   }
 
   void goToClientPage() {
-    Get.toNamed(PageRouterName.clientPage);
+    KeyboardUtils.unFocus();
+    if (UserStore.to.hasToken) {
+      MethodChannel channel = const MethodChannel('originInfoPlugin');
+      channel.invokeMethod('openChatActivity');
+    } else {
+      Get.toNamed(PageRouterName.clientPage,
+          arguments: {AppConstants.fromPageNameKey: PageRouterName.clientPage});
+    }
   }
 
   void goToWebViewPage(String title, String webViewUrl) {

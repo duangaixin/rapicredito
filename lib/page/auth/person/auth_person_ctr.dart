@@ -9,6 +9,7 @@ import 'package:rapicredito/get/getx_storage_service.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/local/app_constants.dart';
+import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
 import 'package:rapicredito/page/auth/person/widget/email_select_list_view.dart';
 import 'package:rapicredito/router/page_router_name.dart';
@@ -136,7 +137,7 @@ class AuthPersonCtr extends BaseGetCtr {
     if (response.isSuccess()) {
       var userEmail = emailCtr.text.strRvSpace();
       await StorageService.to.setString(AppConstants.userEmailKey, userEmail);
-     // await setCrispInfo(userEmail);
+      await setCrispInfo(userEmail);
       Get.toNamed(PageRouterName.authContactPage);
     } else {
       NetException.dealAllException(response);
@@ -174,6 +175,17 @@ class AuthPersonCtr extends BaseGetCtr {
       _postAppConfigInfoRequest(AppConfigClickType.familyCount);
     } else {
       _showSelectDialog(state.familyList, AppConfigClickType.familyCount);
+    }
+  }
+
+  void goToClientPage() {
+    KeyboardUtils.unFocus();
+    if (UserStore.to.hasToken) {
+      MethodChannel channel = const MethodChannel('originInfoPlugin');
+      channel.invokeMethod('openChatActivity');
+    } else {
+      Get.toNamed(PageRouterName.clientPage,
+          arguments: {AppConstants.fromPageNameKey: PageRouterName.clientPage});
     }
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rapicredito/config/app_http_init.dart';
@@ -6,6 +7,8 @@ import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/get/getx_extension.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
+import 'package:rapicredito/local/app_constants.dart';
+import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/model/config_info_bean.dart';
 import 'package:rapicredito/page/auth/contact/auth_contact_state.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
@@ -291,6 +294,18 @@ class AuthContactCtr extends BaseGetCtr {
       }
     }
     return '';
+  }
+
+  void goToClientPage(){
+    KeyboardUtils.unFocus();
+    if (UserStore.to.hasToken) {
+      MethodChannel channel = const MethodChannel('originInfoPlugin');
+      channel.invokeMethod('openChatActivity');
+    } else {
+      Get.toNamed(PageRouterName.clientPage, arguments: {
+        AppConstants.fromPageNameKey: PageRouterName.clientPage
+      });
+    }
   }
 
   @override

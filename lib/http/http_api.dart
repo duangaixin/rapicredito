@@ -24,7 +24,7 @@ class HttpApi {
   static const String apiSaveAccountInfo = 'curtain/landAttractivePath';
   static const String apiIsNeedUploadBigJson =
       'cheapHeroine/regardIndeedDictation';
-  static const String apiUploadBigJson = 'champion/questionMexicanDriver';
+  static const String apiUploadBigJson = 'champion/scoreAustralianNecktie';
   static const String apiQueryOrderListInfo =
       'microcomputer/produceIncorrectDuck';
   static const String apiQueryProductInfo = 'smartBirthplace/feelFestivalMotor';

@@ -17,7 +17,8 @@ import 'package:rapicredito/widget/custom_select_view.dart';
 class AuthIdPage extends GetView<AuthIdCtr> {
   const AuthIdPage({Key? key}) : super(key: key);
 
-  Widget idCameraView(Key key,String title, String imageUrl, VoidCallback func) =>
+  Widget idCameraView(
+          Key key, String title, String imageUrl, VoidCallback func) =>
       CustomClickView(
           onTap: func,
           child: Column(
@@ -63,9 +64,8 @@ class AuthIdPage extends GetView<AuthIdCtr> {
             padding: const EdgeInsets.only(top: 28.0, left: 16.0, right: 16.0),
             child: Row(mainAxisSize: MainAxisSize.max, children: [
               Expanded(child: Obx(() {
-                return idCameraView(
-                    controller.state.frontKey,
-                    'Frente', controller.state.idFrontUrl, () {
+                return idCameraView(controller.state.frontKey, 'Frente',
+                    controller.state.idFrontUrl, () {
                   //controller.tackCamera(isFront: true);
                   controller.showSelectDialog(isFront: true);
                 });
@@ -74,9 +74,8 @@ class AuthIdPage extends GetView<AuthIdCtr> {
                 width: 10.0,
               ),
               Expanded(child: Obx(() {
-                return idCameraView(
-                    controller.state.behindKey,
-                    'Atrás', controller.state.idBackUrl, () {
+                return idCameraView(controller.state.behindKey, 'Atrás',
+                    controller.state.idBackUrl, () {
                   //  controller.tackCamera(isFront: false);
                   controller.showSelectDialog(isFront: false);
                 });
@@ -155,14 +154,10 @@ class AuthIdPage extends GetView<AuthIdCtr> {
             ),
           ),
           Center(
-            child: faceCameraView(
-                (){
-
-                //  controller.goToCustomCamera();
-                  controller.tackCamera(isUploadFace: true);
-
-                }
-                ),
+            child: faceCameraView(() {
+              //  controller.goToCustomCamera();
+              controller.tackCamera(isUploadFace: true);
+            }),
           )
         ],
       );
@@ -274,9 +269,7 @@ class AuthIdPage extends GetView<AuthIdCtr> {
 
   Widget get rightView => CustomClickView(
         onTap: () {
-          Get.toNamed(PageRouterName.clientPage, arguments: {
-            AppConstants.fromPageNameKey: PageRouterName.clientPage
-          });
+          controller.goToClientPage();
         },
         child: Container(
             alignment: Alignment.center,

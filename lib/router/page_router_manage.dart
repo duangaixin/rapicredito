@@ -65,8 +65,7 @@ class PageRouterManage {
     GetPage(
         name: PageRouterName.clientPage,
         page: () => const ClientPage(),
-        binding: ClientBinding(),
-        middlewares: [RouteAuthMiddleware()]),
+        binding: ClientBinding()),
     GetPage(
         name: PageRouterName.loanDatePage,
         page: () => const LoanMoneyDatePage(),
