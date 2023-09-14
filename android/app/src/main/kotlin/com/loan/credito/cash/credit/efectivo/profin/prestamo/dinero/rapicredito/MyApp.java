@@ -10,6 +10,6 @@ public class MyApp extends FlutterApplication {
     public void onCreate() {
         super.onCreate();
         MultiDex.install(this);
-        Crisp.configure(this, "key");
+        Crisp.configure(this, "fec2b430-f6cf-4ee1-a15a-188f19e490c2");
     }
 }

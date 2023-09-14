@@ -7,6 +7,7 @@ class UserStore extends GetxController {
   String mToken = '';
   int mUserId = -1;
   String mUserPhone = '';
+  String mUserEmail = '';
 
   bool get hasToken => mToken.isNotEmpty;
 
@@ -16,6 +17,7 @@ class UserStore extends GetxController {
     mToken = StorageService.to.getString(AppConstants.userTokenKey);
     mUserId = StorageService.to.getInt(AppConstants.userIdKey);
     mUserPhone = StorageService.to.getString(AppConstants.userPhoneKey);
+    mUserEmail = StorageService.to.getString(AppConstants.userEmailKey);
   }
 
   Future<void> setLoginInfo(String token, int userId, String userPhone) async {
@@ -35,6 +37,7 @@ class UserStore extends GetxController {
       await StorageService.to.remove(AppConstants.userTokenKey);
       await StorageService.to.remove(AppConstants.userIdKey);
       await StorageService.to.remove(AppConstants.userPhoneKey);
+      await StorageService.to.remove(AppConstants.userEmailKey);
     }
   }
 

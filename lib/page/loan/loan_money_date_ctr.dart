@@ -30,7 +30,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
   void _requestInitData() async {
     await postAppConfigInfoRequest(AppConfigClickType.moneyDateType);
     await postQueryProductRequest();
-    await postTestCalculateRequest();
+   // await postTestCalculateRequest();
   }
 
   Future<void> postQueryProductRequest() async {
@@ -58,7 +58,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     }
   }
 
-  void _dealDateList() {
+  void _dealDateList() async {
     var testFlag = StorageService.to.getInt(AppConstants.userTestFlagKey);
     if (!ObjectUtil.isEmptyList(state.originList)) {
       List<SelectModel> allDateList = [];
@@ -143,6 +143,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
           selectBeanTwo.canClick = false;
           selectBeanOne.isSelected = false;
           allDateList.insert(2, selectBeanTwo);
+          await postTestCalculateRequest();
         } else {
           ///many
           if (!ObjectUtil.isEmptyList(state.durationList)) {
@@ -174,6 +175,9 @@ class LoanMoneyDateCtr extends BaseGetCtr {
             selectBeanTwo.canClick = false;
             selectBeanTwo.isSelected = false;
             allDateList.insert(2, selectBeanTwo);
+
+            var bean = allDateList[0];
+            bean.isSelected = false;
           }
         }
       }
@@ -181,6 +185,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
       state.dateList
         ..clear()
         ..addAll(allDateList);
+      state.loadState = LoadState.succeed;
     }
   }
 
@@ -393,10 +398,10 @@ class LoanMoneyDateCtr extends BaseGetCtr {
   }
 
   String dealEndZero(String str) {
-    if (!ObjectUtil.isEmptyString(str) ){
-      if(str.endsWith('.0')||str.endsWith('.00')){
-        var index= str.indexOf('.');
-        var newStr=str.substring(0,index);
+    if (!ObjectUtil.isEmptyString(str)) {
+      if (str.endsWith('.0') || str.endsWith('.00')) {
+        var index = str.indexOf('.');
+        var newStr = str.substring(0, index);
         return newStr;
       }
     }

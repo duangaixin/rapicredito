@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
@@ -76,12 +77,12 @@ class LoginCtr extends BaseGetCtr {
     }
   }
 
-  void showTip(){
-    if(ObjectUtil.isEmptyString(phoneCtr.text.strRvSpace())){
-      ProgressHUD.showInfo('Por favor, introduzca un número de teléfono correcto');
+  void showTip() {
+    if (ObjectUtil.isEmptyString(phoneCtr.text.strRvSpace())) {
+      ProgressHUD.showInfo(
+          'Por favor, introduzca un número de teléfono correcto');
     }
   }
-
 
   void postLoginRequest() async {
     KeyboardUtils.unFocus();
@@ -112,6 +113,7 @@ class LoginCtr extends BaseGetCtr {
       var testFlag = loginInfoBean?.delightedGooseFacialUnmarriedHamburger ?? 0;
       await StorageService.to.setInt(AppConstants.userTestFlagKey, testFlag);
       await UserStore.to.setLoginInfo(token, userId, phoneNum);
+      //await setCrispInfo(testFlag.toString(), phoneNum);
       if (isTokenExpired) {
         Get.toNamed(PageRouterName.mainPage);
       } else {
@@ -122,6 +124,15 @@ class LoginCtr extends BaseGetCtr {
     } else {
       NetException.dealAllException(response);
     }
+  }
+
+  Future<void> setCrispInfo(String testFlag, String phone) async {
+    MethodChannel channel = const MethodChannel('originInfoPlugin');
+    var param = <String, String>{};
+    param
+      ..['testFlag'] = testFlag
+      ..['userPhone'] = phone;
+    await channel.invokeMethod('setCrispInfo', param);
   }
 
   @override

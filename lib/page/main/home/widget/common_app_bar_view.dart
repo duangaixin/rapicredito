@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/router/page_router_name.dart';
@@ -30,7 +31,16 @@ class MainAppBarViewState extends State<MainAppBarView> {
       );
 
   Widget get rightView => CustomClickView(
-        onTap: () {
+        onTap: () async{
+         //  MethodChannel channel = const MethodChannel('originInfoPlugin');
+         //  var param = <String, String>{};
+         //  param
+         //    ..['testFlag'] = testFlag
+         //    ..['userPhone'] = phone;
+         //  await channel.invokeMethod('setCrispInfo', param);
+         // await channel.invokeMethod('setCrispInfo');
+         //  await    channel.invokeMethod('openChatActivity');
+
           Get.toNamed(PageRouterName.clientPage, arguments: {
             AppConstants.fromPageNameKey: PageRouterName.clientPage
           });

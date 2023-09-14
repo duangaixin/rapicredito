@@ -108,6 +108,7 @@ class WalletView extends GetView<AccountCtr> {
                         borderRadius: BorderRadius.circular(10.0)),
                     child: Text(
                       title,
+                      textAlign: TextAlign.center,
                       style: const TextStyle(
                           fontSize: 14.0, color: Color(0xff333333)),
                     ),
@@ -144,7 +145,8 @@ class WalletView extends GetView<AccountCtr> {
                                           color: Color(0xff333333)),
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () {
-                                          controller.state.walletSelectIndex = index;
+                                          controller.state.walletSelectIndex =
+                                              index;
                                           controller.goToWebViewPage(
                                               '百度', value);
                                         }),

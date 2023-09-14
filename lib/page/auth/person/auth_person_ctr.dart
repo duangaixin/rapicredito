@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/get/getx_extension.dart';
+import 'package:rapicredito/get/getx_storage_service.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
+import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
 import 'package:rapicredito/page/auth/person/widget/email_select_list_view.dart';
 import 'package:rapicredito/router/page_router_name.dart';
@@ -113,29 +116,13 @@ class AuthPersonCtr extends BaseGetCtr {
 
   void clickSubmit() async {
     await postSaveAuthPersonRequest();
-    // var appMainCtr = Get.find<AppMainCtr>();
-    // var status = await appMainCtr.postQueryIsNeedUploadJsonRequest();
-    // if (status == '0') {
-    //   PermissionUtil.checkPermission(
-    //       permissionList: [
-    //         Permission.camera,
-    //         Permission.sms,
-    //         Permission.calendar,
-    //         Permission.phone,
-    //       ],
-    //       onSuccess: () {
-    //         appMainCtr.postUploadJsonRequest();
-    //         Get.toNamed(PageRouterName.authContactPage);
-    //       },
-    //       onFailed: () {
-    //         Get.toNamed(PageRouterName.authContactPage);
-    //       },
-    //       goSetting: () {
-    //         Get.toNamed(PageRouterName.authContactPage);
-    //       });
-    // } else {
-    //   Get.toNamed(PageRouterName.authContactPage);
-    // }
+  }
+
+  Future<void> setCrispInfo(String userEmail) async {
+    MethodChannel channel = const MethodChannel('originInfoPlugin');
+    var param = <String, String>{};
+    param['userEmail'] = userEmail;
+    await channel.invokeMethod('setCrispInfo', param);
   }
 
   Future<void> postSaveAuthPersonRequest() async {
@@ -147,6 +134,9 @@ class AuthPersonCtr extends BaseGetCtr {
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
     Get.dismiss();
     if (response.isSuccess()) {
+      var userEmail = emailCtr.text.strRvSpace();
+      await StorageService.to.setString(AppConstants.userEmailKey, userEmail);
+     // await setCrispInfo(userEmail);
       Get.toNamed(PageRouterName.authContactPage);
     } else {
       NetException.dealAllException(response);

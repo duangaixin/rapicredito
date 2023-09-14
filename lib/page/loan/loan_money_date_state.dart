@@ -21,25 +21,55 @@ class LoanMoneyDateState {
   List<SkillfulFingerFarSide> originList = [];
   List<int> durationList = [];
 
-  double incrementStep = 0.0;
+  final RxDouble _incrementStep = (0.0).obs;
+
+  double get incrementStep => _incrementStep.value;
+
+  set incrementStep(value) => _incrementStep.value = value;
 
   ///到手金额
-  String amountInHand = '';
+  final RxString _amountInHand = ''.obs;
+
+  String get amountInHand => _amountInHand.value;
+
+  set amountInHand(value) => _amountInHand.value = value;
 
   ///利息
-  String interest = '';
+
+  final RxString _interest = ''.obs;
+
+  String get interest => _interest.value;
+
+  set interest(value) => _interest.value = value;
 
   ///服务费
-  String serviceCharge = '';
+  final RxString _serviceCharge = ''.obs;
+
+  String get serviceCharge => _serviceCharge.value;
+
+  set serviceCharge(value) => _serviceCharge.value = value;
 
   ///增值税
-  String iva = '';
+
+  final RxString _iva = ''.obs;
+
+  String get iva => _iva.value;
+
+  set iva(value) => _iva.value = value;
 
   ///银行收取服务费
-  String bankServiceCharge = '';
+  final RxString _bankServiceCharge = ''.obs;
+
+  String get bankServiceCharge => _bankServiceCharge.value;
+
+  set bankServiceCharge(value) => _bankServiceCharge.value = value;
 
   ///还款金额
-  String repaymentAmount = '';
+  final RxString _repaymentAmount = ''.obs;
+
+  String get repaymentAmount => _repaymentAmount.value;
+
+  set repaymentAmount(value) => _repaymentAmount.value = value;
 
   ///还款日期
   final RxString _repaymentDate = ''.obs;
@@ -64,7 +94,7 @@ class LoanMoneyDateState {
 
   RxList<SelectModel> dateList = <SelectModel>[].obs;
 
-  final RxInt _dateSelectIndex = 0.obs;
+  final RxInt _dateSelectIndex = (-1).obs;
 
   int get dateSelectIndex => _dateSelectIndex.value;
 
