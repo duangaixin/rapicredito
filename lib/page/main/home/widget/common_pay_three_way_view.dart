@@ -66,23 +66,10 @@ class CommonPayThreeWayView extends GetView<MainHomeCtr> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        CustomImageView(
-                          Resource.assetsImageAuthTakeCamera,
-                          imageType: ImageType.assets,
-                          width: 63.43,
-                          height: 37.0,
-                          margin: EdgeInsets.only(right: 16.0),
-                        ),
-                        Text(
-                          'Efectivo',
-                          style: TextStyle(
-                              fontSize: 16.0, color: Color(0xff101F36)),
-                        ),
-                      ],
-                    ),
+                    const CustomImageView(Resource.assetsImagePayEfe,
+                        imageType: ImageType.assets,
+                        width: 142.0,
+                        height: 37.0),
                     CustomButton(
                       onPressed: () {
                         controller.postQueryRepayUrlRequest(PayType.payThree);
@@ -99,59 +86,12 @@ class CommonPayThreeWayView extends GetView<MainHomeCtr> {
                     )
                   ],
                 )),
-            Container(
-              margin: EdgeInsets.only(top: 20.0, bottom: 20.0),
-              padding: EdgeInsets.only(
-                  left: 8.0, right: 10.0, top: 11.0, bottom: 11.0),
-              decoration: BoxDecoration(
-                color: Color(0xffF9F9F9),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                      child: CustomImageView(
-                    Resource.assetsImageAuthTakeCamera,
-                    imageType: ImageType.assets,
-                    width: 43.44,
-                    height: 15.51,
-                    margin: EdgeInsets.only(right: 10.0),
-                  )),
-                  Expanded(
-                      child: CustomImageView(
-                    Resource.assetsImageAuthTakeCamera,
-                    imageType: ImageType.assets,
-                    width: 43.44,
-                    height: 15.51,
-                    margin: EdgeInsets.only(right: 10.0),
-                  )),
-                  Expanded(
-                      child: CustomImageView(
-                    Resource.assetsImageAuthTakeCamera,
-                    imageType: ImageType.assets,
-                    width: 43.44,
-                    height: 15.51,
-                    margin: EdgeInsets.only(right: 10.0),
-                  )),
-                  Expanded(
-                      child: CustomImageView(
-                    Resource.assetsImageAuthTakeCamera,
-                    imageType: ImageType.assets,
-                    width: 43.44,
-                    height: 15.51,
-                    margin: EdgeInsets.only(right: 10.0),
-                  )),
-                  Expanded(
-                      child: CustomImageView(
-                    Resource.assetsImageAuthTakeCamera,
-                    imageType: ImageType.assets,
-                    width: 60,
-                    height: 15.51,
-                  )),
-                ],
-              ),
-            )
+            const CustomImageView(Resource.assetsImagePayThreeCenter,
+                imageType: ImageType.assets,
+                width: double.infinity,
+                height: 39.0,
+                radius: 8.0,
+                margin: EdgeInsets.only(top: 20.0,bottom: 20.0)),
           ],
         ),
       );
@@ -165,25 +105,8 @@ class CommonPayThreeWayView extends GetView<MainHomeCtr> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CustomImageView(
-                    Resource.assetsImageAuthTakeCamera,
-                    imageType: ImageType.assets,
-                    width: 43.5,
-                    height: 28.37,
-                    margin: EdgeInsets.only(right: 14.0),
-                  ),
-                  CustomImageView(
-                    Resource.assetsImageAuthTakeCamera,
-                    imageType: ImageType.assets,
-                    width: 46.29,
-                    height: 28.97,
-                    margin: EdgeInsets.only(right: 16.0),
-                  ),
-                ],
-              ),
+              const CustomImageView(Resource.assetsImagePayThreeVisa,
+                  imageType: ImageType.assets, width: 105, height: 29.0),
               CustomButton(
                 onPressed: () {
                   controller.postQueryRepayUrlRequest(PayType.payFour);
@@ -212,21 +135,10 @@ class CommonPayThreeWayView extends GetView<MainHomeCtr> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CustomImageView(
-                    Resource.assetsImageAuthTakeCamera,
-                    imageType: ImageType.assets,
-                    width: 94.34,
-                    height: 40.0,
-                    margin: EdgeInsets.only(right: 8.0),
-                  ),
-                  Text(
-                    'PSE',
-                    style: TextStyle(fontSize: 16.0, color: Color(0xff101F36)),
-                  ),
-                ],
+              const CustomImageView(Resource.assetsImagePayPse,
+                  imageType: ImageType.assets,
+                  width: 134.0,
+                  height: 40.0,
               ),
               CustomButton(
                 onPressed: () {

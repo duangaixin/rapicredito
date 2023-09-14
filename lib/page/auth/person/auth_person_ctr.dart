@@ -8,8 +8,6 @@ import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
 import 'package:rapicredito/page/auth/person/widget/email_select_list_view.dart';
-import 'package:rapicredito/page/dialog/go_setting_dialog.dart';
-import 'package:rapicredito/page/main/app_main_ctr.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/location_util.dart';
@@ -42,9 +40,7 @@ class AuthPersonCtr extends BaseGetCtr {
         onSuccess: () async {
           await LocationUtil.getLocation();
         },
-        goSetting: () {
-          showGoSettingDialog();
-        });
+        goSetting: () {});
   }
 
   void _emailEndListener() {
@@ -86,16 +82,16 @@ class AuthPersonCtr extends BaseGetCtr {
     }
     CustomPicker.showSinglePicker(Get.context!, data: netList,
         onConfirm: (data, p) {
-          selectData = data;
-          if (clickType == AppConfigClickType.incomeType) {
-            state.income = data;
-          } else if (clickType == AppConfigClickType.familyCount) {
-            state.familyCount = data;
-          } else if (clickType == AppConfigClickType.educationalLevel) {
-            state.educationalLevel = data;
-          }
-          _btnCanClick();
-        }, selectData: selectData);
+      selectData = data;
+      if (clickType == AppConfigClickType.incomeType) {
+        state.income = data;
+      } else if (clickType == AppConfigClickType.familyCount) {
+        state.familyCount = data;
+      } else if (clickType == AppConfigClickType.educationalLevel) {
+        state.educationalLevel = data;
+      }
+      _btnCanClick();
+    }, selectData: selectData);
   }
 
   void disableClickToast() {
@@ -142,26 +138,13 @@ class AuthPersonCtr extends BaseGetCtr {
     // }
   }
 
-  void showGoSettingDialog() {
-    showDialog(
-        context: Get.context!,
-        barrierDismissible: false,
-        builder: (_) {
-          return GoSettingDialog(
-            clickConfirm: () {
-              openAppSettings();
-            },
-          );
-        });
-  }
-
   Future<void> postSaveAuthPersonRequest() async {
     KeyboardUtils.unFocus();
     if (!_validate()) return;
     Get.showLoading();
     Map<String, dynamic> param = _collectPersonParam();
     var response =
-    await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
+        await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
     Get.dismiss();
     if (response.isSuccess()) {
       Get.toNamed(PageRouterName.authContactPage);
@@ -174,7 +157,7 @@ class AuthPersonCtr extends BaseGetCtr {
     Map<String, dynamic> param = getCommonParam();
     Get.showLoading();
     var response =
-    await HttpRequestManage.instance.postQueryAuthInfoRequest(param);
+        await HttpRequestManage.instance.postQueryAuthInfoRequest(param);
     Get.dismiss();
     if (response.isSuccess()) {
       var authInfoBean = response.data;
@@ -297,10 +280,9 @@ class AuthPersonCtr extends BaseGetCtr {
     }
   }
 
-  OverlayEntry get overlay =>
-      OverlayEntry(builder: (ctx) {
+  OverlayEntry get overlay => OverlayEntry(builder: (ctx) {
         final renderBox =
-        state.emailKey.currentContext?.findRenderObject() as RenderBox;
+            state.emailKey.currentContext?.findRenderObject() as RenderBox;
         final size = renderBox.size;
         return Positioned(
           width: size.width,

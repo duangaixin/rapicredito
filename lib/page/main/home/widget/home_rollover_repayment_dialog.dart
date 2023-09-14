@@ -48,7 +48,7 @@ class _HomeRolloverRepaymentDialogState
   }
 
   Widget get headerView => Container(
-        margin: const EdgeInsets.only(top: 43.0),
+        margin: const EdgeInsets.only(top: 20.0),
         height: 57.0,
         child: Stack(
           children: [

@@ -71,36 +71,42 @@ class CommonPayTwoWayView extends GetView<MainHomeCtr> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CustomImageView(
-                  Resource.assetsImageAuthTakeCamera,
-                  imageType: ImageType.assets,
-                  width: 95.0,
-                  height: 40.0,
-                  margin: EdgeInsets.only(right: 8.0),
-                ),
-                Stack(
-                  children: [
-                    Text(
-                      'PSE',
-                      style:
-                          TextStyle(fontSize: 16.0, color: Color(0xff101F36)),
-                    ),
-                    Positioned(
-                        top: -14,
-                        right: 0,
-                        child: CustomImageView(
-                          '',
-                          imageType: ImageType.assets,
-                          width: 15.0,
-                          height: 14.0,
-                          margin: EdgeInsets.only(right: 8.0),
-                        )),
-                  ],
-                )
-              ],
+            // const Row(
+            //   mainAxisSize: MainAxisSize.min,
+            //   children: [
+            //     CustomImageView(
+            //       Resource.assetsImageAuthTakeCamera,
+            //       imageType: ImageType.assets,
+            //       width: 95.0,
+            //       height: 40.0,
+            //       margin: EdgeInsets.only(right: 8.0),
+            //     ),
+            //     Stack(
+            //       children: [
+            //         Text(
+            //           'PSE',
+            //           style:
+            //               TextStyle(fontSize: 16.0, color: Color(0xff101F36)),
+            //         ),
+            //         Positioned(
+            //             top: -14,
+            //             right: 0,
+            //             child: CustomImageView(
+            //               '',
+            //               imageType: ImageType.assets,
+            //               width: 15.0,
+            //               height: 14.0,
+            //               margin: EdgeInsets.only(right: 8.0),
+            //             )),
+            //       ],
+            //     )
+            //   ],
+            // ),
+            const CustomImageView(
+              Resource.assetsImagePayPse,
+              imageType: ImageType.assets,
+              width: 134.0,
+              height: 40.0,
             ),
             CustomButton(
               onPressed: () {
@@ -129,22 +135,8 @@ class CommonPayTwoWayView extends GetView<MainHomeCtr> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CustomImageView(
-                    Resource.assetsImageAuthTakeCamera,
-                    imageType: ImageType.assets,
-                    width: 64.0,
-                    height: 37.0,
-                    margin: EdgeInsets.only(right: 16.0),
-                  ),
-                  Text(
-                    'Efectivo',
-                    style: TextStyle(fontSize: 16.0, color: Color(0xff101F36)),
-                  ),
-                ],
-              ),
+              const CustomImageView(Resource.assetsImagePayEfe,
+                  imageType: ImageType.assets, width: 142.0, height: 37.0),
               CustomButton(
                 onPressed: () {
                   controller.postQueryRepayUrlRequest(PayType.payTwo);
@@ -161,94 +153,12 @@ class CommonPayTwoWayView extends GetView<MainHomeCtr> {
               )
             ],
           ),
-          Container(
-            margin: EdgeInsets.only(top: 20.0, bottom: 20.0),
-            padding: EdgeInsets.only(
-                left: 8.0, right: 10.0, top: 11.0, bottom: 11.0),
-            decoration: BoxDecoration(
-              color: Color(0xffF9F9F9),
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                    child: CustomImageView(
-                  Resource.assetsImageAuthTakeCamera,
-                  imageType: ImageType.assets,
-                  width: 43.44,
-                  height: 15.51,
-                  margin: EdgeInsets.only(right: 10.0),
-                )),
-                Expanded(
-                    child: CustomImageView(
-                  Resource.assetsImageAuthTakeCamera,
-                  imageType: ImageType.assets,
-                  width: 43.44,
-                  height: 15.51,
-                  margin: EdgeInsets.only(right: 10.0),
-                )),
-                Expanded(
-                    child: CustomImageView(
-                  Resource.assetsImageAuthTakeCamera,
-                  imageType: ImageType.assets,
-                  width: 43.44,
-                  height: 15.51,
-                  margin: EdgeInsets.only(right: 10.0),
-                )),
-                Expanded(
-                    child: CustomImageView(
-                  Resource.assetsImageAuthTakeCamera,
-                  imageType: ImageType.assets,
-                  width: 43.44,
-                  height: 15.51,
-                  margin: EdgeInsets.only(right: 10.0),
-                )),
-                Expanded(
-                    child: CustomImageView(
-                  Resource.assetsImageAuthTakeCamera,
-                  imageType: ImageType.assets,
-                  width: 60,
-                  height: 15.51,
-                )),
-
-                // CustomImageView(
-                //   Resource.assetsImageAuthTakeCamera,
-                //   imageType: ImageType.assets,
-                //   width: 43.44,
-                //   height: 15.51,
-                //   margin: EdgeInsets.only(right: 10.0),
-                // ),
-                // CustomImageView(
-                //   Resource.assetsImageAuthTakeCamera,
-                //   imageType: ImageType.assets,
-                //   width: 47.22,
-                //   height: 17.45,
-                //   margin: EdgeInsets.only(right: 10.0),
-                // ),
-                // CustomImageView(
-                //   Resource.assetsImageAuthTakeCamera,
-                //   imageType: ImageType.assets,
-                //   width: 51,
-                //   height: 17.45,
-                //   margin: EdgeInsets.only(right: 8.0),
-                // ),
-                // CustomImageView(
-                //   Resource.assetsImageAuthTakeCamera,
-                //   imageType: ImageType.assets,
-                //   width: 61.39,
-                //   height: 17.45,
-                //   margin: EdgeInsets.only(right: 7.0),
-                // ),
-                // CustomImageView(
-                //   Resource.assetsImageAuthTakeCamera,
-                //   imageType: ImageType.assets,
-                //   width: 54.77,
-                //   height: 14.54,
-                // ),
-              ],
-            ),
-          )
+          const CustomImageView(Resource.assetsImagePayTwoBottom,
+              imageType: ImageType.assets,
+              width: double.infinity,
+              height: 40.0,
+              radius: 8.0,
+              margin: EdgeInsets.only(top: 20.0, bottom: 20.0)),
         ],
       ));
 }

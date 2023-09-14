@@ -6,6 +6,17 @@ class Resource {
   static const String assetsImageSplashThree =
       'assets/image/splash/splash_three.png';
 
+  static const String assetsImagePayEfe =
+      'assets/image/main/pay_efectivo.png';
+  static const String assetsImagePayPse =
+      'assets/image/main/pay_pse.png';
+  static const String assetsImagePayTwoBottom =
+      'assets/image/main/pay_two_bottom.png';
+  static const String assetsImagePayThreeVisa =
+      'assets/image/main/pay_three_visa.png';
+  static const String assetsImagePayThreeCenter =
+      'assets/image/main/pay_thee_center.png';
+
   static const String assetsImageMainOne =
       'assets/image/main/main_tab_home_unselect.png';
   static const String assetsImageMainOneSelected =

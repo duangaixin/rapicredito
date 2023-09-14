@@ -10,7 +10,6 @@ import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/model/pay_url_info_bean.dart';
-import 'package:rapicredito/page/dialog/go_setting_dialog.dart';
 import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/page/main/home/widget/home_rollover_repayment_dialog.dart';
 import 'package:rapicredito/router/page_router_name.dart';
@@ -48,22 +47,7 @@ class MainHomeCtr extends BaseGetCtr {
         onSuccess: () async {
           await LocationUtil.getLocation();
         },
-        goSetting: () {
-          showGoSettingDialog();
-        });
-  }
-
-  void showGoSettingDialog() {
-    showDialog(
-        context: Get.context!,
-        barrierDismissible: false,
-        builder: (_) {
-          return GoSettingDialog(
-            clickConfirm: () {
-              openAppSettings();
-            },
-          );
-        });
+        goSetting: () {});
   }
 
   void requestInitData() async {
@@ -200,14 +184,14 @@ class MainHomeCtr extends BaseGetCtr {
     }
   }
 
-  Future<void> postQueryChannelListRequest() async {
-    Map<String, dynamic> param = getCommonParam();
-    var response = await HttpRequestManage.instance.postChannelListInfo(param);
-    if (response.isSuccess()) {
-    } else {
-      NetException.dealAllException(response);
-    }
-  }
+  // Future<void> postQueryChannelListRequest() async {
+  //   Map<String, dynamic> param = getCommonParam();
+  //   var response = await HttpRequestManage.instance.postChannelListInfo(param);
+  //   if (response.isSuccess()) {
+  //   } else {
+  //     NetException.dealAllException(response);
+  //   }
+  // }
 
   Future<void> postQueryPayInfoRequest() async {
     Map<String, dynamic> param = getCommonParam();

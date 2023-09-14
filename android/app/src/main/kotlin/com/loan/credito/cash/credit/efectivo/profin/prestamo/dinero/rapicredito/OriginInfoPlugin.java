@@ -9,9 +9,7 @@ import androidx.core.app.ActivityCompat;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import im.crisp.client.Crisp;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.MethodChannel;
@@ -73,10 +71,10 @@ public class OriginInfoPlugin implements FlutterPlugin {
         mFusedLocationClient.getLastLocation()
                 .addOnSuccessListener(mActivity, location -> {
                     if (location != null) {
-                     Double latitude=   location.getLatitude();
-                     Double longitude= location.getLongitude();
+                        Double latitude = location.getLatitude();
+                        Double longitude = location.getLongitude();
                         StringBuilder sb = new StringBuilder();
-                        sb.append(longitude.toString()+','+ latitude);
+                        sb.append(longitude.toString() + ',' + latitude);
                         mResult.success(sb.toString());
                     }
                 });
@@ -87,6 +85,4 @@ public class OriginInfoPlugin implements FlutterPlugin {
         channel.setMethodCallHandler(null);
         channel = null;
     }
-
-
 }
