@@ -119,8 +119,9 @@ class MethodCallHandlerImpl(private var context: Context) : MethodCallHandler {
                 if(param!=null && param is Map<*, *> && param.isNotEmpty()){
                     if(param.containsKey("jsonStr")){
                         val jsonStr= param["jsonStr"]
-                        val ipData = EncryptionUtil.getEncryptStringMexCash(jsonStr as String?)
-                        result.success(ipData)
+                        val ipData = EncryptionUtil. aesStr(jsonStr as String?)
+                       val str= EncryptionUtil.compress(ipData)
+                        result.success(str)
                     }
                 }
                  result.success("")

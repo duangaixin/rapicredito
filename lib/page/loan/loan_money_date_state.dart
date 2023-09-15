@@ -20,7 +20,7 @@ class LoanMoneyDateState {
   String contractUrl = '';
   List<SkillfulFingerFarSide> originList = [];
   List<int> durationList = [];
-
+  bool isManyProduct=false;
   final RxDouble _incrementStep = (0.0).obs;
 
   double get incrementStep => _incrementStep.value;
@@ -94,7 +94,7 @@ class LoanMoneyDateState {
 
   RxList<SelectModel> dateList = <SelectModel>[].obs;
 
-  final RxInt _dateSelectIndex = 0.obs;
+  final RxInt _dateSelectIndex = (-1).obs;
 
   int get dateSelectIndex => _dateSelectIndex.value;
 

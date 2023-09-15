@@ -118,6 +118,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
         }
 
         if (allDateList.length < 2) {
+          state.isManyProduct=false;
           ///single
           var bean = state.originList[0];
           var duration = bean.strictMedicalPuzzleCafeteria ?? 0;
@@ -144,6 +145,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
           selectBeanOne.isSelected = false;
           allDateList.insert(2, selectBeanTwo);
         } else {
+          state.isManyProduct=true;
           ///many
           if (!ObjectUtil.isEmptyList(state.durationList)) {
             var maxDuration = state.durationList

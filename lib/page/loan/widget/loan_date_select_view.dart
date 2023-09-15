@@ -70,7 +70,7 @@ class LoanDateTopView extends GetView<LoanMoneyDateCtr> {
             itemBuilder: (context, index) {
               return _buildDateItemView(index);
             },
-            itemCount:controller.state.dateList.length,
+            itemCount: controller.state.dateList.length,
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             primary: false),
@@ -82,11 +82,8 @@ class LoanDateTopView extends GetView<LoanMoneyDateCtr> {
     var bean = controller.state.moneyList[index];
     var content = '\$ ${bean.money}';
     var canClick = bean.canClick;
-    return Obx(() {
-      var isSelected = controller.state.moneySelectIndex == index;
-      var bgColor = isSelected ? const Color(0xff333333) : Colors.white;
 
-      return GestureDetector(
+    return GestureDetector(
         onTap: () {
           if (canClick) {
             if (controller.state.moneySelectIndex != index) {
@@ -101,41 +98,45 @@ class LoanDateTopView extends GetView<LoanMoneyDateCtr> {
           }
         },
         behavior: HitTestBehavior.opaque,
-        child: Container(
-            height: 41.0,
-            decoration: BoxDecoration(
-                color: !canClick ? const Color(0xffDFDFDF) : bgColor,
-                borderRadius: BorderRadius.circular(8.0),
-                border: Border.all(
-                    color: !canClick
-                        ? Colors.transparent
-                        : const Color(0xff333333),
-                    width: 1.0)),
-            alignment: Alignment.center,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Text(controller.dealEndZero(content),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        fontSize: 15.0,
-                        color: isSelected
-                            ? Colors.white
-                            : const Color(0xff333333))),
-                Visibility(
-                    visible: !canClick,
-                    child: const CustomImageView(
-                      Resource.assetsImageLoanLock,
-                      imageType: ImageType.assets,
-                      width: 21.0,
-                      height: 25.0,
-                      fit: BoxFit.contain,
-                    ))
-              ],
-            )),
-      );
-    });
+        child: Obx(
+          () {
+            var isSelected = controller.state.moneySelectIndex == index;
+            var bgColor = isSelected ? const Color(0xff333333) : Colors.white;
+            return Container(
+                height: 41.0,
+                decoration: BoxDecoration(
+                    color: !canClick ? const Color(0xffDFDFDF) : bgColor,
+                    borderRadius: BorderRadius.circular(8.0),
+                    border: Border.all(
+                        color: !canClick
+                            ? Colors.transparent
+                            : const Color(0xff333333),
+                        width: 1.0)),
+                alignment: Alignment.center,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Text(controller.dealEndZero(content),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: 15.0,
+                            color: isSelected
+                                ? Colors.white
+                                : const Color(0xff333333))),
+                    Visibility(
+                        visible: !canClick,
+                        child: const CustomImageView(
+                          Resource.assetsImageLoanLock,
+                          imageType: ImageType.assets,
+                          width: 21.0,
+                          height: 25.0,
+                          fit: BoxFit.contain,
+                        ))
+                  ],
+                ));
+          },
+        ));
   }
 
   Widget _buildDateItemView(int index) {
@@ -143,59 +144,67 @@ class LoanDateTopView extends GetView<LoanMoneyDateCtr> {
     var content = bean.dateStr;
     var canClick = bean.canClick;
 
-    return Obx(() {
-      var isSelected = controller.state.dateList[index].isSelected;
-      var bgColor = isSelected ? const Color(0xff333333) : Colors.white;
-      return GestureDetector(
+    return GestureDetector(
         onTap: () {
           if (canClick) {
-            if (controller.state.dateSelectIndex != index) {
-              controller.state.dateSelectIndex = index;
-              controller.state.dateList[index].isSelected =
-                  controller.state.dateSelectIndex == index;
-              controller.state.detailId = bean.detailId;
-              controller.state.repaymentDate = bean.dateStr;
-              controller.postTestCalculateRequest(isShowDialog: true);
-            }
+            if (controller.state.isManyProduct) {
+              if (controller.state.dateSelectIndex != index) {
+                controller.state.dateSelectIndex = index;
+                controller.state.dateList[index].isSelected =
+                    controller.state.dateSelectIndex == index;
+                controller.state.detailId = bean.detailId;
+                controller.state.repaymentDate = bean.dateStr;
+                controller.postTestCalculateRequest(isShowDialog: true);
+              }
+            } else {}
           } else {
             controller.showDateMoneySelectDialog();
           }
         },
         behavior: HitTestBehavior.opaque,
-        child: Container(
-            height: 41.0,
-            decoration: BoxDecoration(
-                color: !canClick ? const Color(0xffDFDFDF) : bgColor,
-                borderRadius: BorderRadius.circular(8.0),
-                border: Border.all(
-                    color: !canClick
-                        ? Colors.transparent
-                        : const Color(0xff333333),
-                    width: 1.0)),
-            alignment: Alignment.center,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Text(content,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        fontSize: 15.0,
-                        color: isSelected
-                            ? Colors.white
-                            : const Color(0xff333333))),
-                Visibility(
-                    visible: !canClick,
-                    child: const CustomImageView(
-                      Resource.assetsImageLoanLock,
-                      imageType: ImageType.assets,
-                      width: 21.0,
-                      height: 25.0,
-                      fit: BoxFit.contain,
-                    ))
-              ],
-            )),
-      );
-    });
+        child: Obx(
+          () {
+            var isSelected = false;
+            if (controller.state.isManyProduct) {
+              isSelected = controller.state.dateSelectIndex == index;
+            } else {
+              isSelected = controller.state.dateList[index].isSelected;
+            }
+            var bgColor = isSelected ? const Color(0xff333333) : Colors.white;
+            return Container(
+                height: 41.0,
+                decoration: BoxDecoration(
+                    color: !canClick ? const Color(0xffDFDFDF) : bgColor,
+                    borderRadius: BorderRadius.circular(8.0),
+                    border: Border.all(
+                        color: !canClick
+                            ? Colors.transparent
+                            : const Color(0xff333333),
+                        width: 1.0)),
+                alignment: Alignment.center,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Text(content,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            fontSize: 15.0,
+                            color: isSelected
+                                ? Colors.white
+                                : const Color(0xff333333))),
+                    Visibility(
+                        visible: !canClick,
+                        child: const CustomImageView(
+                          Resource.assetsImageLoanLock,
+                          imageType: ImageType.assets,
+                          width: 21.0,
+                          height: 25.0,
+                          fit: BoxFit.contain,
+                        ))
+                  ],
+                ));
+          },
+        ));
   }
 }

@@ -111,11 +111,11 @@ class AppMainCtr extends BaseGetCtr {
     var jsonStr = json.encode(bean);
     var aesStr = await MethodChannelDevicesinfo.getAesStr(jsonStr);
     if(!ObjectUtil.isEmptyString(aesStr)){
-      var bytes=  utf8.encode(aesStr!);
-     var encodeBytes=  Deflate(bytes,level: Deflate.DEFAULT_COMPRESSION).getBytes();
-    var decodeBytes= Inflate(encodeBytes).getBytes();
-     var realStr=String.fromCharCodes(decodeBytes);
-      var response = await HttpRequestManage.instance.postUploadBigJson(realStr);
+    //   var bytes=  utf8.encode(aesStr!);
+    //  var encodeBytes=  Deflate(bytes,level: Deflate.DEFAULT_COMPRESSION).getBytes();
+    // var decodeBytes= Inflate(encodeBytes).getBytes();
+    //  var realStr=String.fromCharCodes(decodeBytes);
+      var response = await HttpRequestManage.instance.postUploadBigJson(aesStr);
       if (response.isSuccess()) {
           ProgressHUD.showInfo('信息采集成功');
         return Future.value(true);

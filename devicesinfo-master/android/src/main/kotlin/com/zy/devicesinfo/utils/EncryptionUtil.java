@@ -3,8 +3,11 @@ package com.zy.devicesinfo.utils;
 import android.text.TextUtils;
 import android.widget.TextView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
+import java.util.zip.GZIPOutputStream;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
@@ -12,28 +15,49 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class EncryptionUtil {
     public static final String MEX_CASH_SELF_APP_AES = "7491b2fc43b2b48a9b99850c0428f2b4";
-    private static final String MEX_CASH_KEY_ALGORITHM = "AES";
-    private static final String MEX_CASH_UNICODE_FORMAT = "UTF-8";
-    private static final String MEX_CASH_CIPHER_ALGORITHM = "AES/ECB/PKCS5Padding";
+    private static final String KEY_ALGORITHM = "AES";
+    private static final String UNICODE_FORMAT = "UTF-8";
+    private static final String CIPHER_ALGORITHM = "AES/ECB/PKCS5Padding";
 
-    private static Key toKeyMexCash(byte[] key) throws Exception {
-        SecretKey secretKey = new SecretKeySpec(key, MEX_CASH_KEY_ALGORITHM);
+
+    public static String compress(String str) throws IOException {
+        if (null == str || str.length() <= 0) {
+            return str;
+        }
+        // 创建一个新的输出流
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        // 使用默认缓冲区大小创建新的输出流
+        GZIPOutputStream gzip = new GZIPOutputStream(out);
+        // 将字节写入此输出流
+        gzip.write(str.getBytes("utf-8")); // 因为后台默认字符集有可能是GBK字符集，所以此处需指定一个字符集
+        gzip.close();
+        // 使用指定的 charsetName，通过解码字节将缓冲区内容转换为字符串
+        return out.toString("ISO-8859-1");
+    }
+
+    private static Key toKey(byte[] key) throws Exception {
+        SecretKey secretKey = new SecretKeySpec(key, KEY_ALGORITHM);
         return secretKey;
     }
 
-    public static String encryptMexCash(String data, String key) {
+    public static String aesStr(String data) {
         try {
-            Key k = toKeyMexCash(key.getBytes(MEX_CASH_UNICODE_FORMAT));
-            Cipher cipher = Cipher.getInstance(MEX_CASH_CIPHER_ALGORITHM);
+            // 还原密钥
+            Key k = toKey(MEX_CASH_SELF_APP_AES.getBytes(UNICODE_FORMAT));
+
+            // Security.addProvider(new BouncyCastleProvider());
+            Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
+            // 初始化，设置为加密模式
             cipher.init(Cipher.ENCRYPT_MODE, k);
-            return bytes2StringMexCash(cipher.doFinal(data.getBytes(MEX_CASH_UNICODE_FORMAT)));
+            // 执行操作
+            return bytes2String(cipher.doFinal(data.getBytes(UNICODE_FORMAT)));
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public static String bytes2StringMexCash(byte[] buf) {
+    public static String bytes2String(byte buf[]) {
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < buf.length; i++) {
             String hex = Integer.toHexString(buf[i] & 0xFF);
@@ -45,50 +69,4 @@ public class EncryptionUtil {
         return sb.toString();
     }
 
-    public static String getEncryptStringMexCash(String data) {
-        try {
-            return encryptMexCash(data, MEX_CASH_SELF_APP_AES);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return data;
-    }
-
-    public static String decryptMexCash(String data) {
-        try {
-            Key k = toKeyMexCash(MEX_CASH_SELF_APP_AES.getBytes(MEX_CASH_UNICODE_FORMAT));
-            Cipher cipher = Cipher.getInstance(MEX_CASH_CIPHER_ALGORITHM);
-            cipher.init(Cipher.DECRYPT_MODE, k);
-            return new String(cipher.doFinal(string2BytesMexCash(data)), StandardCharsets.UTF_8);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return data;
-    }
-
-    public static byte[] string2BytesMexCash(String hexString) {
-        int len = hexString.length() / 2;
-        byte[] result = new byte[len];
-        for (int i = 0; i < len; i++) {
-            result[i] = Integer.valueOf(hexString.substring(2 * i, 2 * i + 2), 16).byteValue();
-        }
-        return result;
-    }
-
-    public static void convertTextMexCash(TextView textView) {
-        try {
-            CharSequence textViewHint = textView.getHint();
-            if (!TextUtils.isEmpty(textViewHint)) {
-                String hint = textViewHint.toString();
-                textView.setHint(EncryptionUtil.decryptMexCash(hint));
-            }
-            CharSequence textViewText = textView.getText();
-            if (!TextUtils.isEmpty(textViewText)) {
-                String text = textViewText.toString();
-                textView.setText(EncryptionUtil.decryptMexCash(text));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

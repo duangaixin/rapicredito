@@ -53,10 +53,10 @@ class AuthContactCtr extends BaseGetCtr {
 
   void _btnCanClick() {
     if (ObjectUtil.isEmptyString(state.relationshipOne) ||
-        ObjectUtil.isEmptyString(phoneOneCtr.text.strRvSpace()) ||
+        ObjectUtil.isEmptyString(phoneOneCtr.text.trim()) ||
         ObjectUtil.isEmptyString(nameOneCtr.text.trim()) ||
         ObjectUtil.isEmptyString(state.relationshipTwo) ||
-        ObjectUtil.isEmptyString(phoneTwoCtr.text.strRvSpace()) ||
+        ObjectUtil.isEmptyString(phoneTwoCtr.text.trim()) ||
         ObjectUtil.isEmptyString(nameTwoCtr.text.trim())) {
       state.btnDisableClick = true;
     } else {

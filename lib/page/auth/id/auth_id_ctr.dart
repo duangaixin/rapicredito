@@ -26,7 +26,6 @@ import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/utils/permission_util.dart';
 import 'package:rapicredito/utils/screen_util.dart';
 import 'package:rapicredito/utils/string_ext.dart';
-import 'package:rapicredito/utils/text_util.dart';
 import 'package:rapicredito/widget/custom_picker.dart';
 import 'package:rapicredito/widget/progress_hud_view.dart';
 
@@ -168,10 +167,27 @@ class AuthIdCtr extends BaseGetCtr {
   }
 
   void _btnCanClick() {
+  var str=  idNumCtr.text;
+  var realStr=  idNumCtr.text.strRvSpace();
+  var isEmpty= idNumCtr.text.isEmpty;
+  var isEmptyTrim= idNumCtr.text.trim().isEmpty;
+  print(str+'duanxinxin11111');
+  print(realStr+'duanxinxin222222');
+  if(isEmpty){
+    print(str+'duanxin333333');
+  }else{
+    print(str+'duanxin444444');
+  }
+  if(isEmptyTrim){
+    print(str+'duanxin55555');
+  }else{
+    print(str+'duanxin666666');
+  }
     if (ObjectUtil.isEmptyString(state.idFrontUrl) ||
         ObjectUtil.isEmptyString(state.idBackUrl) ||
         ObjectUtil.isEmptyString(state.faceUrl) ||
-        ObjectUtil.isEmptyString(idNumCtr.text.strRvSpace()) ||
+        ObjectUtil.isEmptyString(idNumCtr.text.trim()) ||
+        ObjectUtil.isEmptyString(idNumCtr.text) ||
         ObjectUtil.isEmptyString(firstNameCtr.text.trim()) ||
         ObjectUtil.isEmptyString(secondNameCtr.text.trim()) ||
         ObjectUtil.isEmptyString(state.gender) ||
