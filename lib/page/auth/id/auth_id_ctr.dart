@@ -78,21 +78,21 @@ class AuthIdCtr extends BaseGetCtr {
     PermissionUtil.checkPermission(
         permissionList: [Permission.camera],
         onSuccess: () async {
-          MethodChannel channel = const MethodChannel('originInfoPlugin');
-          var path = await channel.invokeMethod('selectImage');
-          if (!TextUtil.isEmpty(path)) {
-            var file = File(path);
-            _uploadPhotoData(file, isFront);
-          }
-          // XFile? result =
-          //     await ImagePicker().pickImage(source: ImageSource.gallery);
-          // if (kDebugMode) {
-          //   print(result?.path ?? '' '-----image===path');
-          // }
-          // if (result != null) {
-          //   var file = File(result.path);
+          // MethodChannel channel = const MethodChannel('originInfoPlugin');
+          // var path = await channel.invokeMethod('selectImage');
+          // if (!TextUtil.isEmpty(path)) {
+          //   var file = File(path);
           //   _uploadPhotoData(file, isFront);
           // }
+          XFile? result =
+              await ImagePicker().pickImage(source: ImageSource.gallery);
+          if (kDebugMode) {
+            print(result?.path ?? '' '-----image===path');
+          }
+          if (result != null) {
+            var file = File(result.path);
+            _uploadPhotoData(file, isFront);
+          }
         },
         onFailed: () {});
   }

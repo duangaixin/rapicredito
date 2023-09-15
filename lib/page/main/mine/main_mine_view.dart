@@ -144,9 +144,7 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
               iconHeight: 22,
               iconWith: 22,
               iconPath: Resource.assetsImageMineClient,
-              onTap: () {
-                ctr.goToWebViewPage('百度', 'https://www.baidu.com/');
-              },
+              onTap:ctr.goToChatPage,
               content: 'Servicio al cliente en línea',
             ),
             CommonSettingClickView(

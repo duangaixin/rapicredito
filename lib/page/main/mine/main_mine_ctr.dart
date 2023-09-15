@@ -82,21 +82,24 @@ class MainMineCtr extends BaseGetCtr {
   }
 
   void goToSettingPage() {
+    KeyboardUtils.unFocus();
     Get.toNamed(PageRouterName.settingPage);
   }
 
   void goToClientPage() {
     KeyboardUtils.unFocus();
-    if (UserStore.to.hasToken) {
-      MethodChannel channel = const MethodChannel('originInfoPlugin');
-      channel.invokeMethod('openChatActivity');
-    } else {
-      Get.toNamed(PageRouterName.clientPage,
-          arguments: {AppConstants.fromPageNameKey: PageRouterName.clientPage});
-    }
+    Get.toNamed(PageRouterName.clientPage,
+        arguments: {AppConstants.fromPageNameKey: PageRouterName.clientPage});
+  }
+
+  void goToChatPage() {
+    KeyboardUtils.unFocus();
+    MethodChannel channel = const MethodChannel('originInfoPlugin');
+    channel.invokeMethod('openChatActivity');
   }
 
   void goToWebViewPage(String title, String webViewUrl) {
+    KeyboardUtils.unFocus();
     Get.toNamed(PageRouterName.webViewPage, arguments: {
       AppConstants.webViewTitleKey: title,
       AppConstants.webViewUrlKey: webViewUrl

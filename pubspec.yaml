@@ -44,7 +44,7 @@ dependencies:
   firebase_core: ^2.15.1
   firebase_crashlytics: ^3.0.14
   firebase_analytics: ^10.4.5
-
+  archive: ^3.3.9
   flutter_pickers:
      path: ./flutter_pickers
 dev_dependencies:

@@ -119,6 +119,7 @@ class MainHomeCtr extends BaseGetCtr {
       if (response.code == null) {
        state.overdueStatus=-1;
        state.loadState = LoadState.succeed;
+       Get.showNoNetDialog();
        return;
       }
       NetException.dealAllException(response);
@@ -137,6 +138,7 @@ class MainHomeCtr extends BaseGetCtr {
       if (response.code == null) {
         state.overdueStatus=-1;
         state.loadState = LoadState.succeed;
+        Get.showNoNetDialog();
         return;
       }
       NetException.dealAllException(response);

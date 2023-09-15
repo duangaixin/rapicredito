@@ -28,14 +28,14 @@ class LoginCtr extends BaseGetCtr {
   @override
   void onInit() {
     super.onInit();
-    var param = Get.arguments;
-    if (param != null && param is Map) {
-      if (!ObjectUtil.isEmptyMap(param)) {
-        if (param.containsKey(AppConstants.isTokenExpired)) {
-          isTokenExpired = param[AppConstants.isTokenExpired];
-        }
-      }
-    }
+    // var param = Get.arguments;
+    // if (param != null && param is Map) {
+    //   if (!ObjectUtil.isEmptyMap(param)) {
+    //     if (param.containsKey(AppConstants.isTokenExpired)) {
+    //       isTokenExpired = param[AppConstants.isTokenExpired];
+    //     }
+    //   }
+    // }
     state.isInitClick = true;
     phoneCtr.addListener(_btnLoginCanClick);
     phoneCtr.addListener(_btnOptCanClick);
@@ -119,11 +119,12 @@ class LoginCtr extends BaseGetCtr {
       await StorageService.to.setInt(AppConstants.userTestFlagKey, testFlag);
       await UserStore.to.setLoginInfo(token, userId, phoneNum);
       await setCrispInfo(testFlag.toString(), phoneNum);
-      if (isTokenExpired) {
-        Get.toNamed(PageRouterName.mainPage);
-      } else {
-        Get.back();
-      }
+      // if (isTokenExpired) {
+      //   Get.toNamed(PageRouterName.mainPage);
+      // } else {
+      //   Get.back();
+      // }
+      Get.back();
       var mainHomeCtr = Get.find<MainHomeCtr>();
       mainHomeCtr.refreshInfo();
     } else {

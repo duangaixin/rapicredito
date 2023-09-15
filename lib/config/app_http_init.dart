@@ -13,6 +13,7 @@ import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/net/base_response.dart';
 import 'package:rapicredito/net/net_config.dart';
 import 'package:rapicredito/net/net_request.dart';
+import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/widget/progress_hud_view.dart';
@@ -37,9 +38,12 @@ bool isReleaseBuild() => !kProfileMode && kReleaseMode;
 void _check401Error(BaseResponse<dynamic> error) async {
   if (is401Error(error)) {
     UserStore.to.loginOut();
-    ProgressHUD.showInfo('Expiración de autorización');
-    Get.offAllNamed(PageRouterName.loginPage,
-        arguments: {AppConstants.isTokenExpired: true});
+    var mainHomeCtr = Get.find<MainHomeCtr>();
+    mainHomeCtr.state.overdueStatus = -1;
+    Get.until((route) => route.settings.name == PageRouterName.mainPage);
+    Get.toNamed(PageRouterName.loginPage);
+    // Get.offAllNamed(PageRouterName.loginPage,
+    //     arguments: {AppConstants.isTokenExpired: true});
   }
 }
 

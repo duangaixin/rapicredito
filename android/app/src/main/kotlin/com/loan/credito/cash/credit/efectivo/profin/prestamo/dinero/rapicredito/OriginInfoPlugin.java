@@ -57,7 +57,7 @@ public class OriginInfoPlugin implements FlutterPlugin {
                     mainActivity.takePhone(result, isFront);
                     break;
                 case "selectImage":
-                    mainActivity.selectImage();
+                    mainActivity.selectImage(result);
                     break;
                 case "getGoogleLocation":
                     getGoogleLocation();

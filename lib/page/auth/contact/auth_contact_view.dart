@@ -49,7 +49,7 @@ class AuthContactPage extends GetView<AuthContactCtr> {
                   keyboardType: TextInputType.number,
                   inputFormatter: [
                     FilteringTextInputFormatter.digitsOnly,
-                    LengthLimitingTextInputFormatter(10),
+                    LengthLimitingTextInputFormatter(20),
                   ],
                 ),
                 CustomEditView(
@@ -95,7 +95,7 @@ class AuthContactPage extends GetView<AuthContactCtr> {
                   keyboardType: TextInputType.number,
                   inputFormatter: [
                     FilteringTextInputFormatter.digitsOnly,
-                    LengthLimitingTextInputFormatter(10),
+                    LengthLimitingTextInputFormatter(20),
                   ],
                 ),
                 CustomEditView(

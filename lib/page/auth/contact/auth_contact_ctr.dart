@@ -201,14 +201,16 @@ class AuthContactCtr extends BaseGetCtr {
             Permission.phone,
           ],
           onSuccess: () async {
-            Get.showLoading();
+            Get.toNamed(PageRouterName.authIdPage);
+         //   Get.showLoading();
             var result = await appMainCtr.postUploadJsonRequest();
-            Get.dismiss();
+         //   Get.dismiss();
             if (result) {
-              Get.toNamed(PageRouterName.authIdPage);
+              ProgressHUD.showError('采集成功');
+             // Get.toNamed(PageRouterName.authIdPage);
             }else{
               ProgressHUD.showError('json采集失败我先自己跳转');
-              Get.toNamed(PageRouterName.authIdPage);
+            //  Get.toNamed(PageRouterName.authIdPage);
             }
           },
           goSetting: () {
