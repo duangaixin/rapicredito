@@ -144,7 +144,7 @@ class LoanDateTopView extends GetView<LoanMoneyDateCtr> {
     var canClick = bean.canClick;
 
     return Obx(() {
-      var isSelected = controller.state.dateSelectIndex == index;
+      var isSelected = controller.state.dateList[index].isSelected;
       var bgColor = isSelected ? const Color(0xff333333) : Colors.white;
       return GestureDetector(
         onTap: () {

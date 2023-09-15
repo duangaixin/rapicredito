@@ -50,14 +50,14 @@ public class OriginInfoPlugin implements FlutterPlugin {
         channel.setMethodCallHandler((methodCall, result) -> {
             this.mResult = result;
             String methodName = methodCall.method;
+            MainActivity mainActivity = (MainActivity) mActivity;
             switch (methodName) {
                 case "takeCamera":
                     int isFront = methodCall.argument("isFront");
-                    MainActivity mainActivity = (MainActivity) mActivity;
                     mainActivity.takePhone(result, isFront);
                     break;
                 case "selectImage":
-
+                    mainActivity.selectImage();
                     break;
                 case "getGoogleLocation":
                     getGoogleLocation();
@@ -87,9 +87,7 @@ public class OriginInfoPlugin implements FlutterPlugin {
                         Crisp.setSessionSegment("rapicredito");
                     }
                 }
-
             }
-
             if (param.containsKey("userPhone")) {
                 String userPhone = param.get("userPhone");
                 Crisp.setTokenID(userPhone);

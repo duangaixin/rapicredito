@@ -11,12 +11,8 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
-
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 
-<!--    <uses-permission-->
-<!--        android:name="android.permission.RECORD_AUDIO"-->
-<!--        tools:node="remove" />-->
     <uses-permission
         android:name="android.permission.READ_CONTACTS"
         tools:node="remove" />
@@ -27,15 +23,20 @@
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         tools:node="remove" />
 
-<!--    <uses-feature-->
-<!--        android:name="android.hardware.camera"-->
-<!--        android:required="true" />-->
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
-    <uses-feature android:name="android.hardware.camera.front" android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
-    <!-- Provide required visibility configuration for API level 30 and above -->
+
+    <queries package="com.loan.credito.cash.credit.efectivo.profin.prestamo.dinero.rapicredito">
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+        </intent>
+    </queries>
 
     <queries>
         <intent>
@@ -45,18 +46,14 @@
             <action android:name="android.intent.action.VIEW" />
         </intent>
     </queries>
+
     <queries>
-        <!-- If your app checks for call support -->
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="tel" />
         </intent>
-<!--        <intent>-->
-<!--            <action android:name="android.intent.action.VIEW" />-->
-<!--            <category android:name="android.intent.category.BROWSABLE" />-->
-<!--            <data android:scheme="https" />-->
-<!--        </intent>-->
     </queries>
+
     <application
         android:name=".MyApp"
         android:icon="@mipmap/ic_launcher"
@@ -81,6 +78,16 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="rapicredito"
+                    android:scheme="rapicredito://believeaggression" />
+            </intent-filter>
         </activity>
 
         <meta-data
@@ -96,5 +103,17 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.facebook.sdk.AutoLogAppEventsEnabled"
+            android:value="true" />
+        <meta-data
+            android:name="com.facebook.sdk.AdvertiserIDCollectionEnabled"
+            android:value="true" />
+        <meta-data
+            android:name="com.facebook.sdk.ClientToken"
+            android:value="@string/fb_client_token" />
     </application>
 </manifest>

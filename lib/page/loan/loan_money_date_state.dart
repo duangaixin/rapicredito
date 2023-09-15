@@ -94,7 +94,7 @@ class LoanMoneyDateState {
 
   RxList<SelectModel> dateList = <SelectModel>[].obs;
 
-  final RxInt _dateSelectIndex = (-1).obs;
+  final RxInt _dateSelectIndex = 0.obs;
 
   int get dateSelectIndex => _dateSelectIndex.value;
 

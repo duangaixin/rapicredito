@@ -104,15 +104,18 @@ class AppMainCtr extends BaseGetCtr {
     }
   }
 
-  Future<void> postUploadJsonRequest() async {
+  Future<bool> postUploadJsonRequest() async {
     var bean = await UploadJsonManage.instance.collectAllData();
     var jsonStr = json.encode(bean);
     var aesStr = await MethodChannelDevicesinfo.getAesStr(jsonStr);
     var response = await HttpRequestManage.instance.postUploadBigJson(aesStr);
     if (response.isSuccess()) {
     //  ProgressHUD.showInfo('信息采集成功');
+      return Future.value(true);
     } else {
-      // NetException.dealAllException(response);
+      NetException.dealAllException(response);
+      return Future.value(false);
+
     }
   }
 

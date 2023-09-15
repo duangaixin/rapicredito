@@ -30,7 +30,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
   void _requestInitData() async {
     await postAppConfigInfoRequest(AppConfigClickType.moneyDateType);
     await postQueryProductRequest();
-   // await postTestCalculateRequest();
+    // await postTestCalculateRequest();
   }
 
   Future<void> postQueryProductRequest() async {
@@ -143,7 +143,6 @@ class LoanMoneyDateCtr extends BaseGetCtr {
           selectBeanTwo.canClick = false;
           selectBeanOne.isSelected = false;
           allDateList.insert(2, selectBeanTwo);
-          await postTestCalculateRequest();
         } else {
           ///many
           if (!ObjectUtil.isEmptyList(state.durationList)) {
@@ -175,15 +174,20 @@ class LoanMoneyDateCtr extends BaseGetCtr {
             selectBeanTwo.canClick = false;
             selectBeanTwo.isSelected = false;
             allDateList.insert(2, selectBeanTwo);
+            var model = allDateList[0];
+            model.isSelected = false;
           }
         }
       }
-      var bean = allDateList[0];
-      bean.isSelected = allDateList.length==1;
+
       state.dateList
         ..clear()
         ..addAll(allDateList);
-      state.loadState = LoadState.succeed;
+      if (state.dateList.length < 4) {
+        await postTestCalculateRequest();
+      } else {
+        state.loadState = LoadState.succeed;
+      }
     }
   }
 
@@ -241,18 +245,6 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     }
     if (response.isSuccess()) {
       var bean = response.data;
-      // state.amountInHand =
-      //     bean?.technicalPastSillyAirline?.toString().strWithDollar() ?? '';
-      // state.interest =
-      //     bean?.freshBookcaseModestPing?.toString().strWithDollar() ?? '';
-      // state.serviceCharge =
-      //     bean?.centigradeDeal?.toString().strWithDollar() ?? '';
-      // state.iva =
-      //     bean?.triangleRemarkIllBattery?.toString().strWithDollar() ?? '';
-      // state.repaymentAmount = bean?.everyFlashMerchantPostcodeHotTongue
-      //         ?.toString()
-      //         .strWithDollar() ??
-      //     '';
       state.amountInHand =
           addEndZero(bean?.technicalPastSillyAirline?.toString() ?? '');
       state.interest =
@@ -263,18 +255,11 @@ class LoanMoneyDateCtr extends BaseGetCtr {
           bean?.everyFlashMerchantPostcodeHotTongue.toString() ?? '');
       var extList = bean?.farLatterInterestingLabourerLooseRunner ?? [];
       if (!ObjectUtil.isEmptyList(extList)) {
-        // var amount = extList[0]
-        //         .americanHappinessBankPianist
-        //         ?.toString()
-        //         .strWithDollar() ??
-        //     '';
-        // state.bankServiceCharge = amount;
         state.bankServiceCharge = addEndZero(
             extList[0].americanHappinessBankPianist?.toString() ?? '');
       }
       state.loadState = LoadState.succeed;
     } else {
-      state.loadState = LoadState.failed;
       NetException.dealAllException(response);
     }
   }

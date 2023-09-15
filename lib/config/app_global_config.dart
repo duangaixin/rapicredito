@@ -8,6 +8,6 @@ class AppGlobalConfig {
     await initSystemConfig();
     await initHttp();
     await initGetInfo();
-    // await initFireBase();
+    //await initFireBase();
   }
 }

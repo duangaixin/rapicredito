@@ -100,16 +100,20 @@ android {
     }
     buildTypes {
         release {
+
             minifyEnabled true
             shrinkResources true
             zipAlignEnabled true
             signingConfig signingConfigs.release
+//            firebaseCrashlytics {
+//                mappingFileUploadEnabled false
+//            }
         }
         debug {
             minifyEnabled false
             shrinkResources false
             zipAlignEnabled false
-             signingConfig signingConfigs.debug
+            signingConfig signingConfigs.debug
         }
     }
 
@@ -137,6 +141,7 @@ dependencies {
     implementation rootProject.depsLibs.multidex
     implementation "com.google.android.gms:play-services-location:17.0.0"
     implementation 'im.crisp:crisp-sdk:1.0.12'
+    implementation 'com.facebook.android:facebook-android-sdk:16.2.0'
 //    implementation 'com.google.firebase:firebase-crashlytics'
 //    implementation 'com.google.firebase:firebase-analytics'
 

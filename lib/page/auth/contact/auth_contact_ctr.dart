@@ -179,10 +179,8 @@ class AuthContactCtr extends BaseGetCtr {
         builder: (_) {
           return Dialog(
             shape: const RoundedRectangleBorder(
-                borderRadius:
-                BorderRadius.all(Radius.circular(8.0))),
-            insetPadding:
-            const EdgeInsets.symmetric(horizontal: 20.0),
+                borderRadius: BorderRadius.all(Radius.circular(8.0))),
+            insetPadding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: PermissionDialog(rightClickConfirm: () {
               _uploadJson();
             }),
@@ -203,8 +201,15 @@ class AuthContactCtr extends BaseGetCtr {
             Permission.phone,
           ],
           onSuccess: () async {
-            Get.toNamed(PageRouterName.authIdPage);
-            await appMainCtr.postUploadJsonRequest();
+            Get.showLoading();
+            var result = await appMainCtr.postUploadJsonRequest();
+            Get.dismiss();
+            if (result) {
+              Get.toNamed(PageRouterName.authIdPage);
+            }else{
+              ProgressHUD.showError('json采集失败我先自己跳转');
+              Get.toNamed(PageRouterName.authIdPage);
+            }
           },
           goSetting: () {
             showGoSettingDialog();
@@ -296,15 +301,14 @@ class AuthContactCtr extends BaseGetCtr {
     return '';
   }
 
-  void goToClientPage(){
+  void goToClientPage() {
     KeyboardUtils.unFocus();
     if (UserStore.to.hasToken) {
       MethodChannel channel = const MethodChannel('originInfoPlugin');
       channel.invokeMethod('openChatActivity');
     } else {
-      Get.toNamed(PageRouterName.clientPage, arguments: {
-        AppConstants.fromPageNameKey: PageRouterName.clientPage
-      });
+      Get.toNamed(PageRouterName.clientPage,
+          arguments: {AppConstants.fromPageNameKey: PageRouterName.clientPage});
     }
   }
 

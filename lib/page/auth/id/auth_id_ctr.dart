@@ -26,6 +26,7 @@ import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/utils/permission_util.dart';
 import 'package:rapicredito/utils/screen_util.dart';
 import 'package:rapicredito/utils/string_ext.dart';
+import 'package:rapicredito/utils/text_util.dart';
 import 'package:rapicredito/widget/custom_picker.dart';
 import 'package:rapicredito/widget/progress_hud_view.dart';
 
@@ -77,15 +78,21 @@ class AuthIdCtr extends BaseGetCtr {
     PermissionUtil.checkPermission(
         permissionList: [Permission.camera],
         onSuccess: () async {
-          XFile? result =
-              await ImagePicker().pickImage(source: ImageSource.gallery);
-          if (kDebugMode) {
-            print(result?.path ?? '' '-----image===path');
-          }
-          if (result != null) {
-            var file = File(result.path);
+          MethodChannel channel = const MethodChannel('originInfoPlugin');
+          var path = await channel.invokeMethod('selectImage');
+          if (!TextUtil.isEmpty(path)) {
+            var file = File(path);
             _uploadPhotoData(file, isFront);
           }
+          // XFile? result =
+          //     await ImagePicker().pickImage(source: ImageSource.gallery);
+          // if (kDebugMode) {
+          //   print(result?.path ?? '' '-----image===path');
+          // }
+          // if (result != null) {
+          //   var file = File(result.path);
+          //   _uploadPhotoData(file, isFront);
+          // }
         },
         onFailed: () {});
   }

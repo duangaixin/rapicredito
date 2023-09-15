@@ -81,6 +81,11 @@ class LoginCtr extends BaseGetCtr {
     if (ObjectUtil.isEmptyString(phoneCtr.text.strRvSpace())) {
       ProgressHUD.showInfo(
           'Por favor, introduzca un número de teléfono correcto');
+      return;
+    }
+    if (ObjectUtil.isEmptyString(codeCtr.text.strRvSpace())) {
+      ProgressHUD.showInfo('Por favor introduzca el captcha');
+      return;
     }
   }
 

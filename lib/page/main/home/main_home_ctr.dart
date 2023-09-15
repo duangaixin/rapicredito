@@ -116,7 +116,11 @@ class MainHomeCtr extends BaseGetCtr {
         state.loadState = LoadState.succeed;
       }
     } else {
-      state.loadState = LoadState.failed;
+      if (response.code == null) {
+       state.overdueStatus=-1;
+       state.loadState = LoadState.succeed;
+       return;
+      }
       NetException.dealAllException(response);
     }
   }
@@ -130,7 +134,11 @@ class MainHomeCtr extends BaseGetCtr {
       state.maxAmount = bean?.cleverMaidActualFoot ?? '--';
       state.loadState = LoadState.succeed;
     } else {
-      state.loadState = LoadState.failed;
+      if (response.code == null) {
+        state.overdueStatus=-1;
+        state.loadState = LoadState.succeed;
+        return;
+      }
       NetException.dealAllException(response);
     }
   }
