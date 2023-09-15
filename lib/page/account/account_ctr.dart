@@ -253,7 +253,7 @@ class AccountCtr extends BaseGetCtr {
     } else {
       canNext = _validateBank();
     }
-    if(!canNext)return;
+    if (!canNext) return;
     Map<String, dynamic> param = collectAccountParam();
     Get.showLoading();
     var response =
@@ -373,7 +373,9 @@ class AccountCtr extends BaseGetCtr {
   }
 
   void _walletBtnCanClick() {
-    if (ObjectUtil.isEmptyString(walletAccountCtr.text.strRvSpace()) ||
+    if (ObjectUtil.isEmptyString(walletAccountCtr.text.trim()) ||
+        ObjectUtil.isEmptyString(walletAccountCtr.text.strRvSpace()) ||
+        ObjectUtil.isEmptyString(walletAccountConfirmCtr.text.trim()) ||
         ObjectUtil.isEmptyString(walletAccountConfirmCtr.text.strRvSpace())) {
       state.walletBtnDisableClick = true;
     } else {
@@ -382,8 +384,11 @@ class AccountCtr extends BaseGetCtr {
   }
 
   void _bankBtnCanClick() {
-    if (ObjectUtil.isEmptyString(bankAccountCtr.text.strRvSpace()) ||
+    if (
+    ObjectUtil.isEmptyString(bankAccountCtr.text.trim())||
+    ObjectUtil.isEmptyString(bankAccountCtr.text.strRvSpace()) ||
         ObjectUtil.isEmptyString(bankAccountConfirmCtr.text.strRvSpace()) ||
+        ObjectUtil.isEmptyString(bankAccountConfirmCtr.text.trim()) ||
         ObjectUtil.isEmptyString(state.bankType) ||
         ObjectUtil.isEmptyString(state.bankName)) {
       state.bankBtnDisableClick = true;

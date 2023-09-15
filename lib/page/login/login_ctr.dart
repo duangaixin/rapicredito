@@ -78,12 +78,12 @@ class LoginCtr extends BaseGetCtr {
   }
 
   void showTip() {
-    if (ObjectUtil.isEmptyString(phoneCtr.text.strRvSpace())) {
+    if (ObjectUtil.isEmptyString(phoneCtr.text.trim())||ObjectUtil.isEmptyString(phoneCtr.text.strRvSpace())) {
       ProgressHUD.showInfo(
           'Por favor, introduzca un número de teléfono correcto');
       return;
     }
-    if (ObjectUtil.isEmptyString(codeCtr.text.strRvSpace())) {
+    if (ObjectUtil.isEmptyString(codeCtr.text.trim())||ObjectUtil.isEmptyString(codeCtr.text.strRvSpace())) {
       ProgressHUD.showInfo('Por favor introduzca el captcha');
       return;
     }

@@ -201,7 +201,7 @@ class AuthIdCtr extends BaseGetCtr {
   Map<String, dynamic> _collectIdParam() {
     Map<String, dynamic> param = {};
     //身份证号
-    param['undividedMay'] = idNumCtr.text.strRvSpace();
+    param['undividedMay'] = idNumCtr.text.trim();
     //姓
     param['puzzledConditionFamiliarUnion'] = firstNameCtr.text.trim();
     //名

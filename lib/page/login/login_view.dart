@@ -146,7 +146,9 @@ class LoginPage extends GetView<LoginCtr> {
         var func = initClick || timeEnd <= 0
             ? () {
                 if (!ObjectUtil.isEmptyString(
-                    controller.phoneCtr.text.strRvSpace())) {
+                        controller.phoneCtr.text.trim()) &&
+                    !ObjectUtil.isEmptyString(
+                        controller.phoneCtr.text.strRvSpace())) {
                   controller.postSendCodeRequest();
                 } else {
                   ProgressHUD.showInfo(

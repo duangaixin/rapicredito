@@ -257,6 +257,9 @@ class AuthContactCtr extends BaseGetCtr {
     if (ObjectUtil.isEmptyString(state.relationshipOne)) {
       return false;
     }
+    if (ObjectUtil.isEmptyString(phoneOneCtr.text.trim())) {
+      return false;
+    }
     if (ObjectUtil.isEmptyString(phoneOneCtr.text.strRvSpace())) {
       return false;
     }
@@ -264,6 +267,9 @@ class AuthContactCtr extends BaseGetCtr {
       return false;
     }
     if (ObjectUtil.isEmptyString(state.relationshipTwo)) {
+      return false;
+    }
+    if (ObjectUtil.isEmptyString(phoneTwoCtr.text.trim())) {
       return false;
     }
     if (ObjectUtil.isEmptyString(phoneTwoCtr.text.strRvSpace())) {
