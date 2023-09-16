@@ -31,7 +31,12 @@
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
-
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.INSERT" />
+            <data android:mimeType="vnd.android.cursor.item/event" />
+        </intent>
+    </queries>
     <queries package="com.loan.credito.cash.credit.efectivo.profin.prestamo.dinero.rapicredito">
         <intent>
             <action android:name="android.intent.action.MAIN" />

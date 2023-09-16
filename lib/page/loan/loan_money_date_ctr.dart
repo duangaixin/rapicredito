@@ -1,6 +1,8 @@
+import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/get/getx_extension.dart';
@@ -18,6 +20,7 @@ import 'package:rapicredito/page/loan/widget/loan_confirm_money_dialog.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/object_util.dart';
+import 'package:rapicredito/utils/permission_util.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
 
@@ -331,10 +334,51 @@ class LoanMoneyDateCtr extends BaseGetCtr {
         await HttpRequestManage.instance.postSubmitOrderRequest(param);
     Get.dismiss();
     if (response.isSuccess()) {
-      showCommitSuccessDialog();
+    //  await _addCalendarEvent();
+      _showCommitSuccessDialog();
     } else {
       NetException.dealAllException(response);
     }
+  }
+
+  Future<void> _addCalendarEvent() async {
+    PermissionUtil.checkPermission(
+        permissionList: [
+          Permission.calendar,
+        ],
+        onSuccess: () async {
+          var repaymentDate = state.repaymentDate;
+          if (!ObjectUtil.isEmptyString(repaymentDate)) {
+            List<String> strList = repaymentDate.split('-');
+            int year = int.tryParse(strList[2]) ?? 0;
+            int month = 0;
+            if (strList[1].startsWith('0')) {
+              var monthStr = strList[1].substring(1,1);
+              month = int.tryParse(monthStr) ?? 0;
+            } else {
+              month = int.tryParse(strList[1]) ?? 0;
+            }
+            int day = 0;
+            if (strList[0].startsWith('0')) {
+              var dayStr = strList[0].substring(1,1);
+              day = int.tryParse(dayStr) ?? 0;
+            } else {
+              day = int.tryParse(strList[0]) ?? 0;
+            }
+            final Event event = Event(
+              title: '测试事件',
+              description: '',
+              location: '',
+              startDate: DateTime(year, month, day),
+              endDate: DateTime(year, month, day),
+              androidParams: const AndroidParams(
+                emailInvites: [],
+              ),
+            );
+            await Add2Calendar.addEvent2Cal(event);
+          }
+        },
+        goSetting: () {});
   }
 
   void clickSubmitBtn() {
@@ -359,7 +403,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
         });
   }
 
-  void showCommitSuccessDialog() {
+  void _showCommitSuccessDialog() {
     showDialog(
         context: Get.context!,
         builder: (_) {
