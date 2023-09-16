@@ -65,7 +65,6 @@ class AuthContactCtr extends BaseGetCtr {
   }
 
   void _showSelectDialog(List netList, AppConfigClickType clickType) {
-    KeyboardUtils.unFocus();
     dynamic selectData;
     if (clickType == AppConfigClickType.relationOne) {
       selectData = state.relationshipOne;
@@ -85,6 +84,7 @@ class AuthContactCtr extends BaseGetCtr {
   }
 
   void disableClickToast() {
+    KeyboardUtils.unFocus();
     if (state.btnDisableClick) {
       ProgressHUD.showInfo(
           'Por favor complete toda la información completamente');
@@ -106,6 +106,7 @@ class AuthContactCtr extends BaseGetCtr {
   }
 
   void clickRelationOne() {
+    KeyboardUtils.unFocus();
     if (ObjectUtil.isEmptyList(state.relationshipShowList)) {
       _postAppConfigInfoRequest(AppConfigClickType.relationOne);
     } else {
@@ -115,6 +116,7 @@ class AuthContactCtr extends BaseGetCtr {
   }
 
   void clickRelationTwo() {
+    KeyboardUtils.unFocus();
     if (ObjectUtil.isEmptyList(state.relationshipShowList)) {
       _postAppConfigInfoRequest(AppConfigClickType.relationTwo);
     } else {
@@ -124,7 +126,6 @@ class AuthContactCtr extends BaseGetCtr {
   }
 
   Future<void> _postAppConfigInfoRequest(AppConfigClickType clickType) async {
-    KeyboardUtils.unFocus();
     var param = <String, dynamic>{};
     var typeStr = '';
     if (clickType == AppConfigClickType.relationTwo ||
@@ -172,7 +173,7 @@ class AuthContactCtr extends BaseGetCtr {
     }
   }
 
-  void showPermissionDialog() {
+  void _showPermissionDialog() {
     showDialog(
         barrierDismissible: false,
         context: Get.context!,
@@ -201,20 +202,15 @@ class AuthContactCtr extends BaseGetCtr {
             Permission.phone,
           ],
           onSuccess: () async {
-            Get.toNamed(PageRouterName.authIdPage);
-         //   Get.showLoading();
+            Get.showLoading();
             var result = await appMainCtr.postUploadJsonRequest();
-         //   Get.dismiss();
+            Get.dismiss();
             if (result) {
-              ProgressHUD.showError('采集成功');
-             // Get.toNamed(PageRouterName.authIdPage);
-            }else{
-              ProgressHUD.showError('json采集失败我先自己跳转');
-            //  Get.toNamed(PageRouterName.authIdPage);
+              Get.toNamed(PageRouterName.authIdPage);
             }
           },
           goSetting: () {
-            showGoSettingDialog();
+            _showGoSettingDialog();
           });
     } else {
       Get.toNamed(PageRouterName.authIdPage);
@@ -222,10 +218,11 @@ class AuthContactCtr extends BaseGetCtr {
   }
 
   void clickSubmit() async {
-    await postSaveAuthContactRequest();
+    KeyboardUtils.unFocus();
+    await _postSaveAuthContactRequest();
   }
 
-  void showGoSettingDialog() {
+  void _showGoSettingDialog() {
     showDialog(
         context: Get.context!,
         barrierDismissible: false,
@@ -238,8 +235,7 @@ class AuthContactCtr extends BaseGetCtr {
         });
   }
 
-  Future<void> postSaveAuthContactRequest() async {
-    KeyboardUtils.unFocus();
+  Future<void> _postSaveAuthContactRequest() async {
     if (!_validate()) return;
     Get.showLoading();
     Map<String, dynamic> param = _collectContactParam();
@@ -247,7 +243,7 @@ class AuthContactCtr extends BaseGetCtr {
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
     Get.dismiss();
     if (response.isSuccess()) {
-      showPermissionDialog();
+      _showPermissionDialog();
     } else {
       NetException.dealAllException(response);
     }

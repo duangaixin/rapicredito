@@ -12,7 +12,6 @@ import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/page/login/index.dart';
 import 'package:rapicredito/page/main/home/index.dart';
-import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/utils/string_ext.dart';
@@ -60,8 +59,12 @@ class LoginCtr extends BaseGetCtr {
     });
   }
 
-  void postSendCodeRequest() async {
+  void clickCodeBtn() {
     KeyboardUtils.unFocus();
+    _postSendCodeRequest();
+  }
+
+  void _postSendCodeRequest() async {
     var param = <String, dynamic>{};
     param['swiftMeansEitherPine'] = phoneCtr.text.strRvSpace();
     param.addAll(getCommonParam());
@@ -78,19 +81,25 @@ class LoginCtr extends BaseGetCtr {
   }
 
   void showTip() {
-    if (ObjectUtil.isEmptyString(phoneCtr.text.trim())||ObjectUtil.isEmptyString(phoneCtr.text.strRvSpace())) {
+    if (ObjectUtil.isEmptyString(phoneCtr.text.trim()) ||
+        ObjectUtil.isEmptyString(phoneCtr.text.strRvSpace())) {
       ProgressHUD.showInfo(
           'Por favor, introduzca un número de teléfono correcto');
       return;
     }
-    if (ObjectUtil.isEmptyString(codeCtr.text.trim())||ObjectUtil.isEmptyString(codeCtr.text.strRvSpace())) {
+    if (ObjectUtil.isEmptyString(codeCtr.text.trim()) ||
+        ObjectUtil.isEmptyString(codeCtr.text.strRvSpace())) {
       ProgressHUD.showInfo('Por favor introduzca el captcha');
       return;
     }
   }
 
-  void postLoginRequest() async {
+  void clickLoginBtn() {
     KeyboardUtils.unFocus();
+    _postLoginRequest();
+  }
+
+  void _postLoginRequest() async {
     var param = <String, dynamic>{};
     var phoneNum = phoneCtr.text.strRvSpace();
 

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/page/auth/id/index.dart';
 import 'package:rapicredito/page/auth/widget/common_auth_agreement_view.dart';
-import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/widget/comon_section_title_view.dart';
 import 'package:rapicredito/style/index.dart';
@@ -13,9 +11,29 @@ import 'package:rapicredito/widget/custom_edit_view.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
 import 'package:rapicredito/widget/custom_select_view.dart';
+import 'package:rapicredito/widget/load_container_view.dart';
 
 class AuthIdPage extends GetView<AuthIdCtr> {
   const AuthIdPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPageBgView(
+        title: 'Información básica',
+        actions: [rightView],
+        content: Obx(() {
+          return LoadContainerView(
+              contentView: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [idCardView, faceView, infoView, bottomView],
+                ),
+              ),
+              loadState: controller.state.loadState);
+        }));
+  }
 
   Widget idCameraView(
           Key key, String title, String imageUrl, VoidCallback func) =>
@@ -38,6 +56,7 @@ class AuthIdPage extends GetView<AuthIdCtr> {
                 placeholder: Resource.assetsImageAuthTakeCamera,
                 height: 91.0,
                 radius: 8.0,
+                fit: BoxFit.fill,
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 7.0),
@@ -66,7 +85,6 @@ class AuthIdPage extends GetView<AuthIdCtr> {
               Expanded(child: Obx(() {
                 return idCameraView(controller.state.frontKey, 'Frente',
                     controller.state.idFrontUrl, () {
-                  //controller.tackCamera(isFront: true);
                   controller.showSelectDialog(isFront: true);
                 });
               })),
@@ -76,7 +94,6 @@ class AuthIdPage extends GetView<AuthIdCtr> {
               Expanded(child: Obx(() {
                 return idCameraView(controller.state.behindKey, 'Atrás',
                     controller.state.idBackUrl, () {
-                  //  controller.tackCamera(isFront: false);
                   controller.showSelectDialog(isFront: false);
                 });
               })),
@@ -121,7 +138,7 @@ class AuthIdPage extends GetView<AuthIdCtr> {
                       imageType: ImageType.assets,
                       width: 41.0,
                       height: 41.0,
-                      fit: BoxFit.contain,
+                      fit: BoxFit.fill,
                     ));
               }),
             ),
@@ -155,7 +172,6 @@ class AuthIdPage extends GetView<AuthIdCtr> {
           ),
           Center(
             child: faceCameraView(() {
-              //  controller.goToCustomCamera();
               controller.tackCamera(isUploadFace: true);
             }),
           )
@@ -171,7 +187,7 @@ class AuthIdPage extends GetView<AuthIdCtr> {
             child: Obx(() {
               return CustomColorButton(
                 disableClick: controller.disableClickToast,
-                realClick: controller.postSaveAuthIdRequest,
+                realClick: controller.clickSubmitBtn,
                 disableColors: const [
                   Color(0xffF5F6F4),
                   Color(0xffF5F6F4),
@@ -251,21 +267,6 @@ class AuthIdPage extends GetView<AuthIdCtr> {
           )
         ],
       );
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomPageBgView(
-        title: 'Información básica',
-        actions: [rightView],
-        content: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            children: [idCardView, faceView, infoView, bottomView],
-          ),
-        ));
-  }
 
   Widget get rightView => CustomClickView(
         onTap: () {

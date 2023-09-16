@@ -20,7 +20,6 @@ class LoginState {
 
   set btnLoginDisableClick(value) => _btnLoginDisableClick.value = value;
 
-
   final RxBool _btnOptDisableClick = true.obs;
 
   bool get btnOptDisableClick => _btnOptDisableClick.value;

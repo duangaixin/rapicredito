@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
@@ -7,6 +8,7 @@ import 'package:rapicredito/get/getx_storage_service.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/local/app_constants.dart';
+import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/model/product_info_bean.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
 import 'package:rapicredito/page/loan/index.dart';
@@ -14,6 +16,7 @@ import 'package:rapicredito/page/loan/widget/commit_success_dialog.dart';
 import 'package:rapicredito/page/loan/widget/date_money_select_dialog.dart';
 import 'package:rapicredito/page/loan/widget/loan_confirm_money_dialog.dart';
 import 'package:rapicredito/router/page_router_name.dart';
+import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
@@ -28,12 +31,12 @@ class LoanMoneyDateCtr extends BaseGetCtr {
   }
 
   void _requestInitData() async {
-    await postAppConfigInfoRequest(AppConfigClickType.moneyDateType);
-    await postQueryProductRequest();
+    await _postAppConfigInfoRequest(AppConfigClickType.moneyDateType);
+    await _postQueryProductRequest();
     // await postTestCalculateRequest();
   }
 
-  Future<void> postQueryProductRequest() async {
+  Future<void> _postQueryProductRequest() async {
     var param = <String, dynamic>{};
     param.addAll(getCommonParam());
     var response =
@@ -118,7 +121,8 @@ class LoanMoneyDateCtr extends BaseGetCtr {
         }
 
         if (allDateList.length < 2) {
-          state.isManyProduct=false;
+          state.isManyProduct = false;
+
           ///single
           var bean = state.originList[0];
           var duration = bean.strictMedicalPuzzleCafeteria ?? 0;
@@ -145,7 +149,8 @@ class LoanMoneyDateCtr extends BaseGetCtr {
           selectBeanOne.isSelected = false;
           allDateList.insert(2, selectBeanTwo);
         } else {
-          state.isManyProduct=true;
+          state.isManyProduct = true;
+
           ///many
           if (!ObjectUtil.isEmptyList(state.durationList)) {
             var maxDuration = state.durationList
@@ -266,7 +271,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     }
   }
 
-  Future<void> postAppConfigInfoRequest(AppConfigClickType clickType) async {
+  Future<void> _postAppConfigInfoRequest(AppConfigClickType clickType) async {
     var param = <String, dynamic>{};
     var typeStr = '';
     if (clickType == AppConfigClickType.moneyDateType) {
@@ -289,7 +294,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     }
   }
 
-  Future<void> postPreSubmitOrderRequest() async {
+  Future<void> _postPreSubmitOrderRequest() async {
     var param = <String, dynamic>{};
     param['brightGarbageAidsGallon'] = state.productId;
     param['cleverFightSatisfactionCustom'] = state.detailId;
@@ -314,7 +319,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     }
   }
 
-  Future<void> postSubmitOrderRequest() async {
+  Future<void> _postSubmitOrderRequest() async {
     var param = <String, dynamic>{};
     param['brightGarbageAidsGallon'] = state.productId;
     param['cleverFightSatisfactionCustom'] = state.detailId;
@@ -332,12 +337,16 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     }
   }
 
+  void clickSubmitBtn() {
+    _postPreSubmitOrderRequest();
+  }
+
   void showConfirmMoneyDialog() {
     showDialog(
         context: Get.context!,
         builder: (_) {
           return LoanConfirmMoneyDialog(
-            clickConfirm: postSubmitOrderRequest,
+            clickConfirm: _postSubmitOrderRequest,
             amountInHand: state.amountInHand,
             repaymentAmount: addEndZero(state.repaymentAmount.toString()),
             repaymentDate: state.repaymentDate,
@@ -391,6 +400,17 @@ class LoanMoneyDateCtr extends BaseGetCtr {
       }
     }
     return str;
+  }
+
+  void goToClientPage() {
+    KeyboardUtils.unFocus();
+    if (UserStore.to.hasToken) {
+      MethodChannel channel = const MethodChannel('originInfoPlugin');
+      channel.invokeMethod('openChatActivity');
+    } else {
+      Get.toNamed(PageRouterName.clientPage,
+          arguments: {AppConstants.fromPageNameKey: PageRouterName.clientPage});
+    }
   }
 }
 

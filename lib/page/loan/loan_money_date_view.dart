@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/loan/index.dart';
 import 'package:rapicredito/page/loan/widget/loan_date_select_view.dart';
+import 'package:rapicredito/style/resources.dart';
 import 'package:rapicredito/widget/custom_button.dart';
+import 'package:rapicredito/widget/custom_click_view.dart';
+import 'package:rapicredito/widget/custom_image_view.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
 
@@ -13,11 +16,27 @@ class LoanMoneyDatePage extends GetView<LoanMoneyDateCtr> {
   Widget build(BuildContext context) {
     return CustomPageBgView(
         title: 'Cantidad máxima',
+        actions: [rightView],
         content: Obx(() {
           return LoadContainerView(
               contentView: contentView, loadState: controller.state.loadState);
         }));
   }
+
+  Widget get rightView => CustomClickView(
+        onTap: () {
+          controller.goToClientPage();
+        },
+        child: Container(
+            alignment: Alignment.center,
+            padding: const EdgeInsets.only(right: 16.0, left: 5.0),
+            child: const CustomImageView(
+              Resource.assetsImageHomeTitleAction,
+              imageType: ImageType.assets,
+              width: 17.81,
+              height: 19.0,
+            )),
+      );
 
   Widget get contentView => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,7 +180,7 @@ class LoanMoneyDatePage extends GetView<LoanMoneyDateCtr> {
         padding: const EdgeInsets.only(
             bottom: 23.0, left: 55.0, right: 55.0, top: 26.0),
         child: CustomButton(
-          onPressed: controller.postPreSubmitOrderRequest,
+          onPressed: controller.clickSubmitBtn,
           minWidth: 265.0,
           minHeight: 46.0,
           backgroundColor: const Color(0xffB8EF17),

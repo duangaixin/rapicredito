@@ -75,7 +75,6 @@ class AuthPersonCtr extends BaseGetCtr {
   }
 
   void _showSelectDialog(List netList, AppConfigClickType clickType) {
-    KeyboardUtils.unFocus();
     dynamic selectData;
     if (clickType == AppConfigClickType.incomeType) {
       selectData = state.income;
@@ -99,6 +98,7 @@ class AuthPersonCtr extends BaseGetCtr {
   }
 
   void disableClickToast() {
+    KeyboardUtils.unFocus();
     if (state.btnDisableClick) {
       ProgressHUD.showInfo(
           'Por favor complete toda la información completamente');
@@ -116,7 +116,8 @@ class AuthPersonCtr extends BaseGetCtr {
   }
 
   void clickSubmit() async {
-    await postSaveAuthPersonRequest();
+    KeyboardUtils.unFocus();
+    await _postSaveAuthPersonRequest();
   }
 
   Future<void> setCrispInfo(String userEmail) async {
@@ -126,8 +127,7 @@ class AuthPersonCtr extends BaseGetCtr {
     await channel.invokeMethod('setCrispInfo', param);
   }
 
-  Future<void> postSaveAuthPersonRequest() async {
-    KeyboardUtils.unFocus();
+  Future<void> _postSaveAuthPersonRequest() async {
     if (!_validate()) return;
     Get.showLoading();
     Map<String, dynamic> param = _collectPersonParam();
@@ -163,6 +163,7 @@ class AuthPersonCtr extends BaseGetCtr {
   }
 
   void clickIncome() {
+    KeyboardUtils.unFocus();
     if (ObjectUtil.isEmptyList(state.incomeList)) {
       _postAppConfigInfoRequest(AppConfigClickType.incomeType);
     } else {
@@ -171,6 +172,7 @@ class AuthPersonCtr extends BaseGetCtr {
   }
 
   void clickFamily() {
+    KeyboardUtils.unFocus();
     if (ObjectUtil.isEmptyList(state.familyList)) {
       _postAppConfigInfoRequest(AppConfigClickType.familyCount);
     } else {
@@ -190,6 +192,7 @@ class AuthPersonCtr extends BaseGetCtr {
   }
 
   void clickEducational() {
+    KeyboardUtils.unFocus();
     if (ObjectUtil.isEmptyList(state.educationalList)) {
       _postAppConfigInfoRequest(AppConfigClickType.educationalLevel);
     } else {
@@ -198,8 +201,7 @@ class AuthPersonCtr extends BaseGetCtr {
     }
   }
 
-  void _postAppConfigInfoRequest(AppConfigClickType clickType) async {
-    KeyboardUtils.unFocus();
+  void _postAppConfigInfoRequest(AppConfigClickType clickType) async {;
     var param = <String, dynamic>{};
     var typeStr = '';
     if (clickType == AppConfigClickType.incomeType) {

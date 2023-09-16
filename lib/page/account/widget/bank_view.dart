@@ -33,11 +33,7 @@ class BankView extends GetView<AccountCtr> {
                 editTitle: 'Nombre del banco',
                 hintText: 'Por favor elige',
                 editContent: controller.state.bankName,
-                action: () {
-                  controller.postAppConfigInfoRequest(
-                      AppConfigClickType.bankNameList,
-                      isShowDialog: true);
-                },
+                action: controller.clickBankName,
               );
             }),
           ),
@@ -48,11 +44,7 @@ class BankView extends GetView<AccountCtr> {
                 editTitle: 'Tipo de cuenta bancaria',
                 hintText: 'Por favor elige',
                 editContent: controller.state.bankType,
-                action: () {
-                  controller.postAppConfigInfoRequest(
-                      AppConfigClickType.bankAccountType,
-                      isShowDialog: true);
-                },
+                action: controller.clickBankType,
               );
             }),
           ),

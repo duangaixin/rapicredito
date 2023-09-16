@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
 import 'package:rapicredito/page/auth/widget/common_auth_agreement_view.dart';
-import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/comon_section_title_view.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
@@ -61,9 +59,9 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
                                 focusNode: controller.emailFocusNode,
                                 key: controller.state.emailKey,
                                 editTitle: 'Dirección de correo electrónico',
-                                hintText: 'Por ejemplo:12345678@gmail.com',
+                                hintText: 'Introducir texto',
                                 keyboardType: TextInputType.emailAddress,
-                                hintStyle: const TextStyle(
+                                editStyle: const TextStyle(
                                     color: Color(0xffD53535), fontSize: 15.0),
                                 inputFormatter: [
                                   FilteringTextInputFormatter.deny(

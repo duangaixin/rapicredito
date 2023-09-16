@@ -8,7 +8,6 @@ import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
-
 class CommitSuccessDialog extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _CommitSuccessDialogState();

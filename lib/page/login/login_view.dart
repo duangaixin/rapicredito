@@ -84,7 +84,7 @@ class LoginPage extends GetView<LoginCtr> {
                               left: 39.0, right: 39.0, top: 33.0),
                           child: Obx(() {
                             return CustomColorButton(
-                              realClick: controller.postLoginRequest,
+                              realClick: controller.clickLoginBtn,
                               disableClick: controller.showTip,
                               disableColors: const [
                                 Color(0xffF5F6F4),
@@ -149,7 +149,7 @@ class LoginPage extends GetView<LoginCtr> {
                         controller.phoneCtr.text.trim()) &&
                     !ObjectUtil.isEmptyString(
                         controller.phoneCtr.text.strRvSpace())) {
-                  controller.postSendCodeRequest();
+                  controller.clickCodeBtn();
                 } else {
                   ProgressHUD.showInfo(
                       'Por favor ingrese el número de teléfono móvil');

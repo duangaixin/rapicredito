@@ -22,7 +22,6 @@ class AccountCtr extends BaseGetCtr {
   final state = AccountState();
   TextEditingController walletAccountCtr = TextEditingController();
   TextEditingController walletAccountConfirmCtr = TextEditingController();
-
   TextEditingController bankAccountCtr = TextEditingController();
   TextEditingController bankAccountConfirmCtr = TextEditingController();
 
@@ -37,7 +36,6 @@ class AccountCtr extends BaseGetCtr {
         }
       }
     }
-
     walletAccountCtr.addListener(_walletBtnCanClick);
     walletAccountConfirmCtr.addListener(_walletBtnCanClick);
     bankAccountCtr.addListener(_bankBtnCanClick);
@@ -46,21 +44,23 @@ class AccountCtr extends BaseGetCtr {
 
   @override
   void onReady() async {
-    await postAppConfigInfoRequest(AppConfigClickType.collectionType,
+    await _postAppConfigInfoRequest(AppConfigClickType.collectionType,
         isInitRequest: true);
-    await postAppConfigInfoRequest(AppConfigClickType.bankNameList,
+    await _postAppConfigInfoRequest(AppConfigClickType.bankNameList,
         isInitRequest: true);
-    await postAppConfigInfoRequest(AppConfigClickType.bankAccountType,
+    await _postAppConfigInfoRequest(AppConfigClickType.bankAccountType,
         isInitRequest: true);
     await _postQueryAccountRequest();
     super.onReady();
   }
 
   void clickWalletItemView(int index) {
+    KeyboardUtils.unFocus();
     state.walletSelectIndex = index;
   }
 
   void disableWalletClickToast() {
+    KeyboardUtils.unFocus();
     if (state.walletBtnDisableClick) {
       ProgressHUD.showInfo(
           'Please fill in all information completely——Por favor complete toda la información completamente');
@@ -68,6 +68,7 @@ class AccountCtr extends BaseGetCtr {
   }
 
   void disableBankClickToast() {
+    KeyboardUtils.unFocus();
     if (state.bankBtnDisableClick) {
       ProgressHUD.showInfo(
           'Please fill in all information completely——Por favor complete toda la información completamente');
@@ -75,6 +76,7 @@ class AccountCtr extends BaseGetCtr {
   }
 
   void showSelectBankDialog() {
+    KeyboardUtils.unFocus();
     CustomPicker.showSinglePicker(Get.context!,
         data: state.accountTypeList,
         selectData: state.accountTypeList[state.accountTypeSelectIndex],
@@ -95,9 +97,8 @@ class AccountCtr extends BaseGetCtr {
     });
   }
 
-  Future<void> postAppConfigInfoRequest(AppConfigClickType clickType,
+  Future<void> _postAppConfigInfoRequest(AppConfigClickType clickType,
       {bool isShowDialog = false, bool isInitRequest = false}) async {
-    KeyboardUtils.unFocus();
     var param = <String, dynamic>{};
     var typeStr = '';
     if (clickType == AppConfigClickType.bankNameList) {
@@ -162,37 +163,37 @@ class AccountCtr extends BaseGetCtr {
     }
   }
 
+  void clickBankName() {
+    KeyboardUtils.unFocus();
+    _postAppConfigInfoRequest(AppConfigClickType.bankNameList,
+        isShowDialog: true);
+  }
+
+  void clickBankType() {
+    KeyboardUtils.unFocus();
+    _postAppConfigInfoRequest(AppConfigClickType.bankAccountType,
+        isShowDialog: true);
+  }
+
   Map<String, dynamic> collectAccountParam() {
     Map<String, dynamic> param = {};
     var bankAccountType = '';
     var bankName = '';
     var bankAccountNumber = '';
     var collectionType = '';
-
-    ///钱包
     if (state.accountTypeSelectIndex == 0) {
       var walletName = state.walletList[state.walletSelectIndex].key ?? '';
-
       collectionType = _getWalletCollectionType(walletName);
       bankAccountNumber = walletAccountConfirmCtr.text.strRvSpace();
     } else if (state.accountTypeSelectIndex == 1) {
-      ///银行卡
       collectionType = _getBankCollectionType();
       bankName = _getCode(state.originBankNameList, state.bankName);
       bankAccountType = _getCode(state.originBankTypeList, state.bankType);
       bankAccountNumber = bankAccountConfirmCtr.text.strRvSpace();
     }
-
-    ///1 2 collectionType
     param['swissEnoughSaying'] = collectionType;
-
-    ///bankName
     param['firstNurse'] = bankName;
-
-    ///bankAccountType
     param['broadSpiritualKilometre'] = bankAccountType;
-
-    ///bankAccountNumber
     param['dampThatTentBlankTrunk'] = bankAccountNumber;
     param.addAll(getCommonParam());
     return param;
@@ -384,9 +385,8 @@ class AccountCtr extends BaseGetCtr {
   }
 
   void _bankBtnCanClick() {
-    if (
-    ObjectUtil.isEmptyString(bankAccountCtr.text.trim())||
-    ObjectUtil.isEmptyString(bankAccountCtr.text.strRvSpace()) ||
+    if (ObjectUtil.isEmptyString(bankAccountCtr.text.trim()) ||
+        ObjectUtil.isEmptyString(bankAccountCtr.text.strRvSpace()) ||
         ObjectUtil.isEmptyString(bankAccountConfirmCtr.text.strRvSpace()) ||
         ObjectUtil.isEmptyString(bankAccountConfirmCtr.text.trim()) ||
         ObjectUtil.isEmptyString(state.bankType) ||

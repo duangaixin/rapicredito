@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/page/auth/contact/auth_contact_ctr.dart';
 import 'package:rapicredito/page/auth/widget/common_auth_agreement_view.dart';
-import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/comon_section_title_view.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';

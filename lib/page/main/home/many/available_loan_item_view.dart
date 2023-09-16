@@ -11,7 +11,7 @@ class AvailableLoanView extends GetView<MainHomeCtr> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top:20.0),
+      margin: EdgeInsets.only(top: 20.0),
       padding: EdgeInsets.only(right: 16.0, bottom: 23.0, left: 5.0),
       decoration: BoxDecoration(
           color: const Color(0xfff5f5f5),

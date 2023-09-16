@@ -11,11 +11,6 @@ import 'package:rapicredito/utils/keyboard_util.dart';
 class PermissionCtr extends BaseGetCtr {
   final state = PermissionState();
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
   void goToMainPage() {
     KeyboardUtils.unFocus();
     Get.offAndToNamed(PageRouterName.mainPage);

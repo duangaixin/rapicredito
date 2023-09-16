@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rapicredito/widget/load_container_view.dart';
 
 class AuthIdState {
+  final _loadState = LoadState.loading.obs;
+
+  LoadState get loadState => _loadState.value;
+
+  set loadState(value) => _loadState.value = value;
   List<String?> genderList = [];
 
   double imageWidth = 167.0;
@@ -45,10 +51,10 @@ class AuthIdState {
   GlobalKey behindKey = GlobalKey();
   GlobalKey faceKey = GlobalKey();
 
-  bool isInitRequest=true;
-  bool isUploadFront=false;
-  bool isUploadBehind=false;
-  bool isUploadFace=false;
+  bool isInitRequest = true;
+  bool isUploadFront = false;
+  bool isUploadBehind = false;
+  bool isUploadFace = false;
 
   int? birthYear;
   int? birthMonth;

@@ -75,8 +75,8 @@ class _LoanConfirmMoneyDialogState extends State<LoanConfirmMoneyDialog> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
-            child:
-                _buildItemView('Monto de devolución', '${widget.repaymentAmount}\$'),
+            child: _buildItemView(
+                'Monto de devolución', '${widget.repaymentAmount}\$'),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),

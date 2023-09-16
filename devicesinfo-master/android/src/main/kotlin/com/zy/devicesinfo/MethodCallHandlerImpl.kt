@@ -2,6 +2,7 @@ package com.zy.devicesinfo
 
 import android.app.Application
 import android.content.Context
+import android.text.TextUtils
 import com.google.gson.Gson
 import com.zy.devicesinfo.data.AppListDataArmour
 import com.zy.devicesinfo.data.BatteryStatusData
@@ -115,17 +116,25 @@ class MethodCallHandlerImpl(private var context: Context) : MethodCallHandler {
             }
 
             "encryptAes" -> {
-                var param =call.arguments
-                if(param!=null && param is Map<*, *> && param.isNotEmpty()){
-                    if(param.containsKey("jsonStr")){
-                        val jsonStr= param["jsonStr"]
-                        val ipData = EncryptionUtil. aesStr(jsonStr as String?)
-                       val str= EncryptionUtil.compress(ipData)
-                        result.success(str)
+                var param = call.arguments
+                if (param != null && param is Map<*, *> && param.isNotEmpty()) {
+                    if (param.containsKey("jsonStr")) {
+                        val jsonStr = param["jsonStr"] as String?
+                        if (!TextUtils.isEmpty(jsonStr)) {
+                            val str = EncryptionUtil.compress(jsonStr)
+                            val aesStr = EncryptionUtil.aesStr(str)
+                            result.success(aesStr)
+                        } else {
+                            result.success("")
+                        }
+
+
                     }
+                }else{
+                    result.success("")
                 }
-                 result.success("")
             }
+
             else -> {
                 result.notImplemented()
             }

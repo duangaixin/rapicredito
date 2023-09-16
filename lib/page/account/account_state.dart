@@ -5,7 +5,7 @@ import 'package:rapicredito/widget/load_container_view.dart';
 
 class AccountState {
   List<String> accountTypeList = ['Billetera Móvil', 'Cuenta Bancaria'];
-  bool isAddAccount=true;
+  bool isAddAccount = true;
   String collectionTypeCode = '';
 
   List<ConfigInfoBean> originAccountList = [];
@@ -55,5 +55,4 @@ class AccountState {
   bool get bankBtnDisableClick => _bankBtnDisableClick.value;
 
   set bankBtnDisableClick(value) => _bankBtnDisableClick.value = value;
-
 }

@@ -62,19 +62,9 @@ class MainActivity : FlutterActivity() {
     }
 
     fun selectImage(result: MethodChannel.Result) {   this.result = result
-//        val intent = Intent()
-//        intent.type = "image/*"
-//        intent.action = Intent.ACTION_GET_CONTENT
-//        startActivityForResult(intent, PICK_CODE_REQUEST_CODE)
-
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         intent.type = "image/*"
-       // intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-        startActivityForResult(
-            Intent.createChooser(intent, "Select Picture"),
-            PICK_CODE_REQUEST_CODE
-        )
-
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_CODE_REQUEST_CODE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
