@@ -19,7 +19,6 @@ class PermissionUtil {
     if (newPermissionList.isNotEmpty) {
       PermissionStatus permissionStatus =
           await requestPermission(newPermissionList);
-
       switch (permissionStatus) {
         case PermissionStatus.denied:
           onFailed != null ? onFailed() : defaultCall('');
