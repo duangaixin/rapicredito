@@ -90,15 +90,20 @@ class MainHomeCtr extends BaseGetCtr {
       state.rolloverPayDay = bean?.strictMedicalPuzzleCafeteria ?? 0;
       var repayTypeFlag = bean?.cottonScreamMusicalAnybody ?? '';
 
+      state.overduePayment = bean?.freeCleanerBluePineapple ?? 0.0;
+      state.valueAddedTax = bean?.triangleRemarkIllBattery ?? 0.0;
+      state.deductCost = bean?.unsafeLicenseNut ?? 0.0;
+      state.overdueDay = bean?.mexicanMedicalCan ?? 0;
+
       ///delete
-      // state.overdueStatus = 0;
+      // state.overdueStatus = 1;
       // state.canRolloverPay = true;
       // repayTypeFlag = '1,1,1,1,1';
       // state.loadState = LoadState.succeed;
 
       if (state.overdueStatus == -1) {
         await postQueryHomeDefaultInfoRequest();
-      } else if (state.overdueStatus == 0) {
+      } else if (state.overdueStatus == 0 || state.overdueStatus == 1) {
         if (!ObjectUtil.isEmptyString(repayTypeFlag)) {
           var payTypeList = repayTypeFlag.split(',');
           if (!ObjectUtil.isEmptyList(payTypeList)) {
@@ -117,10 +122,10 @@ class MainHomeCtr extends BaseGetCtr {
       }
     } else {
       if (response.code == null) {
-       state.overdueStatus=-1;
-       state.loadState = LoadState.succeed;
-       Get.showNoNetDialog();
-       return;
+        state.overdueStatus = -1;
+        state.loadState = LoadState.succeed;
+        Get.showNoNetDialog();
+        return;
       }
       NetException.dealAllException(response);
     }
@@ -136,7 +141,7 @@ class MainHomeCtr extends BaseGetCtr {
       state.loadState = LoadState.succeed;
     } else {
       if (response.code == null) {
-        state.overdueStatus=-1;
+        state.overdueStatus = -1;
         state.loadState = LoadState.succeed;
         Get.showNoNetDialog();
         return;

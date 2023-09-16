@@ -7,6 +7,8 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import androidx.core.content.FileProvider
+import io.branch.referral.Branch
+import io.branch.referral.Branch.sessionBuilder
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
@@ -29,6 +31,39 @@ class MainActivity : FlutterActivity() {
     companion object {
         const val TAKE_CODE_REQUEST_CODE = 1000
         const val PICK_CODE_REQUEST_CODE = 1001
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        Branch.sessionBuilder(this).withCallback { branchUniversalObject, linkProperties, error ->
+            if (error != null) {
+                Log.e("BranchSDK_Tester", "branch init failed. Caused by -" + error.message)
+            } else {
+                Log.e("BranchSDK_Tester", "branch init complete!")
+                if (branchUniversalObject != null) {
+                    Log.e("BranchSDK_Tester", "title " + branchUniversalObject.title)
+                    Log.e("BranchSDK_Tester", "CanonicalIdentifier " + branchUniversalObject.canonicalIdentifier)
+                    Log.e("BranchSDK_Tester", "metadata " + branchUniversalObject.contentMetadata.convertToJson())
+                }
+                if (linkProperties != null) {
+                    Log.e("BranchSDK_Tester", "Channel " + linkProperties.channel)
+                    Log.e("BranchSDK_Tester", "control params " + linkProperties.controlParams)
+                }
+            }
+        }.withData(this.intent.data).init()
+    }
+
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        sessionBuilder(this).withCallback { referringParams, error ->
+            if (error != null) {
+                Log.e("BranchSDK_Tester", error.message)
+            } else if (referringParams != null) {
+                Log.e("BranchSDK_Tester", referringParams.toString())
+            }
+        }.reInit()
     }
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {

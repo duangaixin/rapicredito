@@ -11,17 +11,17 @@ class HomeOrderInfoBean extends Object {
   @JsonKey(name: 'valuableCurrencyBackSkiPineapple')
   String? valuableCurrencyBackSkiPineapple;
   @JsonKey(name: 'aggressiveExamUsedBackStove')
-  String ?aggressiveExamUsedBackStove;
+  String? aggressiveExamUsedBackStove;
   @JsonKey(name: 'quietGreekFairDebt')
-  String ?quietGreekFairDebt;
+  String? quietGreekFairDebt;
   @JsonKey(name: 'unsafeLicenseNut')
   double? unsafeLicenseNut;
   @JsonKey(name: 'richChangeableMuchFebruary')
   String? richChangeableMuchFebruary;
   @JsonKey(name: 'busyBellyShower')
-  String ?busyBellyShower;
+  String? busyBellyShower;
   @JsonKey(name: 'dayLateFee')
-  double ?dayLateFee;
+  double? dayLateFee;
 
   @JsonKey(name: 'spiritualPlanetEggplantRelation')
   String? spiritualPlanetEggplantRelation;
@@ -99,6 +99,11 @@ class HomeOrderInfoBean extends Object {
   ///repayTypeFlag
   String? cottonScreamMusicalAnybody;
 
+  @JsonKey(name: 'freeCleanerBluePineapple')
+  double? freeCleanerBluePineapple;
+  @JsonKey(name: 'mexicanMedicalCan')
+  int? mexicanMedicalCan;
+
   HomeOrderInfoBean(
       this.unusualPing,
       this.prettyRefrigeratorSleepyPaleNovelist,
@@ -133,7 +138,10 @@ class HomeOrderInfoBean extends Object {
       this.paleSuiteUnderwearHot,
       this.indeedSoftMomEnoughPill,
       this.endlessPie,
-      this.cottonScreamMusicalAnybody);
+      this.cottonScreamMusicalAnybody,
+      this.freeCleanerBluePineapple,
+      this.mexicanMedicalCan
+      );
 
   factory HomeOrderInfoBean.fromJson(Map<String, dynamic> srcJson) =>
       _$HomeOrderInfoBeanFromJson(srcJson);

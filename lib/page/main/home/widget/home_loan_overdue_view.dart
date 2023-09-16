@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/main/home/index.dart';
@@ -86,10 +85,10 @@ class HomeLoanOverdueView extends GetView<MainHomeCtr> {
                           fontSize: 15.0, color: Color(0xff333333)),
                       children: <TextSpan>[
                         TextSpan(
-                            text: Strings.autoLineString('20000 días,'),
+                            text: Strings.autoLineString(
+                                '${controller.state.overdueDay} días,'),
                             style: const TextStyle(
-                                fontSize: 15.0, color: Color(0xffD53535)),
-                            recognizer: TapGestureRecognizer()..onTap = () {}),
+                                fontSize: 15.0, color: Color(0xffD53535))),
                         TextSpan(
                             text: Strings.autoLineString(
                                 'devuélvalo de inmediato. Si hay una situación de vencimiento maliciosa, ¡presentaremos una demanda en su contra a través de los canales legales!'),
@@ -101,7 +100,9 @@ class HomeLoanOverdueView extends GetView<MainHomeCtr> {
         ),
       );
 
-  Widget get overdueBtnView => Container(
+  Widget get overdueBtnView => Visibility(
+      visible: controller.state.canRolloverPay,
+      child: Container(
         alignment: Alignment.center,
         margin: const EdgeInsets.only(top: 20.0, bottom: 25.0),
         child: CustomButton(
@@ -112,13 +113,13 @@ class HomeLoanOverdueView extends GetView<MainHomeCtr> {
           disabledBackgroundColor: Colors.white,
           fontSize: 15.0,
           radius: 8.0,
-          text: 'Prórroga de pago\nde 7 días',
+          text: 'Prórroga de pago\nde ${controller.state.rolloverPayDay} días',
           textAlign: TextAlign.center,
           textColor: const Color(0xff333333),
           fontWeight: FontWeight.bold,
           side: const BorderSide(color: Color(0xff333333), width: 1.0),
         ),
-      );
+      ));
 
   Widget get moneyInfoView => Container(
         margin: const EdgeInsets.only(
@@ -146,12 +147,22 @@ class HomeLoanOverdueView extends GetView<MainHomeCtr> {
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  _buildKeyValueView('Monto de devolución', ''),
-                  _buildKeyValueView('Fecha de pago de tu crédito', ''),
-                  _buildKeyValueView('Monto del préstamo', ''),
-                  _buildKeyValueView('Interés', ''),
-                  _buildKeyValueView('Cargo por demora', ''),
-                  _buildKeyValueView('Costo de deducción', '')
+                  _buildKeyValueView(
+                      'Monto de devolución',
+                      controller.addEndZero(
+                          controller.state.repaymentAmount.toString())),
+                  _buildKeyValueView('Fecha de pago de tu crédito',
+                      controller.state.repaymentDate),
+                  _buildKeyValueView(
+                      'Monto del préstamo',
+                      controller.addEndZero(
+                          controller.state.creditAmount.toString())),
+                  _buildKeyValueView(
+                      'Interés', controller.state.interest.toString()),
+                  _buildKeyValueView('Cargo por demora',
+                      controller.state.overduePayment.toString()),
+                  _buildKeyValueView('Costo de deducción',
+                      controller.state.deductCost.toString())
                 ],
               ),
             )

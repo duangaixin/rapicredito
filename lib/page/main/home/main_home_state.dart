@@ -27,14 +27,36 @@ class MainHomeState {
   ///还款日期
   String repaymentDate = '';
 
-  ///利息
-  double interest = 0.0;
-
   ///是否支持展期支付
   bool canRolloverPay = false;
 
   ///展示支付按钮时间
   int rolloverPayDay = 0;
+
+
+  ///更新到期日
+  int updateDueDate = 0;
+
+  ///展期-延期费用
+  double deferralCharge = 0.0;
+
+  ///利息
+  double interest = 0.0;
+
+  ///滞纳金
+  double overduePayment = 0.0;
+
+  ///增值税
+  double valueAddedTax = 0.0;
+
+  ///扣除成本
+  double deductCost = 0.0;
+
+  ///支付费用
+  double payFee = 0.0;
+
+ ///逾期时间
+  int overdueDay=0;
 
   bool onePayShow = true;
   bool twoPayShow = true;
