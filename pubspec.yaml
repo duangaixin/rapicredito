@@ -39,6 +39,7 @@ dependencies:
 #  camera: ^0.10.5+3
   #  flutter_pickers: ^2.1.8
   android_intent_plus: ^4.0.2
+  add_2_calendar: ^2.2.4
   devicesinfo:
     path: ./devicesinfo-master
   firebase_core: ^2.15.1

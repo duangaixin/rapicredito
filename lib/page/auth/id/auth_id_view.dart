@@ -35,28 +35,56 @@ class AuthIdPage extends GetView<AuthIdCtr> {
         }));
   }
 
-  Widget idCameraView(
-          Key key, String title, String imageUrl, VoidCallback func) =>
+  Widget idCameraView(Key key, String title, String imageUrl, VoidCallback func,
+          bool isSuccess, String localPath) =>
       CustomClickView(
           onTap: func,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              CustomImageView(
-                key: key,
-                ObjectUtil.isEmptyString(imageUrl)
-                    ? Resource.assetsImageAuthTakeCamera
-                    : imageUrl,
-                imageType: ObjectUtil.isEmptyString(imageUrl)
-                    ? ImageType.assets
-                    : ImageType.network,
-                memCacheWidth: controller.state.imageWidth.toInt(),
-                memCacheHeight: 91,
-                width: controller.state.imageWidth,
-                placeholder: Resource.assetsImageAuthTakeCamera,
-                height: 91.0,
-                radius: 8.0,
-                fit: BoxFit.fill,
+              Stack(
+                children: [
+                  Visibility(
+                      key: UniqueKey(),
+                      visible: !ObjectUtil.isEmptyString(localPath),
+                      child: CustomImageView(
+                        key: key,
+                        localPath,
+                        imageType: ImageType.localFile,
+                        memCacheWidth: controller.state.imageWidth.toInt(),
+                        memCacheHeight: 91,
+                        width: controller.state.imageWidth,
+                        placeholder: Resource.assetsImageAuthTakeCamera,
+                        height: 91.0,
+                        radius: 8.0,
+                        fit: BoxFit.fill,
+                      )),
+                  Visibility(
+                      visible: ObjectUtil.isEmptyString(localPath),
+                      child: CustomImageView(
+                        key: key,
+                        ObjectUtil.isEmptyString(imageUrl)
+                            ? Resource.assetsImageAuthTakeCamera
+                            : imageUrl,
+                        imageType: ObjectUtil.isEmptyString(imageUrl)
+                            ? ImageType.assets
+                            : ImageType.network,
+                        memCacheWidth: controller.state.imageWidth.toInt(),
+                        memCacheHeight: 91,
+                        width: controller.state.imageWidth,
+                        placeholder: Resource.assetsImageAuthTakeCamera,
+                        height: 91.0,
+                        radius: 8.0,
+                        fit: BoxFit.fill,
+                      )),
+                  Positioned(
+                      bottom: 5.0,
+                      right: 5.0,
+                      child: Visibility(
+                          visible: !ObjectUtil.isEmptyString(imageUrl) ||
+                              !ObjectUtil.isEmptyString(localPath),
+                          child: uploadTipView(isSuccess)))
+                ],
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 7.0),
@@ -86,7 +114,8 @@ class AuthIdPage extends GetView<AuthIdCtr> {
                 return idCameraView(controller.state.frontKey, 'Frente',
                     controller.state.idFrontUrl, () {
                   controller.showSelectDialog(isFront: true);
-                });
+                }, controller.state.uploadFrontSuccess,
+                    controller.state.idFrontPath);
               })),
               const SizedBox(
                 width: 10.0,
@@ -95,7 +124,8 @@ class AuthIdPage extends GetView<AuthIdCtr> {
                 return idCameraView(controller.state.behindKey, 'Atrás',
                     controller.state.idBackUrl, () {
                   controller.showSelectDialog(isFront: false);
-                });
+                }, controller.state.uploadBehindSuccess,
+                    controller.state.idBackPath);
               })),
             ]),
           )
@@ -110,21 +140,42 @@ class AuthIdPage extends GetView<AuthIdCtr> {
           alignment: Alignment.topCenter,
           children: [
             Obx(() {
-              return CustomImageView(
-                ObjectUtil.isEmptyString(controller.state.faceUrl)
-                    ? Resource.assetsImageAuthCameraBg
-                    : controller.state.faceUrl,
-                key: controller.state.faceKey,
-                imageType: ObjectUtil.isEmptyString(controller.state.faceUrl)
-                    ? ImageType.assets
-                    : ImageType.network,
-                placeholder: Resource.assetsImageAuthCameraBg,
-                memCacheHeight: 91,
-                memCacheWidth: 167,
-                width: 167.0,
-                height: 91.0,
-                radius: 8.0,
-              );
+              return Visibility(
+                  key: UniqueKey(),
+                  visible: !ObjectUtil.isEmptyString(controller.state.facePath),
+                  child: CustomImageView(
+                    key: key,
+                    controller.state.facePath,
+                    imageType: ImageType.localFile,
+                    memCacheWidth: controller.state.imageWidth.toInt(),
+                    memCacheHeight: 91,
+                    width: 167.0,
+                    placeholder: Resource.assetsImageAuthTakeCamera,
+                    height: 91.0,
+                    radius: 8.0,
+                    fit: BoxFit.fill,
+                  ));
+            }),
+            Obx(() {
+              return Visibility(
+                  key: UniqueKey(),
+                  visible: ObjectUtil.isEmptyString(controller.state.facePath),
+                  child: CustomImageView(
+                    ObjectUtil.isEmptyString(controller.state.faceUrl)
+                        ? Resource.assetsImageAuthCameraBg
+                        : controller.state.faceUrl,
+                    key: controller.state.faceKey,
+                    imageType:
+                        ObjectUtil.isEmptyString(controller.state.faceUrl)
+                            ? ImageType.assets
+                            : ImageType.network,
+                    placeholder: Resource.assetsImageAuthCameraBg,
+                    memCacheHeight: 91,
+                    memCacheWidth: 167,
+                    width: 167.0,
+                    height: 91.0,
+                    radius: 8.0,
+                  ));
             }),
             Positioned(
               top: 25.0,
@@ -132,7 +183,9 @@ class AuthIdPage extends GetView<AuthIdCtr> {
               right: 63.0,
               child: Obx(() {
                 return Visibility(
-                    visible: ObjectUtil.isEmptyString(controller.state.faceUrl),
+                    visible:
+                        ObjectUtil.isEmptyString(controller.state.faceUrl) &&
+                            ObjectUtil.isEmptyString(controller.state.facePath),
                     child: const CustomImageView(
                       Resource.assetsImageAuthFace,
                       imageType: ImageType.assets,
@@ -155,7 +208,15 @@ class AuthIdPage extends GetView<AuthIdCtr> {
                     'Haga clic en',
                     style: TextStyle(fontSize: 15.0, color: Color(0Xff333333)),
                   ),
-                ))
+                )),
+            Positioned(
+                bottom: 22.0,
+                right: 5.0,
+                child: Visibility(
+                    visible: !ObjectUtil.isEmptyString(
+                            controller.state.faceUrl) ||
+                        !ObjectUtil.isEmptyString(controller.state.facePath),
+                    child: uploadTipView(controller.state.uploadFaceSuccess)))
           ],
         ),
       ));
@@ -281,5 +342,19 @@ class AuthIdPage extends GetView<AuthIdCtr> {
               width: 17.81,
               height: 19.0,
             )),
+      );
+
+  Widget uploadTipView(bool showSuccess) => Container(
+        alignment: Alignment.center,
+        width: 18.0,
+        height: 18.0,
+        decoration: BoxDecoration(
+            color: showSuccess ? Colors.greenAccent : Colors.red,
+            shape: BoxShape.circle),
+        child: Icon(
+          showSuccess ? Icons.done : Icons.close,
+          size: 12.0,
+          color: Colors.white,
+        ),
       );
 }

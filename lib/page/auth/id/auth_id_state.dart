@@ -47,6 +47,45 @@ class AuthIdState {
   bool get btnDisableClick => _btnDisableClick.value;
 
   set btnDisableClick(value) => _btnDisableClick.value = value;
+
+  final RxBool _uploadFrontSuccess = true.obs;
+
+  bool get uploadFrontSuccess => _uploadFrontSuccess.value;
+
+  set uploadFrontSuccess(value) => _uploadFrontSuccess.value = value;
+
+  final RxBool _uploadBehindSuccess = true.obs;
+
+  bool get uploadBehindSuccess => _uploadBehindSuccess.value;
+
+  set uploadBehindSuccess(value) => _uploadBehindSuccess.value = value;
+
+  final RxBool _uploadFaceSuccess = true.obs;
+
+  bool get uploadFaceSuccess => _uploadFaceSuccess.value;
+
+  set uploadFaceSuccess(value) => _uploadFaceSuccess.value = value;
+
+
+  final RxString _idFrontPath = ''.obs;
+
+  String get idFrontPath => _idFrontPath.value;
+
+  set idFrontPath(value) => _idFrontPath.value = value;
+
+  final RxString _idBackPath = ''.obs;
+
+  String get idBackPath => _idBackPath.value;
+
+  set idBackPath(value) => _idBackPath.value = value;
+
+  final RxString _facePath = ''.obs;
+
+  String get facePath => _facePath.value;
+
+  set facePath(value) => _facePath.value = value;
+
+
   GlobalKey frontKey = GlobalKey();
   GlobalKey behindKey = GlobalKey();
   GlobalKey faceKey = GlobalKey();

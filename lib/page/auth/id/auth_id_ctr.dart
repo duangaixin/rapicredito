@@ -54,7 +54,7 @@ class AuthIdCtr extends BaseGetCtr {
   void _requestInitData() async {
     Future.wait([
       _postQueryAuthPersonRequest(),
-      _postQueryPhotoInfo(),
+      _postQueryPhotoInfo(isShowDialog: false),
     ]).whenComplete(() {
       state.loadState = LoadState.succeed;
     });
@@ -88,8 +88,9 @@ class AuthIdCtr extends BaseGetCtr {
             print(result?.path ?? '' '-----image===path');
           }
           if (result != null) {
-            var file = File(result.path);
-            _uploadPhotoData(file, isFront);
+            var originPath = result.path;
+            var file = File(originPath);
+            _uploadPhotoData(file: file, isFront: isFront, showLoading: true);
           }
         },
         onFailed: () {});
@@ -105,7 +106,11 @@ class AuthIdCtr extends BaseGetCtr {
               .invokeMethod('takeCamera', {'isFront': isFrontValue});
           if (!ObjectUtil.isEmptyString(path)) {
             var file = File(path);
-            _uploadPhotoData(file, isFront, isUploadFace: isUploadFace);
+            _uploadPhotoData(
+                file: file,
+                isFront: isFront,
+                isUploadFace: isUploadFace,
+                showLoading: true);
           } else {
             ProgressHUD.showError('Error al tomar la foto, inténtelo de nuevo');
           }
@@ -166,9 +171,12 @@ class AuthIdCtr extends BaseGetCtr {
   }
 
   void _btnCanClick() {
-    if (ObjectUtil.isEmptyString(state.idFrontUrl) ||
-        ObjectUtil.isEmptyString(state.idBackUrl) ||
-        ObjectUtil.isEmptyString(state.faceUrl) ||
+    if ((ObjectUtil.isEmptyString(state.idFrontUrl) &&
+            ObjectUtil.isEmptyString(state.idFrontPath)) ||
+        (ObjectUtil.isEmptyString(state.idBackUrl) &&
+            ObjectUtil.isEmptyString(state.idBackPath)) ||
+        (ObjectUtil.isEmptyString(state.faceUrl) &&
+            ObjectUtil.isEmptyString(state.facePath)) ||
         ObjectUtil.isEmptyString(idNumCtr.text.trim()) ||
         ObjectUtil.isEmptyString(idNumCtr.text) ||
         ObjectUtil.isEmptyString(firstNameCtr.text.trim()) ||
@@ -259,17 +267,16 @@ class AuthIdCtr extends BaseGetCtr {
     }
   }
 
-  void clickSubmitBtn() {
-    KeyboardUtils.unFocus();
-    _postSaveAuthIdRequest();
-  }
-
-  void _postSaveAuthIdRequest() async {
+  Future<void> _postSaveAuthIdRequest({bool isShowDialog = true}) async {
     Map<String, dynamic> param = _collectIdParam();
-    Get.showLoading();
+    if (isShowDialog) {
+      Get.showLoading();
+    }
     var response =
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
-    Get.dismiss();
+    if (isShowDialog) {
+      Get.dismiss();
+    }
     if (response.isSuccess()) {
       _goToAddAccountPage();
     } else {
@@ -293,14 +300,69 @@ class AuthIdCtr extends BaseGetCtr {
     Get.toNamed(PageRouterName.accountPage);
   }
 
-  void _uploadPhotoData(File file, bool isFront,
-      {bool isUploadFace = false}) async {
-    var compressFile = await CompressUtil.compressImage(file);
-    final String path = compressFile.path;
-    print('$path-----duanxin===compressFilePath');
-    final String name = path.substring(path.lastIndexOf('/') + 1);
+  void clickSubmitBtn() async {
+    KeyboardUtils.unFocus();
+    if (_checkNoLocalData()) {
+      _postSaveAuthIdRequest(isShowDialog: true);
+    } else {
+      Get.showLoading();
+      if (!ObjectUtil.isEmptyString(state.idFrontPath)) {
+        await _uploadPhotoData(
+            isFront: true,
+            localPath: state.idFrontPath,
+            isUploadFromLocal: true,
+            showLoading: false);
+      }
+      if (!ObjectUtil.isEmptyString(state.idBackPath)) {
+        await _uploadPhotoData(
+            isFront: false,
+            localPath: state.idBackPath,
+            isUploadFromLocal: true,
+            showLoading: false);
+      }
+      if (!ObjectUtil.isEmptyString(state.facePath)) {
+        await _uploadPhotoData(
+            isFront: false,
+            isUploadFace: true,
+            localPath: state.facePath,
+            isUploadFromLocal: true,
+            showLoading: false);
+      }
+      await _postSaveAuthIdRequest(isShowDialog: false);
+      Get.dismiss();
+    }
+  }
+
+  bool _checkNoLocalData() {
+    if (ObjectUtil.isEmptyString(state.idFrontPath) &&
+        ObjectUtil.isEmptyString(state.idBackPath) &&
+        ObjectUtil.isEmptyString(state.facePath)) {
+      return true;
+    }
+    return false;
+  }
+
+  Future<void> _uploadPhotoData(
+      {File? file,
+      bool isFront = true,
+      bool isUploadFace = false,
+      bool isUploadFromLocal = false,
+      String localPath = '',
+      bool showLoading = true}) async {
+    var compressPath = '';
+    if (isUploadFromLocal) {
+      compressPath = localPath;
+    } else {
+      if (file != null) {
+        var compressFile = await CompressUtil.compressImage(file);
+        compressPath = compressFile.path;
+      }
+    }
+    print('$compressPath-----duanxin===compressFilePath');
+    final String name =
+        compressPath.substring(compressPath.lastIndexOf('/') + 1);
     MultipartFile multipartFile =
-        await MultipartFile.fromFile(path, filename: name);
+        await MultipartFile.fromFile(compressPath, filename: name);
     var userId = StorageService.to.getInt(AppConstants.userIdKey);
     final FormData formData = FormData.fromMap({
       'medicalPrisonStationEnoughNobody': isFront ? multipartFile : '',
@@ -311,11 +373,14 @@ class AuthIdCtr extends BaseGetCtr {
       'contraryScientificRightNone': 'es',
       'everydayMapleChallengingAirline': isUploadFace ? '01' : '00'
     });
-
-    Get.showLoading();
+    if (showLoading) {
+      Get.showLoading();
+    }
     var response =
         await HttpRequestManage.instance.postUploadPhotoRequest(formData);
-    Get.dismiss();
+    if (showLoading) {
+      Get.dismiss();
+    }
     if (isUploadFace) {
       state.isUploadFace = true;
     } else {
@@ -328,12 +393,25 @@ class AuthIdCtr extends BaseGetCtr {
 
     if (response.isSuccess()) {
       Future.delayed(const Duration(milliseconds: 50), () {
-        _postQueryPhotoInfo(isShowDialog: true);
+        _postQueryPhotoInfo(isShowDialog: showLoading);
       });
     } else {
-      state.isUploadFront = false;
-      state.isUploadBehind = false;
-      state.isUploadFace = false;
+      if (isUploadFace) {
+        state.isUploadFace = false;
+        state.uploadFaceSuccess = false;
+        state.facePath = compressPath;
+      } else {
+        if (isFront) {
+          state.isUploadFront = false;
+          state.uploadFrontSuccess = false;
+          state.idFrontPath = compressPath;
+        } else {
+          state.isUploadBehind = false;
+          state.uploadBehindSuccess = false;
+          state.idBackPath = compressPath;
+        }
+      }
+
       ProgressHUD.showError('Upload failed, please upload again-Carga fallida');
     }
   }
@@ -353,6 +431,9 @@ class AuthIdCtr extends BaseGetCtr {
       var frontUrl = photoBean?.tastelessAmericanPlateCattle ?? '';
       var backUrl = photoBean?.hugeNeed ?? '';
       var faceUrl = photoBean?.dueReligionFoggyCustom ?? '';
+      state.uploadFrontSuccess = !ObjectUtil.isEmptyString(frontUrl);
+      state.uploadBehindSuccess = !ObjectUtil.isEmptyString(backUrl);
+      state.uploadFaceSuccess = !ObjectUtil.isEmptyString(faceUrl);
       if (state.isInitRequest) {
         if (state.idFrontUrl != frontUrl) {
           state.idFrontUrl = frontUrl;
@@ -368,23 +449,25 @@ class AuthIdCtr extends BaseGetCtr {
         if (state.isUploadFront) {
           if (state.idFrontUrl != frontUrl) {
             state.idFrontUrl = frontUrl;
+            state.idFrontPath = '';
           }
         }
         if (state.isUploadBehind) {
           if (state.idBackUrl != backUrl) {
             state.idBackUrl = backUrl;
+            state.idBackPath = '';
           }
         }
         if (state.isUploadFace) {
           if (state.faceUrl != faceUrl) {
             state.faceUrl = faceUrl;
+            state.facePath = '';
           }
         }
         state.isUploadFront = false;
         state.isUploadBehind = false;
         state.isUploadFace = false;
       }
-
       _btnCanClick();
     } else {
       state.isUploadFront = false;
