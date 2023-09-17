@@ -17,6 +17,8 @@ import 'package:rapicredito/model/query_photo_info_bean.dart';
 import 'package:rapicredito/model/test_calculate_info_bean.dart';
 import 'package:rapicredito/net/base_response.dart';
 
+import '../model/rollover_detail_info_bean.dart';
+
 class HttpRequestManage {
   HttpRequestManage._privateConstructor();
 
@@ -223,4 +225,12 @@ extension RequestBussiness on HttpRequestManage {
         data: param,
         onTransform: (json) => json['fullMankind']);
   }
+
+  Future<BaseResponse<RolloverDetailInfoBean>> postRolloverDetailInfo(dynamic param) async {
+    return await httpRequest.post<RolloverDetailInfoBean>(HttpApi.apiRolloverDetailInfo,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        data: param,
+        onTransform: (json) => RolloverDetailInfoBean.fromJson(json));
+  }
+
 }

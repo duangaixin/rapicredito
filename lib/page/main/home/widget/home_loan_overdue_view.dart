@@ -106,7 +106,7 @@ class HomeLoanOverdueView extends GetView<MainHomeCtr> {
         alignment: Alignment.center,
         margin: const EdgeInsets.only(top: 20.0, bottom: 25.0),
         child: CustomButton(
-          onPressed: () {},
+          onPressed: controller.clickRolloverBtn,
           minWidth: 152.0,
           minHeight: 46.0,
           backgroundColor: Colors.white,

@@ -35,7 +35,7 @@ class MainHomeState {
 
 
   ///更新到期日
-  int updateDueDate = 0;
+  String updateDueDate = '';
 
   ///展期-延期费用
   double deferralCharge = 0.0;

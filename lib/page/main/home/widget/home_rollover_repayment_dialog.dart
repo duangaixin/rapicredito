@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/page/main/home/widget/common_pay_three_way_view.dart';
 import 'package:rapicredito/page/main/home/widget/common_pay_two_way_view.dart';
 import 'package:rapicredito/style/index.dart';
@@ -17,35 +18,7 @@ class HomeRolloverRepaymentDialog extends StatefulWidget {
 
 class _HomeRolloverRepaymentDialogState
     extends State<HomeRolloverRepaymentDialog> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              headerView,
-              topInfoView,
-              overdueInfoView,
-              const CommonPayTwoWayView(),
-              const SizedBox(
-                height: 19.0,
-              ),
-              const CommonPayThreeWayView(),
-              bottomCloseView
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  var mainHomeCtr = Get.find<MainHomeCtr>();
 
   Widget get headerView => Container(
         margin: const EdgeInsets.only(top: 20.0),
@@ -86,171 +59,200 @@ class _HomeRolloverRepaymentDialogState
         margin: const EdgeInsets.only(top: 30.0, bottom: 30.0),
         child: topCloseView,
       );
-}
 
-Widget get topInfoView => Container(
-      padding: const EdgeInsets.only(
-          top: 9.0, bottom: 20.0, left: 16.0, right: 16.0),
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(16.0)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildBoldKeyValueView(
-            'Actualizar la fecha de\nvencimiento',
-            '',
-          ),
-          _buildNormalKeyValueView(
-            'Tarifa extendida',
-            '',
-          ),
-          _buildNormalKeyValueView(
-            'Interés',
-            '',
-          ),
-          _buildNormalKeyValueView(
-            'IVA',
-            '',
-          ),
-          _buildNormalKeyValueView(
-            'Costo de deducción',
-            '',
-          ),
-          _buildBoldKeyValueView(
-            'Monto del pago',
-            '',
-          ),
-        ],
-      ),
-    );
-
-Widget get overdueInfoView => Container(
-      margin: const EdgeInsets.only(top: 20.0, bottom: 20.0),
-      padding: const EdgeInsets.only(
-          top: 18.0, left: 18.0, right: 17.0, bottom: 20.0),
-      decoration: BoxDecoration(
-          color: const Color(0xffF9F9F9),
-          borderRadius: BorderRadius.circular(16.0)),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Center(
-              child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CustomImageView(
-                Resource.assetsImageHomeLoanOverdue,
-                imageType: ImageType.assets,
-                width: 27.0,
-                height: 27.0,
-                margin: EdgeInsets.only(right: 10.0),
-              ),
-              Text(
-                'Advertir',
-                style: TextStyle(
-                    fontSize: 18.0,
-                    color: Color(0xff333333),
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
-          )),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 13.0,
+  Widget get topInfoView => Container(
+        padding: const EdgeInsets.only(
+            top: 9.0, bottom: 20.0, left: 16.0, right: 16.0),
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(16.0)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildBoldKeyValueView('Actualizar la fecha de\nvencimiento',
+                mainHomeCtr.mainHomeState.updateDueDate),
+            _buildNormalKeyValueView(
+                'Tarifa extendida',
+                mainHomeCtr.addEndZero(
+                    mainHomeCtr.mainHomeState.deferralCharge.toString())),
+            _buildNormalKeyValueView(
+                'Interés',
+                mainHomeCtr
+                    .addEndZero(mainHomeCtr.mainHomeState.interest.toString())),
+            _buildNormalKeyValueView(
+              'IVA',
+              mainHomeCtr.addEndZero(
+                  mainHomeCtr.mainHomeState.valueAddedTax.toString()),
             ),
-            child: RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                    text: Strings.autoLineString('Un pago único de '),
-                    style: const TextStyle(
-                        fontSize: 15.0, color: Color(0xff333333)),
-                    children: <TextSpan>[
-                      TextSpan(
-                          text: Strings.autoLineString('20000'),
-                          style: const TextStyle(
-                              fontSize: 15.0, color: Color(0xffD53535)),
-                          recognizer: TapGestureRecognizer()..onTap = () {}),
-                      TextSpan(
-                          text: Strings.autoLineString(
-                              ', la fecha de vencimiento del reembolso se puede extender por '),
-                          style: const TextStyle(
-                              fontSize: 15.0, color: Color(0xff333333))),
-                      TextSpan(
-                          text: Strings.autoLineString(' días'),
-                          style: const TextStyle(
-                              fontSize: 15.0, color: Color(0xffD53535)),
-                          recognizer: TapGestureRecognizer()..onTap = () {}),
-                      TextSpan(
-                          text: Strings.autoLineString(
-                              '.El pago de una suma  inferior a '),
-                          style: const TextStyle(
-                              fontSize: 15.0, color: Color(0xff333333))),
-                      TextSpan(
-                          text: Strings.autoLineString('7777'),
-                          style: const TextStyle(
-                              fontSize: 15.0, color: Color(0xffD53535)),
-                          recognizer: TapGestureRecognizer()..onTap = () {}),
-                      TextSpan(
-                          text: Strings.autoLineString(
-                              '  no cambia el limite de la fecha de devolución. Debe pagar a tiempo.'),
-                          style: const TextStyle(
-                              fontSize: 15.0, color: Color(0xff333333))),
-                    ])),
-          )
+            _buildNormalKeyValueView(
+                'Costo de deducción',
+                mainHomeCtr.addEndZero(
+                    mainHomeCtr.mainHomeState.overduePayment.toString())),
+            _buildBoldKeyValueView(
+                'Monto del pago',
+                mainHomeCtr
+                    .addEndZero(mainHomeCtr.mainHomeState.payFee.toString())),
+          ],
+        ),
+      );
+
+  Widget get overdueInfoView => Container(
+        margin: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+        padding: const EdgeInsets.only(
+            top: 18.0, left: 18.0, right: 17.0, bottom: 20.0),
+        decoration: BoxDecoration(
+            color: const Color(0xffF9F9F9),
+            borderRadius: BorderRadius.circular(16.0)),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Center(
+                child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CustomImageView(
+                  Resource.assetsImageHomeLoanOverdue,
+                  imageType: ImageType.assets,
+                  width: 27.0,
+                  height: 27.0,
+                  margin: EdgeInsets.only(right: 10.0),
+                ),
+                Text(
+                  'Advertir',
+                  style: TextStyle(
+                      fontSize: 18.0,
+                      color: Color(0xff333333),
+                      fontWeight: FontWeight.bold),
+                ),
+              ],
+            )),
+            Padding(
+              padding: const EdgeInsets.only(
+                top: 13.0,
+              ),
+              child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                      text: Strings.autoLineString('Un pago único de '),
+                      style: const TextStyle(
+                          fontSize: 15.0, color: Color(0xff333333)),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: Strings.autoLineString('20000'),
+                            style: const TextStyle(
+                                fontSize: 15.0, color: Color(0xffD53535)),
+                            recognizer: TapGestureRecognizer()..onTap = () {}),
+                        TextSpan(
+                            text: Strings.autoLineString(
+                                ', la fecha de vencimiento del reembolso se puede extender por '),
+                            style: const TextStyle(
+                                fontSize: 15.0, color: Color(0xff333333))),
+                        TextSpan(
+                            text: Strings.autoLineString(' días'),
+                            style: const TextStyle(
+                                fontSize: 15.0, color: Color(0xffD53535)),
+                            recognizer: TapGestureRecognizer()..onTap = () {}),
+                        TextSpan(
+                            text: Strings.autoLineString(
+                                '.El pago de una suma  inferior a '),
+                            style: const TextStyle(
+                                fontSize: 15.0, color: Color(0xff333333))),
+                        TextSpan(
+                            text: Strings.autoLineString('7777'),
+                            style: const TextStyle(
+                                fontSize: 15.0, color: Color(0xffD53535)),
+                            recognizer: TapGestureRecognizer()..onTap = () {}),
+                        TextSpan(
+                            text: Strings.autoLineString(
+                                '  no cambia el limite de la fecha de devolución. Debe pagar a tiempo.'),
+                            style: const TextStyle(
+                                fontSize: 15.0, color: Color(0xff333333))),
+                      ])),
+            )
+          ],
+        ),
+      );
+
+  Widget _buildNormalKeyValueView(String title, String value) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 14.0,
+              color: Color(0xff666666),
+            ),
+          ),
+          Text(
+            value,
+            style: const TextStyle(
+              fontSize: 14.0,
+              color: Color(0xff666666),
+            ),
+          ),
         ],
       ),
     );
+  }
 
-Widget _buildNormalKeyValueView(String title, String value) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 8.0),
-    child: Row(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 14.0,
-            color: Color(0xff666666),
+  Widget _buildBoldKeyValueView(String title, String value) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+                fontSize: 15.0,
+                color: Color(0xff333333),
+                fontWeight: FontWeight.bold),
+          ),
+          Text(
+            value,
+            style: const TextStyle(
+                fontSize: 15.0,
+                color: Color(0xff333333),
+                fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              headerView,
+              topInfoView,
+              overdueInfoView,
+              const CommonPayTwoWayView(),
+              const SizedBox(
+                height: 19.0,
+              ),
+              const CommonPayThreeWayView(),
+              bottomCloseView
+            ],
           ),
         ),
-        Text(
-          value,
-          style: const TextStyle(
-            fontSize: 14.0,
-            color: Color(0xff666666),
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-Widget _buildBoldKeyValueView(String title, String value) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 8.0),
-    child: Row(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: const TextStyle(
-              fontSize: 15.0,
-              color: Color(0xff333333),
-              fontWeight: FontWeight.bold),
-        ),
-        Text(
-          value,
-          style: const TextStyle(
-              fontSize: 15.0,
-              color: Color(0xff333333),
-              fontWeight: FontWeight.bold),
-        ),
-      ],
-    ),
-  );
+      ),
+    );
+  }
 }

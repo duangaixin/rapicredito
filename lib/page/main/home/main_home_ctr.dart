@@ -117,15 +117,14 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
       var repayTypeFlag = bean?.cottonScreamMusicalAnybody ?? '';
 
       mainHomeState.overduePayment = bean?.freeCleanerBluePineapple ?? 0.0;
-      mainHomeState.valueAddedTax = bean?.triangleRemarkIllBattery ?? 0.0;
       mainHomeState.deductCost = bean?.unsafeLicenseNut ?? 0.0;
       mainHomeState.overdueDay = bean?.mexicanMedicalCan ?? 0;
 
       ///delete
-      // state.overdueStatus = 1;
-      // state.canRolloverPay = true;
-      // repayTypeFlag = '1,1,1,1,1';
-      // state.loadState = LoadState.succeed;
+      mainHomeState.overdueStatus = 0;
+      mainHomeState.canRolloverPay = true;
+      repayTypeFlag = '1,1,1,1,1';
+      mainHomeState.loadState = LoadState.succeed;
 
       if (mainHomeState.overdueStatus == -1) {
         await postQueryHomeDefaultInfoRequest();
@@ -226,19 +225,23 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
     }
   }
 
-  // Future<void> postQueryChannelListRequest() async {
-  //   Map<String, dynamic> param = getCommonParam();
-  //   var response = await HttpRequestManage.instance.postChannelListInfo(param);
-  //   if (response.isSuccess()) {
-  //   } else {
-  //     NetException.dealAllException(response);
-  //   }
-  // }
 
-  Future<void> postQueryPayInfoRequest() async {
+  Future<void> _postQueryRolloverDetailInfoRequest() async {
     Map<String, dynamic> param = getCommonParam();
-    var response = await HttpRequestManage.instance.postPayInfo(param);
+    Get.showLoading();
+    var response =
+        await HttpRequestManage.instance.postRolloverDetailInfo(param);
+    Get.dismiss();
     if (response.isSuccess()) {
+      var bean = response.data;
+      mainHomeState.updateDueDate = bean?.eastLipPoliceNorthernResearch ?? '';
+      mainHomeState.deferralCharge =
+          bean?.roundUniversityAbleCartoonBriefAdult ?? 0.0;
+      mainHomeState.interest = bean?.primaryTastelessKiteDawn ?? 0.0;
+      mainHomeState.overduePayment = bean?.freeCleanerBluePineapple ?? 0.0;
+      mainHomeState.valueAddedTax = bean?.triangleRemarkIllBattery ?? 0.0;
+      mainHomeState.payFee = bean?.interestingComradeHairIntroduction ?? 0.0;
+      _showRolloverPayDialog();
     } else {
       NetException.dealAllException(response);
     }
@@ -258,7 +261,11 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
     }
   }
 
-  void showRolloverPayDialog() {
+  void clickRolloverBtn() {
+    _postQueryRolloverDetailInfoRequest();
+  }
+
+  void _showRolloverPayDialog() {
     showDialog(
         context: Get.context!,
         barrierDismissible: false,
@@ -334,6 +341,25 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
 //     }
 //   } else {
 //     state.loadState = LoadState.failed;
+//     NetException.dealAllException(response);
+//   }
+// }
+
+
+// Future<void> postQueryChannelListRequest() async {
+//   Map<String, dynamic> param = getCommonParam();
+//   var response = await HttpRequestManage.instance.postChannelListInfo(param);
+//   if (response.isSuccess()) {
+//   } else {
+//     NetException.dealAllException(response);
+//   }
+// }
+
+// Future<void> postQueryPayInfoRequest() async {
+//   Map<String, dynamic> param = getCommonParam();
+//   var response = await HttpRequestManage.instance.postPayInfo(param);
+//   if (response.isSuccess()) {
+//   } else {
 //     NetException.dealAllException(response);
 //   }
 // }
