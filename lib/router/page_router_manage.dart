@@ -16,9 +16,10 @@ import 'package:rapicredito/page/result/repayment/index.dart';
 import 'package:rapicredito/page/result/rollover/index.dart';
 import 'package:rapicredito/page/splash/index.dart';
 import 'package:rapicredito/page/test/index.dart';
+import 'package:rapicredito/page/webview/webview_page.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:get/route_manager.dart';
-import 'package:rapicredito/webview/webview_page.dart';
+
 
 class PageRouterManage {
   static const initial = PageRouterName.permissionPage;

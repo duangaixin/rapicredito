@@ -31,7 +31,7 @@ class SettingCtr extends BaseGetCtr {
   void logout() {
     UserStore.to.loginOut();
     var mainHomeCtr = Get.find<MainHomeCtr>();
-    mainHomeCtr.state.overdueStatus = -1;
+    mainHomeCtr.mainHomeState.overdueStatus = -1;
     var mainCtr = Get.find<AppMainCtr>();
     mainCtr.dealNavBarTap(0);
     Get.back();

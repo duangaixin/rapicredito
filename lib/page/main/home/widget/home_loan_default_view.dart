@@ -86,10 +86,10 @@ class HomeLoanDefaultView extends GetView<MainHomeCtr> {
                                         children: [
                                           Obx(() {
                                             var showStr =
-                                                controller.state.maxAmount;
+                                                controller.mainHomeState.maxAmount;
                                             if (!showStr.contains('-')) {
                                               showStr = TextUtil.formatComma3(
-                                                  controller.state.maxAmount);
+                                                  controller.mainHomeState.maxAmount);
                                             }
                                             return Text(
                                               showStr,

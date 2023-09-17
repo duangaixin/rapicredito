@@ -12,6 +12,7 @@ import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/model/pay_url_info_bean.dart';
 import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/page/main/home/widget/home_rollover_repayment_dialog.dart';
+import 'package:rapicredito/page/main/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/location_util.dart';
@@ -21,15 +22,16 @@ import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class MainHomeCtr extends BaseGetCtr {
+class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
   MainHomeCtr();
 
-  final state = MainHomeState();
+  final mainHomeState = MainHomeState();
   var refreshController = RefreshController();
 
   @override
   void onInit() {
     super.onInit();
+    WidgetsBinding.instance.addObserver(this);
     _requestLocation();
   }
 
@@ -37,6 +39,27 @@ class MainHomeCtr extends BaseGetCtr {
   void onReady() {
     super.onReady();
     requestInitData();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    switch (state) {
+      case AppLifecycleState.paused:
+        break;
+      case AppLifecycleState.resumed:
+        var appMainCtr = Get.find<AppMainCtr>();
+        if (appMainCtr.state.pageIndex == 0) {
+          requestInitData();
+        }
+        break;
+    }
+  }
+
+  @override
+  void onClose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.onClose();
   }
 
   void _requestLocation() {
@@ -58,17 +81,17 @@ class MainHomeCtr extends BaseGetCtr {
       // await _postQueryOrderInfoRequest();
       // }
     } else {
-      state.overdueStatus = -1;
+      mainHomeState.overdueStatus = -1;
       await postQueryHomeDefaultInfoRequest();
     }
 
-    if (state.isRefresh) {
+    if (mainHomeState.isRefresh) {
       refreshController.refreshCompleted();
     }
   }
 
   void refreshInfo() {
-    state.isRefresh = true;
+    mainHomeState.isRefresh = true;
     requestInitData();
   }
 
@@ -77,23 +100,26 @@ class MainHomeCtr extends BaseGetCtr {
     var response = await HttpRequestManage.instance.postOrderInfo(param);
     if (response.isSuccess()) {
       var bean = response.data;
-      state.orderId = bean?.disabledLondonPrivatePoolAmericanInstrument ?? -1;
-      state.overdueStatus = bean?.centralTechnologyAboveCarefulTomato ?? -1;
-      state.loanStatus = bean?.federalDirectorySituation ?? -1;
-      state.creditAmount = bean?.sharpStrictRelationship ?? 0.0;
-      state.applyDate = bean?.valuableRussianForestCop ?? '';
-      state.repaymentAmount = bean?.interestingComradeHairIntroduction ?? 0.0;
-      state.repaymentDate = bean?.indeedSoftMomEnoughPill ?? '';
-      state.interest = bean?.freshBookcaseModestPing ?? 0.0;
+      mainHomeState.orderId =
+          bean?.disabledLondonPrivatePoolAmericanInstrument ?? -1;
+      mainHomeState.overdueStatus =
+          bean?.centralTechnologyAboveCarefulTomato ?? -1;
+      mainHomeState.loanStatus = bean?.federalDirectorySituation ?? -1;
+      mainHomeState.creditAmount = bean?.sharpStrictRelationship ?? 0.0;
+      mainHomeState.applyDate = bean?.valuableRussianForestCop ?? '';
+      mainHomeState.repaymentAmount =
+          bean?.interestingComradeHairIntroduction ?? 0.0;
+      mainHomeState.repaymentDate = bean?.indeedSoftMomEnoughPill ?? '';
+      mainHomeState.interest = bean?.freshBookcaseModestPing ?? 0.0;
 
-      state.canRolloverPay = (bean?.endlessPie ?? 0) == 1;
-      state.rolloverPayDay = bean?.strictMedicalPuzzleCafeteria ?? 0;
+      mainHomeState.canRolloverPay = (bean?.endlessPie ?? 0) == 1;
+      mainHomeState.rolloverPayDay = bean?.strictMedicalPuzzleCafeteria ?? 0;
       var repayTypeFlag = bean?.cottonScreamMusicalAnybody ?? '';
 
-      state.overduePayment = bean?.freeCleanerBluePineapple ?? 0.0;
-      state.valueAddedTax = bean?.triangleRemarkIllBattery ?? 0.0;
-      state.deductCost = bean?.unsafeLicenseNut ?? 0.0;
-      state.overdueDay = bean?.mexicanMedicalCan ?? 0;
+      mainHomeState.overduePayment = bean?.freeCleanerBluePineapple ?? 0.0;
+      mainHomeState.valueAddedTax = bean?.triangleRemarkIllBattery ?? 0.0;
+      mainHomeState.deductCost = bean?.unsafeLicenseNut ?? 0.0;
+      mainHomeState.overdueDay = bean?.mexicanMedicalCan ?? 0;
 
       ///delete
       // state.overdueStatus = 1;
@@ -101,29 +127,30 @@ class MainHomeCtr extends BaseGetCtr {
       // repayTypeFlag = '1,1,1,1,1';
       // state.loadState = LoadState.succeed;
 
-      if (state.overdueStatus == -1) {
+      if (mainHomeState.overdueStatus == -1) {
         await postQueryHomeDefaultInfoRequest();
-      } else if (state.overdueStatus == 0 || state.overdueStatus == 1) {
+      } else if (mainHomeState.overdueStatus == 0 ||
+          mainHomeState.overdueStatus == 1) {
         if (!ObjectUtil.isEmptyString(repayTypeFlag)) {
           var payTypeList = repayTypeFlag.split(',');
           if (!ObjectUtil.isEmptyList(payTypeList)) {
             if (payTypeList.length >= 5) {
-              state.onePayShow = payTypeList[0] == '1';
-              state.twoPayShow = payTypeList[1] == '1';
-              state.threePayShow = payTypeList[2] == '1';
-              state.fourPayShow = payTypeList[3] == '1';
-              state.fivePayShow = payTypeList[4] == '1';
-              state.loadState = LoadState.succeed;
+              mainHomeState.onePayShow = payTypeList[0] == '1';
+              mainHomeState.twoPayShow = payTypeList[1] == '1';
+              mainHomeState.threePayShow = payTypeList[2] == '1';
+              mainHomeState.fourPayShow = payTypeList[3] == '1';
+              mainHomeState.fivePayShow = payTypeList[4] == '1';
+              mainHomeState.loadState = LoadState.succeed;
             }
           }
         }
       } else {
-        state.loadState = LoadState.succeed;
+        mainHomeState.loadState = LoadState.succeed;
       }
     } else {
       if (response.code == null) {
-        state.overdueStatus = -1;
-        state.loadState = LoadState.succeed;
+        mainHomeState.overdueStatus = -1;
+        mainHomeState.loadState = LoadState.succeed;
         Get.showNoNetDialog();
         return;
       }
@@ -137,12 +164,12 @@ class MainHomeCtr extends BaseGetCtr {
     var response = await HttpRequestManage.instance.postAppSettingInfo(param);
     if (response.isSuccess()) {
       var bean = response.data;
-      state.maxAmount = bean?.cleverMaidActualFoot ?? '--';
-      state.loadState = LoadState.succeed;
+      mainHomeState.maxAmount = bean?.cleverMaidActualFoot ?? '--';
+      mainHomeState.loadState = LoadState.succeed;
     } else {
       if (response.code == null) {
-        state.overdueStatus = -1;
-        state.loadState = LoadState.succeed;
+        mainHomeState.overdueStatus = -1;
+        mainHomeState.loadState = LoadState.succeed;
         Get.showNoNetDialog();
         return;
       }
@@ -275,7 +302,7 @@ class MainHomeCtr extends BaseGetCtr {
     KeyboardUtils.unFocus();
     Get.toNamed(PageRouterName.webViewPage, arguments: {
       AppConstants.webViewTitleKey: title,
-      AppConstants.webViewUrlKey: webViewUrl
+      AppConstants.webViewUrlKey: webViewUrl,
     });
   }
 // Future<void> postIsHomeManyProductRequest() async {

@@ -12,7 +12,7 @@ class CommonLoanMoneyView extends GetView<MainHomeCtr> {
   @override
   Widget build(BuildContext context) {
     var loanMoney = TextUtil.formatComma3(
-        controller.dealEndZero(controller.state.creditAmount.toString()));
+        controller.dealEndZero(controller.mainHomeState.creditAmount.toString()));
     return Container(
       alignment: Alignment.center,
       width: double.infinity,
@@ -54,7 +54,7 @@ class CommonLoanMoneyView extends GetView<MainHomeCtr> {
           Padding(
               padding: const EdgeInsets.only(top: 10.0, bottom: 11.0),
               child: Text(
-                controller.state.applyDate,
+                controller.mainHomeState.applyDate,
                 style:
                     const TextStyle(fontSize: 15.0, color: Color(0xff333333)),
               )),

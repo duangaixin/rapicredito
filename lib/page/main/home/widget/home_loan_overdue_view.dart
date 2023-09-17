@@ -86,7 +86,7 @@ class HomeLoanOverdueView extends GetView<MainHomeCtr> {
                       children: <TextSpan>[
                         TextSpan(
                             text: Strings.autoLineString(
-                                '${controller.state.overdueDay} días,'),
+                                '${controller.mainHomeState.overdueDay} días,'),
                             style: const TextStyle(
                                 fontSize: 15.0, color: Color(0xffD53535))),
                         TextSpan(
@@ -101,7 +101,7 @@ class HomeLoanOverdueView extends GetView<MainHomeCtr> {
       );
 
   Widget get overdueBtnView => Visibility(
-      visible: controller.state.canRolloverPay,
+      visible: controller.mainHomeState.canRolloverPay,
       child: Container(
         alignment: Alignment.center,
         margin: const EdgeInsets.only(top: 20.0, bottom: 25.0),
@@ -113,7 +113,7 @@ class HomeLoanOverdueView extends GetView<MainHomeCtr> {
           disabledBackgroundColor: Colors.white,
           fontSize: 15.0,
           radius: 8.0,
-          text: 'Prórroga de pago\nde ${controller.state.rolloverPayDay} días',
+          text: 'Prórroga de pago\nde ${controller.mainHomeState.rolloverPayDay} días',
           textAlign: TextAlign.center,
           textColor: const Color(0xff333333),
           fontWeight: FontWeight.bold,
@@ -150,19 +150,19 @@ class HomeLoanOverdueView extends GetView<MainHomeCtr> {
                   _buildKeyValueView(
                       'Monto de devolución',
                       controller.addEndZero(
-                          controller.state.repaymentAmount.toString())),
+                          controller.mainHomeState.repaymentAmount.toString())),
                   _buildKeyValueView('Fecha de pago de tu crédito',
-                      controller.state.repaymentDate),
+                      controller.mainHomeState.repaymentDate),
                   _buildKeyValueView(
                       'Monto del préstamo',
                       controller.addEndZero(
-                          controller.state.creditAmount.toString())),
+                          controller.mainHomeState.creditAmount.toString())),
                   _buildKeyValueView(
-                      'Interés', controller.state.interest.toString()),
+                      'Interés', controller.mainHomeState.interest.toString()),
                   _buildKeyValueView('Cargo por demora',
-                      controller.state.overduePayment.toString()),
+                      controller.mainHomeState.overduePayment.toString()),
                   _buildKeyValueView('Costo de deducción',
-                      controller.state.deductCost.toString())
+                      controller.mainHomeState.deductCost.toString())
                 ],
               ),
             )

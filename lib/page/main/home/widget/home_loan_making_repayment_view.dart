@@ -28,7 +28,7 @@ class HomeLoanMakingRepaymentView extends GetView<MainHomeCtr> {
             ),
             Visibility(
               visible:
-                  controller.state.onePayShow || controller.state.twoPayShow,
+                  controller.mainHomeState.onePayShow || controller.mainHomeState.twoPayShow,
               child: Container(
                 margin:
                     const EdgeInsets.only(left: 16.0, right: 16.0, top: 20.0),
@@ -36,9 +36,9 @@ class HomeLoanMakingRepaymentView extends GetView<MainHomeCtr> {
               ),
             ),
             Visibility(
-              visible: controller.state.threePayShow ||
-                  controller.state.fourPayShow ||
-                  controller.state.fivePayShow,
+              visible: controller.mainHomeState.threePayShow ||
+                  controller.mainHomeState.fourPayShow ||
+                  controller.mainHomeState.fivePayShow,
               child: Container(
                 margin:
                     const EdgeInsets.only(left: 16.0, right: 16.0, top: 19.0),
@@ -51,7 +51,7 @@ class HomeLoanMakingRepaymentView extends GetView<MainHomeCtr> {
   }
 
   Widget get overdueBtnView => Visibility(
-        visible: controller.state.canRolloverPay,
+        visible: controller.mainHomeState.canRolloverPay,
         child: Container(
             alignment: Alignment.center,
             margin: const EdgeInsets.only(top: 20.0),
@@ -64,7 +64,7 @@ class HomeLoanMakingRepaymentView extends GetView<MainHomeCtr> {
               fontSize: 15.0,
               radius: 8.0,
               text:
-                  'Prórroga de pago\nde ${controller.state.rolloverPayDay} días',
+                  'Prórroga de pago\nde ${controller.mainHomeState.rolloverPayDay} días',
               textAlign: TextAlign.center,
               textColor: const Color(0xff333333),
               fontWeight: FontWeight.bold,
@@ -102,15 +102,15 @@ class HomeLoanMakingRepaymentView extends GetView<MainHomeCtr> {
                   _buildKeyValueView(
                       'Monto de devolución',
                       controller.addEndZero(
-                          controller.state.repaymentAmount.toString())),
+                          controller.mainHomeState.repaymentAmount.toString())),
                   _buildKeyValueView('Fecha de pago de tu crédito',
-                      controller.state.repaymentDate),
+                      controller.mainHomeState.repaymentDate),
                   _buildKeyValueView(
                       'Monto del préstamo',
                       controller.addEndZero(
-                          controller.state.creditAmount.toString())),
+                          controller.mainHomeState.creditAmount.toString())),
                   _buildKeyValueView(
-                      'Interés', controller.state.interest.toString())
+                      'Interés', controller.mainHomeState.interest.toString())
                 ],
               ),
             )

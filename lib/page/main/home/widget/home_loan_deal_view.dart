@@ -49,7 +49,7 @@ class HomeLoanDealView extends GetView<MainHomeCtr> {
       decoration: BoxDecoration(
           color: const Color(0xffF9F9F9),
           borderRadius: BorderRadius.circular(8.0)),
-      child: Row(
+      child: const Row(
         mainAxisSize: MainAxisSize.max,
         children: [
           CustomImageView(

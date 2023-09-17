@@ -29,7 +29,7 @@ class HomeManyProductView extends GetKeepStateView<MainHomeCtr> {
   Widget get homeManyListView => ListView.builder(
         padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 0.0),
         shrinkWrap: true,
-        itemCount: ctr.state.originNetList.length,
+        itemCount: ctr.mainHomeState.originNetList.length,
       //  itemCount: 5,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {

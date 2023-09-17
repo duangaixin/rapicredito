@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:archive/archive.dart';
 import 'package:devicesinfo/devicesinfo_method_channel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';

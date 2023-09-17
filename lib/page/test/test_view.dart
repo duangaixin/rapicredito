@@ -30,14 +30,14 @@ class TestPage extends GetView<TestCtr> {
             int year = int.tryParse(strList[2]) ?? 0;
             int month = 0;
             if (strList[1].startsWith('0')) {
-              var monthStr = strList[1].substring(1,1);
+              var monthStr = strList[1].substring(0);
               month = int.tryParse(monthStr) ?? 0;
             } else {
               month = int.tryParse(strList[1]) ?? 0;
             }
             int day = 0;
             if (strList[0].startsWith('0')) {
-              var dayStr = strList[0].substring(1,1);
+              var dayStr = strList[0].substring(0);
               day = int.tryParse(dayStr) ?? 0;
             } else {
               day = int.tryParse(strList[0]) ?? 0;

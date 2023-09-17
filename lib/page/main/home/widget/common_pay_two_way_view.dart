@@ -36,7 +36,7 @@ class CommonPayTwoWayView extends GetView<MainHomeCtr> {
             ),
           ),
           Visibility(
-              visible: controller.state.onePayShow,
+              visible: controller.mainHomeState.onePayShow,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +49,7 @@ class CommonPayTwoWayView extends GetView<MainHomeCtr> {
                 ],
               )),
           Visibility(
-              visible: controller.state.twoPayShow,
+              visible: controller.mainHomeState.twoPayShow,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,

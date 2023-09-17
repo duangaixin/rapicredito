@@ -26,7 +26,7 @@ class CommonPayThreeWayView extends GetView<MainHomeCtr> {
         children: [
           onePayView,
           Visibility(
-              visible: controller.state.fourPayShow,
+              visible: controller.mainHomeState.fourPayShow,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,7 +39,7 @@ class CommonPayThreeWayView extends GetView<MainHomeCtr> {
                 ],
               )),
           Visibility(
-              visible: controller.state.fivePayShow,
+              visible: controller.mainHomeState.fivePayShow,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,7 +61,7 @@ class CommonPayThreeWayView extends GetView<MainHomeCtr> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Visibility(
-                visible: controller.state.threePayShow,
+                visible: controller.mainHomeState.threePayShow,
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

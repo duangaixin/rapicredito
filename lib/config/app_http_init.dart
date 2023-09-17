@@ -39,7 +39,7 @@ void _check401Error(BaseResponse<dynamic> error) async {
   if (is401Error(error)) {
     UserStore.to.loginOut();
     var mainHomeCtr = Get.find<MainHomeCtr>();
-    mainHomeCtr.state.overdueStatus = -1;
+    mainHomeCtr.mainHomeState.overdueStatus = -1;
     Get.until((route) => route.settings.name == PageRouterName.mainPage);
     Get.toNamed(PageRouterName.loginPage);
     // Get.offAllNamed(PageRouterName.loginPage,

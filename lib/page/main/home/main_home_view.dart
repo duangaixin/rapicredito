@@ -25,9 +25,9 @@ class MainHomePage extends GetKeepStateView<MainHomeCtr> {
           enablePullUp: false,
           child: LoadContainerView(
               onReload: ctr.refreshInfo,
-              loadState: ctr.state.loadState,
+              loadState: ctr.mainHomeState.loadState,
               contentView: Obx(() {
-                var overdueStatus = ctr.state.overdueStatus;
+                var overdueStatus = ctr.mainHomeState.overdueStatus;
                 Widget homeShowView = const HomeLoanDefaultView();
                 if (overdueStatus == 0) {
                   homeShowView = const HomeLoanMakingRepaymentView();
@@ -36,7 +36,7 @@ class MainHomePage extends GetKeepStateView<MainHomeCtr> {
                 } else if (overdueStatus == 3) {
                   homeShowView = const HomeRefusalToLendView();
                 } else if (overdueStatus == 2) {
-                  var loanStatus = ctr.state.loanStatus;
+                  var loanStatus = ctr.mainHomeState.loanStatus;
                   if (loanStatus == 2) {
                     homeShowView = const HomeLoanFailureView();
                   } else if (loanStatus == 3) {

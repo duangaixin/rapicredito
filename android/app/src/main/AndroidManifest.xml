@@ -179,7 +179,7 @@
 <!--        <meta-data-->
 <!--            android:name="io.branch.sdk.TestMode"-->
 <!--            android:value="false" />-->
-        <meta-data android:name="io.branch.sdk.BranchKey" android:value="key_live_xxx" />
+        <meta-data android:name="io.branch.sdk.BranchKey" android:value="branch:key_live_hDao5r9VE3uyHpS4nc1TDceezwfzUVaV" />
 
         <meta-data android:name="io.branch.sdk.TestMode" android:value="false" />
 
