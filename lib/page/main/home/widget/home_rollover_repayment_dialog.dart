@@ -37,12 +37,12 @@ class _HomeRolloverRepaymentDialogState
                       'Prolonga 7 días más',
                       style: TextStyle(fontSize: 15.0, color: Colors.white),
                     ))),
-            Positioned(bottom: 20.0, right: 0.0, child: topCloseView),
+            Positioned(bottom: 20.0, right: 0.0, child: closeView),
           ],
         ),
       );
 
-  Widget get topCloseView => CustomClickView(
+  Widget get closeView => CustomClickView(
       onTap: Get.back,
       child: Container(
         alignment: Alignment.center,
@@ -62,7 +62,7 @@ class _HomeRolloverRepaymentDialogState
         height: 66.0,
         color: Colors.transparent,
         margin: const EdgeInsets.only(top: 30.0, bottom: 30.0),
-        child: topCloseView,
+        child: closeView,
       );
 
   Widget get topInfoView => Container(

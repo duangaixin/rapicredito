@@ -42,7 +42,7 @@ android {
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a'
         }
-       multiDexEnabled true
+        multiDexEnabled true
     }
 
     compileOptions {
@@ -100,11 +100,11 @@ android {
     }
     buildTypes {
         release {
-
             minifyEnabled true
             shrinkResources true
             zipAlignEnabled true
             signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 //            firebaseCrashlytics {
 //                mappingFileUploadEnabled false
 //            }
@@ -114,6 +114,11 @@ android {
             shrinkResources false
             zipAlignEnabled false
             signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            //            firebaseCrashlytics {
+//                mappingFileUploadEnabled false
+//            }
         }
     }
 
@@ -144,7 +149,7 @@ dependencies {
     implementation 'com.facebook.android:facebook-android-sdk:16.2.0'
     implementation 'io.branch.sdk.android:library:5.+'
     implementation 'androidx.browser:browser:1.0.0'
-    implementation  'com.google.android.gms:play-services-ads-identifier:17.1.0+'
+    implementation 'com.google.android.gms:play-services-ads-identifier:17.1.0+'
 //    implementation 'com.google.firebase:firebase-crashlytics'
 //    implementation 'com.google.firebase:firebase-analytics'
 
