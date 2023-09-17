@@ -7,7 +7,8 @@ import 'package:rapicredito/widget/custom_dash_line.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
 class CommonPayTwoWayView extends GetView<MainHomeCtr> {
-  const CommonPayTwoWayView({Key? key}) : super(key: key);
+  final bool isRollover;
+  const CommonPayTwoWayView({Key? key,this.isRollover=false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +111,7 @@ class CommonPayTwoWayView extends GetView<MainHomeCtr> {
             ),
             CustomButton(
               onPressed: () {
-                controller.postQueryRepayUrlRequest(PayType.payOne);
+                controller.clickPayType(PayType.payOne,isRollover: isRollover);
               },
               minWidth: 111.0,
               minHeight: 46.0,
@@ -139,7 +140,7 @@ class CommonPayTwoWayView extends GetView<MainHomeCtr> {
                   imageType: ImageType.assets, width: 142.0, height: 37.0),
               CustomButton(
                 onPressed: () {
-                  controller.postQueryRepayUrlRequest(PayType.payTwo);
+                  controller.clickPayType(PayType.payTwo,isRollover: isRollover);
                 },
                 minWidth: 111.0,
                 minHeight: 46.0,

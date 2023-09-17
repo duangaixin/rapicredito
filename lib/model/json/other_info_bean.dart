@@ -45,13 +45,13 @@ class OtherInfoBean extends Object {
   @JsonKey(name: 'sensorData')
   SensorData sensorData;
 
-  @JsonKey(name: 'simulator')
-  int? simulator;
+  @JsonKey(name: 'intSimulator')
+  int? intSimulator;
 
   @JsonKey(name: 'vpn_address')
   String? vpnAddress;
 
-  OtherInfoBean(this.bootTime,this.dbm,this.httpProxyHostPort,this.isAirplaneMode,this.isMockLocation,this.isUsbDebug,this.isUsingProxyPort,this.isUsingVpn,this.keyboard,this.lastBootTime,this.ringerMode,this.rootJailbreak,this.sensorData,this.simulator,this.vpnAddress,);
+  OtherInfoBean(this.bootTime,this.dbm,this.httpProxyHostPort,this.isAirplaneMode,this.isMockLocation,this.isUsbDebug,this.isUsingProxyPort,this.isUsingVpn,this.keyboard,this.lastBootTime,this.ringerMode,this.rootJailbreak,this.sensorData,this.intSimulator,this.vpnAddress,);
 
   factory OtherInfoBean.fromJson(Map<String, dynamic> srcJson) => _$OtherInfoBeanFromJson(srcJson);
 

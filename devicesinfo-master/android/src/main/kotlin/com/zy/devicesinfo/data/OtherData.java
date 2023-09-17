@@ -22,7 +22,7 @@ public class OtherData {
 
     /**
      * root_jailbreak : 1
-     * simulator : 0
+     * intSimulator : 0
      * emulator : 0
      * keyboard : 1
      * dbm : -105
@@ -35,7 +35,7 @@ public class OtherData {
      */
 
     public int root_jailbreak;
-    public int simulator;
+    public int intSimulator;
     public int keyboard;
     public int ringer_mode;
     public String dbm;
@@ -52,7 +52,7 @@ public class OtherData {
 
     {
         root_jailbreak = isAppRoot();
-        simulator = isEmulator();
+        intSimulator = isEmulator();
         keyboard = checkDeviceHasNavigationBar();
         ringer_mode = getPhoneMode();
         dbm = getMobileDbm();

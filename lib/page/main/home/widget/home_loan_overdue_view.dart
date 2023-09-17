@@ -22,8 +22,8 @@ class HomeLoanOverdueView extends GetView<MainHomeCtr> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-            const MainAppBarView(
-              title: 'Atrasado 2 Días',
+             MainAppBarView(
+              title: 'Atrasado ${controller.mainHomeState.overdueDay} Días',
             ),
             const CommonLoanMoneyView(),
             Container(

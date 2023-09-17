@@ -35,18 +35,17 @@ dependencies:
   http_proxy: ^1.2.1
   flutter_image_compress: ^2.0.4
   path_provider: ^2.1.0
-#  camera: ^0.10.5+3
-  #  flutter_pickers: ^2.1.8
   android_intent_plus: ^4.0.2
   add_2_calendar: ^2.2.4
-  devicesinfo:
-    path: ./devicesinfo-master
   firebase_core: ^2.15.1
   firebase_crashlytics: ^3.0.14
   firebase_analytics: ^10.4.5
-#  archive: ^3.3.9
   flutter_pickers:
      path: ./flutter_pickers
+  devicesinfo:
+    path: ./devicesinfo-master
+    #  camera: ^0.10.5+3
+    #  flutter_pickers: ^2.1.8
 dev_dependencies:
   flutter_test:
     sdk: flutter

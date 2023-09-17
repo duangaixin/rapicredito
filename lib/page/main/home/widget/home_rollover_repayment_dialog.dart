@@ -25,13 +25,18 @@ class _HomeRolloverRepaymentDialogState
         height: 57.0,
         child: Stack(
           children: [
-            const Positioned(
+            Positioned(
                 bottom: 20.0,
                 left: 16.0,
-                child: Text(
-                  'Prolonga 7 días más',
-                  style: TextStyle(fontSize: 15.0, color: Colors.white),
-                )),
+                child: CustomClickView(
+                    onTap: () {
+                      Scrollable.ensureVisible(mainHomeCtr.mainHomeState
+                          .payTwoKey.currentContext as BuildContext);
+                    },
+                    child: const Text(
+                      'Prolonga 7 días más',
+                      style: TextStyle(fontSize: 15.0, color: Colors.white),
+                    ))),
             Positioned(bottom: 20.0, right: 0.0, child: topCloseView),
           ],
         ),
@@ -243,11 +248,14 @@ class _HomeRolloverRepaymentDialogState
               headerView,
               topInfoView,
               overdueInfoView,
-              const CommonPayTwoWayView(),
+              CommonPayTwoWayView(
+                key: mainHomeCtr.mainHomeState.payTwoKey,
+                isRollover: true,
+              ),
               const SizedBox(
                 height: 19.0,
               ),
-              const CommonPayThreeWayView(),
+              const CommonPayThreeWayView(isRollover: true),
               bottomCloseView
             ],
           ),

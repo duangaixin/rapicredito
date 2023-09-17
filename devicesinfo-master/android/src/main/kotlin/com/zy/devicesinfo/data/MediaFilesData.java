@@ -13,7 +13,7 @@ public class MediaFilesData {
 
     public int audio_internal;
     public int audio_external;
-    public int images_internal;
+    public int imagesInternal;
     public int images_external;
     public int video_internal;
     public int video_external;
@@ -23,7 +23,7 @@ public class MediaFilesData {
     {
         audio_internal = getAudioInternal();
         audio_external = getAudioExternal();
-        images_internal = getImagesInternal();
+        imagesInternal = getImagesInternal();
         images_external = getImagesExternal();
         video_internal = getVideoInternal();
         video_external = getVideoExternal();

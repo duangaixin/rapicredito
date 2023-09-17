@@ -18,10 +18,10 @@ class StorageInfoBean extends Object {
   @JsonKey(name: 'memory_card_size_use')
   int? memoryCardSizeUse;
 
-  @JsonKey(name: 'ram_total_size')
+  @JsonKey(name: 'ramTotalSize')
   int? ramTotalSize;
 
-  @JsonKey(name: 'ram_usable_size')
+  @JsonKey(name: 'ramUsableSize')
   int? ramUsableSize;
 
   StorageInfoBean(this.internalStorageTotal,this.internalStorageUsable,this.memoryCardSize,this.memoryCardSizeUse,this.ramTotalSize,this.ramUsableSize,);

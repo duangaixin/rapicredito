@@ -7,7 +7,8 @@ import 'package:rapicredito/widget/custom_dash_line.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
 class CommonPayThreeWayView extends GetView<MainHomeCtr> {
-  const CommonPayThreeWayView({Key? key}) : super(key: key);
+  final bool isRollover;
+  const CommonPayThreeWayView({Key? key,this.isRollover=false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +73,7 @@ class CommonPayThreeWayView extends GetView<MainHomeCtr> {
                         height: 37.0),
                     CustomButton(
                       onPressed: () {
-                        controller.postQueryRepayUrlRequest(PayType.payThree);
+                        controller.clickPayType(PayType.payThree,isRollover: isRollover);
                       },
                       minWidth: 111.0,
                       minHeight: 46.0,
@@ -109,7 +110,7 @@ class CommonPayThreeWayView extends GetView<MainHomeCtr> {
                   imageType: ImageType.assets, width: 105, height: 29.0),
               CustomButton(
                 onPressed: () {
-                  controller.postQueryRepayUrlRequest(PayType.payFour);
+                  controller.clickPayType(PayType.payFour,isRollover: isRollover);
                 },
                 minWidth: 111.0,
                 minHeight: 46.0,
@@ -142,7 +143,7 @@ class CommonPayThreeWayView extends GetView<MainHomeCtr> {
               ),
               CustomButton(
                 onPressed: () {
-                  controller.postQueryRepayUrlRequest(PayType.payFive);
+                  controller.clickPayType(PayType.payFive,isRollover: isRollover);
                 },
                 minWidth: 111.0,
                 minHeight: 46.0,

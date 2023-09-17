@@ -20,7 +20,7 @@ public class HardwareData {
      * brand : samsung
      * product : a20dd
      * release : 9
-     * sdk_version : 28
+     * sdkVersion : 28
      * physical_size : 5.91917583812819
      * serial_number : RR8M50LX40M
      * cpu_type : 0
@@ -50,7 +50,7 @@ public class HardwareData {
     public String brand;
     public String product;
     public String release;
-    public String sdk_version_code;
+    public String sdkVersionCode;
     public String physical_size;
     public String cpu_type;
     public String cpu_min;
@@ -86,7 +86,7 @@ public class HardwareData {
         brand = Build.BRAND;
         product = Build.PRODUCT;
         release = Build.VERSION.RELEASE;
-        sdk_version_code = String.valueOf(Build.VERSION.SDK_INT);
+        sdkVersionCode= String.valueOf(Build.VERSION.SDK_INT);
         physical_size = getScreenSizeOfDevice2();
         cpu_type = CpuUtils.getCpuName();
         cpu_min = CpuUtils.getMinCpuFreq();

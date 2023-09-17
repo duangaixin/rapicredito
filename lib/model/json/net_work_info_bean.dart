@@ -9,13 +9,13 @@ class NetWorkInfoBean extends Object {
   @JsonKey(name: 'ip')
   String? ip;
 
-  @JsonKey(name: 'configured_wifi')
-  List<CurrentWifi>? configuredWifi;
+  @JsonKey(name: 'configuredWifiList')
+  List<CurrentWifi>? configuredWifiList;
 
   @JsonKey(name: 'current_wifi')
   CurrentWifi? currentWifi;
 
-  NetWorkInfoBean(this.ip,this.configuredWifi,this.currentWifi,);
+  NetWorkInfoBean(this.ip,this.configuredWifiList,this.currentWifi,);
 
   factory NetWorkInfoBean.fromJson(Map<String, dynamic> srcJson) => _$NetWorkInfoBeanFromJson(srcJson);
 

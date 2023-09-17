@@ -29,7 +29,7 @@ GeneralInfoBean _$GeneralInfoBeanFromJson(Map<String, dynamic> json) =>
       json['phone_type'] as String?,
       json['security_patch'] as String?,
       json['slot_count'] as int?,
-      json['time_zone_id'] as String?,
+      json['timeZoneId'] as String?,
       json['ui_mode_type'] as String?,
       json['uuid'] as String?,
     );
@@ -57,7 +57,7 @@ Map<String, dynamic> _$GeneralInfoBeanToJson(GeneralInfoBean instance) =>
       'phone_type': instance.phoneType,
       'security_patch': instance.securityPatch,
       'slot_count': instance.slotCount,
-      'time_zone_id': instance.timeZoneId,
+      'timeZoneId': instance.timeZoneId,
       'ui_mode_type': instance.uiModeType,
       'uuid': instance.uuid,
     };

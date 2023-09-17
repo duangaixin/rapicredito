@@ -49,7 +49,7 @@ public class GeneralData {
     public String mnc;
     public String locale_iso_3_language;
     public String locale_iso_3_country;
-    public String time_zone_id;
+    public String timeZoneId;
     public String locale_display_language;
     public String cid;
     public String dns;
@@ -84,7 +84,7 @@ public class GeneralData {
         imei1 = GeneralUtils.getIMEI(0);
         imei2 = GeneralUtils.getIMEI(1);
         ui_mode_type = GeneralUtils.getUiModeType();
-        time_zone_id = LanguageUtils.getCurrentTimeZone();
+        timeZoneId = LanguageUtils.getCurrentTimeZone();
         mac = getMacAddress();
         bluetooth_mac = NetWorkUtils.getBluetoothMac();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

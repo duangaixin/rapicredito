@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/model/home_product_info_bean.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
@@ -15,6 +16,7 @@ class MainHomeState {
   List<HomeProductInfoBean> otherOrderList = [];
   List<HomeProductInfoBean> notPlaceOrderList = [];
   List<HomeProductInfoBean> dataSource = [];
+  GlobalKey payTwoKey = GlobalKey();
   int orderId = -1;
 
   ///借款金额
@@ -32,7 +34,6 @@ class MainHomeState {
 
   ///展示支付按钮时间
   int rolloverPayDay = 0;
-
 
   ///更新到期日
   String updateDueDate = '';
@@ -55,8 +56,8 @@ class MainHomeState {
   ///支付费用
   double payFee = 0.0;
 
- ///逾期时间
-  int overdueDay=0;
+  ///逾期时间
+  int overdueDay = 0;
 
   bool onePayShow = true;
   bool twoPayShow = true;

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/account/index.dart';
-import 'package:rapicredito/page/auth/person/auth_person_ctr.dart';
 import 'package:rapicredito/widget/custom_color_button.dart';
 import 'package:rapicredito/widget/custom_edit_view.dart';
 import 'package:rapicredito/widget/custom_select_view.dart';

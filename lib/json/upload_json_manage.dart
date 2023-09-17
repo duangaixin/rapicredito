@@ -475,8 +475,8 @@ class UploadJsonManage {
       netInfoBean.falseCattleCarefulPrinting = wifi;
       netInfoBean.considerateCarpetCleverFairness = bean.ip;
       netInfoBean.realParcelDeadHungrySaying =
-          bean.configuredWifi?.length.toString();
-      var list = bean.configuredWifi ?? [];
+          bean.configuredWifiList?.length.toString();
+      var list = bean.configuredWifiList ?? [];
       List<FalseCattleCarefulPrinting>? realList = [];
       if (!ObjectUtil.isEmptyList(list)) {
         for (int i = 0; i < list.length; i++) {
@@ -589,7 +589,7 @@ class UploadJsonManage {
       otherInfoBean.laserTeamwork = bean.rootJailbreak?.toString();
       otherInfoBean.greekFibreSlipNoisyShaver = bean.lastBootTime?.toString();
       otherInfoBean.smoothRedRepairsGaySlip = bean.keyboard?.toString();
-      otherInfoBean.classicalThickMinister = bean.simulator?.toString();
+      otherInfoBean.classicalThickMinister = bean.intSimulator?.toString();
       otherInfoBean.racialChalkPainfulUniversity = bean.dbm?.toString();
       otherInfoBean.fairDifficultMiddlePreciousCloth =
           bean.bootTime?.toString();

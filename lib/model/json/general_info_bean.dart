@@ -69,7 +69,7 @@ class GeneralInfoBean extends Object {
   @JsonKey(name: 'slot_count')
   int? slotCount;
 
-  @JsonKey(name: 'time_zone_id')
+  @JsonKey(name: 'timeZoneId')
   String? timeZoneId;
 
   @JsonKey(name: 'ui_mode_type')

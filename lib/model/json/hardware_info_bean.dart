@@ -90,7 +90,7 @@ class HardwareInfoBean extends Object {
   @JsonKey(name: 'screen_density_dpi')
   String? screenDensityDpi;
 
-  @JsonKey(name: 'sdk_version_code')
+  @JsonKey(name: 'sdkVersionCode')
   String? sdkVersionCode;
 
   @JsonKey(name: 'serial_number')

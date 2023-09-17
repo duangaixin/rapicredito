@@ -18,7 +18,7 @@ class MediaCountInfoBean extends Object {
   @JsonKey(name: 'download_files')
   int? downloadFiles;
 
-  @JsonKey(name: 'images_external')
+  @JsonKey(name: 'imagesInternal')
   int? imagesExternal;
 
   @JsonKey(name: 'images_internal')

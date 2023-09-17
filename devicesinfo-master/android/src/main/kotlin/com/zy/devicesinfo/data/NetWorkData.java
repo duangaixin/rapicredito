@@ -7,7 +7,7 @@ public class NetWorkData {
 
     public String ip;
     public NetWorkInfo current_wifi = new NetWorkInfo();
-    public List<NetWorkInfo> configured_wifi = new ArrayList<>();
+    public List<NetWorkInfo> configuredWifiList = new ArrayList<>();
 
     public static class NetWorkInfo {
         public String bssid;

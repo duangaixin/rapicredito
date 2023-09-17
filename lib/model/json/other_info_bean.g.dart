@@ -21,7 +21,7 @@ OtherInfoBean _$OtherInfoBeanFromJson(Map<String, dynamic> json) =>
       json['ringer_mode'] as int?,
       json['root_jailbreak'] as int?,
       SensorData.fromJson(json['sensorData'] as Map<String, dynamic>),
-      json['simulator'] as int?,
+      json['intSimulator'] as int?,
       json['vpn_address'] as String?,
     );
 
@@ -40,7 +40,7 @@ Map<String, dynamic> _$OtherInfoBeanToJson(OtherInfoBean instance) =>
       'ringer_mode': instance.ringerMode,
       'root_jailbreak': instance.rootJailbreak,
       'sensorData': instance.sensorData,
-      'simulator': instance.simulator,
+      'intSimulator': instance.intSimulator,
       'vpn_address': instance.vpnAddress,
     };
 

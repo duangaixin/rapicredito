@@ -9,7 +9,7 @@ part of 'net_work_info_bean.dart';
 NetWorkInfoBean _$NetWorkInfoBeanFromJson(Map<String, dynamic> json) =>
     NetWorkInfoBean(
       json['ip'] as String?,
-      (json['configured_wifi'] as List<dynamic>?)
+      (json['configuredWifiList'] as List<dynamic>?)
           ?.map((e) => CurrentWifi.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['current_wifi'] == null
@@ -20,7 +20,7 @@ NetWorkInfoBean _$NetWorkInfoBeanFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$NetWorkInfoBeanToJson(NetWorkInfoBean instance) =>
     <String, dynamic>{
       'ip': instance.ip,
-      'configured_wifi': instance.configuredWifi,
+      'configuredWifiList': instance.configuredWifiList,
       'current_wifi': instance.currentWifi,
     };
 

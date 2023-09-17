@@ -42,7 +42,7 @@ public class NetWorkUtils {
         wifiInfos.current_wifi.ssid = ssid;
         wifiInfos.current_wifi.mac = info.getMacAddress();
         wifiInfos.ip = int2ip(info.getIpAddress());
-        wifiInfos.configured_wifi.addAll(getAroundWifiDeciceInfo());
+        wifiInfos.configuredWifiList.addAll(getAroundWifiDeciceInfo());
         return wifiInfos;
     }
 

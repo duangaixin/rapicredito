@@ -186,10 +186,14 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
     }
   }
 
-  Future<void> postQueryRepayUrlRequest(PayType payType) async {
+  void clickPayType(PayType payType,{bool isRollover=false}){
+    _postQueryRepayUrlRequest(payType,isRollover: isRollover);
+  }
+
+  Future<void> _postQueryRepayUrlRequest(PayType payType,{bool isRollover=false}) async {
     Get.showLoading();
     Map<String, dynamic> param = getCommonParam();
-    var payTypeStr = '00';
+    var payTypeStr =isRollover?'01': '00';
     var payMethod = '';
     if (payType == PayType.payOne) {
       payMethod = '1';
@@ -228,6 +232,8 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
 
   Future<void> _postQueryRolloverDetailInfoRequest() async {
     Map<String, dynamic> param = getCommonParam();
+    param['disabledLondonPrivatePoolAmericanInstrument']=mainHomeState.orderId;
+    param['terminalSongHelpfulDeadDiamond']='01';
     Get.showLoading();
     var response =
         await HttpRequestManage.instance.postRolloverDetailInfo(param);
