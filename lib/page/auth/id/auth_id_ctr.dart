@@ -25,7 +25,6 @@ import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/utils/permission_util.dart';
 import 'package:rapicredito/utils/screen_util.dart';
-import 'package:rapicredito/utils/text_util.dart';
 import 'package:rapicredito/widget/custom_picker.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
 import 'package:rapicredito/widget/progress_hud_view.dart';
@@ -412,8 +411,7 @@ class AuthIdCtr extends BaseGetCtr {
           state.idBackPath = compressPath;
         }
       }
-
-      ProgressHUD.showError('Upload failed, please upload again-Carga fallida');
+      // ProgressHUD.showError('Upload failed, please upload again-Carga fallida');
     }
   }
 

@@ -11,71 +11,73 @@ class LoanDateTopView extends GetView<LoanMoneyDateCtr> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const Text(
-          'Monto del préstamo',
-          style: TextStyle(
-              fontSize: 18.0,
-              color: Color(0xff333333),
-              fontWeight: FontWeight.bold),
-        ),
-        Obx(() {
-          return GridView.builder(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 11,
-                  mainAxisSpacing: 11,
-                  childAspectRatio: 2.61),
-              itemBuilder: (context, index) {
-                return _buildMoneyItemView(index);
-              },
-              itemCount: controller.state.moneyList.length,
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              primary: false);
-        }),
-        const Padding(
-            padding: EdgeInsets.only(top: 8.0, left: 7.0),
-            child: Text(
-              'Obtén un descuento en tu próximo préstamo',
-              style: TextStyle(fontSize: 15.0, color: Color(0xffD53535)),
-            )),
-        Padding(
-            padding: const EdgeInsets.only(left: 7.0, bottom: 16.0),
-            child: Text(
-              '${controller.state.incrementStep.toString()}\$',
-              style: const TextStyle(
-                  fontSize: 15.0,
-                  color: Color(0xffD53535),
+    return Padding(
+        padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              'Monto del préstamo',
+              style: TextStyle(
+                  fontSize: 18.0,
+                  color: Color(0xff333333),
                   fontWeight: FontWeight.bold),
-            )),
-        const Text(
-          'Por favor, elija la fecha de reembolso',
-          style: TextStyle(
-              fontSize: 18.0,
-              color: Color(0xff333333),
-              fontWeight: FontWeight.bold),
-        ),
-        GridView.builder(
-            padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                crossAxisSpacing: 11,
-                mainAxisSpacing: 11,
-                childAspectRatio: 2.61),
-            itemBuilder: (context, index) {
-              return _buildDateItemView(index);
-            },
-            itemCount: controller.state.dateList.length,
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            primary: false),
-      ],
-    );
+            ),
+            Obx(() {
+              return GridView.builder(
+                  padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 11,
+                      mainAxisSpacing: 11,
+                      childAspectRatio: 2.61),
+                  itemBuilder: (context, index) {
+                    return _buildMoneyItemView(index);
+                  },
+                  itemCount: controller.state.moneyList.length,
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  primary: false);
+            }),
+            const Padding(
+                padding: EdgeInsets.only(top: 8.0, left: 7.0),
+                child: Text(
+                  'Obtén un descuento en tu próximo préstamo',
+                  style: TextStyle(fontSize: 15.0, color: Color(0xffD53535)),
+                )),
+            Padding(
+                padding: const EdgeInsets.only(left: 7.0, bottom: 16.0),
+                child: Text(
+                  '${controller.state.incrementStep.toString()}\$',
+                  style: const TextStyle(
+                      fontSize: 15.0,
+                      color: Color(0xffD53535),
+                      fontWeight: FontWeight.bold),
+                )),
+            const Text(
+              'Por favor, elija la fecha de reembolso',
+              style: TextStyle(
+                  fontSize: 18.0,
+                  color: Color(0xff333333),
+                  fontWeight: FontWeight.bold),
+            ),
+            GridView.builder(
+                padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 11,
+                    mainAxisSpacing: 11,
+                    childAspectRatio: 2.61),
+                itemBuilder: (context, index) {
+                  return _buildDateItemView(index);
+                },
+                itemCount: controller.state.dateList.length,
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                primary: false),
+          ],
+        ));
   }
 
   Widget _buildMoneyItemView(int index) {

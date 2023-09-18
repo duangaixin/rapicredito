@@ -40,7 +40,7 @@ class OrderInfoBean extends Object {
   String? disabledBusyEngine;
 
   @JsonKey(name: 'mexicanMedicalCan')
-  String? mexicanMedicalCan;
+  int? mexicanMedicalCan;
 
   @JsonKey(name: 'passiveHis')
   int? passiveHis;

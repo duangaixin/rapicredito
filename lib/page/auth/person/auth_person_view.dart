@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
+import 'package:rapicredito/page/auth/person/widget/custom_edit_email_view.dart';
 import 'package:rapicredito/page/auth/widget/common_auth_agreement_view.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/comon_section_title_view.dart';
@@ -54,15 +55,13 @@ class AuthPersonPage extends GetView<AuthPersonCtr> {
                             }),
                             CompositedTransformTarget(
                               link: controller.state.layerLink,
-                              child: CustomEditView(
+                              child: CustomEditEmailView(
                                 controller: controller.emailCtr,
                                 focusNode: controller.emailFocusNode,
                                 key: controller.state.emailKey,
                                 editTitle: 'Dirección de correo electrónico',
                                 hintText: 'Introducir texto',
                                 keyboardType: TextInputType.emailAddress,
-                                editStyle: const TextStyle(
-                                    color: Color(0xffD53535), fontSize: 15.0),
                                 inputFormatter: [
                                   FilteringTextInputFormatter.deny(
                                     RegExp(controller.state.regexNotNull),

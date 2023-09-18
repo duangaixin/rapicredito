@@ -19,7 +19,7 @@ OrderInfoBean _$OrderInfoBeanFromJson(Map<String, dynamic> json) =>
       json['luckyExperience'] as String?,
       (json['interestingComradeHairIntroduction'] as num?)?.toDouble(),
       json['disabledBusyEngine'] as String?,
-      json['mexicanMedicalCan'] as String?,
+      json['mexicanMedicalCan'] as int?,
       json['passiveHis'] as int?,
       json['endlessPie'] as String?,
       json['civilCompanyDirectionFondPercentage'] as String?,

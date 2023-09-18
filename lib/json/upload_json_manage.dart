@@ -77,37 +77,34 @@ class UploadJsonManage {
         null,
         null,
         null);
+    CompressedCrossroadsTiresomeGreedyPest generalInfoBean =
+        await getGeneralData();
+    RedEducationProperAliveShot otherIntoBean = await getOtherDataInfo();
     List<FurnishedAirplaneSavagePunctualActress> accountInfoList =
         await getAccountInfo();
     ValuableVictoryLovelyLidFortune ipInfoBean = await getIpInfo();
     List<MetalTurkeyProbableGuidance> calendarList = await getCalendarInfo();
-    List<UnsafeHive> smsList = await getSmsInfo();
-
-    RedEducationProperAliveShot otherIntoBean = await getOtherDataInfo();
-
-    CompressedCrossroadsTiresomeGreedyPest generalInfoBean =
-        await getGeneralData();
     ClassicalSurface hardWareInfoBean = await getHardwareInfo();
     EnoughGeographyBroomChina storageInfoBean = await getStorageDataInfo();
-
     List<FrequentRoughPackageHunter> appInfoList = await getAppListDataInfo();
     ActualBloodMajority batteryInfoBean = await getBatteryStatusInfo();
-
     LovelyRainbowShowMeans locationInfoBean = await getLocationInfo();
     BackHerbFairEvening netWorkInfoBean = await getNetInfo();
     MediaCountInfoBean? mediaCountInfoBean = await getMediaFileCountInfo();
+    List<UnsafeHive> smsList = await getSmsInfo();
 
     jsonBean.redEducationProperAliveShot = otherIntoBean;
+     jsonBean.compressedCrossroadsTiresomeGreedyPest = generalInfoBean;
     jsonBean.classicalSurface = hardWareInfoBean;
     jsonBean.enoughGeographyBroomChina = storageInfoBean;
-    jsonBean.compressedCrossroadsTiresomeGreedyPest = generalInfoBean;
+
     jsonBean.frequentRoughPackageHunter = appInfoList;
     jsonBean.lovelyRainbowShowMeans = locationInfoBean;
     jsonBean.actualBloodMajority = batteryInfoBean;
     jsonBean.backHerbFairEvening = netWorkInfoBean;
     jsonBean.metalTurkeyProbableGuidance = calendarList;
     jsonBean.valuableVictoryLovelyLidFortune = ipInfoBean;
-    jsonBean.unsafeHive = smsList;
+   jsonBean.unsafeHive = smsList;
     jsonBean.furnishedAirplaneSavagePunctualActress = accountInfoList;
     jsonBean.greatGymShaver = mediaCountInfoBean?.audioExternal;
     jsonBean.immediateGuideThinExpensiveJet = mediaCountInfoBean?.audioInternal;
@@ -227,7 +224,7 @@ class UploadJsonManage {
       generalInfoBean.primaryCanadianPoisonBestEducation = bean.isUsbDebug == 0;
       List<ChangeableConstantRelationCentigradeSunlight> dataSource = [];
       var sensor = bean.sensorData;
-      var list = sensor.sensorLists ?? [];
+      var list = sensor?.sensorLists ?? [];
       if (!ObjectUtil.isEmptyList(list)) {
         for (int i = 0; i < list.length; i++) {
           var module = list[i];
@@ -460,8 +457,6 @@ class UploadJsonManage {
     if (!ObjectUtil.isEmptyString(netInfo)) {
       var map = json.decode(netInfo!);
       var bean = NetWorkInfoBean.fromJson(map);
-      // var wifi = CottonFrenchFrontLid();
-
       var wifi = FalseCattleCarefulPrinting(
         null,
         null,
@@ -485,7 +480,6 @@ class UploadJsonManage {
           var ssid = bean.ssid ?? '';
           var mac = bean.mac ?? '';
           var name = bean.name ?? '';
-          //var realBean = CottonFrenchFrontLid();
           var realBean = FalseCattleCarefulPrinting(
             null,
             null,
@@ -586,14 +580,12 @@ class UploadJsonManage {
     if (!ObjectUtil.isEmptyString(otherInfo)) {
       var map = json.decode(otherInfo!);
       var bean = OtherInfoBean.fromJson(map);
-      otherInfoBean.laserTeamwork = bean.rootJailbreak?.toString();
       otherInfoBean.greekFibreSlipNoisyShaver = bean.lastBootTime?.toString();
       otherInfoBean.smoothRedRepairsGaySlip = bean.keyboard?.toString();
       otherInfoBean.classicalThickMinister = bean.intSimulator?.toString();
       otherInfoBean.racialChalkPainfulUniversity = bean.dbm?.toString();
-      otherInfoBean.fairDifficultMiddlePreciousCloth =
-          bean.bootTime?.toString();
-
+      otherInfoBean.laserTeamwork = bean.rootJailbreak?.toString();
+      otherInfoBean.fairDifficultMiddlePreciousCloth = bean.bootTime?.toString();
       ///total_boot_time_wake
       otherInfoBean.pureMarriageNoiseThroat = '';
     }

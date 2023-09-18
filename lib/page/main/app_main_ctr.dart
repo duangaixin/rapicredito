@@ -18,7 +18,6 @@ import 'package:rapicredito/page/main/order/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/utils/object_util.dart';
-import 'package:rapicredito/widget/progress_hud_view.dart';
 
 class AppMainCtr extends BaseGetCtr {
   AppMainCtr();
@@ -109,19 +108,13 @@ class AppMainCtr extends BaseGetCtr {
     var bean = await UploadJsonManage.instance.collectAllData();
     var jsonStr = json.encode(bean);
     var aesStr = await MethodChannelDevicesinfo.getAesStr(jsonStr);
-    if(!ObjectUtil.isEmptyString(aesStr)){
-    //   var bytes=  utf8.encode(aesStr!);
-    //  var encodeBytes=  Deflate(bytes,level: Deflate.DEFAULT_COMPRESSION).getBytes();
-    // var decodeBytes= Inflate(encodeBytes).getBytes();
-    //  var realStr=String.fromCharCodes(decodeBytes);
+    if (!ObjectUtil.isEmptyString(aesStr)) {
       var response = await HttpRequestManage.instance.postUploadBigJson(aesStr);
       if (response.isSuccess()) {
-          ProgressHUD.showInfo('信息采集成功');
         return Future.value(true);
       } else {
         NetException.dealAllException(response);
         return Future.value(false);
-
       }
     }
     return Future.value(false);

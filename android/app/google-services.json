@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1055631205721",
+    "project_id": "rapicredito-36559",
+    "storage_bucket": "rapicredito-36559.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1055631205721:android:0bb8cae93dfd95f9db9848",
+        "android_client_info": {
+          "package_name": "com.loan.credito.cash.credit.efectivo.profin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrHeH0oBnG__3IjK2d3HW-dsCHHs5ZXVs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

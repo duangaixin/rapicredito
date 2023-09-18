@@ -24,8 +24,8 @@ if (flutterVersionName == null) {
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
-//apply plugin: 'com.google.gms.google-services'
-//apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 static def getTime() {
     return new Date().format("yyyyMMddHHmmss", TimeZone.getTimeZone("GMT+08:00"))
@@ -105,9 +105,9 @@ android {
             zipAlignEnabled true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-//            firebaseCrashlytics {
-//                mappingFileUploadEnabled false
-//            }
+            firebaseCrashlytics {
+                mappingFileUploadEnabled false
+            }
         }
         debug {
             minifyEnabled false
@@ -116,9 +116,9 @@ android {
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
-            //            firebaseCrashlytics {
-//                mappingFileUploadEnabled false
-//            }
+            firebaseCrashlytics {
+                mappingFileUploadEnabled false
+            }
         }
     }
 
@@ -150,7 +150,7 @@ dependencies {
     implementation 'io.branch.sdk.android:library:5.+'
     implementation 'androidx.browser:browser:1.0.0'
     implementation 'com.google.android.gms:play-services-ads-identifier:17.1.0+'
-//    implementation 'com.google.firebase:firebase-crashlytics'
-//    implementation 'com.google.firebase:firebase-analytics'
-
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation platform('com.google.firebase:firebase-bom:31.2.0')
 }

@@ -43,7 +43,7 @@ class OtherInfoBean extends Object {
   int? rootJailbreak;
 
   @JsonKey(name: 'sensorData')
-  SensorData sensorData;
+  SensorData? sensorData;
 
   @JsonKey(name: 'intSimulator')
   int? intSimulator;

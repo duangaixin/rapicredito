@@ -20,7 +20,9 @@ OtherInfoBean _$OtherInfoBeanFromJson(Map<String, dynamic> json) =>
       json['last_boot_time'] as int?,
       json['ringer_mode'] as int?,
       json['root_jailbreak'] as int?,
-      SensorData.fromJson(json['sensorData'] as Map<String, dynamic>),
+      json['sensorData'] == null
+          ? null
+          : SensorData.fromJson(json['sensorData'] as Map<String, dynamic>),
       json['intSimulator'] as int?,
       json['vpn_address'] as String?,
     );

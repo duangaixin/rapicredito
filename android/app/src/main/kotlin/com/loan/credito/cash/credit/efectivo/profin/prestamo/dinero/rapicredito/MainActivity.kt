@@ -112,13 +112,10 @@ class MainActivity : FlutterActivity() {
             }
         }
 
-
         if (requestCode == PICK_CODE_REQUEST_CODE && resultCode == RESULT_OK && null != data) {
             val selectedImage: Uri? = data.data
             val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-            Log.e("duanxin","----111111")
             selectedImage?.let {
-                Log.e("duanxin",selectedImage.toString()+"----2222")
                 val cursor: Cursor? = contentResolver.query(
                     it,
                     filePathColumn, null, null, null
@@ -128,13 +125,10 @@ class MainActivity : FlutterActivity() {
                     val columnIndex = cursor.getColumnIndex(filePathColumn[0])
                     val picturePath = cursor.getString(columnIndex)
                     cursor.close()
-                    Log.e("duanxin",picturePath .toString()+"----333")
                     backResult(picturePath)
                 }
             }
-
         }
-
     }
 
     private fun backResult(path: String?) {
@@ -177,6 +171,4 @@ class MainActivity : FlutterActivity() {
         currentPhotoPath = imageFile.absolutePath
         return imageFile
     }
-
-
 }

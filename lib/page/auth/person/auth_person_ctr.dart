@@ -253,6 +253,7 @@ class AuthPersonCtr extends BaseGetCtr {
       return false;
     }
     if (!GetUtils.isEmail(emailCtr.text.strRvSpace())) {
+      ProgressHUD.showInfo('Por favor, introduzca un correo electrónico correcto');
       return false;
     }
     return true;

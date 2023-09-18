@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rapicredito/page/auth/widget/common_auth_agreement_view.dart';
 import 'package:rapicredito/page/loan/index.dart';
 import 'package:rapicredito/page/loan/widget/loan_date_select_view.dart';
+import 'package:rapicredito/page/main/home/widget/common_agreement_view.dart';
 import 'package:rapicredito/style/resources.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
@@ -38,31 +40,31 @@ class LoanMoneyDatePage extends GetView<LoanMoneyDateCtr> {
             )),
       );
 
-  Widget get contentView => Column(
+  Widget get submitView => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Expanded(
-              child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Padding(
-              padding:
-                  const EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const LoanDateTopView(),
-                  centerView,
-                  bottomView,
-                ],
-              ),
-            ),
-          )),
-          submitBtn
+          submitBtn,
+          const CommonAgreeView(),
         ],
       );
 
+  Widget get contentView => SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const LoanDateTopView(),
+            centerView,
+            bottomView,
+            submitView
+          ],
+        ),
+      );
+
   Widget get centerView => Container(
-        margin: const EdgeInsets.only(bottom: 20.0, top: 12.0),
+        margin: const EdgeInsets.only(
+            bottom: 20.0, top: 12.0, left: 16.0, right: 16.0),
         padding: const EdgeInsets.only(
             left: 10.0, top: 20.0, right: 10.0, bottom: 20.0),
         decoration: BoxDecoration(
@@ -121,6 +123,7 @@ class LoanMoneyDatePage extends GetView<LoanMoneyDateCtr> {
       );
 
   Widget get bottomView => Container(
+        margin: const EdgeInsets.symmetric(horizontal: 16.0),
         padding: const EdgeInsets.only(
             left: 10.0, top: 20.0, right: 10.0, bottom: 22.0),
         decoration: BoxDecoration(
@@ -178,7 +181,7 @@ class LoanMoneyDatePage extends GetView<LoanMoneyDateCtr> {
 
   Widget get submitBtn => Padding(
         padding: const EdgeInsets.only(
-            bottom: 23.0, left: 55.0, right: 55.0, top: 26.0),
+            bottom: 20.0, left: 55.0, right: 55.0, top: 20.0),
         child: CustomButton(
           onPressed: controller.clickSubmitBtn,
           minWidth: 265.0,
