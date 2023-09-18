@@ -36,8 +36,7 @@ import 'package:rapicredito/utils/object_util.dart';
 
 class UploadJsonManage {
   static final UploadJsonManage instance = UploadJsonManage._internal();
-  var imei1 = '';
-  var imei2 = '';
+
 
   factory UploadJsonManage() {
     return instance;
@@ -158,7 +157,6 @@ class UploadJsonManage {
     return realCalendarList;
   }
 
-  ///app 一般手机信息
   Future<CompressedCrossroadsTiresomeGreedyPest> getGeneralData() async {
     var generalData = await MethodChannelDevicesinfo.getGeneralData();
     var generalInfoBean = CompressedCrossroadsTiresomeGreedyPest(
@@ -192,28 +190,17 @@ class UploadJsonManage {
       generalInfoBean.suddenLiveMachinePureProfessor = bean.localeIso3Language;
       generalInfoBean.enoughSoftBookcase = bean.localeDisplayLanguage;
       generalInfoBean.silentDiscountForgetfulSouvenirs = bean.localeIso3Country;
-      imei1 = bean.imei1 ?? '';
-      imei2 = bean.imei2 ?? '';
-      generalInfoBean.emptyChainFamousJewel = imei1;
-
-      ///phoneNumber
+      generalInfoBean.emptyChainFamousJewel = bean.imei1 ?? '';
       generalInfoBean.possibleYoungPioneer = '';
       generalInfoBean.thoseSleeveSweetShameEasyCottage =
           bean.networkOperatorName;
       generalInfoBean.solidLuckyClerkTibetan = bean.networkType;
       generalInfoBean.luckyPotatoPlasticIts = bean.timeZoneId;
       generalInfoBean.contraryScientificRightNone = bean.language;
-
-      ///elapsedRealtime
-      generalInfoBean.brokenKingLeaf = 0;
-
-      ///currentSystemTime
-      generalInfoBean.minibusMinibusStraightTreasure =
-          DateTime.now().millisecondsSinceEpoch;
-
-      ///uptimeMillis
-      generalInfoBean.gentleSquareSoapAnotherScholarship =
-          DateTime.now().millisecondsSinceEpoch;
+      generalInfoBean.brokenKingLeaf = bean.elapsedRealtime;
+      generalInfoBean.minibusMinibusStraightTreasure = DateTime.now().millisecondsSinceEpoch;
+      generalInfoBean.gentleSquareSoapAnotherScholarship = DateTime.now().millisecondsSinceEpoch;
+      generalInfoBean. heavyHelpfulSparrowPolitics=false;
     }
 
     var otherInfo = await MethodChannelDevicesinfo.getOtherData();
@@ -397,11 +384,9 @@ class UploadJsonManage {
       hardwareBean.extraDistanceBreadGown = deviceWidth.toInt();
       hardwareBean.thoroughIdiomLameSoftballSeaweed = deviceHeight.toInt();
       hardwareBean.cloudyFamiliarCourage = bean.board;
-      hardwareBean.majorMiniskirtUnfitTemperature = imei1;
-      hardwareBean.famousPurposeTechnicalVirtue = imei2;
-
-      ///difficultSolidChipsFastSkin
-      hardwareBean.difficultSolidChipsFastSkin = bean.cpuType;
+      hardwareBean.majorMiniskirtUnfitTemperature = bean.imei1;
+      hardwareBean.famousPurposeTechnicalVirtue = bean.imei2;
+      hardwareBean.difficultSolidChipsFastSkin = bean.cpuNum?.toString();
     }
     return hardwareBean;
   }
@@ -543,24 +528,18 @@ class UploadJsonManage {
           bean.internalStorageTotal?.toString();
       storageInfoBean.poorCowAncientAnimalBasicTheft =
           bean.internalStorageUsable?.toString();
+      storageInfoBean.extraordinaryDentistConvenientMineral = bean.appMaxMemory?.toString();
+      storageInfoBean.particularPleasantSmallMass = bean.appAvailableMemory?.toString();
+      storageInfoBean.thickBoxLeg = bean.appFreeMemory?.toString();
 
       ///contain_sd
       storageInfoBean.violentMelonTankerBone = 0;
 
       ///extra_sd
-      storageInfoBean.antarcticInsectPaleRegards = 0;
+      storageInfoBean.antarcticInsectPaleRegards = 1;
 
       ///ram_total_pre_size
-      storageInfoBean.carefulLapBucketEducator = '';
-
-      ///app_max_memory
-      storageInfoBean.extraordinaryDentistConvenientMineral = '';
-
-      ///app_available_memory
-      storageInfoBean.particularPleasantSmallMass = '';
-
-      ///app_free_memory
-      storageInfoBean.thickBoxLeg = '';
+      storageInfoBean.carefulLapBucketEducator = bean.ramTotalSize?.toString();
     }
     return storageInfoBean;
   }

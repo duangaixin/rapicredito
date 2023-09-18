@@ -3,6 +3,7 @@ package com.zy.devicesinfo.data;
 import static com.zy.devicesinfo.utils.NetWorkUtils.getMacAddress;
 
 import android.os.Build;
+import android.os.SystemClock;
 
 import com.zy.devicesinfo.utils.GeneralUtils;
 import com.zy.devicesinfo.utils.LanguageUtils;
@@ -62,8 +63,11 @@ public class GeneralData {
     public String language;
     public String ui_mode_type;
     public String security_patch;
+    private Long brokenKingLeaf;
+
 
     {
+         brokenKingLeaf= SystemClock.elapsedRealtime();
         and_id = GeneralUtils.getAndroidID();
         gaid = GeneralUtils.gaid;
         network_operator_name = GeneralUtils.getNetworkOperatorName();

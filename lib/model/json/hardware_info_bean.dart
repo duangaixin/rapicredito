@@ -2,10 +2,14 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'hardware_info_bean.g.dart';
 
-
 @JsonSerializable()
 class HardwareInfoBean extends Object {
-
+  @JsonKey(name: 'imei1')
+  String? imei1;
+  @JsonKey(name: 'imei2')
+  String? imei2;
+  @JsonKey(name: 'cpu_num')
+  int? cpuNum;
   @JsonKey(name: 'abis')
   String? abis;
 
@@ -108,12 +112,48 @@ class HardwareInfoBean extends Object {
   @JsonKey(name: 'user')
   String? user;
 
-  HardwareInfoBean(this.abis,this.baseOs,this.basebandVer,this.board,this.bootloader,this.brand,this.cpuAbi,this.cpuAbi2,this.cpuCur,this.cpuMax,this.cpuMin,this.cpuType,this.device,this.display,this.fingerPrint,this.hardware,this.host,this.id,this.isTablet,this.manufacturerName,this.model,this.physicalSize,this.product,this.radioVersion,this.release,this.resolution,this.screenDensity,this.screenDensityDpi,this.sdkVersionCode,this.serialNumber,this.tags,this.time,this.type,this.user,);
+  HardwareInfoBean(
+    this.imei1,
+    this.imei2,
+    this.cpuNum,
+    this.abis,
+    this.baseOs,
+    this.basebandVer,
+    this.board,
+    this.bootloader,
+    this.brand,
+    this.cpuAbi,
+    this.cpuAbi2,
+    this.cpuCur,
+    this.cpuMax,
+    this.cpuMin,
+    this.cpuType,
+    this.device,
+    this.display,
+    this.fingerPrint,
+    this.hardware,
+    this.host,
+    this.id,
+    this.isTablet,
+    this.manufacturerName,
+    this.model,
+    this.physicalSize,
+    this.product,
+    this.radioVersion,
+    this.release,
+    this.resolution,
+    this.screenDensity,
+    this.screenDensityDpi,
+    this.sdkVersionCode,
+    this.serialNumber,
+    this.tags,
+    this.time,
+    this.type,
+    this.user,
+  );
 
-  factory HardwareInfoBean.fromJson(Map<String, dynamic> srcJson) => _$HardwareInfoBeanFromJson(srcJson);
+  factory HardwareInfoBean.fromJson(Map<String, dynamic> srcJson) =>
+      _$HardwareInfoBeanFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$HardwareInfoBeanToJson(this);
-
 }
-
-

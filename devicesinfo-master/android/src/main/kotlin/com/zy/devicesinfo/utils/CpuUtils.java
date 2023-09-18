@@ -1,13 +1,50 @@
 package com.zy.devicesinfo.utils;
 
+import android.os.Build;
+
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 
 public class CpuUtils {
-    
+    private static final FileFilter CPU_FILTER = new FileFilter() {
+        @Override
+        public boolean accept(File pathname) {
+            String path = pathname.getName();
+            //regex is slow, so checking char by char.
+            if (path.startsWith("cpu")) {
+                for (int i = 3; i < path.length(); i++) {
+                    if (path.charAt(i) < '0' || path.charAt(i) > '9') {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
+    };
+    /**
+     * @return 获取CPU名字
+     */
+    public static int getCpuNum() {
+
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.GINGERBREAD_MR1) {
+            return 1;
+        }
+        int cores;
+        try {
+            cores = new File("/sys/devices/system/cpu/").listFiles(CPU_FILTER).length;
+        } catch (SecurityException e) {
+            cores = 1;
+        } catch (NullPointerException e) {
+            cores = 1;
+        }
+        return cores;
+    }
     /**
      * @return 获取CPU名字
      */

@@ -75,7 +75,8 @@ public class GeneralUtils {
                 UtilsApp.getApp().getContentResolver(),
                 Settings.Secure.ANDROID_ID
         );
-        if ("9774d56d682e549c".equals(id)) return "";
+        if ("9774d56d682e549c".equals(id))
+            return "";
         return id == null ? "" : id;
     }
 
@@ -91,7 +92,8 @@ public class GeneralUtils {
 
     public static String getSimOperatorByMnc() {
         String operator = getTelephonyManager().getSimOperator();
-        if (operator == null) return "";
+        if (operator == null)
+            return "";
         switch (operator) {
             case "46000":
             case "46002":
@@ -208,11 +210,14 @@ public class GeneralUtils {
     private static boolean isEthernet() {
         final ConnectivityManager cm =
                 (ConnectivityManager) UtilsApp.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (cm == null) return false;
+        if (cm == null)
+            return false;
         final NetworkInfo info = cm.getNetworkInfo(ConnectivityManager.TYPE_ETHERNET);
-        if (info == null) return false;
+        if (info == null)
+            return false;
         NetworkInfo.State state = info.getState();
-        if (null == state) return false;
+        if (null == state)
+            return false;
         return state == NetworkInfo.State.CONNECTED || state == NetworkInfo.State.CONNECTING;
     }
 
@@ -369,7 +374,8 @@ public class GeneralUtils {
     private static String getMinOne(String s0, String s1) {
         boolean empty0 = TextUtils.isEmpty(s0);
         boolean empty1 = TextUtils.isEmpty(s1);
-        if (empty0 && empty1) return "";
+        if (empty0 && empty1)
+            return "";
         if (!empty0 && !empty1) {
             if (s0.compareTo(s1) <= 0) {
                 return s0;
@@ -377,7 +383,8 @@ public class GeneralUtils {
                 return s1;
             }
         }
-        if (!empty0) return s0;
+        if (!empty0)
+            return s0;
         return s1;
     }
 
@@ -466,14 +473,15 @@ public class GeneralUtils {
      * @return
      */
     public static String getIMEI(int slotId) {
+        String imei = "";
         try {
             TelephonyManager manager = getTelephonyManager();
             Method method = manager.getClass().getMethod("getImei", int.class);
-            String imei = (String) method.invoke(manager, slotId);
-            return imei;
+            imei = (String) method.invoke(manager, slotId);
         } catch (Exception e) {
             return "";
         }
+        return imei;
     }
 
     public static void getGaid() {

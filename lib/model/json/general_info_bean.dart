@@ -77,8 +77,9 @@ class GeneralInfoBean extends Object {
 
   @JsonKey(name: 'uuid')
   String? uuid;
-
-  GeneralInfoBean(this.andId,this.bluetoothMac,this.cid,this.dns,this.gaid,this.imei1,this.imei2,this.language,this.localeDisplayLanguage,this.localeIso3Country,this.localeIso3Language,this.mac,this.mcc,this.meid,this.mnc,this.networkOperator,this.networkOperatorName,this.networkType,this.phoneType,this.securityPatch,this.slotCount,this.timeZoneId,this.uiModeType,this.uuid,);
+  @JsonKey(name: 'elapsedRealtime')
+  int? elapsedRealtime;
+  GeneralInfoBean(this.andId,this.bluetoothMac,this.cid,this.dns,this.gaid,this.imei1,this.imei2,this.language,this.localeDisplayLanguage,this.localeIso3Country,this.localeIso3Language,this.mac,this.mcc,this.meid,this.mnc,this.networkOperator,this.networkOperatorName,this.networkType,this.phoneType,this.securityPatch,this.slotCount,this.timeZoneId,this.uiModeType,this.uuid,this.elapsedRealtime);
 
   factory GeneralInfoBean.fromJson(Map<String, dynamic> srcJson) => _$GeneralInfoBeanFromJson(srcJson);
 

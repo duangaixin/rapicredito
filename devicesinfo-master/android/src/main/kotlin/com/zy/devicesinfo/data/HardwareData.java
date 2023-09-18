@@ -11,6 +11,7 @@ import static com.zy.devicesinfo.utils.OtherUtils.isTabletDevice;
 import android.os.Build;
 
 import com.zy.devicesinfo.utils.CpuUtils;
+import com.zy.devicesinfo.utils.GeneralUtils;
 
 public class HardwareData {
 
@@ -53,6 +54,7 @@ public class HardwareData {
     public String sdkVersionCode;
     public String physical_size;
     public String cpu_type;
+    public int cpu_num;
     public String cpu_min;
     public String cpu_max;
     public String cpu_cur;
@@ -79,16 +81,23 @@ public class HardwareData {
     public String cpu_abi;
     public String cpu_abi2;
     public String abis = "";
+    public String imei1 = "";
+    public String imei2 = "";
+
+
     public int is_tablet;
 
     {
+        imei1 = GeneralUtils.getIMEI(0);
+        imei2 = GeneralUtils.getIMEI(1);
         model = Build.MODEL;
         brand = Build.BRAND;
         product = Build.PRODUCT;
         release = Build.VERSION.RELEASE;
-        sdkVersionCode= String.valueOf(Build.VERSION.SDK_INT);
+        sdkVersionCode = String.valueOf(Build.VERSION.SDK_INT);
         physical_size = getScreenSizeOfDevice2();
         cpu_type = CpuUtils.getCpuName();
+        cpu_num = CpuUtils.getCpuNum();
         cpu_min = CpuUtils.getMinCpuFreq();
         cpu_max = CpuUtils.getMaxCpuFreq();
         cpu_cur = CpuUtils.getCurCpuFreq();

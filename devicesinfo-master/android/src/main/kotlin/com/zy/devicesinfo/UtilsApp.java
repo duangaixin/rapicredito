@@ -9,7 +9,6 @@ import android.util.Log;
 import com.zy.devicesinfo.broadcast.BatteryBroadcastReceiver;
 import com.zy.devicesinfo.data.BatteryStatusData;
 import com.zy.devicesinfo.utils.GeneralUtils;
-import com.zy.devicesinfo.data.BatteryStatusData;
 
 public class UtilsApp {
 
@@ -39,8 +38,7 @@ public class UtilsApp {
         if (sApp == null) {
             sApp = app;
             GeneralUtils.getGaid();
-            initBoadcast();
-            return;
+            initBroadcaster();
         }
     }
 
@@ -51,7 +49,7 @@ public class UtilsApp {
         return sApp;
     }
 
-    public static void initBoadcast() {
+    public static void initBroadcaster() {
         batteryBroadcastReceiver = new BatteryBroadcastReceiver();
         IntentFilter intent = new IntentFilter();
         intent.addAction(Intent.ACTION_BATTERY_CHANGED);
@@ -60,7 +58,7 @@ public class UtilsApp {
     }
 
 
-    public static void removeBoadcast() {
+    public static void removeBroadcaster() {
         if (mRegisterTag) {
             UtilsApp.getApp().unregisterReceiver(batteryBroadcastReceiver);
             mRegisterTag = false;

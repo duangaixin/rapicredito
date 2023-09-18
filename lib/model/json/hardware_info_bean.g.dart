@@ -8,6 +8,9 @@ part of 'hardware_info_bean.dart';
 
 HardwareInfoBean _$HardwareInfoBeanFromJson(Map<String, dynamic> json) =>
     HardwareInfoBean(
+      json['imei1'] as String?,
+      json['imei2'] as String?,
+      json['cpu_num'] as int?,
       json['abis'] as String?,
       json['base_os'] as String?,
       json['baseband_ver'] as String?,
@@ -46,6 +49,9 @@ HardwareInfoBean _$HardwareInfoBeanFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$HardwareInfoBeanToJson(HardwareInfoBean instance) =>
     <String, dynamic>{
+      'imei1': instance.imei1,
+      'imei2': instance.imei2,
+      'cpu_num': instance.cpuNum,
       'abis': instance.abis,
       'base_os': instance.baseOs,
       'baseband_ver': instance.basebandVer,

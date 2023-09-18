@@ -223,7 +223,8 @@ public class OtherUtils {
         String[] paths = {"/system/app/Superuser.apk", "/sbin/su", "/system/bin/su", "/system/xbin/su", "/data/local/xbin/su", "/data/local/bin/su", "/system/sd/xbin/su",
                 "/system/bin/failsafe/su", "/data/local/su", "/su/bin/su"};
         for (String path : paths) {
-            if (new File(path).exists()) return true;
+            if (new File(path).exists())
+                return true;
         }
         return false;
     }
@@ -233,12 +234,14 @@ public class OtherUtils {
         try {
             process = Runtime.getRuntime().exec(new String[]{"/system/xbin/which", "su"});
             BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            if (in.readLine() != null) return true;
+            if (in.readLine() != null)
+                return true;
             return false;
         } catch (Throwable t) {
             return false;
         } finally {
-            if (process != null) process.destroy();
+            if (process != null)
+                process.destroy();
         }
     }
 
@@ -258,7 +261,8 @@ public class OtherUtils {
                 || Build.MANUFACTURER.contains("Genymotion")
                 || (Build.BRAND.startsWith("generic") && Build.DEVICE.startsWith("generic"))
                 || "google_sdk".equals(Build.PRODUCT);
-        if (checkProperty) return 1;
+        if (checkProperty)
+            return 1;
         String operatorName = "";
         TelephonyManager tm = (TelephonyManager) UtilsApp.getApp().getSystemService(Context.TELEPHONY_SERVICE);
         if (tm != null) {
@@ -268,14 +272,16 @@ public class OtherUtils {
             }
         }
         boolean checkOperatorName = operatorName.toLowerCase().equals("android");
-        if (checkOperatorName) return 1;
+        if (checkOperatorName)
+            return 1;
 
         String url = "tel:" + "123456";
         Intent intent = new Intent();
         intent.setData(Uri.parse(url));
         intent.setAction(Intent.ACTION_DIAL);
         boolean checkDial = intent.resolveActivity(UtilsApp.getApp().getPackageManager()) == null;
-        if (checkDial) return 1;
+        if (checkDial)
+            return 1;
         return 0;
     }
 
@@ -468,7 +474,22 @@ public class OtherUtils {
     public static long getInternalAvailableSize() {
         return getFsAvailableSize(Environment.getDataDirectory().getAbsolutePath());
     }
+    public static long getAppMaxMemory() {
+        //最大分配内存获取方法
+        long maxMemory =  (Runtime.getRuntime().maxMemory() );
+        return maxMemory;
+    }
+    public static long getAppAvailableMemory() {
+        //最大分配内存获取方法
+        long totalMemory =  Runtime.getRuntime().totalMemory() ;
+        return totalMemory;
+    }
 
+    public static long getAppFreeMemory() {
+        //最大分配内存获取方法
+        long freeMemory = Runtime.getRuntime().freeMemory();
+        return freeMemory;
+    }
     public static int getContactGroupCount() {
         if (ActivityCompat.checkSelfPermission(UtilsApp.getApp(), Manifest.permission.READ_CONTACTS)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -494,6 +515,35 @@ public class OtherUtils {
         return mi.availMem;
     }
 
+    public static long getRamTotalSize() {
+        //获得ActivityManager服务的对象
+        ActivityManager mActivityManager = (ActivityManager) UtilsApp.getApp().getSystemService(Context.ACTIVITY_SERVICE);
+        //获得MemoryInfo对象
+        ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
+        //获得系统可用内存，保存在MemoryInfo对象上
+        mActivityManager.getMemoryInfo(memoryInfo);
+        long memSize = memoryInfo.totalMem;
+        //字符类型转换
+        //        String availMemStr = formateFileSize(context, memSize);
+        return memSize;
+
+    }
+
+    public static boolean externalMemoryAvailable() {
+        return Environment.getExternalStorageState().equals("mounted");
+    }
+
+    public static long getRamUseAbleSize() {
+        if (externalMemoryAvailable()) {
+            File path = Environment.getExternalStorageDirectory();
+            StatFs stat = new StatFs(path.getPath());
+            long blockSize = (long) stat.getBlockSize();
+            long totalBlocks = (long) stat.getBlockCount();
+            return totalBlocks * blockSize;
+        } else {
+            return -1L;
+        }
+    }
 
     /**
      * 获取android总运行内存大小
@@ -522,7 +572,8 @@ public class OtherUtils {
 
 
     public static long getFsTotalSize(String anyPathInFs) {
-        if (TextUtils.isEmpty(anyPathInFs)) return 0;
+        if (TextUtils.isEmpty(anyPathInFs))
+            return 0;
         StatFs statFs = new StatFs(anyPathInFs);
         long blockSize;
         long totalSize;
@@ -537,7 +588,8 @@ public class OtherUtils {
     }
 
     public static long getFsAvailableSize(final String anyPathInFs) {
-        if (TextUtils.isEmpty(anyPathInFs)) return 0;
+        if (TextUtils.isEmpty(anyPathInFs))
+            return 0;
         StatFs statFs = new StatFs(anyPathInFs);
         long blockSize;
         long availableSize;
