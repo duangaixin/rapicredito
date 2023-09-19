@@ -60,21 +60,23 @@ class HomeLoanMakingRepaymentView extends GetView<MainHomeCtr> {
           child: Container(
               alignment: Alignment.center,
               margin: const EdgeInsets.only(top: 20.0),
-              child: CustomButton(
-                onPressed: controller.clickRolloverBtn,
-                minWidth: 152.0,
-                minHeight: 46.0,
-                backgroundColor: Colors.white,
-                disabledBackgroundColor: Colors.white,
-                fontSize: 15.0,
-                radius: 8.0,
-                text:
-                    'Prórroga de pago\nde ${controller.mainHomeState.rolloverPayDay} días',
-                textAlign: TextAlign.center,
-                textColor: const Color(0xff333333),
-                fontWeight: FontWeight.bold,
-                side: const BorderSide(color: Color(0xff333333), width: 1.0),
-              )),
+              child: Obx(() {
+                return CustomButton(
+                  onPressed: controller.clickRolloverBtn,
+                  minWidth: 152.0,
+                  minHeight: 46.0,
+                  backgroundColor: Colors.white,
+                  disabledBackgroundColor: Colors.white,
+                  fontSize: 15.0,
+                  radius: 8.0,
+                  text:
+                      'Prórroga de pago\nde ${controller.mainHomeState.rolloverPayDay} días',
+                  textAlign: TextAlign.center,
+                  textColor: const Color(0xff333333),
+                  fontWeight: FontWeight.bold,
+                  side: const BorderSide(color: Color(0xff333333), width: 1.0),
+                );
+              })),
         );
       });
 
