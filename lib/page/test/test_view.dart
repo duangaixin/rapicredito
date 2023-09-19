@@ -77,7 +77,7 @@ class TestPage extends GetView<TestCtr> {
                   onPressed: () async {
                     var bean = await UploadJsonManage.instance.collectAllData();
                     var jsonStr = json.encode(bean);
-
+                    print(jsonStr+'----');
                   }),
               CustomButton(
                   text: '设置页面',

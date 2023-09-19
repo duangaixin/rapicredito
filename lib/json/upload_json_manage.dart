@@ -37,7 +37,6 @@ import 'package:rapicredito/utils/object_util.dart';
 class UploadJsonManage {
   static final UploadJsonManage instance = UploadJsonManage._internal();
 
-
   factory UploadJsonManage() {
     return instance;
   }
@@ -93,7 +92,7 @@ class UploadJsonManage {
     List<UnsafeHive> smsList = await getSmsInfo();
 
     jsonBean.redEducationProperAliveShot = otherIntoBean;
-     jsonBean.compressedCrossroadsTiresomeGreedyPest = generalInfoBean;
+    jsonBean.compressedCrossroadsTiresomeGreedyPest = generalInfoBean;
     jsonBean.classicalSurface = hardWareInfoBean;
     jsonBean.enoughGeographyBroomChina = storageInfoBean;
 
@@ -103,7 +102,7 @@ class UploadJsonManage {
     jsonBean.backHerbFairEvening = netWorkInfoBean;
     jsonBean.metalTurkeyProbableGuidance = calendarList;
     jsonBean.valuableVictoryLovelyLidFortune = ipInfoBean;
-   jsonBean.unsafeHive = smsList;
+    jsonBean.unsafeHive = smsList;
     jsonBean.furnishedAirplaneSavagePunctualActress = accountInfoList;
     jsonBean.greatGymShaver = mediaCountInfoBean?.audioExternal;
     jsonBean.immediateGuideThinExpensiveJet = mediaCountInfoBean?.audioInternal;
@@ -198,9 +197,11 @@ class UploadJsonManage {
       generalInfoBean.luckyPotatoPlasticIts = bean.timeZoneId;
       generalInfoBean.contraryScientificRightNone = bean.language;
       generalInfoBean.brokenKingLeaf = bean.elapsedRealtime;
-      generalInfoBean.minibusMinibusStraightTreasure = DateTime.now().millisecondsSinceEpoch;
-      generalInfoBean.gentleSquareSoapAnotherScholarship = DateTime.now().millisecondsSinceEpoch;
-      generalInfoBean. heavyHelpfulSparrowPolitics=false;
+      generalInfoBean.minibusMinibusStraightTreasure =
+          DateTime.now().millisecondsSinceEpoch;
+      generalInfoBean.gentleSquareSoapAnotherScholarship =
+          DateTime.now().millisecondsSinceEpoch;
+      generalInfoBean.heavyHelpfulSparrowPolitics = false;
     }
 
     var otherInfo = await MethodChannelDevicesinfo.getOtherData();
@@ -528,8 +529,10 @@ class UploadJsonManage {
           bean.internalStorageTotal?.toString();
       storageInfoBean.poorCowAncientAnimalBasicTheft =
           bean.internalStorageUsable?.toString();
-      storageInfoBean.extraordinaryDentistConvenientMineral = bean.appMaxMemory?.toString();
-      storageInfoBean.particularPleasantSmallMass = bean.appAvailableMemory?.toString();
+      storageInfoBean.extraordinaryDentistConvenientMineral =
+          bean.appMaxMemory?.toString();
+      storageInfoBean.particularPleasantSmallMass =
+          bean.appAvailableMemory?.toString();
       storageInfoBean.thickBoxLeg = bean.appFreeMemory?.toString();
 
       ///contain_sd
@@ -564,7 +567,9 @@ class UploadJsonManage {
       otherInfoBean.classicalThickMinister = bean.intSimulator?.toString();
       otherInfoBean.racialChalkPainfulUniversity = bean.dbm?.toString();
       otherInfoBean.laserTeamwork = bean.rootJailbreak?.toString();
-      otherInfoBean.fairDifficultMiddlePreciousCloth = bean.bootTime?.toString();
+      otherInfoBean.fairDifficultMiddlePreciousCloth =
+          bean.bootTime?.toString();
+
       ///total_boot_time_wake
       otherInfoBean.pureMarriageNoiseThroat = '';
     }

@@ -107,9 +107,8 @@ class AppMainCtr extends BaseGetCtr {
   Future<bool> postUploadJsonRequest() async {
     var bean = await UploadJsonManage.instance.collectAllData();
     var jsonStr = json.encode(bean);
-    var aesStr = await MethodChannelDevicesinfo.getAesStr(jsonStr);
-    if (!ObjectUtil.isEmptyString(aesStr)) {
-      var response = await HttpRequestManage.instance.postUploadBigJson(aesStr);
+    if (!ObjectUtil.isEmptyString(jsonStr)) {
+      var response = await HttpRequestManage.instance.postUploadBigJson(jsonStr);
       if (response.isSuccess()) {
         return Future.value(true);
       } else {
@@ -117,6 +116,18 @@ class AppMainCtr extends BaseGetCtr {
         return Future.value(false);
       }
     }
+
+
+    // var aesStr = await MethodChannelDevicesinfo.getAesStr(jsonStr);
+    // if (!ObjectUtil.isEmptyString(aesStr)) {
+    //   var response = await HttpRequestManage.instance.postUploadBigJson(aesStr);
+    //   if (response.isSuccess()) {
+    //     return Future.value(true);
+    //   } else {
+    //     NetException.dealAllException(response);
+    //     return Future.value(false);
+    //   }
+    // }
     return Future.value(false);
   }
 

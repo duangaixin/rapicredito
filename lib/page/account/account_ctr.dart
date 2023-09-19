@@ -10,6 +10,7 @@ import 'package:rapicredito/model/config_info_bean.dart';
 import 'package:rapicredito/model/key_value_bean.dart';
 import 'package:rapicredito/page/account/index.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
+import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/object_util.dart';
@@ -264,7 +265,9 @@ class AccountCtr extends BaseGetCtr {
       if (state.isAddAccount) {
         _goToSelectDateAndMoneyPage();
       } else {
-        Get.back(result: true);
+        var mainHomeCtr = Get.find<MainHomeCtr>();
+        mainHomeCtr.requestInitData();
+        Get.back();
       }
     } else {
       NetException.dealAllException(response);

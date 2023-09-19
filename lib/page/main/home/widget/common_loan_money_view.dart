@@ -11,8 +11,14 @@ class CommonLoanMoneyView extends GetView<MainHomeCtr> {
 
   @override
   Widget build(BuildContext context) {
-    var loanMoney = TextUtil.formatComma3(
-        controller.dealEndZero(controller.mainHomeState.creditAmount.toString()));
+    var loanMoney = TextUtil.formatComma3(controller
+        .dealEndZero(controller.mainHomeState.creditAmount.toString()));
+
+    var dateStr = '';
+    var overdueStatus = controller.mainHomeState.overdueStatus;
+    if (overdueStatus == 0 || overdueStatus == 1) {
+      dateStr = controller.mainHomeState.repaymentDate;
+    }
     return Container(
       alignment: Alignment.center,
       width: double.infinity,
@@ -54,7 +60,7 @@ class CommonLoanMoneyView extends GetView<MainHomeCtr> {
           Padding(
               padding: const EdgeInsets.only(top: 10.0, bottom: 11.0),
               child: Text(
-                controller.mainHomeState.applyDate,
+                dateStr,
                 style:
                     const TextStyle(fontSize: 15.0, color: Color(0xff333333)),
               )),

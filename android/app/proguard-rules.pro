@@ -1,12 +1,4 @@
 
-
--dontwarn io.flutter.**
--keep class io.flutter.app.** { *; }
--keep class io.flutter.plugin.**  { *; }
--keep class io.flutter.util.**  { *; }
--keep class io.flutter.view.**  { *; }
--keep class io.flutter.**  { *; }
-
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Application
 -keep public class * extends android.app.Service
@@ -76,3 +68,12 @@
 -keep class com.facebook.FacebookSdk { *; }
 -keep class com.huawei.hms.ads.** { *; }
 -keep interface com.huawei.hms.ads.** { *; }
+
+
+-dontwarn io.flutter.**
+-keep class io.flutter.app.** { *; }
+-keep class io.flutter.plugin.**  { *; }
+-keep class io.flutter.util.**  { *; }
+-keep class io.flutter.view.**  { *; }
+-keep class io.flutter.**  { *; }
+-keep class io.flutter.plugins.**  { *; }

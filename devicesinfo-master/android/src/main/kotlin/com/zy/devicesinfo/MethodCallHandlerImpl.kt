@@ -12,7 +12,6 @@ import com.zy.devicesinfo.data.LocationAddressData
 import com.zy.devicesinfo.data.MediaFilesData
 import com.zy.devicesinfo.data.NetWorkData
 import com.zy.devicesinfo.data.OtherData
-import com.zy.devicesinfo.data.PhotoData
 import com.zy.devicesinfo.data.SimCardData
 import com.zy.devicesinfo.data.StorageData
 import com.zy.devicesinfo.utils.AccountDataUtil
@@ -46,10 +45,6 @@ class MethodCallHandlerImpl(private var context: Context) : MethodCallHandler {
             "getBatteryStatusData" -> {
                 val batteryStatusData = BatteryStatusData()
                 result.success(Gson().toJson(batteryStatusData))
-            }
-
-            "getContactDataArmour" -> {
-                //获取联系人信息
             }
 
             "getHardwareData" -> {
@@ -127,14 +122,11 @@ class MethodCallHandlerImpl(private var context: Context) : MethodCallHandler {
                         } else {
                             result.success("")
                         }
-
-
                     }
-                }else{
+                } else {
                     result.success("")
                 }
             }
-
             else -> {
                 result.notImplemented()
             }
