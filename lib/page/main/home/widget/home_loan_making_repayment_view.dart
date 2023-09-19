@@ -26,51 +26,57 @@ class HomeLoanMakingRepaymentView extends GetView<MainHomeCtr> {
             const SizedBox(
               height: 20.0,
             ),
-            Visibility(
-              visible:
-                  controller.mainHomeState.onePayShow || controller.mainHomeState.twoPayShow,
-              child: Container(
-                margin:
-                    const EdgeInsets.only(left: 16.0, right: 16.0, top: 20.0),
-                child: const CommonPayTwoWayView(),
-              ),
-            ),
-            Visibility(
-              visible: controller.mainHomeState.threePayShow ||
-                  controller.mainHomeState.fourPayShow ||
-                  controller.mainHomeState.fivePayShow,
-              child: Container(
-                margin:
-                    const EdgeInsets.only(left: 16.0, right: 16.0, top: 19.0),
-                child: const CommonPayThreeWayView(),
-              ),
-            ),
+            Obx(() {
+              return Visibility(
+                visible: controller.mainHomeState.onePayShow ||
+                    controller.mainHomeState.twoPayShow,
+                child: Container(
+                  margin:
+                      const EdgeInsets.only(left: 16.0, right: 16.0, top: 20.0),
+                  child: const CommonPayTwoWayView(),
+                ),
+              );
+            }),
+            Obx(() {
+              return Visibility(
+                visible: controller.mainHomeState.threePayShow ||
+                    controller.mainHomeState.fourPayShow ||
+                    controller.mainHomeState.fivePayShow,
+                child: Container(
+                  margin:
+                      const EdgeInsets.only(left: 16.0, right: 16.0, top: 19.0),
+                  child: const CommonPayThreeWayView(),
+                ),
+              );
+            }),
             moneyInfoView
           ],
         ));
   }
 
-  Widget get overdueBtnView => Visibility(
-        visible: controller.mainHomeState.canRolloverPay,
-        child: Container(
-            alignment: Alignment.center,
-            margin: const EdgeInsets.only(top: 20.0),
-            child: CustomButton(
-              onPressed: controller.clickRolloverBtn,
-              minWidth: 152.0,
-              minHeight: 46.0,
-              backgroundColor: Colors.white,
-              disabledBackgroundColor: Colors.white,
-              fontSize: 15.0,
-              radius: 8.0,
-              text:
-                  'Prórroga de pago\nde ${controller.mainHomeState.rolloverPayDay} días',
-              textAlign: TextAlign.center,
-              textColor: const Color(0xff333333),
-              fontWeight: FontWeight.bold,
-              side: const BorderSide(color: Color(0xff333333), width: 1.0),
-            )),
-      );
+  Widget get overdueBtnView => Obx(() {
+        return Visibility(
+          visible: controller.mainHomeState.canRolloverPay,
+          child: Container(
+              alignment: Alignment.center,
+              margin: const EdgeInsets.only(top: 20.0),
+              child: CustomButton(
+                onPressed: controller.clickRolloverBtn,
+                minWidth: 152.0,
+                minHeight: 46.0,
+                backgroundColor: Colors.white,
+                disabledBackgroundColor: Colors.white,
+                fontSize: 15.0,
+                radius: 8.0,
+                text:
+                    'Prórroga de pago\nde ${controller.mainHomeState.rolloverPayDay} días',
+                textAlign: TextAlign.center,
+                textColor: const Color(0xff333333),
+                fontWeight: FontWeight.bold,
+                side: const BorderSide(color: Color(0xff333333), width: 1.0),
+              )),
+        );
+      });
 
   Widget get moneyInfoView => Container(
         margin: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 30.0),
@@ -99,18 +105,29 @@ class HomeLoanMakingRepaymentView extends GetView<MainHomeCtr> {
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  _buildKeyValueView(
-                      'Monto de devolución',
-                      controller.addEndZero(
-                          controller.mainHomeState.repaymentAmount.toString())),
-                  _buildKeyValueView('Fecha de pago de tu crédito',
-                      controller.mainHomeState.repaymentDate),
-                  _buildKeyValueView(
-                      'Monto del préstamo',
-                      controller.addEndZero(
-                          controller.mainHomeState.creditAmount.toString())),
-                  _buildKeyValueView(
-                      'Interés', controller.mainHomeState.interest.toString())
+                  Obx(() {
+                    return _buildKeyValueView(
+                        'Monto de devolución',
+                        controller.addEndZero(controller
+                            .mainHomeState.repaymentAmount
+                            .toString()));
+                  }),
+                  Obx(() {
+                    return _buildKeyValueView('Fecha de pago de tu crédito',
+                        controller.mainHomeState.repaymentDate);
+                  }),
+                  Obx(() {
+                    return _buildKeyValueView(
+                        'Monto del préstamo',
+                        controller.addEndZero(
+                            controller.mainHomeState.creditAmount.toString()));
+                  }),
+                  Obx(() {
+                    return _buildKeyValueView(
+                        'Interés',
+                        controller.addEndZero(
+                            controller.mainHomeState.interest.toString()));
+                  }),
                 ],
               ),
             )

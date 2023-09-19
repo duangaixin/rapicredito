@@ -11,14 +11,6 @@ class CommonLoanMoneyView extends GetView<MainHomeCtr> {
 
   @override
   Widget build(BuildContext context) {
-    var loanMoney = TextUtil.formatComma3(controller
-        .dealEndZero(controller.mainHomeState.creditAmount.toString()));
-
-    var dateStr = '';
-    var overdueStatus = controller.mainHomeState.overdueStatus;
-    if (overdueStatus == 0 || overdueStatus == 1) {
-      dateStr = controller.mainHomeState.repaymentDate;
-    }
     return Container(
       alignment: Alignment.center,
       width: double.infinity,
@@ -39,13 +31,17 @@ class CommonLoanMoneyView extends GetView<MainHomeCtr> {
                 'Monto del préstamo',
                 style: TextStyle(fontSize: 15.0, color: Color(0xff333333)),
               )),
-          Text(
-            '${loanMoney}GTQ',
-            style: const TextStyle(
-                fontSize: 30.0,
-                color: Color(0xff333333),
-                fontWeight: FontWeight.bold),
-          ),
+          Obx(() {
+            var loanMoney = TextUtil.formatComma3(controller
+                .dealEndZero(controller.mainHomeState.creditAmount.toString()));
+            return Text(
+              '${loanMoney}GTQ',
+              style: const TextStyle(
+                  fontSize: 30.0,
+                  color: Color(0xff333333),
+                  fontWeight: FontWeight.bold),
+            );
+          }),
           Container(
             padding: const EdgeInsets.only(
                 top: 5.0, bottom: 12.0, left: 30.0, right: 30),
@@ -59,11 +55,18 @@ class CommonLoanMoneyView extends GetView<MainHomeCtr> {
           ),
           Padding(
               padding: const EdgeInsets.only(top: 10.0, bottom: 11.0),
-              child: Text(
-                dateStr,
-                style:
-                    const TextStyle(fontSize: 15.0, color: Color(0xff333333)),
-              )),
+              child: Obx(() {
+                var dateStr = controller.mainHomeState.applyDate;
+                var overdueStatus = controller.mainHomeState.overdueStatus;
+                if (overdueStatus == 0 || overdueStatus == 1) {
+                  dateStr = controller.mainHomeState.repaymentDate;
+                }
+                return Text(
+                  dateStr,
+                  style:
+                      const TextStyle(fontSize: 15.0, color: Color(0xff333333)),
+                );
+              })),
         ],
       ),
     );

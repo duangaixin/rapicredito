@@ -4,6 +4,6 @@ import 'package:rapicredito/page/permission/index.dart';
 class PermissionBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<PermissionCtr>(() => PermissionCtr(),fenix: true);
+    Get.lazyPut<PermissionCtr>(() => PermissionCtr(), fenix: true);
   }
 }

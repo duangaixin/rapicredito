@@ -10,5 +10,5 @@ class MainOrderState {
 
   bool isRefresh = false;
 
-  List dataSource = [];
+  RxList dataSource = [].obs;
 }

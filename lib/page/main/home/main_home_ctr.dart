@@ -121,7 +121,7 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
       mainHomeState.overdueDay = bean?.mexicanMedicalCan ?? 0;
 
       ///delete
-      // mainHomeState.overdueStatus = 0;
+      // mainHomeState.overdueStatus = 1;
       // mainHomeState.canRolloverPay = true;
       // repayTypeFlag = '1,1,1,1,1';
       // mainHomeState.loadState = LoadState.succeed;

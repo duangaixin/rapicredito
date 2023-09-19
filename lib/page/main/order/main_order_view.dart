@@ -43,15 +43,17 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
         ),
       );
 
-  Widget get orderListView => ListView.builder(
-        padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 0.0),
-        shrinkWrap: true,
-        itemCount: ctr.state.dataSource.length,
-        physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: (context, index) {
-          return _buildListItemView(index);
-        },
-      );
+  Widget get orderListView => Obx(() {
+        return ListView.builder(
+          padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 0.0),
+          shrinkWrap: true,
+          itemCount: ctr.state.dataSource.length,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            return _buildListItemView(index);
+          },
+        );
+      });
 
   Widget _buildListItemView(int index) {
     OrderInfoBean orderInfoBean = ctr.state.dataSource[index];

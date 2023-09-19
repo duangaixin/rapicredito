@@ -74,29 +74,42 @@ class _HomeRolloverRepaymentDialogState
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            _buildBoldKeyValueView('Actualizar la fecha de\nvencimiento',
-                mainHomeCtr.mainHomeState.updateDueDate),
-            _buildNormalKeyValueView(
-                'Tarifa extendida',
+            Obx(() {
+              return _buildBoldKeyValueView(
+                  'Actualizar la fecha de\nvencimiento',
+                  mainHomeCtr.mainHomeState.updateDueDate);
+            }),
+            Obx(() {
+              return _buildNormalKeyValueView(
+                  'Tarifa extendida',
+                  mainHomeCtr.addEndZero(
+                      mainHomeCtr.mainHomeState.deferralCharge.toString()));
+            }),
+            Obx(() {
+              return _buildNormalKeyValueView(
+                  'Interés',
+                  mainHomeCtr.addEndZero(
+                      mainHomeCtr.mainHomeState.interest.toString()));
+            }),
+            Obx(() {
+              return _buildNormalKeyValueView(
+                'IVA',
                 mainHomeCtr.addEndZero(
-                    mainHomeCtr.mainHomeState.deferralCharge.toString())),
-            _buildNormalKeyValueView(
-                'Interés',
-                mainHomeCtr
-                    .addEndZero(mainHomeCtr.mainHomeState.interest.toString())),
-            _buildNormalKeyValueView(
-              'IVA',
-              mainHomeCtr.addEndZero(
-                  mainHomeCtr.mainHomeState.valueAddedTax.toString()),
-            ),
-            _buildNormalKeyValueView(
-                'Costo de deducción',
-                mainHomeCtr.addEndZero(
-                    mainHomeCtr.mainHomeState.overduePayment.toString())),
-            _buildBoldKeyValueView(
-                'Monto del pago',
-                mainHomeCtr
-                    .addEndZero(mainHomeCtr.mainHomeState.payFee.toString())),
+                    mainHomeCtr.mainHomeState.valueAddedTax.toString()),
+              );
+            }),
+            Obx(() {
+              return _buildNormalKeyValueView(
+                  'Costo de deducción',
+                  mainHomeCtr.addEndZero(
+                      mainHomeCtr.mainHomeState.overduePayment.toString()));
+            }),
+            Obx(() {
+              return _buildBoldKeyValueView(
+                  'Monto del pago',
+                  mainHomeCtr
+                      .addEndZero(mainHomeCtr.mainHomeState.payFee.toString()));
+            }),
           ],
         ),
       );
@@ -132,6 +145,7 @@ class _HomeRolloverRepaymentDialogState
                 ),
               ],
             )),
+            //TODO OBX
             Padding(
               padding: const EdgeInsets.only(
                 top: 13.0,
@@ -146,8 +160,7 @@ class _HomeRolloverRepaymentDialogState
                         TextSpan(
                             text: Strings.autoLineString('20000'),
                             style: const TextStyle(
-                                fontSize: 15.0, color: Color(0xffD53535)),
-                            recognizer: TapGestureRecognizer()..onTap = () {}),
+                                fontSize: 15.0, color: Color(0xffD53535))),
                         TextSpan(
                             text: Strings.autoLineString(
                                 ', la fecha de vencimiento del reembolso se puede extender por '),
@@ -156,8 +169,7 @@ class _HomeRolloverRepaymentDialogState
                         TextSpan(
                             text: Strings.autoLineString(' días'),
                             style: const TextStyle(
-                                fontSize: 15.0, color: Color(0xffD53535)),
-                            recognizer: TapGestureRecognizer()..onTap = () {}),
+                                fontSize: 15.0, color: Color(0xffD53535))),
                         TextSpan(
                             text: Strings.autoLineString(
                                 '.El pago de una suma  inferior a '),
@@ -166,8 +178,7 @@ class _HomeRolloverRepaymentDialogState
                         TextSpan(
                             text: Strings.autoLineString('7777'),
                             style: const TextStyle(
-                                fontSize: 15.0, color: Color(0xffD53535)),
-                            recognizer: TapGestureRecognizer()..onTap = () {}),
+                                fontSize: 15.0, color: Color(0xffD53535))),
                         TextSpan(
                             text: Strings.autoLineString(
                                 '  no cambia el limite de la fecha de devolución. Debe pagar a tiempo.'),

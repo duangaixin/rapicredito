@@ -28,7 +28,7 @@ class ClientCtr extends BaseGetCtr {
     Get.dismiss();
     if (response.isSuccess()) {
       var clientInfoBean = response.data;
-      state.tip=clientInfoBean?.aggressiveExamUsedBackStove??'';
+      state.tip = clientInfoBean?.aggressiveExamUsedBackStove ?? '';
       var modelList = clientInfoBean?.stillEmbassyVillagerReviewer ?? [];
       var whatAppList =
           clientInfoBean?.busyChimneyLiquidStadiumRectangleArithmetic ?? [];
@@ -51,7 +51,7 @@ class ClientCtr extends BaseGetCtr {
       }
       state.loadState = LoadState.succeed;
     } else {
-    //  state.loadState = LoadState.failed;
+      //  state.loadState = LoadState.failed;
       NetException.dealAllException(response);
     }
   }

@@ -22,9 +22,11 @@ class HomeLoanOverdueView extends GetView<MainHomeCtr> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: [
-             MainAppBarView(
-              title: 'Atrasado ${controller.mainHomeState.overdueDay} Días',
-            ),
+            Obx(() {
+              return MainAppBarView(
+                title: 'Atrasado ${controller.mainHomeState.overdueDay} Días',
+              );
+            }),
             const CommonLoanMoneyView(),
             Container(
               margin: const EdgeInsets.only(left: 16.0, right: 16.0, top: 20.0),
@@ -76,50 +78,55 @@ class HomeLoanOverdueView extends GetView<MainHomeCtr> {
               padding: const EdgeInsets.only(
                 top: 13.0,
               ),
-              child: RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                      text: Strings.autoLineString(
-                          'Su pedido se ha sido vencido por '),
-                      style: const TextStyle(
-                          fontSize: 15.0, color: Color(0xff333333)),
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: Strings.autoLineString(
-                                '${controller.mainHomeState.overdueDay} días,'),
-                            style: const TextStyle(
-                                fontSize: 15.0, color: Color(0xffD53535))),
-                        TextSpan(
-                            text: Strings.autoLineString(
-                                'devuélvalo de inmediato. Si hay una situación de vencimiento maliciosa, ¡presentaremos una demanda en su contra a través de los canales legales!'),
-                            style: const TextStyle(
-                                fontSize: 15.0, color: Color(0xff333333)))
-                      ])),
+              child: Obx(() {
+                return RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                        text: Strings.autoLineString(
+                            'Su pedido se ha sido vencido por '),
+                        style: const TextStyle(
+                            fontSize: 15.0, color: Color(0xff333333)),
+                        children: <TextSpan>[
+                          TextSpan(
+                              text: Strings.autoLineString(
+                                  '${controller.mainHomeState.overdueDay} días,'),
+                              style: const TextStyle(
+                                  fontSize: 15.0, color: Color(0xffD53535))),
+                          TextSpan(
+                              text: Strings.autoLineString(
+                                  'devuélvalo de inmediato. Si hay una situación de vencimiento maliciosa, ¡presentaremos una demanda en su contra a través de los canales legales!'),
+                              style: const TextStyle(
+                                  fontSize: 15.0, color: Color(0xff333333)))
+                        ]));
+              }),
             )
           ],
         ),
       );
 
-  Widget get overdueBtnView => Visibility(
-      visible: controller.mainHomeState.canRolloverPay,
-      child: Container(
-        alignment: Alignment.center,
-        margin: const EdgeInsets.only(top: 20.0, bottom: 25.0),
-        child: CustomButton(
-          onPressed: controller.clickRolloverBtn,
-          minWidth: 152.0,
-          minHeight: 46.0,
-          backgroundColor: Colors.white,
-          disabledBackgroundColor: Colors.white,
-          fontSize: 15.0,
-          radius: 8.0,
-          text: 'Prórroga de pago\nde ${controller.mainHomeState.rolloverPayDay} días',
-          textAlign: TextAlign.center,
-          textColor: const Color(0xff333333),
-          fontWeight: FontWeight.bold,
-          side: const BorderSide(color: Color(0xff333333), width: 1.0),
-        ),
-      ));
+  Widget get overdueBtnView => Obx(() {
+        return Visibility(
+            visible: controller.mainHomeState.canRolloverPay,
+            child: Container(
+              alignment: Alignment.center,
+              margin: const EdgeInsets.only(top: 20.0, bottom: 25.0),
+              child: CustomButton(
+                onPressed: controller.clickRolloverBtn,
+                minWidth: 152.0,
+                minHeight: 46.0,
+                backgroundColor: Colors.white,
+                disabledBackgroundColor: Colors.white,
+                fontSize: 15.0,
+                radius: 8.0,
+                text:
+                    'Prórroga de pago\nde ${controller.mainHomeState.rolloverPayDay} días',
+                textAlign: TextAlign.center,
+                textColor: const Color(0xff333333),
+                fontWeight: FontWeight.bold,
+                side: const BorderSide(color: Color(0xff333333), width: 1.0),
+              ),
+            ));
+      });
 
   Widget get moneyInfoView => Container(
         margin: const EdgeInsets.only(
@@ -147,22 +154,39 @@ class HomeLoanOverdueView extends GetView<MainHomeCtr> {
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  _buildKeyValueView(
-                      'Monto de devolución',
-                      controller.addEndZero(
-                          controller.mainHomeState.repaymentAmount.toString())),
-                  _buildKeyValueView('Fecha de pago de tu crédito',
-                      controller.mainHomeState.repaymentDate),
-                  _buildKeyValueView(
-                      'Monto del préstamo',
-                      controller.addEndZero(
-                          controller.mainHomeState.creditAmount.toString())),
-                  _buildKeyValueView(
-                      'Interés', controller.mainHomeState.interest.toString()),
-                  _buildKeyValueView('Cargo por demora',
-                      controller.mainHomeState.overduePayment.toString()),
-                  _buildKeyValueView('Costo de deducción',
-                      controller.mainHomeState.deductCost.toString())
+                  Obx(() {
+                    return _buildKeyValueView(
+                        'Monto de devolución',
+                        controller.addEndZero(controller
+                            .mainHomeState.repaymentAmount
+                            .toString()));
+                  }),
+                  Obx(() {
+                    return _buildKeyValueView('Fecha de pago de tu crédito',
+                        controller.mainHomeState.repaymentDate);
+                  }),
+                  Obx(() {
+                    return _buildKeyValueView(
+                        'Monto del préstamo',
+                        controller.addEndZero(
+                            controller.mainHomeState.creditAmount.toString()));
+                  }),
+                  Obx(() {
+                    return _buildKeyValueView(
+                        'Interés',
+                        controller.addEndZero(
+                            controller.mainHomeState.interest.toString()));
+                  }),
+                  Obx(() {
+                    return _buildKeyValueView('Cargo por demora',
+                        controller.mainHomeState.overduePayment.toString());
+                  }),
+                  Obx(() {
+                    return _buildKeyValueView(
+                        'Costo de deducción',
+                        controller.addEndZero(
+                            controller.mainHomeState.deductCost.toString()));
+                  })
                 ],
               ),
             )

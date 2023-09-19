@@ -16,7 +16,7 @@ class PermissionCtr extends BaseGetCtr {
     Get.offAndToNamed(PageRouterName.mainPage);
   }
 
-  void exitApp()async{
+  void exitApp() async {
     await SystemNavigator.pop();
   }
 

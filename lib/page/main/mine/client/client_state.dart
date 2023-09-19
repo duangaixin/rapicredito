@@ -11,7 +11,7 @@ class ClientState {
 
   List<ClientListBean?> dataSource = [];
 
-  String tip='';
+  String tip = '';
 }
 
 class ClientListBean {
@@ -19,5 +19,5 @@ class ClientListBean {
   String? type;
   List<ClientInfoItemBean?> itemList;
 
-  ClientListBean({this.title,this.type, required this.itemList});
+  ClientListBean({this.title, this.type, required this.itemList});
 }

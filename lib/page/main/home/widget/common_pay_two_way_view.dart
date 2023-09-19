@@ -8,7 +8,9 @@ import 'package:rapicredito/widget/custom_image_view.dart';
 
 class CommonPayTwoWayView extends GetView<MainHomeCtr> {
   final bool isRollover;
-  const CommonPayTwoWayView({Key? key,this.isRollover=false}) : super(key: key);
+
+  const CommonPayTwoWayView({Key? key, this.isRollover = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,32 +38,36 @@ class CommonPayTwoWayView extends GetView<MainHomeCtr> {
                   fontWeight: FontWeight.bold),
             ),
           ),
-          Visibility(
-              visible: controller.mainHomeState.onePayShow,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const CustomDashLine(
-                    color: Color(0xffE2E5DA),
-                    dashWidth: 5.0,
-                  ),
-                  centerPayView
-                ],
-              )),
-          Visibility(
-              visible: controller.mainHomeState.twoPayShow,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const CustomDashLine(
-                    color: Color(0xffE2E5DA),
-                    dashWidth: 5.0,
-                  ),
-                  bottomPayView
-                ],
-              )),
+          Obx(() {
+            return Visibility(
+                visible: controller.mainHomeState.onePayShow,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const CustomDashLine(
+                      color: Color(0xffE2E5DA),
+                      dashWidth: 5.0,
+                    ),
+                    centerPayView
+                  ],
+                ));
+          }),
+          Obx(() {
+            return Visibility(
+                visible: controller.mainHomeState.twoPayShow,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const CustomDashLine(
+                      color: Color(0xffE2E5DA),
+                      dashWidth: 5.0,
+                    ),
+                    bottomPayView
+                  ],
+                ));
+          }),
         ],
       );
 
@@ -72,37 +78,6 @@ class CommonPayTwoWayView extends GetView<MainHomeCtr> {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // const Row(
-            //   mainAxisSize: MainAxisSize.min,
-            //   children: [
-            //     CustomImageView(
-            //       Resource.assetsImageAuthTakeCamera,
-            //       imageType: ImageType.assets,
-            //       width: 95.0,
-            //       height: 40.0,
-            //       margin: EdgeInsets.only(right: 8.0),
-            //     ),
-            //     Stack(
-            //       children: [
-            //         Text(
-            //           'PSE',
-            //           style:
-            //               TextStyle(fontSize: 16.0, color: Color(0xff101F36)),
-            //         ),
-            //         Positioned(
-            //             top: -14,
-            //             right: 0,
-            //             child: CustomImageView(
-            //               '',
-            //               imageType: ImageType.assets,
-            //               width: 15.0,
-            //               height: 14.0,
-            //               margin: EdgeInsets.only(right: 8.0),
-            //             )),
-            //       ],
-            //     )
-            //   ],
-            // ),
             const CustomImageView(
               Resource.assetsImagePayPse,
               imageType: ImageType.assets,
@@ -111,7 +86,7 @@ class CommonPayTwoWayView extends GetView<MainHomeCtr> {
             ),
             CustomButton(
               onPressed: () {
-                controller.clickPayType(PayType.payOne,isRollover: isRollover);
+                controller.clickPayType(PayType.payOne, isRollover: isRollover);
               },
               minWidth: 111.0,
               minHeight: 46.0,
@@ -140,7 +115,8 @@ class CommonPayTwoWayView extends GetView<MainHomeCtr> {
                   imageType: ImageType.assets, width: 142.0, height: 37.0),
               CustomButton(
                 onPressed: () {
-                  controller.clickPayType(PayType.payTwo,isRollover: isRollover);
+                  controller.clickPayType(PayType.payTwo,
+                      isRollover: isRollover);
                 },
                 minWidth: 111.0,
                 minHeight: 46.0,
