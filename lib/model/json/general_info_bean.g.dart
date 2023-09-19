@@ -32,6 +32,7 @@ GeneralInfoBean _$GeneralInfoBeanFromJson(Map<String, dynamic> json) =>
       json['timeZoneId'] as String?,
       json['ui_mode_type'] as String?,
       json['uuid'] as String?,
+      json['elapsedRealtime'] as int?,
     );
 
 Map<String, dynamic> _$GeneralInfoBeanToJson(GeneralInfoBean instance) =>
@@ -60,4 +61,5 @@ Map<String, dynamic> _$GeneralInfoBeanToJson(GeneralInfoBean instance) =>
       'timeZoneId': instance.timeZoneId,
       'ui_mode_type': instance.uiModeType,
       'uuid': instance.uuid,
+      'elapsedRealtime': instance.elapsedRealtime,
     };
