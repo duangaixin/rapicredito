@@ -69,11 +69,39 @@ public class OriginInfoPlugin implements FlutterPlugin {
                 case "openChatActivity":
                     openChatActivity();
                     break;
+                case "addCalendar":
+                    Map<String, Object> calendarParam = (Map<String, Object>) methodCall.arguments;
+                    addCalendar(calendarParam);
+                    break;
                 default:
                     result.notImplemented();
             }
         });
     }
+
+    private void addCalendar(Map<String, Object> param) {
+        String title = "";
+        String description = "";
+        long reminderTime = System.currentTimeMillis();
+        int previousDate = 0;
+        if (param != null && !param.isEmpty()) {
+            if (param.containsKey("title")) {
+                title = (String) param.get("title");
+            }
+            if (param.containsKey("description")) {
+                description = (String) param.get("description");
+            }
+            if (param.containsKey("reminderTime")) {
+                reminderTime = (long) param.get("reminderTime");
+            }
+            if (param.containsKey("previousDate")) {
+                previousDate = (int) param.get("previousDate");
+            }
+        }
+        CalendarReminderUtils.addCalendarEvent(mActivity, title, description, reminderTime, previousDate);
+
+    }
+
 
     private void setCrispInfo(Map<String, String> param) {
         Crisp.resetChatSession(mActivity);

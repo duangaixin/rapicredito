@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -143,6 +144,7 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
             }
           }
         }
+        _addCalendarEvent();
       } else {
         mainHomeState.loadState = LoadState.succeed;
       }
@@ -155,6 +157,44 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
       }
       NetException.dealAllException(response);
     }
+  }
+
+  Future<void> _addCalendarEvent() async {
+    PermissionUtil.checkPermission(
+        permissionList: [
+          Permission.calendar,
+        ],
+        onSuccess: () async {
+          if (!ObjectUtil.isEmptyString(mainHomeState.repaymentDate)) {
+            List<String> strList = mainHomeState.repaymentDate.split('-');
+            int year = int.tryParse(strList[2]) ?? 0;
+            int month = 0;
+            if (strList[1].startsWith('0')) {
+              var monthStr = strList[1].substring(0);
+              month = int.tryParse(monthStr) ?? 0;
+            } else {
+              month = int.tryParse(strList[1]) ?? 0;
+            }
+            int day = 0;
+            if (strList[0].startsWith('0')) {
+              var dayStr = strList[0].substring(0);
+              day = int.tryParse(dayStr) ?? 0;
+            } else {
+              day = int.tryParse(strList[0]) ?? 0;
+            }
+            var dateTime = DateTime(year, month, day);
+            var reminderTime = dateTime.millisecondsSinceEpoch;
+            MethodChannel channel = const MethodChannel('originInfoPlugin');
+            var param = <String, Object>{};
+            param
+              ..['title'] = 'Recordatorio de reembolso'
+              ..['description'] = 'Por favor pague puntualmente'
+              ..['reminderTime'] = reminderTime
+              ..['previousDate'] = 0;
+            await channel.invokeMethod('addCalendar', param);
+          }
+        },
+        goSetting: () {});
   }
 
   Future<void> postQueryHomeDefaultInfoRequest() async {
