@@ -48,7 +48,7 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
               return Visibility(
                   visible: isUrlNotExist,
                   child: const CustomImageView(
-                  Resource.assetsImageLogo,
+                    Resource.assetsImageLogo,
                     imageType: ImageType.assets,
                     shape: BoxShape.circle,
                     memCacheHeight: 75,
@@ -65,7 +65,7 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
                   visible: !isUrlNotExist,
                   child: CustomImageView(
                     imageUrl,
-                    placeholder:Resource.assetsImageLogo,
+                    placeholder: Resource.assetsImageLogo,
                     shape: BoxShape.circle,
                     memCacheHeight: 75,
                     memCacheWidth: 75,
@@ -92,7 +92,7 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
                     padding: const EdgeInsets.only(top: 16.0),
                     child: Obx(() {
                       return Text(
-                      '+57 ${ctr.state.phoneNum}',
+                        '+57 ${ctr.state.phoneNum}',
                         style: const TextStyle(
                           fontSize: 18.0,
                           color: Color(0xff333333),
@@ -136,7 +136,8 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
               iconWith: 22,
               iconPath: Resource.assetsImageMineSignAgreement,
               onTap: () {
-                ctr.goToWebViewPage('百度', 'https://www.baidu.com/');
+                ctr.goToWebViewPage('Aviso de Privacidad',
+                    'https://www.rapicreditoco.com/rapicreditos/privacy.html');
               },
               content: 'Avisos de Privacidad',
             ),
@@ -144,7 +145,7 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
               iconHeight: 22,
               iconWith: 22,
               iconPath: Resource.assetsImageMineClient,
-              onTap:ctr.goToChatPage,
+              onTap: ctr.goToChatPage,
               content: 'Servicio al cliente en línea',
             ),
             CommonSettingClickView(
@@ -152,8 +153,9 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
               iconWith: 25.0,
               iconPath: Resource.assetsImageMineSupplyAgreement,
               onTap: () {
-                ctr.goToTestPage();
-                //ctr.goToWebViewPage('百度', 'https://www.baidu.com/');
+                // ctr.goToTestPage();
+                ctr.goToWebViewPage('Terminos y Condiciones',
+                    'https://test.rapicreditoco.com/rapicreditos/Term.html');
               },
               content: 'Atención al cliente',
             ),
