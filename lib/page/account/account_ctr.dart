@@ -213,30 +213,42 @@ class AccountCtr extends BaseGetCtr {
     }
     if (response.isSuccess()) {
       var netList = response.data ?? [];
-      if (!ObjectUtil.isEmptyList(netList)) {
-        var accountBean = netList[0];
-        var collectionType = accountBean.swissEnoughSaying ?? '';
-        var accountNumber = accountBean.dampThatTentBlankTrunk ?? '';
-        var walletName = accountBean.blankKeyRegulation ?? '';
-        var bankNameCode = accountBean.firstNurse ?? '';
-        var bankTypeCode = accountBean.broadSpiritualKilometre ?? '';
-        if (collectionType == '1') {
-          state.accountTypeSelectIndex = 1;
-          state.bankName = _getName(state.originBankNameList, bankNameCode);
-          state.bankType = _getName(state.originBankTypeList, bankTypeCode);
-          bankAccountCtr.text = accountNumber;
-          bankAccountConfirmCtr.text = accountNumber;
-        } else {
-          state.accountTypeSelectIndex = 0;
-          walletAccountCtr.text = accountNumber;
-          walletAccountConfirmCtr.text = accountNumber;
-          if (!ObjectUtil.isEmptyList(state.walletList)) {
-            for (int i = 0; i < state.walletList.length; i++) {
-              var bean = state.walletList[i];
-              if (bean.key == walletName) {
-                state.walletSelectIndex = i;
+      if (state.isAddAccount) {
+        if (!ObjectUtil.isEmptyList(netList)) {
+          var accountBean = netList[0];
+          var collectionType = accountBean.swissEnoughSaying ?? '';
+          var accountNumber = accountBean.dampThatTentBlankTrunk ?? '';
+          var walletName = accountBean.blankKeyRegulation ?? '';
+          var bankNameCode = accountBean.firstNurse ?? '';
+          var bankTypeCode = accountBean.broadSpiritualKilometre ?? '';
+          if (collectionType == '1') {
+            state.accountTypeSelectIndex = 1;
+            state.bankName = _getName(state.originBankNameList, bankNameCode);
+            state.bankType = _getName(state.originBankTypeList, bankTypeCode);
+            bankAccountCtr.text = accountNumber;
+            bankAccountConfirmCtr.text = accountNumber;
+          } else {
+            state.accountTypeSelectIndex = 0;
+            walletAccountCtr.text = accountNumber;
+            walletAccountConfirmCtr.text = accountNumber;
+            if (!ObjectUtil.isEmptyList(state.walletList)) {
+              for (int i = 0; i < state.walletList.length; i++) {
+                var bean = state.walletList[i];
+                if (bean.key == walletName) {
+                  state.walletSelectIndex = i;
+                }
               }
             }
+          }
+        }
+      } else {
+        if (!ObjectUtil.isEmptyList(netList)) {
+          var accountBean = netList[0];
+          var collectionType = accountBean.swissEnoughSaying ?? '';
+          if (collectionType == '1') {
+            state.accountTypeSelectIndex = 1;
+          } else {
+            state.accountTypeSelectIndex = 0;
           }
         }
       }

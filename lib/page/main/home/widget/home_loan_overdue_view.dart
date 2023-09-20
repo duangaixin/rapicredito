@@ -181,7 +181,7 @@ class HomeLoanOverdueView extends GetView<MainHomeCtr> {
                   }),
                   Obx(() {
                     return _buildKeyValueView('Cargo por demora',
-                        controller.mainHomeState.overduePayment.toString());
+                        controller.addEndZero( controller.mainHomeState.overduePayment.toString()));
                   }),
                   Obx(() {
                     return _buildKeyValueView(

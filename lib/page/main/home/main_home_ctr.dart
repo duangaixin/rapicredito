@@ -20,6 +20,7 @@ import 'package:rapicredito/utils/location_util.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/utils/permission_util.dart';
 import 'package:rapicredito/utils/string_ext.dart';
+import 'package:rapicredito/utils/text_util.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -330,10 +331,25 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
   }
 
   String addEndZero(String str) {
-    if (!ObjectUtil.isEmptyString(str) &&
-        str.contains('.') &&
-        str.endsWith('.0')) {
-      return '${str}0'.strWithDollar();
+    if (!ObjectUtil.isEmptyString(str)) {
+      if (str.contains('.')) {
+        var index = str.indexOf('.');
+        var beginStr = str.substring(0, index);
+        var endStr = str.substring(index + 1, str.length);
+        if (num.parse(beginStr) is int) {
+          var strBegin = TextUtil.formatComma3(beginStr);
+          var str = '$strBegin.$endStr';
+          if (str.endsWith('.0')) {
+            str = '${str}0';
+          }
+          return str.strWithDollar();
+        }
+      } else {
+        if (num.parse(str) is int) {
+          var strBegin = TextUtil.formatComma3(str);
+          return '${strBegin}00'.strWithDollar();
+        }
+      }
     }
     return str;
   }
