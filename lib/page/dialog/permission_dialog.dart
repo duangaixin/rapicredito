@@ -62,7 +62,7 @@ class _PermissionDialogState extends State<PermissionDialog> {
           _buildItemView('colección de ubicaciones',
               'Recopile y supervise información sobre las ubicaciones de los dispositivos para evaluar y puntuar riesgos. Cargaremos los datos de ubicación a nuestro servidor Volcan Prêt (https://test.rapicreditoco.com y https://api2.branch.io).\n'),
           _buildItemView('colección de calendarios',
-              'Se utiliza para recordarle la fecha de pago y evitar que los pagos vencidos afecten su crédito. Cargaremos los datos del calendario al servidor (https://test.rapicreditoco.com y https://api2.branch.io) para comparar los préstamos, sus datos estarán protegidos y se mantendrán confidenciales.'),
+              'Se utiliza para recordarle la fecha de pago y evitar que los pagos vencidos afecten su crédito. Cargaremos los datos del calendario al servidor (https://test.rapicreditoco.com y https://api2.branch.io) para comparar los préstamos, sus datos estarán protegidos y se mantendrán confidenciales.\n'),
         ],
       ),
     );

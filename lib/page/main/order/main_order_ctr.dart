@@ -51,7 +51,7 @@ class MainOrderCtr extends BaseGetCtr {
       if (ObjectUtil.isEmptyList(netList)) {
         state.loadState = LoadState.empty;
       } else {
-        state.dataSource.addAll(netList);
+        state.dataSource..clear()..addAll(netList);
         state.loadState = LoadState.succeed;
       }
     } else {
