@@ -18,7 +18,12 @@ class MainHomeState {
   RxList<HomeProductInfoBean> otherOrderList = <HomeProductInfoBean>[].obs;
   RxList<HomeProductInfoBean> notPlaceOrderList = <HomeProductInfoBean>[].obs;
   RxList<HomeProductInfoBean> dataSource = <HomeProductInfoBean>[].obs;
+  ///减免费用
+  final RxDouble _feeWaiver = 0.0.obs;
 
+  double get feeWaiver => _feeWaiver.value;
+
+  set feeWaiver(status) => _feeWaiver.value = status;
   ///借款金额
   final RxDouble _creditAmount = 0.0.obs;
 

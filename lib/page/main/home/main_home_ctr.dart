@@ -102,6 +102,7 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
     var response = await HttpRequestManage.instance.postOrderInfo(param);
     if (response.isSuccess()) {
       var bean = response.data;
+     mainHomeState.feeWaiver=bean?. unusualPing??0.0;
       mainHomeState.orderId =
           bean?.disabledLondonPrivatePoolAmericanInstrument ?? -1;
       mainHomeState.overdueStatus =
@@ -194,8 +195,8 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
             MethodChannel channel = const MethodChannel('originInfoPlugin');
             var param = <String, Object>{};
             param
-              ..['title'] = 'Recordatorio de reembolso'
-              ..['description'] = 'Por favor pague puntualmente'
+              ..['title'] = 'repayment due date'
+              ..['description'] = 'repayment due date, please pay on time!'
               ..['reminderTime'] = reminderTime
               ..['previousDate'] = 0;
             await channel.invokeMethod('addCalendar', param);

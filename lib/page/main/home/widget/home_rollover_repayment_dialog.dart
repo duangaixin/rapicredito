@@ -110,6 +110,14 @@ class _HomeRolloverRepaymentDialogState
                   mainHomeCtr
                       .addEndZero(mainHomeCtr.mainHomeState.payFee.toString()));
             }),
+            Obx(() {
+              return _buildBoldKeyValueView(
+                  'Reducción de los gastos',
+                  mainHomeCtr
+                      .addEndZero(mainHomeCtr.mainHomeState.feeWaiver.toString()));
+            }),
+
+
           ],
         ),
       );
