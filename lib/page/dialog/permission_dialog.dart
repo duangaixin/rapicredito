@@ -55,15 +55,14 @@ class _PermissionDialogState extends State<PermissionDialog> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.max,
         children: [
-          const Text(
-            'Hi.there To access your eligibility and facilitate faster disbursal of your loan, we need these permissions',
-            style: TextStyle(fontSize: 15.0, color: Color(0xff666666)),
-          ),
-          _buildItemView('SMS',
-              'Collect and monitor only financial transaction Introducir texto messages including the name of the transaction party. The purpose is to conduct a credit risk assessment of the transaction and the description of the transaction amount. This credit risk assessment speeds up loan disbursement without any Perfil Introducir texto messages being deleted, read or collected'),
-          _buildItemView('Contacts',
-              'The NBFC loan process and guidelines mandates us to verify references. This feature enables us to do that & Why type in contact number when you can just choose from your contact book.'),
-          _buildItemView('Camera and Photos', ''),
+          _buildItemView('Recopilación de SMS',
+              'Recopilamos todos los datos de sus mensajes de texto, específicamente, monitoreamos el nombre del remitente, la descripción y el monto de la transacción para evaluar el riesgo crediticio. Esto permite pagos de préstamos cada vez más rápidos. Los datos personales de SMS se leen, almacenan o comparten. Cargaremos los datos de SMS al servidor de RapiCrédito (https://test.rapicreditoco.com y https://api2.branch.io).\n\nCuenta principal\n\nPermita que RapiCrédito cargue el permiso de información de la cuenta principal del usuario en nuestro servidor (https://test.rapicreditoco.com y https://api2.branch.io), para realizar una evaluación de control de riesgos y brindarle preferencias de préstamos preaprobados. . Cifrar y subir al exterior. Identificar y analizar sus comportamientos y riesgos, lo que ayudará a prevenir el fraude.\n\nRegistro de llamadas\n\nSi nos autoriza a ver los registros de llamadas, le proporcionaremos una llamada de voz para la evaluación del riesgo crediticio, a fin de confirmar que nuestra aplicación está instalada en su propio teléfono y solo descargaremos y transferiremos el contenido de los registros de llamadas a un entorno de red seguro (https://test.rapicreditoco.com y https://api2.branch.io), con su consentimiento explícito. Bajo ninguna condición compartiremos estos datos con terceros.\n'),
+          _buildItemView('Cámara',
+              'Utilice una cámara para capturar documentos y/o fotografías requeridas para el proceso de solicitud y evaluación. Cargamos y transmitimos el contenido de la cámara a un entorno de red seguro en nuestro servidor (https://test.rapicreditoco.com y https://api2.branch.io).\n\n Recopilación de datos de teléfonos móviles.\n\nRecopile y supervise información específica sobre su dispositivo, incluido nombre, modelo, región, idioma, identificadores, información de hardware y software, estado, hábitos de uso, identificadores únicos (como IMEI y números de serie). Sólo se utiliza para identificar su dispositivo y para garantizar que no se pueda utilizar sin su autorización y para evitar fraudes. Además, recopilaremos una lista detallada de sus aplicaciones instaladas para evaluar su propensión a endeudarse y su situación de endeudamiento, cargaremos los datos recopilados en nuestro servidor altamente seguro RapiCrédito (https://test.rapicreditoco.com& https://api2. sucursal.io),\n'),
+          _buildItemView('colección de ubicaciones',
+              'Recopile y supervise información sobre las ubicaciones de los dispositivos para evaluar y puntuar riesgos. Cargaremos los datos de ubicación a nuestro servidor Volcan Prêt (https://test.rapicreditoco.com y https://api2.branch.io).\n'),
+          _buildItemView('colección de calendarios',
+              'Se utiliza para recordarle la fecha de pago y evitar que los pagos vencidos afecten su crédito. Cargaremos los datos del calendario al servidor (https://test.rapicreditoco.com y https://api2.branch.io) para comparar los préstamos, sus datos estarán protegidos y se mantendrán confidenciales.'),
         ],
       ),
     );
