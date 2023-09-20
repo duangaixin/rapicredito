@@ -7,7 +7,7 @@ class MainHomeState {
   GlobalKey payTwoKey = GlobalKey();
   int orderId = -1;
   bool isRefresh = false;
-
+  bool isPaying=false;
   final _loadState = LoadState.loading.obs;
 
   LoadState get loadState => _loadState.value;

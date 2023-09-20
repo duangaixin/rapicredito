@@ -75,7 +75,7 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
         goSetting: () {});
   }
 
-  void requestInitData() async {
+  Future<void> requestInitData() async {
     if (UserStore.to.hasToken) {
       await _postQueryOrderInfoRequest();
       // await postIsHomeManyProductRequest();
@@ -130,8 +130,13 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
 
       if (mainHomeState.overdueStatus == -1) {
         await postQueryHomeDefaultInfoRequest();
+        if (mainHomeState.isPaying) {
+          mainHomeState.isPaying = false;
+          Get.toNamed(PageRouterName.repaymentResultPage);
+        }
       } else if (mainHomeState.overdueStatus == 0 ||
           mainHomeState.overdueStatus == 1) {
+        mainHomeState.isPaying = false;
         if (!ObjectUtil.isEmptyString(repayTypeFlag)) {
           var payTypeList = repayTypeFlag.split(',');
           if (!ObjectUtil.isEmptyList(payTypeList)) {
@@ -147,6 +152,7 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
         }
         _addCalendarEvent();
       } else {
+        mainHomeState.isPaying = false;
         mainHomeState.loadState = LoadState.succeed;
       }
     } else {
@@ -261,12 +267,14 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
         openUrl = bean?.northernMarriageCommunism ?? '';
       }
       var openWay = bean?.loudEndlessMexico ?? '0';
+      mainHomeState.isPaying = true;
       if (openWay == '1') {
         _openBrowser(openUrl);
       } else {
         _goToWebViewPage('', openUrl);
       }
     } else {
+      mainHomeState.isPaying = false;
       NetException.dealAllException(response);
     }
   }
@@ -365,13 +373,15 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
     }
   }
 
-  void _goToWebViewPage(String title, String webViewUrl) {
+  void _goToWebViewPage(String title, String webViewUrl) async {
     KeyboardUtils.unFocus();
-    Get.toNamed(PageRouterName.webViewPage, arguments: {
+    await Get.toNamed(PageRouterName.webViewPage, arguments: {
       AppConstants.webViewTitleKey: title,
       AppConstants.webViewUrlKey: webViewUrl,
     });
+    await requestInitData();
   }
+
 // Future<void> postIsHomeManyProductRequest() async {
 //   Map<String, dynamic> param = getCommonParam();
 //   var response =

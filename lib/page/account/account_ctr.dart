@@ -196,6 +196,9 @@ class AccountCtr extends BaseGetCtr {
     param['firstNurse'] = bankName;
     param['broadSpiritualKilometre'] = bankAccountType;
     param['dampThatTentBlankTrunk'] = bankAccountNumber;
+    if(!state.isAddAccount){
+      param['honestMethodPureStorm'] = 1;
+    }
     param.addAll(getCommonParam());
     return param;
   }

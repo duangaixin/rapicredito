@@ -45,7 +45,9 @@ extension RequestBussiness on HttpRequestManage {
         options: Options(contentType: Headers.formUrlEncodedContentType),
         onTransform: (json) => null);
   }
-  Future<BaseResponse<PayUrlInfoBean>> postRepayUrlInfo(Map<String, dynamic> param) async {
+
+  Future<BaseResponse<PayUrlInfoBean>> postRepayUrlInfo(
+      Map<String, dynamic> param) async {
     return await httpRequest.post<PayUrlInfoBean>(HttpApi.apiRepayInfo,
         data: param,
         options: Options(contentType: Headers.formUrlEncodedContentType),
@@ -226,11 +228,12 @@ extension RequestBussiness on HttpRequestManage {
         onTransform: (json) => json['fullMankind']);
   }
 
-  Future<BaseResponse<RolloverDetailInfoBean>> postRolloverDetailInfo(dynamic param) async {
-    return await httpRequest.post<RolloverDetailInfoBean>(HttpApi.apiRolloverDetailInfo,
+  Future<BaseResponse<RolloverDetailInfoBean>> postRolloverDetailInfo(
+      dynamic param) async {
+    return await httpRequest.post<RolloverDetailInfoBean>(
+        HttpApi.apiRolloverDetailInfo,
         options: Options(contentType: Headers.formUrlEncodedContentType),
         data: param,
         onTransform: (json) => RolloverDetailInfoBean.fromJson(json));
   }
-
 }
