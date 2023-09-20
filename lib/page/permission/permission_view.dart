@@ -129,7 +129,7 @@ class PermissionPage extends GetView<PermissionCtr> {
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           controller.goToWebViewPage(
-                              '百度', 'https://www.baidu.com/');
+                              'Aviso de Privacidad', 'https://test.rapicreditoco.com/rapicreditos/privacy.html');
                         }),
                   TextSpan(
                       text: Strings.autoLineString('y'),
@@ -144,7 +144,7 @@ class PermissionPage extends GetView<PermissionCtr> {
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
                           controller.goToWebViewPage(
-                              '百度', 'https://www.baidu.com/');
+                              'Terminos y Condiciones', 'https://test.rapicreditoco.com/rapicreditos/Term.html');
                         }),
                 ])),
           ),

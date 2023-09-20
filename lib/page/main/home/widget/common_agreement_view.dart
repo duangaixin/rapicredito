@@ -34,7 +34,7 @@ class CommonAgreeViewState extends State<CommonAgreeView> {
                     color: Color(0xff6B8817)),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    _goToWebViewPage('Aviso de Privacidad', 'https://www.rapicreditoco.com/rapicreditos/privacy.html');
+                    _goToWebViewPage('Aviso de Privacidad', 'https://test.rapicreditoco.com/rapicreditos/privacy.html');
                   }),
             TextSpan(
                 text: Strings.autoLineString('y'),
@@ -48,7 +48,7 @@ class CommonAgreeViewState extends State<CommonAgreeView> {
                     color: Color(0xff6B8817)),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    _goToWebViewPage('Terminos y Condiciones', 'https://test.rapicreditoco.com/rapicreditos/Term.html');
+                    _goToWebViewPage( 'Terminos y Condiciones', 'https://test.rapicreditoco.com/rapicreditos/Term.html');
                   }),
           ])),
     );

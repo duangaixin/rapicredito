@@ -137,7 +137,7 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
               iconPath: Resource.assetsImageMineSignAgreement,
               onTap: () {
                 ctr.goToWebViewPage('Aviso de Privacidad',
-                    'https://www.rapicreditoco.com/rapicreditos/privacy.html');
+                    'https://test.rapicreditoco.com/rapicreditos/privacy.html');
               },
               content: 'Avisos de Privacidad',
             ),

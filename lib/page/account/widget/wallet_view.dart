@@ -148,7 +148,7 @@ class WalletView extends GetView<AccountCtr> {
                                           controller.state.walletSelectIndex =
                                               index;
                                           controller.goToWebViewPage(
-                                              '百度', value);
+                                              '', value);
                                         }),
                                 ])));
                       }))
