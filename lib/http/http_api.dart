@@ -1,5 +1,5 @@
 class HttpApi {
-  static const String apiBaseUrl = 'https://test.rapicreditoco.com/';
+  static const String apiBaseUrl = 'https://test.rapicreditoco.com/rapicredito/';
   static const String apiSendCode = 'italy/pushHarmfulConstruction';
   static const String apiLogin = 'italy/inventBetterMoon';
   static const String apiConfigInfo = 'facialHis/studyCompressedNortheast';

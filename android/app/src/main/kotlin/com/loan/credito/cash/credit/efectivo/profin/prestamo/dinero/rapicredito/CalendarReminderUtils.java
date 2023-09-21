@@ -95,9 +95,9 @@ public class CalendarReminderUtils {
             return;
         }
         Calendar mCalendar = Calendar.getInstance();
-        mCalendar.setTimeInMillis(reminderTime);//设置开始时间
+        mCalendar.setTimeInMillis(reminderTime);
         long start = mCalendar.getTime().getTime();
-        mCalendar.setTimeInMillis(start + 10 * 60 * 1000);//设置终止时间，开始时间加10分钟
+        mCalendar.setTimeInMillis(start + 10 * 60 * 1000);
         long end = mCalendar.getTime().getTime();
         ContentValues event = new ContentValues();
         event.put("title", title);
@@ -113,7 +113,7 @@ public class CalendarReminderUtils {
         }
         ContentValues values = new ContentValues();
         values.put(CalendarContract.Reminders.EVENT_ID, ContentUris.parseId(newEvent));
-        values.put(CalendarContract.Reminders.MINUTES, previousDate * 24 * 60);// 提前previousDate天有提醒
+        values.put(CalendarContract.Reminders.MINUTES, previousDate * 24 * 60);
         values.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT);
         Uri uri = context.getContentResolver().insert(Uri.parse(CALENDER_REMINDER_URL), values);
         if (uri == null) {
