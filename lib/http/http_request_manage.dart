@@ -14,10 +14,9 @@ import 'package:rapicredito/model/pay_url_info_bean.dart';
 import 'package:rapicredito/model/pre_submit_order_bean.dart';
 import 'package:rapicredito/model/product_info_bean.dart';
 import 'package:rapicredito/model/query_photo_info_bean.dart';
+import 'package:rapicredito/model/rollover_detail_info_bean.dart';
 import 'package:rapicredito/model/test_calculate_info_bean.dart';
 import 'package:rapicredito/net/base_response.dart';
-
-import '../model/rollover_detail_info_bean.dart';
 
 class HttpRequestManage {
   HttpRequestManage._privateConstructor();

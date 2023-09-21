@@ -7,7 +7,7 @@ import 'package:rapicredito/page/main/home/widget/common_pay_three_way_view.dart
 import 'package:rapicredito/page/main/home/widget/common_pay_two_way_view.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 
-///还款中
+
 class HomeLoanMakingRepaymentView extends GetView<MainHomeCtr> {
   const HomeLoanMakingRepaymentView({Key? key}) : super(key: key);
 

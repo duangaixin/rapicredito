@@ -18,13 +18,13 @@ class MainHomeState {
   RxList<HomeProductInfoBean> otherOrderList = <HomeProductInfoBean>[].obs;
   RxList<HomeProductInfoBean> notPlaceOrderList = <HomeProductInfoBean>[].obs;
   RxList<HomeProductInfoBean> dataSource = <HomeProductInfoBean>[].obs;
-  ///减免费用
+
   final RxDouble _feeWaiver = 0.0.obs;
 
   double get feeWaiver => _feeWaiver.value;
 
   set feeWaiver(status) => _feeWaiver.value = status;
-  ///借款金额
+
   final RxDouble _creditAmount = 0.0.obs;
 
   double get creditAmount => _creditAmount.value;
@@ -37,14 +37,14 @@ class MainHomeState {
 
   set applyDate(value) => _applyDate.value = value;
 
-  ///还款金额
+
   final RxDouble _repaymentAmount = 0.0.obs;
 
   double get repaymentAmount => _repaymentAmount.value;
 
   set repaymentAmount(status) => _repaymentAmount.value = status;
 
-  ///还款日期
+
 
   final RxString _repaymentDate = ''.obs;
 
@@ -52,7 +52,7 @@ class MainHomeState {
 
   set repaymentDate(value) => _repaymentDate.value = value;
 
-  ///是否支持展期支付
+
 
   final RxBool _canRolloverPay = false.obs;
 
@@ -60,7 +60,7 @@ class MainHomeState {
 
   set canRolloverPay(value) => _canRolloverPay.value = value;
 
-  ///展示支付按钮时间
+
 
   final RxInt _rolloverPayDay = 0.obs;
 
@@ -68,7 +68,7 @@ class MainHomeState {
 
   set rolloverPayDay(status) => _rolloverPayDay.value = status;
 
-  ///更新到期日
+
 
   final RxString _updateDueDate = ''.obs;
 
@@ -76,7 +76,7 @@ class MainHomeState {
 
   set updateDueDate(value) => _updateDueDate.value = value;
 
-  ///展期-延期费用
+
 
   final RxDouble _deferralCharge = 0.0.obs;
 
@@ -84,21 +84,21 @@ class MainHomeState {
 
   set deferralCharge(status) => _deferralCharge.value = status;
 
-  ///利息
+
   final RxDouble _interest = 0.0.obs;
 
   double get interest => _interest.value;
 
   set interest(status) => _interest.value = status;
 
-  ///滞纳金
+
   final RxDouble _overduePayment = 0.0.obs;
 
   double get overduePayment => _overduePayment.value;
 
   set overduePayment(status) => _overduePayment.value = status;
 
-  ///增值税
+
 
   final RxDouble _valueAddedTax = 0.0.obs;
 
@@ -106,7 +106,7 @@ class MainHomeState {
 
   set valueAddedTax(status) => _valueAddedTax.value = status;
 
-  ///扣除成本
+
 
   final RxDouble _deductCost = 0.0.obs;
 
@@ -114,7 +114,6 @@ class MainHomeState {
 
   set deductCost(status) => _deductCost.value = status;
 
-  ///支付费用
 
   final RxDouble _payFee = 0.0.obs;
 
@@ -122,7 +121,6 @@ class MainHomeState {
 
   set payFee(status) => _payFee.value = status;
 
-  ///逾期天数
   final RxInt _overdueDay = 0.obs;
 
   int get overdueDay => _overdueDay.value;

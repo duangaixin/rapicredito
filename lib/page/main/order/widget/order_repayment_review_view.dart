@@ -6,7 +6,7 @@ import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
-///还款中2
+///2
 class OrderRepaymentView extends GetView<MainOrderCtr> {
   final OrderInfoBean bean;
 

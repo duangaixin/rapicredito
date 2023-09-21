@@ -6,7 +6,7 @@ import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
-///放款失败5
+///5
 class OrderLoanFailedView extends GetView<MainOrderCtr> {
   final OrderInfoBean bean;
 

@@ -358,7 +358,6 @@ class AuthIdCtr extends BaseGetCtr {
         compressPath = compressFile.path;
       }
     }
-    print('$compressPath-----duanxin===compressFilePath');
     final String name =
         compressPath.substring(compressPath.lastIndexOf('/') + 1);
     MultipartFile multipartFile =

@@ -1,9 +1,5 @@
 class HttpApi {
-  static const String apiBaseUrl = 'https://glby.ultracreditosmx.com/rapicredito/';
-  ///debug
-  //static const String apiBaseUrl = 'https://test.rapicreditoco.com/';
-  ///release
-//  static const String apiBaseUrl ='https://www.rapicreditoco.com/ ';
+  static const String apiBaseUrl = 'https://test.rapicreditoco.com/';
   static const String apiSendCode = 'italy/pushHarmfulConstruction';
   static const String apiLogin = 'italy/inventBetterMoon';
   static const String apiConfigInfo = 'facialHis/studyCompressedNortheast';

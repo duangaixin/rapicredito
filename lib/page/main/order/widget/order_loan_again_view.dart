@@ -6,7 +6,7 @@ import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
-///再借一笔6
+///6
 class OrderLoanAgainView extends GetView<MainOrderCtr> {
   final OrderInfoBean bean;
 

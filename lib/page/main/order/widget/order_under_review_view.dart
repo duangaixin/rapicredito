@@ -5,7 +5,7 @@ import 'package:rapicredito/page/main/order/index.dart';
 import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
-///审核中1
+///1
 class OrderUnderReviewView extends GetView<MainOrderCtr> {
   final OrderInfoBean bean;
 

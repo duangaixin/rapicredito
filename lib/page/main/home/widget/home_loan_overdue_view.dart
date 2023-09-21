@@ -10,7 +10,7 @@ import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
-///逾期中
+
 class HomeLoanOverdueView extends GetView<MainHomeCtr> {
   const HomeLoanOverdueView({Key? key}) : super(key: key);
 

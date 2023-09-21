@@ -420,7 +420,6 @@ class UploadJsonManage {
     return locationBean;
   }
 
-  ///获取手机文件个数
   Future<MediaCountInfoBean?> getMediaFileCountInfo() async {
     var mediaCountInfo = await MethodChannelDevicesinfo.getMediaFilesData();
     if (!ObjectUtil.isEmptyString(mediaCountInfo)) {
@@ -484,7 +483,6 @@ class UploadJsonManage {
     return netInfoBean;
   }
 
-  ///手机卡
   Future<void> getSimCardInfo() async {
     var simCardInfo = await MethodChannelDevicesinfo.getSimCardData();
     if (!ObjectUtil.isEmptyString(simCardInfo)) {
@@ -492,8 +490,6 @@ class UploadJsonManage {
       var bean = SimCardInfoBean.fromJson(map);
     }
   }
-
-  ///内存卡
 
   Future<EnoughGeographyBroomChina> getStorageDataInfo() async {
     var storageInfo = await MethodChannelDevicesinfo.getStorageData();
@@ -547,7 +543,6 @@ class UploadJsonManage {
     return storageInfoBean;
   }
 
-  ///其他信息
   Future<RedEducationProperAliveShot> getOtherDataInfo() async {
     var otherInfo = await MethodChannelDevicesinfo.getOtherData();
     var otherInfoBean = RedEducationProperAliveShot(

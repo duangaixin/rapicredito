@@ -24,21 +24,18 @@ class AuthPersonState {
 
   set emailSelectIndex(value) => _emailSelectIndex.value = value;
 
-  ///收入
   final RxString _income = ''.obs;
 
   String get income => _income.value;
 
   set income(value) => _income.value = value;
 
-  ///家庭规模
   final RxString _familyCount = ''.obs;
 
   String get familyCount => _familyCount.value;
 
   set familyCount(value) => _familyCount.value = value;
 
-  ///教育程度
   final RxString _educationalLevel = ''.obs;
 
   String get educationalLevel => _educationalLevel.value;
