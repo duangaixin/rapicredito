@@ -22,10 +22,10 @@ class CommonAuthAgreeView extends GetView<MainHomeCtr> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const CustomImageView(
-                Resource.assetsImageMainOne,
+                Resource.assetsImageAgreeLock,
                 imageType: ImageType.assets,
                 width: 18.0,
-                height: 15.0,
+                height: 21.0,
               ),
               Expanded(
                   child: Padding(

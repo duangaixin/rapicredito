@@ -153,9 +153,9 @@ class MainMinePage extends GetKeepStateView<MainMineCtr> {
               iconWith: 25.0,
               iconPath: Resource.assetsImageMineSupplyAgreement,
               onTap: () {
-                ctr.goToTestPage();
-               // ctr.goToWebViewPage('Terminos y Condiciones',
-               //     'https://test.rapicreditoco.com/rapicreditos/Term.html');
+                //  ctr.goToTestPage();
+                ctr.goToWebViewPage('Terminos y Condiciones',
+                    'https://test.rapicreditoco.com/rapicreditos/Term.html');
               },
               content: 'Atención al cliente',
             ),

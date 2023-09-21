@@ -50,6 +50,8 @@ class Resource {
       'assets/image/auth/auth_take_camera.png';
   static const String assetsImageMessageDialog =
       'assets/image/other/message_top_dialog.png';
+  static const String assetsImageAgreeLock =
+      'assets/image/other/agree_lock.png';
   static const String assetsImageNotFound =
       'assets/image/other/not_found.png';
   static const String assetsImageDateSelectDialog =
