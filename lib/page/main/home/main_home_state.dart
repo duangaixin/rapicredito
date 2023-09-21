@@ -8,6 +8,7 @@ class MainHomeState {
   int orderId = -1;
   bool isRefresh = false;
   bool isPaying=false;
+  bool isRollover=false;
   final _loadState = LoadState.loading.obs;
 
   LoadState get loadState => _loadState.value;
@@ -126,6 +127,14 @@ class MainHomeState {
   int get overdueDay => _overdueDay.value;
 
   set overdueDay(status) => _overdueDay.value = status;
+
+  final RxInt _rolloverDuration = 0.obs;
+
+  int get rolloverDuration => _rolloverDuration.value;
+
+  set rolloverDuration(status) => _rolloverDuration.value = status;
+
+
 
   final RxBool _onePayShow = true.obs;
 

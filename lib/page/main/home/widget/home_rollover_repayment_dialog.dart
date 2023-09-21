@@ -155,46 +155,48 @@ class _HomeRolloverRepaymentDialogState
                 ),
               ],
             )),
-            //TODO OBX
             Padding(
               padding: const EdgeInsets.only(
                 top: 13.0,
               ),
-              child: RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                      text: Strings.autoLineString('Un pago único de '),
-                      style: const TextStyle(
-                          fontSize: 15.0, color: Color(0xff333333)),
-                      children: <TextSpan>[
-                        TextSpan(
-                            text: Strings.autoLineString('20000'),
-                            style: const TextStyle(
-                                fontSize: 15.0, color: Color(0xffD53535))),
-                        TextSpan(
-                            text: Strings.autoLineString(
-                                ', la fecha de vencimiento del reembolso se puede extender por '),
-                            style: const TextStyle(
-                                fontSize: 15.0, color: Color(0xff333333))),
-                        TextSpan(
-                            text: Strings.autoLineString(' días'),
-                            style: const TextStyle(
-                                fontSize: 15.0, color: Color(0xffD53535))),
-                        TextSpan(
-                            text: Strings.autoLineString(
-                                '.El pago de una suma  inferior a '),
-                            style: const TextStyle(
-                                fontSize: 15.0, color: Color(0xff333333))),
-                        TextSpan(
-                            text: Strings.autoLineString('7777'),
-                            style: const TextStyle(
-                                fontSize: 15.0, color: Color(0xffD53535))),
-                        TextSpan(
-                            text: Strings.autoLineString(
-                                '  no cambia el limite de la fecha de devolución. Debe pagar a tiempo.'),
-                            style: const TextStyle(
-                                fontSize: 15.0, color: Color(0xff333333))),
-                      ])),
+              child: Obx(() {
+                return RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                        text: Strings.autoLineString('Un pago único de '),
+                        style: const TextStyle(
+                            fontSize: 15.0, color: Color(0xff333333)),
+                        children: <TextSpan>[
+                          TextSpan(
+                              text: Strings.autoLineString('20000'),
+                              style: const TextStyle(
+                                  fontSize: 15.0, color: Color(0xffD53535))),
+                          TextSpan(
+                              text: Strings.autoLineString(
+                                  ', la fecha de vencimiento del reembolso se puede extender por '),
+                              style: const TextStyle(
+                                  fontSize: 15.0, color: Color(0xff333333))),
+                          TextSpan(
+                              text: Strings.autoLineString(
+                                  '${mainHomeCtr.mainHomeState.rolloverDuration} días'),
+                              style: const TextStyle(
+                                  fontSize: 15.0, color: Color(0xffD53535))),
+                          TextSpan(
+                              text: Strings.autoLineString(
+                                  '.El pago de una suma  inferior a '),
+                              style: const TextStyle(
+                                  fontSize: 15.0, color: Color(0xff333333))),
+                          TextSpan(
+                              text: Strings.autoLineString('7777'),
+                              style: const TextStyle(
+                                  fontSize: 15.0, color: Color(0xffD53535))),
+                          TextSpan(
+                              text: Strings.autoLineString(
+                                  '  no cambia el limite de la fecha de devolución. Debe pagar a tiempo.'),
+                              style: const TextStyle(
+                                  fontSize: 15.0, color: Color(0xff333333))),
+                        ]));
+              }),
             )
           ],
         ),

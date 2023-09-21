@@ -133,7 +133,12 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
         await postQueryHomeDefaultInfoRequest();
         if (mainHomeState.isPaying) {
           mainHomeState.isPaying = false;
-          Get.toNamed(PageRouterName.repaymentResultPage);
+          if(mainHomeState.isRollover){
+            Get.toNamed(PageRouterName.rolloverPaymentResultPage);
+          }else{
+            Get.toNamed(PageRouterName.repaymentResultPage);
+          }
+
         }
       } else if (mainHomeState.overdueStatus == 0 ||
           mainHomeState.overdueStatus == 1) {
@@ -242,6 +247,7 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
       {bool isRollover = false}) async {
     Get.showLoading();
     Map<String, dynamic> param = getCommonParam();
+    mainHomeState.isRollover=isRollover;
     var payTypeStr = isRollover ? '01' : '00';
     var payMethod = '';
     if (payType == PayType.payOne) {
@@ -268,6 +274,9 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
         openUrl = bean?.northernMarriageCommunism ?? '';
       }
       var openWay = bean?.loudEndlessMexico ?? '0';
+      if(isRollover){
+        Get.back();
+      }
       mainHomeState.isPaying = true;
       if (openWay == '1') {
         _openBrowser(openUrl);
@@ -298,6 +307,10 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
       mainHomeState.overduePayment = bean?.freeCleanerBluePineapple ?? 0.0;
       mainHomeState.valueAddedTax = bean?.triangleRemarkIllBattery ?? 0.0;
       mainHomeState.payFee = bean?.interestingComradeHairIntroduction ?? 0.0;
+      mainHomeState.rolloverDuration=bean?.passiveHis??0;
+
+
+
       _showRolloverPayDialog();
     } else {
       NetException.dealAllException(response);
