@@ -9,6 +9,7 @@ import static com.zy.devicesinfo.utils.OtherUtils.getSerialNumbers;
 import static com.zy.devicesinfo.utils.OtherUtils.isTabletDevice;
 
 import android.os.Build;
+import android.text.TextUtils;
 
 import com.zy.devicesinfo.utils.CpuUtils;
 import com.zy.devicesinfo.utils.GeneralUtils;
@@ -88,8 +89,11 @@ public class HardwareData {
     public int is_tablet;
 
     {
-        imei1 = GeneralUtils.getIMEI(0);
-        imei2 = GeneralUtils.getIMEI(1);
+
+
+        imei1 = GeneralUtils.getImeiOne();
+
+        imei2 = GeneralUtils.getImeiTwo();
         model = Build.MODEL;
         brand = Build.BRAND;
         product = Build.PRODUCT;

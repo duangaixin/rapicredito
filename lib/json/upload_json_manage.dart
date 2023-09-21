@@ -563,10 +563,9 @@ class UploadJsonManage {
       otherInfoBean.racialChalkPainfulUniversity = bean.dbm?.toString();
       otherInfoBean.laserTeamwork = bean.rootJailbreak?.toString();
       otherInfoBean.fairDifficultMiddlePreciousCloth =
-          bean.bootTime?.toString();
-
-      ///total_boot_time_wake
-      otherInfoBean.pureMarriageNoiseThroat = '';
+          bean.totalBootTime?.toString();
+      otherInfoBean.pureMarriageNoiseThroat =
+          bean.totalBootTimeWake?.toString();
     }
     return otherInfoBean;
   }

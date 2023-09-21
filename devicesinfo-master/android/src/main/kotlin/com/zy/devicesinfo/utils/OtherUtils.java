@@ -402,7 +402,44 @@ public class OtherUtils {
         return System.currentTimeMillis() - SystemClock.elapsedRealtimeNanos() / 1000000;
     }
 
-
+    /**
+     * 获取手机信号强度，需添加权限 android.permission.ACCESS_COARSE_LOCATION <br>
+     * API要求不低于17 <br>
+     *
+     * @return 当前手机主卡信号强度, 单位 dBm（-1是默认值，表示获取失败）
+     */
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    @SuppressLint("MissingPermission")
+    public static int getMyMobileDbm() {
+        int dbm = -1;
+        TelephonyManager tm = (TelephonyManager) UtilsApp.getApp().getSystemService(Context.TELEPHONY_SERVICE);
+        List<CellInfo> cellInfoList;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            cellInfoList = tm.getAllCellInfo();
+            if (null != cellInfoList) {
+                for (CellInfo cellInfo : cellInfoList) {
+                    if (cellInfo instanceof CellInfoGsm) {
+                        CellSignalStrengthGsm cellSignalStrengthGsm = ((CellInfoGsm) cellInfo).getCellSignalStrength();
+                        dbm = cellSignalStrengthGsm.getDbm();
+                    } else if (cellInfo instanceof CellInfoCdma) {
+                        CellSignalStrengthCdma cellSignalStrengthCdma =
+                                ((CellInfoCdma) cellInfo).getCellSignalStrength();
+                        dbm = cellSignalStrengthCdma.getDbm();
+                    } else if (cellInfo instanceof CellInfoWcdma) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                            CellSignalStrengthWcdma cellSignalStrengthWcdma =
+                                    ((CellInfoWcdma) cellInfo).getCellSignalStrength();
+                            dbm = cellSignalStrengthWcdma.getDbm();
+                        }
+                    } else if (cellInfo instanceof CellInfoLte) {
+                        CellSignalStrengthLte cellSignalStrengthLte = ((CellInfoLte) cellInfo).getCellSignalStrength();
+                        dbm = cellSignalStrengthLte.getDbm();
+                    }
+                }
+            }
+        }
+        return dbm;
+    }
     @SuppressLint("NewApi")
     public static String getMobileDbm() {
         String dbm = "";

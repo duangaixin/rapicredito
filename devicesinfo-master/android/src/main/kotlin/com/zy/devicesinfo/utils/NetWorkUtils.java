@@ -20,10 +20,13 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+
+import kotlin.jvm.JvmStatic;
 
 public class NetWorkUtils {
 
@@ -88,6 +91,28 @@ public class NetWorkUtils {
         return mac;
     }
 
+    public static String getMyMacAddress() {
+        String macAddress = "";
+        NetworkInterface networkInterface = null;
+            try {
+                if (NetworkInterface.getByName("eth0") != null) {
+                    networkInterface = NetworkInterface.getByName("eth0");
+                } else if (NetworkInterface.getByName("wlan0") != null) {
+                    networkInterface = NetworkInterface.getByName("wlan0");
+                }
+                if (networkInterface == null) {
+                    return macAddress;
+                }
+                byte[] macArr = networkInterface.getHardwareAddress();
+                StringBuilder buf = new StringBuilder();
+                for (byte b : macArr) {
+                    buf.append(String.format("%02X", b) + ":");
+                }
+                return macAddress.substring(0, macAddress.length() - 1);
+            } catch (SocketException e) {
+                throw new RuntimeException(e);
+            }
+    }
 
     /**
      * Android  6.0 之前（不包括6.0）

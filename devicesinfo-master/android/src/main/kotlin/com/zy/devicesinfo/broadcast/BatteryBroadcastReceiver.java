@@ -23,6 +23,8 @@ import android.content.Intent;
 import com.zy.devicesinfo.UtilsApp;
 import com.zy.devicesinfo.data.BatteryStatusData;
 
+import kotlin.jvm.JvmStatic;
+
 
 public class BatteryBroadcastReceiver extends BroadcastReceiver {
 
@@ -98,7 +100,10 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
                     break;
             }
             batteryStatusData.charge_type = status;
-            batteryStatusData.battery_pct = intent.getIntExtra("level", 0);    //目前电量
+            int sum=intent.getIntExtra("scale", 100);
+
+             int level=        intent.getIntExtra("level", 0);
+            batteryStatusData.battery_pct =100 * level / sum;
             batteryStatusData.battery_temperature = intent.getIntExtra("temperature", 0);  //电池温度
             batteryStatusData.is_charging = charge_type;
             batteryStatusData.battery_health = battery_health;
@@ -107,4 +112,5 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
             UtilsApp.batteryStatusData = batteryStatusData;
         }
     }
+
 }

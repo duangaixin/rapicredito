@@ -5,9 +5,10 @@ part 'other_info_bean.g.dart';
 
 @JsonSerializable()
 class OtherInfoBean extends Object {
-
-  @JsonKey(name: 'bootTime')
-  int? bootTime;
+  @JsonKey(name: 'total_boot_time_wake')
+  int? totalBootTimeWake;
+  @JsonKey(name: 'total_boot_time')
+  int? totalBootTime;
 
   @JsonKey(name: 'dbm')
   String? dbm;
@@ -51,7 +52,7 @@ class OtherInfoBean extends Object {
   @JsonKey(name: 'vpn_address')
   String? vpnAddress;
 
-  OtherInfoBean(this.bootTime,this.dbm,this.httpProxyHostPort,this.isAirplaneMode,this.isMockLocation,this.isUsbDebug,this.isUsingProxyPort,this.isUsingVpn,this.keyboard,this.lastBootTime,this.ringerMode,this.rootJailbreak,this.sensorData,this.intSimulator,this.vpnAddress,);
+  OtherInfoBean(this.totalBootTimeWake,this.totalBootTime,this.dbm,this.httpProxyHostPort,this.isAirplaneMode,this.isMockLocation,this.isUsbDebug,this.isUsingProxyPort,this.isUsingVpn,this.keyboard,this.lastBootTime,this.ringerMode,this.rootJailbreak,this.sensorData,this.intSimulator,this.vpnAddress,);
 
   factory OtherInfoBean.fromJson(Map<String, dynamic> srcJson) => _$OtherInfoBeanFromJson(srcJson);
 

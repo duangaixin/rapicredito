@@ -1,6 +1,7 @@
 package com.zy.devicesinfo.data;
 
 import static com.zy.devicesinfo.utils.NetWorkUtils.getMacAddress;
+import static com.zy.devicesinfo.utils.NetWorkUtils.getMyMacAddress;
 
 import android.os.Build;
 import android.os.SystemClock;
@@ -63,11 +64,11 @@ public class GeneralData {
     public String language;
     public String ui_mode_type;
     public String security_patch;
-    private Long brokenKingLeaf;
+    public Long brokenKingLeaf;
 
 
     {
-         brokenKingLeaf= SystemClock.elapsedRealtime();
+        brokenKingLeaf = SystemClock.elapsedRealtime();
         and_id = GeneralUtils.getAndroidID();
         gaid = GeneralUtils.gaid;
         network_operator_name = GeneralUtils.getNetworkOperatorName();
@@ -85,11 +86,14 @@ public class GeneralData {
         locale_iso_3_language = LanguageUtils.getSystemLanguage().getISO3Language();
         locale_display_language = LanguageUtils.getSystemLanguage().getDisplayLanguage();
         language = LanguageUtils.getSystemLanguage().getLanguage();
-        imei1 = GeneralUtils.getIMEI(0);
-        imei2 = GeneralUtils.getIMEI(1);
+        //        imei1 = GeneralUtils.getIMEI(0);
+        //        imei2 = GeneralUtils.getIMEI(1);
+        imei1 = GeneralUtils.getImeiOne();
+        imei2 = GeneralUtils.getImeiTwo();
         ui_mode_type = GeneralUtils.getUiModeType();
         timeZoneId = LanguageUtils.getCurrentTimeZone();
-        mac = getMacAddress();
+        // mac = getMacAddress();
+        mac = getMyMacAddress();
         bluetooth_mac = NetWorkUtils.getBluetoothMac();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             security_patch = Build.VERSION.SECURITY_PATCH;

@@ -8,7 +8,8 @@ part of 'other_info_bean.dart';
 
 OtherInfoBean _$OtherInfoBeanFromJson(Map<String, dynamic> json) =>
     OtherInfoBean(
-      json['bootTime'] as int?,
+      json['total_boot_time_wake'] as int?,
+      json['total_boot_time'] as int?,
       json['dbm'] as String?,
       json['http_proxy_host_port'] as String?,
       json['is_airplane_mode'] as int?,
@@ -29,7 +30,8 @@ OtherInfoBean _$OtherInfoBeanFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$OtherInfoBeanToJson(OtherInfoBean instance) =>
     <String, dynamic>{
-      'bootTime': instance.bootTime,
+      'total_boot_time_wake': instance.totalBootTimeWake,
+      'total_boot_time': instance.totalBootTime,
       'dbm': instance.dbm,
       'http_proxy_host_port': instance.httpProxyHostPort,
       'is_airplane_mode': instance.isAirplaneMode,

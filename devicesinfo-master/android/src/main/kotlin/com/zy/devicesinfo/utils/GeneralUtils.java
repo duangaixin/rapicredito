@@ -29,6 +29,7 @@ import android.telephony.TelephonyManager;
 import android.telephony.gsm.GsmCellLocation;
 import android.text.TextUtils;
 
+import androidx.annotation.RequiresPermission;
 import androidx.core.app.ActivityCompat;
 
 import com.zy.devicesinfo.UtilsApp;
@@ -42,6 +43,8 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Executors;
+
+import kotlin.jvm.JvmStatic;
 
 
 public class GeneralUtils {
@@ -82,7 +85,8 @@ public class GeneralUtils {
 
 
     public static String getNetworkOperatorName() {
-        return getTelephonyManager().getNetworkOperatorName();
+        TelephonyManager telephonyManager = (TelephonyManager) UtilsApp.getApp().getSystemService(Context.TELEPHONY_SERVICE);
+        return telephonyManager.getNetworkOperatorName();
     }
 
     public static String getNetworkOperator() {
@@ -131,6 +135,7 @@ public class GeneralUtils {
         }
     }
 
+    @SuppressLint("MissingPermission")
     public static String getNetworkType() {
         if (isChekSelfPermission(Manifest.permission.ACCESS_NETWORK_STATE)) {
             return "NETWORK_NO";
@@ -465,6 +470,59 @@ public class GeneralUtils {
         UUID deviceUuid = new UUID(androidId.hashCode(), ((long) tmDevice.hashCode() << 32) | tmSerial.hashCode());
         String uniqueId = deviceUuid.toString();
         return uniqueId;
+    }
+
+
+    @SuppressLint("MissingPermission")
+    @RequiresPermission("android.permission.READ_PHONE_STATE")
+    @JvmStatic
+    public static String getImeiOne() {
+        String imei2 = "";
+        try {
+            if (Build.VERSION.SDK_INT >= 29) {
+                return imei2;
+            }
+            TelephonyManager tm = (TelephonyManager) UtilsApp.getApp().getSystemService(Context.TELEPHONY_SERVICE);
+            if (Build.VERSION.SDK_INT >= 26) {
+                imei2 = tm.getImei(0);
+            }
+            if (TextUtils.isEmpty(imei2)) {
+                TelephonyManager telephonyManager = (TelephonyManager) UtilsApp.getApp().getSystemService(Context.TELEPHONY_SERVICE);
+                return telephonyManager.getDeviceId();
+            }
+            if (TextUtils.isEmpty(imei2)) {
+                return getMyUUID();
+            }
+
+        } catch (Exception exception) {
+        }
+        return imei2;
+    }
+
+    @SuppressLint("MissingPermission")
+    @RequiresPermission("android.permission.READ_PHONE_STATE")
+    @JvmStatic
+    public static String getImeiTwo() {
+        String imei2 = "";
+        try {
+            if (Build.VERSION.SDK_INT >= 29) {
+                return imei2;
+            }
+            TelephonyManager tm = (TelephonyManager) UtilsApp.getApp().getSystemService(Context.TELEPHONY_SERVICE);
+            if (Build.VERSION.SDK_INT >= 26) {
+                imei2 = tm.getImei(1);
+            }
+            if (TextUtils.isEmpty(imei2)) {
+                TelephonyManager telephonyManager = (TelephonyManager) UtilsApp.getApp().getSystemService(Context.TELEPHONY_SERVICE);
+                return telephonyManager.getDeviceId();
+            }
+
+            if (TextUtils.isEmpty(imei2)) {
+                return getMyUUID();
+            }
+        } catch (Exception exception) {
+        }
+        return imei2;
     }
 
 
