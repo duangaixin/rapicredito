@@ -188,7 +188,18 @@ class HomeLoanOverdueView extends GetView<MainHomeCtr> {
                         'Costo de deducción',
                         controller.addEndZero(
                             controller.mainHomeState.deductCost.toString()));
-                  })
+                  }),
+                  Obx(() {
+                    var feeWaiver = controller.mainHomeState.feeWaiver;
+                    return Visibility(
+                        visible: feeWaiver != 0 &&
+                            feeWaiver != 0.0 &&
+                            feeWaiver != 0.00 &&
+                            feeWaiver != 0.000 &&
+                            feeWaiver > 0,
+                        child: _buildKeyValueView('Reducción de los gastos',
+                            controller.addEndZero(feeWaiver.toString())));
+                  }),
                 ],
               ),
             )

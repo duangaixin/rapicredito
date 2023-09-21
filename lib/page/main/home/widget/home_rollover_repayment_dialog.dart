@@ -110,13 +110,16 @@ class _HomeRolloverRepaymentDialogState
                       .addEndZero(mainHomeCtr.mainHomeState.payFee.toString()));
             }),
             Obx(() {
-              return _buildBoldKeyValueView(
-                  'Reducción de los gastos',
-                  mainHomeCtr
-                      .addEndZero(mainHomeCtr.mainHomeState.feeWaiver.toString()));
+              var feeWaiver = mainHomeCtr.mainHomeState.feeWaiver;
+              return Visibility(
+                  visible: feeWaiver != 0 &&
+                      feeWaiver != 0.0 &&
+                      feeWaiver != 0.00 &&
+                      feeWaiver != 0.000 &&
+                      feeWaiver > 0,
+                  child: _buildBoldKeyValueView('Reducción de los gastos',
+                      mainHomeCtr.addEndZero(feeWaiver.toString())));
             }),
-
-
           ],
         ),
       );

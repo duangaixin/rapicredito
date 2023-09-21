@@ -32,8 +32,25 @@ class CommonLoanMoneyView extends GetView<MainHomeCtr> {
                 style: TextStyle(fontSize: 15.0, color: Color(0xff333333)),
               )),
           Obx(() {
-            var loanMoney = TextUtil.formatComma3(controller
-                .dealEndZero(controller.mainHomeState.creditAmount.toString()));
+            var loanMoney = '';
+            var str = controller
+                .dealEndZero(controller.mainHomeState.creditAmount.toString());
+            if (int.tryParse(str) != null) {
+              loanMoney = str;
+            } else {
+              loanMoney = (double.tryParse(str) ?? 0.0).toString();
+            }
+            if (controller.mainHomeState.overdueStatus == 0 ||
+                controller.mainHomeState.overdueStatus == 1) {
+              var str = controller.dealEndZero(
+                  controller.mainHomeState.repaymentAmount.toString());
+              if (int.tryParse(str) != null) {
+                loanMoney = str;
+              } else {
+                loanMoney = (double.tryParse(str) ?? 0.0).toString();
+              }
+            }
+
             return Text(
               '${loanMoney}GTQ',
               style: const TextStyle(

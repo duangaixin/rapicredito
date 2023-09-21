@@ -356,7 +356,7 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
       } else {
         if (num.parse(str) is int) {
           var strBegin = TextUtil.formatComma3(str);
-          return '${strBegin}00'.strWithDollar();
+          return '$strBegin.00'.strWithDollar();
         }
       }
     }
