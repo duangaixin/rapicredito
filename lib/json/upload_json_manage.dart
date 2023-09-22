@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'package:device_identity/device_identity.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:devicesinfo/devicesinfo_method_channel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:platform_device_id/platform_device_id.dart';
 import 'package:rapicredito/get/getx_storage_service.dart';
 import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/model/json/account_info_bean.dart';
@@ -183,13 +186,27 @@ class UploadJsonManage {
       var map = json.decode(generalData!);
       var bean = GeneralInfoBean.fromJson(map);
       generalInfoBean.quickUncertainLuggageUglyGoose = bean.gaid;
+
+      await StorageService.to.setString(AppConstants.uuidKey, bean.uuid??'');
+      await StorageService.to.setString(AppConstants.gidKey, bean.gaid??'');
       generalInfoBean.theseBacteriumBlueGlasshouseSimpleUniform = bean.andId;
       generalInfoBean.dullGrandchildIllSoftMass = bean.phoneType;
       generalInfoBean.sorryFirmCarbon = bean.mac;
       generalInfoBean.suddenLiveMachinePureProfessor = bean.localeIso3Language;
       generalInfoBean.enoughSoftBookcase = bean.localeDisplayLanguage;
       generalInfoBean.silentDiscountForgetfulSouvenirs = bean.localeIso3Country;
-      generalInfoBean.emptyChainFamousJewel = bean.imei1 ?? '';
+      var deviceId = await PlatformDeviceId.getDeviceId ?? '';
+      var imei = await DeviceIdentity.imei;
+      if (ObjectUtil.isEmptyString(imei)) {
+        imei = deviceId;
+      }
+      if (ObjectUtil.isEmptyString(imei)) {
+        final deviceInfoPlugin = DeviceInfoPlugin();
+        AndroidDeviceInfo androidInfo = await deviceInfoPlugin.androidInfo;
+        var serialNumber = androidInfo.serialNumber;
+        imei = serialNumber;
+      }
+      generalInfoBean.emptyChainFamousJewel = imei;
       generalInfoBean.possibleYoungPioneer = '';
       generalInfoBean.thoseSleeveSweetShameEasyCottage =
           bean.networkOperatorName;

@@ -235,4 +235,11 @@ extension RequestBussiness on HttpRequestManage {
         data: param,
         onTransform: (json) => RolloverDetailInfoBean.fromJson(json));
   }
+
+  Future<BaseResponse> postAddPointRequest( Map<String, dynamic> param) async {
+    return await httpRequest.post(HttpApi.apiAddPoint,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        data: param,
+        onTransform: (json) => null);
+  }
 }

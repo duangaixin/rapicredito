@@ -12,6 +12,7 @@ import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/model/pay_url_info_bean.dart';
 import 'package:rapicredito/page/main/home/index.dart';
+import 'package:rapicredito/page/main/home/widget/home_confirm_pay_dialog.dart';
 import 'package:rapicredito/page/main/home/widget/home_rollover_repayment_dialog.dart';
 import 'package:rapicredito/page/main/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
@@ -238,6 +239,15 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
     }
   }
 
+  void _showConfirmPayDialog({Function? func}) {
+    showDialog(
+        context: Get.context!,
+        barrierDismissible: false,
+        builder: (_) {
+          return HomeConfirmPayDialog(clickConfirm: func);
+        });
+  }
+
   void clickPayType(PayType payType, {bool isRollover = false}) {
     _postQueryRepayUrlRequest(payType, isRollover: isRollover);
   }
@@ -278,9 +288,13 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
       }
       mainHomeState.isPaying = true;
       if (openWay == '1') {
-        _openBrowser(openUrl);
+        _showConfirmPayDialog(func: () {
+          _openBrowser(openUrl);
+        });
       } else {
-        _goToWebViewPage('', openUrl);
+        _showConfirmPayDialog(func: () {
+          _goToWebViewPage('', openUrl);
+        });
       }
     } else {
       mainHomeState.isPaying = false;

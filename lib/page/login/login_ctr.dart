@@ -147,6 +147,7 @@ class LoginCtr extends BaseGetCtr {
     param
       ..['testFlag'] = testFlag
       ..['userPhone'] = phone;
+  // var str=  await channel.invokeMethod('appInstanceId');
     await channel.invokeMethod('setCrispInfo', param);
   }
 

@@ -9,6 +9,9 @@ import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Map;
 
@@ -73,10 +76,38 @@ public class OriginInfoPlugin implements FlutterPlugin {
                     Map<String, Object> calendarParam = (Map<String, Object>) methodCall.arguments;
                     addCalendar(calendarParam);
                     break;
+                case "appInstanceId":
+                   getAppInstanceId();
+                    break;
+                case "getUserAgent":
+                    result.success(System.getProperty("http.agent"));
+                    break;
                 default:
                     result.notImplemented();
             }
         });
+    }
+
+    private  void getAppInstanceId(){
+        try {
+            FirebaseAnalytics.getInstance(mActivity).getAppInstanceId().addOnCompleteListener(new OnCompleteListener<String>() {
+                @Override
+                public void onComplete(@NonNull Task<String> task) {
+                    if (task.isSuccessful()) {
+                        try {
+                            String instanceId = task.getResult();
+                            System.out.print(instanceId+"-----dddd");
+                            mResult.success(instanceId);
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void addCalendar(Map<String, Object> param) {

@@ -5,18 +5,18 @@ import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
-class PayDialog extends StatefulWidget {
+class HomeConfirmPayDialog extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _PayDialogState();
-  final Function clickConfirm;
+  State<StatefulWidget> createState() => _HomeConfirmPayDialogState();
+  final Function? clickConfirm;
 
-  const PayDialog({
+  const HomeConfirmPayDialog({
     Key? key,
     required this.clickConfirm,
   }) : super(key: key);
 }
 
-class _PayDialogState extends State<PayDialog> {
+class _HomeConfirmPayDialogState extends State<HomeConfirmPayDialog> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,7 +78,7 @@ class _PayDialogState extends State<PayDialog> {
       children: [
         Expanded(
             child: CustomButton(
-          onPressed: widget.clickConfirm(),
+          onPressed: Get.back,
           minWidth: 152.0,
           minHeight: 46.0,
           backgroundColor: Colors.white,
@@ -95,7 +95,10 @@ class _PayDialogState extends State<PayDialog> {
         ),
         Expanded(
             child: CustomButton(
-          onPressed: widget.clickConfirm(),
+          onPressed: () {
+            Get.back();
+            widget.clickConfirm?.call();
+          },
           minWidth: 152.0,
           minHeight: 46.0,
           backgroundColor: const Color(0xffB8EF17),

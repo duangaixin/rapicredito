@@ -31,5 +31,5 @@ class HttpApi {
       'facialHis/instructLikelyTailor';
   static const String apiIsManyProduct = 'businessman/dismissThatRail';
   static const String apiRolloverDetailInfo='cheapHeroine/plantReadyTechnique' ;
-
+  static const String apiAddPoint='facialHis/burnUselessQuantity' ;
 }

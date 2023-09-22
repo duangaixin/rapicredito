@@ -16,4 +16,6 @@ class AppConstants {
   static const String fromPageNameKey = 'fromPageNameKey';
   static const String isFromAddAccountKey = 'isFromAddAccountKey';
   static const String locationKey = 'locationKey';
+  static const String  gidKey = 'gidKey';
+  static const String  uuidKey = 'uuidKey';
 }
