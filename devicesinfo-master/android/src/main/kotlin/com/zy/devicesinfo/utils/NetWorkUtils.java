@@ -94,24 +94,29 @@ public class NetWorkUtils {
     public static String getMyMacAddress() {
         String macAddress = "";
         NetworkInterface networkInterface = null;
-            try {
-                if (NetworkInterface.getByName("eth0") != null) {
-                    networkInterface = NetworkInterface.getByName("eth0");
-                } else if (NetworkInterface.getByName("wlan0") != null) {
-                    networkInterface = NetworkInterface.getByName("wlan0");
-                }
-                if (networkInterface == null) {
-                    return macAddress;
-                }
-                byte[] macArr = networkInterface.getHardwareAddress();
-                StringBuilder buf = new StringBuilder();
+        try {
+            if (NetworkInterface.getByName("eth0") != null) {
+                networkInterface = NetworkInterface.getByName("eth0");
+            } else if (NetworkInterface.getByName("wlan0") != null) {
+                networkInterface = NetworkInterface.getByName("wlan0");
+            }
+            if (networkInterface == null) {
+                return macAddress;
+            }
+            byte[] macArr = networkInterface.getHardwareAddress();
+            StringBuilder buf = new StringBuilder();
+            if (macArr != null && macArr.length > 0) {
                 for (byte b : macArr) {
                     buf.append(String.format("%02X", b) + ":");
                 }
-                return macAddress.substring(0, macAddress.length() - 1);
-            } catch (SocketException e) {
-                throw new RuntimeException(e);
             }
+            if (TextUtils.isEmpty(macAddress)) {
+                return getMacAddress();
+            }
+            return macAddress.substring(0, macAddress.length() - 1);
+        } catch (SocketException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -169,7 +174,8 @@ public class NetWorkUtils {
         try {
             List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
             for (NetworkInterface nif : all) {
-                if (!nif.getName().equalsIgnoreCase("wlan0")) continue;
+                if (!nif.getName().equalsIgnoreCase("wlan0"))
+                    continue;
 
                 byte[] macBytes = nif.getHardwareAddress();
                 if (macBytes == null) {
@@ -205,7 +211,8 @@ public class NetWorkUtils {
 
     @TargetApi(23)
     public static String getBluetoothAddressSdk23(BluetoothAdapter adapter) {
-        if (adapter == null) return null;
+        if (adapter == null)
+            return null;
         Class<? extends BluetoothAdapter> btAdapterClass = adapter.getClass();
         try {
             Class<?> btClass = Class.forName("android.bluetooth.IBluetooth");

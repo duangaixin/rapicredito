@@ -116,9 +116,6 @@ public class CalendarReminderUtils {
         values.put(CalendarContract.Reminders.MINUTES, previousDate * 24 * 60);
         values.put(CalendarContract.Reminders.METHOD, CalendarContract.Reminders.METHOD_ALERT);
         Uri uri = context.getContentResolver().insert(Uri.parse(CALENDER_REMINDER_URL), values);
-        if (uri == null) {
-            return;
-        }
     }
 
     public static void deleteCalendarEvent(Context context, String title) {
