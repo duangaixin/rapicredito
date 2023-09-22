@@ -28,7 +28,7 @@ class LoanMoneyDateState {
   set incrementStep(value) => _incrementStep.value = value;
 
   ///到手金额
-  final RxString _amountInHand = ''.obs;
+  final RxString _amountInHand = '--'.obs;
 
   String get amountInHand => _amountInHand.value;
 
@@ -36,14 +36,14 @@ class LoanMoneyDateState {
 
   ///利息
 
-  final RxString _interest = ''.obs;
+  final RxString _interest = '--'.obs;
 
   String get interest => _interest.value;
 
   set interest(value) => _interest.value = value;
 
   ///服务费
-  final RxString _serviceCharge = ''.obs;
+  final RxString _serviceCharge = '--'.obs;
 
   String get serviceCharge => _serviceCharge.value;
 
@@ -51,28 +51,28 @@ class LoanMoneyDateState {
 
   ///增值税
 
-  final RxString _iva = ''.obs;
+  final RxString _iva = '--'.obs;
 
   String get iva => _iva.value;
 
   set iva(value) => _iva.value = value;
 
   ///银行收取服务费
-  final RxString _bankServiceCharge = ''.obs;
+  final RxString _bankServiceCharge = '--'.obs;
 
   String get bankServiceCharge => _bankServiceCharge.value;
 
   set bankServiceCharge(value) => _bankServiceCharge.value = value;
 
   ///还款金额
-  final RxString _repaymentAmount = ''.obs;
+  final RxString _repaymentAmount = '--'.obs;
 
   String get repaymentAmount => _repaymentAmount.value;
 
   set repaymentAmount(value) => _repaymentAmount.value = value;
 
   ///还款日期
-  final RxString _repaymentDate = ''.obs;
+  final RxString _repaymentDate = '--'.obs;
 
   String get repaymentDate => _repaymentDate.value;
 

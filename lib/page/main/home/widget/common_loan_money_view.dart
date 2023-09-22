@@ -50,9 +50,9 @@ class CommonLoanMoneyView extends GetView<MainHomeCtr> {
                 loanMoney = (double.tryParse(str) ?? 0.0).toString();
               }
             }
-
+           var dealStr=controller.formatPrice(loanMoney);
             return Text(
-              '${loanMoney}GTQ',
+              '${dealStr}GTQ',
               style: const TextStyle(
                   fontSize: 30.0,
                   color: Color(0xff333333),

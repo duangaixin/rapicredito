@@ -102,7 +102,7 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
     var response = await HttpRequestManage.instance.postOrderInfo(param);
     if (response.isSuccess()) {
       var bean = response.data;
-     mainHomeState.feeWaiver=bean?. unusualPing??0.0;
+      mainHomeState.feeWaiver = bean?.unusualPing ?? 0.0;
       mainHomeState.orderId =
           bean?.disabledLondonPrivatePoolAmericanInstrument ?? -1;
       mainHomeState.overdueStatus =
@@ -133,12 +133,11 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
         await postQueryHomeDefaultInfoRequest();
         if (mainHomeState.isPaying) {
           mainHomeState.isPaying = false;
-          if(mainHomeState.isRollover){
+          if (mainHomeState.isRollover) {
             Get.toNamed(PageRouterName.rolloverPaymentResultPage);
-          }else{
+          } else {
             Get.toNamed(PageRouterName.repaymentResultPage);
           }
-
         }
       } else if (mainHomeState.overdueStatus == 0 ||
           mainHomeState.overdueStatus == 1) {
@@ -247,7 +246,7 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
       {bool isRollover = false}) async {
     Get.showLoading();
     Map<String, dynamic> param = getCommonParam();
-    mainHomeState.isRollover=isRollover;
+    mainHomeState.isRollover = isRollover;
     var payTypeStr = isRollover ? '01' : '00';
     var payMethod = '';
     if (payType == PayType.payOne) {
@@ -274,7 +273,7 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
         openUrl = bean?.northernMarriageCommunism ?? '';
       }
       var openWay = bean?.loudEndlessMexico ?? '0';
-      if(isRollover){
+      if (isRollover) {
         Get.back();
       }
       mainHomeState.isPaying = true;
@@ -307,9 +306,7 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
       mainHomeState.overduePayment = bean?.freeCleanerBluePineapple ?? 0.0;
       mainHomeState.valueAddedTax = bean?.triangleRemarkIllBattery ?? 0.0;
       mainHomeState.payFee = bean?.interestingComradeHairIntroduction ?? 0.0;
-      mainHomeState.rolloverDuration=bean?.passiveHis??0;
-
-
+      mainHomeState.rolloverDuration = bean?.passiveHis ?? 0;
 
       _showRolloverPayDialog();
     } else {
@@ -352,13 +349,37 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
     return str;
   }
 
+  String formatPrice(String str) {
+    if (!ObjectUtil.isEmptyString(str)) {
+      if (str.contains('.')) {
+        var index = str.indexOf('.');
+        var beginStr = str.substring(0, index);
+        var endStr = str.substring(index + 1, str.length);
+        if (num.tryParse(beginStr) is int) {
+          var strBegin = TextUtil.formatComma3(beginStr);
+          var str = '$strBegin.$endStr';
+          if (str.endsWith('.0')) {
+            str = '${str}0';
+          }
+          return str;
+        }
+      } else {
+        if (num.tryParse(str) is int) {
+          var strBegin = TextUtil.formatComma3(str);
+          return strBegin;
+        }
+      }
+    }
+    return str;
+  }
+
   String addEndZero(String str) {
     if (!ObjectUtil.isEmptyString(str)) {
       if (str.contains('.')) {
         var index = str.indexOf('.');
         var beginStr = str.substring(0, index);
         var endStr = str.substring(index + 1, str.length);
-        if (num.parse(beginStr) is int) {
+        if (num.tryParse(beginStr) is int) {
           var strBegin = TextUtil.formatComma3(beginStr);
           var str = '$strBegin.$endStr';
           if (str.endsWith('.0')) {
@@ -367,7 +388,7 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
           return str.strWithDollar();
         }
       } else {
-        if (num.parse(str) is int) {
+        if (num.tryParse(str) is int) {
           var strBegin = TextUtil.formatComma3(str);
           return '$strBegin.00'.strWithDollar();
         }

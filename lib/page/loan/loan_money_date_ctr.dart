@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -151,6 +150,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
           allDateList.insert(2, selectBeanTwo);
         } else {
           state.isManyProduct = true;
+          state.repaymentDate = '--';
 
           ///many
           if (!ObjectUtil.isEmptyList(state.durationList)) {

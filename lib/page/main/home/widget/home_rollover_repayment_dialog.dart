@@ -168,7 +168,9 @@ class _HomeRolloverRepaymentDialogState
                             fontSize: 15.0, color: Color(0xff333333)),
                         children: <TextSpan>[
                           TextSpan(
-                              text: Strings.autoLineString('20000'),
+                              text: Strings.autoLineString(mainHomeCtr
+                                  .addEndZero(mainHomeCtr.mainHomeState.payFee
+                                      .toString())),
                               style: const TextStyle(
                                   fontSize: 15.0, color: Color(0xffD53535))),
                           TextSpan(
@@ -187,7 +189,9 @@ class _HomeRolloverRepaymentDialogState
                               style: const TextStyle(
                                   fontSize: 15.0, color: Color(0xff333333))),
                           TextSpan(
-                              text: Strings.autoLineString('7777'),
+                              text: Strings.autoLineString(mainHomeCtr
+                                  .addEndZero(mainHomeCtr.mainHomeState.payFee
+                                      .toString())),
                               style: const TextStyle(
                                   fontSize: 15.0, color: Color(0xffD53535))),
                           TextSpan(
