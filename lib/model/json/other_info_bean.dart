@@ -2,113 +2,64 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'other_info_bean.g.dart';
 
-
 @JsonSerializable()
 class OtherInfoBean extends Object {
-  @JsonKey(name: 'total_boot_time_wake')
+  @JsonKey(name: 'totalBootTimeWake')
   int? totalBootTimeWake;
-  @JsonKey(name: 'total_boot_time')
+  @JsonKey(name: 'totalBootTime')
   int? totalBootTime;
 
   @JsonKey(name: 'dbm')
   String? dbm;
 
-  @JsonKey(name: 'http_proxy_host_port')
+  @JsonKey(name: 'httpProxyHostPort')
   String? httpProxyHostPort;
 
-  @JsonKey(name: 'is_airplane_mode')
+  @JsonKey(name: 'isAirplaneMode')
   int? isAirplaneMode;
 
-  @JsonKey(name: 'is_mock_location')
+  @JsonKey(name: 'isMockLocation')
   int? isMockLocation;
 
-  @JsonKey(name: 'is_usb_debug')
-  int? isUsbDebug;
-
-  @JsonKey(name: 'is_using_proxy_port')
-  int? isUsingProxyPort;
-
-  @JsonKey(name: 'is_using_vpn')
+  @JsonKey(name: 'isUsingVpn')
   int? isUsingVpn;
 
   @JsonKey(name: 'keyboard')
   int? keyboard;
 
-  @JsonKey(name: 'last_boot_time')
+  @JsonKey(name: 'lastBootTime')
   int? lastBootTime;
 
-  @JsonKey(name: 'ringer_mode')
+  @JsonKey(name: 'ringerMode')
   int? ringerMode;
 
-  @JsonKey(name: 'root_jailbreak')
+  @JsonKey(name: 'rootJailbreak')
   int? rootJailbreak;
-
-  @JsonKey(name: 'sensorData')
-  SensorData? sensorData;
 
   @JsonKey(name: 'intSimulator')
   int? intSimulator;
 
-  @JsonKey(name: 'vpn_address')
+  @JsonKey(name: 'vpnAddress')
   String? vpnAddress;
 
-  OtherInfoBean(this.totalBootTimeWake,this.totalBootTime,this.dbm,this.httpProxyHostPort,this.isAirplaneMode,this.isMockLocation,this.isUsbDebug,this.isUsingProxyPort,this.isUsingVpn,this.keyboard,this.lastBootTime,this.ringerMode,this.rootJailbreak,this.sensorData,this.intSimulator,this.vpnAddress,);
+  OtherInfoBean(
+    this.totalBootTimeWake,
+    this.totalBootTime,
+    this.dbm,
+    this.httpProxyHostPort,
+    this.isAirplaneMode,
+    this.isMockLocation,
+    this.isUsingVpn,
+    this.keyboard,
+    this.lastBootTime,
+    this.ringerMode,
+    this.rootJailbreak,
+    this.intSimulator,
+    this.vpnAddress,
+  );
 
-  factory OtherInfoBean.fromJson(Map<String, dynamic> srcJson) => _$OtherInfoBeanFromJson(srcJson);
+  factory OtherInfoBean.fromJson(Map<String, dynamic> srcJson) =>
+      _$OtherInfoBeanFromJson(srcJson);
 
   Map<String, dynamic> toJson() => _$OtherInfoBeanToJson(this);
-
 }
-
-
-@JsonSerializable()
-class SensorData extends Object {
-
-  @JsonKey(name: 'sensor_lists')
-  List<Sensor_lists>? sensorLists;
-
-  SensorData(this.sensorLists,);
-
-  factory SensorData.fromJson(Map<String, dynamic> srcJson) => _$SensorDataFromJson(srcJson);
-
-  Map<String, dynamic> toJson() => _$SensorDataToJson(this);
-
-}
-
-
-@JsonSerializable()
-class Sensor_lists extends Object {
-
-  @JsonKey(name: 'max_range')
-  double? maxRange;
-
-  @JsonKey(name: 'min_delay')
-  int? minDelay;
-
-  @JsonKey(name: 'name')
-  String? name;
-
-  @JsonKey(name: 'power')
-  double? power;
-
-  @JsonKey(name: 'resolution')
-  double? resolution;
-
-  @JsonKey(name: 'type')
-  int? type;
-
-  @JsonKey(name: 'vendor')
-  String ?vendor;
-
-  @JsonKey(name: 'version')
-  int ?version;
-
-  Sensor_lists(this.maxRange,this.minDelay,this.name,this.power,this.resolution,this.type,this.vendor,this.version,);
-
-  factory Sensor_lists.fromJson(Map<String, dynamic> srcJson) => _$Sensor_listsFromJson(srcJson);
-
-  Map<String, dynamic> toJson() => _$Sensor_listsToJson(this);
-
-}
-
-

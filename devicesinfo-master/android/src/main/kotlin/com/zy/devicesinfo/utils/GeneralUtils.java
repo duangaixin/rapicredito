@@ -85,8 +85,18 @@ public class GeneralUtils {
 
 
     public static String getNetworkOperatorName() {
-        TelephonyManager telephonyManager = (TelephonyManager) UtilsApp.getApp().getSystemService(Context.TELEPHONY_SERVICE);
-        return telephonyManager.getNetworkOperatorName();
+
+        String networkOperatorName = "";
+        try {
+            TelephonyManager telephonyManager = (TelephonyManager) UtilsApp.getApp().getSystemService(Context.TELEPHONY_SERVICE);
+            networkOperatorName = telephonyManager.getNetworkOperatorName();
+        } catch (Exception E) {
+            E.printStackTrace();
+        }
+        if (TextUtils.isEmpty(networkOperatorName)) {
+            networkOperatorName = "Unknown";
+        }
+        return networkOperatorName;
     }
 
     public static String getNetworkOperator() {
@@ -140,9 +150,6 @@ public class GeneralUtils {
         if (isChekSelfPermission(Manifest.permission.ACCESS_NETWORK_STATE)) {
             return "NETWORK_NO";
         }
-        if (isEthernet()) {
-            return "NETWORK_ETHERNET";
-        }
         ConnectivityManager cm =
                 (ConnectivityManager) UtilsApp.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
         if (cm == null) {
@@ -151,7 +158,7 @@ public class GeneralUtils {
         NetworkInfo info = cm.getActiveNetworkInfo();
         if (info != null && info.isAvailable()) {
             if (info.getType() == ConnectivityManager.TYPE_WIFI) {
-                return "NETWORK_WIFI";
+                return "wifi";
             } else if (info.getType() == ConnectivityManager.TYPE_MOBILE) {
                 switch (info.getSubtype()) {
                     case TelephonyManager.NETWORK_TYPE_GSM:
@@ -160,7 +167,7 @@ public class GeneralUtils {
                     case TelephonyManager.NETWORK_TYPE_EDGE:
                     case TelephonyManager.NETWORK_TYPE_1xRTT:
                     case TelephonyManager.NETWORK_TYPE_IDEN:
-                        return "NETWORK_2G";
+                        return "2G";
 
                     case TelephonyManager.NETWORK_TYPE_TD_SCDMA:
                     case TelephonyManager.NETWORK_TYPE_EVDO_A:
@@ -172,26 +179,26 @@ public class GeneralUtils {
                     case TelephonyManager.NETWORK_TYPE_EVDO_B:
                     case TelephonyManager.NETWORK_TYPE_EHRPD:
                     case TelephonyManager.NETWORK_TYPE_HSPAP:
-                        return "NETWORK_3G";
+                        return "3G";
 
                     case TelephonyManager.NETWORK_TYPE_IWLAN:
                     case TelephonyManager.NETWORK_TYPE_LTE:
-                        return "NETWORK_4G";
+                        return "4G";
 
                     case TelephonyManager.NETWORK_TYPE_NR:
-                        return "NETWORK_5G";
+                        return "5G";
                     default:
                         String subtypeName = info.getSubtypeName();
                         if (subtypeName.equalsIgnoreCase("TD-SCDMA")
                                 || subtypeName.equalsIgnoreCase("WCDMA")
                                 || subtypeName.equalsIgnoreCase("CDMA2000")) {
-                            return "NETWORK_3G";
+                            return "3G";
                         } else {
-                            return "NETWORK_UNKNOWN";
+                            return "UNKNOWN";
                         }
                 }
             } else {
-                return "NETWORK_UNKNOWN";
+                return "UNKNOWN";
             }
         }
         return "NETWORK_NO";

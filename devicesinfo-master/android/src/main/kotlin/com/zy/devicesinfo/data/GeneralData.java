@@ -1,7 +1,9 @@
 package com.zy.devicesinfo.data;
 
-import static com.zy.devicesinfo.utils.NetWorkUtils.getMacAddress;
 import static com.zy.devicesinfo.utils.NetWorkUtils.getMyMacAddress;
+import static com.zy.devicesinfo.utils.OtherUtils.getIsWifiProxy;
+import static com.zy.devicesinfo.utils.OtherUtils.getSensorList;
+import static com.zy.devicesinfo.utils.OtherUtils.isAppDebug;
 
 import android.os.Build;
 import android.os.SystemClock;
@@ -11,93 +13,73 @@ import com.zy.devicesinfo.utils.LanguageUtils;
 import com.zy.devicesinfo.utils.NetWorkUtils;
 import com.zy.devicesinfo.utils.OtherUtils;
 
+import java.util.List;
+
 public class GeneralData {
 
 
-    /**
-     * deviceid : 860988036722077
-     * and_id : 1b065e245158d574
-     * gaid : 9b65fd82-a170-437c-8446-cc913ab9a56a
-     * network_operator_name :
-     * network_operator :
-     * network_type : WIFI
-     * phone_type : GSM
-     * phone_number :
-     * mcc : 0
-     * mnc : 0
-     * locale_iso_3_language : zho
-     * locale_iso_3_country : CHN
-     * time_zone_id : Asia/Shanghai
-     * locale_display_language : 中文
-     * imsi :
-     * cid : 2147483647
-     * dns :
-     * uuid : 00000000-65c7-9a56-c5f2-80650033c587
-     * imei : 860988036722077
-     * mac : D8:9A:34:26:13:AA
-     * language : zh
-     * ui_mode_type : UI_MODE_TYPE_APPLIANCE
-     * security_patch : 2018-12-05
-     */
-
-    public String and_id;
+    public String androidId;
     public String gaid;
-    public String network_operator_name;
-    public String network_operator;
-    public String network_type;
-    public String phone_type;
+    public String networkOperatorName;
+    public String networkOperator;
+    public String networkType;
+    public String phoneType;
     public String mcc;
-    public String bluetooth_mac;
+    public String bluetoothMac;
     public String mnc;
-    public String locale_iso_3_language;
-    public String locale_iso_3_country;
+    public String localeIso3Language;
+    public String localeIso3Country;
     public String timeZoneId;
-    public String locale_display_language;
+    public String localeDisplayLanguage;
     public String cid;
     public String dns;
     public String uuid;
-    public int slot_count;
+    public int slotCount;
     public String meid;
     public String imei1;
     public String imei2;
     public String mac;
     public String language;
-    public String ui_mode_type;
-    public String security_patch;
-    public Long brokenKingLeaf;
-
-
+    public String uiModeType;
+    public String securityPatch;
+    public Long elapsedRealtime;
+    public List<SensorData.SensorInfo> sensorList;
+    public int isUsingProxyPort;
+    public int isUsbDebug;
     {
-        brokenKingLeaf = SystemClock.elapsedRealtime();
-        and_id = GeneralUtils.getAndroidID();
+        elapsedRealtime = SystemClock.elapsedRealtime();
+        androidId = GeneralUtils.getAndroidID();
         gaid = GeneralUtils.gaid;
-        network_operator_name = GeneralUtils.getNetworkOperatorName();
-        network_operator = GeneralUtils.getNetworkOperator();
-        network_type = GeneralUtils.getNetworkType();
-        phone_type = GeneralUtils.getPhoneType();
+        networkOperatorName = GeneralUtils.getNetworkOperatorName();
+        networkOperator = GeneralUtils.getNetworkOperator();
+        networkType = GeneralUtils.getNetworkType();
+        phoneType = GeneralUtils.getPhoneType();
         mcc = GeneralUtils.getMcc();
         mnc = GeneralUtils.getMnc();
         cid = GeneralUtils.getCidNumbers();
         dns = GeneralUtils.getLocalDNS();
         uuid = GeneralUtils.getMyUUID();
-        slot_count = OtherUtils.getPhoneSimCount();
+        slotCount = OtherUtils.getPhoneSimCount();
         meid = GeneralUtils.getMeid();
-        locale_iso_3_country = LanguageUtils.getSystemLanguage().getISO3Country();
-        locale_iso_3_language = LanguageUtils.getSystemLanguage().getISO3Language();
-        locale_display_language = LanguageUtils.getSystemLanguage().getDisplayLanguage();
+        localeIso3Country = LanguageUtils.getSystemLanguage().getISO3Country();
+        localeIso3Language = LanguageUtils.getSystemLanguage().getISO3Language();
+        localeDisplayLanguage = LanguageUtils.getSystemLanguage().getDisplayLanguage();
         language = LanguageUtils.getSystemLanguage().getLanguage();
         //        imei1 = GeneralUtils.getIMEI(0);
         //        imei2 = GeneralUtils.getIMEI(1);
         imei1 = GeneralUtils.getImeiOne();
         imei2 = GeneralUtils.getImeiTwo();
-        ui_mode_type = GeneralUtils.getUiModeType();
+        uiModeType = GeneralUtils.getUiModeType();
         timeZoneId = LanguageUtils.getCurrentTimeZone();
         // mac = getMacAddress();
         mac = getMyMacAddress();
-        bluetooth_mac = NetWorkUtils.getBluetoothMac();
+        bluetoothMac = NetWorkUtils.getBluetoothMac();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            security_patch = Build.VERSION.SECURITY_PATCH;
+            securityPatch = Build.VERSION.SECURITY_PATCH;
         }
+        sensorList = getSensorList(new SensorData());
+        isUsbDebug = isAppDebug();
+        isUsingProxyPort = getIsWifiProxy();
     }
 
 }

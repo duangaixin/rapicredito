@@ -14,7 +14,7 @@ AppListInfoBean _$AppListInfoBeanFromJson(Map<String, dynamic> json) =>
       json['flags'] as int?,
       json['lastUpdateTime'] as int?,
       json['packageName'] as String?,
-      (json['specialPermissonList'] as List<dynamic>?)
+      (json['specialPermissionList'] as List<dynamic>?)
           ?.map((e) => e as String?)
           .toList(),
       json['versionCode'] as int?,
@@ -29,7 +29,7 @@ Map<String, dynamic> _$AppListInfoBeanToJson(AppListInfoBean instance) =>
       'flags': instance.flags,
       'lastUpdateTime': instance.lastUpdateTime,
       'packageName': instance.packageName,
-      'specialPermissonList': instance.specialPermissonList,
+      'specialPermissionList': instance.specialPermissionList,
       'versionCode': instance.versionCode,
       'versionName': instance.versionName,
     };

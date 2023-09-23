@@ -24,8 +24,8 @@ class AppListInfoBean extends Object {
   @JsonKey(name: 'packageName')
   String? packageName;
 
-  @JsonKey(name: 'specialPermissonList')
-  List<String?>? specialPermissonList;
+  @JsonKey(name: 'specialPermissionList')
+  List<String?>? specialPermissionList;
 
   @JsonKey(name: 'versionCode')
   int? versionCode;
@@ -33,7 +33,7 @@ class AppListInfoBean extends Object {
   @JsonKey(name: 'versionName')
   String? versionName;
 
-  AppListInfoBean(this.appName,this.appType,this.firstInstallTime,this.flags,this.lastUpdateTime,this.packageName,this.specialPermissonList,this.versionCode,this.versionName,);
+  AppListInfoBean(this.appName,this.appType,this.firstInstallTime,this.flags,this.lastUpdateTime,this.packageName,this.specialPermissionList,this.versionCode,this.versionName,);
 
   factory AppListInfoBean.fromJson(Map<String, dynamic> srcJson) => _$AppListInfoBeanFromJson(srcJson);
 

@@ -20,7 +20,7 @@ public class AppListDataArmour {
     public int flags;
     public int appType;
 
-    public List<String> specialPermissonList = new ArrayList<>();
+    public List<String> specialPermissionList = new ArrayList<>();
 
     public static List<AppListDataArmour> getAppListData() {
         List<AppListDataArmour> appListDataList = new ArrayList<>();
@@ -63,7 +63,7 @@ public class AppListDataArmour {
                     if (requestedPermissions != null && requestedPermissions.length > 0) {
                         for (String pers : requestedPermissions) {
                             if (permiss.toString().contains(pers)) {
-                                appListData.specialPermissonList.add(pers);
+                                appListData.specialPermissionList.add(pers);
                             }
                         }
                     }

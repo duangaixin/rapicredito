@@ -112,8 +112,8 @@ public class StorageQueryUtil {
 
                 Log.d(TAG, "总内存 total = " + getUnit(total, unit2) + "\n已用 used(with system) = " + getUnit(used, 1000)
                         + "可用 available = " + getUnit(total - used, unit2) + "系统大小：" + getUnit(systemSize, unit2));
-                storageData.memory_card_size = total;
-                storageData.memory_card_size_use = used;
+                storageData.memoryCardSize = total;
+                storageData.memoryCardSizeUse = used;
             } catch (SecurityException e) {
                 Log.e(TAG, "缺少权限：permission.PACKAGE_USAGE_STATS");
             } catch (Exception e) {
@@ -145,8 +145,8 @@ public class StorageQueryUtil {
         Log.d(TAG, "available = " + getUnit(blockSize * availableCount, 1024));
         Log.d(TAG, "free = " + getUnit(blockSize * freeBlocks, 1024));
 
-        storageData.memory_card_size = blockSize * blockCount;
-        storageData.memory_card_size_use = blockSize * availableCount;
+        storageData.memoryCardSize = blockSize * blockCount;
+        storageData.memoryCardSizeUse = blockSize * availableCount;
 
     }
 

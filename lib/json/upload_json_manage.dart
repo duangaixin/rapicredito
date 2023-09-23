@@ -187,8 +187,8 @@ class UploadJsonManage {
       var bean = GeneralInfoBean.fromJson(map);
       generalInfoBean.quickUncertainLuggageUglyGoose = bean.gaid;
 
-      await StorageService.to.setString(AppConstants.uuidKey, bean.uuid??'');
-      await StorageService.to.setString(AppConstants.gidKey, bean.gaid??'');
+      await StorageService.to.setString(AppConstants.uuidKey, bean.uuid ?? '');
+      await StorageService.to.setString(AppConstants.gidKey, bean.gaid ?? '');
       generalInfoBean.theseBacteriumBlueGlasshouseSimpleUniform = bean.andId;
       generalInfoBean.dullGrandchildIllSoftMass = bean.phoneType;
       generalInfoBean.sorryFirmCarbon = bean.mac;
@@ -219,17 +219,8 @@ class UploadJsonManage {
       generalInfoBean.gentleSquareSoapAnotherScholarship =
           DateTime.now().millisecondsSinceEpoch;
       generalInfoBean.heavyHelpfulSparrowPolitics = false;
-    }
-
-    var otherInfo = await MethodChannelDevicesinfo.getOtherData();
-    if (!ObjectUtil.isEmptyString(otherInfo)) {
-      var map = json.decode(otherInfo!);
-      var bean = OtherInfoBean.fromJson(map);
-      generalInfoBean.strangeRacialDeer = bean.isUsingProxyPort == 0;
-      generalInfoBean.primaryCanadianPoisonBestEducation = bean.isUsbDebug == 0;
       List<ChangeableConstantRelationCentigradeSunlight> dataSource = [];
-      var sensor = bean.sensorData;
-      var list = sensor?.sensorLists ?? [];
+      var list = bean.sensorList ?? [];
       if (!ObjectUtil.isEmptyList(list)) {
         for (int i = 0; i < list.length; i++) {
           var module = list[i];
@@ -255,6 +246,8 @@ class UploadJsonManage {
         }
       }
       generalInfoBean.changeableConstantRelationCentigradeSunlight = dataSource;
+      generalInfoBean.strangeRacialDeer = bean.isUsingProxyPort == 0;
+      generalInfoBean.primaryCanadianPoisonBestEducation = bean.isUsbDebug == 0;
     }
     return generalInfoBean;
   }
@@ -422,7 +415,7 @@ class UploadJsonManage {
       var map = json.decode(locationInfo!);
       var bean = LocationInfoBean.fromJson(map);
       locationBean.tastyDepthAdditionAverageViewer = bean.city;
-      locationBean.modernFlagEmptyCottageDrug = bean.provice;
+      locationBean.modernFlagEmptyCottageDrug = bean.province;
       locationBean.clearBrownActor = bean.addressDetails;
       var locationDetail = IndependentAmbulanceBurialFlag(
         null,
@@ -547,15 +540,10 @@ class UploadJsonManage {
       storageInfoBean.particularPleasantSmallMass =
           bean.appAvailableMemory?.toString();
       storageInfoBean.thickBoxLeg = bean.appFreeMemory?.toString();
-
-      ///contain_sd
-      storageInfoBean.violentMelonTankerBone = 0;
-
-      ///extra_sd
-      storageInfoBean.antarcticInsectPaleRegards = 1;
-
-      ///ram_total_pre_size
-      storageInfoBean.carefulLapBucketEducator = bean.ramTotalSize?.toString();
+      storageInfoBean.carefulLapBucketEducator =
+          bean.ramTotalPreSize?.toString();
+      storageInfoBean.violentMelonTankerBone = bean.containSd;
+      storageInfoBean.antarcticInsectPaleRegards = bean.containSd == 0 ? 1 : 0;
     }
     return storageInfoBean;
   }

@@ -8,28 +8,32 @@ part of 'storage_info_bean.dart';
 
 StorageInfoBean _$StorageInfoBeanFromJson(Map<String, dynamic> json) =>
     StorageInfoBean(
-      json['internal_storage_total'] as int?,
-      json['internal_storage_usable'] as int?,
-      json['memory_card_size'] as int?,
-      json['memory_card_size_use'] as int?,
+      json['internalStorageTotal'] as int?,
+      json['internalStorageUsable'] as int?,
+      json['memoryCardSize'] as int?,
+      json['memoryCardSizeUse'] as int?,
       json['ramTotalSize'] as int?,
       json['ramUsableSize'] as int?,
-      json['memory_card_usable_size'] as int?,
-      json['app_max_memory'] as int?,
-      json['app_available_memory'] as int?,
-      json['app_free_memory'] as int?,
+      json['memoryCardUsableSize'] as int?,
+      json['appMaxMemory'] as int?,
+      json['appAvailableMemory'] as int?,
+      json['appFreeMemory'] as int?,
+      json['containSd'] as int?,
+      json['ramTotalPreSize'] as int?,
     );
 
 Map<String, dynamic> _$StorageInfoBeanToJson(StorageInfoBean instance) =>
     <String, dynamic>{
-      'internal_storage_total': instance.internalStorageTotal,
-      'internal_storage_usable': instance.internalStorageUsable,
-      'memory_card_size': instance.memoryCardSize,
-      'memory_card_size_use': instance.memoryCardSizeUse,
+      'internalStorageTotal': instance.internalStorageTotal,
+      'internalStorageUsable': instance.internalStorageUsable,
+      'memoryCardSize': instance.memoryCardSize,
+      'memoryCardSizeUse': instance.memoryCardSizeUse,
       'ramTotalSize': instance.ramTotalSize,
       'ramUsableSize': instance.ramUsableSize,
-      'memory_card_usable_size': instance.memoryCardUsableSize,
-      'app_max_memory': instance.appMaxMemory,
-      'app_available_memory': instance.appAvailableMemory,
-      'app_free_memory': instance.appFreeMemory,
+      'memoryCardUsableSize': instance.memoryCardUsableSize,
+      'appMaxMemory': instance.appMaxMemory,
+      'appAvailableMemory': instance.appAvailableMemory,
+      'appFreeMemory': instance.appFreeMemory,
+      'containSd': instance.containSd,
+      'ramTotalPreSize': instance.ramTotalPreSize,
     };

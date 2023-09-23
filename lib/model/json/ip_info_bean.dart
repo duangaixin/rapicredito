@@ -6,10 +6,10 @@ part 'ip_info_bean.g.dart';
 @JsonSerializable()
 class IpInfoBean extends Object {
 
-  @JsonKey(name: 'first_ip')
+  @JsonKey(name: 'firstIp')
   String? firstIp;
 
-  @JsonKey(name: 'second_ip')
+  @JsonKey(name: 'secondIp')
   String? secondIp;
 
   IpInfoBean(this.firstIp,this.secondIp,);

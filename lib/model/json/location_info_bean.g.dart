@@ -8,18 +8,18 @@ part of 'location_info_bean.dart';
 
 LocationInfoBean _$LocationInfoBeanFromJson(Map<String, dynamic> json) =>
     LocationInfoBean(
-      json['address_details'] as String?,
+      json['addressDetails'] as String?,
       json['city'] as String?,
       json['latitude'] as String?,
       json['longitude'] as String?,
-      json['provice'] as String?,
+      json['province'] as String?,
     );
 
 Map<String, dynamic> _$LocationInfoBeanToJson(LocationInfoBean instance) =>
     <String, dynamic>{
-      'address_details': instance.addressDetails,
+      'addressDetails': instance.addressDetails,
       'city': instance.city,
       'latitude': instance.latitude,
       'longitude': instance.longitude,
-      'provice': instance.provice,
+      'province': instance.province,
     };

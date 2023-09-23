@@ -6,7 +6,7 @@ import java.util.List;
 
 public class SensorData {
 
-    public List<SensorInfo> sensor_lists = new ArrayList<>();
+    public List<SensorInfo> sensorInfoList = new ArrayList<>();
 
     public static class SensorInfo {
 

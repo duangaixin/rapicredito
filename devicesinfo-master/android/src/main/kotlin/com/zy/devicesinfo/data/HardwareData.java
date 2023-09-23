@@ -9,44 +9,10 @@ import static com.zy.devicesinfo.utils.OtherUtils.getSerialNumbers;
 import static com.zy.devicesinfo.utils.OtherUtils.isTabletDevice;
 
 import android.os.Build;
-import android.text.TextUtils;
-
 import com.zy.devicesinfo.utils.CpuUtils;
 import com.zy.devicesinfo.utils.GeneralUtils;
 
 public class HardwareData {
-
-
-    /**
-     * model : SM-A205F
-     * brand : samsung
-     * product : a20dd
-     * release : 9
-     * sdkVersion : 28
-     * physical_size : 5.91917583812819
-     * serial_number : RR8M50LX40M
-     * cpu_type : 0
-     * cpu_min : 396800
-     * cpu_max : 1500000
-     * cpu_average : 478000
-     * manufacturerName : samsung
-     * board : universal7885
-     * serial : RR8M50LX40M
-     * display : PPR1.180610.011.A205FXXU1ASC8
-     * id : PPR1.180610.011
-     * bootloader : A205FXXU1ASC8
-     * fingerPrint : samsung/a20dd/a20:9/PPR1.180610.011/A205FXXU1ASC8:user/release-keys
-     * host : 21HH1E20
-     * hardWare : exynos7885
-     * device : a20
-     * user : dpi
-     * radioVersion : A205FDDU1ASC8,A205FDDU1ASC8
-     * tags : release-keys
-     * time : 1551957941000
-     * type : user
-     * baseband_ver : 21.258.09.00.030,CBP8.2
-     * resolution : 1080*1920
-     */
 
     public String model;
     public String brand;

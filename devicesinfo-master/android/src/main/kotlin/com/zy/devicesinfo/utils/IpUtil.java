@@ -13,7 +13,7 @@ public class IpUtil {
     public static  IpData getIpData() {
         IpData data = new IpData();
         try {
-            data.first_ip = getLocalIPAddress();
+            data.firstIp = getLocalIPAddress();
             data.second_ip = getLocalIPAddress();
         } catch (Exception e) {
             e.printStackTrace();

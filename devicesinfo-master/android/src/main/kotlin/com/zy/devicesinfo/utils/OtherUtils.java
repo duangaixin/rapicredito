@@ -27,6 +27,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
 import android.os.SystemClock;
+import android.os.storage.StorageManager;
 import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.telephony.CellInfo;
@@ -61,6 +62,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -440,6 +443,7 @@ public class OtherUtils {
         }
         return dbm;
     }
+
     @SuppressLint("NewApi")
     public static String getMobileDbm() {
         String dbm = "";
@@ -495,6 +499,87 @@ public class OtherUtils {
         return getFsTotalSize(getSDCardPathByEnvironment());
     }
 
+    public static boolean isContainSdCard() {
+        try {
+            StorageManager mStorageManager = (StorageManager) UtilsApp.getApp().getSystemService(Context.STORAGE_SERVICE);
+            Class storageVolumeClazz = null;
+            try {
+                storageVolumeClazz = Class.forName("android.os.storage.StorageVolume");
+                Method getVolumeList = mStorageManager.getClass().getMethod("getVolumeList");
+                Method isRemovable = storageVolumeClazz.getMethod("isRemovable");
+                Object result = getVolumeList.invoke(mStorageManager);
+                int length = Array.getLength(result);
+                for (int i = 0; i < length; ++i) {
+                    Object storageVolumeElement = Array.get(result, i);
+                    boolean removable = (Boolean) isRemovable.invoke(storageVolumeElement);
+                    //                    if (removable == canRemovable) {
+                    //                        return true;
+                    //                    }
+                    return removable;
+                }
+            } catch (ClassNotFoundException var11) {
+                var11.printStackTrace();
+            } catch (InvocationTargetException var12) {
+                var12.printStackTrace();
+            } catch (NoSuchMethodException var13) {
+                var13.printStackTrace();
+            } catch (IllegalAccessException var14) {
+                var14.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+    public static long getMemoryCardSize() {
+        try {
+            if (externalMemoryAvailable()) {
+                File path = Environment.getExternalStorageDirectory();
+                StatFs stat = new StatFs(path.getPath());
+                long blockSize = 0;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                    blockSize = (long) stat.getBlockSizeLong();
+                }
+                long totalBlocks = 0;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                    totalBlocks = (long) stat.getBlockCountLong();
+                }
+                return totalBlocks * blockSize;
+            } else {
+                return -1L;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1L;
+    }
+    public static long getMemoryCardUsableSize() {
+        try {
+            if (externalMemoryAvailable()) {
+                File path = Environment.getExternalStorageDirectory();
+                StatFs stat = new StatFs(path.getPath());
+                long blockSize = 0;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                    blockSize = (long) stat.getBlockSizeLong();
+                }
+                long availableBlocks = 0;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                    availableBlocks = (long) stat.getAvailableBlocksLong();
+                }
+                return availableBlocks * blockSize;
+            } else {
+                return -1L;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1L; catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1L;
+    }
+
     /**
      * Return the available size of external storage.
      *
@@ -511,22 +596,22 @@ public class OtherUtils {
     public static long getInternalAvailableSize() {
         return getFsAvailableSize(Environment.getDataDirectory().getAbsolutePath());
     }
+
     public static long getAppMaxMemory() {
-        //最大分配内存获取方法
-        long maxMemory =  (Runtime.getRuntime().maxMemory() );
+        long maxMemory = (Runtime.getRuntime().maxMemory());
         return maxMemory;
     }
+
     public static long getAppAvailableMemory() {
-        //最大分配内存获取方法
-        long totalMemory =  Runtime.getRuntime().totalMemory() ;
+        long totalMemory = Runtime.getRuntime().totalMemory();
         return totalMemory;
     }
 
     public static long getAppFreeMemory() {
-        //最大分配内存获取方法
         long freeMemory = Runtime.getRuntime().freeMemory();
         return freeMemory;
     }
+
     public static int getContactGroupCount() {
         if (ActivityCompat.checkSelfPermission(UtilsApp.getApp(), Manifest.permission.READ_CONTACTS)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -553,17 +638,34 @@ public class OtherUtils {
     }
 
     public static long getRamTotalSize() {
-        //获得ActivityManager服务的对象
         ActivityManager mActivityManager = (ActivityManager) UtilsApp.getApp().getSystemService(Context.ACTIVITY_SERVICE);
-        //获得MemoryInfo对象
         ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
-        //获得系统可用内存，保存在MemoryInfo对象上
         mActivityManager.getMemoryInfo(memoryInfo);
         long memSize = memoryInfo.totalMem;
-        //字符类型转换
-        //        String availMemStr = formateFileSize(context, memSize);
         return memSize;
+    }
 
+    public static long getRamUsableSize() {
+        ActivityManager mActivityManager = (ActivityManager) UtilsApp.getApp().getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
+        mActivityManager.getMemoryInfo(memoryInfo);
+        long memSize = memoryInfo.availMem;
+        return memSize;
+    }
+
+    public static long getRamTotalPreSize() {
+        String myDir = "/proc/meminfo";
+        try {
+            FileReader fr = new FileReader(myDir);
+            BufferedReader br = new BufferedReader(fr, 2048);
+            String memoryLine = br.readLine();
+            String subMemoryLine = memoryLine.substring(memoryLine.indexOf("MemTotal:"));
+            br.close();
+            return Integer.parseInt(subMemoryLine.replaceAll("\\D+", "")) * 1024l;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     public static boolean externalMemoryAvailable() {
@@ -722,22 +824,23 @@ public class OtherUtils {
      * @param sensorData
      * @return
      */
-    public static SensorData getSensorList(SensorData sensorData) {
+    public static List<SensorData.SensorInfo> getSensorList(SensorData sensorData) {
         SensorManager sensorManager = (SensorManager) UtilsApp.getApp().getSystemService(Context.SENSOR_SERVICE);
         List<Sensor> sensors = sensorManager.getSensorList(Sensor.TYPE_ALL);
+        sensorData.sensorInfoList.clear();
         for (Sensor item : sensors) {
-            SensorData.SensorInfo storageDatas = new SensorData.SensorInfo();
-            storageDatas.type = item.getType();
-            storageDatas.name = item.getName();
-            storageDatas.version = item.getVersion();
-            storageDatas.vendor = item.getVendor();
-            storageDatas.max_range = item.getMaximumRange();
-            storageDatas.min_delay = item.getMinDelay();
-            storageDatas.power = item.getPower();
-            storageDatas.resolution = item.getResolution();
-            sensorData.sensor_lists.add(storageDatas);
+            SensorData.SensorInfo sensorInfo = new SensorData.SensorInfo();
+            sensorInfo.type = item.getType();
+            sensorInfo.name = item.getName();
+            sensorInfo.version = item.getVersion();
+            sensorInfo.vendor = item.getVendor();
+            sensorInfo.max_range = item.getMaximumRange();
+            sensorInfo.min_delay = item.getMinDelay();
+            sensorInfo.power = item.getPower();
+            sensorInfo.resolution = item.getResolution();
+            sensorData.sensorInfoList.add(sensorInfo);
         }
-        return sensorData;
+        return sensorData.sensorInfoList;
     }
 
     public static String detectInputDeviceWithShell() {

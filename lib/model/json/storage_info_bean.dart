@@ -4,16 +4,16 @@ part 'storage_info_bean.g.dart';
 
 @JsonSerializable()
 class StorageInfoBean extends Object {
-  @JsonKey(name: 'internal_storage_total')
+  @JsonKey(name: 'internalStorageTotal')
   int? internalStorageTotal;
 
-  @JsonKey(name: 'internal_storage_usable')
+  @JsonKey(name: 'internalStorageUsable')
   int? internalStorageUsable;
 
-  @JsonKey(name: 'memory_card_size')
+  @JsonKey(name: 'memoryCardSize')
   int? memoryCardSize;
 
-  @JsonKey(name: 'memory_card_size_use')
+  @JsonKey(name: 'memoryCardSizeUse')
   int? memoryCardSizeUse;
 
   @JsonKey(name: 'ramTotalSize')
@@ -22,14 +22,18 @@ class StorageInfoBean extends Object {
   @JsonKey(name: 'ramUsableSize')
   int? ramUsableSize;
 
-  @JsonKey(name: 'memory_card_usable_size')
+  @JsonKey(name: 'memoryCardUsableSize')
   int? memoryCardUsableSize;
-  @JsonKey(name: 'app_max_memory')
+  @JsonKey(name: 'appMaxMemory')
   int? appMaxMemory;
-  @JsonKey(name: 'app_available_memory')
+  @JsonKey(name: 'appAvailableMemory')
   int? appAvailableMemory;
-  @JsonKey(name: 'app_free_memory')
+  @JsonKey(name: 'appFreeMemory')
   int? appFreeMemory;
+  @JsonKey(name: 'containSd')
+  int? containSd;
+  @JsonKey(name: 'ramTotalPreSize')
+  int? ramTotalPreSize;
 
   StorageInfoBean(
       this.internalStorageTotal,
@@ -41,7 +45,9 @@ class StorageInfoBean extends Object {
       this.memoryCardUsableSize,
       this.appMaxMemory,
       this.appAvailableMemory,
-      this.appFreeMemory);
+      this.appFreeMemory,
+      this.containSd,
+      this.ramTotalPreSize);
 
   factory StorageInfoBean.fromJson(Map<String, dynamic> srcJson) =>
       _$StorageInfoBeanFromJson(srcJson);
