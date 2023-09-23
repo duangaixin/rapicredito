@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rapicredito/page/main/home/widget/common_agreement_view.dart';
 import 'package:rapicredito/page/main/mine/client/index.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';

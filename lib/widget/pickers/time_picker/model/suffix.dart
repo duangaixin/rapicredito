@@ -1,6 +1,5 @@
 import 'package:rapicredito/widget/pickers/time_picker/model/date_type.dart';
 
-/// 后缀标签
 class Suffix {
   late String years;
   late String month;

@@ -40,8 +40,6 @@ class ScreenUtil {
     }
   }
 
-  /// screen width
-  /// 屏幕 宽
   double get screenWidth => _screenWidth;
 
   double get screenHeight => _screenHeight;

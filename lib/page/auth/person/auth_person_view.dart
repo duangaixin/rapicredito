@@ -8,7 +8,6 @@ import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/comon_section_title_view.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_color_button.dart';
-import 'package:rapicredito/widget/custom_edit_view.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 import 'package:rapicredito/widget/custom_page_bg_view.dart';
 import 'package:rapicredito/widget/custom_select_view.dart';

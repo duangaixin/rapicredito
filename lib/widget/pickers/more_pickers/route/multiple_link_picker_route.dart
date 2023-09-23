@@ -4,11 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:rapicredito/widget/pickers/style/picker_style.dart';
 
-
 typedef MultipleLinkCallback = Function(List res, List<int> position);
 
-/// 多项选择器
-/// 有关联
 class MultipleLinkPickerRoute<T> extends PopupRoute<T> {
   MultipleLinkPickerRoute({
     required this.pickerStyle,
@@ -76,7 +73,7 @@ class MultipleLinkPickerRoute<T> extends PopupRoute<T> {
       removeTop: true,
       child: _PickerContentView(
         data: data,
-        columeNum: columeNum,
+        columnNum: columeNum,
         selectData: selectData,
         pickerStyle: pickerStyle,
         route: this,
@@ -94,65 +91,54 @@ class _PickerContentView extends StatefulWidget {
   _PickerContentView({
     Key? key,
     required this.data,
-    required this.columeNum,
+    required this.columnNum,
     required this.pickerStyle,
     required this.selectData,
     required this.route,
   }) : super(key: key);
 
   final Map data;
-  final int columeNum;
+  final int columnNum;
   final List selectData;
   final MultipleLinkPickerRoute route;
   final PickerStyle pickerStyle;
 
   @override
   State<StatefulWidget> createState() => _PickerState(
-      this.data, this.selectData, this.pickerStyle, this.columeNum);
+      this.data, this.selectData, this.pickerStyle, this.columnNum);
 }
 
 class _PickerState extends State<_PickerContentView> {
   final PickerStyle _pickerStyle;
-
-  // 没有数据时占位字符
   static const placeData = '';
 
-  /// 选中数据
   late List _selectData;
 
-  /// 选中数据下标
   late List<int> _selectDataPosition;
 
-  /// 原始数据
   Map _data;
-
-  /// 有多少列
   final int _columeNum;
 
-  /// 所有item 对应的数据
   late List<List> _columnData = [];
 
   AnimationController? controller;
   Animation<double>? animation;
 
   List<FixedExtentScrollController> scrollCtrl = [];
-
-  // 选择器 高度  单独提出来，用来解决修改数据 不及时更新的BUG
   late double pickerItemHeight;
 
   _PickerState(
       this._data, List mSelectData, this._pickerStyle, this._columeNum) {
-    this.pickerItemHeight = _pickerStyle.pickerItemHeight;
-    // 已选择器数据为准，因为初始化数据有可能和选择器对不上
-    this._selectData = [];
-    this._selectDataPosition = [];
+    pickerItemHeight = _pickerStyle.pickerItemHeight;
+    _selectData = [];
+    _selectDataPosition = [];
     for (int i = 0; i < _columeNum; ++i) {
       if (i >= mSelectData.length) {
-        this._selectData.add('');
+        _selectData.add('');
       } else {
-        this._selectData.add(mSelectData[i]);
+        _selectData.add(mSelectData[i]);
       }
-      this._selectDataPosition.add(0);
+      _selectDataPosition.add(0);
     }
 
     _init(mSelectData);
@@ -198,7 +184,6 @@ class _PickerState extends State<_PickerContentView> {
       pindex = 0;
 
       if (i == 0) {
-        /// 第一列
         pindex = _data.keys.toList().indexOf(_selectData[i]);
         if (pindex < 0) {
           _selectData[i] = _data.keys.first;
@@ -208,10 +193,7 @@ class _PickerState extends State<_PickerContentView> {
 
         _columnData.add(_data.keys.toList());
       } else {
-        /// 其他列
         dynamic date = findNextData(i);
-        // print('longer  第$i列 >>> $date');
-
         if (date is Map) {
           pindex = date.keys.toList().indexOf(_selectData[i]);
           if (pindex < 0) {
@@ -241,29 +223,20 @@ class _PickerState extends State<_PickerContentView> {
     }
   }
 
-  /// [position] 变动的列
-  /// [selectIndex] 对应列选中的index
-  /// [jump] 是否需要jumpToItem
   void _setPicker(int position, int selectIndex, bool jump) {
-    // 得到新的选中的数据
     var selectValue = _columnData[position][selectIndex];
-    // 更新选中数据
     _selectData[position] = selectValue;
     _selectDataPosition[position] = selectIndex;
     if (jump) {
       scrollCtrl[position].jumpToItem(selectIndex);
     }
 
-    /// 如果不是最后一列
-    /// 数据的变动都会造成剩下列的更新
     if (position < _columeNum - 1) {
-      // 先更新下一列所有数据
-      // 如果这一列的所有数据都为空，下列直接也设为空数据(优化)
       if (_columnData[position].length == 1 &&
           _columnData[position].first == placeData) {
         _columnData[position + 1] = [placeData];
       } else {
-        _columnData[position + 1] = findColumeData(position + 1);
+        _columnData[position + 1] = findColumnData(position + 1);
       }
 
       // 再次递归
@@ -273,17 +246,13 @@ class _PickerState extends State<_PickerContentView> {
     }
   }
 
-  /// 找到对应位置的 下一列数据
-  /// return map list other
   dynamic findNextData(int position) {
     dynamic nextData;
 
     for (int i = 0; i < position; i++) {
       if (i == 0) {
-        // 肯定是map
         nextData = _data[_selectData[0]];
       } else {
-        // 肯定是map
         dynamic data = nextData[_selectData[i]];
 
         if (data is Map) {
@@ -291,14 +260,10 @@ class _PickerState extends State<_PickerContentView> {
         } else if (data is List) {
           nextData = data;
         } else {
-          // 遍历到最后会返回该值
           nextData = [data];
         }
       }
-      // print('longer  i:$i >>> $nextData');
-
-      /// 如果数据 还没有到最后 就 已经不是Map
-      if (!(nextData is Map) && (i < position - 1)) {
+      if (nextData is! Map && (i < position - 1)) {
         return [placeData];
       }
     }
@@ -306,46 +271,28 @@ class _PickerState extends State<_PickerContentView> {
     return nextData;
   }
 
-  /// 找到对应位置的数据
-  /// 比如 position = 2;
-  /// 就是找到第2列数据
-  /// return list
-  List findColumeData(int position) {
+  List findColumnData(int position) {
     dynamic nextData;
     for (int i = 0; i < position; i++) {
       if (i == 0) {
-        // 肯定是map
         nextData = _data[_selectData[0]];
       } else {
-        // print(
-        //     'longer   选中 >>> ${_selectData.join('-')}   当前选中： ${_selectData[i]}');
-        // 肯定是map
         dynamic data = nextData[_selectData[i]];
-
         if (data is Map) {
           nextData = data;
         } else if (data is List) {
           nextData = data;
         } else {
-          // 遍历到最后会返回该值
           nextData = [data];
         }
       }
-      // print('longer  i:$i >>> $nextData');
-
-      /// 如果是map 并且是最后一列 返回他的key
       if ((nextData is Map) && (i == position - 1)) {
         return nextData.keys.toList();
       }
-
-      /// 如果数据 还没有到最后 就 已经不是Map
-      if (!(nextData is Map) && (i < position - 1)) {
-        // print('longer2  第:$position列之前返回数据  >>> $nextData');
+      if (nextData is! Map && (i < position - 1)) {
         return [placeData];
       }
     }
-
-    // print('longer  第:$position列返回数据    >>> $nextData');
     return nextData;
   }
 
@@ -379,7 +326,6 @@ class _PickerState extends State<_PickerContentView> {
   }
 
   Widget _renderItemView() {
-    // 选择器
     List<Widget> pickerList =
         List.generate(_columeNum, (index) => pickerView(index)).toList();
 
@@ -432,15 +378,10 @@ class _PickerState extends State<_PickerContentView> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          /// 取消按钮
           InkWell(
               onTap: () => Navigator.pop(context, false),
               child: _pickerStyle.cancelButton),
-
-          /// 标题
           Expanded(child: _pickerStyle.title),
-
-          /// 确认按钮
           InkWell(
               onTap: () {
                 if (widget.route.onConfirm != null) {

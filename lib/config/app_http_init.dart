@@ -16,7 +16,6 @@ import 'package:rapicredito/net/net_request.dart';
 import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/object_util.dart';
-import 'package:rapicredito/widget/progress_hud_view.dart';
 
 late NetRequest httpRequest;
 
@@ -96,8 +95,7 @@ Future<Map<String, dynamic>> _getDefParam() async {
 
 Interceptors? getNetInterceptors() {
   if (!isReleaseBuild()) {
-    return Interceptors()
-      ..add(LoggingInterceptor());
+    return Interceptors()..add(LoggingInterceptor());
   }
   return null;
 }

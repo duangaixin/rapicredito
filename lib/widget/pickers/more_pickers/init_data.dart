@@ -1,10 +1,10 @@
 enum PickerDataType {
-  sex, // 性别
-  education, // 学历
-  subject, // 学科
-  constellation, // 星座
-  zodiac, // 生肖
-  ethnicity, // 名族
+  sex,
+  education,
+  subject,
+  constellation,
+  zodiac,
+  ethnicity,
 }
 
 var pickerData = {

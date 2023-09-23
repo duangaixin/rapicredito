@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rapicredito/page/auth/widget/common_auth_agreement_view.dart';
 import 'package:rapicredito/page/loan/index.dart';
 import 'package:rapicredito/page/loan/widget/loan_date_select_view.dart';
 import 'package:rapicredito/page/main/home/widget/common_agreement_view.dart';

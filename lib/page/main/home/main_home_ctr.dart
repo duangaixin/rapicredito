@@ -52,8 +52,8 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
         break;
       case AppLifecycleState.resumed:
         var appMainCtr = Get.find<AppMainCtr>();
-          if(Get.currentRoute==PageRouterName.mainPage){
-            if (appMainCtr.state.pageIndex == 0) {
+        if (Get.currentRoute == PageRouterName.mainPage) {
+          if (appMainCtr.state.pageIndex == 0) {
             requestInitData();
           }
         }
@@ -80,11 +80,10 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
 
   Future<void> requestInitData() async {
     if (UserStore.to.hasToken) {
-      await _postQueryOrderInfoRequest();
-      // await postIsHomeManyProductRequest();
-      // if (state.originNetList.length == 1) {
-      // await _postQueryOrderInfoRequest();
-      // }
+      await _postIsHomeManyProductRequest();
+      if (mainHomeState.originNetList.length == 1) {
+        await _postQueryOrderInfoRequest();
+      }
     } else {
       mainHomeState.overdueStatus = -1;
       await postQueryHomeDefaultInfoRequest();
@@ -154,8 +153,8 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
               mainHomeState.threePayShow = payTypeList[2] == '1';
               mainHomeState.fourPayShow = payTypeList[3] == '1';
               mainHomeState.fivePayShow = payTypeList[4] == '1';
-              mainHomeState.loadState = LoadState.succeed;
             }
+            mainHomeState.loadState = LoadState.succeed;
           }
         }
         _addCalendarEvent();
@@ -433,56 +432,39 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
     await requestInitData();
   }
 
-// Future<void> postIsHomeManyProductRequest() async {
-//   Map<String, dynamic> param = getCommonParam();
-//   var response =
-//       await HttpRequestManage.instance.postIsHomeManyProductRequest(param);
-//   if (response.isSuccess()) {
-//     var netList = response.data ?? [];
-//     if (!ObjectUtil.isEmptyList(netList)) {
-//       state.originNetList
-//         ..clear()
-//         ..addAll(netList);
-//       if (state.originNetList.length > 1) {
-//         for (int i = 0; i < state.originNetList.length; i++) {
-//           var bean = state.originNetList[i];
-//           var status = bean.shortHelmetModernLatterGiftedDifference ?? '0';
-//           if (status == '0') {
-//             state.notPlaceOrderList.add(bean);
-//           } else {
-//             state.otherOrderList.add(bean);
-//           }
-//           if (!ObjectUtil.isEmptyList(state.otherOrderList)) {
-//             state.dataSource.addAll(state.otherOrderList);
-//           }
-//
-//           if (!ObjectUtil.isEmptyList(state.otherOrderList)) {}
-//         }
-//       }
-//     }
-//   } else {
-//     state.loadState = LoadState.failed;
-//     NetException.dealAllException(response);
-//   }
-// }
-
-// Future<void> postQueryChannelListRequest() async {
-//   Map<String, dynamic> param = getCommonParam();
-//   var response = await HttpRequestManage.instance.postChannelListInfo(param);
-//   if (response.isSuccess()) {
-//   } else {
-//     NetException.dealAllException(response);
-//   }
-// }
-
-// Future<void> postQueryPayInfoRequest() async {
-//   Map<String, dynamic> param = getCommonParam();
-//   var response = await HttpRequestManage.instance.postPayInfo(param);
-//   if (response.isSuccess()) {
-//   } else {
-//     NetException.dealAllException(response);
-//   }
-// }
+  Future<void> _postIsHomeManyProductRequest() async {
+    Map<String, dynamic> param = getCommonParam();
+    var response =
+        await HttpRequestManage.instance.postIsHomeManyProductRequest(param);
+    if (response.isSuccess()) {
+      var netList = response.data ?? [];
+      if (!ObjectUtil.isEmptyList(netList)) {
+        mainHomeState.originNetList
+          ..clear()
+          ..addAll(netList);
+        if (mainHomeState.originNetList.length > 1) {
+          for (int i = 0; i < mainHomeState.originNetList.length; i++) {
+            var bean = mainHomeState.originNetList[i];
+            var status = bean.shortHelmetModernLatterGiftedDifference ?? '0';
+            if (status == '0') {
+              mainHomeState.notPlaceOrderList.add(bean);
+            } else {
+              mainHomeState.otherOrderList.add(bean);
+            }
+            if (!ObjectUtil.isEmptyList(mainHomeState.otherOrderList)) {
+              mainHomeState.dataSource.addAll(mainHomeState.otherOrderList);
+            }
+            if (!ObjectUtil.isEmptyList(mainHomeState.notPlaceOrderList)) {
+              mainHomeState.dataSource.addAll(mainHomeState.notPlaceOrderList);
+            }
+          }
+          mainHomeState.loadState = LoadState.succeed;
+        }
+      }
+    } else {
+      NetException.dealAllException(response);
+    }
+  }
 }
 
 enum PayType { payOne, payTwo, payThree, payFour, payFive }

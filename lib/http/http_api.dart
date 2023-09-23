@@ -7,9 +7,6 @@ class HttpApi {
   static const String apiOrderInfo = 'facialHis/plusValuablePalace';
   static const String apiRepayInfo = 'cheapHeroine/maskRacialFortnight';
   static const String apiRecommendList ='curtain/blowTastyPeace';
-  static const String apiChannelListInfo = 'apartment/honourSteepCrop';
-  static const String apiPayInfo ='apartment/borrowEgyptianSoul';
-
   static const String apiUploadIdPhoto = 'curtain/defeatUntrueToday';
   static const String apiQueryPhoto = 'curtain/completeProbableFortnight';
   static const String apiSaveAuthInfo = 'curtain/digitalSmallLung';

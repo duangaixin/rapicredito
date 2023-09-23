@@ -63,7 +63,4 @@ class TimeUtils {
     return (v < 10) ? "0$v" : "$v";
   }
 
-  // String _checkStr(String v) {
-  //   return v == null ? "" : v;
-  // }
 }

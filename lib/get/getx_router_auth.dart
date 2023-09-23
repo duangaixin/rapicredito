@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:rapicredito/get/getx_storage_service.dart';
 import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/local/user_store.dart';

@@ -33,7 +33,6 @@ class LoanMoneyDateCtr extends BaseGetCtr {
   void _requestInitData() async {
     await _postAppConfigInfoRequest(AppConfigClickType.moneyDateType);
     await _postQueryProductRequest();
-    // await postTestCalculateRequest();
   }
 
   Future<void> _postQueryProductRequest() async {

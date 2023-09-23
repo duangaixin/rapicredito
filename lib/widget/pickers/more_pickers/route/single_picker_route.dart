@@ -66,7 +66,6 @@ class SinglePickerRoute<T> extends PopupRoute<T> {
   Widget buildPage(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation) {
     List mData = [];
-    // 初始化数据
     if (data is PickerDataType) {
       mData = pickerData[data]!;
     } else if (data is List) {

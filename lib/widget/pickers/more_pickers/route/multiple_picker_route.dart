@@ -98,7 +98,7 @@ class _PickerContentView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() =>
-      _PickerState(this.data, this.selectData, this.pickerStyle);
+      _PickerState(data, selectData, pickerStyle);
 }
 
 class _PickerState extends State<_PickerContentView> {
@@ -113,16 +113,15 @@ class _PickerState extends State<_PickerContentView> {
   List<FixedExtentScrollController> scrollCtrl = [];
 
   _PickerState(this._data, List mSelectData, this._pickerStyle) {
-    // 已选择器数据为准，因为初始化数据有可能和选择器对不上
-    this._selectData = [];
-    this._selectDataPosition = [];
-    this._data.asMap().keys.forEach((index) {
+    _selectData = [];
+    _selectDataPosition = [];
+    _data.asMap().keys.forEach((index) {
       if (index >= mSelectData.length) {
-        this._selectData.add('');
+        _selectData.add('');
       } else {
-        this._selectData.add(mSelectData[index]);
+        _selectData.add(mSelectData[index]);
       }
-      this._selectDataPosition.add(0);
+      _selectDataPosition.add(0);
     });
 
     _init();
@@ -163,18 +162,17 @@ class _PickerState extends State<_PickerContentView> {
     int pindex;
     scrollCtrl.clear();
 
-    this._data.asMap().keys.forEach((index) {
+    _data.asMap().keys.forEach((index) {
       pindex = 0;
       pindex = _data[index].indexWhere(
           (element) => element.toString() == _selectData[index].toString());
-      // 如果没有匹配到选择器对应数据，我们得修改选择器选中数据 ，不然confirm 返回的事设置的数据
       if (pindex < 0) {
         _selectData[index] = _data[index][0];
         pindex = 0;
       }
       _selectDataPosition[index] = pindex;
 
-      scrollCtrl.add(new FixedExtentScrollController(initialItem: pindex));
+      scrollCtrl.add(FixedExtentScrollController(initialItem: pindex));
     });
   }
 
@@ -216,9 +214,8 @@ class _PickerState extends State<_PickerContentView> {
   }
 
   Widget _renderItemView() {
-    // 选择器
     List<Widget> pickerList =
-        List.generate(this._data.length, (index) => pickerView(index)).toList();
+        List.generate(_data.length, (index) => pickerView(index)).toList();
 
     return Container(
       height: _pickerStyle.pickerHeight,
@@ -259,7 +256,6 @@ class _PickerState extends State<_PickerContentView> {
     );
   }
 
-  // 选择器上面的view
   Widget _titleView() {
     return Container(
       height: _pickerStyle.pickerTitleHeight,
@@ -268,15 +264,10 @@ class _PickerState extends State<_PickerContentView> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          /// 取消按钮
           InkWell(
               onTap: () => Navigator.pop(context, false),
               child: _pickerStyle.cancelButton),
-
-          /// 标题
           Expanded(child: _pickerStyle.title),
-
-          /// 确认按钮
           InkWell(
               onTap: () {
                 if (widget.route.onConfirm != null) {

@@ -18,7 +18,6 @@ extension _FixAutoLines on String {
 }
 
 class Strings {
-  ///防止文字自动换行
   static String autoLineString(String str) {
     if (!ObjectUtil.isEmptyString(str)) {
       return str.fixAutoLines();

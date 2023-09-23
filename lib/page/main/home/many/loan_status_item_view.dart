@@ -5,10 +5,44 @@ import 'package:rapicredito/widget/custom_color_button.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
 class LoanStatusItemView extends GetView<MainHomeCtr> {
-  const LoanStatusItemView({Key? key}) : super(key: key);
+  final int index;
+
+  const LoanStatusItemView({Key? key, required this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return _buildItemView();
+  }
+
+  Widget _buildItemView() {
+    var bean = controller.mainHomeState.dataSource[index];
+    var appName = bean.unfitImpressionSingleHandSuchElectricity ?? '';
+    var logoUrl = bean.bornDoubleShallowAcheActiveSparrow ?? '';
+    var status = bean.shortHelmetModernLatterGiftedDifference ?? '';
+    var statusName = '';
+    var btnText = '';
+    var btnDisable = false;
+    if (status == '3') {
+      statusName = 'Bajo Revisión';
+      btnText = 'Espere por favor';
+      btnDisable = true;
+    } else if (status == '6') {
+      statusName = 'Devolución Pendiente';
+      btnText = 'Pagar';
+      btnDisable = false;
+    } else if (status == '2') {
+      statusName = 'Atrasado';
+      btnText = 'Pagar';
+      btnDisable = false;
+    } else if (status == '4') {
+      statusName = 'Solicitud rechazado';
+      btnText = 'Aplica ya';
+      btnDisable = true;
+    } else if (status == '5') {
+      statusName = 'Dispersión fallida';
+      btnText = 'Actualizar datos';
+      btnDisable = false;
+    }
     return Container(
       padding: const EdgeInsets.only(top: 10.0),
       child: Column(
@@ -27,8 +61,9 @@ class LoanStatusItemView extends GetView<MainHomeCtr> {
                       shape: BoxShape.circle, color: Color(0xffB8EF17)),
                 ),
                 Text(
-                  '',
-                  style: TextStyle(fontSize: 15.0, color: Color(0xff333333)),
+                  statusName,
+                  style:
+                      const TextStyle(fontSize: 15.0, color: Color(0xff333333)),
                 )
               ],
             ),
@@ -43,16 +78,20 @@ class LoanStatusItemView extends GetView<MainHomeCtr> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       CustomImageView(
-                        '',
+                        logoUrl,
+                        imageType: ImageType.network,
                         radius: 8.0,
-                        width: 35.8,
-                        height: 35.8,
-                        margin: EdgeInsets.only(right: 9.0),
+                        width: 36,
+                        height: 36,
+                        memCacheHeight: 36,
+                        memCacheWidth: 36,
+                        margin: const EdgeInsets.only(
+                            right: 9.0, left: 11.0, top: 12.0),
                       ),
                       Text(
-                        '',
-                        style:
-                            TextStyle(fontSize: 15.0, color: Color(0xff333333)),
+                        appName,
+                        style: const TextStyle(
+                            fontSize: 15.0, color: Color(0xff333333)),
                       )
                     ],
                   ),
@@ -63,16 +102,16 @@ class LoanStatusItemView extends GetView<MainHomeCtr> {
                       Color(0xffF5F6F4),
                       Color(0xffF5F6F4),
                     ],
-                    disable: false,
+                    disable: btnDisable,
                     colors: const [Color(0xffB8EF17), Color(0xffB8EF17)],
                     height: 46.0,
                     width: 152.0,
                     borderRadius: BorderRadius.circular(8.0),
                     btnContent: Text(
-                      '',
+                      btnText,
                       style: TextStyle(
                           fontSize: 15.0,
-                          color: false
+                          color: btnDisable
                               ? const Color(0xffC4BFBF)
                               : const Color(0xff333333),
                           fontWeight: FontWeight.bold),
@@ -84,7 +123,7 @@ class LoanStatusItemView extends GetView<MainHomeCtr> {
             height: 1.0,
             margin: const EdgeInsets.only(top: 10.0),
             width: double.infinity,
-            color: Color(0xffE8E8E8),
+            color: const Color(0xffE8E8E8),
           ),
         ],
       ),

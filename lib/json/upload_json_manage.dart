@@ -37,7 +37,6 @@ import 'package:rapicredito/model/json/upload/spoken_cop_jewelry.dart';
 import 'package:rapicredito/model/json/upload/unsafe_hive.dart';
 import 'package:rapicredito/model/json/upload/valuable_victory_lovely_lid_fortune.dart';
 import 'package:rapicredito/utils/object_util.dart';
-import 'package:rapicredito/utils/text_util.dart';
 
 class UploadJsonManage {
   static final UploadJsonManage instance = UploadJsonManage._internal();

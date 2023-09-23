@@ -12,32 +12,28 @@ class PicketUtil {
     return value.trim().isEmpty;
   }
 
-  /// MAp不为空
   static bool mapNoEmpty(Map? value) {
     if (value == null) return false;
     return value.isNotEmpty;
   }
 
-  /// MAp为空
   static bool mapEmpty(Map? value) {
     if (value == null) return true;
     return value.isEmpty;
   }
 
-  ///判断List是否为空
   static bool listNoEmpty(List? list) {
     if (list == null) return false;
 
-    if (list.length == 0) return false;
+    if (list.isEmpty) return false;
 
     return true;
   }
 
-  ///判断List是否为空
   static bool listEmpty(List? list) {
     if (list == null) return true;
 
-    if (list.length == 0) return true;
+    if (list.isEmpty) return true;
 
     return false;
   }

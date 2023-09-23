@@ -16,11 +16,6 @@ class MainOrderCtr extends BaseGetCtr {
   final state = MainOrderState();
   var refreshController = RefreshController();
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
   void requestInitData({bool isShowDialog = false}) async {
     if (UserStore.to.hasToken) {
       await _postQueryOrderListRequest(isShowDialog: isShowDialog);
@@ -30,9 +25,8 @@ class MainOrderCtr extends BaseGetCtr {
     }
   }
 
-
   Future<void> refreshInfo({bool isShowDialog = false}) async {
-    state.isRefresh=true;
+    state.isRefresh = true;
     requestInitData(isShowDialog: isShowDialog);
   }
 
@@ -51,7 +45,9 @@ class MainOrderCtr extends BaseGetCtr {
       if (ObjectUtil.isEmptyList(netList)) {
         state.loadState = LoadState.empty;
       } else {
-        state.dataSource..clear()..addAll(netList);
+        state.dataSource
+          ..clear()
+          ..addAll(netList);
         state.loadState = LoadState.succeed;
       }
     } else {
