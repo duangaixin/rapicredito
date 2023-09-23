@@ -17,6 +17,7 @@ import com.zy.devicesinfo.data.StorageData
 import com.zy.devicesinfo.utils.AccountDataUtil
 import com.zy.devicesinfo.utils.CalendarDataUtil
 import com.zy.devicesinfo.utils.EncryptionUtil
+import com.zy.devicesinfo.utils.GeneralUtils
 import com.zy.devicesinfo.utils.IpUtil
 import com.zy.devicesinfo.utils.PhotoDataUtil
 import com.zy.devicesinfo.utils.SmsDataUtil
@@ -106,10 +107,14 @@ class MethodCallHandlerImpl(private var context: Context) : MethodCallHandler {
             }
 
             "getIpData" -> {
-                val ipData = IpUtil.getIpData();
+                val ipData = IpUtil.getIpData()
                 result.success(Gson().toJson(ipData))
             }
 
+            "getGaid" -> {
+                val gaid = GeneralUtils.gaid
+                result.success(gaid)
+            }
             "encryptAes" -> {
                 var param = call.arguments
                 if (param != null && param is Map<*, *> && param.isNotEmpty()) {

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:devicesinfo/devicesinfo_method_channel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -39,6 +40,18 @@ class LoginCtr extends BaseGetCtr {
     phoneCtr.addListener(_btnLoginCanClick);
     phoneCtr.addListener(_btnOptCanClick);
     codeCtr.addListener(_btnLoginCanClick);
+  }
+
+  @override
+  void onReady() {
+    _initGid();
+    super.onReady();
+  }
+
+  void _initGid() async {
+    var gid = await DeviceInfoChannel.getGid();
+    await StorageService.to.setString(AppConstants.gidKey, gid ?? '');
+    await setFireBaseUserIdInfo();
   }
 
   void _btnOptCanClick() {
@@ -128,6 +141,7 @@ class LoginCtr extends BaseGetCtr {
       await StorageService.to.setInt(AppConstants.userTestFlagKey, testFlag);
       await UserStore.to.setLoginInfo(token, userId, phoneNum);
       await setCrispInfo(testFlag.toString(), phoneNum);
+      await setFireBaseUserIdInfo(phone: phoneNum, userId: userId.toString());
       // if (isTokenExpired) {
       //   Get.toNamed(PageRouterName.mainPage);
       // } else {
@@ -148,6 +162,18 @@ class LoginCtr extends BaseGetCtr {
       ..['testFlag'] = testFlag
       ..['userPhone'] = phone;
     await channel.invokeMethod('setCrispInfo', param);
+  }
+
+  Future<void> setFireBaseUserIdInfo(
+      {String phone = '', String userId = ''}) async {
+    var gid = StorageService.to.getString(AppConstants.gidKey);
+    MethodChannel channel = const MethodChannel('originInfoPlugin');
+    var param = <String, String>{};
+    param
+      ..['gaid'] = gid
+      ..['userId'] = userId
+      ..['phone'] = phone;
+    await channel.invokeMethod('firebaseSetUserId', param);
   }
 
   @override

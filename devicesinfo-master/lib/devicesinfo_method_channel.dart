@@ -93,5 +93,8 @@ class DeviceInfoChannel extends DevicesinfoPlatform {
     var data = await methodChannel.invokeMethod('encryptAes',{'jsonStr':json});
     return data;
   }
-
+  static Future<String?> getGid() async {
+    var data = await methodChannel.invokeMethod('getGaid');
+    return data;
+  }
 }

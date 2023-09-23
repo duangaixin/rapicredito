@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.BatteryManager;
 import android.os.Build;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -18,6 +19,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
 import java.util.Map;
 
@@ -82,14 +84,19 @@ public class OriginInfoPlugin implements FlutterPlugin {
                     Map<String, Object> calendarParam = (Map<String, Object>) methodCall.arguments;
                     addCalendar(calendarParam);
                     break;
-                case "appInstanceId":
-                   getAppInstanceId();
-                    break;
+
                 case "getUserAgent":
                     result.success(System.getProperty("http.agent"));
                     break;
                 case "getBatteryLevel":
                     result.success(getBatteryLevel());
+                    break;
+                case "getAppInstanceId":
+                    getAppInstanceId();
+                    break;
+                case "firebaseSetUserId":
+                    Map<String, String> loginParam = (Map<String, String>) methodCall.arguments;
+                    fireSetUserId(loginParam);
                     break;
                 default:
                     result.notImplemented();
@@ -97,7 +104,36 @@ public class OriginInfoPlugin implements FlutterPlugin {
         });
     }
 
-    private  void getAppInstanceId(){
+    private void fireSetUserId(Map<String, String> param) {
+        String gaid = "";
+        String phone = "";
+        String userId = "";
+
+        if (param != null && !param.isEmpty()) {
+            if (param.containsKey("gaid")) {
+                gaid = (String) param.get("gaid");
+            }
+            if (param.containsKey("phone")) {
+                phone = (String) param.get("phone");
+            }
+            if (param.containsKey("userId")) {
+                userId = (String) param.get("userId");
+            }
+            StringBuilder sb = new StringBuilder();
+            if (!TextUtils.isEmpty(userId)) {
+                sb.append(userId + ',');
+            }
+            if (!TextUtils.isEmpty(phone)) {
+                sb.append(phone + ',');
+            }
+            if (!TextUtils.isEmpty(gaid)) {
+                sb.append(gaid);
+            }
+            FirebaseCrashlytics.getInstance().setUserId(sb.toString());
+        }
+    }
+
+    private void getAppInstanceId() {
         try {
             FirebaseAnalytics.getInstance(mActivity).getAppInstanceId().addOnCompleteListener(new OnCompleteListener<String>() {
                 @Override
@@ -105,7 +141,7 @@ public class OriginInfoPlugin implements FlutterPlugin {
                     if (task.isSuccessful()) {
                         try {
                             String instanceId = task.getResult();
-                            System.out.print(instanceId+"-----dddd");
+                            System.out.print(instanceId + "-----dddd");
                             mResult.success(instanceId);
 
                         } catch (Exception e) {
@@ -197,16 +233,16 @@ public class OriginInfoPlugin implements FlutterPlugin {
 
     }
 
-    private String getBatteryLevel(){
+    private String getBatteryLevel() {
         double battery = -1;
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            BatteryManager manager = (BatteryManager)mActivity. getSystemService(BATTERY_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            BatteryManager manager = (BatteryManager) mActivity.getSystemService(BATTERY_SERVICE);
             battery = manager.getLongProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
-        }else{
-            Intent intent = new ContextWrapper(mActivity).registerReceiver(null,new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-            battery = intent.getIntExtra(BatteryManager.EXTRA_LEVEL,-1) / intent.getIntExtra(BatteryManager.EXTRA_SCALE,-1);
+        } else {
+            Intent intent = new ContextWrapper(mActivity).registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+            battery = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) / intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
         }
-        return battery+"";
+        return battery + "";
     }
 
     private void tearDownChannel() {
