@@ -275,9 +275,7 @@ class AuthIdCtr extends BaseGetCtr {
     }
     var response =
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
-    if (isShowDialog) {
       Get.dismiss();
-    }
     if (response.isSuccess()) {
       _goToAddAccountPage();
     } else {
@@ -330,7 +328,6 @@ class AuthIdCtr extends BaseGetCtr {
             showLoading: false);
       }
       await _postSaveAuthIdRequest(isShowDialog: false);
-      Get.dismiss();
     }
   }
 
