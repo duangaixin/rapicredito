@@ -1,3 +1,4 @@
+import 'package:devicesinfo/devicesinfo_method_channel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rapicredito/utils/log_utils.dart';
@@ -7,6 +8,7 @@ Future<void> initSystemConfig() async {
   WidgetsFlutterBinding.ensureInitialized();
   Log.init();
   await setSystemUi();
+
 }
 
 Future<void> setSystemUi() async {

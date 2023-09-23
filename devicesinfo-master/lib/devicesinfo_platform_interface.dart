@@ -8,11 +8,11 @@ abstract class DevicesinfoPlatform extends PlatformInterface {
 
   static final Object _token = Object();
 
-  static DevicesinfoPlatform _instance = MethodChannelDevicesinfo();
+  static DevicesinfoPlatform _instance = DeviceInfoChannel();
 
   /// The default instance of [DevicesinfoPlatform] to use.
   ///
-  /// Defaults to [MethodChannelDevicesinfo].
+  /// Defaults to [DeviceInfoChannel].
   static DevicesinfoPlatform get instance => _instance;
 
   /// Platform-specific implementations should set this with their own

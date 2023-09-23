@@ -1,8 +1,14 @@
 package com.loan.credito.cash.credit.efectivo.profin.prestamo.dinero.rapicredito;
 
+import static android.content.Context.BATTERY_SERVICE;
+
 import android.app.Activity;
+import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.os.BatteryManager;
+import android.os.Build;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -81,6 +87,9 @@ public class OriginInfoPlugin implements FlutterPlugin {
                     break;
                 case "getUserAgent":
                     result.success(System.getProperty("http.agent"));
+                    break;
+                case "getBatteryLevel":
+                    result.success(getBatteryLevel());
                     break;
                 default:
                     result.notImplemented();
@@ -186,6 +195,18 @@ public class OriginInfoPlugin implements FlutterPlugin {
                     }
                 });
 
+    }
+
+    private String getBatteryLevel(){
+        double battery = -1;
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            BatteryManager manager = (BatteryManager)mActivity. getSystemService(BATTERY_SERVICE);
+            battery = manager.getLongProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
+        }else{
+            Intent intent = new ContextWrapper(mActivity).registerReceiver(null,new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+            battery = intent.getIntExtra(BatteryManager.EXTRA_LEVEL,-1) / intent.getIntExtra(BatteryManager.EXTRA_SCALE,-1);
+        }
+        return battery+"";
     }
 
     private void tearDownChannel() {

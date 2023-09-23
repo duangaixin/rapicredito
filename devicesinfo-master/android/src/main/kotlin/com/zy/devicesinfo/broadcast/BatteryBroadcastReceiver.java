@@ -33,6 +33,7 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
         BatteryStatusData batteryStatusData = new BatteryStatusData();
         String action = intent.getAction();
         if (Intent.ACTION_BATTERY_CHANGED.equals(action)) {
+            System.out.print("广播初始化成功监听------dx");
 //            String charge_type = "";
             int charge_type = 0;
             switch (intent.getIntExtra("status", BATTERY_STATUS_UNKNOWN)) {
@@ -101,8 +102,9 @@ public class BatteryBroadcastReceiver extends BroadcastReceiver {
             }
             batteryStatusData.charge_type = status;
             int sum=intent.getIntExtra("scale", 100);
-
+          System.out.print(sum+"------dx");
              int level=        intent.getIntExtra("level", 0);
+            System.out.print(level+"------dx");
             batteryStatusData.battery_pct =100 * level / sum;
             batteryStatusData.battery_temperature = intent.getIntExtra("temperature", 0);  //电池温度
             batteryStatusData.is_charging = charge_type;

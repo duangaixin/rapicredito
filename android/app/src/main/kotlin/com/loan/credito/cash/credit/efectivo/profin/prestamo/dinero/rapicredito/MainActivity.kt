@@ -27,7 +27,7 @@ import java.util.UUID
 class MainActivity : FlutterActivity() {
     private var currentPhotoPath: String? = null
     private var result: MethodChannel.Result? = null
-
+    private lateinit var channel:MethodChannel
     companion object {
         const val TAKE_CODE_REQUEST_CODE = 1000
         const val PICK_CODE_REQUEST_CODE = 1001
@@ -73,7 +73,15 @@ class MainActivity : FlutterActivity() {
                 this
             )
         )
+
+        val messenger = flutterEngine.dartExecutor.binaryMessenger
+        channel = MethodChannel(messenger, "addPoint")
+
     }
+
+     fun installAppPoint(){
+         channel.invokeMethod("installApp",null)
+     }
 
     fun takePhone(result: MethodChannel.Result, takeWay: Int) {
         this.result = result

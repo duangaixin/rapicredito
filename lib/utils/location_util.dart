@@ -8,8 +8,8 @@ import 'package:rapicredito/utils/object_util.dart';
 
 class LocationUtil {
   static Future getLocation() async {
-    MethodChannelDevicesinfo.initApp();
-    var locationInfo = await MethodChannelDevicesinfo.getLocationAddressData();
+    DeviceInfoChannel.initApp();
+    var locationInfo = await DeviceInfoChannel.getLocationAddressData();
     if (!ObjectUtil.isEmptyString(locationInfo)) {
       var map = json.decode(locationInfo!);
       var bean = LocationInfoBean.fromJson(map);

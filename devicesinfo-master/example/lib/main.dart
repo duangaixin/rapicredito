@@ -38,8 +38,8 @@ class _MyAppState extends State<MyApp> {
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
-    MethodChannelDevicesinfo.initApp();
-    var generalData = await MethodChannelDevicesinfo.getGeneralData();
+    DeviceInfoChannel.initApp();
+    var generalData = await DeviceInfoChannel.getGeneralData();
     platformVersion = generalData!;
     print(generalData);
     // If the widget was removed from the tree while the asynchronous platform

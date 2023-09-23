@@ -31,6 +31,7 @@
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
+
     <queries>
         <intent>
             <action android:name="android.intent.action.INSERT" />
@@ -70,6 +71,15 @@
         android:icon="@mipmap/logo"
         android:label="rapicredito"
         android:networkSecurityConfig="@xml/network_security_config">
+        <receiver
+            android:name="InstallAppReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+
+
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -170,19 +180,25 @@
             android:name="com.facebook.sdk.ClientToken"
             android:value="@string/fb_client_token" />
         <!-- Branch init -->
-<!--        <meta-data-->
-<!--            android:name="io.branch.sdk.BranchKey"-->
-<!--            android:value="" />-->
-<!--        <meta-data-->
-<!--            android:name="io.branch.sdk.BranchKey.test"-->
-<!--            android:value="" />-->
-<!--        <meta-data-->
-<!--            android:name="io.branch.sdk.TestMode"-->
-<!--            android:value="false" />-->
-        <meta-data android:name="io.branch.sdk.BranchKey" android:value="branch:key_live_hDao5r9VE3uyHpS4nc1TDceezwfzUVaV" />
+        <!--        <meta-data-->
+        <!--            android:name="io.branch.sdk.BranchKey"-->
+        <!--            android:value="" />-->
+        <!--        <meta-data-->
+        <!--            android:name="io.branch.sdk.BranchKey.test"-->
+        <!--            android:value="" />-->
+        <!--        <meta-data-->
+        <!--            android:name="io.branch.sdk.TestMode"-->
+        <!--            android:value="false" />-->
+        <meta-data
+            android:name="io.branch.sdk.BranchKey"
+            android:value="key_live_hDao5r9VE3uyHpS4nc1TDceezwfzUVaV" />
 
-        <meta-data android:name="io.branch.sdk.TestMode" android:value="false" />
+        <meta-data
+            android:name="io.branch.sdk.TestMode"
+            android:value="false" />
 
-        <meta-data android:name="com.google.android.gms.ads.AD_MANAGER_APP" android:value="true"/>
+        <meta-data
+            android:name="com.google.android.gms.ads.AD_MANAGER_APP"
+            android:value="true" />
     </application>
 </manifest>

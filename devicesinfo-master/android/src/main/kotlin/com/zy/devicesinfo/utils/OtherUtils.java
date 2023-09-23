@@ -574,9 +574,6 @@ public class OtherUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return -1L; catch (Exception e) {
-            e.printStackTrace();
-        }
         return -1L;
     }
 

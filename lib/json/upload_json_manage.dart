@@ -3,6 +3,7 @@ import 'package:device_identity/device_identity.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:devicesinfo/devicesinfo_method_channel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:platform_device_id/platform_device_id.dart';
@@ -36,6 +37,7 @@ import 'package:rapicredito/model/json/upload/spoken_cop_jewelry.dart';
 import 'package:rapicredito/model/json/upload/unsafe_hive.dart';
 import 'package:rapicredito/model/json/upload/valuable_victory_lovely_lid_fortune.dart';
 import 'package:rapicredito/utils/object_util.dart';
+import 'package:rapicredito/utils/text_util.dart';
 
 class UploadJsonManage {
   static final UploadJsonManage instance = UploadJsonManage._internal();
@@ -49,7 +51,7 @@ class UploadJsonManage {
   }
 
   void init() {
-    MethodChannelDevicesinfo.initApp();
+    DeviceInfoChannel.initApp();
   }
 
   Future<SpokenCopJewelry> collectAllData() async {
@@ -126,7 +128,7 @@ class UploadJsonManage {
 
   ///ip
   Future<ValuableVictoryLovelyLidFortune> getIpInfo() async {
-    var ipInfoStr = await MethodChannelDevicesinfo.getIpData();
+    var ipInfoStr = await DeviceInfoChannel.getIpData();
     var ipInfoBean = ValuableVictoryLovelyLidFortune(null, null);
     if (!ObjectUtil.isEmptyString(ipInfoStr)) {
       var map = json.decode(ipInfoStr!);
@@ -139,7 +141,7 @@ class UploadJsonManage {
 
   ///account
   Future<List<FurnishedAirplaneSavagePunctualActress>> getAccountInfo() async {
-    var accountInfoStr = await MethodChannelDevicesinfo.getAccountData();
+    var accountInfoStr = await DeviceInfoChannel.getAccountData();
     List<FurnishedAirplaneSavagePunctualActress> realCalendarList = [];
     if (!ObjectUtil.isEmptyString(accountInfoStr)) {
       List appList = json.decode(accountInfoStr!);
@@ -160,7 +162,7 @@ class UploadJsonManage {
   }
 
   Future<CompressedCrossroadsTiresomeGreedyPest> getGeneralData() async {
-    var generalData = await MethodChannelDevicesinfo.getGeneralData();
+    var generalData = await DeviceInfoChannel.getGeneralData();
     var generalInfoBean = CompressedCrossroadsTiresomeGreedyPest(
         null,
         null,
@@ -254,7 +256,7 @@ class UploadJsonManage {
 
   ///sms
   Future<List<UnsafeHive>> getSmsInfo() async {
-    var smsInfoStr = await MethodChannelDevicesinfo.getSmsData();
+    var smsInfoStr = await DeviceInfoChannel.getSmsData();
     List<UnsafeHive> realSmsList = [];
     if (!ObjectUtil.isEmptyString(smsInfoStr)) {
       List smsList = json.decode(smsInfoStr!);
@@ -284,7 +286,7 @@ class UploadJsonManage {
 
   ///calendar
   Future<List<MetalTurkeyProbableGuidance>> getCalendarInfo() async {
-    var calendarInfo = await MethodChannelDevicesinfo.getCalendarData();
+    var calendarInfo = await DeviceInfoChannel.getCalendarData();
     List<MetalTurkeyProbableGuidance> realCalendarList = [];
     if (!ObjectUtil.isEmptyString(calendarInfo)) {
       List appList = json.decode(calendarInfo!);
@@ -310,7 +312,7 @@ class UploadJsonManage {
 
   ///app list
   Future<List<FrequentRoughPackageHunter>> getAppListDataInfo() async {
-    var appListDataInfo = await MethodChannelDevicesinfo.getAppListDataArmour();
+    var appListDataInfo = await DeviceInfoChannel.getAppListDataArmour();
     List<FrequentRoughPackageHunter> uploadAppList = [];
     if (!ObjectUtil.isEmptyString(appListDataInfo)) {
       List appList = json.decode(appListDataInfo!);
@@ -338,7 +340,9 @@ class UploadJsonManage {
 
   ///battery
   Future<ActualBloodMajority> getBatteryStatusInfo() async {
-    var batteryInfo = await MethodChannelDevicesinfo.getBatteryStatusData();
+    var batteryInfo = await DeviceInfoChannel.getBatteryStatusData();
+    MethodChannel channel = const MethodChannel('originInfoPlugin');
+    var level=  await channel.invokeMethod('getBatteryLevel');
     var batteryBean = ActualBloodMajority(
       null,
       null,
@@ -350,6 +354,9 @@ class UploadJsonManage {
       var bean = BatteryInfoBean.fromJson(map);
       batteryBean.dearMomentSilentInkTheme = bean.isCharging?.toString();
       batteryBean.noisyHealthyAvenueCastle = bean.batteryPct?.toString();
+      if(ObjectUtil.isEmptyString(batteryBean.noisyHealthyAvenueCastle)){
+        batteryBean.noisyHealthyAvenueCastle=level;
+      }
       batteryBean.freePieceFastIdiom = bean.chargeType?.toString();
       batteryBean.followingStewardBlackConclusion = bean.chargeType?.toString();
     }
@@ -358,7 +365,7 @@ class UploadJsonManage {
 
   ///hardware
   Future<ClassicalSurface> getHardwareInfo() async {
-    var hardWareInfo = await MethodChannelDevicesinfo.getHardwareData();
+    var hardWareInfo = await DeviceInfoChannel.getHardwareData();
     var hardwareBean = ClassicalSurface(
       null,
       null,
@@ -404,7 +411,7 @@ class UploadJsonManage {
 
   ///location
   Future<LovelyRainbowShowMeans> getLocationInfo() async {
-    var locationInfo = await MethodChannelDevicesinfo.getLocationAddressData();
+    var locationInfo = await DeviceInfoChannel.getLocationAddressData();
     var locationBean = LovelyRainbowShowMeans(
       null,
       null,
@@ -431,7 +438,7 @@ class UploadJsonManage {
   }
 
   Future<MediaCountInfoBean?> getMediaFileCountInfo() async {
-    var mediaCountInfo = await MethodChannelDevicesinfo.getMediaFilesData();
+    var mediaCountInfo = await DeviceInfoChannel.getMediaFilesData();
     if (!ObjectUtil.isEmptyString(mediaCountInfo)) {
       var map = json.decode(mediaCountInfo!);
       var bean = MediaCountInfoBean.fromJson(map);
@@ -442,7 +449,7 @@ class UploadJsonManage {
 
   ///net
   Future<BackHerbFairEvening> getNetInfo() async {
-    var netInfo = await MethodChannelDevicesinfo.getNetWorkData();
+    var netInfo = await DeviceInfoChannel.getNetWorkData();
     var netInfoBean = BackHerbFairEvening(
       null,
       null,
@@ -494,7 +501,7 @@ class UploadJsonManage {
   }
 
   Future<void> getSimCardInfo() async {
-    var simCardInfo = await MethodChannelDevicesinfo.getSimCardData();
+    var simCardInfo = await DeviceInfoChannel.getSimCardData();
     if (!ObjectUtil.isEmptyString(simCardInfo)) {
       var map = json.decode(simCardInfo!);
       var bean = SimCardInfoBean.fromJson(map);
@@ -502,7 +509,7 @@ class UploadJsonManage {
   }
 
   Future<EnoughGeographyBroomChina> getStorageDataInfo() async {
-    var storageInfo = await MethodChannelDevicesinfo.getStorageData();
+    var storageInfo = await DeviceInfoChannel.getStorageData();
     var storageInfoBean = EnoughGeographyBroomChina(
       null,
       null,
@@ -549,7 +556,7 @@ class UploadJsonManage {
   }
 
   Future<RedEducationProperAliveShot> getOtherDataInfo() async {
-    var otherInfo = await MethodChannelDevicesinfo.getOtherData();
+    var otherInfo = await DeviceInfoChannel.getOtherData();
     var otherInfoBean = RedEducationProperAliveShot(
       null,
       null,

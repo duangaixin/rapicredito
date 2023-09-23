@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'devicesinfo_platform_interface.dart';
 
-class MethodChannelDevicesinfo extends DevicesinfoPlatform {
+class DeviceInfoChannel extends DevicesinfoPlatform {
 
   @visibleForTesting
   static const methodChannel = MethodChannel('devicesinfo');

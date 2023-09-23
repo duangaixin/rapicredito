@@ -5,7 +5,7 @@ import 'package:devicesinfo/devicesinfo_method_channel.dart';
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  MethodChannelDevicesinfo platform = MethodChannelDevicesinfo();
+  DeviceInfoChannel platform = DeviceInfoChannel();
   const MethodChannel channel = MethodChannel('devicesinfo');
 
   setUp(() {

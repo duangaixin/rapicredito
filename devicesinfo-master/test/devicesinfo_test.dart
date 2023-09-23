@@ -15,8 +15,8 @@ class MockDevicesinfoPlatform
 void main() {
   final DevicesinfoPlatform initialPlatform = DevicesinfoPlatform.instance;
 
-  test('$MethodChannelDevicesinfo is the default instance', () {
-    expect(initialPlatform, isInstanceOf<MethodChannelDevicesinfo>());
+  test('$DeviceInfoChannel is the default instance', () {
+    expect(initialPlatform, isInstanceOf<DeviceInfoChannel>());
   });
 
   test('getPlatformVersion', () async {

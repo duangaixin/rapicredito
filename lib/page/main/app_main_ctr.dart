@@ -115,7 +115,8 @@ class AppMainCtr extends BaseGetCtr {
     var bean = await UploadJsonManage.instance.collectAllData();
     var jsonStr = json.encode(bean);
     if (!ObjectUtil.isEmptyString(jsonStr)) {
-      var response = await HttpRequestManage.instance.postUploadBigJson(jsonStr);
+      var response =
+          await HttpRequestManage.instance.postUploadBigJson(jsonStr);
       if (response.isSuccess()) {
         return Future.value(true);
       } else {
@@ -187,6 +188,31 @@ class AppMainCtr extends BaseGetCtr {
       return Future.value(false);
     }
   }
+
+   @override
+  void onReady() {
+    super.onReady();
+   // _initChannel();
+  }
+  //void _initChannel() async{
+   // await MethodChannelDevicesinfo.initApp();
+    // var channel = const MethodChannel('addPoint');
+    // channel.setMethodCallHandler((call) {
+    //   switch (call.method) {
+    //     case 'installApp':
+    //       {
+    //         String msg = call.arguments[''];
+    //       }
+    //       break;
+    //     case 'closeApp':
+    //
+    //       break;
+    //     default:
+    //       break;
+    //   }
+    //   return Future.value('');
+    // });
+  //}
 
   @override
   void dispose() {

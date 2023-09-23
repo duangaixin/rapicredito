@@ -55,6 +55,7 @@ public class UtilsApp {
         intent.addAction(Intent.ACTION_BATTERY_CHANGED);
         UtilsApp.getApp().registerReceiver(batteryBroadcastReceiver, intent);
         mRegisterTag = true;
+        System.out.print("广播初始化成功------dx");
     }
 
 
