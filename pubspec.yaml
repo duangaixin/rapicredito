@@ -38,8 +38,8 @@ dependencies:
 #  firebase_core: ^2.15.1
 #  firebase_crashlytics: ^3.0.14
 #  firebase_analytics: ^10.4.5
-  flutter_pickers:
-     path: ./flutter_pickers
+#  flutter_pickers:
+#     path: ./flutter_pickers
   devicesinfo:
     path: ./devicesinfo-master
     #  camera: ^0.10.5+3

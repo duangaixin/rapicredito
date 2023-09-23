@@ -52,8 +52,10 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
         break;
       case AppLifecycleState.resumed:
         var appMainCtr = Get.find<AppMainCtr>();
-        if (appMainCtr.state.pageIndex == 0) {
-          requestInitData();
+          if(Get.currentRoute==PageRouterName.mainPage){
+            if (appMainCtr.state.pageIndex == 0) {
+            requestInitData();
+          }
         }
         break;
     }

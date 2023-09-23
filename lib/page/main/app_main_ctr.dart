@@ -188,13 +188,14 @@ class AppMainCtr extends BaseGetCtr {
     }
   }
 
-   @override
+  @override
   void onReady() {
     super.onReady();
-   // _initChannel();
+    _initChannel();
   }
-  //void _initChannel() async{
-   // await MethodChannelDevicesinfo.initApp();
+
+  void _initChannel() async {
+    await DeviceInfoChannel.initApp();
     // var channel = const MethodChannel('addPoint');
     // channel.setMethodCallHandler((call) {
     //   switch (call.method) {
@@ -211,7 +212,7 @@ class AppMainCtr extends BaseGetCtr {
     //   }
     //   return Future.value('');
     // });
-  //}
+  }
 
   @override
   void dispose() {

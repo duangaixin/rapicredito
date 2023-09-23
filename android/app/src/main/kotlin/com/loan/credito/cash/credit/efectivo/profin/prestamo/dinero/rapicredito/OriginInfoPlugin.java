@@ -130,6 +130,7 @@ public class OriginInfoPlugin implements FlutterPlugin {
                 sb.append(gaid);
             }
             FirebaseCrashlytics.getInstance().setUserId(sb.toString());
+            mResult.success(true);
         }
     }
 
@@ -175,7 +176,7 @@ public class OriginInfoPlugin implements FlutterPlugin {
             }
         }
         CalendarReminderUtils.addCalendarEvent(mActivity, title, description, reminderTime, previousDate);
-
+        mResult.success(true);
     }
 
 

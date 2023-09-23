@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_pickers/time_picker/model/pduration.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:image_picker/image_picker.dart';
@@ -27,7 +26,9 @@ import 'package:rapicredito/utils/permission_util.dart';
 import 'package:rapicredito/utils/screen_util.dart';
 import 'package:rapicredito/widget/custom_picker.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
+import 'package:rapicredito/widget/pickers/time_picker/model/pduration.dart';
 import 'package:rapicredito/widget/progress_hud_view.dart';
+
 
 class AuthIdCtr extends BaseGetCtr {
   final state = AuthIdState();
