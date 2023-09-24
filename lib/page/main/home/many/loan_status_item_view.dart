@@ -27,7 +27,7 @@ class LoanStatusItemView extends GetView<MainHomeCtr> {
       statusName = 'Bajo Revisión';
       btnText = 'Espere por favor';
       btnDisable = true;
-    } else if (status == '6') {
+    } else if (status == '1') {
       statusName = 'Devolución Pendiente';
       btnText = 'Pagar';
       btnDisable = false;
@@ -44,6 +44,8 @@ class LoanStatusItemView extends GetView<MainHomeCtr> {
       btnText = 'Actualizar datos';
       btnDisable = false;
     }
+
+
     return Container(
       padding: const EdgeInsets.only(top: 10.0),
       child: Column(
@@ -58,6 +60,7 @@ class LoanStatusItemView extends GetView<MainHomeCtr> {
                 Container(
                   width: 6.8,
                   height: 6.8,
+                  margin: const EdgeInsets.only(right: 3.0),
                   decoration: const BoxDecoration(
                       shape: BoxShape.circle, color: Color(0xffB8EF17)),
                 ),

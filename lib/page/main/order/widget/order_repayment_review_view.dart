@@ -139,7 +139,7 @@ class OrderRepaymentView extends GetView<MainOrderCtr> {
             disabledBackgroundColor: Colors.white,
             fontSize: 15.0,
             radius: 8.0,
-            text: 'Prolonga +$delayDay días más',
+            text: 'Prolonga $delayDay días más',
             textAlign: TextAlign.center,
             textColor: const Color(0xff333333),
             side: const BorderSide(color: Color(0xff333333), width: 1.0),

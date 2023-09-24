@@ -80,7 +80,7 @@ class Resource {
   static const String assetsImageHomeManyFireThree =
       'assets/image/main/home_many_fire_three.png';
   static const String assetsImageHomeManyFireTwo =
-      'assets/image/main/home_many_fire_Two.png';
+      'assets/image/main/home_many_fire_two.png';
   static const String assetsImageHomeManyFireOne =
       'assets/image/main/home_many_fire_one.png';
   static const String assetsImageHomeManyGoalOne =

@@ -16,6 +16,7 @@ HomeProductInfoBean _$HomeProductInfoBeanFromJson(Map<String, dynamic> json) =>
       (json['cleverMaidActualFoot'] as num?)?.toDouble(),
       json['smokeCampSpanishLift'] as int?,
       json['shortHelmetModernLatterGiftedDifference'] as String?,
+      json['noPlaceOrderIndex'] as int?,
     );
 
 Map<String, dynamic> _$HomeProductInfoBeanToJson(
@@ -33,4 +34,5 @@ Map<String, dynamic> _$HomeProductInfoBeanToJson(
       'smokeCampSpanishLift': instance.smokeCampSpanishLift,
       'shortHelmetModernLatterGiftedDifference':
           instance.shortHelmetModernLatterGiftedDifference,
+      'noPlaceOrderIndex': instance.noPlaceOrderIndex,
     };

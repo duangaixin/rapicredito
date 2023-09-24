@@ -13,7 +13,7 @@ class NoOrderLoanItemView extends GetView<MainHomeCtr> {
 
   @override
   Widget build(BuildContext context) {
-    return index < 3
+    return controller.mainHomeState.notPlaceOrderList.length < 3
         ? _buildTopThreeItemView()
         : _buildNoOrderNormalLoanItemView();
   }
@@ -27,15 +27,20 @@ class NoOrderLoanItemView extends GetView<MainHomeCtr> {
     var status = bean.shortHelmetModernLatterGiftedDifference ?? '';
     var goalPath = Resource.assetsImageHomeManyGoalOne;
     var firePath = Resource.assetsImageHomeManyFireThree;
-    if (index == 0) {
+    var fireWidth=53.0;
+    var noPlaceOrderIndex=bean.noPlaceOrderIndex??-1;
+    if (noPlaceOrderIndex== 0) {
       goalPath = Resource.assetsImageHomeManyGoalOne;
       firePath = Resource.assetsImageHomeManyFireThree;
-    } else if (index == 1) {
+      fireWidth=53.0;
+    } else if (noPlaceOrderIndex == 1) {
       goalPath = Resource.assetsImageHomeManyGoalTwo;
       firePath = Resource.assetsImageHomeManyFireTwo;
-    } else if (index == 2) {
+      fireWidth=35.0;
+    } else if (noPlaceOrderIndex == 2) {
       goalPath = Resource.assetsImageHomeManyGoalThree;
       firePath = Resource.assetsImageHomeManyFireOne;
+      fireWidth=17.0;
     }
     return Container(
         margin: const EdgeInsets.only(top: 20.0),
@@ -80,7 +85,7 @@ class NoOrderLoanItemView extends GetView<MainHomeCtr> {
                 ),
                 CustomImageView(
                   firePath,
-                  width: 53.0,
+                  width: fireWidth,
                   height: 20.0,
                   margin: const EdgeInsets.only(left: 11.0),
                   imageType: ImageType.assets,
@@ -89,6 +94,7 @@ class NoOrderLoanItemView extends GetView<MainHomeCtr> {
             ),
             Container(
               height: 1.0,
+              margin: const EdgeInsets.only(top: 12.0),
               padding: const EdgeInsets.only(left: 12.0, right: 1.0),
               width: double.infinity,
               color: const Color(0xffEAEAEA),
@@ -100,9 +106,9 @@ class NoOrderLoanItemView extends GetView<MainHomeCtr> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    Strings.formatPrice(maxCreditAmount.toString()),
+                   '\$${Strings.formatPrice(maxCreditAmount.toString())}',
                     style: const TextStyle(
-                        fontSize: 20.0, color: Color(0xff333333)),
+                        fontSize: 20.0, color: Color(0xff333333),fontWeight: FontWeight.bold),
                   ),
                   CustomColorButton(
                     realClick: (){

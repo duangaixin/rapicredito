@@ -213,7 +213,10 @@ class AuthIdPage extends GetView<AuthIdCtr> {
                 bottom: 22.0,
                 right: 5.0,
                 child: Obx(() {
-                  return Container(
+                  return Visibility(
+                      visible: !ObjectUtil.isEmptyString(controller.state.faceUrl) ||
+                          !ObjectUtil.isEmptyString(controller.state.facePath),
+                      child:     Container(
                         alignment: Alignment.center,
                         width: 18.0,
                         height: 18.0,
@@ -229,7 +232,13 @@ class AuthIdPage extends GetView<AuthIdCtr> {
                           size: 12.0,
                           color: Colors.white,
                         ),
-                      );
+                      )
+
+                  )
+
+
+
+                ;
                 }))
           ],
         ),

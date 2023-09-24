@@ -38,7 +38,12 @@ class HomeProductInfoBean extends Object {
   ///viewStatus
   String? shortHelmetModernLatterGiftedDifference;
 
-  HomeProductInfoBean(this.skillfulExpressionSaltyYard,this.bornDoubleShallowAcheActiveSparrow,this.passiveHis,this.disabledLondonPrivatePoolAmericanInstrument,this.unfitImpressionSingleHandSuchElectricity,this.cleverMaidActualFoot,this.smokeCampSpanishLift,this.shortHelmetModernLatterGiftedDifference,);
+  @JsonKey(name: 'noPlaceOrderIndex')
+  ///viewStatus
+  int? noPlaceOrderIndex;
+
+
+  HomeProductInfoBean(this.skillfulExpressionSaltyYard,this.bornDoubleShallowAcheActiveSparrow,this.passiveHis,this.disabledLondonPrivatePoolAmericanInstrument,this.unfitImpressionSingleHandSuchElectricity,this.cleverMaidActualFoot,this.smokeCampSpanishLift,this.shortHelmetModernLatterGiftedDifference,this.noPlaceOrderIndex);
 
   factory HomeProductInfoBean.fromJson(Map<String, dynamic> srcJson) => _$HomeProductInfoBeanFromJson(srcJson);
 

@@ -11,6 +11,7 @@ import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/local/user_store.dart';
+import 'package:rapicredito/main.dart';
 import 'package:rapicredito/model/pay_url_info_bean.dart';
 import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/page/main/home/widget/home_confirm_pay_dialog.dart';
@@ -386,6 +387,9 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
         mainHomeState.originNetList
           ..clear()
           ..addAll(netList);
+        mainHomeState.dataSource.clear();
+        mainHomeState.notPlaceOrderList.clear();
+        mainHomeState.otherOrderList.clear();
         if (mainHomeState.originNetList.length > 1) {
           for (int i = 0; i < mainHomeState.originNetList.length; i++) {
             var bean = mainHomeState.originNetList[i];
@@ -395,11 +399,15 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
             } else {
               mainHomeState.otherOrderList.add(bean);
             }
-            if (!ObjectUtil.isEmptyList(mainHomeState.otherOrderList)) {
-              mainHomeState.dataSource.addAll(mainHomeState.otherOrderList);
-            }
-            if (!ObjectUtil.isEmptyList(mainHomeState.notPlaceOrderList)) {
-              mainHomeState.dataSource.addAll(mainHomeState.notPlaceOrderList);
+          }
+          if (!ObjectUtil.isEmptyList(mainHomeState.otherOrderList)) {
+            mainHomeState.dataSource.addAll(mainHomeState.otherOrderList);
+          }
+          if (!ObjectUtil.isEmptyList(mainHomeState.notPlaceOrderList)) {
+            for(int i=0;i<mainHomeState.notPlaceOrderList.length;i++){
+              var bean=mainHomeState.notPlaceOrderList[i];
+              bean.noPlaceOrderIndex=i;
+              mainHomeState.dataSource.add(bean);
             }
           }
           mainHomeState.isManyProduct = true;
