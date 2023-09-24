@@ -32,9 +32,9 @@ class _HomeRolloverRepaymentDialogState
                       Scrollable.ensureVisible(mainHomeCtr.mainHomeState
                           .payTwoKey.currentContext as BuildContext);
                     },
-                    child: const Text(
-                      'Prolonga 7 días más',
-                      style: TextStyle(fontSize: 15.0, color: Colors.white),
+                    child:  Text(
+                      'Prolonga ${mainHomeCtr.mainHomeState.rolloverDuration} días más',
+                      style: const TextStyle(fontSize: 15.0, color: Colors.white),
                     ))),
             Positioned(bottom: 20.0, right: 0.0, child: closeView),
           ],

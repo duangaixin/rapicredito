@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/main/home/index.dart';
+import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_color_button.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
@@ -45,7 +46,6 @@ class LoanStatusItemView extends GetView<MainHomeCtr> {
       btnDisable = false;
     }
 
-
     return Container(
       padding: const EdgeInsets.only(top: 10.0),
       child: Column(
@@ -84,6 +84,7 @@ class LoanStatusItemView extends GetView<MainHomeCtr> {
                       CustomImageView(
                         logoUrl,
                         imageType: ImageType.network,
+                        placeholder: Resource.assetsImageAuthCameraBg,
                         radius: 8.0,
                         width: 36,
                         height: 36,
@@ -100,7 +101,7 @@ class LoanStatusItemView extends GetView<MainHomeCtr> {
                     ],
                   ),
                   CustomColorButton(
-                    realClick: (){
+                    realClick: () {
                       controller.clickManyProductItemBtn(status, currentUserId);
                     },
                     disableClick: null,

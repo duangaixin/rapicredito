@@ -125,24 +125,28 @@ class OrderRepaymentView extends GetView<MainOrderCtr> {
 
   Widget _buildBottomView() {
     var delayDay = bean.passiveHis ?? 0;
+    var canRollover = bean.endlessPie ?? '0';
     return Container(
       margin: const EdgeInsets.only(bottom: 10.0, top: 7.0),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
           Expanded(
-              child: CustomButton(
-            onPressed: () {},
-            minWidth: 177.5,
-            minHeight: 46.0,
-            backgroundColor: Colors.white,
-            disabledBackgroundColor: Colors.white,
-            fontSize: 15.0,
-            radius: 8.0,
-            text: 'Prolonga $delayDay días más',
-            textAlign: TextAlign.center,
-            textColor: const Color(0xff333333),
-            side: const BorderSide(color: Color(0xff333333), width: 1.0),
+              child: Opacity(
+            opacity: canRollover == '1' ? 1.0 : 0.0,
+            child: CustomButton(
+              onPressed: () {},
+              minWidth: 177.5,
+              minHeight: 46.0,
+              backgroundColor: Colors.white,
+              disabledBackgroundColor: Colors.white,
+              fontSize: 15.0,
+              radius: 8.0,
+              text: 'Prolonga $delayDay días más',
+              textAlign: TextAlign.center,
+              textColor: const Color(0xff333333),
+              side: const BorderSide(color: Color(0xff333333), width: 1.0),
+            ),
           )),
           const SizedBox(
             width: 13.0,

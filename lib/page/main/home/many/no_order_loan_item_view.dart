@@ -59,6 +59,7 @@ class NoOrderLoanItemView extends GetView<MainHomeCtr> {
                     CustomImageView(
                       logoUrl,
                       imageType: ImageType.network,
+                      placeholder: Resource.assetsImageAuthCameraBg,
                       radius: 8.0,
                       width: 36,
                       height: 36,
@@ -181,6 +182,7 @@ class NoOrderLoanItemView extends GetView<MainHomeCtr> {
                       CustomImageView(
                         logoUrl,
                         imageType: ImageType.network,
+                        placeholder: Resource.assetsImageAuthCameraBg,
                         radius: 8.0,
                         width: 36,
                         height: 36,

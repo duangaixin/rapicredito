@@ -104,8 +104,9 @@ Map<String, dynamic> getCommonParam() {
   var userId = StorageService.to.getInt(AppConstants.userIdKey);
   var locationStr = StorageService.to.getString(AppConstants.locationKey);
   var isManyProduct = StorageService.to.getBool(AppConstants.isManyProductKey);
+
   ///appssid
-  commonParam['madUnableBackacheCanal'] = isManyProduct?'':'204';
+  commonParam['madUnableBackacheCanal'] = '204';
   commonParam['terminalDifferentActionFatFountain'] = userId;
   commonParam['dailyFortuneQuantity'] = locationStr;
   commonParam['contraryScientificRightNone'] = 'es';
