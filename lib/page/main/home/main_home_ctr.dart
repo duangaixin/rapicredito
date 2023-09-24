@@ -11,7 +11,6 @@ import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/local/user_store.dart';
-import 'package:rapicredito/main.dart';
 import 'package:rapicredito/model/pay_url_info_bean.dart';
 import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/page/main/home/widget/home_confirm_pay_dialog.dart';
@@ -128,12 +127,6 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
       mainHomeState.overduePayment = bean?.freeCleanerBluePineapple ?? 0.0;
       mainHomeState.deductCost = bean?.unsafeLicenseNut ?? 0.0;
       mainHomeState.overdueDay = bean?.mexicanMedicalCan ?? 0;
-
-      ///delete
-      // mainHomeState.overdueStatus = 1;
-      // mainHomeState.canRolloverPay = true;
-      // repayTypeFlag = '1,1,1,1,1';
-      // mainHomeState.loadState = LoadState.succeed;
 
       if (mainHomeState.overdueStatus == -1) {
         await postQueryHomeDefaultInfoRequest();

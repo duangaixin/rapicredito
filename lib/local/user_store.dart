@@ -34,6 +34,11 @@ class UserStore extends GetxController {
       mUserId = -1;
       mToken = '';
       mUserPhone = '';
+      await StorageService.to.remove(AppConstants.appInstanceIdKey);
+      await StorageService.to.remove(AppConstants.isManyProductKey);
+      await StorageService.to.remove(AppConstants.currentUserIdKey);
+      await StorageService.to.remove(AppConstants.gidKey);
+      await StorageService.to.remove(AppConstants.uuidKey);
       await StorageService.to.remove(AppConstants.userTokenKey);
       await StorageService.to.remove(AppConstants.userIdKey);
       await StorageService.to.remove(AppConstants.userPhoneKey);

@@ -4,6 +4,7 @@ import 'package:rapicredito/page/loan/index.dart';
 class LoanMoneyDateBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<LoanMoneyDateCtr>(() => LoanMoneyDateCtr(),fenix: true);
+    Get.put<LoanMoneyDateCtr>(LoanMoneyDateCtr());
+  //  Get.lazyPut<LoanMoneyDateCtr>(() => LoanMoneyDateCtr(),fenix: true);
   }
 }

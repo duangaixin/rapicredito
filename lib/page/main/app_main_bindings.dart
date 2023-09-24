@@ -7,9 +7,9 @@ import 'package:rapicredito/page/main/order/main_order_ctr.dart';
 class AppMainBinding implements Bindings {
   @override
   void dependencies() {
-    Get.put<AppMainCtr>(AppMainCtr());
-    Get.put<MainHomeCtr>(MainHomeCtr());
-    Get.put<MainOrderCtr>(MainOrderCtr());
-    Get.put<MainMineCtr>(MainMineCtr());
+    Get.put<AppMainCtr>(AppMainCtr(),permanent: true);
+    Get.put<MainHomeCtr>(MainHomeCtr(),permanent: true);
+    Get.put<MainOrderCtr>(MainOrderCtr(),permanent: true);
+    Get.put<MainMineCtr>(MainMineCtr(),permanent: true);
   }
 }

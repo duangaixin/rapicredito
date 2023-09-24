@@ -147,9 +147,12 @@ class LoginCtr extends BaseGetCtr {
       // } else {
       //   Get.back();
       // }
-      Get.back();
+
       var mainHomeCtr = Get.find<MainHomeCtr>();
-      mainHomeCtr.refreshInfo();
+      if(mainHomeCtr.initialized){
+        mainHomeCtr.refreshInfo();
+      }
+      Get.back();
     } else {
       NetException.dealAllException(response);
     }

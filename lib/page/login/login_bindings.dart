@@ -4,6 +4,7 @@ import 'package:rapicredito/page/login/index.dart';
 class LoginBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<LoginCtr>(() => LoginCtr(), fenix: true);
+    Get.put<LoginCtr>(LoginCtr());
+    //  Get.lazyPut<LoginCtr>(() => LoginCtr(), fenix: true);
   }
 }

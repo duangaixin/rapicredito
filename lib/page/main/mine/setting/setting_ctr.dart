@@ -18,12 +18,14 @@ class SettingCtr extends BaseGetCtr {
     LanguageStore.to.setLocal(const Locale('es', 'CO'));
   }
 
-  void logout() {
-    UserStore.to.loginOut();
-    var mainHomeCtr = Get.find<MainHomeCtr>();
-    mainHomeCtr.mainHomeState.overdueStatus = -1;
-    var mainCtr = Get.find<AppMainCtr>();
-    mainCtr.dealNavBarTap(0);
-    Get.back();
+  void logout() async{
+     await UserStore.to.loginOut();
+     var mainCtr = Get.find<AppMainCtr>();
+     mainCtr.dealNavBarTap(0);
+      var mainHomeCtr = Get.find<MainHomeCtr>();
+      if(mainHomeCtr.initialized){
+        mainHomeCtr.mainHomeState.overdueStatus = -1;
+      }
+      Get.back();
   }
 }

@@ -25,7 +25,7 @@ class WalletView extends GetView<AccountCtr> {
             child: CustomEditView(
               key: GlobalKey(),
               controller: controller.walletAccountCtr,
-              maxLength: 10,
+              // maxLength: 10,
               keyboardType: TextInputType.number,
               editTitle: 'Cuenta de billetera móvil',
               hintText: 'Introducir texto',
@@ -36,7 +36,7 @@ class WalletView extends GetView<AccountCtr> {
             child: CustomEditView(
               controller: controller.walletAccountConfirmCtr,
               editTitle: 'Confirmar Cuenta de  billetera móvil',
-              maxLength: 10,
+              // maxLength: 10,
               keyboardType: TextInputType.number,
               hintText: 'Introducir texto',
             ),
