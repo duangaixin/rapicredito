@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/style/resources.dart';
-import 'package:rapicredito/utils/text_util.dart';
+import 'package:rapicredito/utils/string_ext.dart';
+
 
 class CommonLoanMoneyView extends GetView<MainHomeCtr> {
   const CommonLoanMoneyView({
@@ -33,8 +34,7 @@ class CommonLoanMoneyView extends GetView<MainHomeCtr> {
               )),
           Obx(() {
             var loanMoney = '';
-            var str = controller
-                .dealEndZero(controller.mainHomeState.creditAmount.toString());
+            var str = Strings.dealEndZero(controller.mainHomeState.creditAmount.toString());
             if (int.tryParse(str) != null) {
               loanMoney = str;
             } else {
@@ -42,7 +42,7 @@ class CommonLoanMoneyView extends GetView<MainHomeCtr> {
             }
             if (controller.mainHomeState.overdueStatus == 0 ||
                 controller.mainHomeState.overdueStatus == 1) {
-              var str = controller.dealEndZero(
+              var str = Strings.dealEndZero(
                   controller.mainHomeState.repaymentAmount.toString());
               if (int.tryParse(str) != null) {
                 loanMoney = str;
@@ -50,7 +50,7 @@ class CommonLoanMoneyView extends GetView<MainHomeCtr> {
                 loanMoney = (double.tryParse(str) ?? 0.0).toString();
               }
             }
-           var dealStr=controller.formatPrice(loanMoney);
+           var dealStr=Strings.formatPrice(loanMoney);
             return Text(
               '${dealStr}GTQ',
               style: const TextStyle(

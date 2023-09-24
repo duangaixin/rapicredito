@@ -6,7 +6,6 @@ import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
-///5
 class OrderLoanFailedView extends GetView<MainOrderCtr> {
   final OrderInfoBean bean;
 
@@ -50,8 +49,8 @@ class OrderLoanFailedView extends GetView<MainOrderCtr> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-          Text(
-            appName,
+            Text(
+              appName,
               style: const TextStyle(
                   fontSize: 15.0,
                   color: Color(0xff333333),
@@ -60,9 +59,8 @@ class OrderLoanFailedView extends GetView<MainOrderCtr> {
             const Padding(
                 padding: EdgeInsets.only(top: 6.0),
                 child: Text(
-              'Préstamo fallido',
-                  style:
-                      TextStyle(fontSize: 14.0, color: Color(0xff333333)),
+                  'Préstamo fallido',
+                  style: TextStyle(fontSize: 14.0, color: Color(0xff333333)),
                 ))
           ],
         )

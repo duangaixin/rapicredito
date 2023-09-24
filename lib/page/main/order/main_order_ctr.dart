@@ -5,10 +5,14 @@ import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/get/getx_extension.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
+import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/page/main/order/index.dart';
+import 'package:rapicredito/router/page_router_name.dart';
+import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainOrderCtr extends BaseGetCtr {
   MainOrderCtr();
@@ -54,5 +58,30 @@ class MainOrderCtr extends BaseGetCtr {
       state.loadState = LoadState.failed;
       NetException.dealAllException(response);
     }
+  }
+
+  void goToChangeAccountPage() async {
+    KeyboardUtils.unFocus();
+    await Get.toNamed(PageRouterName.accountPage,
+        arguments: {AppConstants.isFromAddAccountKey: false});
+  }
+
+  void _openBrowser(String url) async {
+    if (!ObjectUtil.isEmptyString(url)) {
+      Uri uri = Uri.parse(url);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        throw 'Cannot open $url';
+      }
+    }
+  }
+
+  void _goToWebViewPage(String title, String webViewUrl) async {
+    KeyboardUtils.unFocus();
+    await Get.toNamed(PageRouterName.webViewPage, arguments: {
+      AppConstants.webViewTitleKey: title,
+      AppConstants.webViewUrlKey: webViewUrl,
+    });
   }
 }

@@ -10,7 +10,6 @@ import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
-
 class HomeLoanOverdueView extends GetView<MainHomeCtr> {
   const HomeLoanOverdueView({Key? key}) : super(key: key);
 
@@ -159,7 +158,7 @@ class HomeLoanOverdueView extends GetView<MainHomeCtr> {
                   Obx(() {
                     return _buildKeyValueView(
                         'Monto de devolución',
-                        controller.addEndZero(controller
+                        Strings.addEndZero(controller
                             .mainHomeState.repaymentAmount
                             .toString()));
                   }),
@@ -170,23 +169,26 @@ class HomeLoanOverdueView extends GetView<MainHomeCtr> {
                   Obx(() {
                     return _buildKeyValueView(
                         'Monto del préstamo',
-                        controller.addEndZero(
+                        Strings.addEndZero(
                             controller.mainHomeState.creditAmount.toString()));
                   }),
                   Obx(() {
                     return _buildKeyValueView(
                         'Interés',
-                        controller.addEndZero(
+                        Strings.addEndZero(
                             controller.mainHomeState.interest.toString()));
                   }),
                   Obx(() {
-                    return _buildKeyValueView('Cargo por demora',
-                        controller.addEndZero( controller.mainHomeState.overduePayment.toString()));
+                    return _buildKeyValueView(
+                        'Cargo por demora',
+                        Strings.addEndZero(controller
+                            .mainHomeState.overduePayment
+                            .toString()));
                   }),
                   Obx(() {
                     return _buildKeyValueView(
                         'Costo de deducción',
-                        controller.addEndZero(
+                        Strings.addEndZero(
                             controller.mainHomeState.deductCost.toString()));
                   }),
                   Obx(() {
@@ -198,7 +200,7 @@ class HomeLoanOverdueView extends GetView<MainHomeCtr> {
                             feeWaiver != 0.000 &&
                             feeWaiver > 0,
                         child: _buildKeyValueView('Reducción de los gastos',
-                            controller.addEndZero(feeWaiver.toString())));
+                            Strings.addEndZero(feeWaiver.toString())));
                   }),
                 ],
               ),

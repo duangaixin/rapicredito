@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/style/index.dart';
+import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_color_button.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
@@ -99,7 +100,7 @@ class NoOrderLoanItemView extends GetView<MainHomeCtr> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    controller.formatPrice(maxCreditAmount.toString()),
+                    Strings.formatPrice(maxCreditAmount.toString()),
                     style: const TextStyle(
                         fontSize: 20.0, color: Color(0xff333333)),
                   ),

@@ -20,8 +20,6 @@ import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/location_util.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/utils/permission_util.dart';
-import 'package:rapicredito/utils/string_ext.dart';
-import 'package:rapicredito/utils/text_util.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -353,65 +351,6 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
         });
   }
 
-  String dealEndZero(String str) {
-    if (!ObjectUtil.isEmptyString(str)) {
-      if (str.endsWith('.0') || str.endsWith('.00')) {
-        var index = str.indexOf('.');
-        var newStr = str.substring(0, index);
-        return newStr;
-      }
-    }
-    return str;
-  }
-
-  String formatPrice(String str) {
-    if (!ObjectUtil.isEmptyString(str)) {
-      if (str.contains('.')) {
-        var index = str.indexOf('.');
-        var beginStr = str.substring(0, index);
-        var endStr = str.substring(index + 1, str.length);
-        if (num.tryParse(beginStr) is int) {
-          var strBegin = TextUtil.formatComma3(beginStr);
-          var str = '$strBegin.$endStr';
-          if (str.endsWith('.0')) {
-            str = '${str}0';
-          }
-          return str;
-        }
-      } else {
-        if (num.tryParse(str) is int) {
-          var strBegin = TextUtil.formatComma3(str);
-          return strBegin;
-        }
-      }
-    }
-    return str;
-  }
-
-  String addEndZero(String str) {
-    if (!ObjectUtil.isEmptyString(str)) {
-      if (str.contains('.')) {
-        var index = str.indexOf('.');
-        var beginStr = str.substring(0, index);
-        var endStr = str.substring(index + 1, str.length);
-        if (num.tryParse(beginStr) is int) {
-          var strBegin = TextUtil.formatComma3(beginStr);
-          var str = '$strBegin.$endStr';
-          if (str.endsWith('.0')) {
-            str = '${str}0';
-          }
-          return str.strWithDollar();
-        }
-      } else {
-        if (num.tryParse(str) is int) {
-          var strBegin = TextUtil.formatComma3(str);
-          return '$strBegin.00'.strWithDollar();
-        }
-      }
-    }
-    return str;
-  }
-
   void _openBrowser(String url) async {
     if (!ObjectUtil.isEmptyString(url)) {
       Uri uri = Uri.parse(url);
@@ -466,7 +405,6 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
     }
   }
 
-
   Future<void> _postHomeManyProductSonInfoRequest() async {
     Map<String, dynamic> param = getCommonParam();
     var response = await HttpRequestManage.instance
@@ -481,10 +419,7 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
     String status,
     int currentUserId,
   ) {
-    if(currentUserId==-1){
-
-    }
-
+    if (currentUserId == -1) {}
   }
 }
 

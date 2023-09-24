@@ -6,7 +6,6 @@ import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
-///6
 class OrderLoanAgainView extends GetView<MainOrderCtr> {
   final OrderInfoBean bean;
 
@@ -61,8 +60,7 @@ class OrderLoanAgainView extends GetView<MainOrderCtr> {
                 padding: EdgeInsets.only(top: 6.0),
                 child: Text(
                   'Fin',
-                  style:
-                      TextStyle(fontSize: 14.0, color: Color(0xff333333)),
+                  style: TextStyle(fontSize: 14.0, color: Color(0xff333333)),
                 ))
           ],
         )

@@ -5,8 +5,8 @@ import 'package:rapicredito/page/main/home/widget/common_app_bar_view.dart';
 import 'package:rapicredito/page/main/home/widget/common_loan_money_view.dart';
 import 'package:rapicredito/page/main/home/widget/common_pay_three_way_view.dart';
 import 'package:rapicredito/page/main/home/widget/common_pay_two_way_view.dart';
+import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_button.dart';
-
 
 class HomeLoanMakingRepaymentView extends GetView<MainHomeCtr> {
   const HomeLoanMakingRepaymentView({Key? key}) : super(key: key);
@@ -110,7 +110,7 @@ class HomeLoanMakingRepaymentView extends GetView<MainHomeCtr> {
                   Obx(() {
                     return _buildKeyValueView(
                         'Monto de devolución',
-                        controller.addEndZero(controller
+                        Strings.addEndZero(controller
                             .mainHomeState.repaymentAmount
                             .toString()));
                   }),
@@ -121,13 +121,13 @@ class HomeLoanMakingRepaymentView extends GetView<MainHomeCtr> {
                   Obx(() {
                     return _buildKeyValueView(
                         'Monto del préstamo',
-                        controller.addEndZero(
+                        Strings.addEndZero(
                             controller.mainHomeState.creditAmount.toString()));
                   }),
                   Obx(() {
                     return _buildKeyValueView(
                         'Interés',
-                        controller.addEndZero(
+                        Strings.addEndZero(
                             controller.mainHomeState.interest.toString()));
                   }),
                 ],

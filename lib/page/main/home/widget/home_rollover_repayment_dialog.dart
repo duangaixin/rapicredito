@@ -81,32 +81,32 @@ class _HomeRolloverRepaymentDialogState
             Obx(() {
               return _buildNormalKeyValueView(
                   'Tarifa extendida',
-                  mainHomeCtr.addEndZero(
+                  Strings.addEndZero(
                       mainHomeCtr.mainHomeState.deferralCharge.toString()));
             }),
             Obx(() {
               return _buildNormalKeyValueView(
                   'Interés',
-                  mainHomeCtr.addEndZero(
+                  Strings.addEndZero(
                       mainHomeCtr.mainHomeState.interest.toString()));
             }),
             Obx(() {
               return _buildNormalKeyValueView(
                 'IVA',
-                mainHomeCtr.addEndZero(
+                Strings.addEndZero(
                     mainHomeCtr.mainHomeState.valueAddedTax.toString()),
               );
             }),
             Obx(() {
               return _buildNormalKeyValueView(
                   'Costo de deducción',
-                  mainHomeCtr.addEndZero(
+                  Strings.addEndZero(
                       mainHomeCtr.mainHomeState.overduePayment.toString()));
             }),
             Obx(() {
               return _buildBoldKeyValueView(
                   'Monto del pago',
-                  mainHomeCtr
+                  Strings
                       .addEndZero(mainHomeCtr.mainHomeState.payFee.toString()));
             }),
             Obx(() {
@@ -118,7 +118,7 @@ class _HomeRolloverRepaymentDialogState
                       feeWaiver != 0.000 &&
                       feeWaiver > 0,
                   child: _buildBoldKeyValueView('Reducción de los gastos',
-                      mainHomeCtr.addEndZero(feeWaiver.toString())));
+                      Strings.addEndZero(feeWaiver.toString())));
             }),
           ],
         ),
@@ -168,7 +168,7 @@ class _HomeRolloverRepaymentDialogState
                             fontSize: 15.0, color: Color(0xff333333)),
                         children: <TextSpan>[
                           TextSpan(
-                              text: Strings.autoLineString(mainHomeCtr
+                              text: Strings.autoLineString(Strings
                                   .addEndZero(mainHomeCtr.mainHomeState.payFee
                                       .toString())),
                               style: const TextStyle(
@@ -189,7 +189,7 @@ class _HomeRolloverRepaymentDialogState
                               style: const TextStyle(
                                   fontSize: 15.0, color: Color(0xff333333))),
                           TextSpan(
-                              text: Strings.autoLineString(mainHomeCtr
+                              text: Strings.autoLineString(Strings
                                   .addEndZero(mainHomeCtr.mainHomeState.payFee
                                       .toString())),
                               style: const TextStyle(

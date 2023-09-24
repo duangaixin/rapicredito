@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:rapicredito/model/order_info_bean.dart';
 import 'package:rapicredito/page/main/order/index.dart';
 import 'package:rapicredito/style/index.dart';
+import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
-///1
 class OrderUnderReviewView extends GetView<MainOrderCtr> {
   final OrderInfoBean bean;
 
@@ -29,6 +29,7 @@ class OrderUnderReviewView extends GetView<MainOrderCtr> {
   Widget _buildShowInfoView() {
     var applyAmount = bean.funnyAustraliaTeamTale ?? 0.0;
     var submitTime = bean.luckyExperience ?? '';
+    var applyAmountStr = '\$${Strings.formatPrice(applyAmount.toString())}';
     return Container(
       margin: const EdgeInsets.only(top: 13.0, bottom: 14.0),
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
@@ -38,7 +39,7 @@ class OrderUnderReviewView extends GetView<MainOrderCtr> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildKeyValueView('Monto del préstamo', applyAmount.toString()),
+          _buildKeyValueView('Monto del préstamo', applyAmountStr),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: _buildKeyValueView('Fecha de aplicación', submitTime),
@@ -80,8 +81,7 @@ class OrderUnderReviewView extends GetView<MainOrderCtr> {
                 padding: EdgeInsets.only(top: 6.0),
                 child: Text(
                   'Bajo Revisión',
-                  style:
-                      TextStyle(fontSize: 14.0, color: Color(0xff333333)),
+                  style: TextStyle(fontSize: 14.0, color: Color(0xff333333)),
                 ))
           ],
         )

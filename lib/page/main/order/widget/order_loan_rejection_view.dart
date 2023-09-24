@@ -6,7 +6,6 @@ import 'package:rapicredito/style/index.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
-///4
 class OrderLoanRejectionView extends GetView<MainOrderCtr> {
   final OrderInfoBean bean;
 
@@ -104,7 +103,9 @@ class OrderLoanRejectionView extends GetView<MainOrderCtr> {
     return Container(
       margin: const EdgeInsets.only(bottom: 10.0, top: 14.0),
       child: CustomButton(
-          onPressed: () {},
+          onPressed: () {
+            controller.goToChangeAccountPage();
+          },
           minWidth: 254.0,
           minHeight: 46.0,
           backgroundColor: const Color(0xffF5F6F4),

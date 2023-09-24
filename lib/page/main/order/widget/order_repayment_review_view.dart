@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:rapicredito/model/order_info_bean.dart';
 import 'package:rapicredito/page/main/order/index.dart';
 import 'package:rapicredito/style/index.dart';
+import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
-///2
 class OrderRepaymentView extends GetView<MainOrderCtr> {
   final OrderInfoBean bean;
 
@@ -31,6 +31,7 @@ class OrderRepaymentView extends GetView<MainOrderCtr> {
 
   Widget _buildShowInfoView() {
     var payAmount = bean.interestingComradeHairIntroduction ?? 0.0;
+    var payAmountStr = '\$${Strings.formatPrice(payAmount.toString())}';
     var payDate = bean.disabledBusyEngine ?? '';
     return Container(
       margin: const EdgeInsets.only(top: 13.0),
@@ -41,7 +42,7 @@ class OrderRepaymentView extends GetView<MainOrderCtr> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildKeyValueView('Monto del préstamo', payAmount.toString()),
+          _buildKeyValueView('Monto del préstamo', payAmountStr),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: _buildKeyValueView('Fecha de aplicación', payDate),
@@ -83,8 +84,7 @@ class OrderRepaymentView extends GetView<MainOrderCtr> {
                 padding: EdgeInsets.only(top: 6.0),
                 child: Text(
                   'Devolución pendiente',
-                  style:
-                      TextStyle(fontSize: 14.0, color: Color(0xff333333)),
+                  style: TextStyle(fontSize: 14.0, color: Color(0xff333333)),
                 ))
           ],
         )
