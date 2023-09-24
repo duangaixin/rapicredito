@@ -27,6 +27,7 @@ class HttpApi {
   static const String apiQueryHomeDefaultMoney =
       'facialHis/instructLikelyTailor';
   static const String apiIsManyProduct = 'businessman/dismissThatRail';
+  static const String apiHomeManyProductSonInfo='microcomputer/smileRacialSpaghetti';
   static const String apiRolloverDetailInfo='cheapHeroine/plantReadyTechnique' ;
   static const String apiAddPoint='facialHis/burnUselessQuantity' ;
 }

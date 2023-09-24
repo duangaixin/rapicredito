@@ -19,6 +19,7 @@ class LoanStatusItemView extends GetView<MainHomeCtr> {
     var appName = bean.unfitImpressionSingleHandSuchElectricity ?? '';
     var logoUrl = bean.bornDoubleShallowAcheActiveSparrow ?? '';
     var status = bean.shortHelmetModernLatterGiftedDifference ?? '';
+    var currentUserId = bean.smokeCampSpanishLift ?? -1;
     var statusName = '';
     var btnText = '';
     var btnDisable = false;
@@ -96,7 +97,9 @@ class LoanStatusItemView extends GetView<MainHomeCtr> {
                     ],
                   ),
                   CustomColorButton(
-                    realClick: null,
+                    realClick: (){
+                      controller.clickManyProductItemBtn(status, currentUserId);
+                    },
                     disableClick: null,
                     disableColors: const [
                       Color(0xffF5F6F4),

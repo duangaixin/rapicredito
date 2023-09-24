@@ -465,6 +465,27 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
       NetException.dealAllException(response);
     }
   }
+
+
+  Future<void> _postHomeManyProductSonInfoRequest() async {
+    Map<String, dynamic> param = getCommonParam();
+    var response = await HttpRequestManage.instance
+        .postHomeManyProductSonInfoRequest(param);
+    if (response.isSuccess()) {
+    } else {
+      NetException.dealAllException(response);
+    }
+  }
+
+  void clickManyProductItemBtn(
+    String status,
+    int currentUserId,
+  ) {
+    if(currentUserId==-1){
+
+    }
+
+  }
 }
 
 enum PayType { payOne, payTwo, payThree, payFour, payFive }

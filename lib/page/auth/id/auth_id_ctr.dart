@@ -277,7 +277,7 @@ class AuthIdCtr extends BaseGetCtr {
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
       Get.dismiss();
     if (response.isSuccess()) {
-      _goToAddAccountPage();
+       _goToAddAccountPage();
     } else {
       NetException.dealAllException(response);
     }
@@ -308,6 +308,7 @@ class AuthIdCtr extends BaseGetCtr {
       if (!ObjectUtil.isEmptyString(state.idFrontPath)) {
         await _uploadPhotoData(
             isFront: true,
+            isUploadFace: false,
             localPath: state.idFrontPath,
             isUploadFromLocal: true,
             showLoading: false);
@@ -315,6 +316,7 @@ class AuthIdCtr extends BaseGetCtr {
       if (!ObjectUtil.isEmptyString(state.idBackPath)) {
         await _uploadPhotoData(
             isFront: false,
+            isUploadFace: false,
             localPath: state.idBackPath,
             isUploadFromLocal: true,
             showLoading: false);
@@ -396,18 +398,22 @@ class AuthIdCtr extends BaseGetCtr {
       if (isUploadFace) {
         state.isUploadFace = false;
         state.uploadFaceSuccess = false;
+        state.faceUrl='';
         state.facePath = compressPath;
       } else {
         if (isFront) {
           state.isUploadFront = false;
           state.uploadFrontSuccess = false;
+          state.idFrontUrl='';
           state.idFrontPath = compressPath;
         } else {
           state.isUploadBehind = false;
           state.uploadBehindSuccess = false;
+          state.idBackUrl='';
           state.idBackPath = compressPath;
         }
       }
+      _btnCanClick();
       // ProgressHUD.showError('Upload failed, please upload again-Carga fallida');
     }
   }
@@ -427,9 +433,6 @@ class AuthIdCtr extends BaseGetCtr {
       var frontUrl = photoBean?.tastelessAmericanPlateCattle ?? '';
       var backUrl = photoBean?.hugeNeed ?? '';
       var faceUrl = photoBean?.dueReligionFoggyCustom ?? '';
-      state.uploadFrontSuccess = !ObjectUtil.isEmptyString(frontUrl);
-      state.uploadBehindSuccess = !ObjectUtil.isEmptyString(backUrl);
-      state.uploadFaceSuccess = !ObjectUtil.isEmptyString(faceUrl);
       if (state.isInitRequest) {
         if (state.idFrontUrl != frontUrl) {
           state.idFrontUrl = frontUrl;
@@ -441,24 +444,30 @@ class AuthIdCtr extends BaseGetCtr {
           state.faceUrl = faceUrl;
         }
         state.isInitRequest = false;
+        state.uploadFrontSuccess = !ObjectUtil.isEmptyString(frontUrl);
+        state.uploadBehindSuccess = !ObjectUtil.isEmptyString(backUrl);
+        state.uploadFaceSuccess = !ObjectUtil.isEmptyString(faceUrl);
       } else {
         if (state.isUploadFront) {
           if (state.idFrontUrl != frontUrl) {
             state.idFrontUrl = frontUrl;
             state.idFrontPath = '';
           }
+          state.uploadFrontSuccess = !ObjectUtil.isEmptyString(frontUrl);
         }
         if (state.isUploadBehind) {
           if (state.idBackUrl != backUrl) {
             state.idBackUrl = backUrl;
             state.idBackPath = '';
           }
+          state.uploadBehindSuccess = !ObjectUtil.isEmptyString(backUrl);
         }
         if (state.isUploadFace) {
           if (state.faceUrl != faceUrl) {
             state.faceUrl = faceUrl;
             state.facePath = '';
           }
+          state.uploadFaceSuccess = !ObjectUtil.isEmptyString(faceUrl);
         }
         state.isUploadFront = false;
         state.isUploadBehind = false;

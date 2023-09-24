@@ -22,6 +22,8 @@ class NoOrderLoanItemView extends GetView<MainHomeCtr> {
     var appName = bean.unfitImpressionSingleHandSuchElectricity ?? '';
     var logoUrl = bean.bornDoubleShallowAcheActiveSparrow ?? '';
     var maxCreditAmount = bean.cleverMaidActualFoot ?? 0.0;
+    var currentUserId = bean.smokeCampSpanishLift ?? -1;
+    var status = bean.shortHelmetModernLatterGiftedDifference ?? '';
     var goalPath = Resource.assetsImageHomeManyGoalOne;
     var firePath = Resource.assetsImageHomeManyFireThree;
     if (index == 0) {
@@ -102,7 +104,9 @@ class NoOrderLoanItemView extends GetView<MainHomeCtr> {
                         fontSize: 20.0, color: Color(0xff333333)),
                   ),
                   CustomColorButton(
-                    realClick: null,
+                    realClick: (){
+                      controller.clickManyProductItemBtn(status, currentUserId);
+                    },
                     disableClick: null,
                     disableColors: const [
                       Color(0xffF5F6F4),
@@ -132,6 +136,8 @@ class NoOrderLoanItemView extends GetView<MainHomeCtr> {
     var bean = controller.mainHomeState.dataSource[index];
     var appName = bean.unfitImpressionSingleHandSuchElectricity ?? '';
     var logoUrl = bean.bornDoubleShallowAcheActiveSparrow ?? '';
+    var currentUserId = bean.smokeCampSpanishLift ?? -1;
+    var status = bean.shortHelmetModernLatterGiftedDifference ?? '';
     return Container(
       padding: const EdgeInsets.only(top: 10.0),
       child: Column(
@@ -184,7 +190,9 @@ class NoOrderLoanItemView extends GetView<MainHomeCtr> {
                     ],
                   ),
                   CustomColorButton(
-                    realClick: null,
+                    realClick: (){
+                      controller.clickManyProductItemBtn(status, currentUserId);
+                    },
                     disableClick: null,
                     disableColors: const [
                       Color(0xffF5F6F4),

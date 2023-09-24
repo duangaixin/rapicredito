@@ -77,6 +77,7 @@ Future<Map<String, dynamic>> _getDefHeader() async {
 
   ///currentUserId
   map['terminalDifferentActionFatFountain'] = userId;
+
   map['rawEndingApril'] = userId;
   map['taxFebruary'] = 'googleplay';
   map['extraordinaryIndependentCollegeDeal'] = versionName;
@@ -104,6 +105,7 @@ Map<String, dynamic> getCommonParam() {
   var commonParam = <String, dynamic>{};
   var userId = StorageService.to.getInt(AppConstants.userIdKey);
   var locationStr = StorageService.to.getString(AppConstants.locationKey);
+  ///appssid
   commonParam['madUnableBackacheCanal'] = '204';
   commonParam['terminalDifferentActionFatFountain'] = userId;
   commonParam['dailyFortuneQuantity'] = locationStr;

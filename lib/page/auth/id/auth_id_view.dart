@@ -212,11 +212,25 @@ class AuthIdPage extends GetView<AuthIdCtr> {
             Positioned(
                 bottom: 22.0,
                 right: 5.0,
-                child: Visibility(
-                    visible: !ObjectUtil.isEmptyString(
-                            controller.state.faceUrl) ||
-                        !ObjectUtil.isEmptyString(controller.state.facePath),
-                    child: uploadTipView(controller.state.uploadFaceSuccess)))
+                child: Obx(() {
+                  return Container(
+                        alignment: Alignment.center,
+                        width: 18.0,
+                        height: 18.0,
+                        decoration: BoxDecoration(
+                            color: controller.state.uploadFaceSuccess
+                                ? Colors.greenAccent
+                                : Colors.red,
+                            shape: BoxShape.circle),
+                        child: Icon(
+                          controller.state.uploadFaceSuccess
+                              ? Icons.done
+                              : Icons.close,
+                          size: 12.0,
+                          color: Colors.white,
+                        ),
+                      );
+                }))
           ],
         ),
       ));

@@ -198,6 +198,14 @@ extension RequestBussiness on HttpRequestManage {
             .toList());
   }
 
+  Future<BaseResponse> postHomeManyProductSonInfoRequest(
+      Map<String, dynamic> param) async {
+    return await httpRequest.post(HttpApi.apiHomeManyProductSonInfo,
+        options: Options(contentType: Headers.formUrlEncodedContentType),
+        data: param,
+        onTransform: null);
+  }
+
   Future<BaseResponse> postUploadBigJson(dynamic param) async {
     return await httpRequest.post(HttpApi.apiUploadBigJson,
         options: Options(contentType: Headers.jsonContentType),
@@ -222,7 +230,7 @@ extension RequestBussiness on HttpRequestManage {
         onTransform: (json) => RolloverDetailInfoBean.fromJson(json));
   }
 
-  Future<BaseResponse> postAddPointRequest( Map<String, dynamic> param) async {
+  Future<BaseResponse> postAddPointRequest(Map<String, dynamic> param) async {
     return await httpRequest.post(HttpApi.apiAddPoint,
         options: Options(contentType: Headers.formUrlEncodedContentType),
         data: param,
