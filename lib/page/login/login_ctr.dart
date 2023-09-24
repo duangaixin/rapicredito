@@ -44,14 +44,18 @@ class LoginCtr extends BaseGetCtr {
 
   @override
   void onReady() {
-    _initGid();
+    _initChannelInfo();
     super.onReady();
   }
 
-  void _initGid() async {
+  void _initChannelInfo() async {
     var gid = await DeviceInfoChannel.getGid();
     await StorageService.to.setString(AppConstants.gidKey, gid ?? '');
     await setFireBaseUserIdInfo();
+    MethodChannel channel = const MethodChannel('originInfoPlugin');
+    var appInstanceId = await channel.invokeMethod('getAppInstanceId');
+    await StorageService.to
+        .setString(AppConstants.appInstanceIdKey, appInstanceId ?? '');
   }
 
   void _btnOptCanClick() {
@@ -113,21 +117,17 @@ class LoginCtr extends BaseGetCtr {
   }
 
   void _postLoginRequest() async {
+    var gid = StorageService.to.getString(AppConstants.gidKey);
+    var appInstanceId =
+        StorageService.to.getString(AppConstants.appInstanceIdKey);
     var param = <String, dynamic>{};
     var phoneNum = phoneCtr.text.strRvSpace();
-
-    ///phoneNo
     param['swiftMeansEitherPine'] = phoneNum;
-
-    ///smsCode
     param['littlePenfriendCompressedFlightManager'] = codeCtr.text.strRvSpace();
-
-    ///gaid
-    param['quickUncertainLuggageUglyGoose'] =
-        '00000000-0000-0000-0000-000000000000';
-
-    ///appInstanceId
-    param['aliveCanteenSteadyPioneer'] = '00000000000000000000000000000000';
+    // param['quickUncertainLuggageUglyGoose'] ='00000000-0000-0000-0000-000000000000';
+    param['quickUncertainLuggageUglyGoose'] = gid;
+    // param['aliveCanteenSteadyPioneer'] = '00000000000000000000000000000000';
+    param['aliveCanteenSteadyPioneer'] = appInstanceId;
     param.addAll(getCommonParam());
     Get.showLoading();
     var response = await HttpRequestManage.instance.postLoginRequest(param);

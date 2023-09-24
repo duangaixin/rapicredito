@@ -57,6 +57,7 @@ bool is401Error(BaseResponse<dynamic> error) {
 Future<Map<String, dynamic>> _getDefHeader() async {
   var map = <String, dynamic>{};
   var userId = StorageService.to.getInt(AppConstants.userIdKey);
+  var currentUserId = StorageService.to.getInt(AppConstants.currentUserIdKey);
   var token = StorageService.to.getString(AppConstants.userTokenKey);
   PackageInfo packageInfo = await PackageInfo.fromPlatform();
   var versionName = packageInfo.version;
@@ -74,15 +75,12 @@ Future<Map<String, dynamic>> _getDefHeader() async {
   }
   map['delightedHospitalGoldenMuttonManyTaxi'] = '204';
   map['darkPlentyNervousHandbag'] = token;
-
-  ///currentUserId
-  map['terminalDifferentActionFatFountain'] = userId;
-
-  map['rawEndingApril'] = userId;
   map['taxFebruary'] = 'googleplay';
   map['extraordinaryIndependentCollegeDeal'] = versionName;
   map['literaryMineralFatHillSwiftRobot'] = buildNumber;
-  map['italianArm'] = imei;
+  map['italianArm'] = deviceId;
+  map['rawEndingApril'] = userId;
+  map['terminalDifferentActionFatFountain'] = currentUserId;
   map['emptyChainFamousJewel'] = imei;
   map['electronicRiceEarth'] = imei;
   map['perfectAche'] = '';
@@ -105,6 +103,8 @@ Map<String, dynamic> getCommonParam() {
   var commonParam = <String, dynamic>{};
   var userId = StorageService.to.getInt(AppConstants.userIdKey);
   var locationStr = StorageService.to.getString(AppConstants.locationKey);
+  var isManyProduct = StorageService.to.getBool(AppConstants.isManyProductKey);
+
   ///appssid
   commonParam['madUnableBackacheCanal'] = '204';
   commonParam['terminalDifferentActionFatFountain'] = userId;

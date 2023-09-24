@@ -20,6 +20,12 @@ class MainHomeState {
   RxList<HomeProductInfoBean> notPlaceOrderList = <HomeProductInfoBean>[].obs;
   RxList<HomeProductInfoBean> dataSource = <HomeProductInfoBean>[].obs;
 
+  final RxBool _isManyProduct = false.obs;
+
+  bool get isManyProduct  => _isManyProduct .value;
+
+  set isManyProduct (value) => _isManyProduct .value = value;
+
   final RxDouble _feeWaiver = 0.0.obs;
 
   double get feeWaiver => _feeWaiver.value;

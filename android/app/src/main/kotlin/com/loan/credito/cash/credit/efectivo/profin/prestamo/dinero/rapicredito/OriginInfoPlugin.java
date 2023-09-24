@@ -142,7 +142,6 @@ public class OriginInfoPlugin implements FlutterPlugin {
                     if (task.isSuccessful()) {
                         try {
                             String instanceId = task.getResult();
-                            System.out.print(instanceId + "-----dddd");
                             mResult.success(instanceId);
 
                         } catch (Exception e) {

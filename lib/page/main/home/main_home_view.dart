@@ -27,8 +27,7 @@ class MainHomePage extends GetKeepStateView<MainHomeCtr> {
             onReload: ctr.refreshInfo,
             loadState: ctr.mainHomeState.loadState,
             contentView: Obx(() {
-              var length = ctr.mainHomeState.dataSource.length;
-              return length > 1
+              return ctr.mainHomeState.isManyProduct
                   ? const HomeManyProductView()
                   : Obx(() {
                       var overdueStatus = ctr.mainHomeState.overdueStatus;

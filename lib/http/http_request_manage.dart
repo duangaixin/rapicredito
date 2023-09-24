@@ -148,7 +148,9 @@ extension RequestBussiness on HttpRequestManage {
       Map<String, dynamic> param) async {
     return await httpRequest.post<List<OrderInfoBean>>(
         HttpApi.apiQueryOrderListInfo,
-        options: Options(contentType: Headers.formUrlEncodedContentType),
+        options: Options(
+            contentType: Headers.formUrlEncodedContentType,
+            headers: {'nobleEndlessSnowman':'1'}),
         data: param,
         onTransform: (json) =>
             json.map<OrderInfoBean>((e) => OrderInfoBean.fromJson(e)).toList());

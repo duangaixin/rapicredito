@@ -6,6 +6,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:rapicredito/config/app_http_init.dart';
 import 'package:rapicredito/get/getx_base_controller.dart';
 import 'package:rapicredito/get/getx_extension.dart';
+import 'package:rapicredito/get/getx_storage_service.dart';
 import 'package:rapicredito/http/http_request_manage.dart';
 import 'package:rapicredito/http/net_exception.dart';
 import 'package:rapicredito/local/app_constants.dart';
@@ -80,9 +81,13 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
     if (UserStore.to.hasToken) {
       await _postIsHomeManyProductRequest();
       if (mainHomeState.originNetList.length == 1) {
+        mainHomeState.isManyProduct = false;
+        await StorageService.to.setBool(AppConstants.isManyProductKey, false);
         await _postQueryOrderInfoRequest();
       }
     } else {
+      mainHomeState.isManyProduct = false;
+      await StorageService.to.setBool(AppConstants.isManyProductKey, false);
       mainHomeState.overdueStatus = -1;
       await postQueryHomeDefaultInfoRequest();
     }
@@ -397,6 +402,8 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
               mainHomeState.dataSource.addAll(mainHomeState.notPlaceOrderList);
             }
           }
+          mainHomeState.isManyProduct = true;
+          await StorageService.to.setBool(AppConstants.isManyProductKey, true);
           mainHomeState.loadState = LoadState.succeed;
         }
       }
