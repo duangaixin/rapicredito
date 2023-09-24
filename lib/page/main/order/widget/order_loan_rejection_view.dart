@@ -49,19 +49,18 @@ class OrderLoanRejectionView extends GetView<MainOrderCtr> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'APPName',
-              style: TextStyle(
+            Text(
+              appName,
+              style: const TextStyle(
                   fontSize: 15.0,
                   color: Color(0xff333333),
                   fontWeight: FontWeight.bold),
             ),
-            Padding(
-                padding: const EdgeInsets.only(top: 6.0),
+            const Padding(
+                padding: EdgeInsets.only(top: 6.0),
                 child: Text(
-                  appName,
-                  style:
-                      const TextStyle(fontSize: 14.0, color: Color(0xff333333)),
+                  'Solicitud rechazada',
+                  style: TextStyle(fontSize: 14.0, color: Color(0xff333333)),
                 ))
           ],
         )

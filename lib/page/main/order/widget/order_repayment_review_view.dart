@@ -30,8 +30,8 @@ class OrderRepaymentView extends GetView<MainOrderCtr> {
   }
 
   Widget _buildShowInfoView() {
-    var applyAmount = bean.funnyAustraliaTeamTale ?? 0.0;
-    var submitTime = bean.luckyExperience ?? '';
+    var payAmount = bean.interestingComradeHairIntroduction ?? 0.0;
+    var payDate = bean.disabledBusyEngine ?? '';
     return Container(
       margin: const EdgeInsets.only(top: 13.0),
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 12.0),
@@ -41,10 +41,10 @@ class OrderRepaymentView extends GetView<MainOrderCtr> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildKeyValueView('Monto del préstamo', applyAmount.toString()),
+          _buildKeyValueView('Monto del préstamo', payAmount.toString()),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
-            child: _buildKeyValueView('Fecha de aplicación', submitTime),
+            child: _buildKeyValueView('Fecha de aplicación', payDate),
           )
         ],
       ),
@@ -62,6 +62,8 @@ class OrderRepaymentView extends GetView<MainOrderCtr> {
           placeholder: Resource.assetsImageAuthCameraBg,
           width: 44.0,
           height: 44.0,
+          memCacheWidth: 44,
+          memCacheHeight: 44,
           radius: 8.0,
           margin: const EdgeInsets.only(right: 10.0),
           fit: BoxFit.cover,
@@ -70,19 +72,19 @@ class OrderRepaymentView extends GetView<MainOrderCtr> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'APPName',
-              style: TextStyle(
+            Text(
+              appName,
+              style: const TextStyle(
                   fontSize: 15.0,
                   color: Color(0xff333333),
                   fontWeight: FontWeight.bold),
             ),
-            Padding(
-                padding: const EdgeInsets.only(top: 6.0),
+            const Padding(
+                padding: EdgeInsets.only(top: 6.0),
                 child: Text(
-                  appName,
+                  'Devolución pendiente',
                   style:
-                      const TextStyle(fontSize: 14.0, color: Color(0xff333333)),
+                      TextStyle(fontSize: 14.0, color: Color(0xff333333)),
                 ))
           ],
         )
@@ -122,6 +124,7 @@ class OrderRepaymentView extends GetView<MainOrderCtr> {
   }
 
   Widget _buildBottomView() {
+    var delayDay = bean.passiveHis ?? 0;
     return Container(
       margin: const EdgeInsets.only(bottom: 10.0, top: 7.0),
       child: Row(
@@ -136,7 +139,7 @@ class OrderRepaymentView extends GetView<MainOrderCtr> {
             disabledBackgroundColor: Colors.white,
             fontSize: 15.0,
             radius: 8.0,
-            text: 'Prolonga 7 días más',
+            text: 'Prolonga +$delayDay días más',
             textAlign: TextAlign.center,
             textColor: const Color(0xff333333),
             side: const BorderSide(color: Color(0xff333333), width: 1.0),

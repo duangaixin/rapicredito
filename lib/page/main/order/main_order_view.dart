@@ -92,10 +92,6 @@ class MainOrderPage extends GetKeepStateView<MainOrderCtr> {
         ///放款失败
         itemView = OrderLoanFailedView(bean: orderInfoBean);
         break;
-      case '6':
-
-        ///放款处理中
-        break;
     }
     return itemView;
   }

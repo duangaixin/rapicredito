@@ -40,6 +40,8 @@ class OrderLoanFailedView extends GetView<MainOrderCtr> {
           placeholder: Resource.assetsImageAuthCameraBg,
           width: 44.0,
           height: 44.0,
+          memCacheWidth: 44,
+          memCacheHeight: 44,
           radius: 8.0,
           margin: const EdgeInsets.only(right: 10.0),
           fit: BoxFit.cover,
@@ -48,19 +50,19 @@ class OrderLoanFailedView extends GetView<MainOrderCtr> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'APPName',
-              style: TextStyle(
+          Text(
+            appName,
+              style: const TextStyle(
                   fontSize: 15.0,
                   color: Color(0xff333333),
                   fontWeight: FontWeight.bold),
             ),
-            Padding(
-                padding: const EdgeInsets.only(top: 6.0),
+            const Padding(
+                padding: EdgeInsets.only(top: 6.0),
                 child: Text(
-                  appName,
+              'Préstamo fallido',
                   style:
-                      const TextStyle(fontSize: 14.0, color: Color(0xff333333)),
+                      TextStyle(fontSize: 14.0, color: Color(0xff333333)),
                 ))
           ],
         )
@@ -93,7 +95,7 @@ class OrderLoanFailedView extends GetView<MainOrderCtr> {
             ),
             Expanded(
                 child: Text(
-              'Su puntaje de crédito está por debajo de los requisitos mínimos para préstamos de plataforma.',
+              'El sistema ha detectado que la información de su tarjeta bancaria no se ha completado correctamente,   cárguela de nuevo.',
               style: TextStyle(fontSize: 14.0, color: Color(0xffD53535)),
             ))
           ],
