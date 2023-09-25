@@ -11,6 +11,7 @@ import 'package:rapicredito/model/key_value_bean.dart';
 import 'package:rapicredito/page/account/index.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
 import 'package:rapicredito/page/main/home/index.dart';
+import 'package:rapicredito/page/main/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/object_util.dart';
@@ -196,7 +197,7 @@ class AccountCtr extends BaseGetCtr {
     param['firstNurse'] = bankName;
     param['broadSpiritualKilometre'] = bankAccountType;
     param['dampThatTentBlankTrunk'] = bankAccountNumber;
-    if(!state.isAddAccount){
+    if (!state.isAddAccount) {
       param['honestMethodPureStorm'] = 1;
     }
     param.addAll(getCommonParam());
@@ -230,6 +231,13 @@ class AccountCtr extends BaseGetCtr {
             state.bankType = _getName(state.originBankTypeList, bankTypeCode);
             bankAccountCtr.text = accountNumber;
             bankAccountConfirmCtr.text = accountNumber;
+            if (ObjectUtil.isEmptyString(state.bankName) &&
+                ObjectUtil.isEmptyString(state.bankType) &&
+                ObjectUtil.isEmptyString(bankAccountCtr.text.trim()) &&
+                ObjectUtil.isEmptyString(bankAccountConfirmCtr.text.trim())) {
+              state.isFirstEnter = true;
+              _addOldPoint(osType: 'RENT_LEFTOVER_FUN');
+            }
           } else {
             state.accountTypeSelectIndex = 0;
             walletAccountCtr.text = accountNumber;
@@ -241,6 +249,11 @@ class AccountCtr extends BaseGetCtr {
                   state.walletSelectIndex = i;
                 }
               }
+            }
+            if (ObjectUtil.isEmptyString(walletAccountCtr.text.trim()) &&
+                ObjectUtil.isEmptyString(walletAccountConfirmCtr.text.trim())) {
+              state.isFirstEnter = true;
+              _addOldPoint(osType: 'RENT_LEFTOVER_FUN');
             }
           }
         }
@@ -254,6 +267,8 @@ class AccountCtr extends BaseGetCtr {
             state.accountTypeSelectIndex = 0;
           }
         }
+        state.isFirstEnter = true;
+        _addOldPoint(osType: 'RENT_LEFTOVER_FUN');
       }
       state.loadState = LoadState.succeed;
     } else {
@@ -262,8 +277,16 @@ class AccountCtr extends BaseGetCtr {
     }
   }
 
+  void _addOldPoint({String osType = ''}) async {
+    var appMainCtr = Get.find<AppMainCtr>();
+    if (appMainCtr.initialized) {
+      await appMainCtr.postAddPointRequest(osType: osType);
+    }
+  }
+
   void postSaveAccountRequest() async {
     KeyboardUtils.unFocus();
+    _addOldPoint(osType: 'SHAVE_CANADIAN_SUNSET');
     var canNext = false;
     if (state.accountTypeSelectIndex == 0) {
       canNext = _validateWallet();
@@ -278,6 +301,9 @@ class AccountCtr extends BaseGetCtr {
     Get.dismiss();
     if (response.isSuccess()) {
       if (state.isAddAccount) {
+        if (state.isFirstEnter) {
+          _addOldPoint(osType: 'RUIN_FRIENDLY_MANKIND');
+        }
         _goToSelectDateAndMoneyPage();
       } else {
         var mainHomeCtr = Get.find<MainHomeCtr>();

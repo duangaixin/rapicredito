@@ -8,6 +8,7 @@ class AuthContactState {
   LoadState get loadState => _loadState.value;
 
   set loadState(value) => _loadState.value = value;
+  bool isFirstEnter = false;
   List<String?> relationshipShowList = [];
   List<ConfigInfoBean> relationshipOriginList = [];
 

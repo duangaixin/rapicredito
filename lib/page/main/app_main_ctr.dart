@@ -191,28 +191,10 @@ class AppMainCtr extends BaseGetCtr {
   @override
   void onReady() {
     super.onReady();
-    _initChannel();
+    DeviceInfoChannel.initApp();
+    postAddPointRequest(osType: 'HIRE_SURROUNDING_MINISKIRT');
   }
 
-  void _initChannel() async {
-    await DeviceInfoChannel.initApp();
-    // var channel = const MethodChannel('addPoint');
-    // channel.setMethodCallHandler((call) {
-    //   switch (call.method) {
-    //     case 'installApp':
-    //       {
-    //         String msg = call.arguments[''];
-    //       }
-    //       break;
-    //     case 'closeApp':
-    //
-    //       break;
-    //     default:
-    //       break;
-    //   }
-    //   return Future.value('');
-    // });
-  }
 
   @override
   void dispose() {

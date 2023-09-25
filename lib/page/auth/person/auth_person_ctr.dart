@@ -12,6 +12,7 @@ import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
 import 'package:rapicredito/page/auth/person/widget/email_select_list_view.dart';
+import 'package:rapicredito/page/main/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/location_util.dart';
@@ -36,6 +37,13 @@ class AuthPersonCtr extends BaseGetCtr {
     _requestLocation();
   }
 
+  Future<void> _addOldPoint({String osType = ''}) async {
+    var appMainCtr = Get.find<AppMainCtr>();
+    if (appMainCtr.initialized) {
+      await appMainCtr.postAddPointRequest(osType: osType);
+    }
+  }
+
   void _requestLocation() {
     PermissionUtil.checkPermission(
         permissionList: [
@@ -45,6 +53,7 @@ class AuthPersonCtr extends BaseGetCtr {
           await LocationUtil.getLocation();
         },
         goSetting: () {});
+    _addOldPoint();
   }
 
   void _emailEndListener() {
@@ -117,6 +126,7 @@ class AuthPersonCtr extends BaseGetCtr {
 
   void clickSubmit() async {
     KeyboardUtils.unFocus();
+    _addOldPoint(osType: 'UNITE_USED_SETTLER');
     await _postSaveAuthPersonRequest();
   }
 
@@ -138,6 +148,9 @@ class AuthPersonCtr extends BaseGetCtr {
       var userEmail = emailCtr.text.strRvSpace();
       await StorageService.to.setString(AppConstants.userEmailKey, userEmail);
       await setCrispInfo(userEmail);
+      if (state.isFirstEnter) {
+        _addOldPoint(osType: 'ARRANGE_CERTAIN_MOVEMENT');
+      }
       Get.toNamed(PageRouterName.authContactPage);
     } else {
       NetException.dealAllException(response);
@@ -156,6 +169,13 @@ class AuthPersonCtr extends BaseGetCtr {
       emailCtr.text = authInfoBean?.sadBirdHopelessHobby ?? '';
       state.familyCount = authInfoBean?.necessarySeasonTechnicalHers ?? '';
       state.educationalLevel = authInfoBean?.thesePopCrossCountryside ?? '';
+      if (ObjectUtil.isEmptyString(state.income) &&
+          ObjectUtil.isEmptyString(emailCtr.text.trim()) &&
+          ObjectUtil.isEmptyString(state.familyCount) &&
+          ObjectUtil.isEmptyString(state.educationalLevel)) {
+        state.isFirstEnter = true;
+        _addOldPoint(osType: 'SPEED_TECHNICAL_ANTARCTICA');
+      }
       _btnCanClick();
     } else {
       NetException.dealAllException(response);
@@ -201,7 +221,8 @@ class AuthPersonCtr extends BaseGetCtr {
     }
   }
 
-  void _postAppConfigInfoRequest(AppConfigClickType clickType) async {;
+  void _postAppConfigInfoRequest(AppConfigClickType clickType) async {
+    ;
     var param = <String, dynamic>{};
     var typeStr = '';
     if (clickType == AppConfigClickType.incomeType) {
@@ -253,7 +274,8 @@ class AuthPersonCtr extends BaseGetCtr {
       return false;
     }
     if (!GetUtils.isEmail(emailCtr.text.strRvSpace())) {
-      ProgressHUD.showInfo('Por favor, introduzca un correo electrónico correcto');
+      ProgressHUD.showInfo(
+          'Por favor, introduzca un correo electrónico correcto');
       return false;
     }
     return true;

@@ -7,7 +7,7 @@ class AccountState {
   List<String> accountTypeList = ['Billetera Móvil', 'Cuenta Bancaria'];
   bool isAddAccount = true;
   String collectionTypeCode = '';
-
+  bool isFirstEnter = false;
   List<ConfigInfoBean> originAccountList = [];
   List<ConfigInfoBean> originBankNameList = [];
   List<ConfigInfoBean> originBankTypeList = [];

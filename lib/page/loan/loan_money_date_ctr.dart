@@ -15,6 +15,7 @@ import 'package:rapicredito/page/loan/index.dart';
 import 'package:rapicredito/page/loan/widget/commit_success_dialog.dart';
 import 'package:rapicredito/page/loan/widget/date_money_select_dialog.dart';
 import 'package:rapicredito/page/loan/widget/loan_confirm_money_dialog.dart';
+import 'package:rapicredito/page/main/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/object_util.dart';
@@ -253,16 +254,18 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     if (response.isSuccess()) {
       var bean = response.data;
       state.amountInHand =
-          addEndZero(bean?.technicalPastSillyAirline?.toString() ?? '');
+          Strings.addEndZero(bean?.technicalPastSillyAirline?.toString() ?? '');
       state.interest =
-          addEndZero(bean?.freshBookcaseModestPing?.toString() ?? '');
-      state.serviceCharge = addEndZero(bean?.centigradeDeal?.toString() ?? '');
-      state.iva = addEndZero(bean?.triangleRemarkIllBattery?.toString() ?? '');
-      state.repaymentAmount = addEndZero(
+          Strings.addEndZero(bean?.freshBookcaseModestPing?.toString() ?? '');
+      state.serviceCharge =
+          Strings.addEndZero(bean?.centigradeDeal?.toString() ?? '');
+      state.iva =
+          Strings.addEndZero(bean?.triangleRemarkIllBattery?.toString() ?? '');
+      state.repaymentAmount = Strings.addEndZero(
           bean?.everyFlashMerchantPostcodeHotTongue.toString() ?? '');
       var extList = bean?.farLatterInterestingLabourerLooseRunner ?? [];
       if (!ObjectUtil.isEmptyList(extList)) {
-        state.bankServiceCharge = addEndZero(
+        state.bankServiceCharge = Strings.addEndZero(
             extList[0].americanHappinessBankPianist?.toString() ?? '');
       }
       state.loadState = LoadState.succeed;
@@ -331,6 +334,7 @@ class LoanMoneyDateCtr extends BaseGetCtr {
         await HttpRequestManage.instance.postSubmitOrderRequest(param);
     Get.dismiss();
     if (response.isSuccess()) {
+      _addOldPoint(osType: 'NAME_FOLLOWING_PHYSICIAN');
       _showCommitSuccessDialog();
     } else {
       NetException.dealAllException(response);
@@ -348,7 +352,8 @@ class LoanMoneyDateCtr extends BaseGetCtr {
           return LoanConfirmMoneyDialog(
             clickConfirm: _postSubmitOrderRequest,
             amountInHand: state.amountInHand,
-            repaymentAmount: addEndZero(state.repaymentAmount.toString()),
+            repaymentAmount:
+                Strings.addEndZero(state.repaymentAmount.toString()),
             repaymentDate: state.repaymentDate,
             contractName: state.contractName,
             contractUrl: state.contractUrl,
@@ -382,26 +387,6 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     });
   }
 
-  String addEndZero(String str) {
-    if (!ObjectUtil.isEmptyString(str) &&
-        str.contains('.') &&
-        str.endsWith('.0')) {
-      return '${str}0'.strWithDollar();
-    }
-    return str;
-  }
-
-  String dealEndZero(String str) {
-    if (!ObjectUtil.isEmptyString(str)) {
-      if (str.endsWith('.0') || str.endsWith('.00')) {
-        var index = str.indexOf('.');
-        var newStr = str.substring(0, index);
-        return newStr;
-      }
-    }
-    return str;
-  }
-
   void goToClientPage() {
     KeyboardUtils.unFocus();
     if (UserStore.to.hasToken) {
@@ -410,6 +395,13 @@ class LoanMoneyDateCtr extends BaseGetCtr {
     } else {
       Get.toNamed(PageRouterName.clientPage,
           arguments: {AppConstants.fromPageNameKey: PageRouterName.clientPage});
+    }
+  }
+
+  Future<void> _addOldPoint({String osType=''}) async {
+    var appMainCtr = Get.find<AppMainCtr>();
+    if (appMainCtr.initialized) {
+      await appMainCtr.postAddPointRequest(osType: osType);
     }
   }
 }

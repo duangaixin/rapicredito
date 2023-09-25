@@ -21,11 +21,9 @@ import 'package:rapicredito/page/main/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/location_util.dart';
-import 'package:rapicredito/utils/log_utils.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/utils/permission_util.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
-import 'package:rapicredito/widget/progress_hud_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
@@ -340,7 +338,15 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
 
   void goToAuthPage() {
     KeyboardUtils.unFocus();
+    _addOldPoint(osType: 'DESIGN_BEST_MOTTO');
     Get.toNamed(PageRouterName.authPersonPage);
+  }
+
+  void _addOldPoint({String osType = ''}) {
+    var appMainCtr = Get.find<AppMainCtr>();
+    if (appMainCtr.initialized) {
+      appMainCtr.postAddPointRequest(osType: osType);
+    }
   }
 
   void goToChangeAccountPage() async {
@@ -459,7 +465,16 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
     String status,
     int currentUserId,
   ) {
-    if (currentUserId == -1) {}
+    if (currentUserId == -1) {
+      _postHomeManyProductSonInfoRequest();
+    } else {
+      if (status == '0') {
+        goToAuthPage();
+      } else if (status == '1' || status == '2') {
+      } else if (status == '5') {
+        goToChangeAccountPage();
+      }
+    }
   }
 }
 

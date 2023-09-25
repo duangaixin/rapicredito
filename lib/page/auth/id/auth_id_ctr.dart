@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -18,6 +19,7 @@ import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/page/auth/id/index.dart';
 import 'package:rapicredito/page/auth/person/index.dart';
+import 'package:rapicredito/page/main/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/compress_util.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
@@ -28,7 +30,6 @@ import 'package:rapicredito/widget/custom_picker.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
 import 'package:rapicredito/widget/pickers/time_picker/model/pduration.dart';
 import 'package:rapicredito/widget/progress_hud_view.dart';
-
 
 class AuthIdCtr extends BaseGetCtr {
   final state = AuthIdState();
@@ -49,7 +50,15 @@ class AuthIdCtr extends BaseGetCtr {
   @override
   void onReady() {
     _requestInitData();
+    _addOldPoint(osType: 'EASE_DIRTY_DUST');
     super.onReady();
+  }
+
+ void _addOldPoint({String osType = ''}) async {
+    var appMainCtr = Get.find<AppMainCtr>();
+    if (appMainCtr.initialized) {
+      await appMainCtr.postAddPointRequest(osType: osType);
+    }
   }
 
   void _requestInitData() async {
@@ -63,6 +72,12 @@ class AuthIdCtr extends BaseGetCtr {
 
   void showSelectDialog({bool isFront = true}) {
     KeyboardUtils.unFocus();
+    if (isFront) {
+      _addOldPoint(osType: 'DIGITAL_THESE_METRE');
+    } else {
+      _addOldPoint(osType: 'SMOKE_CLOSE_RESERVATION');
+    }
+
     CustomPicker.showSinglePicker(Get.context!,
         data: ['Tomar fotos', 'Seleccionar del álbum'], onConfirm: (data, p) {
       if (p == 0) {
@@ -98,6 +113,9 @@ class AuthIdCtr extends BaseGetCtr {
   }
 
   void tackCamera({bool isFront = true, bool isUploadFace = false}) {
+    if (isUploadFace) {
+      _addOldPoint(osType: 'AIM_CONSTANT_FEW');
+    }
     PermissionUtil.checkPermission(
         permissionList: [Permission.camera],
         onSuccess: () async {
@@ -275,9 +293,9 @@ class AuthIdCtr extends BaseGetCtr {
     }
     var response =
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
-      Get.dismiss();
+    Get.dismiss();
     if (response.isSuccess()) {
-       _goToAddAccountPage();
+      _goToAddAccountPage();
     } else {
       NetException.dealAllException(response);
     }
@@ -301,10 +319,12 @@ class AuthIdCtr extends BaseGetCtr {
 
   void clickSubmitBtn() async {
     KeyboardUtils.unFocus();
+    _addOldPoint(osType: 'FORBID_FRESH_PENNY');
     if (_checkNoLocalData()) {
       _postSaveAuthIdRequest(isShowDialog: true);
     } else {
       Get.showLoading();
+      _addOldPoint(osType: 'DESCRIBE_BLUE_SEAT');
       if (!ObjectUtil.isEmptyString(state.idFrontPath)) {
         await _uploadPhotoData(
             isFront: true,
@@ -391,6 +411,16 @@ class AuthIdCtr extends BaseGetCtr {
     }
 
     if (response.isSuccess()) {
+      if (isUploadFace) {
+        _addOldPoint(osType: 'LOCK_BORN_ROOM');
+      } else {
+        if (isFront) {
+          _addOldPoint(osType: 'TASTE_BROKEN_ANCESTOR');
+        } else {
+          _addOldPoint(osType: 'CARRY_MALE_STORY');
+        }
+      }
+
       Future.delayed(const Duration(milliseconds: 50), () {
         _postQueryPhotoInfo(isShowDialog: showLoading);
       });
@@ -398,19 +428,22 @@ class AuthIdCtr extends BaseGetCtr {
       if (isUploadFace) {
         state.isUploadFace = false;
         state.uploadFaceSuccess = false;
-        state.faceUrl='';
+        state.faceUrl = '';
         state.facePath = compressPath;
+        _addOldPoint(osType: 'REPORT_DOUBLE_POUND');
       } else {
         if (isFront) {
           state.isUploadFront = false;
           state.uploadFrontSuccess = false;
-          state.idFrontUrl='';
+          state.idFrontUrl = '';
           state.idFrontPath = compressPath;
+          _addOldPoint(osType: 'TELEPHONE_SPIRITUAL_BOXING');
         } else {
           state.isUploadBehind = false;
           state.uploadBehindSuccess = false;
-          state.idBackUrl='';
+          state.idBackUrl = '';
           state.idBackPath = compressPath;
+          _addOldPoint(osType: 'RETIRE_ARABIC_SANDWICH');
         }
       }
       _btnCanClick();

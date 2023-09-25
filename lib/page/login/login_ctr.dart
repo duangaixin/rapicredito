@@ -13,6 +13,7 @@ import 'package:rapicredito/local/app_constants.dart';
 import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/page/login/index.dart';
 import 'package:rapicredito/page/main/home/index.dart';
+import 'package:rapicredito/page/main/index.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/utils/string_ext.dart';
@@ -28,14 +29,6 @@ class LoginCtr extends BaseGetCtr {
   @override
   void onInit() {
     super.onInit();
-    // var param = Get.arguments;
-    // if (param != null && param is Map) {
-    //   if (!ObjectUtil.isEmptyMap(param)) {
-    //     if (param.containsKey(AppConstants.isTokenExpired)) {
-    //       isTokenExpired = param[AppConstants.isTokenExpired];
-    //     }
-    //   }
-    // }
     state.isInitClick = true;
     phoneCtr.addListener(_btnLoginCanClick);
     phoneCtr.addListener(_btnOptCanClick);
@@ -91,7 +84,6 @@ class LoginCtr extends BaseGetCtr {
     if (response.isSuccess()) {
       state.isInitClick = false;
       _startTimer();
-      // var codeStr = response.data ?? '';
     } else {
       NetException.dealAllException(response);
     }
@@ -124,9 +116,7 @@ class LoginCtr extends BaseGetCtr {
     var phoneNum = phoneCtr.text.strRvSpace();
     param['swiftMeansEitherPine'] = phoneNum;
     param['littlePenfriendCompressedFlightManager'] = codeCtr.text.strRvSpace();
-    // param['quickUncertainLuggageUglyGoose'] ='00000000-0000-0000-0000-000000000000';
     param['quickUncertainLuggageUglyGoose'] = gid;
-    // param['aliveCanteenSteadyPioneer'] = '00000000000000000000000000000000';
     param['aliveCanteenSteadyPioneer'] = appInstanceId;
     param.addAll(getCommonParam());
     Get.showLoading();
@@ -138,23 +128,28 @@ class LoginCtr extends BaseGetCtr {
       var userId = loginInfoBean?.terminalDifferentActionFatFountain ?? -1;
       var firstRegister = loginInfoBean?.cheapFenceScholarEverydayClinic ?? '0';
       var testFlag = loginInfoBean?.delightedGooseFacialUnmarriedHamburger ?? 0;
+      if (firstRegister == '1') {
+        _addOldPoint(osType: 'RELAX_POP_CORAL');
+      }
       await StorageService.to.setInt(AppConstants.userTestFlagKey, testFlag);
       await UserStore.to.setLoginInfo(token, userId, phoneNum);
       await setCrispInfo(testFlag.toString(), phoneNum);
       await setFireBaseUserIdInfo(phone: phoneNum, userId: userId.toString());
-      // if (isTokenExpired) {
-      //   Get.toNamed(PageRouterName.mainPage);
-      // } else {
-      //   Get.back();
-      // }
-
+      _addOldPoint(osType: 'CANCEL_ASHAMED_FAN');
       var mainHomeCtr = Get.find<MainHomeCtr>();
-      if(mainHomeCtr.initialized){
+      if (mainHomeCtr.initialized) {
         mainHomeCtr.refreshInfo();
       }
       Get.back();
     } else {
       NetException.dealAllException(response);
+    }
+  }
+
+  void _addOldPoint({String osType = ''}) async {
+    var appMainCtr = Get.find<AppMainCtr>();
+    if (appMainCtr.initialized) {
+      await appMainCtr.postAddPointRequest(osType: osType);
     }
   }
 

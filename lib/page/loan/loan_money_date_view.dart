@@ -4,6 +4,7 @@ import 'package:rapicredito/page/loan/index.dart';
 import 'package:rapicredito/page/loan/widget/loan_date_select_view.dart';
 import 'package:rapicredito/page/main/home/widget/common_agreement_view.dart';
 import 'package:rapicredito/style/resources.dart';
+import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_button.dart';
 import 'package:rapicredito/widget/custom_click_view.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
@@ -111,8 +112,8 @@ class LoanMoneyDatePage extends GetView<LoanMoneyDateCtr> {
             Obx(() {
               return _buildKeyValueView(
                   title: 'Monto del préstamo',
-                  content: controller
-                      .addEndZero(controller.state.applyAmount.toString()),
+                  content: Strings.addEndZero(
+                      controller.state.applyAmount.toString()),
                   color: const Color(0xff333333),
                   fontWeight: FontWeight.bold,
                   fontSize: 15.0);

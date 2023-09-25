@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rapicredito/page/loan/index.dart';
 import 'package:rapicredito/style/index.dart';
+import 'package:rapicredito/utils/string_ext.dart';
 import 'package:rapicredito/widget/custom_image_view.dart';
 
 class LoanDateTopView extends GetView<LoanMoneyDateCtr> {
@@ -118,7 +119,7 @@ class LoanDateTopView extends GetView<LoanMoneyDateCtr> {
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    Text(controller.dealEndZero(content),
+                    Text(Strings.dealEndZero(content),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(

@@ -165,6 +165,17 @@ class AuthContactCtr extends BaseGetCtr {
           authInfoBean?.instantMerchantMidday ?? '');
       phoneTwoCtr.text = authInfoBean?.theoreticalAppleFlatLateFriendship ?? '';
       nameTwoCtr.text = authInfoBean?.quickNonDetermination ?? '';
+
+      if (ObjectUtil.isEmptyString(state.relationshipOne) &&
+          ObjectUtil.isEmptyString(phoneOneCtr.text.trim()) &&
+          ObjectUtil.isEmptyString(nameOneCtr.text.trim()) &&
+          ObjectUtil.isEmptyString(state.relationshipTwo) &&
+          ObjectUtil.isEmptyString(phoneTwoCtr.text.trim()) &&
+          ObjectUtil.isEmptyString(nameTwoCtr.text.trim())) {
+        state.isFirstEnter = true;
+        _addOldPoint(osType: 'SEIZE_MOBILE_SIGHT');
+      }
+
       _btnCanClick();
       state.loadState = LoadState.succeed;
     } else {
@@ -212,13 +223,22 @@ class AuthContactCtr extends BaseGetCtr {
           goSetting: () {
             _showGoSettingDialog();
           });
+      _addOldPoint();
     } else {
       Get.toNamed(PageRouterName.authIdPage);
     }
   }
 
+  Future<void> _addOldPoint({String osType = ''}) async {
+    var appMainCtr = Get.find<AppMainCtr>();
+    if (appMainCtr.initialized) {
+      await appMainCtr.postAddPointRequest(osType: osType);
+    }
+  }
+
   void clickSubmit() async {
     KeyboardUtils.unFocus();
+    _addOldPoint(osType: 'RAISE_SPLENDID_SEAMAN');
     await _postSaveAuthContactRequest();
   }
 
@@ -243,6 +263,9 @@ class AuthContactCtr extends BaseGetCtr {
         await HttpRequestManage.instance.postSaveAuthInfoRequest(param);
     Get.dismiss();
     if (response.isSuccess()) {
+      if (state.isFirstEnter) {
+        _addOldPoint(osType: 'RETIRE_SWISS_FRIGHT');
+      }
       _showPermissionDialog();
     } else {
       NetException.dealAllException(response);

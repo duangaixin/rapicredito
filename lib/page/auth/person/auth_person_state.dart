@@ -6,6 +6,7 @@ class AuthPersonState {
   List<String?> incomeList = [];
   List<String?> familyList = [];
   List<String?> educationalList = [];
+  bool isFirstEnter=false;
   final GlobalKey emailKey = GlobalKey();
   final LayerLink layerLink = LayerLink();
 

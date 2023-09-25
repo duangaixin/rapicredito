@@ -352,10 +352,8 @@ class UploadJsonManage {
       var map = json.decode(batteryInfo!);
       var bean = BatteryInfoBean.fromJson(map);
       batteryBean.dearMomentSilentInkTheme = bean.isCharging?.toString();
-      batteryBean.noisyHealthyAvenueCastle = bean.batteryPct?.toString();
-      if (ObjectUtil.isEmptyString(batteryBean.noisyHealthyAvenueCastle)) {
-        batteryBean.noisyHealthyAvenueCastle = level;
-      }
+      // batteryBean.noisyHealthyAvenueCastle = bean.batteryPct?.toString();
+      batteryBean.noisyHealthyAvenueCastle = level;
       batteryBean.freePieceFastIdiom = bean.chargeType?.toString();
       batteryBean.followingStewardBlackConclusion = bean.chargeType?.toString();
     }
@@ -418,7 +416,7 @@ class UploadJsonManage {
       }
       hardwareBean.famousPurposeTechnicalVirtue = bean.imei2;
       if (ObjectUtil.isEmptyString(bean.imei2)) {
-        hardwareBean.famousPurposeTechnicalVirtue  = imei;
+        hardwareBean.famousPurposeTechnicalVirtue = imei;
       }
       hardwareBean.difficultSolidChipsFastSkin = bean.cpuNum?.toString();
     }

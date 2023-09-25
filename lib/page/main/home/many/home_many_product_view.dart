@@ -30,7 +30,6 @@ class HomeManyProductView extends GetKeepStateView<MainHomeCtr> {
           padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 0.0),
           shrinkWrap: true,
           itemCount: ctr.mainHomeState.dataSource.length,
-          //  itemCount: 5,
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return _buildListItemView(index);
