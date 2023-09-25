@@ -187,8 +187,6 @@ class LoginCtr extends BaseGetCtr {
     phoneCtr.removeListener(_btnOptCanClick);
     phoneCtr.removeListener(_btnLoginCanClick);
     codeCtr.removeListener(_btnLoginCanClick);
-    phoneCtr.dispose();
-    codeCtr.dispose();
     super.onClose();
   }
 }
