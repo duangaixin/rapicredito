@@ -14,7 +14,7 @@ public class IpUtil {
         IpData data = new IpData();
         try {
             data.firstIp = getLocalIPAddress();
-            data.second_ip = getLocalIPAddress();
+            data.secondIp = getLocalIPAddress();
         } catch (Exception e) {
             e.printStackTrace();
             return data;

@@ -14,6 +14,8 @@ import 'package:rapicredito/local/user_store.dart';
 import 'package:rapicredito/model/pay_url_info_bean.dart';
 import 'package:rapicredito/page/main/home/index.dart';
 import 'package:rapicredito/page/main/home/widget/home_confirm_pay_dialog.dart';
+import 'package:rapicredito/page/main/home/widget/home_payment_result_dialog.dart';
+import 'package:rapicredito/page/main/home/widget/home_rollover_payment_result_dialog.dart';
 import 'package:rapicredito/page/main/home/widget/home_rollover_repayment_dialog.dart';
 import 'package:rapicredito/page/main/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
@@ -53,7 +55,11 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
         var appMainCtr = Get.find<AppMainCtr>();
         if (Get.currentRoute == PageRouterName.mainPage) {
           if (appMainCtr.state.pageIndex == 0) {
-            requestInitData();
+            if (mainHomeState.isManyProduct) {
+              requestInitData();
+            } else {
+              _postQueryOrderInfoRequest();
+            }
           }
         }
         break;
@@ -108,8 +114,7 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
     if (response.isSuccess()) {
       var bean = response.data;
       mainHomeState.feeWaiver = bean?.unusualPing ?? 0.0;
-      mainHomeState.orderId =
-          bean?.disabledLondonPrivatePoolAmericanInstrument ?? -1;
+
       mainHomeState.overdueStatus =
           bean?.centralTechnologyAboveCarefulTomato ?? -1;
       mainHomeState.loanStatus = bean?.federalDirectorySituation ?? -1;
@@ -127,16 +132,18 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
       mainHomeState.overduePayment = bean?.freeCleanerBluePineapple ?? 0.0;
       mainHomeState.deductCost = bean?.unsafeLicenseNut ?? 0.0;
       mainHomeState.overdueDay = bean?.mexicanMedicalCan ?? 0;
-
+      var orderId = bean?.disabledLondonPrivatePoolAmericanInstrument ?? -1;
+      if (mainHomeState.orderId != orderId) {
+        mainHomeState.orderId = orderId;
+      } else {
+        _showRolloverPayResultDialog();
+      }
       if (mainHomeState.overdueStatus == -1) {
         await postQueryHomeDefaultInfoRequest();
         if (mainHomeState.isPaying) {
           mainHomeState.isPaying = false;
-          if (mainHomeState.isRollover) {
-            Get.toNamed(PageRouterName.rolloverPaymentResultPage);
-          } else {
-            Get.toNamed(PageRouterName.repaymentResultPage);
-          }
+          // if (mainHomeState.isRollover) {} else {}
+          _showPayResultDialog();
         }
       } else if (mainHomeState.overdueStatus == 0 ||
           mainHomeState.overdueStatus == 1) {
@@ -319,7 +326,7 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
       mainHomeState.valueAddedTax = bean?.triangleRemarkIllBattery ?? 0.0;
       mainHomeState.payFee = bean?.interestingComradeHairIntroduction ?? 0.0;
       mainHomeState.rolloverDuration = bean?.passiveHis ?? 0;
-
+      // bean? disabledLondonPrivatePoolAmericanInstrument??
       _showRolloverPayDialog();
     } else {
       NetException.dealAllException(response);
@@ -347,6 +354,26 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
         barrierDismissible: false,
         builder: (_) {
           return const HomeRolloverRepaymentDialog();
+        });
+  }
+
+  void _showPayResultDialog() {
+    showDialog(
+        context: Get.context!,
+        barrierDismissible: false,
+        builder: (_) {
+          return const HomePaymentResultDialog();
+        });
+  }
+
+  void _showRolloverPayResultDialog() {
+    showDialog(
+        context: Get.context!,
+        barrierDismissible: false,
+        builder: (_) {
+          return HomeRolloverPaymentResultDialog(
+            date: mainHomeState.updateDueDate ?? '',
+          );
         });
   }
 
@@ -397,9 +424,9 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
             mainHomeState.dataSource.addAll(mainHomeState.otherOrderList);
           }
           if (!ObjectUtil.isEmptyList(mainHomeState.notPlaceOrderList)) {
-            for(int i=0;i<mainHomeState.notPlaceOrderList.length;i++){
-              var bean=mainHomeState.notPlaceOrderList[i];
-              bean.noPlaceOrderIndex=i;
+            for (int i = 0; i < mainHomeState.notPlaceOrderList.length; i++) {
+              var bean = mainHomeState.notPlaceOrderList[i];
+              bean.noPlaceOrderIndex = i;
               mainHomeState.dataSource.add(bean);
             }
           }

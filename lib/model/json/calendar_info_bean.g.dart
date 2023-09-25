@@ -13,7 +13,6 @@ CalendarInfoBean _$CalendarInfoBeanFromJson(Map<String, dynamic> json) =>
       json['location'] as String?,
       json['startTime'] as String?,
       json['endTime'] as String?,
-      json['date_sent'] as String?,
     );
 
 Map<String, dynamic> _$CalendarInfoBeanToJson(CalendarInfoBean instance) =>
@@ -23,5 +22,4 @@ Map<String, dynamic> _$CalendarInfoBeanToJson(CalendarInfoBean instance) =>
       'location': instance.location,
       'startTime': instance.startTime,
       'endTime': instance.endTime,
-      'date_sent': instance.dateSent,
     };

@@ -69,6 +69,7 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.List;
 
 public class OtherUtils {
@@ -446,35 +447,35 @@ public class OtherUtils {
 
     @SuppressLint("NewApi")
     public static String getMobileDbm() {
-        String dbm = "";
-        TelephonyManager tm = getTelephonyManager();
-        if (ActivityCompat.checkSelfPermission(UtilsApp.getApp(), Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            return dbm;
-        }
-        List<CellInfo> cellInfoList = tm.getAllCellInfo();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+        int dbm = -1;
+        TelephonyManager tm = (TelephonyManager) UtilsApp.getApp().getSystemService(Context.TELEPHONY_SERVICE);
+
+        try {
+            List<CellInfo> cellInfoList = tm.getAllCellInfo();
             if (null != cellInfoList) {
-                for (CellInfo cellInfo : cellInfoList) {
+                Iterator var3 = cellInfoList.iterator();
+
+                while (var3.hasNext()) {
+                    CellInfo cellInfo = (CellInfo) var3.next();
                     if (cellInfo instanceof CellInfoGsm) {
                         CellSignalStrengthGsm cellSignalStrengthGsm = ((CellInfoGsm) cellInfo).getCellSignalStrength();
-                        dbm = String.valueOf(cellSignalStrengthGsm.getDbm());
+                        dbm = cellSignalStrengthGsm.getDbm();
                     } else if (cellInfo instanceof CellInfoCdma) {
                         CellSignalStrengthCdma cellSignalStrengthCdma = ((CellInfoCdma) cellInfo).getCellSignalStrength();
-                        dbm = String.valueOf(cellSignalStrengthCdma.getDbm());
+                        dbm = cellSignalStrengthCdma.getDbm();
                     } else if (cellInfo instanceof CellInfoWcdma) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-                            CellSignalStrengthWcdma cellSignalStrengthWcdma = ((CellInfoWcdma) cellInfo).getCellSignalStrength();
-                            dbm = String.valueOf(cellSignalStrengthWcdma.getDbm());
-                        }
+                        CellSignalStrengthWcdma cellSignalStrengthWcdma = ((CellInfoWcdma) cellInfo).getCellSignalStrength();
+                        dbm = cellSignalStrengthWcdma.getDbm();
                     } else if (cellInfo instanceof CellInfoLte) {
                         CellSignalStrengthLte cellSignalStrengthLte = ((CellInfoLte) cellInfo).getCellSignalStrength();
-                        dbm = String.valueOf(cellSignalStrengthLte.getDbm());
+                        dbm = cellSignalStrengthLte.getDbm();
                     }
                 }
             }
+        } catch (Exception var6) {
         }
-        return dbm;
+
+        return String.valueOf(dbm);
     }
 
     /**

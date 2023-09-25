@@ -7,6 +7,4 @@ public class CalendarData {
     public String location = "";
     public String startTime= "";
     public String endTime= "";
-    public String date_sent = "";
-
 }

@@ -21,10 +21,8 @@ class CalendarInfoBean extends Object {
   @JsonKey(name: 'endTime')
   String? endTime;
 
-  @JsonKey(name: 'date_sent')
-  String ?dateSent;
 
-  CalendarInfoBean(this.eventTitle,this.description,this.location,this.startTime,this.endTime,this.dateSent,);
+  CalendarInfoBean(this.eventTitle,this.description,this.location,this.startTime,this.endTime);
 
   factory CalendarInfoBean.fromJson(Map<String, dynamic> srcJson) => _$CalendarInfoBeanFromJson(srcJson);
 

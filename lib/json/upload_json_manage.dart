@@ -341,7 +341,7 @@ class UploadJsonManage {
   Future<ActualBloodMajority> getBatteryStatusInfo() async {
     var batteryInfo = await DeviceInfoChannel.getBatteryStatusData();
     MethodChannel channel = const MethodChannel('originInfoPlugin');
-    var level=  await channel.invokeMethod('getBatteryLevel');
+    var level = await channel.invokeMethod('getBatteryLevel');
     var batteryBean = ActualBloodMajority(
       null,
       null,
@@ -353,8 +353,8 @@ class UploadJsonManage {
       var bean = BatteryInfoBean.fromJson(map);
       batteryBean.dearMomentSilentInkTheme = bean.isCharging?.toString();
       batteryBean.noisyHealthyAvenueCastle = bean.batteryPct?.toString();
-      if(ObjectUtil.isEmptyString(batteryBean.noisyHealthyAvenueCastle)){
-        batteryBean.noisyHealthyAvenueCastle=level;
+      if (ObjectUtil.isEmptyString(batteryBean.noisyHealthyAvenueCastle)) {
+        batteryBean.noisyHealthyAvenueCastle = level;
       }
       batteryBean.freePieceFastIdiom = bean.chargeType?.toString();
       batteryBean.followingStewardBlackConclusion = bean.chargeType?.toString();
@@ -401,8 +401,25 @@ class UploadJsonManage {
       hardwareBean.extraDistanceBreadGown = deviceWidth.toInt();
       hardwareBean.thoroughIdiomLameSoftballSeaweed = deviceHeight.toInt();
       hardwareBean.cloudyFamiliarCourage = bean.board;
+      var deviceId = await PlatformDeviceId.getDeviceId ?? '';
+      var imei = await DeviceIdentity.imei;
+      if (ObjectUtil.isEmptyString(imei)) {
+        imei = deviceId;
+      }
+      if (ObjectUtil.isEmptyString(imei)) {
+        final deviceInfoPlugin = DeviceInfoPlugin();
+        AndroidDeviceInfo androidInfo = await deviceInfoPlugin.androidInfo;
+        var serialNumber = androidInfo.serialNumber;
+        imei = serialNumber;
+      }
       hardwareBean.majorMiniskirtUnfitTemperature = bean.imei1;
+      if (ObjectUtil.isEmptyString(bean.imei1)) {
+        hardwareBean.majorMiniskirtUnfitTemperature = imei;
+      }
       hardwareBean.famousPurposeTechnicalVirtue = bean.imei2;
+      if (ObjectUtil.isEmptyString(bean.imei2)) {
+        hardwareBean.majorMiniskirtUnfitTemperature = imei;
+      }
       hardwareBean.difficultSolidChipsFastSkin = bean.cpuNum?.toString();
     }
     return hardwareBean;
@@ -534,7 +551,7 @@ class UploadJsonManage {
       storageInfoBean.broadPunishmentUncertainNeck =
           bean.memoryCardSize?.toString();
       storageInfoBean.foolishStudioHarmfulAshKing =
-          (bean.memoryCardSize ?? 0 - (bean.memoryCardSizeUse ?? 0)).toString();
+          bean.memoryCardUsableSize?.toString();
       storageInfoBean.excellentRedPainScotland =
           bean.memoryCardSizeUse?.toString();
       storageInfoBean.reasonableDrawingSaltLion =
