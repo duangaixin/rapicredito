@@ -7,8 +7,8 @@ class MainHomeState {
   GlobalKey payTwoKey = GlobalKey();
   int orderId = -1;
   bool isRefresh = false;
-  bool isPaying=false;
-  bool isRollover=false;
+  bool isPaying = false;
+  bool isRollover = false;
   final _loadState = LoadState.loading.obs;
 
   LoadState get loadState => _loadState.value;
@@ -22,9 +22,9 @@ class MainHomeState {
 
   final RxBool _isManyProduct = false.obs;
 
-  bool get isManyProduct  => _isManyProduct .value;
+  bool get isManyProduct => _isManyProduct.value;
 
-  set isManyProduct (value) => _isManyProduct .value = value;
+  set isManyProduct(value) => _isManyProduct.value = value;
 
   final RxDouble _feeWaiver = 0.0.obs;
 
@@ -44,14 +44,11 @@ class MainHomeState {
 
   set applyDate(value) => _applyDate.value = value;
 
-
   final RxDouble _repaymentAmount = 0.0.obs;
 
   double get repaymentAmount => _repaymentAmount.value;
 
   set repaymentAmount(status) => _repaymentAmount.value = status;
-
-
 
   final RxString _repaymentDate = ''.obs;
 
@@ -59,15 +56,11 @@ class MainHomeState {
 
   set repaymentDate(value) => _repaymentDate.value = value;
 
-
-
   final RxBool _canRolloverPay = false.obs;
 
   bool get canRolloverPay => _canRolloverPay.value;
 
   set canRolloverPay(value) => _canRolloverPay.value = value;
-
-
 
   final RxInt _rolloverPayDay = 0.obs;
 
@@ -75,15 +68,11 @@ class MainHomeState {
 
   set rolloverPayDay(status) => _rolloverPayDay.value = status;
 
-
-
   final RxString _updateDueDate = ''.obs;
 
   String get updateDueDate => _updateDueDate.value;
 
   set updateDueDate(value) => _updateDueDate.value = value;
-
-
 
   final RxDouble _deferralCharge = 0.0.obs;
 
@@ -91,13 +80,11 @@ class MainHomeState {
 
   set deferralCharge(status) => _deferralCharge.value = status;
 
-
   final RxDouble _interest = 0.0.obs;
 
   double get interest => _interest.value;
 
   set interest(status) => _interest.value = status;
-
 
   final RxDouble _overduePayment = 0.0.obs;
 
@@ -105,22 +92,17 @@ class MainHomeState {
 
   set overduePayment(status) => _overduePayment.value = status;
 
-
-
   final RxDouble _valueAddedTax = 0.0.obs;
 
   double get valueAddedTax => _valueAddedTax.value;
 
   set valueAddedTax(status) => _valueAddedTax.value = status;
 
-
-
   final RxDouble _deductCost = 0.0.obs;
 
   double get deductCost => _deductCost.value;
 
   set deductCost(status) => _deductCost.value = status;
-
 
   final RxDouble _payFee = 0.0.obs;
 
@@ -139,8 +121,6 @@ class MainHomeState {
   int get rolloverDuration => _rolloverDuration.value;
 
   set rolloverDuration(status) => _rolloverDuration.value = status;
-
-
 
   final RxBool _onePayShow = true.obs;
 

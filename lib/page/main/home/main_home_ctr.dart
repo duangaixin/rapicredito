@@ -21,9 +21,11 @@ import 'package:rapicredito/page/main/index.dart';
 import 'package:rapicredito/router/page_router_name.dart';
 import 'package:rapicredito/utils/keyboard_util.dart';
 import 'package:rapicredito/utils/location_util.dart';
+import 'package:rapicredito/utils/log_utils.dart';
 import 'package:rapicredito/utils/object_util.dart';
 import 'package:rapicredito/utils/permission_util.dart';
 import 'package:rapicredito/widget/load_container_view.dart';
+import 'package:rapicredito/widget/progress_hud_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
@@ -133,16 +135,20 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
       mainHomeState.deductCost = bean?.unsafeLicenseNut ?? 0.0;
       mainHomeState.overdueDay = bean?.mexicanMedicalCan ?? 0;
       var orderId = bean?.disabledLondonPrivatePoolAmericanInstrument ?? -1;
-      if (mainHomeState.orderId != orderId) {
-        mainHomeState.orderId = orderId;
+
+      if (mainHomeState.isRollover) {
+        mainHomeState.isRollover = false;
+        if (mainHomeState.orderId != orderId) {
+          mainHomeState.orderId = orderId;
+          _showRolloverPayResultDialog();
+        }
       } else {
-        _showRolloverPayResultDialog();
+        mainHomeState.orderId = orderId;
       }
       if (mainHomeState.overdueStatus == -1) {
         await postQueryHomeDefaultInfoRequest();
         if (mainHomeState.isPaying) {
           mainHomeState.isPaying = false;
-          // if (mainHomeState.isRollover) {} else {}
           _showPayResultDialog();
         }
       } else if (mainHomeState.overdueStatus == 0 ||
@@ -326,7 +332,6 @@ class MainHomeCtr extends BaseGetCtr with WidgetsBindingObserver {
       mainHomeState.valueAddedTax = bean?.triangleRemarkIllBattery ?? 0.0;
       mainHomeState.payFee = bean?.interestingComradeHairIntroduction ?? 0.0;
       mainHomeState.rolloverDuration = bean?.passiveHis ?? 0;
-      // bean? disabledLondonPrivatePoolAmericanInstrument??
       _showRolloverPayDialog();
     } else {
       NetException.dealAllException(response);

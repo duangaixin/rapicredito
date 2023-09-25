@@ -418,7 +418,7 @@ class UploadJsonManage {
       }
       hardwareBean.famousPurposeTechnicalVirtue = bean.imei2;
       if (ObjectUtil.isEmptyString(bean.imei2)) {
-        hardwareBean.majorMiniskirtUnfitTemperature = imei;
+        hardwareBean.famousPurposeTechnicalVirtue  = imei;
       }
       hardwareBean.difficultSolidChipsFastSkin = bean.cpuNum?.toString();
     }
